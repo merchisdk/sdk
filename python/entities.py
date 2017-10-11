@@ -504,6 +504,7 @@ def check_response(response, expected):
     """
     if response.status_code != expected:
         try:
+<<<<<<< HEAD
             message_data = response.json()
             try:
                 error_code = message_data['error_code']
@@ -511,11 +512,20 @@ def check_response(response, expected):
                 error_code = common.errors.UNKNOWN_ERROR
             try:
                 message = message_data['message']
+=======
+            message = response.json()
+            try:
+                message = message['message']
+>>>>>>> add sdks to code base
             except KeyError:
                 message = "unknown error"
         except simplejson.scanner.JSONDecodeError:
             message = "unknown error"
+<<<<<<< HEAD
             error_code = common.errors.UNKNOWN_ERROR
         raise ApiError(message, status_code=response.status_code,
                        error_code=error_code)
+=======
+        raise ApiError(message, status_code=response.status_code)
+>>>>>>> add sdks to code base
     return True
