@@ -5,7 +5,7 @@ import json
 from sdk.python.util.name_protocol import parse_json_key_camel, \
     unpack_recursive_json
 
-PROTOCOL_VERSION = 6
+CURRENT_VERSION = 6
 
 
 def process_dict_param(embed):
@@ -22,8 +22,8 @@ def process_dict_param(embed):
 class Request(object):
 
     def __init__(self):
-        self.server = frontend.app.app.config["INTERNAL_BACKEND_URI"]
-        self.version = 'v' + str(PROTOCOL_VERSION)
+        self.server = 'http://backend:5000/'
+        self.version = 'v' + str(CURRENT_VERSION)
         self.method = 'GET'
         self.resource = '/'
         self.query = {}

@@ -516,6 +516,7 @@ def check_response(response, expected):
         except simplejson.scanner.JSONDecodeError:
             message = "unknown error"
             error_code = sdk.python.util.errors.UNKNOWN_ERROR
+            error_code = common.errors.UNKNOWN_ERROR
         raise ApiError(message, status_code=response.status_code,
                        error_code=error_code)
     return True

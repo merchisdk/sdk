@@ -29,30 +29,6 @@ class Theme(sdk.python.entities.Entity):
         self.json_property(str, "invoices_page_compiled")
         self.json_property(str, "products_page_template")
         self.json_property(str, "products_page_compiled")
-        self.json_property(str, "domain_invite_page_template")
-        self.json_property(str, "domain_invite_page_compiled")
-        self.json_property(str, "reset_password_page_template")
-        self.json_property(str, "reset_password_page_compiled")
-        self.json_property(str, "password_change_page_template")
-        self.json_property(str, "password_change_page_compiled")
-        self.json_property(str, "sms_login_page_template")
-        self.json_property(str, "sms_login_page_compiled")
-        self.json_property(str, "jobs_page_template")
-        self.json_property(str, "jobs_page_compiled")
-        self.json_property(str, "job_drafting_page_template")
-        self.json_property(str, "job_drafting_page_compiled")
-        self.json_property(str, "draft_preview_page_template")
-        self.json_property(str, "draft_preview_page_compiled")
-        self.json_property(str, "invoice_page_template")
-        self.json_property(str, "invoice_page_compiled")
-        self.json_property(str, "user_profile_page_template")
-        self.json_property(str, "user_profile_page_compiled")
-        self.json_property(str, "company_profile_page_template")
-        self.json_property(str, "company_profile_page_compiled")
-        self.json_property(str, "product_page_template")
-        self.json_property(str, "product_page_compiled")
-        self.json_property(str, "invoice_paid_page_template")
-        self.json_property(str, "invoice_paid_page_compiled")
         self.json_property(str, "header_template")
         self.json_property(str, "header_compiled")
         self.json_property(str, "footer_template")
@@ -61,19 +37,6 @@ class Theme(sdk.python.entities.Entity):
         self.json_property(str, "index_page_error")
         self.json_property(str, "invoices_page_error")
         self.json_property(str, "products_page_error")
-        self.json_property(str, "domain_invite_page_error")
-        self.json_property(str, "reset_password_page_error")
-        self.json_property(str, "password_change_page_error")
-        self.json_property(str, "sms_login_page_error")
-        self.json_property(str, "sms_token_page_error")
-        self.json_property(str, "jobs_page_error")
-        self.json_property(str, "job_drafting_page_error")
-        self.json_property(str, "draft_preview_page_error")
-        self.json_property(str, "invoice_page_error")
-        self.json_property(str, "user_profile_page_error")
-        self.json_property(str, "company_profile_page_error")
-        self.json_property(str, "product_page_error")
-        self.json_property(str, "invoice_paid_page_error")
         self.json_property(str, "header_error")
         self.json_property(str, "footer_error")
         self.json_property(datetime.datetime, 'last_updated')
@@ -98,19 +61,7 @@ class Theme(sdk.python.entities.Entity):
             self.email_css_status == VALID_AND_UPDATED and \
             self.index_page_error is None and\
             self.invoices_page_error is None and\
-            self.products_page_error is None and\
-            self.domain_invite_page_error is None and\
-            self.reset_password_page_error is None and\
-            self.password_change_page_error is None and\
-            self.sms_login_page_error is None and\
-            self.sms_token_page_error is None and\
-            self.jobs_page_error is None and\
-            self.job_drafting_page_error is None and\
-            self.draft_preview_page_error is None and\
-            self.invoice_page_error is None and\
-            self.user_profile_page_error is None and\
-            self.product_page_error is None and\
-            self.invoice_paid_page_error is None
+            self.products_page_error is None
 
     def can_be_activated(self):
         """ Check whether this theme can be a valid activated theme """
