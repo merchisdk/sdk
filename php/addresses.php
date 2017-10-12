@@ -17,5 +17,32 @@ class Address extends Entity
         $this->json_property('country', 'string');
         $this->json_property('postcode', 'string');
     }
+
+    #TODO
+    public function __repr(){
+
+    }
+
+    #TODO
+    public function clone(){
+
+    }
+
+    #TODO
+    public function country_name(){
+
+    }
 }
 
+
+class Addresses extends Resource
+{
+
+  function __construct(argument)
+  {
+    $this->entity_class = 'Address';
+    $this->json_name = 'addresses';
+  }
+}
+
+$addresses = new Addresses();
