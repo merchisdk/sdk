@@ -16,7 +16,7 @@ from jinja2 import utils
 
 def enumerate_files(files):
     """ Convert a list into a dictionary whose keys where the indices of the
-        list and whose values are the values that occopied that index. Differs
+        list and whose values are the values that occupied` ` that index. Differs
         from pythons builtin enumerate only by having keys whose type is str.
     """
     n = 0

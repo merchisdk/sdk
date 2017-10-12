@@ -9,16 +9,18 @@ class Bank extends Entity
 
 
     public function __construct() {
+        $this->escape_fields = ['default'];
         $this->json_property('id', 'integer');
+        $this->json_property('default','boolean');
         $this->json_property('bank_name', 'string');
         $this->json_property('account_number', 'string');
         $this->json_property('bsb', 'string');
         $this->json_property('swift_code', 'string');
         $this->json_property('iban', 'string');
         $this->json_property('bank_code', 'string');
-        $this->json_property('bank_address', 'Address', $many = True, 
+        $this->json_property('bank_address', 'Address', $many = True,
                              $recursive = True);
-        $this->json_property('company', 'Company', $many = False, 
-                             $recursive = True);
+        /*$this->json_property('company', 'Company', $many = False,
+                             $recursive = True);*/
     }
 }
