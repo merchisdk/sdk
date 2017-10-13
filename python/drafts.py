@@ -8,6 +8,7 @@ from sdk.python.files import File
 
 class Draft(sdk.python.entities.Entity):
 
+
     resource = '/drafts/'
     json_name = 'draft'
 

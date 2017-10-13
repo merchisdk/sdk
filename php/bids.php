@@ -13,7 +13,7 @@ class Bid extends Entity
     public static $resource = '/bids/';
     public static $json_name = 'bid';
 
-    public function __construct(argument)
+    public function __construct()
     {
         $this.json_property('id','integer');
         # datetime: import datetime in python
@@ -28,10 +28,9 @@ class Bid extends Entity
 
 class Bids extends Resource
 {
-
-  public function __construct(argument)
-  {
-      $this->json_name = 'bids';
-      $this->entity_class = 'Bid';
-  }
+    public function __construct()
+    {
+        $this->json_name = 'bids';
+        $this->entity_class = 'Bid';
+    }
 }

@@ -14,3 +14,13 @@ class EmailAddress extends Entity
     }
 }
 
+class EmailAddresses extends Resource
+{
+    public function __construct()
+    {
+        $this->entity_class = 'EmailAddress';
+        $this->json_name = 'eamilAddress';
+    }
+}
+
+$email_addresses = new EmailAddresses();
