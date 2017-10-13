@@ -7,7 +7,7 @@ class Category extends Entity
     public static $resource = '/categories/';
     public static $json_name = 'category';
 
-    public function __construct(argument)
+    public function __construct()
     {
         $this->json_property('id','integer');
         $this->json_property('name','string');
@@ -20,8 +20,7 @@ class Category extends Entity
 
 class Categories extends Resource
 {
-
-    public function __construct(argument)
+    public function __construct()
     {
         $this->entity_class = 'Category';
         $this->json_name = 'categories';

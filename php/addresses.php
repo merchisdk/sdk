@@ -37,12 +37,11 @@ class Address extends Entity
 
 class Addresses extends Resource
 {
-
-  function __construct()
-  {
-    $this->entity_class = 'Address';
-    $this->json_name = 'addresses';
-  }
+    public function __construct()
+    {
+        $this->entity_class = 'Address';
+        $this->json_name = 'addresses';
+    }
 }
 
 $addresses = new Addresses();
