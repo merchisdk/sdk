@@ -3,9 +3,9 @@
 require_once 'entity.php';
 require_once 'bid_item.php';
 
-public function addup_subtotal(prev_total, b){
+public function addup_subtotal($prev_total, $b){
     /* Return the value of object.quantity * object.unit_price */
-    return prev_total + (b->quantity * b->unit_price)
+    return $prev_total + ($b->quantity * $b->unit_price)
 }
 
 class Bid extends Entity
@@ -24,6 +24,12 @@ class Bid extends Entity
         $this.json_property('bid_items','BidItem', $many = False,
                              $default = '1', $recursive = True);
     }
+
+    public function bid_total()
+    {
+        #Calculate the bid sub total by adding all the bid_item totals together.
+        return round(array_reduce($this->bid_items, "addup_subtotal"), 2);
+    }
 }
 
 class Bids extends Resource
@@ -34,3 +40,5 @@ class Bids extends Resource
         $this->entity_class = 'Bid';
     }
 }
+
+$bids = new Bids();

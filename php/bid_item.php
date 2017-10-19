@@ -1,6 +1,7 @@
 <?php
 
 require_once 'entity.php';
+require_once 'common_alt.php';
 
 class BidItem extends Entity
 {
@@ -14,7 +15,21 @@ class BidItem extends Entity
         $this->json_property('quantity','integer');
         $this->json_property('description','string');
         $this->json_property('unit_price','float');
-  }
+    }
+
+    public function item_total(){
+        /*Calculate the total of the item by
+            multiplying the unit_price and quantity. It then
+            returns the total
+          */
+        $total = $this->quantity * $this->unit_price;
+        return $total;
+    }
+
+    public function item_type_name(){
+        #return name of the bid item type instead of type id
+        return $item_types->item_type[$this->type];
+    }
 }
 
 class BidItems extends resource
@@ -25,4 +40,4 @@ class BidItems extends resource
     }
 }
 
-$bit_items = new BidItems();
+$bid_items = new BidItems();
