@@ -9,11 +9,13 @@ from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
 import sdk.python.users*/
 require_once 'company_invitations.php';
+require_once 'common_alt.php';
 
 class Company extends Entity
 {
     public static $json_name = 'company';
     public static $resource = '/companies/';
+    public $default_banks = array();
 
     public function __construct() {
         #import sdk.python.company_invitations
@@ -57,6 +59,64 @@ class Company extends Entity
     }
 
     #TODO:A lot of functions
+    function get_default_banks(){
+        foreach($this->banks as $bank){
+            if ($bank->default){
+              array_push($this->default_banks, $bank);
+            }
+        }
+        unset($bank);
+        return $this->default_banks;
+    }
+
+    function primary_address(){
+        if ($this->address){
+          return $this->address[0];
+        } else{
+          return null;
+        }
+    }
+
+    function dictionary_of_address_names_and_ids(){
+        #Return an array of dictionaries which contain the
+        #name and id of the address which are related to this company.
+        $saved_address = array();
+        if ($this->addresses){
+            foreach(array_values($this->addresses) as $i=>$address){
+                $name = $address_util->name_primary($i, $this->name);
+                $temp_address = array('name'=>$name,'id'=>$address->id);
+                array_push($saved_address, $temp_address);
+            }
+        }
+        return $saved_address;
+    }
+
+    function is_payment_phone_nubmer_valid(){
+        return sizeof($this->payment_phone_numbers) > 0;
+    }
+
+    function is_bank_valid(){
+        return sizeof($this->banks) > 0;
+    }
+
+    function primary_phone_number(){
+        try {
+            $primary_phone_number = $this->phone_numbers[0]->international_format_number;
+        } catch (Exception $e) {
+            $primary_phone_number = "";
+        }
+        return $primary_phone_number;
+
+    }
+
+    function primary_eamil_address(){
+        try {
+            $primary_eamil_address = $this->email_addresses[0]->emailAddress;
+        } catch (Exception $e) {
+            $primary_eamil_address = "";
+        }
+        return $primary_eamil_address;
+    }
 }
 
 class Companies extends Resource

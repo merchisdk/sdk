@@ -1,6 +1,7 @@
 <?php
 
 require_once 'entity.php';
+require_once 'country_code.php';
 
 class Address extends Entity
 {
@@ -18,18 +19,31 @@ class Address extends Entity
         $this->json_property('postcode', 'string');
     }
 
-    #TODO
     public function __repr(){
-
+        $format = '%s,%s,%s,%s,%s';
+        return sprintf($format,$this->line_one,$this->city,
+        $this->state,$this->country,$this->postcode);
     }
 
-    #TODO
-    public function clone(){
-
+    public function cloneAddress(){
+        $clone_address = clone $this;
+        $clone_address->id = null;
+        return $clone_address;
     }
 
-    #TODO
     public function country_name(){
+      /* Convert the country initials into
+          the country full name and returns the country
+          full name
+      */
+      $country_name = $this->country;
+      try {
+        $country_name = $countries[$this->country];
+      } catch (Exception $e) {
+
+      }
+
+      return $country_name;
 
     }
 }
