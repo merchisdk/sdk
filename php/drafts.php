@@ -30,6 +30,38 @@ class Draft extends Entity
         $this->json_property('viewd','boolean');
         $this->json_property('just_viewed','boolean');
     }
+
+      function changes_have_been_requested(){
+          /* Return true if any changes to this draft have been requested
+              (typically by the client), or False otherwise. Requires that the
+              draft object was loaded with the draft commented embedded.
+          */
+          foreach($this->comments as $comment){
+              if ($commetn->change_request){
+                  return True;
+              }
+              unset($comment);
+              return False;
+          }
+      }
+
+      function is_draft_rejected(){
+          # Return True if the draft has been rejected else return False
+          return $this->changes_have_been_requested();
+      }
+
+      function is_most_recent(){
+          /*Return True if the draft is the most recent draft
+              in the related job else return False
+          */
+          foreach($this->job->drafts as $draft){
+              if ($this->date < $draft->date){
+                  return False;
+              } else{
+                  return True;
+              }
+          }
+      }
 }
 
 class Drafts extends Resource

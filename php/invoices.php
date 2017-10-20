@@ -11,6 +11,8 @@ require_once 'files.php';
 require_once 'companies.php';
 require_once 'phone_numbers.php';
 require_once 'email_addresses.php';
+require_once './../php_aux/invoice_status.php';
+require_once './../php_aux/money_protocol.php';
 
 class Invoice extends Entity
 {
@@ -69,6 +71,77 @@ class Invoice extends Entity
                              $default = '1', $recursive = True);
         $this->json_property('payments','Payment', $many = True,
                              $recursive = True);
+    }
+
+    function process_for_transfer(){
+        # can not update product by updating invoice
+        # will have better solution later
+        if($this->jobs){
+            foreach($this->jobs as $job){
+                $job->product = null;
+            }
+        }
+    }
+
+    function amount_paid(){
+        #Return how much money has been paid for this invoice.
+        if (is_array($this->payments)){
+            $sum = 0;
+            foreach($this->payments as $key=>$value){
+                $sum += $value->amount;
+            }
+            return $sum;
+        } else{
+            return 0;
+        }
+    }
+
+    function amount_owed(){
+        #Return how much money still owed for this invoice
+        $total = $this->total_cost;
+        if($this->amount_paid()){
+            return $total - $this->amount_paid();
+        } else{
+            return $total;
+        }
+    }
+
+    function amount_owed_format_with_currency(){
+        /*Return a formatted amount owed including the currency
+            icon at the start of the value.
+        */
+        return format_currency($this->amount_owed(), 2, $this->currency);
+    }
+
+    function invoice_payment_status(){
+        #Return the payment status of the invoice
+        $total_payment = 0;
+        foreach($this->payments as $key=>$value){
+            $total_payment += $value->amount;
+        }
+
+        if ($total_payment < 0){
+            return NEGATIVE_PAYMENT;
+        } elseif ($total_payment == 0) {
+            return NO_PAYMENT;
+        } elseif ($this->total_cost == $total_payment) {
+            return FULL_PAYMENT;
+        } elseif ($this->total_cost > $total_payment) {
+            return PART_PAYMENT;
+        } else {
+            return OVER_PAYMENT;
+        }
+    }
+
+    function is_paid_string(){
+        /*Return a string 'Unpaid' if the invoice is unpaid
+          else return a string 'Paid'.
+        */
+        if ($this->unpaid){
+            return "Unpaid";
+        } else{
+            return "Paid";
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 require_once 'entity.php';
-require_once 'country_code.php';
+require_once './../php_aux/country_code.php';
 
 class Address extends Entity
 {
