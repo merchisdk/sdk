@@ -22,6 +22,19 @@ class Item extends Entity
         $this->json_property('tax_type', 'CountryTax', $many = False,
                              $default = '1', $recursive = True);
     }
+
+    function item_total(){
+        /*Return the total value of the item
+            by multiplying the quantity by the cost. This value
+            is without GST.
+        */
+        return $this->cost * $this->quantity;
+    }
+
+    function item_tax(){
+        #Return the total tax based on the total quantity
+        return $this->tax_amount * $this->quantity;
+    }
 }
 
 class Items extends Resource

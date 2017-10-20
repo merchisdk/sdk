@@ -26,25 +26,26 @@ class File_ extends Entity
 
     public function from_php_info($info) {
         $this->name = $info['name'];
-        $this->type = $info['type'];
-        #TODO?
-        $this->size = $info['size'];
+        $this->mimetype = $info['mimetype'];
+        #TODO
+        #$this->size = $info['size'];
         #Not sure if this property can still be retrived in this way
-        $this->file_data = $info['tmp_name'];
+        #$this->file_data = $info['tmp_name'];
+        $this->file_data = [$this->name, $info, $info['mimetype']];
     }
 
     public function is_image(){
-      try{
-        var type = explode('/',$this->type);
-        return type[0] == 'image';
-      }
-      catch(){
-        return True;
-      }
+        try{
+          $type = explode('/',$this->mimetype);
+          return $type[0] == 'image';
+        }
+        catch(){
+          return True;
+        }
     }
 
     public function is_pdf(){
-      return in_array($this->type,['application/pdf', 'application/x-pdf']);
+        return in_array($this->mimetype,['application/pdf', 'application/x-pdf']);
     }
 }
 

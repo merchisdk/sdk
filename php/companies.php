@@ -9,7 +9,7 @@ from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
 import sdk.python.users*/
 require_once 'company_invitations.php';
-require_once 'common_alt.php';
+require_once './../php_aux/AddressUtil.php';
 
 class Company extends Entity
 {

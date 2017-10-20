@@ -1,6 +1,7 @@
 <?php
 
 require_once 'entity.php';
+require_once './../php_aux/country_code.php';
 
 class CountryTax extends Entity
 {
@@ -13,6 +14,19 @@ class CountryTax extends Entity
         $this->json_property('country', 'string');
         $this->json_property('tax_name', 'string');
         $this->json_property('tax_percent', 'float');
+    }
+
+    function country_name(){
+        if ($this->country){
+            return $countries[$this->country];
+        } else{
+            return "World Wide";
+        }
+    }
+
+    function full_name(){
+        $format = "%s (%s)";
+        return sprintf($format, $this->tax_name, $this->country_name());
     }
 }
 

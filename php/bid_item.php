@@ -1,7 +1,7 @@
 <?php
 
 require_once 'entity.php';
-require_once 'common_alt.php';
+require_once './../php_aux/ItemTypes.php';
 
 class BidItem extends Entity
 {

@@ -1,8 +1,6 @@
 <?php
 
 require_once 'entity.php';
-require_once 'domains.php';
-require_once 'users.php';
 
 class DomainInvitation extends Entity
 {
@@ -11,6 +9,8 @@ class DomainInvitation extends Entity
 
     public function __construct()
     {
+        require_once 'domains.php';
+        require_once 'users.php';
         $this->json_property('id', 'integer');
         $this->json_property('user_name', 'string');
         $this->json_property('user_email', 'string');
