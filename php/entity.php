@@ -2,6 +2,17 @@
 
 require_once 'http.php';
 require_once 'utility.php';
+require_once './../php_aux/rights.php';
+
+function enumerate_files($files){
+    $n = 0;
+    $result = [];
+    foreach($files as $element){
+        $result["$n"] = $element;
+        $n++;
+    }
+    return $result;
+}
 
 function generate_request($data, $email = null, $password = null) {
     $request = new Request();
@@ -24,10 +35,18 @@ function check_response($response) {
 class Entity
 {
     public static $primary_key = 'id';
+    public static $file_data = [];
+    public static $request_class = "Request";
     public $json_properties = [];
 
     public $escape_fields = [];
+    public $url_fields = [];
     public $recursive_properties = [];
+    public $rights = new Rights(ALL_RIGHTS);
+    # if it is set to True the entity should
+    # only be treat as a reference to the backend
+    # entity
+    public $only_for_reference = False;
 
     public function send_to_entity($request, $identifier) {
         $request->resource = $this::$resource . $identifier . '/';
@@ -76,7 +95,7 @@ class Entity
         $request = generate_request($data, $email, $password);
         $request->method = 'PATCH';
         return $this->send_to_entity($request, $this->primary_value());
-    } 
+    }
 
     public function primary_value() {
         $key = self::$primary_key;
@@ -101,7 +120,7 @@ class Entity
             $result['fileDataIndex'] = $index;
         }
         foreach ($this->json_properties as $name => $info) {
-            list($type, $many, $recursive) = $info; 
+            list($type, $many, $recursive) = $info;
             $value = $this->$name;
             $actual_type = gettype($value);
             if ($value === null) {
@@ -123,7 +142,7 @@ class Entity
                     $result[$name . '-count'] = $i;
                 }
             } else if ($actual_type === "object") {
-                list($sub_data, $files) = 
+                list($sub_data, $files) =
                     $value->serialise($force_primary, $files);
                 foreach ($sub_data as $subname => $subvalue) {
                     $result[$name . '-' . $subname] = $subvalue;
@@ -146,7 +165,7 @@ class Entity
         return [$result, $files];
     }
 
-    
+
     public function __toString()
     {
         return "<Entity " . get_class($this) . ">";
@@ -187,7 +206,7 @@ class Entity
                             $instance->from_json($e);
                             array_push($this->$name, $instance);
                         }
-                       
+
                     } else {
                         $this->$name = $element;
                     }
