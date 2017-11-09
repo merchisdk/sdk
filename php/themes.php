@@ -2,6 +2,7 @@
 
 require_once 'entity.php';
 require_once 'files.php';
+require_once './../php_aux/theme_status.php';
 
 class Theme extends Entity
 {
@@ -60,6 +61,22 @@ class Theme extends Entity
         require_once 'domains.php';
         $this->json_property('domain', 'Domain', $many = False,
                              $default = '1', $recursive = True);
+    }
+
+    public function is_valid_and_updated(){
+        /*Check both main css template and email css template
+            are valid and up to date
+        */
+        return $this->main_css_status == VALID_AND_UPDATED and
+               $this->email_css_status == VALID_AND_UPDATED and
+               $this->index_page_error === null and
+               $this->products_page_error === null;
+    }
+
+    public function can_be_activated(){
+        #Check whether this theme can be a valid activated theme
+        return $this->main_css_status >= VALID_BUT_NOT_UPDATED and
+               $this->email_css_status >= VALID_BUT_NOT_UPDATED;
     }
 }
 

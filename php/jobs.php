@@ -1,5 +1,5 @@
 <?php
-
+#TODO:NOT FINISHED
 require_once 'entity.php';
 require_once 'users.php';
 require_once 'products.php';
@@ -22,6 +22,7 @@ require_once './../php_aux/business_default.php';
 require_once './../php_aux/roles.php';
 require_once './../php_aux/status.php';
 require_once './../php_aux/notifcation_sources.php';
+require_once './../php_aux/events.php';
 
 class Job extends Entity
 {
@@ -324,6 +325,7 @@ class Job extends Entity
         return sprintf($fmt, JOB_SECTION_STRINGS[$section]);
     }
 
+    #TODO
     function inject_notifications($tab="unread", $section = NULL){
         $notifications_embed = ['domain' => ['logo' => []],
                                 'relatedJob' => [],
@@ -334,11 +336,181 @@ class Job extends Entity
                   "sort" => "id",
                   "order" => "desc"];
     }
+
+    function need_to_update_notifications($tab, $section = null){
+        /*Check whether we need to update the job related notifications,
+            if needed return True otherwise return False.
+        */
+        $section_prefix = get_section_name($section);
+
+        $section_tab = $section_prefix."tab";
+        $tab_attr = property_exists($this, $section_tab)?
+        $this->$section_tab:null;
+
+        $section_statistics = $section_prefix."statistics";
+        $statistics_attr = property_exists($this, $section_statistics)?
+        $this->$section_statistics:null;
+
+        $section_list = $section_prefix."list";
+        $list_attr = property_exists($this, $section_list)?
+        $this->$section_list:null;
+
+        return ($tab_attr != $tab) or ($statistics_attr === null) or
+        ($list_attr === null);
+    }
+
+    function refresh_notifications_info($tab, $section = null){
+        #Refresh the notifications of this job if needed
+        if($this->need_to_update_notifications($tab, $section)){
+            $this->inject_notifications($tab, $section);
+        }
+    }
+
+    function notifications_statistics($tab = "unread", $section = null){
+        /*Return the statistics of notifications of the this job
+            whose recipient is current user.
+        */
+        $this->refresh_notifications_info($tab, $section);
+        $section_statistics = $this->get_section_name($section)."statistics";
+        try {
+            return $this->$section_statistics;
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    function notifications_list($tab = "unread"){
+        /*Return the count of notifications of the this job
+            whose recipient is current user.
+        */
+        $this->refresh_notifications_info($tab);
+        return $this->_all_notifications_list;
+    }
+
+    function unseen_notifications_count($section = null){
+        /*Return the count of notifications of the this job
+            whose recipient is current user.
+        */
+        $statistics =  $this->notifications_statistics($tab ="unread", $section);
+        return $statistics->available;
+    }
+
+    function shipping_finished(){
+        #Return whether the shipping has been finished
+        return $this->shiping_status >= SHIPPING_STATUS["DISPATCHED"]["dbValue"]
+         or (!$this->needs_shipping);
+    }
+
+    function drafting_finished(){
+        #Return whether the drafting has been finished
+        return $this->design_status >= DESIGN_STATUS["DRAFTING_APPROVED"]["dbValue"]
+         or (!$this->needs_drafting);
+    }
+
+    function production_finished(){
+        #Return whether the production has been finished
+        return $this->production_status !== null and
+        $this->production_status >= PRODUCTION_STATUS["SHIPPED"]["dbValue"]
+         or (!$this->needs_production);
+    }
+
+    function payment_finished(){
+        #Return whether the payment has been finished
+        if($this->payment_status){
+            return $this->payment_status >=
+            PAYMENT_STATUS["FULLY_PAID"]["dbValue"];
+        }
+    }
+
+    function is_ready_to_complete(){
+        /*Return whether the job is ready for move to the
+            completed stage
+        */
+        return $this->drafting_finished() and $this->production_finished() and
+         $this->payment_finished() and $this->shipping_finished();
+    }
+
+    function array_of_related_address_names_and_ids(
+        $job_shipping = True, $production_shipping = true,
+        $manager_addresses = true, $client_addresses = true){
+        #Return a list of the related job adress ids and names.
+        $saved_addresses = array();
+        if($this->shipping and $job_shipping){
+            $saved_addresses[] =
+            ["name" => "Job Shipping Address",
+            "id " => $this->production_shipping_address->id];
+        }
+
+        if($this->client and $client_addresses){
+            $saved_addresses = $saved_addresses +
+            $this->client->array_of_addresses_names_and_ids("Client Address");
+        }
+
+        if($this->manager and $manager_addresses){
+            $saved_addresses = $saved_addresses +
+            $this->manager->array_of_addresses_names_and_ids("Manager Address");
+        }
+
+        return $saved_addresses;
+    }
+
+    function draft_time_line($reverse = true){
+        /*Return job draft related object in chronological order
+            as a dictionary. This is used for creating a job draft timeline.
+        */
+        $time_line_array = array();
+
+        foreach($this->draft_comments as $comment){
+            $time_line_array[$comment->date] = new Event(DRAFT_COMMENT, $comment);
+        }
+        unset($comment);
+
+        foreach($this->drafts as $draft){
+            $time_line_array[$draft->date] = new Event(DRAFT_UPLOADED, $draft);
+
+            if($draft->accepted){
+                $time_line_array[$draft->accepted] = new Event(DRAFT_APPROVED, $draft->accepted);
+            }
+
+            if($draft->resend_date){
+                $time_line_array[$draft->resend_date] = new Event(DRAFT_RESENT, $draft->resend_date);
+            }
+
+            foreach($draft->comments as $comment){
+                if($comment->change_request){
+                    $time_line_array[$comment->date] = new Event(DRAFT_REJECTED, $comment);
+                } else {
+                    $time_line_array[$comment->date] = new Event(DRAFT_COMMENT, $comment);
+                }
+            }
+        }
+        #TODO: translate Python collections.OrderDict functionality
+    }
+
+    function is_complete_string(){
+        /*Return a string 'Completed' if the job is complete
+            else it will return a string 'Uncompleted'.
+        */
+        if($this->completed){
+            return "Completed";
+        }
+        return "Uncompleted";
+    }
+
+    #TODO
+    function can_be_archived_by(){
+
+    }
+
+    function total_inc_tax(){
+        #Return the job cost + the tax amount
+        return $this->tax_amount + $this->cost;
+    }
 }
 
 class Jobs extends Resource
 {
-    public function __construct(argument)
+    public function __construct()
     {
         $this->entity_class = 'Job';
         $this->json_name = 'jobs';
@@ -374,7 +546,7 @@ class Assignment extends Entity
 
 class Assignments extends Resource
 {
-    public function __construct(argument)
+    public function __construct()
     {
         $this->entity_class = 'Assignment';
         $this->json_name = 'assignments';
