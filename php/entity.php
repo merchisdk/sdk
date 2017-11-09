@@ -9,7 +9,7 @@ function enumerate_files($files){
     $result = [];
     foreach($files as $element){
         $result["$n"] = $element;
-        $n++;
+        ++$n;
     }
     return $result;
 }
