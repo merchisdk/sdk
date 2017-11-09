@@ -40,7 +40,8 @@ class Request
     }
 
     public function auth(){
-        if(!is_null($this->username)){
+        if(!is_null($this->username))
+        {
             return array($this->username, $this->password);
         }
         return null;
