@@ -8,18 +8,23 @@ class Response
     public $body = null;
 }
 
+const CURRENT_VERSION = 6;
+
 class Request
 {
     public $server = '';
-    public $version = 'v6';
+    public $version = 'v'. (string)CURRENT_VERSION;
     public $method = 'GET';
     public $resource = '/';
     public $query = [];
     public $headers = [];
     public $username = null;
     public $password = null;
+    public $api_secret = null;
+    public $as_domain = null;
     public $data = [];
     public $files = [];
+    public $cookies = [];
 
     public function path() {
         return $this->version . $this->resource;
@@ -32,6 +37,17 @@ class Request
             $result = $result . $query_string;
         }
         return $result;
+    }
+
+    public function auth(){
+        if(!is_null($this->username)){
+            return array($this->username, $this->password);
+        }
+        return null;
+    }
+
+    public function version_number(){
+        return (integer)substr($this->version,1);
     }
 
     public function send() {
@@ -68,6 +84,6 @@ class Request
 
     function __construct() {
         $this->server = BACKEND_PROTO . BACKEND_URI;
-    } 
+    }
 
 }

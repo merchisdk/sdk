@@ -3,6 +3,7 @@
 require_once 'entity.php';
 require_once 'invoices.php';
 require_once 'users.php';
+require_once './../php_aux/business_default.php';
 
 class Payment extends Entity
 {
@@ -23,6 +24,13 @@ class Payment extends Entity
                              $recursive = True);
         $this->json_property('send_sms','boolean');
         $this->json_property('send_email','boolean');
+    }
+
+    public function payment_type_string(){
+        /*Return the string value of payment type from the
+          common.business_default file
+        */
+        return PAYMENT_TYPES[$this->payment_type];
     }
 }
 

@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="679c89da-63fc-47dc-b475-7a04aeec0ec2" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/php_aux/AdressUtil.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/entity.php" afterPath="$PROJECT_DIR$/php/entity.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/config.php" afterPath="$PROJECT_DIR$/php/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/http.php" afterPath="$PROJECT_DIR$/php/http.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/jobs.php" afterPath="$PROJECT_DIR$/php/jobs.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/menus.php" afterPath="$PROJECT_DIR$/php/menus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/notifications.php" afterPath="$PROJECT_DIR$/php/notifications.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/payments.php" afterPath="$PROJECT_DIR$/php/payments.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/products.php" afterPath="$PROJECT_DIR$/php/products.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/specifications.php" afterPath="$PROJECT_DIR$/php/specifications.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/themes.php" afterPath="$PROJECT_DIR$/php/themes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/users.php" afterPath="$PROJECT_DIR$/php/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php_aux/ItemTypes.php" afterPath="$PROJECT_DIR$/php_aux/ItemTypes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php_aux/roles.php" afterPath="$PROJECT_DIR$/php_aux/roles.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,7 +25,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/sdk$try.coverage" NAME="try Coverage Results" MODIFIED="1508471892005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
+    <SUITE FILE_PATH="coverage/sdk$test.coverage" NAME="test Coverage Results" MODIFIED="1510185021676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
+    <SUITE FILE_PATH="coverage/sdk$try.coverage" NAME="try Coverage Results" MODIFIED="1509684685467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -22,65 +34,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="entities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/entities.py">
+      <file leaf-file-name="users.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python/users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="444" column="9" lean-forward="false" selection-start-line="444" selection-start-column="9" selection-end-line="444" selection-end-column="9" />
+            <state relative-caret-position="5060">
+              <caret line="230" column="0" lean-forward="true" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rights.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/rights.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1100">
-              <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-              <folding>
-                <marker date="1508990323131" expanded="true" signature="187:1775" ph="..." />
-                <marker date="1508990323131" expanded="true" signature="373:765" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="builtins.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-900320256/builtins.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="4269" column="42" lean-forward="false" selection-start-line="4269" selection-start-column="36" selection-end-line="4269" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="request.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/request.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/jinja2/utils.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/urllib/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -89,31 +56,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jobs.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/python/jobs.py">
+      <file leaf-file-name="parse.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/urllib/parse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+            <state relative-caret-position="158">
+              <caret line="707" column="0" lean-forward="false" selection-start-line="707" selection-start-column="0" selection-end-line="708" selection-end-column="18" />
+              <folding>
+                <element signature="e#1131#1140#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/collections/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#1090#1120#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python/entities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="470" column="0" lean-forward="true" selection-start-line="470" selection-start-column="0" selection-end-line="470" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="notifications.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/notifications.py">
+      <file leaf-file-name="time_util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/time_util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-132">
-              <caret line="29" column="54" lean-forward="false" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
+            <state relative-caret-position="242">
+              <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tz.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/dateutil/tz/tz.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28182">
+              <caret line="1295" column="25" lean-forward="false" selection-start-line="1295" selection-start-column="25" selection-end-line="1295" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="notification_sources.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/notification_sources.py">
+      <file leaf-file-name="timezones.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/timezones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1298">
-              <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+            <state relative-caret-position="66">
+              <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pytz/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -145,9 +170,19 @@
       <find>current_draft</find>
       <find>fetch</find>
       <find>delete</find>
-      <find>object</find>
-      <find>resourc</find>
       <find>resource</find>
+      <find>resourc</find>
+      <find>object</find>
+      <find>create</find>
+      <find>buil</find>
+      <find>classmethod</find>
+      <find>builtin_module_names</find>
+      <find>_names</find>
+      <find>environ</find>
+      <find>timezone</find>
+      <find>quote</find>
+      <find>Quoter</find>
+      <find>Quote_fro</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -159,7 +194,6 @@
         <option value="$PROJECT_DIR$/python/bids.py" />
         <option value="$PROJECT_DIR$/python/components.py" />
         <option value="$PROJECT_DIR$/python/shipments.py" />
-        <option value="$PROJECT_DIR$/python/specifications.py" />
         <option value="$PROJECT_DIR$/python/addresses.py" />
         <option value="$PROJECT_DIR$/python/companies.py" />
         <option value="$PROJECT_DIR$/python/component_tags.py" />
@@ -169,9 +203,17 @@
         <option value="$PROJECT_DIR$/python/invoices.py" />
         <option value="$USER_HOME$/Anaconda3/Lib/site-packages/babel/numbers.py" />
         <option value="$PROJECT_DIR$/python/try.py" />
-        <option value="$PROJECT_DIR$/python/jobs.py" />
         <option value="$PROJECT_DIR$/common/rights.py" />
         <option value="$PROJECT_DIR$/python/entities.py" />
+        <option value="$PROJECT_DIR$/python/request.py" />
+        <option value="$PROJECT_DIR$/python/jobs.py" />
+        <option value="$PROJECT_DIR$/common/notification_sources.py" />
+        <option value="$PROJECT_DIR$/python/products.py" />
+        <option value="$PROJECT_DIR$/python/sessions.py" />
+        <option value="$PROJECT_DIR$/python/specifications.py" />
+        <option value="$PROJECT_DIR$/python/menus.py" />
+        <option value="$PROJECT_DIR$/python/users.py" />
+        <option value="$PROJECT_DIR$/python/test.py" />
       </list>
     </option>
   </component>
@@ -202,7 +244,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -245,6 +286,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -255,8 +297,9 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="SearchEverywhereHistoryKey" value="classmethod&#9;null&#9;null&#10;domain&#9;FILE&#9;file://E:/sdk/python/domains.py" />
   </component>
-  <component name="RunManager" selected="Python.try">
+  <component name="RunManager" selected="Python.test">
     <configuration default="false" name="try" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -271,6 +314,24 @@
       <module name="Merchi-SDKs" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/try.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Merchi-SDKs" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -489,12 +550,14 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.try" />
+      <item index="1" class="java.lang.String" itemvalue="Python.test" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.try" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.try" />
       </list>
     </recent_temporary>
   </component>
@@ -522,20 +585,20 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,130 +614,165 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/python/bids.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="30" column="66" lean-forward="false" selection-start-line="30" selection-start-column="66" selection-end-line="30" selection-end-column="66" />
+        <state relative-caret-position="293">
+          <caret line="369" column="13" lean-forward="false" selection-start-line="369" selection-start-column="13" selection-end-line="369" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/address_util.py">
+    <entry file="file://$PROJECT_DIR$/php/entity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="572">
+          <caret line="77" column="20" lean-forward="false" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/companies.py">
+    <entry file="file://$PROJECT_DIR$/python/sessions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1673">
-          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        <state relative-caret-position="351">
+          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/component_tags.py">
+    <entry file="file://$PROJECT_DIR$/python/shipments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="571">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/components.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/copy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        <state relative-caret-position="132">
+          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/company_invitations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/categories.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/country_taxes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/discount.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/templates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3247">
-          <caret line="3" column="16" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/brand_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/google.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/weakref.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-396">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/domains.py">
+    <entry file="file://$PROJECT_DIR$/common/specification_field_type.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        <state relative-caret-position="352">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/datetime.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/copy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="7" column="11" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        <state relative-caret-position="1341">
+          <caret line="304" column="41" lean-forward="false" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/drafts.py">
+    <entry file="file://$PROJECT_DIR$/common/theme_status.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+        <state relative-caret-position="330">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/draft_comments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/domain_invitations.py">
+    <entry file="file://$PROJECT_DIR$/python/user_companies.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/astropy/utils/tests/test_introspection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="85" column="12" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/abc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-900320256/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-235">
+          <caret line="2553" column="8" lean-forward="false" selection-start-line="2553" selection-start-column="8" selection-end-line="2553" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/themes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/specifications.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="230" column="48" lean-forward="true" selection-start-line="230" selection-start-column="48" selection-end-line="230" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="747">
+          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/products.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="94" column="53" lean-forward="true" selection-start-line="94" selection-start-column="53" selection-end-line="94" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/menus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="45" column="51" lean-forward="false" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/jobs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="424" column="22" lean-forward="true" selection-start-line="424" selection-start-column="22" selection-end-line="424" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/invoices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="108" column="22" lean-forward="false" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/notifications.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="107" column="5" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -685,270 +783,218 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/invoice_status.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/babel/core.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-433">
-          <caret line="933" column="4" lean-forward="false" selection-start-line="933" selection-start-column="4" selection-end-line="933" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/babel/numbers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5632">
-          <caret line="260" column="37" lean-forward="false" selection-start-line="260" selection-start-column="37" selection-end-line="260" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/money_protocol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2838">
-          <caret line="131" column="7" lean-forward="false" selection-start-line="131" selection-start-column="7" selection-end-line="131" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/try.py" />
-    <entry file="file://$PROJECT_DIR$/python/invoices.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="108" column="22" lean-forward="false" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/business_default.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/roles.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/status.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/job_comments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/menus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/payments.py">
+    <entry file="file://$PROJECT_DIR$/python/drafts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/sessions.py">
+    <entry file="file://$PROJECT_DIR$/python/draft_comments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-89">
+        <state relative-caret-position="-111">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/specifications.py">
+    <entry file="file://$PROJECT_DIR$/python/domains.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4598">
-          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="51">
+          <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/themes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1321">
-          <caret line="3" column="44" lean-forward="true" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/user_companies.py">
+    <entry file="file://$PROJECT_DIR$/python/discount.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/users.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2597">
-          <caret line="78" column="8" lean-forward="false" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/shipments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/products.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1013">
-          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/production_comments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/phone_numbers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/jinja2/utils.py">
+    <entry file="file://$PROJECT_DIR$/python/banks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/backups.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/addresses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/components.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/bids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/dateutil/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/Cython/Includes/posix/dlfcn.pxd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/Cython/Includes/posix/stdlib.pxd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/Cython/Includes/posix/__init__.pxd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-900320256/sys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12408">
+          <caret line="564" column="6" lean-forward="false" selection-start-line="564" selection-start-column="6" selection-end-line="564" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/rights.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/os.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+        <state relative-caret-position="16962">
+          <caret line="773" column="24" lean-forward="false" selection-start-line="773" selection-start-column="24" selection-end-line="773" selection-end-column="24" />
           <folding>
-            <marker date="1508990323131" expanded="true" signature="187:1775" ph="..." />
-            <marker date="1508990323131" expanded="true" signature="373:765" ph="..." />
+            <element signature="e#1114#1124#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-900320256/builtins.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pytz/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="4269" column="42" lean-forward="false" selection-start-line="4269" selection-start-column="36" selection-end-line="4269" selection-end-column="42" />
+        <state relative-caret-position="22">
+          <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/request.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/dateutil/tz/tz.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="28182">
+          <caret line="1295" column="25" lean-forward="false" selection-start-line="1295" selection-start-column="25" selection-end-line="1295" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/python/entities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="444" column="9" lean-forward="false" selection-start-line="444" selection-start-column="9" selection-end-line="444" selection-end-column="9" />
+        <state relative-caret-position="571">
+          <caret line="470" column="0" lean-forward="true" selection-start-line="470" selection-start-column="0" selection-end-line="470" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/time_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/notification_sources.py">
+    <entry file="file://$PROJECT_DIR$/common/timezones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1298">
-          <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        <state relative-caret-position="66">
+          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/notifications.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/wsgiref/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="29" column="54" lean-forward="false" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/jobs.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/sqlite3/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        <state relative-caret-position="132">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/urllib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/collections/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#1090#1120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/urllib/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="707" column="0" lean-forward="false" selection-start-line="707" selection-start-column="0" selection-end-line="708" selection-end-column="18" />
+          <folding>
+            <element signature="e#1131#1140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/users.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5060">
+          <caret line="230" column="0" lean-forward="true" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
