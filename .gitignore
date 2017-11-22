@@ -25,3 +25,4 @@ pyenv/*
 .mypy_cache/
 *.iml
 .idea
+.DS_Store
