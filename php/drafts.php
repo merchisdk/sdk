@@ -25,7 +25,7 @@ class Draft extends Entity
         $this->json_property('resend_date', 'DateTime');
         $this->json_property('send_sms','boolean');
         $this->json_property('send_email','boolean');
-        $this->json_property('comments', 'DraftComment', $many = Ture,
+        $this->json_property('comments', 'DraftComment', $many = True,
                              $recursive = True);
         $this->json_property('viewd','boolean');
         $this->json_property('just_viewed','boolean');
@@ -37,12 +37,12 @@ class Draft extends Entity
               draft object was loaded with the draft commented embedded.
           */
           foreach($this->comments as $comment){
-              if ($commetn->change_request){
+              if ($comment->change_request){
                   return True;
               }
               unset($comment);
-              return False;
           }
+          return False;
       }
 
       function is_draft_rejected(){
@@ -57,10 +57,9 @@ class Draft extends Entity
           foreach($this->job->drafts as $draft){
               if ($this->date < $draft->date){
                   return False;
-              } else{
-                  return True;
               }
           }
+          return True;
       }
 }
 

@@ -8,7 +8,6 @@ require_once 'theme.php';
 require_once 'menus.php';
 require_once 'domain_invitations.php';
 require_once 'categories.php';
-# need alternative of 'datetime'
 /*
         merchi python SDK object representing Domains.
 
@@ -76,6 +75,7 @@ class EnrolledDomain extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('role', 'string');
         $this->json_property('domain', 'Domain', $many = False,

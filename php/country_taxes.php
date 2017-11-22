@@ -18,6 +18,7 @@ class CountryTax extends Entity
 
     function country_name(){
         if ($this->country){
+            global $countries;
             return $countries[$this->country];
         } else{
             return "World Wide";

@@ -24,7 +24,7 @@ class Category extends Entity
         $return_array = $this->menu_items;
         usort($return_array, function($a, $b){
             return $a->position <=> $b->postition;
-        })
+        });
         return $return_array;
     }
 }

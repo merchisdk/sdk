@@ -1,5 +1,6 @@
 <?php
-/*Define names for various stages in the "production" part of
+/*
+    Define names for various stages in the "production" part of
     the job state which are used by the homepage and production job tab page to
     display progress information.
 
@@ -110,5 +111,5 @@ function status_info($status, $status_array, $status_string = ""){
             return $value;
         }
     }
-    throw new Exception($status_string + "status was not defined");    
+    throw new Exception($status_string . "status was not defined");
 }

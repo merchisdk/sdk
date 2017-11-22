@@ -5,6 +5,7 @@ require_once 'country_code.php';
 function address_country($code){
     #Take a 2 char country code like 'AU' and return the associated country
     #name, i.e. 'Australia' as a string
+    global $countries;
     $country_name = $countries[$code];
     return $country_name;
 }
