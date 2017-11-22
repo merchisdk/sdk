@@ -109,5 +109,5 @@ class DefaultThemes extends Resource
     }
 }
 
-$default_themes = new DefaultThemes()
-$themes = new Themes()
+$default_themes = new DefaultThemes();
+$themes = new Themes();

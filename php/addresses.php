@@ -32,18 +32,17 @@ class Address extends Entity
     }
 
     public function country_name(){
-      /* Convert the country initials into
+        /*
+          Convert the country initials into
           the country full name and returns the country
           full name
-      */
-      $country_name = $this->country;
-      try {
-        $country_name = $countries[$this->country];
-      } catch (Exception $e) {
+        */
+        $country_name = $this->country;
+        try {
+            $country_name = $countries[$this->country];
+        } catch (Exception $e) {}
 
-      }
-
-      return $country_name;
+        return $country_name;
 
     }
 }

@@ -27,10 +27,6 @@ class File_ extends Entity
     public function from_php_info($info) {
         $this->name = $info['name'];
         $this->mimetype = $info['mimetype'];
-        #TODO
-        #$this->size = $info['size'];
-        #Not sure if this property can still be retrived in this way
-        #$this->file_data = $info['tmp_name'];
         $this->file_data = [$this->name, $info, $info['mimetype']];
     }
 
@@ -39,7 +35,7 @@ class File_ extends Entity
           $type = explode('/',$this->mimetype);
           return $type[0] == 'image';
         }
-        catch(){
+        catch(Exception $e){
           return True;
         }
     }

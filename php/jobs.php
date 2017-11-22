@@ -1,5 +1,4 @@
 <?php
-#TODO:NOT FINISHED
 require_once 'entity.php';
 require_once 'users.php';
 require_once 'products.php';
@@ -21,7 +20,7 @@ require_once 'notifications.php';
 require_once './../php_aux/business_default.php';
 require_once './../php_aux/roles.php';
 require_once './../php_aux/status.php';
-require_once './../php_aux/notifcation_sources.php';
+require_once './../php_aux/notification_sources.php';
 require_once './../php_aux/events.php';
 
 class Job extends Entity
@@ -78,7 +77,7 @@ class Job extends Entity
         $this->json_property('design_status', 'integer');
         $this->json_property('shipping_status', 'integer');
         $this->json_property('payment_status', 'integer');
-        $this->json_property('domain', 'string');]
+        $this->json_property('domain', 'string');
         $this->json_property('received', 'DateTime');
         $this->json_property('deadline', 'DateTime');
         $this->json_property('updated', 'DateTime');
@@ -133,8 +132,10 @@ class Job extends Entity
         /*Return a string from one of the constants defined in
             common.business_default that represents the priority of this job.
         */
+        global $PRIORITY_OPTIONS_REVERSE_MAP;
         $return_value = array_key_exists($this->priority, $PRIORITY_OPTIONS_REVERSE_MAP)
         ? $PRIORITY_OPTIONS_REVERSE_MAP[$this->priority] : LOW_STRING;
+        return $return_value;
     }
 
     function current_draft(){
@@ -325,7 +326,6 @@ class Job extends Entity
         return sprintf($fmt, JOB_SECTION_STRINGS[$section]);
     }
 
-    #TODO
     function inject_notifications($tab="unread", $section = NULL){
         $notifications_embed = ['domain' => ['logo' => []],
                                 'relatedJob' => [],
@@ -335,6 +335,19 @@ class Job extends Entity
                   "section" => $section,
                   "sort" => "id",
                   "order" => "desc"];
+        global $notifications;
+        list($notifications_list, $notifications_statistics) =
+            $notifications->fetch($query, $embed=$notifications_embed);
+        $section_prefix = $this->get_section_name($section);
+
+        $attr_tab = $section_prefix . "tab";
+        $this->$attr_tab = $tab;
+
+        $attr_statistics = $section_prefix . "statistics";
+        $this->$attr_statistics = $notifications_statistics;
+
+        $attr_list = $section_prefix . "list";
+        $this->$attr_list = $notifications_list;
     }
 
     function need_to_update_notifications($tab, $section = null){
@@ -375,7 +388,7 @@ class Job extends Entity
         try {
             return $this->$section_statistics;
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            return $e;
         }
     }
 
@@ -392,6 +405,9 @@ class Job extends Entity
             whose recipient is current user.
         */
         $statistics =  $this->notifications_statistics($tab ="unread", $section);
+        if($statistics instanceof Exception) {
+            return $statistics;
+        }
         return $statistics->available;
     }
 
@@ -409,7 +425,7 @@ class Job extends Entity
 
     function production_finished(){
         #Return whether the production has been finished
-        return $this->production_status !== null and
+        return isset($this->production_status) and
         $this->production_status >= PRODUCTION_STATUS["SHIPPED"]["dbValue"]
          or (!$this->needs_production);
     }
@@ -455,7 +471,8 @@ class Job extends Entity
     }
 
     function draft_time_line($reverse = true){
-        /*Return job draft related object in chronological order
+        /*
+            Return job draft related object in chronological order
             as a dictionary. This is used for creating a job draft timeline.
         */
         $time_line_array = array();
@@ -483,12 +500,70 @@ class Job extends Entity
                     $time_line_array[$comment->date] = new Event(DRAFT_COMMENT, $comment);
                 }
             }
+            unset($comment);
         }
-        #TODO: translate Python collections.OrderDict functionality
+        unset($draft);
+
+        function cmp($a, $b){
+            if($a == $b) {
+                return 0;
+            }
+            return $a < $b ? -1 : 1;
+        }
+
+        function cmp_reverse($a, $b){
+            if($a == $b) {
+                return 0;
+            }
+            return $a < $b ? 1 : -1;
+        }
+
+        if($reverse) {
+            uksort($time_line_array, "cmp_reverse");
+            return $time_line_array;
+        } else {
+            uksort($time_line_array, "cmp");
+            return $time_line_array;
+        }
+    }
+
+    function job_info_time_line($reverse = true) {
+        /*
+         * Return the job comments in reverse with the youngest at
+            bottom of the list.
+         */
+        $time_line_array = [];
+        foreach($this->comments as $comment){
+            $time_line_array[$comment->date] = new Event(JOB_COMMENT, $comment);
+        }
+        unset($comment);
+
+        function cmp($a, $b){
+            if($a == $b) {
+                return 0;
+            }
+            return $a < $b ? -1 : 1;
+        }
+
+        function cmp_reverse($a, $b){
+            if($a == $b) {
+                return 0;
+            }
+            return $a < $b ? 1 : -1;
+        }
+
+        if($reverse) {
+            uksort($time_line_array, "cmp_reverse");
+            return $time_line_array;
+        } else {
+            uksort($time_line_array, "cmp");
+            return $time_line_array;
+        }
     }
 
     function is_complete_string(){
-        /*Return a string 'Completed' if the job is complete
+        /*
+            Return a string 'Completed' if the job is complete
             else it will return a string 'Uncompleted'.
         */
         if($this->completed){
@@ -497,13 +572,13 @@ class Job extends Entity
         return "Uncompleted";
     }
 
-    #TODO
     function can_be_archived_by(){
-
+        /*Check if the job can be archived by the user making the request.*/
+        return $this->rights->delete;
     }
 
     function total_inc_tax(){
-        #Return the job cost + the tax amount
+        /*Return the job cost + the tax amount*/
         return $this->tax_amount + $this->cost;
     }
 }

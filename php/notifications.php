@@ -8,7 +8,7 @@ require_once 'users.php';
 require_once 'domains.php';
 require_once 'jobs.php';
 require_once 'files.php';
-require_once './../php_aux/notifcation_sources.php';
+require_once './../php_aux/notification_sources.php';
 require_once './../php_aux/notification_type.php';
 require_once './../php_aux/brand_util.php';
 

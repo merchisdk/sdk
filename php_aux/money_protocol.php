@@ -120,14 +120,13 @@ const currency_map = ["ALL" => "L",
                 "YER" => "﷼",
                 "ZWD" => "Z$"];
 
-function format_currency($amount, $deciaml = 2, $currency)
+function format_currency($amount, $decimal = 2, $currency)
 {
-    $symbo = '';
-		if (currency_map[$currency]){
-				$symbol = currency_map[$currency];
-		}else{
-				$symbol = $currency;
-		}
+    if (currency_map[$currency]){
+        $symbol = currency_map[$currency];
+    }else{
+        $symbol = $currency;
+    }
     $n = $amount;
     $sign = ($n < 0) ? '-' : '';
     $i = number_format(abs($n),$decimal);

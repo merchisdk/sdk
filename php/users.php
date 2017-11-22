@@ -217,7 +217,7 @@ class User extends Entity
         } catch (Exception $e) {
             $primary_email = "";
         }
-        return #TODO: gravatar.gravatar_url(primary_email, size)
+        #TODO: gravatar.gravatar_url(primary_email, size)
     }
 
     public function dictionary_of_addresses_and_ids($address_name = null,

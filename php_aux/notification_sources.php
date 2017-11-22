@@ -10,7 +10,7 @@ const JOB_PRODUCTION = 4;
 const JOB_INVOICING = 5;
 const JOB_SHIPPING = 6;
 const INVOICE = 7;
-const JOB_NOTIFICATIONS = 8;p
+const JOB_NOTIFICATIONS = 8;
 const REMINDER = 9;
 
 const SECTION_ICON_CLASS = [SYSTEM =>  "fa fa-server",

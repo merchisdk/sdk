@@ -2,4 +2,8 @@
 
 const DEFAULT_TIMEZONE = "Australia/Melbourne";
 
-TIMEZONE_OPTIONS = [(tz, tz) for tz in pytz.common_timezones];
+$TIMEZONE_OPTIONS = [];
+
+foreach(timezone_identifiers_list() as $key => $zone) {
+    $TIMEZONE_OPTIONS[] = [$zone, $zone];
+}

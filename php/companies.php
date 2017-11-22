@@ -1,13 +1,6 @@
 <?php
 
 require_once 'entity.php';
-#import sdk.python.country_taxes
-/*from sdk.python.email_addresses import EmailAddress
-from sdk.python.addresses import Address
-from sdk.python.files import File
-from sdk.python.phone_numbers import PhoneNumber
-from sdk.python.banks import Bank
-import sdk.python.users*/
 require_once 'company_invitations.php';
 require_once './../php_aux/AddressUtil.php';
 
@@ -58,7 +51,6 @@ class Company extends Entity
 
     }
 
-    #TODO:A lot of functions
     function get_default_banks(){
         foreach($this->banks as $bank){
             if ($bank->default){
@@ -83,6 +75,7 @@ class Company extends Entity
         $saved_address = array();
         if ($this->addresses){
             foreach(array_values($this->addresses) as $i=>$address){
+                global $address_util;
                 $name = $address_util->name_primary($i, $this->name);
                 $temp_address = array('name'=>$name,'id'=>$address->id);
                 array_push($saved_address, $temp_address);

@@ -4,8 +4,8 @@ require_once 'entity.php';
 require_once 'users.php';
 require_once 'domains.php';
 
-public function years_to_seconds($years){
-    return $years * 3.15569e7
+function years_to_seconds($years){
+    return $years * 3.15569e7;
 }
 
 class Session extends Entity
