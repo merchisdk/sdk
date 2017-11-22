@@ -72,7 +72,6 @@ class Job extends Entity
         $this->json_property('needs_drafting', 'boolean');
         $this->json_property('needs_shipping', 'boolean');
         $this->json_property('domain', 'string');
-        $this->json_property('deadline', 'integer', $default = NULL);
         $this->json_property('production_status', 'integer');
         $this->json_property('design_status', 'integer');
         $this->json_property('shipping_status', 'integer');

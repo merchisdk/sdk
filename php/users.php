@@ -41,7 +41,7 @@ class User extends Entity
         $this->json_property('enable_invoice_reminders', 'boolean');
         $this->json_property('is_super_user', 'boolean');
 
-        $this->json_property('address', 'Address', $many = True,
+        $this->json_property('addresses', 'Address', $many = True,
                              $recursive = True);
         $this->json_property('phoneNumbers', 'PhoneNumber', $many = True,
                              $recursive = True);
@@ -51,7 +51,7 @@ class User extends Entity
                              $recursive = True);
         $this->json_property('user_companies', 'UserCompany', $many = True,
                              $recursive = True);
-        $this->json_property('enrolled_domains', 'EnrolledDomain', $many = False,
+        $this->json_property('enrolled_domains', 'EnrolledDomain', $many = True,
                              $default = '1', $recursive = True);
         # Products that supplier can produce
         $this->json_property('products', 'Product', $many = True,

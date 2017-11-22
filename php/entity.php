@@ -113,15 +113,26 @@ class Entity
     }
 
     public function serialise($force_primary = True, $files = [],
+                              $time_format = null, $consider_rights = true,
+                              $for_updates = false, $html_safe= false,
                               $render_nulls = False) {
         $result = [];
         if ($force_primary) {
             $result[self::$primary_key] = $this->primary_value();
         }
-        if (isset($this->file_data)) {
+        if ($this->only_for_reference and $for_updates) {
+            if (!$force_primary) {
+                $result[self::$primary_key] = $this->primary_value();
+            }
+            return [$result, $files];
+        }
+        if (isset($this->file_data) and isset($this->file_data[0])) {
             $index = count($files);
-            array_push($files, $this);
+            array_push($files, $this->file_data);
             $result['fileDataIndex'] = $index;
+        }
+        if ($consider_rights) {
+            $result[Rights::$json_name] = $this->rights->to_array();
         }
         foreach ($this->json_properties as $name => $info) {
             list($type, $many, $recursive) = $info;
@@ -130,6 +141,23 @@ class Entity
             if ($value === null) {
                 if ($render_nulls) {
                     $result[$name] = 'None';
+                }
+                continue;
+            }
+            if (!$recursive) {
+                if ($type === "DateTime") {
+                    if ($value instanceof DateTime) {
+                        if (!$time_format) {
+                            $value = $value->getTimestamp();
+                        } else {
+                            $value = $value->format($time_format);
+                        }
+                    }
+                }
+                if (gettype($value) === "string" and $html_safe and !in_array($name, $this->url_fields)) {
+                    $result[camelize($name)] = htmlspecialchars($value);
+                } else {
+                    $result[camelize($name)] = $value;
                 }
             } else if ($actual_type === "array" && $many) {
                 $i = 0;
@@ -143,6 +171,7 @@ class Entity
                         $result[$key] = $subvalue;
                     }
                     ++$i;
+
                     $result[$name . '-count'] = $i;
                 }
             } else if ($actual_type === "object") {
