@@ -11,16 +11,17 @@ class Category extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
         $this->json_property('name','string');
         $this->json_property('menu_handle','string');
         $this->json_property('menu_type','integer');
-        $this->json_property('menu_items', 'MenuItem', $many = True,
+        $this->json_property('menu_items', 'MenuItem', null, $many = True,
                              $recursive = True);
     }
 
     public function  menu_items_in_order(){
-        #Return a list of menu_items sorted by their position
+        /* Return a list of menu_items sorted by their position */
         $return_array = $this->menu_items;
         usort($return_array, function($a, $b){
             return $a->position <=> $b->postition;
@@ -31,13 +32,17 @@ class Category extends Entity
 
 class MenuItem extends Entity
 {
+    public static $resource = '/menu_items/';
+    public static $json_name = 'menue_item';
+
     public function __construct()
     {
-      $this->json_property('id','integer');
-      $this->json_property('name','string');
-      $this->json_property('link_url','string');
-      $this->json_property('link_type','integer');
-      $this->json_property('position','integer');
+        parent::__construct();
+        $this->json_property('id','integer');
+        $this->json_property('name','string');
+        $this->json_property('link_url','string');
+        $this->json_property('link_type','integer');
+        $this->json_property('position','integer');
     }
 
     public function url($domain = Null){

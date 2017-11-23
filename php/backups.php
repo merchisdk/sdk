@@ -9,9 +9,10 @@ class Backup extends Entity
 
 
     public function __construct() {
+        parent::__construct();
         $this->json_property('id','integer');
-        $this->json_property('file','File', $default = [],
-                            $many = true, $recursive = True);
+        $this->json_property('file','File', '',
+                            false, $recursive = True);
     }
 }
 

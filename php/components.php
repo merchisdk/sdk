@@ -10,12 +10,13 @@ class Component extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('body', 'string');
         $this->json_property('description', 'string');
-        $this->json_property('tags', 'ComponentTag', $many = True,
-                            $recursive = True);
+        $this->json_property('tags', 'ComponentTag', [],
+                              $many = True, $recursive = True);
     }
 }
 

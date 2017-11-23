@@ -1,6 +1,6 @@
 <?php
 # The ISO alpha-2 ocuntry codes
-$countries = array
+const countries = array
 (
 	'AF' => 'Afghanistan',
 	'AX' => 'Aland Islands',

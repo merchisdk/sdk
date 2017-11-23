@@ -13,6 +13,7 @@ class JobComment extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
         $this->json_property('text','string');
         $this->json_property('urgency','integer');
@@ -20,16 +21,16 @@ class JobComment extends Entity
         $this->json_property('send_sms','boolean');
         $this->json_property('send_email','boolean');
         $this->json_property('date', 'DateTime');
-        $this->json_property('notifications', 'Notification', $many = True,
-                              $recursive = True);
-        $this->json_property('job', 'Job', $many = False,
-                              $recursive = True);
-        $this->json_property('user', 'User', $many = False,
-                              $recursive = True);
-        $this->json_property('fowards', 'User', $many = True,
-                              $recursive = True);
-        $this->json_property('file', 'File', $many = False,
-                              $recursive = True);
+        $this->json_property('notifications', 'Notification', null,
+                             True, $recursive = True);
+        $this->json_property('job', 'Job', null,
+                              False, $recursive = True);
+        $this->json_property('user', 'User', null,
+                              False, $recursive = True);
+        $this->json_property('fowards', 'User', null,
+                             True, $recursive = True);
+        $this->json_property('file', 'File', null,
+                             False, $recursive = True);
     }
 }
 

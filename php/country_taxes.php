@@ -10,6 +10,7 @@ class CountryTax extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('country', 'string');
         $this->json_property('tax_name', 'string');
@@ -18,8 +19,7 @@ class CountryTax extends Entity
 
     function country_name(){
         if ($this->country){
-            global $countries;
-            return $countries[$this->country];
+            return countries[$this->country];
         } else{
             return "World Wide";
         }

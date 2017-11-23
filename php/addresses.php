@@ -10,6 +10,7 @@ class Address extends Entity
 
 
     public function __construct() {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('line_one', 'string');
         $this->json_property('line_two', 'string');
@@ -39,7 +40,7 @@ class Address extends Entity
         */
         $country_name = $this->country;
         try {
-            $country_name = $countries[$this->country];
+            $country_name = countries[$this->country];
         } catch (Exception $e) {}
 
         return $country_name;

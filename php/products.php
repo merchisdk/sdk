@@ -14,6 +14,7 @@ class Product extends Entity
 
 
     public function __construct() {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('notes', 'string');
@@ -38,19 +39,19 @@ class Product extends Entity
         $this->json_property('allow_payment_upfront', 'boolean');
         $this->json_property('allow_quotation', 'boolean');
         $this->json_property('delivery_days_normal', 'integer');
-        $this->json_property('categories', 'Category', $many = True,
+        $this->json_property('categories', 'Category', null, $many = True,
                              $recursive = True);
-        $this->json_property('discounts', 'Discount', $many = True,
+        $this->json_property('discounts', 'Discount', null, $many = True,
                              $recursive = True);
-        $this->json_property('domain', 'Domain', $many = False,
-                             $default = '1', $recursive = True);
-        $this->json_property('files', 'File', $many = True,
+        $this->json_property('domain', 'Domain', null, $many = False,
+                             $recursive = True);
+        $this->json_property('files', 'File', null, $many = True,
                              $recursive = True);
         $this->json_property('independent_variation_fields', 'SpecificationField',
-                             $many = True, $recursive = True);
+                             null, $many = True, $recursive = True);
         $this->json_property('group_variation_fields', 'SpecificationField',
-                             $many = True, $recursive = True);
-        $this->json_property('suppliers', 'User', $many = True,
+                             null, $many = True, $recursive = True);
+        $this->json_property('suppliers', 'User', null, $many = True,
                              $recursive = True);
     }
 
@@ -58,9 +59,8 @@ class Product extends Entity
                           $query = null, $api_secret = null, $as_domain = null)
     {
         $this->unit_price = (float)$this->unit_price;
-        parent::create($embed = $embed, $email = $email,$password = $password,
-                      $query = $query, $api_secret = $api_secret,
-                       $as_domain = $as_domain);
+        parent::create($embed, $email,$password,
+                      $query, $api_secret, $as_domain);
     }
 
     public function primary_image(){
@@ -70,10 +70,11 @@ class Product extends Entity
         if($this->files and sizeof($this->files) > 0){
             return $this->files[0];
         }
+        return null;
     }
 
     public function preview_images($max_images){
-        #Only will return max_images of files
+        /*Only will return max_images of files */
         return array_slice($this->files, 0, $max_images);
     }
 
@@ -82,11 +83,12 @@ class Product extends Entity
     }
 
     public function primary_product_image(){
-        #Return the first product image if it exists else return None
+        /*Return the first product image if it exists else return None*/
         if($this->files and sizeof($this->files) > 0){
             $result = $this->files[0];
             return $result->view_url;
         }
+        return null;
     }
 
     public function build_empty_specifications_group(){

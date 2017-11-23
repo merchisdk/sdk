@@ -19,21 +19,22 @@ class Category extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
-        $this->json_property('recipient', 'User', $many = False,
+        $this->json_property('recipient', 'User', null, $many = False,
                              $recursive = True);
-        $this->json_property('sender', 'User', $many = False,
+        $this->json_property('sender', 'User', null, $many = False,
                              $recursive = True);
         $this->json_property('date', 'DateTime');
-        $this->json_property('related_job', 'Job', $many = True,
+        $this->json_property('related_job', 'Job', null, $many = False,
                              $recursive = True);
-        $this->json_property('related_job_comment', 'JobComment', $many = False,
+        $this->json_property('related_job_comment', 'JobComment', null, $many = False,
                              $recursive = True);
-        $this->json_property('related_draft_comment', 'DraftComment', $many = False,
+        $this->json_property('related_draft_comment', 'DraftComment', null, $many = False,
                              $recursive = True);
-        $this->json_property('related_production_comment', 'ProductionComment', $many = False,
-                             $recursive = True);
-        $this->json_property('attachment', 'File', $many = False,
+        $this->json_property('related_production_comment', 'ProductionComment', null,
+                              $many = False, $recursive = True);
+        $this->json_property('attachment', 'File', null, $many = False,
                              $recursive = True);
         $this->json_property('urgency','integer');
         $this->json_property('notification_type','integer');
@@ -46,8 +47,8 @@ class Category extends Entity
         $this->json_property('html_message','string');
         $this->json_property('link','string');
         $this->json_property('section','integer');
-        $this->json_property('domain', 'Domain', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('domain', 'Domain', null, $many = False,
+                                $recursive = True);
     }
 
     public function have_link(){

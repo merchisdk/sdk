@@ -6,20 +6,20 @@ class File_ extends Entity
 {
     public static $json_name = 'file';
     public static $resource = '/files/';
-    public static $url_fields = ['view_url', 'download_url'];
+    public $url_fields = ['view_url', 'download_url'];
 
 
     public function __construct() {
-        $this->url_fields = ['view_url', 'download_url'];
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('size', 'integer');
         $this->json_property('mimetype', 'integer');
         $this->json_property('view_url', 'string');
         $this->json_property('download_url', 'string');
-        $this->json_property('creation_date', 'datetime');
-        $this->json_property('uploader', 'User', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('creation_date', 'DateTime');
+        $this->json_property('uploader', 'User', null,
+                             False, $recursive = True);
         $this->file_data = [];
 
     }

@@ -13,6 +13,7 @@ class Category extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->escape_fields = ['tax_type'];
 
         $this->json_property('id','integer');
@@ -23,28 +24,28 @@ class Category extends Entity
         $this->json_property('received_date','DateTime');
 
         # sender attributes
-        $this->json_property('sender', 'User', $many = False,
+        $this->json_property('sender', 'User', null, False,
                              $recursive = True);
-        $this->json_property('sender_company', 'Company', $many = False,
+        $this->json_property('sender_company', 'Company', null, $many = False,
                              $recursive = True);
-        $this->json_property('sender_address', 'Address', $many = False,
+        $this->json_property('sender_address', 'Address', null, $many = False,
                              $recursive = True);
         $this->json_property('sender_notes', 'string');
 
         #receiver attributes
-        $this->json_property('receiver', 'User', $many = False,
+        $this->json_property('receiver', 'User', null, $many = False,
                              $recursive = True);
-        $this->json_property('receiver_company', 'Company', $many = False,
+        $this->json_property('receiver_company', 'Company', null, $many = False,
                              $recursive = True);
-        $this->json_property('receiver_address', 'Address', $many = False,
+        $this->json_property('receiver_address', 'Address', null, $many = False,
                              $recursive = True);
         $this->json_property('receiver_notes', 'string');
 
-        $this->json_property('invoice', 'Invoice', $many = False,
+        $this->json_property('invoice', 'Invoice', null,$many = False,
                              $recursive = True);
-        $this->json_property('jobs', 'Job', $many = True,
+        $this->json_property('jobs', 'Job', null, $many = True,
                              $recursive = True);
-        $this->json_property('assignments', 'Assignment', $many = True,
+        $this->json_property('assignments', 'Assignment', null, $many = True,
                              $recursive = True);
 
         $this->json_property('tracking_number', 'string');
@@ -56,7 +57,7 @@ class Category extends Entity
         $this->json_property('sender_responsible', 'boolean');
         $this->json_property('cost', 'float');
         $this->json_property('tax_amount', 'float');
-        $this->json_property('tax_type', 'CountryTax', $many = False,
+        $this->json_property('tax_type', 'CountryTax', null, $many = False,
                              $recursive = True);
     }
 }

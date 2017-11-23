@@ -13,16 +13,17 @@ class ProductionComment extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
-        $this->json_property('assignment', 'Assignment', $many = False,
+        $this->json_property('assignment', 'Assignment', null, $many = False,
                              $recursive = True);
-        $this->json_property('user', 'User', $many = False,
+        $this->json_property('user', 'User', null, $many = False,
                              $recursive = True);
-        $this->json_property('forwards', 'User', $many = True,
+        $this->json_property('forwards', 'User', null, $many = True,
                              $recursive = True);
-        $this->json_property('file', 'File', $many = False,
+        $this->json_property('file', 'File', null, $many = False,
                              $recursive = True);
-        $this->json_property('notifications', 'Notification', $many = True,
+        $this->json_property('notifications', 'Notification', null, $many = True,
                              $recursive = True);
         $this->json_property('text','string');
         $this->json_property('date','DateTime');

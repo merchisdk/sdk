@@ -11,6 +11,7 @@ class SpecificationFieldOption extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->escape_fields = ["default"];
         $this->json_property('id','integer');
         $this->json_property('value','string');
@@ -19,7 +20,7 @@ class SpecificationFieldOption extends Entity
         $this->json_property('specification_cost','float');
         $this->json_property('specification_unit_cost','float');
         $this->json_property('default','float');
-        $this->json_property('linked_file', 'File', $many = False,
+        $this->json_property('linked_file', 'File', null, $many = False,
                              $recursive = True);
     }
 
@@ -41,6 +42,7 @@ class SpecificationField extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->escape_fields = ["field_type", 'required', 'specification_cost'];
         $this->json_property('id','integer');
         $this->json_property('field_type','integer');
@@ -67,9 +69,9 @@ class SpecificationField extends Entity
         $this->json_property('specification_cost','float');
         $this->json_property('specification_unit_cost','float');
         $this->json_property('cost','float');
-        $this->json_property('options', 'SpecificationFieldOption',
+        $this->json_property('options', 'SpecificationFieldOption', null,
                               $many = True, $recursive = True);
-        $this->json_property('default_options', 'SpecificationFieldOption',
+        $this->json_property('default_options', 'SpecificationFieldOption', null,
                               $many = True, $recursive = True);
     }
 
@@ -134,7 +136,7 @@ class SpecificationField extends Entity
         }
         $specification_built->unit_cost_total = 0;
         $specification_built->cost = $specification_built->once_off_cost;
-        //NOTE:To do a deep copy,unserialize a serialized object is an extremly
+        //NOTE:To do a deep copy,unserialize a serialized object is an extremely
         //resource-consuming method.Should get rid of it latter on.
         $specification_built->specification_field =
                         unserialize(serialize($this));
@@ -148,6 +150,7 @@ class SpecificationOption extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('option_id','integer');
         $this->json_property('quantity','integer');
         $this->json_property('value','string');
@@ -167,6 +170,7 @@ class Specification extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
         $this->json_property('quantity','integer');
         $this->json_property('value','string');
@@ -174,27 +178,27 @@ class Specification extends Entity
         $this->json_property('unit_cost','float');
         $this->json_property('unit_cost_total','float');
         $this->json_property('cost','float');
-        $this->json_property('selected_options', 'SpecificationOption',
+        $this->json_property('selected_options', 'SpecificationOption', null,
                               $many = True, $recursive = True);
-        $this->json_property('specification_files', 'File', $many = True,
+        $this->json_property('specification_files', 'File', null, $many = True,
                              $recursive = True);
-        $this->json_property('specification_field', 'SpecificationField',
+        $this->json_property('specification_field', 'SpecificationField',null,
                               $many = False, $recursive = True);
     }
 
     public function is_selectable(){
-        #Returns True if the field type is selectable
+        /*Returns True if the field type is selectable*/
         return in_array($this->specification_field->field_type,
                         has_options_array);
     }
 
     public function is_file_upload(){
-        #Returns True if is a file upload type
+        /*Returns True if is a file upload type*/
         return $this->specification_field->is_file_upload();
     }
 
     public function has_muiltiple_files(){
-        #Returns True if the specification has multiple files
+        /*Returns True if the specification has multiple files*/
         if($this->specification_files){
             return sizeof($this->specification_files) > 0;
         }
@@ -206,7 +210,7 @@ class Specification extends Entity
     }
 
     public function selected_colour_option(){
-        #Returns the first selected option
+        /*Returns the first selected option*/
         return $this->selected_options[0];
     }
 
@@ -230,7 +234,7 @@ class Specification extends Entity
     }
 
     public function get_selected_option($option_id){
-        #Return the specification option which matches the option_id argument
+        /*Return the specification option which matches the option_id argument*/
         foreach($this->specification_field->options as $option){
             if((int)$option_id ==  $option->id){
                 return $option;
@@ -240,7 +244,7 @@ class Specification extends Entity
     }
 
     public function selected_options_array(){
-        #Returns an array of selected options
+        /*Returns an array of selected options*/
         $values = $this->value_array();
         if($this->is_selectable()){
             $return_array = [];
@@ -295,10 +299,11 @@ class SpecificationsGroup extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
         $this->json_property('quantity','integer');
         $this->json_property('group_cost','float');
-        $this->json_property('specifications', 'Specification', $many = True,
+        $this->json_property('specifications', 'Specification', null, $many = True,
                              $recursive = True);
     }
 

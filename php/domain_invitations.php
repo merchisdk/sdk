@@ -1,6 +1,8 @@
 <?php
 
 require_once 'entity.php';
+require_once 'domains.php';
+require_once 'users.php';
 
 class DomainInvitation extends Entity
 {
@@ -9,18 +11,17 @@ class DomainInvitation extends Entity
 
     public function __construct()
     {
-        require_once 'domains.php';
-        require_once 'users.php';
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('user_name', 'string');
         $this->json_property('user_email', 'string');
         $this->json_property('role', 'integer');
-        $this->json_property('domain', 'Domain', $many = False,
-                            $recursive = True);
-        $this->json_property('sender', 'User', $many = False,
-                            $recursive = True);
-        $this->json_property('user', 'User', $many = False,
-                            $recursive = True);
+        $this->json_property('domain', 'Domain', '',
+                              $many = False, $recursive = True);
+        $this->json_property('sender', 'User', '',
+                              $many = False, $recursive = True);
+        $this->json_property('user', 'User', '',
+                             False, $recursive = True);
     }
 }
 

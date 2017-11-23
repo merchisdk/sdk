@@ -2,6 +2,8 @@
 
 require_once 'entity.php';
 require_once 'files.php';
+require_once 'users.php';
+require_once 'domains.php';
 require_once './../php_aux/theme_status.php';
 
 class Theme extends Entity
@@ -11,6 +13,7 @@ class Theme extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
         $this->json_property('name','string');
         $this->json_property('description','string');
@@ -39,28 +42,26 @@ class Theme extends Entity
         $this->json_property('footer_error','string');
         $this->json_property('last_updated','DateTime');
 
-        $this->json_property('main_css_file', 'File', $many = False,
+        $this->json_property('main_css_file', 'File', null,$many = False,
                               $recursive = True);
-        $this->json_property('main_css_template_editing', 'File', $many = False,
+        $this->json_property('main_css_template_editing', 'File', null,$many = False,
                               $recursive = True);
-        $this->json_property('main_css_template_using', 'File', $many = False,
+        $this->json_property('main_css_template_using', 'File', null, $many = False,
                               $recursive = True);
-        $this->json_property('email_css_file', 'File', $many = False,
+        $this->json_property('email_css_file', 'File', null,$many = False,
                               $recursive = True);
-        $this->json_property('email_css_template_editing', 'File', $many = False,
+        $this->json_property('email_css_template_editing', 'File', null, $many = False,
                               $recursive = True);
-        $this->json_property('email_css_template_using', 'File', $many = False,
+        $this->json_property('email_css_template_using', 'File', null, $many = False,
                               $recursive = True);
-        $this->json_property('feature_image', 'File', $many = False,
+        $this->json_property('feature_image', 'File', null,$many = False,
                               $recursive = True);
-        $this->json_property('css_image_files', 'File', $many = True,
+        $this->json_property('css_image_files', 'File', null, $many = True,
                               $recursive = True);
-        require_once 'users.php';
-        $this->json_property('author', 'User', $many = False,
+        $this->json_property('author', 'User', null, $many = False,
                               $recursive = True);
-        require_once 'domains.php';
-        $this->json_property('domain', 'Domain', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('domain', 'Domain', null, $many = False,
+                              $recursive = True);
     }
 
     public function is_valid_and_updated(){
@@ -74,7 +75,7 @@ class Theme extends Entity
     }
 
     public function can_be_activated(){
-        #Check whether this theme can be a valid activated theme
+        /*Check whether this theme can be a valid activated theme*/
         return $this->main_css_status >= VALID_BUT_NOT_UPDATED and
                $this->email_css_status >= VALID_BUT_NOT_UPDATED;
     }
@@ -96,6 +97,7 @@ class DefaultTheme extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('name','string');
     }
 }

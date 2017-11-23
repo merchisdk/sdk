@@ -11,16 +11,17 @@ class Item extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->escape_fields = ['tax_type'];
         $this->json_property('id', 'integer');
         $this->json_property('cost','float');
         $this->json_property('description','string');
         $this->json_property('tax_amount','float');
         $this->json_property('quantity','float');
-        $this->json_property('invoice', 'Invoice', $many = False,
-                             $default = '1', $recursive = True);
-        $this->json_property('tax_type', 'CountryTax', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('invoice', 'Invoice', null,
+                             False, $recursive = True);
+        $this->json_property('tax_type', 'CountryTax', null,
+                             False, $recursive = True);
     }
 
     function item_total(){
