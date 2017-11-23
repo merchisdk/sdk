@@ -18,9 +18,8 @@ function enumerate_files($files){
 function generate_request($data,$files, $email = null, $password = null, $api_secret,
                            $query, $embed, $as_domain = null) {
     $request = new Request();
-    $request->data = $data;
-    $request->username = $email;
-    $request->password = $password;
+    $request->wraps_request($data,$files, $email, $password, $api_secret,
+        $query, $embed, $as_domain);
     return $request;
 }
 
@@ -79,26 +78,53 @@ class Entity
         }
     }
 
-    public function create($email = null, $password = null) {
-        list($data, $files) = $this->serialise();
-        $request = generate_request($data, $email, $password);
+    public function create($embed = null, $email = null, $password = null,
+                            $query = null, $api_secret = null, $as_domain = null) {
+        $this->process_before_transfer();
+        list($data, $files) = $this->serialise($consider_rights = False);
+        $request = generate_request($data, enumerate_files($files), $email, $password,
+                                    $api_secret, $query, $embed, $as_domain);
         $request->method = 'POST';
         $request->resource = static::$resource;
-        $request->files = $files;
         $response = $request->send();
         check_response($response);
+        $body = json_decode($response->body, true);
+        $this->from_json($body);
     }
 
-    public function put($data = '', $email = null, $password = null) {
-        $request = generate_request($data, $email, $password);
+    public function put($data = '', $files, $email = null, $password = null,
+                        $query = null, $api_secret = null, $as_domain = null) {
+        $request = generate_request($data, $files, $email, $password,
+            $api_secret, $query,null, $as_domain);
         $request->method = 'PUT';
         return $this->send_to_entity($request, $this->primary_value());
     }
 
-    public function patch($data = '', $email = null, $password = null) {
-        $request = generate_request($data, $email, $password);
+    public function patch($data = '', $files = null, $email = null, $password = null,
+                          $query = null, $api_secret = null, $as_domain = null) {
+        $request = generate_request($data, $files, $email, $password,
+            $api_secret, $query,null, $as_domain);
         $request->method = 'PATCH';
         return $this->send_to_entity($request, $this->primary_value());
+    }
+
+    public function update($query = null, $only_updates = null, $refresh = false, $email = null,
+                           $password = null, $api_secret = null, $as_domain = null) {
+        if ($only_updates and count($only_updates) > 0) {
+            foreach ($only_updates as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+        $this->process_before_transfer();
+        list($data, $files) = $this->serialise(false, null, null,
+                                               False,
+                                               True);
+        $response = $this->patch($data, enumerate_files($files),$email, $password,$query,
+                                 $api_secret, $as_domain);
+        if ($refresh) {
+            $body = json_decode($response->body, true);
+            $this->from_json($body);
+        }
     }
 
     public function primary_value() {
