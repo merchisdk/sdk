@@ -4,10 +4,11 @@ require_once 'entity.php';
 require_once 'products.php';
 require_once 'companies.php';
 require_once 'files.php';
-require_once 'theme.php';
+require_once 'themes.php';
 require_once 'menus.php';
 require_once 'domain_invitations.php';
 require_once 'categories.php';
+require_once './../php_aux/menu_util.php';
 /*
         merchi python SDK object representing Domains.
 
@@ -37,6 +38,7 @@ class Domain extends Entity
 
 
     public function __construct() {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('domain', 'string');
         $this->json_property('sub_domain', 'string');
@@ -49,22 +51,60 @@ class Domain extends Entity
         $this->json_property('enable_notifications', 'boolean');
         $this->json_property('enable_email_notifications', 'boolean');
         $this->json_property('enable_sms_notifications','boolean');
-        $this->json_property('active_theme', 'Theme', $many = False,
-                             $recursive = True);
-        $this->json_property('domain_invitations', 'DomainInvitation',
+        $this->json_property('active_theme', 'Theme', '',
+                             False, $recursive = True);
+        $this->json_property('domain_invitations', 'DomainInvitation', [],
                              $many = True, $recursive = True);
-        $this->json_property('company', 'Company', $many = False,
-                             $recursive = True);
-        $this->json_property('logo', 'File', $many = False,
-                             $recursive = True);
-        $this->json_property('categories', 'Category', $many = True,
-                             $recursive = True);
-        $this->json_property('products', 'Product', null, $many = True,
-                             $recursive = True);
-        $this->json_property('themes', 'Theme', $many = True,
-                             $recursive = True);
-        $this->json_property('menus', 'Menu', $many = True,
-                             $recursive = Ture);
+        $this->json_property('company', 'Company', '',
+                             False, $recursive = True);
+        $this->json_property('logo', 'File', '',
+                             False, $recursive = True);
+        $this->json_property('categories', 'Category', [],
+                             True, $recursive = True);
+        $this->json_property('products', 'Product', null,
+                             $many = True, $recursive = True);
+        $this->json_property('themes', 'Theme', [],
+                             $many = True, $recursive = True);
+        $this->json_property('menus', 'Menu', [],
+                              $many = True, $recursive = Ture);
+    }
+
+    public function public_categories() {
+        $return_array = [];
+        foreach ($this->categories as $category) {
+            if ($category->show_public) {
+                $return_array[] = $category;
+            }
+        }
+        return $return_array;
+    }
+
+    public function email_notifications_enabled() {
+        return $this->enable_notifications and
+            $this->enable_email_notifications;
+    }
+
+    public function sms_notifications_enabled() {
+        return $this->enable_notifications and
+            $this->enable_sms_notifications;
+    }
+
+    public function main_menu() {
+        if($this->menus) {
+            foreach($this->menus as $menu) {
+                if ($menu->menu_type == MAIN) {
+                    return $menu;
+                }
+            }
+        }
+        return null;
+    }
+
+    public function safe_conversion_tracking_code($invoice = null) {
+        $code = $this->conversion_tracking_code;
+        if (!isset($code)) {
+            return '';
+        }
     }
 }
 
@@ -78,10 +118,10 @@ class EnrolledDomain extends Entity
         parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('role', 'string');
-        $this->json_property('domain', 'Domain', $many = False,
-                             $recursive = True);
-        $this->json_property('user', 'User', $many = True,
-                             $recursive = True);
+        $this->json_property('domain', 'Domain', null,
+                             $many = False, $recursive = True);
+        $this->json_property('user', 'User', null,
+                              $many = False, $recursive = True);
     }
 }
 

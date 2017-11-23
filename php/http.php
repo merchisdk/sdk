@@ -68,7 +68,7 @@ class Request
 
     public function wraps_request($data = null, $files = null, $email = null, $password = null,
                                   $api_secret = null, $query = null, $embed = null, $as_domain = null) {
-        /* Wrap user customized infomation to request*/
+        /* Wrap user customized information to request*/
         $this->files = $files;
         $this->data = $data;
         $this->username = $email;

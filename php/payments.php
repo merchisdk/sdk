@@ -12,15 +12,16 @@ class Payment extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->escape_fields = ['payment_type', 'pay_date'];
         $this->json_property('id','integer');
         $this->json_property('note','string');
         $this->json_property('payment_type','integer');
         $this->json_property('pay_date','DateTime');
         $this->json_property('amount','float');
-        $this->json_property('invoice', 'Invoice', $many = False,
+        $this->json_property('invoice', 'Invoice', null,$many = False,
                              $recursive = True);
-        $this->json_property('payment_recorder', 'Users', $many = False,
+        $this->json_property('payment_recorder', 'Users', null, $many = False,
                              $recursive = True);
         $this->json_property('send_sms','boolean');
         $this->json_property('send_email','boolean');

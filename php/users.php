@@ -12,7 +12,7 @@ require_once 'products.php';
 require_once 'domains.php';
 require_once './../php_aux/roles.php';
 require_once './../php_aux/timezones.php';
-require_once './../php_aux/AddressUtil.php';
+require_once './../php_aux/address_util.php';
 
 class User extends Entity
 {
@@ -21,13 +21,14 @@ class User extends Entity
 
 
     public function __construct() {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('password', 'string');
         $this->json_property('reset_token', 'string');
         $this->json_property('created', 'DateTime');
         $this->json_property('timezone', 'integer');
-        $this->json_property('emailAddresses', 'EmailAddress', $many = True,
+        $this->json_property('email_addresses', 'EmailAddress', null, $many = True,
                              $recursive = True);
 
         $this->json_property('incomplete_jobs_count', 'integer');
@@ -41,22 +42,22 @@ class User extends Entity
         $this->json_property('enable_invoice_reminders', 'boolean');
         $this->json_property('is_super_user', 'boolean');
 
-        $this->json_property('addresses', 'Address', $many = True,
+        $this->json_property('addresses', 'Address', null, $many = True,
                              $recursive = True);
-        $this->json_property('phoneNumbers', 'PhoneNumber', $many = True,
+        $this->json_property('phoneNumbers', 'PhoneNumber', null, $many = True,
                              $recursive = True);
-        $this->json_property('categories', 'Category', $many = True,
+        $this->json_property('categories', 'Category', null, $many = True,
                              $recursive = True);
-        $this->json_property('notifications', 'Notification', $many = True,
+        $this->json_property('notifications', 'Notification', null, $many = True,
                              $recursive = True);
-        $this->json_property('user_companies', 'UserCompany', $many = True,
+        $this->json_property('user_companies', 'UserCompany', null, $many = True,
                              $recursive = True);
-        $this->json_property('enrolled_domains', 'EnrolledDomain', $many = True,
-                             $default = '1', $recursive = True);
+        $this->json_property('enrolled_domains', 'EnrolledDomain', null, $many = True,
+                             $recursive = True);
         # Products that supplier can produce
-        $this->json_property('products', 'Product', $many = True,
+        $this->json_property('products', 'Product', null, $many = True,
                              $recursive = True);
-        $this->json_property('profile_picture', 'File', $many = False,
+        $this->json_property('profile_picture', 'File', null, $many = False,
                              $recursive = True);
     }
 
@@ -89,7 +90,7 @@ class User extends Entity
     }
 
     public function has_roles($roles){
-        #Assert whether user have roles registered
+        /*Assert whether user have roles registered*/
         $user_all_roles = $this->all_roles();
         foreach ($roles as $role) {
             if (in_array($role, $user_all_roles)) {
@@ -100,47 +101,51 @@ class User extends Entity
     }
 
     public function has_authority($domain_id, $roles){
-        #Check whether user is in one of the roles in certain domain
+        /*Check whether user is in one of the roles in certain domain*/
         return $this->is_super_user or
                in_array($this->role_in_domain($domain_id), $roles);
     }
 
     public function is_not_client($domain_id){
-        #Check to see if the user is part of the domain staff.
+        /*Check to see if the user is part of the domain staff.*/
         return $this->has_authority($domain_id, BUSINESS_ACCOUNTS);
     }
 
     public function can_view_info_section($job){
-        #Return whether current user should need to view info section of a job.
+        /*Return whether current user should need to view info section of a job.*/
         return $this->has_authority($job->domain->id, BUSINESS_ACCOUNTS);
     }
 
     public function can_view_payment_section($job){
-        #Return whether current user should need to view payment
-        # section of a job.
+        /*Return whether current user should need to view payment
+          section of a job.
+       */
         return $this->has_authority($job->domain->id, INVOICE_ROLES);
     }
 
     public function can_view_production_section($job){
-        #Return whether current user should need to view production
-        # section of a job.
+        /*Return whether current user should need to view production
+          section of a job.
+       */
         return $this->has_authority($job->domain->id, PRODUCTION_SECTION);
     }
 
     public function can_view_drafing_section($job){
-        #Return whether current user should need to view drafting
-        # section of a job.
+        /*Return whether current user should need to view drafting
+          section of a job.
+        */
         return $this->has_authority($job->domain->id, DESIGN_SECTION);
     }
 
     public function can_view_shipping_section($job){
-        #Return whether current user should need to view shipping
-        # section of a job.
+        /*Return whether current user should need to view shipping
+          section of a job.
+        */
         return $this->has_authority($job->domain->id, SHIPPING_SECTION);
     }
 
     public function user_type(){
-        #Return a user friendly string indicating what type the user is
+        /*Return a user friendly string indicating what type the user is*/
         if($this->is_super_user){
             return "System Admin";
         }
@@ -148,7 +153,7 @@ class User extends Entity
     }
 
     public function primary_company_name(){
-        #Return the user's primary company name if the user has a company
+        #/*eturn the user's primary company name if the user has a company*/
         if($this->user_companies and $this->user_companies[0]->company){
             return $this->user_companies[0]->company->name;
         }
@@ -156,7 +161,7 @@ class User extends Entity
     }
 
     public function company_country(){
-        #Return the country which the users is located
+        /*Return the country which the users is located*/
         try {
             $country = $this->addresses[0]->country_name();
         } catch (Exception $e) {
@@ -166,7 +171,7 @@ class User extends Entity
     }
 
     public function primary_phone_number(){
-        #Return the users primary phone number including the area code
+        /*Return the users primary phone number including the area code*/
         try {
             $primary_phone_number =
             $this->phone_numbers[0]->international_format_number;
@@ -177,7 +182,7 @@ class User extends Entity
     }
 
     public function primary_email_address(){
-        #Return the user's primary email address if they have one
+        /*Return the user's primary email address if they have one*/
         try {
             $primary_email_address = $this->email_addresses[0]->email_address;
           } catch (Exception $e) {
@@ -187,7 +192,7 @@ class User extends Entity
     }
 
     public function get_tzinfo(){
-        #Return the timezone of the user as a DateTimeZone object.
+        /*Return the timezone of the user as a DateTimeZone object.*/
         if($this->timezone !== null){
             $timezone = $this->timezone;
         }else {
@@ -217,7 +222,9 @@ class User extends Entity
         } catch (Exception $e) {
             $primary_email = "";
         }
-        #TODO: gravatar.gravatar_url(primary_email, size)
+        $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($primary_email))) .
+                     "?d=mm" . "&s=" . $size;
+        return $grav_url;
     }
 
     public function dictionary_of_addresses_and_ids($address_name = null,
@@ -251,8 +258,9 @@ class User extends Entity
     }
 
     public function public_nav_extension($url){
-        #Extend menu items with user info so that if
-        #the user is redirected to a third party site
+        /*Extend menu items with user info so that if
+          the user is redirected to a third party site
+       */
         $query = '?';
         if(strpos($url, $query) !== False){
             $query = '&';

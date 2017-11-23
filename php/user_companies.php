@@ -2,6 +2,7 @@
 
 require_once 'entity.php';
 require_once 'companies.php';
+require_once 'users.php';
 
 class UserCompany extends Entity
 {
@@ -10,15 +11,15 @@ class UserCompany extends Entity
 
     public function __construct()
     {
-        require_once 'users.php';
+        parent::__construct();
         $this->escape_fields = ['main', 'is_admin'];
         $this->json_property('main','boolean');
         $this->json_property('is_admin','boolean');
         $this->json_property('show_dashboard','boolean');
         $this->json_property('show_public','boolean');
-        $this->json_property('company', 'Company', $many = False,
+        $this->json_property('company', 'Company', null, $many = False,
                               $recursive = True);
-        $this->json_property('user', 'User', $many = False,
+        $this->json_property('user', 'User', null, $many = False,
                               $recursive = True);
     }
 }

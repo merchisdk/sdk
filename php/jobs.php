@@ -25,37 +25,38 @@ require_once './../php_aux/events.php';
 
 class Job extends Entity
 {
-    public static $json_name = 'Job';
+    public static $json_name = 'job';
     public static $resource = '/jobs/';
 
 
     public function __construct() {
+        parent::__construct();
         $this->escape_fields = ['product', 'quantity', 'tax_type'];
         $this->json_property('id', 'integer');
-        $this->json_property('manager','User', $many = False,
-                             $recursive = True);
-        $this->json_property('designer','User', $many = False,
-                             $recursive = True);
-        $this->json_property('client','User', $many = False,
-                             $recursive = True);
-        $this->json_property('product','Product', $many = False,
-                             $recursive = True);
-        $this->json_property('comments','JobComment', $many = True,
-                             $recursive = True);
-        $this->json_property('draft_comments','DraftComment', $many = True,
-                             $recursive = True);
-        $this->json_property('drafts','Draft', $many = True,
-                             $recursive = True);
-        $this->json_property('invoice','Invoice', $many = False,
-                             $recursive = True);
-        $this->json_property('shipping','Address', $many = False,
-                             $recursive = True);
-        $this->json_property('production_shipping_address','Address', $many = False,
-                             $recursive = True);
-        $this->json_property('notifications','Notification', $many = True,
-                             $recursive = True);
-        $this->json_property('client_company','Company', $many = False,
-                             $recursive = True);
+        $this->json_property('manager','User', null,
+                             False, $recursive = True);
+        $this->json_property('designer','User', null,
+                              False, $recursive = True);
+        $this->json_property('client','User', null,
+                             False, $recursive = True);
+        $this->json_property('product','Product', null,
+                             False, $recursive = True);
+        $this->json_property('comments','JobComment', null,
+                             True, $recursive = True);
+        $this->json_property('draft_comments','DraftComment', null,
+                             True, $recursive = True);
+        $this->json_property('drafts','Draft', null,
+                             True, $recursive = True);
+        $this->json_property('invoice','Invoice', null,
+                             False, $recursive = True);
+        $this->json_property('shipping','Address', null,
+                              False, $recursive = True);
+        $this->json_property('production_shipping_address','Address', null,
+                             False, $recursive = True);
+        $this->json_property('notifications','Notification', null,
+                             True, $recursive = True);
+        $this->json_property('client_company','Company', null,
+                              False, $recursive = True);
         $this->json_property('quantity', 'integer');
         $this->json_property('notes', 'string');
         $this->json_property('production_notes', 'string');
@@ -84,9 +85,9 @@ class Job extends Entity
                              $default = '1', $recursive = True);
         $this->json_property('domain', 'Domain', $many = False,
                              $default = '1', $recursive = True);
-        $this->json_property('clientFile', 'File', $default = [],
+        $this->json_property('client_files', 'File', $default = [],
                              $many = true, $recursive = True);
-        $this->json_property('productionFile', 'File', $default = [],
+        $this->json_property('production_files', 'File', $default = [],
                              $many = true, $recursive = True);
         $this->json_property('assignments', 'Assignment', $default = [],
                              $many = true, $recursive = True);
@@ -94,9 +95,9 @@ class Job extends Entity
                              $many = true, $recursive = True);
         $this->json_property('specifications', 'Specification', $default = [],
                              $many = true, $recursive = True);
-        $this->json_property('shipment', 'Shipment',
+        $this->json_property('shipment', 'Shipment', null,
                              $many = False, $recursive = True);
-        $this->json_property('tax_type', 'CountryTax',
+        $this->json_property('tax_type', 'CountryTax', null,
                              $many = False, $recursive = True);
     }
 
@@ -158,14 +159,14 @@ class Job extends Entity
         }
     }
 
-    function supplier($only_aproved = False){
+    function supplier($only_approved = False){
         /*Return either a list of suppliers, a single supplier, or None,
             depending on what stage the job is in and what suppliers have
             been assigned. Requires that assignments.supplier be embedded
             with the job when fetching it.
         */
         if($this->assignments){
-            if($only_aproved){
+            if($only_approved){
                 foreach($this->assignments as $assign){
                     if($assign->manager_accepts){
                         return $assign->supplier;
@@ -182,7 +183,7 @@ class Job extends Entity
     }
 
     function is_production_in_house(){
-        #Return True if one of the job assignment suppliers is a manager
+        /* Return True if one of the job assignment suppliers is a manager */
         foreach($this->assignments as $assign){
             if($assign->supplier->has_authority($this->domain->id,[ADMIN, MANAGER])){
                 return True;
@@ -192,7 +193,7 @@ class Job extends Entity
     }
 
     function in_house_assignment(){
-        #Return an assignment if the assignment is in-house
+        /*Return an assignment if the assignment is in-house */
         if($this->is_production_in_house()){
             return $this->assignments[0];
         }
@@ -200,7 +201,7 @@ class Job extends Entity
     }
 
     function accepted_assignment(){
-        #Return the production assignment accepted by the manager
+        /* Return the production assignment accepted by the manager */
         foreach($this->assignments as $assign){
             if($assign->manager_accepts){
                 return $assign;
@@ -210,7 +211,7 @@ class Job extends Entity
     }
 
     function assignment_deadline(){
-        #Return the assignment deadline from one of the assignments
+        /* Return the assignment deadline from one of the assignments */
         if(sizeof($this->assignments) > 0){
             return $this->assignments[0]->assignment_deadline;
         }
@@ -353,7 +354,7 @@ class Job extends Entity
         /*Check whether we need to update the job related notifications,
             if needed return True otherwise return False.
         */
-        $section_prefix = get_section_name($section);
+        $section_prefix = $this->get_section_name($section);
 
         $section_tab = $section_prefix."tab";
         $tab_attr = property_exists($this, $section_tab)?
@@ -598,22 +599,23 @@ class Assignment extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('manager_accepts', 'string');
         $this->json_property('supplier_refused', 'string');
         $this->json_property('production_deadline', 'DateTime');
         $this->json_property('assignment_deadline', 'DateTime');
-        $this->json_property('job', 'Job',
+        $this->json_property('job', 'Job',null,
+                             False, $recursive = True);
+        $this->json_property('supplier', 'User', null,
                              $many = False, $recursive = True);
-        $this->json_property('supplier', 'User',
+        $this->json_property('bid', 'Bid',null,
                              $many = False, $recursive = True);
-        $this->json_property('bid', 'Bid',
-                             $many = False, $recursive = True);
-        $this->json_property('comments', 'ProductionComment',
+        $this->json_property('comments', 'ProductionComment', null,
                              $many = True, $recursive = True);
-        $this->json_property('shipment', 'Shipment',
+        $this->json_property('shipment', 'Shipment', null,
                              $many = False, $recursive = True);
-        $this->json_property('notifications', 'Notification',
+        $this->json_property('notifications', 'Notification', null,
                              $many = True, $recursive = True);
     }
 }

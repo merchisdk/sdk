@@ -16,13 +16,14 @@ class Session extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('ip','string');
         $this->json_property('token','string');
         $this->json_property('remember','boolean');
-        $this->json_property('user', 'User', $many = False,
+        $this->json_property('user', 'User', null, $many = False,
                              $recursive = True);
-        $this->json_property('domain', 'Domain', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('domain', 'Domain', null, $many = False,
+                             $recursive = True);
     }
 
     public function cookie_ttl(){

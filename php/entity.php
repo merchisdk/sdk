@@ -41,9 +41,7 @@ class Entity
 
     public $escape_fields = [];
     public $url_fields = [];
-    /*
-     if it is set to True the entity should only be treat as a reference to the backend entity
-    */
+    #if it is set to True the entity should only be treat as a reference to the backend entity
     public $only_for_reference = False;
 
     public function __construct() {
@@ -133,7 +131,7 @@ class Entity
     }
 
     public function json_property($name, $type, $default = null,
-                                  $many = False, $recursive = null) {
+                                  $many = False, $recursive = False) {
         $this->json_properties[$name] = [$type, $many, $recursive];
         $this->$name = $default;
     }

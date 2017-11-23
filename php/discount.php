@@ -10,11 +10,12 @@ class Discount extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('lower_limit', 'float');
         $this->json_property('amount', 'float');
-        $this->json_property('product', 'Product', $many = False,
-                            $recursive = True);
+        $this->json_property('product', 'Product', '',
+                             False,$recursive = True);
     }
 }
 

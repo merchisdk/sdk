@@ -2,7 +2,7 @@
 
 require_once 'entity.php';
 require_once 'company_invitations.php';
-require_once './../php_aux/AddressUtil.php';
+require_once './../php_aux/address_util.php';
 
 class Company extends Entity
 {
@@ -11,7 +11,7 @@ class Company extends Entity
     public $default_banks = array();
 
     public function __construct() {
-        #import sdk.python.company_invitations
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('website', 'string');
@@ -30,24 +30,24 @@ class Company extends Entity
         $this->json_property('accept_bank_transfer', 'boolean');
         $this->json_property('accept_phone_payment', 'boolean');
         $this->json_property('temporary_created', 'boolean');
-        $this->json_property('logo', 'File', $many = False,
-                             $default = '1', $recursive = True);
-        $this->json_property('emailAddresses', 'EmailAddress', $many = True,
-                             $recursive = True);
-        $this->json_property('phoneNumbers', 'PhoneNumber', $many = True,
-                             $recursive = True);
-        $this->json_property('payment_phone_numbers', 'PhoneNumber',
+        $this->json_property('logo', 'File', '',
+                             false, $recursive = True);
+        $this->json_property('email_addresses', 'EmailAddress', [],
+                             True, $recursive = True);
+        $this->json_property('phoneNumbers', 'PhoneNumber', [],
+                             True, $recursive = True);
+        $this->json_property('payment_phone_numbers', 'PhoneNumber', [],
                              $many = True, $recursive = True);
-        $this->json_property('addresses', 'Address', $many = True,
-                             $recursive = True);
-        $this->json_property('user_companies', 'UserCompany', $many = True,
-                             $recursive = True);
-        $this->json_property('banks', 'Bank', $many = True,
-                             $recursive = True);
-        $this->json_property('company_invitations', 'CompanyInvitation',
+        $this->json_property('addresses', 'Address', [],
+                              $many = True, $recursive = True);
+        $this->json_property('user_companies', 'UserCompany', [],
+                             True, $recursive = True);
+        $this->json_property('banks', 'Bank', [],
+                             True, $recursive = True);
+        $this->json_property('company_invitations', 'CompanyInvitation', [],
                              $many = True, $recursive = True);
-        $this->json_property('default_tax_type', 'CountryTax', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('default_tax_type', 'CountryTax', '',
+                             True, $recursive = True);
 
     }
 
@@ -70,13 +70,14 @@ class Company extends Entity
     }
 
     function dictionary_of_address_names_and_ids(){
-        #Return an array of dictionaries which contain the
-        #name and id of the address which are related to this company.
+        /*
+         Return an array of dictionaries which contain the
+         name and id of the address which are related to this company.
+        */
         $saved_address = array();
         if ($this->addresses){
             foreach(array_values($this->addresses) as $i=>$address){
-                global $address_util;
-                $name = $address_util->name_primary($i, $this->name);
+                $name = name_primary($i, $this->name);
                 $temp_address = array('name'=>$name,'id'=>$address->id);
                 array_push($saved_address, $temp_address);
             }

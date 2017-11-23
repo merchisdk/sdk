@@ -15,19 +15,20 @@ class Bid extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id','integer');
-        # datetime: import datetime in python
-        $this->json_property('agreed_deadline','datetime');
-        # Assignment: sdk.python.jobs.Assignment
-        $this->json_property('assignments','Assignment', $many = False,
-                             $default = '1', $recursive = True);
-        $this->json_property('bid_items','BidItem', $many = False,
-                             $default = '1', $recursive = True);
+        $this->json_property('agreed_deadline','DateTime');
+        $this->json_property('assignments','Assignment', $default = [],
+                             True, $recursive = True);
+        $this->json_property('bid_items','BidItem', $default = [],
+                             True, $recursive = True);
     }
 
     public function bid_total()
     {
-        #Calculate the bid sub total by adding all the bid_item totals together.
+        /* alculate the bid sub total by adding
+           all the bid_item totals together.
+        */
         return round(array_reduce($this->bid_items, "addup_subtotal"), 2);
     }
 }

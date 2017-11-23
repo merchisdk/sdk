@@ -21,6 +21,7 @@ class Invoice extends Entity
 
     public function __construct()
     {
+        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('creation_date', 'DateTime');
         $this->json_property('payment_deadline', 'DateTime');
@@ -41,41 +42,43 @@ class Invoice extends Entity
         $this->json_property('currency', 'string');
         $this->json_property('invoice_token', 'string');
         $this->json_property('reminder_message', 'string');
-        $this->json_property('responsible_manager','User', $many = False,
-                             $recursive = True);
-        $this->json_property('creator','User', $many = False,
-                             $recursive = True);
-        $this->json_property('client','User', $many = False,
-                             $recursive = True);
-        $this->json_property('client_phone','PhoneNumber', $many = False,
-                             $recursive = True);
-        $this->json_property('client_email','EmailAddress', $many = False,
-                             $recursive = True);
-        $this->json_property('jobs','Job', $many = True,
-                             $recursive = True);
-        $this->json_property('client_company','Company', $many = False,
-                             $recursive = True);
-        $this->json_property('client_company_phone','PhoneNumber', $many = False,
-                             $recursive = True);
-        $this->json_property('client_company_email','EmailAddress', $many = False,
-                             $recursive = True);
-        $this->json_property('items','Item', $many = True,
-                             $recursive = True);
-        $this->json_property('shipping','Address', $many = False,
-                             $recursive = True);
-        $this->json_property('pdf','File', $many = False,
-                             $recursive = True);
-        $this->json_property('receipt','File', $many = False,
-                             $recursive = True);
-        $this->json_property('domain', 'Domain', $many = False,
-                             $default = '1', $recursive = True);
-        $this->json_property('payments','Payment', $many = True,
-                             $recursive = True);
+        $this->json_property('responsible_manager','User', null,
+                             False, $recursive = True);
+        $this->json_property('creator','User', null,
+                              False, $recursive = True);
+        $this->json_property('client','User', null,
+                             False, $recursive = True);
+        $this->json_property('client_phone','PhoneNumber',null,
+                             False, $recursive = True);
+        $this->json_property('client_email','EmailAddress', null,
+                             False, $recursive = True);
+        $this->json_property('jobs','Job', null,
+                              True, $recursive = True);
+        $this->json_property('client_company','Company', null,
+                             False, $recursive = True);
+        $this->json_property('client_company_phone','PhoneNumber', null,
+                             False, $recursive = True);
+        $this->json_property('client_company_email','EmailAddress', null,
+                             False, $recursive = True);
+        $this->json_property('items','Item', null,
+                             True, $recursive = True);
+        $this->json_property('shipping','Address', null,
+                             False, $recursive = True);
+        $this->json_property('pdf','File', null,
+                             False, $recursive = True);
+        $this->json_property('receipt','File', null,
+                             False, $recursive = True);
+        $this->json_property('domain', 'Domain', null,
+                              False, $recursive = True);
+        $this->json_property('payments','Payment', null,
+                              True, $recursive = True);
     }
 
     function process_for_transfer(){
-        # can not update product by updating invoice
-        # will have better solution later
+        /*
+          can not update product by updating invoice
+          will have better solution later
+        */
         if($this->jobs){
             foreach($this->jobs as $job){
                 $job->product = null;
@@ -84,7 +87,7 @@ class Invoice extends Entity
     }
 
     function amount_paid(){
-        #Return how much money has been paid for this invoice.
+        /* Return how much money has been paid for this invoice. */
         if (is_array($this->payments)){
             $sum = 0;
             foreach($this->payments as $key=>$value){
@@ -97,7 +100,7 @@ class Invoice extends Entity
     }
 
     function amount_owed(){
-        #Return how much money still owed for this invoice
+        /* Return how much money still owed for this invoice */
         $total = $this->total_cost;
         if($this->amount_paid()){
             return $total - $this->amount_paid();
