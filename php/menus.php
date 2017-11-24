@@ -46,7 +46,8 @@ class MenuItem extends Entity
     }
 
     public function url($domain = Null){
-      /*Check to see if the menu type is a redirect or an
+      /*
+            Check to see if the menu type is a redirect or an
             internal link, then return a full url constructed from the
             link_uri and the domain
       */

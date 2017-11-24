@@ -65,7 +65,8 @@ class Theme extends Entity
     }
 
     public function is_valid_and_updated(){
-        /*Check both main css template and email css template
+        /*
+            Check both main css template and email css template
             are valid and up to date
         */
         return $this->main_css_status == VALID_AND_UPDATED and

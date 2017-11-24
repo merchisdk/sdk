@@ -188,7 +188,6 @@ class Entity
                 foreach ($value as $property) {
                     list($sub_data, $files) =
                         $property->serialise($force_primary, $files);
-                    //$remote_name = $property::$json_name;
                     foreach ($sub_data as $subname => $subvalue) {
                         if ($subname === 'id') continue;
                         $key = $name . '-' . $i . '-' . $subname;
@@ -398,8 +397,6 @@ class Entity
             Args:
               identifier: primary key of entity to fetch
               embed (dict): map of related entities to fill in
-              include_archived: specified whether archived entity should
-                                been taken into account
          */
         $entity = new static();
         $request = generate_request(null, null, $email, $password,$api_secret, null,$embed, $as_domain);

@@ -26,7 +26,8 @@ class Bid extends Entity
 
     public function bid_total()
     {
-        /* alculate the bid sub total by adding
+        /*
+           calculate the bid sub total by adding
            all the bid_item totals together.
         */
         return round(array_reduce($this->bid_items, "addup_subtotal"), 2);

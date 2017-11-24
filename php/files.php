@@ -6,8 +6,6 @@ class File_ extends Entity
 {
     public static $json_name = 'file';
     public static $resource = '/files/';
-    public $url_fields = ['view_url', 'download_url'];
-
 
     public function __construct() {
         parent::__construct();
@@ -21,6 +19,7 @@ class File_ extends Entity
         $this->json_property('uploader', 'User', null,
                              False, $recursive = True);
         $this->file_data = [];
+        $this->url_fields = ['view_url', 'download_url'];
 
     }
 

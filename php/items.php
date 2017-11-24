@@ -25,7 +25,8 @@ class Item extends Entity
     }
 
     function item_total(){
-        /*Return the total value of the item
+        /*
+            Return the total value of the item
             by multiplying the quantity by the cost. This value
             is without GST.
         */
@@ -33,7 +34,7 @@ class Item extends Entity
     }
 
     function item_tax(){
-        #Return the total tax based on the total quantity
+        /*Return the total tax based on the total quantity*/
         return $this->tax_amount * $this->quantity;
     }
 }

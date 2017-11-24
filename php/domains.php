@@ -9,8 +9,9 @@ require_once 'menus.php';
 require_once 'domain_invitations.php';
 require_once 'categories.php';
 require_once './../php_aux/menu_util.php';
+require_once  './../php_aux/brand_util.php';
 /*
-        merchi python SDK object representing Domains.
+        merchi PHP SDK object representing Domains.
 
         A domain originally represented only a domain in the DNS sense, being
         an entity that is allowed to use the merchi API on a website, etc.
@@ -28,8 +29,6 @@ require_once './../php_aux/menu_util.php';
         will authenticate itself as well as the user when asking to create
         the session.
 
-        Methods for making requests to get information or update the domains
-        settings are inherited from sdk.python.entities.Entity.
 */
 class Domain extends Entity
 {
@@ -100,11 +99,19 @@ class Domain extends Entity
         return null;
     }
 
-    public function safe_conversion_tracking_code($invoice = null) {
+    public function safe_conversion_tracking_code() {
         $code = $this->conversion_tracking_code;
         if (!isset($code)) {
             return '';
         }
+        return $code;
+    }
+
+    public function logo_url() {
+        if ($this->logo) {
+            return $this->logo->view_url;
+        }
+        return PLATFORM_MASCOT_ICON;
     }
 }
 

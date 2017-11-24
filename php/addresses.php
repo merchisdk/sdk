@@ -41,10 +41,10 @@ class Address extends Entity
         $country_name = $this->country;
         try {
             $country_name = countries[$this->country];
-        } catch (Exception $e) {}
-
+        } catch (Exception $e) {
+            throw $e;
+        }
         return $country_name;
-
     }
 }
 

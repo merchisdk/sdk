@@ -62,7 +62,7 @@ class User extends Entity
     }
 
     public function role_in_domain($domain_id){
-        #The role of this user of specific domain id
+        /*The role of this user of specific domain id*/
         if($this->enrolled_domains){
             foreach ($this->enrolled_domains as $enrolled_domain) {
                 if($enrolled_domain->domain->id == $domain_id){
@@ -74,7 +74,8 @@ class User extends Entity
     }
 
     public function all_roles(){
-        /*Return all the roles that user have registered in super user
+        /*
+            Return all the roles that user have registered in super user
             have all possible roles
         */
         if($this->is_super_user){
@@ -117,28 +118,32 @@ class User extends Entity
     }
 
     public function can_view_payment_section($job){
-        /*Return whether current user should need to view payment
+        /*
+            Return whether current user should need to view payment
           section of a job.
-       */
+        */
         return $this->has_authority($job->domain->id, INVOICE_ROLES);
     }
 
     public function can_view_production_section($job){
-        /*Return whether current user should need to view production
+        /*
+          Return whether current user should need to view production
           section of a job.
-       */
+        */
         return $this->has_authority($job->domain->id, PRODUCTION_SECTION);
     }
 
     public function can_view_drafing_section($job){
-        /*Return whether current user should need to view drafting
+        /*
+          Return whether current user should need to view drafting
           section of a job.
         */
         return $this->has_authority($job->domain->id, DESIGN_SECTION);
     }
 
     public function can_view_shipping_section($job){
-        /*Return whether current user should need to view shipping
+        /*
+          Return whether current user should need to view shipping
           section of a job.
         */
         return $this->has_authority($job->domain->id, SHIPPING_SECTION);
@@ -153,7 +158,7 @@ class User extends Entity
     }
 
     public function primary_company_name(){
-        #/*eturn the user's primary company name if the user has a company*/
+        /*return the user's primary company name if the user has a company*/
         if($this->user_companies and $this->user_companies[0]->company){
             return $this->user_companies[0]->company->name;
         }
@@ -230,7 +235,8 @@ class User extends Entity
     public function dictionary_of_addresses_and_ids($address_name = null,
                                                $company_addresses = true)
     {
-        /*Return an array of dictionaries which contain the
+        /*
+            Return an array of dictionaries which contain the
             name and id of address which are related to this user. If the
             company_address attribute is True it will also return the users
             related company addresses as well.
@@ -258,9 +264,10 @@ class User extends Entity
     }
 
     public function public_nav_extension($url){
-        /*Extend menu items with user info so that if
+        /*
+          Extend menu items with user info so that if
           the user is redirected to a third party site
-       */
+        */
         $query = '?';
         if(strpos($url, $query) !== False){
             $query = '&';

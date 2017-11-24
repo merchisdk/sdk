@@ -25,7 +25,7 @@ class SpecificationFieldOption extends Entity
     }
 
     public function apply_cost_per_unit(){
-        # Return True if the option cost is applied per unit
+        /* Return True if the option cost is applied per unit*/
         return is_null($this->specification_unit_cost);
     }
 }
@@ -220,7 +220,8 @@ class Specification extends Entity
     }
 
     public function value_array($new_values_array = null){
-        /*Return an array of the specification values and if new_values_array
+        /*
+            Return an array of the specification values and if new_values_array
             is provided update the value attribute to match the
             new_values_array argument
         */
@@ -258,7 +259,8 @@ class Specification extends Entity
     }
 
     public function first_selected_option(){
-        /*Return an option if the option id is equal to the
+        /*
+            Return an option if the option id is equal to the
             specification value.
         */
         if(sizeof($this->value_array()) > 0){
@@ -268,7 +270,8 @@ class Specification extends Entity
     }
 
     public function value_string($option_id = null){
-        /*Check to see if the specification has options and if an option_id
+        /*
+            Check to see if the specification has options and if an option_id
             has been provided and return that option value if so. If no option
             value is provided return the first option
         */

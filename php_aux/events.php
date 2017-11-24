@@ -13,7 +13,7 @@ const JOB_COMMENT = 6;
 
 class Event
 {
-    #Record the event type and event object for the timeline
+    /*Record the event type and event object for the timeline*/
 
     function __construct($event_type, $event_object)
     {
