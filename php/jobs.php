@@ -102,7 +102,8 @@ class Job extends Entity
     }
 
     function product_total_cost(){
-        /*Return the cost_per_unit multiplied by the total job
+        /*
+            Return the cost_per_unit multiplied by the total job
             quantity
         */
         return $this->quantity * $this->cost_per_unit;
@@ -113,7 +114,8 @@ class Job extends Entity
     }
 
     function is_draft_accepted(){
-        /*Return True if the current draft for this job has been accepted,
+        /*
+            Return True if the current draft for this job has been accepted,
             or False otherwise.
         */
         try {
@@ -129,9 +131,6 @@ class Job extends Entity
     }
 
     function priority_name(){
-        /*Return a string from one of the constants defined in
-            common.business_default that represents the priority of this job.
-        */
         global $PRIORITY_OPTIONS_REVERSE_MAP;
         $return_value = array_key_exists($this->priority, $PRIORITY_OPTIONS_REVERSE_MAP)
         ? $PRIORITY_OPTIONS_REVERSE_MAP[$this->priority] : LOW_STRING;
@@ -139,7 +138,7 @@ class Job extends Entity
     }
 
     function current_draft(){
-        #Return the most recent job draft from an array of job drafts
+        /*Return the most recent job draft from an array of job drafts*/
         if(sizeof($this->drafts) > 0){
             return $this->drafts[0];
         } else {
@@ -148,7 +147,8 @@ class Job extends Entity
     }
 
     function most_recent_draft_id(){
-        /*Return the current draft id for the job or None if no drafts.
+        /*
+            Return the current draft id for the job or None if no drafts.
             Requires that the draft objects be embedded when fetching
             this job object.
         */
@@ -160,7 +160,8 @@ class Job extends Entity
     }
 
     function supplier($only_approved = False){
-        /*Return either a list of suppliers, a single supplier, or None,
+        /*
+            Return either a list of suppliers, a single supplier, or None,
             depending on what stage the job is in and what suppliers have
             been assigned. Requires that assignments.supplier be embedded
             with the job when fetching it.
@@ -219,7 +220,8 @@ class Job extends Entity
     }
 
     function assignment_by_supplier_id($user_id){
-        /*Return a job assignment associated with
+        /*
+            Return a job assignment associated with
             the user provided and return None if no assignment can
             be found with the user.
         */
@@ -233,7 +235,8 @@ class Job extends Entity
     }
 
     function production_shipment(){
-        /*Return the shipment object which has been created for production
+        /*
+            Return the shipment object which has been created for production
             procedure.
         */
         foreach($this->assignments as $assign){
@@ -245,28 +248,31 @@ class Job extends Entity
     }
 
     function production_display_info(){
-        /*Return the PRODUCTION_STATUS dict from
-            common.status with the values based on the job.production_status
+        /*
+            Return the PRODUCTION_STATUS dict from
+            php_aux.status with the values based on the job.production_status
         */
         return status_info($this->design_status, DESIGN_STATUS, "design ");
     }
 
     function payment_display_info(){
-        /*Return the PAYMENT_STATUS dict from
-            common.status with the values based on the job.payment_status
+        /*
+            Return the PAYMENT_STATUS dict from
+            php_aux.status with the values based on the job.payment_status
         */
         return status_info($this->payment_status, PAYMENT_STATUS, "payment ");
     }
 
     function shipment_display_info(){
-        /*Return the SHIPPING_STATUS dict from common.status with the values
+        /*
+            Return the SHIPPING_STATUS dict from common.status with the values
             based on the job.shipping_status
         */
         return status_info($this->shipping_status, SHIPPING_STATUS, "shipment ");
     }
 
     function supplier_shipment_info(){
-        #Return the shipping information submitted buy the supplier
+        /*Return the shipping information submitted buy the supplier*/
         $assignment = $this->accepted_assignment();
         if($assignment){
             return $assignment->shipment;
@@ -275,7 +281,8 @@ class Job extends Entity
     }
 
     function product_unit_price(){
-        /*Display the product unit_price. This value takes into consideration
+        /*
+            Display the product unit_price. This value takes into consideration
             discounted unit price based on server calculated product unit price
             after it got discounted
         */
@@ -283,8 +290,9 @@ class Job extends Entity
     }
 
     function assignment_earliest_production(){
-        /* Return the assignment which is able to get the
-          production completed in the fastest amount of time
+        /*
+           Return the assignment which is able to get the
+           production completed in the fastest amount of time
         */
         $earliest_deadline = NULL;
         $earliest_supplier = NULL;
@@ -301,7 +309,7 @@ class Job extends Entity
     }
 
     function assignment_lowest_bid(){
-        #Return the lowest bid out of all the assignments
+        /*Return the lowest bid out of all the assignments*/
         $lowest_bid = NULL;
         $lowest_supplier = NULL;
         foreach($this->assignments as $assign){
@@ -316,7 +324,8 @@ class Job extends Entity
     }
 
     function get_section_name($section){
-        /*Generate section name that can be used to generate private attribute
+        /*
+            Generate section name that can be used to generate private attribute
             to store notifications info of different sections in job.
         */
         $fmt = "_%s_notifications_";
@@ -351,7 +360,8 @@ class Job extends Entity
     }
 
     function need_to_update_notifications($tab, $section = null){
-        /*Check whether we need to update the job related notifications,
+        /*
+            Check whether we need to update the job related notifications,
             if needed return True otherwise return False.
         */
         $section_prefix = $this->get_section_name($section);
@@ -373,14 +383,15 @@ class Job extends Entity
     }
 
     function refresh_notifications_info($tab, $section = null){
-        #Refresh the notifications of this job if needed
+        /*Refresh the notifications of this job if needed*/
         if($this->need_to_update_notifications($tab, $section)){
             $this->inject_notifications($tab, $section);
         }
     }
 
     function notifications_statistics($tab = "unread", $section = null){
-        /*Return the statistics of notifications of the this job
+        /*
+            Return the statistics of notifications of the this job
             whose recipient is current user.
         */
         $this->refresh_notifications_info($tab, $section);
@@ -388,12 +399,13 @@ class Job extends Entity
         try {
             return $this->$section_statistics;
         } catch (Exception $e) {
-            return $e;
+            throw $e;
         }
     }
 
     function notifications_list($tab = "unread"){
-        /*Return the count of notifications of the this job
+        /*
+            Return the count of notifications of the this job
             whose recipient is current user.
         */
         $this->refresh_notifications_info($tab);
@@ -401,7 +413,8 @@ class Job extends Entity
     }
 
     function unseen_notifications_count($section = null){
-        /*Return the count of notifications of the this job
+        /*
+            Return the count of notifications of the this job
             whose recipient is current user.
         */
         $statistics =  $this->notifications_statistics($tab ="unread", $section);
@@ -412,26 +425,26 @@ class Job extends Entity
     }
 
     function shipping_finished(){
-        #Return whether the shipping has been finished
+        /*Return whether the shipping has been finished*/
         return $this->shiping_status >= SHIPPING_STATUS["DISPATCHED"]["dbValue"]
          or (!$this->needs_shipping);
     }
 
     function drafting_finished(){
-        #Return whether the drafting has been finished
+        /*Return whether the drafting has been finished*/
         return $this->design_status >= DESIGN_STATUS["DRAFTING_APPROVED"]["dbValue"]
          or (!$this->needs_drafting);
     }
 
     function production_finished(){
-        #Return whether the production has been finished
+        /*Return whether the production has been finished*/
         return isset($this->production_status) and
         $this->production_status >= PRODUCTION_STATUS["SHIPPED"]["dbValue"]
          or (!$this->needs_production);
     }
 
     function payment_finished(){
-        #Return whether the payment has been finished
+        /*Return whether the payment has been finished*/
         if($this->payment_status){
             return $this->payment_status >=
             PAYMENT_STATUS["FULLY_PAID"]["dbValue"];
@@ -439,7 +452,8 @@ class Job extends Entity
     }
 
     function is_ready_to_complete(){
-        /*Return whether the job is ready for move to the
+        /*
+            Return whether the job is ready for move to the
             completed stage
         */
         return $this->drafting_finished() and $this->production_finished() and
@@ -456,7 +470,10 @@ class Job extends Entity
             ["name" => "Job Shipping Address",
             "id " => $this->production_shipping_address->id];
         }
-
+        if ($this->production_shipping_address and $production_shipping) {
+            $saved_addresses[] = ["name" => "Job Shipping Address",
+                                  "id" => $this->production_shipping_address->id];
+        }
         if($this->client and $client_addresses){
             $saved_addresses = $saved_addresses +
             $this->client->array_of_addresses_names_and_ids("Client Address");
@@ -529,7 +546,7 @@ class Job extends Entity
 
     function job_info_time_line($reverse = true) {
         /*
-         * Return the job comments in reverse with the youngest at
+            Return the job comments in reverse with the youngest at
             bottom of the list.
          */
         $time_line_array = [];

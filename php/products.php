@@ -64,7 +64,8 @@ class Product extends Entity
     }
 
     public function primary_image(){
-        /*Return the first product image object if one exists and
+        /*
+          Return the first product image object if one exists and
           return None if no images exists
         */
         if($this->files and sizeof($this->files) > 0){

@@ -58,9 +58,9 @@ const INVOICE_ROLES = array(ADMIN, MANAGER, ACCOUNTANT);
 
 function role_string($role_code){
     /*
-    Given integer role_code denoting a users role, return a lower case
-    string naming that role. Defaults to 'public' if the code is not
-    known.
+        Given integer role_code denoting a users role, return a lower case
+        string naming that role. Defaults to 'public' if the code is not
+        known.
     */
     try {
         return ROLE_STRINGS[$role_code];

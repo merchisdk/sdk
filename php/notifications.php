@@ -56,7 +56,8 @@ class Category extends Entity
     }
 
     public function can_reply($role){
-        /*Check whether user the user has the right to reply to a
+        /*
+            Check whether user the user has the right to reply to a
             notification.
         */
         if (array_key_exists((int)$this->section, section_roles)) {
@@ -68,7 +69,8 @@ class Category extends Entity
     }
 
     public function notification_title(){
-        /*Check to see if notifications has a subject
+        /*
+          Check to see if notifications has a subject
           and return a special title if this is the case
         */
         if($this->subject and $this->subject != "None"){
@@ -82,7 +84,8 @@ class Category extends Entity
     }
 
     public function job_notification_title(){
-        /*Check to see if notifications has a subject and return a
+        /*
+            Check to see if notifications has a subject and return a
             a shorter job notification title specifically for jobs
         */
         if($this->subject and $this->subject != "None"){
@@ -92,7 +95,7 @@ class Category extends Entity
     }
 
     public function avatar_url(){
-        #Return the URL of the correct avatar to use for the notification
+        /*Return the URL of the correct avatar to use for the notification*/
         $notification_type = $this->notification_type;
         $sender = $this->sender;
         $domain = $this->domain;

@@ -62,7 +62,7 @@ function empty_content($content) {
 
 function is_empty_json($json_object) {
     /*
-        Check whether given json object has value
+       Check whether given json object has value
        by checking whether all the values in very key-value
        pair of json is None
      */

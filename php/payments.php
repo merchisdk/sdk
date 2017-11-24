@@ -28,8 +28,9 @@ class Payment extends Entity
     }
 
     public function payment_type_string(){
-        /*Return the string value of payment type from the
-          common.business_default file
+        /*
+          Return the string value of payment type from the
+          php_auz.business_default file
         */
         return PAYMENT_TYPES[$this->payment_type];
     }

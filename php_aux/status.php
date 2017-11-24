@@ -15,47 +15,47 @@ const PROGRESS_CSS_CLASS = "cssClass";
 
 const PRODUCTION_STATUS = [
     "INIT" =>  ["dbValue" =>  0, "text" =>  "Start Production", "percentage" =>  0,
-             "cssClass" =>  "progress-bar-inverse"],
+                "cssClass" =>  "progress-bar-inverse"],
     "REJECTED" =>  ["dbValue" =>  1, "text" =>  "Suppliers Rejected",
-                 "percentage" =>  0, "cssClass" =>  "progress-bar-danger"],
+                    "percentage" =>  0, "cssClass" =>  "progress-bar-danger"],
     "BIDDING" =>  ["dbValue" =>  2, "text" =>  "Bidding", "percentage" =>  30,
-                "cssClass" =>  ""],
+                    "cssClass" =>  ""],
     "ASSIGN_SENT" =>  ["dbValue" =>  3, "text" =>  "Waiting Reply", "percentage" =>  30,
-                    "cssClass" =>  "progress-bar-info"],
+                        "cssClass" =>  "progress-bar-info"],
     "ASSIGN_DEADLINE_REACHED" =>  ["dbValue" =>  4,
-                                "text" =>  "Deadline Close", "percentage" =>  30,
-                                "cssClass" =>  "progress-bar-warning"],
+                                    "text" =>  "Deadline Close", "percentage" =>  30,
+                                    "cssClass" =>  "progress-bar-warning"],
     "ASSIGN_COMPLETE" =>  ["dbValue" =>  5,
-                        "text" =>  "Production Awarded", "percentage" =>  50,
-                        "cssClass" =>  "progress-bar-success"],
+                            "text" =>  "Production Awarded", "percentage" =>  50,
+                            "cssClass" =>  "progress-bar-success"],
     "QUESTIONING" =>  ["dbValue" =>  6, "text" =>  "Question Asking", "percentage" =>  60,
-                    "cssClass" =>  "progress-bar-warning"],
+                        "cssClass" =>  "progress-bar-warning"],
     "COMMENCED" =>  ["dbValue" =>  7,
-                  "text" =>  "Production Commenced", "percentage" =>  60,
-                  "cssClass" =>  ""],
+                    "text" =>  "Production Commenced", "percentage" =>  60,
+                    "cssClass" =>  ""],
     "FINISHED" =>  ["dbValue" =>  8,
-                 "text" =>  "Production Finished", "percentage" =>  80,
-                 "cssClass" =>  "progress-bar-success"],
+                    "text" =>  "Production Finished", "percentage" =>  80,
+                    "cssClass" =>  "progress-bar-success"],
     "SHIPPED" =>  ["dbValue" =>  9,
-                "text" =>  "Production Shipped", "percentage" =>  100,
-                "cssClass" =>  "progress-bar-success"]
+                    "text" =>  "Production Shipped", "percentage" =>  100,
+                    "cssClass" =>  "progress-bar-success"]
 ];
 
 const DESIGN_STATUS = [
     "INIT" =>  ["dbValue" =>  0, "text" =>  "Assign Designer", "percentage" =>  0,
-             "cssClass" =>  "progress-bar-inverse"],
+                "cssClass" =>  "progress-bar-inverse"],
     "WAIT_DRAFTING" =>  ["dbValue" =>  1,
-                      "text" =>  "Designer Assigned", "percentage" =>  33,
-                      "cssClass" =>  "progress-bar-info"],
+                        "text" =>  "Designer Assigned", "percentage" =>  33,
+                        "cssClass" =>  "progress-bar-info"],
     "CHANGES_REQUESTED" =>  ["dbValue" =>  2,
-                          "text" =>  "Changes Requested", "percentage" =>  45,
-                          "cssClass" =>  "progress-bar-danger"],
+                            "text" =>  "Changes Requested", "percentage" =>  45,
+                            "cssClass" =>  "progress-bar-danger"],
     "DRAFTING_UPLOADED" =>  ["dbValue" =>  3,
-                          "text" =>  "Waiting Approval", "percentage" =>  70,
-                          "cssClass" =>  "progress-bar-warning"],
+                            "text" =>  "Waiting Approval", "percentage" =>  70,
+                            "cssClass" =>  "progress-bar-warning"],
     "DRAFTING_APPROVED" =>  ["dbValue" =>  4,
-                          "text" =>  "Design Approved", "percentage" =>  100,
-                          "cssClass" =>  "progress-bar-success"],
+                            "text" =>  "Design Approved", "percentage" =>  100,
+                            "cssClass" =>  "progress-bar-success"],
 ];
 
 const PAYMENT_STATUS = [
@@ -98,7 +98,8 @@ const SHIPPING_STATUS = [
 ];
 
 function status_info($status, $status_array, $status_string = ""){
-    /*Return a status dictionary based on the common.status
+    /*
+        Return a status dictionary based on the common.status
         key provided to the 'status_dict' argument and the job progress
         key provided to the status argument. Status_string is used for
         error reporting.

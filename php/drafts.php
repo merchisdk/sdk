@@ -47,12 +47,13 @@ class Draft extends Entity
       }
 
       function is_draft_rejected(){
-          # Return True if the draft has been rejected else return False
+          /* Return True if the draft has been rejected else return False*/
           return $this->changes_have_been_requested();
       }
 
       function is_most_recent(){
-          /*Return True if the draft is the most recent draft
+          /*
+              Return True if the draft is the most recent draft
               in the related job else return False
           */
           foreach($this->job->drafts as $draft){
