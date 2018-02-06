@@ -31,7 +31,7 @@ class BidItem extends Entity
 
     public function item_type_name(){
         // return name of the bid item type instead of type id
-        return item_type[$this->type];
+        return $item_type[$this->type];
     }
 }
 
