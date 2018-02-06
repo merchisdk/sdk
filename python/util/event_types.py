@@ -1,0 +1,3 @@
+POST = 0
+PATCH = 1
+DELETE = 2
