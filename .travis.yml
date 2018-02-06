@@ -2,7 +2,9 @@ matrix:
   include:
     - language: php
       php: 7.0
-      before_script: composer require phpmd/phpmd
+      before_install:
+        - sudo apt-get -qq update
+        - sudo apt-get install -y phpmd
       script:
         - php/lint.sh
         - php/test.sh
