@@ -1,8 +1,7 @@
 matrix:
   include:
     - language: php
-      php:
-        - '7.1'
+      php: 7.0
       script:
         - php/lint.sh
         - php/test.sh
