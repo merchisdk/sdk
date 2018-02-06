@@ -2,7 +2,7 @@ matrix:
   include:
     - language: php
       php: 7.0
-      before_script: composer require phpmd
+      before_script: composer require phpmd/phpmd
       script:
         - php/lint.sh
         - php/test.sh
