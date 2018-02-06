@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-out=$(find . -name \*.php -print0 | xargs -I{} -0 php -l {} | \
+out=$(find php/ -name \*.php -print0 | xargs -I{} -0 php -l {} | \
       grep -v "No syntax errors detected in ")
 
-phpmd . text ruleset.xml && \
+phpmd php/ text php/ruleset.xml && \
 phpcs -s -q . && \
 if [ -n "$out" ]; then
    echo $out
