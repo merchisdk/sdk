@@ -2,10 +2,10 @@ matrix:
   include:
     - language: php
       php: 7.0
-      before_install:
-        - sudo apt-get -qq update
-        - sudo apt-get install -y phpmd
+      before_script:
+        - composer global require phpmd/phpmd
       script:
+        - export PATH=~/.composer/vendor/bin:$PATH
         - php/lint.sh
         - php/test.sh
 
