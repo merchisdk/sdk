@@ -1,0 +1,12 @@
+matrix:
+  include:
+    - language: php
+    php:
+      - '7.1'
+    script:
+      - php/lint.sh
+      - php/test.sh
+
+notifications:
+  email:
+    - mail@dcollins.info
