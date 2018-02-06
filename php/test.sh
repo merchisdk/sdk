@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-phpunit sdk/php/tests/test.php
+phpunit php/tests/test.php
