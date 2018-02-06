@@ -1,0 +1,15 @@
+matrix:
+  include:
+    - language: php
+      php: 7.0
+      before_script:
+        - composer global require phpmd/phpmd
+        - composer global require "squizlabs/php_codesniffer=*"
+      script:
+        - export PATH=~/.composer/vendor/bin:$PATH
+        - php/lint.sh
+        - php/test.sh
+
+notifications:
+  email:
+    - mail@dcollins.info

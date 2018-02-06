@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-out=$(find sdk/php -name \*.php -print0 | xargs -I{} -0 php -l {} | \
+out=$(find php/ -name \*.php -print0 | xargs -I{} -0 php -l {} | \
       grep -v "No syntax errors detected in ")
 
-phpmd sdk/php/ text ruleset.xml && \
-phpcs -s -q sdk/php/ && \
+phpmd php/ text php/ruleset.xml && \
+phpcs --standard=php/phpcs.xml -s -q . && \
 if [ -n "$out" ]; then
    echo $out
    exit 1
