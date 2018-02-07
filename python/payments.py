@@ -2,7 +2,7 @@ import datetime
 import sdk.python.entities
 import sdk.python.invoices
 import sdk.python.users
-from common.business_default import PAYMENT_TYPES
+from sdk.python.util.business_default import PAYMENT_TYPES
 
 
 class Payment(sdk.python.entities.Entity):
@@ -27,7 +27,7 @@ class Payment(sdk.python.entities.Entity):
 
     def payment_type_string(self):
         """ Return the string value of payment type from the
-            common.business_default file
+            sdk.python.util.business_default file
         """
         return PAYMENT_TYPES[self.payment_type]
 

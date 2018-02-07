@@ -1,5 +1,5 @@
 import inflection
-import common.rights
+import sdk.python.util.rights
 
 CAMEL = 1
 UNDERSCORE = 2
@@ -102,7 +102,7 @@ def unpack_recursive_json_iter(json_object, version):
         return key
 
     for key, value in json_object.items():
-        if key == common.rights.Rights.json_name:
+        if key == sdk.python.util.rights.Rights.json_name:
             continue
         # if the value is a list of objects
         if isinstance(value, list):

@@ -1,9 +1,9 @@
 from typing import Set  # noqa # pylint: disable=unused-import
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
-from common.css import validate_stylesheet, ValidateError
-from common.css import validate_declaration_list
-import common.reactjs as reactjs
+from sdk.python.util.css import validate_stylesheet, ValidateError
+from sdk.python.util.css import validate_declaration_list
+import sdk.python.util.reactjs as reactjs
 
 
 ALLOWED_TAGS = {'address', 'article', 'aside', 'b', 'blockquote', 'button',

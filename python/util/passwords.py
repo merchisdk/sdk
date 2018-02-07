@@ -42,7 +42,7 @@
 """
 import os
 import dawg
-import common.crypto as crypto
+import sdk.python.util.crypto as crypto
 
 
 PASSWORD_DATABASE_FILENAME = 'cracked_passwords.dawg'

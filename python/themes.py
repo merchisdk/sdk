@@ -1,7 +1,8 @@
 import sdk.python.entities
 import datetime
 from sdk.python.files import File
-from common.theme_status import VALID_AND_UPDATED, VALID_BUT_NOT_UPDATED
+from sdk.python.util.theme_status import VALID_AND_UPDATED, \
+    VALID_BUT_NOT_UPDATED
 
 
 class Theme(sdk.python.entities.Entity):

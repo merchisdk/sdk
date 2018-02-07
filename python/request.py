@@ -2,7 +2,8 @@ import requests
 import frontend
 import frontend.app
 import json
-from common.name_protocol import parse_json_key_camel, unpack_recursive_json
+from sdk.python.util.name_protocol import parse_json_key_camel, \
+    unpack_recursive_json
 
 PROTOCOL_VERSION = 6
 

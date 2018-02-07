@@ -1,7 +1,7 @@
 import copy
 import sdk.python.entities
 from sdk.python.files import File
-from common.specification_field_type import SELECT, CHECKBOX, RADIO, \
+from sdk.python.util.specification_field_type import SELECT, CHECKBOX, RADIO, \
     has_options_array, COLOUR_SELECT, FILE_UPLOAD
 
 

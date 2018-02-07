@@ -18,12 +18,13 @@ from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.specifications import Specification, SpecificationsGroup
 from sdk.python.notifications import Notification
-from common.status import PRODUCTION_STATUS, PAYMENT_STATUS, \
+from sdk.python.util.status import PRODUCTION_STATUS, PAYMENT_STATUS, \
     DESIGN_STATUS, SHIPPING_STATUS, status_info
-from common import events
-from common.roles import MANAGER, ADMIN
-from common.notification_sources import JOB_SECTION_STRINGS
-from common.business_default import PRIORITY_OPTIONS_REVERSE_MAP, LOW_STRING
+from sdk.python.util import events
+from sdk.python.util.roles import MANAGER, ADMIN
+from sdk.python.util.notification_sources import JOB_SECTION_STRINGS
+from sdk.python.util.business_default import PRIORITY_OPTIONS_REVERSE_MAP, \
+    LOW_STRING
 
 
 class Job(sdk.python.entities.Entity):
@@ -103,7 +104,8 @@ class Job(sdk.python.entities.Entity):
 
     def priority_name(self):
         """ Return a string from one of the constants defined in
-            common.business_default that represents the priority of this job.
+            sdk.python.util.business_default that represents the priority of
+            this job.
         """
         return PRIORITY_OPTIONS_REVERSE_MAP.get(self.priority, LOW_STRING)
 
@@ -183,25 +185,28 @@ class Job(sdk.python.entities.Entity):
 
     def production_display_info(self):
         """ Return the PRODUCTION_STATUS dict from
-            common.status with the values based on the job.production_status
+            sdk.python.util.status with the values based on the
+            job.production_status
         """
         return status_info(self.production_status,
                            PRODUCTION_STATUS, "production ")
 
     def design_display_info(self):
         """ Return the DESIGN_STATUS dict from
-            common.status with the values based on the job.design_status
+            sdk.python.util.status with the values based on the
+            job.design_status
         """
         return status_info(self.design_status, DESIGN_STATUS, "design ")
 
     def payment_display_info(self):
         """ Return the PAYMENT_STATUS dict from
-            common.status with the values based on the job.payment_status
+            sdk.python.util.status with the values based on the
+            job.payment_status
         """
         return status_info(self.payment_status, PAYMENT_STATUS, "payment ")
 
     def shipment_display_info(self):
-        """ Return the SHIPPING_STATUS dict from common.status with the values
+        """ Return the SHIPPING_STATUS dict from sdk.python.util.status with the values
             based on the job.shipping_status
         """
         return status_info(self.shipping_status, SHIPPING_STATUS, "shipment ")

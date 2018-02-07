@@ -7,9 +7,9 @@ import sdk.python.users
 import sdk.python.domains
 import sdk.python.jobs
 import sdk.python.files
-import common.notification_sources as note_source
-import common.notification_type as note_type
-from common.brand_util import PLATFORM_MASCOT_ICON
+import sdk.python.util.notification_sources as note_source
+import sdk.python.util.notification_type as note_type
+from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
 
 
 class Notification(sdk.python.entities.Entity):

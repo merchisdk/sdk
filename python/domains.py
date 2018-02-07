@@ -4,11 +4,11 @@ from sdk.python.files import File
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
-import common.menu_util as menu_util
-from common.google import reconstitute_conversion_script
-from common.google import extract_script_parameters
-from common.brand_util import PLATFORM_MASCOT_ICON
-from common.templates import compile_template
+import sdk.python.util.menu_util as menu_util
+from sdk.python.util.google import reconstitute_conversion_script
+from sdk.python.util.google import extract_script_parameters
+from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
+from sdk.python.util.templates import compile_template
 
 
 class Domain(sdk.python.entities.Entity):
@@ -113,7 +113,7 @@ class Domain(sdk.python.entities.Entity):
         """
         if self.active_theme:
             return self.active_theme.index_page_compiled
-        with open("common/templates/index.html") as template_file:
+        with open("sdk/python/util/templates/index.html") as template_file:
             return compile_template(template_file.read(), database)
 
     def get_invoices_page_content(self, database):
@@ -125,7 +125,7 @@ class Domain(sdk.python.entities.Entity):
         """
         if self.active_theme:
             return self.active_theme.invoices_page_compiled
-        with open("common/templates/invoices.html") as template_file:
+        with open("sdk/python/util/templates/invoices.html") as template_file:
             return compile_template(template_file.read(), database)
 
     def get_products_page_content(self, database):
@@ -137,7 +137,7 @@ class Domain(sdk.python.entities.Entity):
         """
         if self.active_theme:
             return self.active_theme.products_page_compiled
-        with open("common/templates/products.html") as template_file:
+        with open("sdk/python/util/templates/products.html") as template_file:
             return compile_template(template_file.read(), database)
 
     def get_domain_invite_page_content(self, database):
@@ -233,7 +233,7 @@ class Domain(sdk.python.entities.Entity):
         """
         if self.active_theme:
             return self.active_theme.header_compiled
-        with open("common/templates/header.html") as template_file:
+        with open("sdk/python/util/templates/header.html") as template_file:
             return compile_template(template_file.read(), database)
 
     def get_footer_content(self, database):
@@ -245,7 +245,7 @@ class Domain(sdk.python.entities.Entity):
         """
         if self.active_theme:
             return self.active_theme.footer_compiled
-        with open("common/templates/footer.html") as template_file:
+        with open("sdk/python/util/templates/footer.html") as template_file:
             return compile_template(template_file.read(), database)
 
     def logo_url(self):

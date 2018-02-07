@@ -10,8 +10,8 @@ from sdk.python.files import File
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
-from common.money_protocol import format_currency
-import common.invoice_status
+from sdk.python.util.money_protocol import format_currency
+import sdk.python.util.invoice_status
 
 
 class Invoice(sdk.python.entities.Entity):
@@ -88,14 +88,14 @@ class Invoice(sdk.python.entities.Entity):
         total_payments = \
             sum([payment.amount for payment in self.payments])
         if total_payments < 0:
-            return common.invoice_status.NEGATIVE_PAYMENT
+            return sdk.python.util.invoice_status.NEGATIVE_PAYMENT
         elif total_payments == 0:
-            return common.invoice_status.NO_PAYMENT
+            return sdk.python.util.invoice_status.NO_PAYMENT
         elif self.total_cost == total_payments:
-            return common.invoice_status.FULL_PAYMENT
+            return sdk.python.util.invoice_status.FULL_PAYMENT
         elif self.total_cost > total_payments:
-            return common.invoice_status.PART_PAYMENT
-        return common.invoice_status.OVER_PAYMENT
+            return sdk.python.util.invoice_status.PART_PAYMENT
+        return sdk.python.util.invoice_status.OVER_PAYMENT
 
     def is_paid_string(self):
         """ Return a string 'Unpaid' if the invoice is unpaid

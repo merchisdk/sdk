@@ -1,4 +1,4 @@
-import common.address_util as address_util
+import sdk.python.util.address_util as address_util
 import sdk.python.entities
 from sdk.python.email_addresses import EmailAddress
 from sdk.python.addresses import Address

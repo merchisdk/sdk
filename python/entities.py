@@ -4,11 +4,11 @@ import json
 import simplejson
 import arrow
 import flask
-from common.rights import Rights, ALL_RIGHTS
-from common.name_protocol import camelize, parse_json_key_camel
-from common.time_util import to_unix_timestamp
-from common.api_error import ApiError
-import common.errors
+from sdk.python.util.rights import Rights, ALL_RIGHTS
+from sdk.python.util.name_protocol import camelize, parse_json_key_camel
+from sdk.python.util.time_util import to_unix_timestamp
+from sdk.python.util.api_error import ApiError
+import sdk.python.util.errors
 from sdk.python.request import Request
 from frontend.views import user_time_from_unix_timestamp
 from jinja2 import utils
@@ -508,14 +508,14 @@ def check_response(response, expected):
             try:
                 error_code = message_data['error_code']
             except KeyError:
-                error_code = common.errors.UNKNOWN_ERROR
+                error_code = sdk.python.util.errors.UNKNOWN_ERROR
             try:
                 message = message_data['message']
             except KeyError:
                 message = "unknown error"
         except simplejson.scanner.JSONDecodeError:
             message = "unknown error"
-            error_code = common.errors.UNKNOWN_ERROR
+            error_code = sdk.python.util.errors.UNKNOWN_ERROR
         raise ApiError(message, status_code=response.status_code,
                        error_code=error_code)
     return True

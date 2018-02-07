@@ -1,8 +1,8 @@
 from typing import Dict  # noqa # pylint: disable=unused-import
 import io
 import os
-from common.s3 import S3Bucket
-from common.brand_util import colour_logo_uri
+from sdk.python.util.s3 import S3Bucket
+from sdk.python.util.brand_util import colour_logo_uri
 
 
 local_domain_logo_uri = "file://" + os.path.\

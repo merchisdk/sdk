@@ -97,7 +97,7 @@ SHIPPING_STATUS = {
 
 
 def status_info(status, status_dict, status_string=""):
-    """ Return a status dictionary based on the common.status
+    """ Return a status dictionary based on the sdk.python.util.status
         key provided to the 'status_dict' argument and the job progress
         key provided to the status argument. Status_string is used for
         error reporting.

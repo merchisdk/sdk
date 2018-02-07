@@ -1,5 +1,5 @@
 import sdk.python.entities
-from common.item_types import item_type
+from sdk.python.util.item_types import item_type
 
 
 class BidItem(sdk.python.entities.Entity):

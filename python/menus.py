@@ -1,6 +1,6 @@
 import frontend.app
 import sdk.python.entities
-import common.menu_util as menu_util
+import sdk.python.util.menu_util as menu_util
 from operator import attrgetter
 
 

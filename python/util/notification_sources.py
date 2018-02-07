@@ -1,4 +1,4 @@
-import common.roles as roles
+import sdk.python.util.roles as roles
 
 SYSTEM = 0
 USER = 1

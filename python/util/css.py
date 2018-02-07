@@ -39,8 +39,8 @@
 
 """
 import tinycss2
-from common.url import data_url_from_bytes
-from common.legal import is_legal_theme_file_mimetype
+from sdk.python.util.url import data_url_from_bytes
+from sdk.python.util.legal import is_legal_theme_file_mimetype
 
 
 class ValidateError(ValueError):

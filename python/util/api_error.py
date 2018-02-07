@@ -1,4 +1,4 @@
-import common.errors
+import sdk.python.util.errors
 
 
 class ApiError(Exception):
@@ -9,11 +9,11 @@ class ApiError(Exception):
         self.status_code = status_code
         if error_code is None:
             if status_code > 499:
-                error_code = common.errors.SERVER_ERROR
+                error_code = sdk.python.util.errors.SERVER_ERROR
             elif status_code > 399:
-                error_code = common.errors.CLIENT_ERROR
+                error_code = sdk.python.util.errors.CLIENT_ERROR
             else:
-                error_code = common.errors.UNKNOWN_ERROR
+                error_code = sdk.python.util.errors.UNKNOWN_ERROR
         self.error_code = error_code
 
     def to_dict(self):

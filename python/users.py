@@ -1,9 +1,9 @@
 import urllib
 import datetime
-import common.roles
-import common.timezones
-import common.address_util as address_util
-from common.time_util import get_tzinfo_from_timezone_name
+import sdk.python.util.roles
+import sdk.python.util.timezones
+import sdk.python.util.address_util as address_util
+from sdk.python.util.time_util import get_tzinfo_from_timezone_name
 import sdk.python.entities
 from sdk.python.user_companies import UserCompany
 from sdk.python.email_addresses import EmailAddress
@@ -59,16 +59,16 @@ class User(sdk.python.entities.Entity):
             for enrolled_domain in self.enrolled_domains:
                 if enrolled_domain.domain.id == domain_id:
                     return enrolled_domain.role
-        return common.roles.PUBLIC
+        return sdk.python.util.roles.PUBLIC
 
     def all_roles(self):
         """ Return all the roles that user have registered in super user
             have all possible roles
         """
         if self.is_super_user:
-            return common.roles.ALL_ROLES
+            return sdk.python.util.roles.ALL_ROLES
         roles_dict = set(ed.role for ed in self.enrolled_domains)
-        roles_dict.add(common.roles.PUBLIC)
+        roles_dict.add(sdk.python.util.roles.PUBLIC)
         return roles_dict
 
     def has_roles(self, roles, combination_method=any):
@@ -82,42 +82,43 @@ class User(sdk.python.entities.Entity):
 
     def is_not_client(self, domain_id):
         """ Check to see if the user is part of the domain staff. """
-        return self.has_authority(domain_id, common.roles.BUSINESS_ACCOUNTS)
+        return self.has_authority(domain_id,
+                                  sdk.python.util.roles.BUSINESS_ACCOUNTS)
 
     def can_view_info_section(self, job):
         """ Return whether current user should need to view info
             section of a job.
         """
         return self.has_authority(job.domain.id,
-                                  common.roles.BUSINESS_ACCOUNTS)
+                                  sdk.python.util.roles.BUSINESS_ACCOUNTS)
 
     def can_view_payment_section(self, job):
         """ Return whether current user should need to view payment
             section of a job.
         """
         return self.has_authority(job.domain.id,
-                                  common.roles.INVOICE_ROLES)
+                                  sdk.python.util.roles.INVOICE_ROLES)
 
     def can_view_production_section(self, job):
         """ Return whether current user should need to view production
             section of a job.
         """
         return self.has_authority(job.domain.id,
-                                  common.roles.PRODUCTION_SECTION)
+                                  sdk.python.util.roles.PRODUCTION_SECTION)
 
     def can_view_drafting_section(self, job):
         """ Return whether current user should need to view drafting
             section of a job.
         """
         return self.has_authority(job.domain.id,
-                                  common.roles.DESIGN_SECTION)
+                                  sdk.python.util.roles.DESIGN_SECTION)
 
     def can_view_shipping_section(self, job):
         """ Return whether current user should need to view shipping
             section of a job.
         """
         return self.has_authority(job.domain.id,
-                                  common.roles.SHIPPING_SECTION)
+                                  sdk.python.util.roles.SHIPPING_SECTION)
 
     def user_type(self):
         """ Return a user friendly string indicating what type the user is """
@@ -164,14 +165,14 @@ class User(sdk.python.entities.Entity):
         if self.timezone is not None:
             timezone = self.timezone
         else:
-            timezone = common.timezones.DEFAULT_TIMEZONE
+            timezone = sdk.python.util.timezones.DEFAULT_TIMEZONE
         return get_tzinfo_from_timezone_name(timezone)
 
     @classmethod
     def empty_user(cls):
         empty_user = User()
         empty_user.id = -1
-        empty_user.timezone = common.timezones.DEFAULT_TIMEZONE
+        empty_user.timezone = sdk.python.util.timezones.DEFAULT_TIMEZONE
         return empty_user
 
     def profile_picture_url(self, size):
