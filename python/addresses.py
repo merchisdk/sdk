@@ -26,6 +26,7 @@ class Address(sdk.python.entities.Entity):
                                        self.postcode)
 
     def clone(self):
+        """ Return a copy of this address """
         clone_address = Address()
         for json_name in self.json_properties:
             setattr(clone_address, json_name,
