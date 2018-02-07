@@ -21,7 +21,7 @@ class File(sdk.python.entities.Entity):
         self.json_property(str, 'download_url')
         self.json_property(datetime.datetime, 'creation_date')
         self.recursive_json_property(sdk.python.users.User, "uploader")
-        self.file_data = []
+        self.file_data = []  # type: ignore
 
     def from_flask_file(self, flask_file):
         self.name = secure_filename(flask_file.filename)

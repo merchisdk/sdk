@@ -95,10 +95,10 @@ class SpecificationField(sdk.python.entities.Entity):
         specification_built.once_off_cost = 0
         specification_built.value = ""
         if self.field_type == CHECKBOX:
-            specification_built.value = []
+            specification_built.value = []  # type: ignore
             for option in self.options:
                 if option.default:
-                    specification_built.value.append(option.id)
+                    specification_built.value.append(option.id)  # type: ignore
                     specification_built.once_off_cost +=\
                         option.specification_cost
             specification_built.value = \
