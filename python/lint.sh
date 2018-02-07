@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PYFILES=`find python/ -type f -name "*.py"
+PYFILES=`find python/ -type f -name "*.py"`
 mypy --ignore-missing-imports --check-untyped-defs --strict-optional\
       --follow-imports=skip \
       --warn-no-return --warn-redundant-casts --warn-unused-ignores\
