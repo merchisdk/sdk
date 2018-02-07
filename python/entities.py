@@ -56,15 +56,15 @@ def intercept_missing_entities(e):
 class Entity(object):
 
     primary_key = 'id'
-    file_data = []
+    file_data = []  # type: ignore
     request_class = Request
 
     def __init__(self):
-        self.escape_fields = []
+        self.escape_fields = []  # type: ignore
         # should not apply html safe to url fields
-        self.url_fields = []
-        self.json_properties = {}
-        self.recursive_properties = {}
+        self.url_fields = []  # type: ignore
+        self.json_properties = {}  # type: ignore
+        self.recursive_properties = {}  # type: ignore
         self.rights = Rights(ALL_RIGHTS)
         # if it is set to True the entity should
         # only be treat as a reference to the backend
@@ -145,7 +145,7 @@ class Entity(object):
     def serialise(self, force_primary=True, files=None,
                   time_format=None, consider_rights=True,
                   for_updates=False, html_safe=False):
-        result = {}
+        result = {}  # type: ignore
 
         def insert_primary_key(result_dict):
             try:
@@ -189,7 +189,8 @@ class Entity(object):
                     data = data.strftime(time_format)
             if isinstance(data, str) and html_safe and property_name \
                     not in self.url_fields:
-                result[camelize(property_name)] = utils.escape(data)
+                escaped = utils.escape(data)
+                result[camelize(property_name)] = escaped  # type: ignore
             else:
                 result[camelize(property_name)] = data
 
@@ -199,7 +200,7 @@ class Entity(object):
                 # skip when the recursive property do not exist
                 pass
             elif isinstance(recursive_property, list):
-                result[property_name] = []
+                result[property_name] = []  # type: ignore
                 recursive_properties = recursive_property
                 for each_property in recursive_properties:
                     d, files = each_property.\
@@ -207,7 +208,7 @@ class Entity(object):
                                   consider_rights=consider_rights,
                                   html_safe=html_safe,
                                   for_updates=for_updates)
-                    result[property_name].append(d)
+                    result[property_name].append(d)  # type: ignore
             elif isinstance(recursive_property, int):
                 count_key = property_name + '-count'
                 count = result.get(count_key, 0)
