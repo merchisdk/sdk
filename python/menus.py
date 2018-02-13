@@ -1,4 +1,3 @@
-import frontend.app
 import sdk.python.entities
 import sdk.python.util.menu_util as menu_util
 from operator import attrgetter
@@ -38,14 +37,13 @@ class MenuItem(sdk.python.entities.Entity):
         self.json_property(str, 'link_uri')
         self.json_property(int, 'position')
 
-    def url(self, domain=None):
+    def url(self, host, domain=None):
         """ Check to see if the menu type is a redirect or an
             internal link, then return a full url constructed from the
             link_uri and the domain
         """
-        server_name = frontend.app.app.config['SERVER_NAME']
         if domain and self.link_type == menu_util.INTERNAL_PAGE:
             return 'http://{0}.{1}/{2}/'.format(str(domain.sub_domain),
-                                                server_name,
+                                                host,
                                                 self.link_uri)
         return self.link_uri
