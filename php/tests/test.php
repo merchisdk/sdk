@@ -20,7 +20,7 @@ final class PhpSuite extends TestCase
         $item->unit_price = 4;
         $item->type = 1;
 
-        $this->assertEquals($item->item_total(), 888); 
+        $this->assertEquals($item->item_total(), 888);
         $this->assertEquals($item->item_type_name(), 'Shipping');
     }
 }
