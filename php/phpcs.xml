@@ -19,6 +19,8 @@
     <!-- Include the whole PEAR standard -->
     <rule ref="PEAR">
         <exclude name="PEAR.Commenting.FileComment.Missing" />
+        <exclude name="PEAR.Commenting.FileComment.MissingAuthorTag" />
+        <exclude name="PEAR.Commenting.FileComment.MissingLicenseTag" />
         <exclude name="PEAR.ControlStructures.ControlSignature" />
         <exclude name="PEAR.Functions.FunctionDeclaration.NewlineBeforeOpenBrace" />
         <exclude name="Generic.Formatting.MultipleStatementAlignment.Incorrect" />
