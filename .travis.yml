@@ -9,6 +9,12 @@ matrix:
         - export PATH=~/.composer/vendor/bin:$PATH
         - php/lint.sh
         - php/test.sh
+    - language: python
+      python: 3.5
+      install:
+        - pip install -r python/requirements/dev.txt
+      script:
+        - python/lint.sh
 
 notifications:
   email:
