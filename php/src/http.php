@@ -1,6 +1,22 @@
 <?php
 
 require_once 'config.php';
+require_once './../php_aux/name_protocol.php';
+
+const CURRENT_VERSION = 6;
+
+function process_dict_param($embed) {
+    if (isset($embed)) {
+        if (is_array($embed)) {
+            $embed = json_encode($embed);
+        } elseif (gettype($embed) === "string") {
+
+        } else {
+            $embed = null;
+        }
+    }
+    return $embed;
+}
 
 class Response
 {
@@ -10,16 +26,20 @@ class Response
 
 class Request
 {
-    public $server = '';
-    public $version = 'v6';
+    public $server = 'http://backend:5000/';
+    public $version = 'v'. (string)CURRENT_VERSION;
     public $method = 'GET';
     public $resource = '/';
     public $query = [];
     public $headers = [];
     public $username = null;
+    public $embed = null;
     public $password = null;
+    public $api_secret = null;
+    public $as_domain = null;
     public $data = [];
     public $files = [];
+    public $cookies = [];
 
     public function path() {
         return $this->version . $this->resource;
@@ -34,6 +54,35 @@ class Request
         return $result;
     }
 
+    public function auth(){
+        if(!is_null($this->username))
+        {
+            return $this->username . $this->password;
+        }
+        return null;
+    }
+
+    public function version_number(){
+        return (integer)substr($this->version,1);
+    }
+
+    public function wraps_request($data = null, $files = null, $email = null, $password = null,
+                                  $api_secret = null, $query = null, $embed = null, $as_domain = null) {
+        /* Wrap user customized information to request*/
+        $this->files = $files;
+        $this->data = $data;
+        $this->username = $email;
+        $this->password = $password;
+        $this->api_secret = $api_secret;
+        $this->embed = $embed;
+        $this->as_domain = $as_domain;
+        if ($query) {
+            $this->query = array_replace($this->query, $query);
+        } else {
+            $this->query = [];
+        }
+    }
+
     public function send() {
         $handle = curl_init();
         $data = $this->data;
@@ -43,6 +92,19 @@ class Request
             $data[strval($i)] =  new CurlFile(realpath($file->file_data),
                                               $file->mimetype, strval($i));
         }
+        if ($data) {
+            $data_json = parse_json_key_camel($data);
+            $data = unpack_recursive_json($data_json);
+        }
+        if (isset($this->api_secret)) {
+            $this->query['api_secret'] = $this->api_secret;
+        }
+        if (isset($this->embed)) {
+            $this->query['embed'] = process_dict_param($this->embed);
+        }
+        if (isset($this->as_domain)) {
+            $this->query['as_domain'] = $this->as_domain;
+        }
         curl_setopt_array($handle,
                           [CURLOPT_RETURNTRANSFER => 1,
                            CURLOPT_URL => $this->url(),
@@ -50,6 +112,9 @@ class Request
                            CURLOPT_CUSTOMREQUEST => $this->method,
                            CURLOPT_SAFE_UPLOAD => True,
                            CURLOPT_POST => 1,
+                           CURLOPT_USERPWD => $this->auth(),
+                           CURLOPT_HTTPHEADER => $this->headers,
+                           CURLOPT_COOKIE => http_build_query($this->cookies, null, ";"),
                            CURLOPT_POSTFIELDS => $data]);
         $result = curl_exec($handle);
 

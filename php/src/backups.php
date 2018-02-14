@@ -7,11 +7,12 @@ class Backup extends Entity
     public static $resource = '/backups/';
     public static $json_name = 'backup';
 
+
     public function __construct() {
         parent::__construct();
-        $this->json_property('id', 'integer');
-        $this->json_property('file', 'File', '',
-                             false, $recursive = True);
+        $this->json_property('id','integer');
+        $this->json_property('file','File', '',
+                            false, $recursive = True);
     }
 }
 
