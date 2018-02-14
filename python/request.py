@@ -3,7 +3,7 @@ import json
 from sdk.python.util.name_protocol import parse_json_key_camel, \
     unpack_recursive_json
 
-PROTOCOL_VERSION = 6
+CURRENT_VERSION = 6
 
 
 def process_dict_param(embed):

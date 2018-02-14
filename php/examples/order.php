@@ -1,6 +1,6 @@
 <?php
-    require_once 'products.php';
-    require_once 'order_helper.php';
+    require_once './../products.php';
+    require_once './../order_helper.php';
 
     $domain = 1; // this should be set to the sales site id
     $sitename = "Example Merchi Order Form";
@@ -198,7 +198,7 @@
             <h1>Example Merchi Order Form</h1>
         </div>
         <form method="post"
-              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
+              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
               enctype="multipart/form-data">
             <div>
                 <?php text_input("name", "name", $name, $nameErr) ?>
@@ -217,7 +217,7 @@
                 <?php text_input("country", "country", $country, $countryErr) ?>
                 <?php text_input("postcode", "postcode", $postcode,
                                  $postcodeErr) ?>
-                <?php product_select() ?>
+                <?php //product_select() ?>
                 <?php text_input("quantity", "quantity", $quantity,
                                  $quantityErr) ?>
                 <?php text_input("notes", "notes", $notes, $notesErr) ?>
@@ -231,7 +231,7 @@
                 <input type="submit" value="place order">
             </div>
         </form>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
     </script>
     <script>
         function add() {
@@ -242,7 +242,6 @@
             e.preventDefault();
         });
         add();
-    </script>
+    </script>-->
     </body>
 </html>
-

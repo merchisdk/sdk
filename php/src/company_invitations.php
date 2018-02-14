@@ -18,14 +18,15 @@ class CompanyInvitation extends Entity
         $this->json_property('user_email', 'string');
         $this->json_property('invite_as_admin', 'boolean');
         $this->json_property('company', 'Company', '',
-                             False, $recursive = True);
+                             False,$recursive = True);
         $this->json_property('sender', 'User', '',
-                             False, $recursive = True);
+                             False,$recursive = True);
     }
 }
 
 class CompanyInvitations extends Resource
 {
+
     public function __construct()
     {
         $this->entity_class = 'CompanyInvitation';

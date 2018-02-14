@@ -16,7 +16,7 @@ from jinja2 import utils
 
 def enumerate_files(files):
     """ Convert a list into a dictionary whose keys where the indices of the
-        list and whose values are the values that occopied that index. Differs
+        list and whose values are the values that occupied` ` that index. Differs
         from pythons builtin enumerate only by having keys whose type is str.
     """
     n = 0
@@ -517,6 +517,7 @@ def check_response(response, expected):
         except simplejson.scanner.JSONDecodeError:
             message = "unknown error"
             error_code = sdk.python.util.errors.UNKNOWN_ERROR
+            error_code = common.errors.UNKNOWN_ERROR
         raise ApiError(message, status_code=response.status_code,
                        error_code=error_code)
     return True

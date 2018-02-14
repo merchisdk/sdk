@@ -23,3 +23,5 @@ pyenv/*
 .coverage
 *.mo
 .mypy_cache/
+*.iml
+.idea

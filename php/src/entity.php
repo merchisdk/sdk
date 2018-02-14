@@ -2,12 +2,24 @@
 
 require_once 'http.php';
 require_once 'utility.php';
+require_once './../php_aux/rights.php';
+require_once './../php_aux/name_protocol.php';
 
-function generate_request($data, $email = null, $password = null) {
+function enumerate_files($files){
+    $n = 0;
+    $result = [];
+    foreach($files as $element){
+        $result["$n"] = $element;
+        ++$n;
+    }
+    return $result;
+}
+
+function generate_request($data,$files, $email = null, $password = null, $api_secret,
+                           $query, $embed, $as_domain = null) {
     $request = new Request();
-    $request->data = $data;
-    $request->username = $email;
-    $request->password = $password;
+    $request->wraps_request($data,$files, $email, $password, $api_secret,
+        $query, $embed, $as_domain);
     return $request;
 }
 
@@ -15,7 +27,7 @@ function check_response($response) {
     if ($response->status_code < 199 || $response->status_code > 299)
     {
         $body = json_decode($response->body, true);
-        $message = $body['message']['message'];
+        $message = $body['message'];
         throw new Exception($message);
     }
     return True;
@@ -24,10 +36,17 @@ function check_response($response) {
 class Entity
 {
     public static $primary_key = 'id';
+    public $file_data = [];
     public $json_properties = [];
 
     public $escape_fields = [];
-    public $recursive_properties = [];
+    public $url_fields = [];
+    #if it is set to True the entity should only be treat as a reference to the backend entity
+    public $only_for_reference = False;
+
+    public function __construct() {
+        $this->rights = new Rights(ALL_RIGHTS);
+    }
 
     public function send_to_entity($request, $identifier) {
         $request->resource = $this::$resource . $identifier . '/';
@@ -40,11 +59,12 @@ class Entity
         $response = $this->send_to_entity($request, $identifier);
         check_response($response);
         $body = json_decode($response->body, true);
-        return $this->from_json($body);
+        $this->from_json($body);
     }
 
-    public function delete($identifier) {
+    public function delete($identifier, $as_domain = null) {
         $request = new Request();
+        $request->as_domain = $as_domain;
         $request->method = 'DELETE';
         return $this->send_to_entity($request, $identifier);
     }
@@ -56,26 +76,53 @@ class Entity
         }
     }
 
-    public function create($email = null, $password = null) {
-        list($data, $files) = $this->serialise();
-        $request = generate_request($data, $email, $password);
+    public function create($embed = null, $email = null, $password = null,
+                            $query = null, $api_secret = null, $as_domain = null) {
+        $this->process_before_transfer();
+        list($data, $files) = $this->serialise($consider_rights = False);
+        $request = generate_request($data, enumerate_files($files), $email, $password,
+                                    $api_secret, $query, $embed, $as_domain);
         $request->method = 'POST';
         $request->resource = static::$resource;
-        $request->files = $files;
         $response = $request->send();
         check_response($response);
+        $body = json_decode($response->body, true);
+        $this->from_json($body);
     }
 
-    public function put($data = '', $email = null, $password = null) {
-        $request = generate_request($data, $email, $password);
+    public function put($data = '', $files, $email = null, $password = null,
+                        $query = null, $api_secret = null, $as_domain = null) {
+        $request = generate_request($data, $files, $email, $password,
+            $api_secret, $query,null, $as_domain);
         $request->method = 'PUT';
-        return $this->sent_to_entity($request, $this->primary_value());
+        return $this->send_to_entity($request, $this->primary_value());
     }
 
-    public function patch($data = '', $email = null, $password = null) {
-        $request = generate_request($data, $email, $password);
+    public function patch($data = '', $files = null, $email = null, $password = null,
+                          $query = null, $api_secret = null, $as_domain = null) {
+        $request = generate_request($data, $files, $email, $password,
+            $api_secret, $query,null, $as_domain);
         $request->method = 'PATCH';
         return $this->send_to_entity($request, $this->primary_value());
+    }
+
+    public function update($query = null, $only_updates = null, $refresh = false, $email = null,
+                           $password = null, $api_secret = null, $as_domain = null) {
+        if ($only_updates and count($only_updates) > 0) {
+            foreach ($only_updates as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+        $this->process_before_transfer();
+        list($data, $files) = $this->serialise(false, null, null,
+                                               False,
+                                               True);
+        $response = $this->patch($data, enumerate_files($files),$email, $password,$query,
+                                 $api_secret, $as_domain);
+        if ($refresh) {
+            $body = json_decode($response->body, true);
+            $this->from_json($body);
+        }
     }
 
     public function primary_value() {
@@ -84,21 +131,32 @@ class Entity
     }
 
     public function json_property($name, $type, $default = null,
-                                  $many = False, $recursive = null) {
+                                  $many = False, $recursive = False) {
         $this->json_properties[$name] = [$type, $many, $recursive];
         $this->$name = $default;
     }
 
     public function serialise($force_primary = True, $files = [],
+                              $time_format = null, $consider_rights = true,
+                              $for_updates = false, $html_safe= false,
                               $render_nulls = False) {
         $result = [];
         if ($force_primary) {
             $result[self::$primary_key] = $this->primary_value();
         }
-        if (isset($this->file_data)) {
+        if ($this->only_for_reference and $for_updates) {
+            if (!$force_primary) {
+                $result[self::$primary_key] = $this->primary_value();
+            }
+            return [$result, $files];
+        }
+        if (isset($this->file_data) and isset($this->file_data[0])) {
             $index = count($files);
-            array_push($files, $this);
+            array_push($files, $this->file_data);
             $result['fileDataIndex'] = $index;
+        }
+        if ($consider_rights) {
+            $result[Rights::$json_name] = $this->rights->to_array();
         }
         foreach ($this->json_properties as $name => $info) {
             list($type, $many, $recursive) = $info;
@@ -108,18 +166,35 @@ class Entity
                 if ($render_nulls) {
                     $result[$name] = 'None';
                 }
+                continue;
+            }
+            if (!$recursive) {
+                if ($type === "DateTime") {
+                    if ($value instanceof DateTime) {
+                        if (!$time_format) {
+                            $value = $value->getTimestamp();
+                        } else {
+                            $value = $value->format($time_format);
+                        }
+                    }
+                }
+                if (gettype($value) === "string" and $html_safe and !in_array($name, $this->url_fields)) {
+                    $result[camelize($name)] = htmlspecialchars($value);
+                } else {
+                    $result[camelize($name)] = $value;
+                }
             } else if ($actual_type === "array" && $many) {
                 $i = 0;
                 foreach ($value as $property) {
                     list($sub_data, $files) =
                         $property->serialise($force_primary, $files);
-                    // $remote_name = $property::$json_name;
                     foreach ($sub_data as $subname => $subvalue) {
                         if ($subname === 'id') continue;
                         $key = $name . '-' . $i . '-' . $subname;
                         $result[$key] = $subvalue;
                     }
                     ++$i;
+
                     $result[$name . '-count'] = $i;
                 }
             } else if ($actual_type === "object") {
@@ -146,6 +221,7 @@ class Entity
         return [$result, $files];
     }
 
+
     public function __toString()
     {
         return "<Entity " . get_class($this) . ">";
@@ -163,19 +239,28 @@ class Entity
         }
 
         if ($given_type === "array") {
+            try {
+                $rights_codes = $json[Rights::$json_name];
+                $this->rights->from_json($rights_codes);
+            } catch (Exception $e) {
+                $this->rights->from_json(ALL_RIGHTS);
+            }
             foreach ($this->json_properties as $name => $info) {
                 if (!array_key_exists($name, $json)) {
                     $this->$name = null;
                     continue;
                 }
                 list($type, $many, $recursive) = $info;
-                $element = $json[$name];
+                $element = $json[camelize($name)];
                 $element_type = gettype($element);
                 if (!$recursive) {
+                    if ($type === "DateTime") {
+                        $element = new DateTime(@$element);
+                    }
                     $this->$name = $element;
                 } else {
                     if (is_assoc($element) ||
-                         $element_type === "integer") {
+                        $element_type === "integer") {
                         $instance = new $type();
                         $instance->from_json($element);
                         $this->$name = $instance;
@@ -186,21 +271,153 @@ class Entity
                             $instance->from_json($e);
                             array_push($this->$name, $instance);
                         }
+
                     } else {
                         $this->$name = $element;
                     }
                 }
             }
         } else if ($given_type === "integer") {
-            $key = $this->primary_key;
+            $key = self::$primary_key;
             $this->$key = $json;
         }
+    }
+
+    public function process_for_transfer(){
+
+    }
+
+    public function process_before_transfer() {
+        /*
+           Every entity ensure that all the recursive attribute
+           (entity subclass object) do its corresponding process
+            before transfer
+         */
+        $this->process_for_transfer();
+        foreach ($this->json_properties as $json_property_name) {
+            $json_property = $this->$json_property_name;
+            if (is_array($json_property)) {
+                foreach ($json_property as $item) {
+                    if ($item and !$item->is_empty()) {
+                        $item->process_before_transfer();
+                    }
+                }
+            }
+            if ($json_property and ($json_property instanceof Entity) and
+                !$json_property->is_empty()) {
+                $json_property->process_before_transfer();
+            }
+        }
+    }
+
+    public function has_none_attribute() {
+        $whether_has_none = false;
+        foreach ($this->json_properties as $json_property_name => $info) {
+            list($type, $many, $recursive) = $info;
+            if (!$recursive) {
+                if (is_null($this->$json_property_name) and !in_array($json_property_name, $this->escape_fields)) {
+                    return false;
+                }
+            } else {
+                if (is_null($this->$json_property_name)) {
+                    return false;
+                } else {
+                    $entity_attribute = $this->$json_property_name;
+                    $whether_has_none = $entity_attribute->has_none_attribute();
+                }
+            }
+
+        }
+        return $whether_has_none;
+    }
+
+    public function entity_process($attribute_group_name, $process_func) {
+        $attribute_group = $this->$attribute_group_name;
+        if (!isset($attribute_group)) {
+            return $this;
+        }
+
+        foreach ($attribute_group as $attribute_name) {
+            $attribute_value = $this->$attribute_name;
+            try {
+                $new_attribute_value = $process_func($attribute_value);
+            } catch (Exception $e) {
+                continue;
+            }
+            $this->$attribute_name = $new_attribute_value;
+        }
+        foreach ($this->json_properties as $name => $info) {
+            list($type, $many, $recursive) = $info;
+            if ($recursive) {
+                $recursive_property = $this->$name;
+                if (is_array($recursive_property) and !is_assoc($recursive_property)) {
+                    foreach ($recursive_property as $item) {
+                        $item->entity_process($attribute_group_name, $process_func);
+                    }
+                } elseif (isset($recursive_property)) {
+                    $recursive_property->entity_process($attribute_group_name, $process_func);
+                }
+            }
+        }
+    }
+
+    public function is_empty() {
+        /* Return true if every attribute of that entity is None or '' */
+        foreach ($this->json_properties as $name => $info) {
+            if (in_array($name, $this->escape_fields)) {
+                continue;
+            }
+            $recursive = $info[2];
+            $json_property = $this->$name;
+            if (!$recursive) {
+                if ($json_property) {
+                    return false;
+                }
+            } else {
+                if (is_array($json_property)) {
+                    foreach ($json_property as $item) {
+                        if (!$item->is_empty()) {
+                            return false;
+                        }
+                    }
+                } elseif ($json_property !== null and !$json_property->is_empty()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static function fetch($identifier, $embed = null, $include_archived = false, $as_domain = null,
+                                 $email = null, $password = null, $api_secret = null, $query_string = null) {
+        /*
+         * Factory method that returns an instance of this entity named by
+            the given primary key.
+
+            Args:
+              identifier: primary key of entity to fetch
+              embed (dict): map of related entities to fill in
+         */
+        $entity = new static();
+        $request = generate_request(null, null, $email, $password,$api_secret, null,$embed, $as_domain);
+        if ($include_archived) {
+            $request->query['include_archived'] = true;
+        }
+        if ($query_string) {
+            $request->query = array_replace($request->query, (array)$query_string);
+        }
+        $response = $entity->send_to_entity($request, $identifier);
+        $body = json_decode($response->body, true);
+        $entity->from_json($body);
+        return $entity;
     }
 
 }
 
 class Resource
 {
+    public $can_create = true;
+
     public function from_json($json) {
         $result = [];
         $o = $json[$this->json_name];
@@ -219,13 +436,53 @@ class Resource
         return $entity::$resource;
     }
 
-    public function get($embed = Null) {
+    public function get($embed = Null, $query = Null, $email = Null,$password = Null, $api_secret = Null,
+                        $forbid_auto_update = false, $as_domain = Null) {
         $request = new Request();
-        $request->query['embed'] = $embed;
+        $request->wraps_request(null,null,$email, $password, $api_secret, $query, $embed, $as_domain);
         $request->resource = $this->uri();
         $response = $request->send();
         check_response($response);
-        $body = json_decode($response->body, true);
-        return $this->from_json($body);
+        return $response;
+    }
+
+    public function fetch($embed = Null, $query = Null, $email = Null,$password = Null, $api_secret = Null,
+                          $forbid_auto_update = false, $as_domain = Null) {
+        $resp = $this->get($embed, $query, $email, $password, $api_secret, $forbid_auto_update, $as_domain);
+        $body = json_decode($resp->body, true);
+        return [$this->from_json($body), new PageSpecification($body['count'], $body['available'], $body['offset'],
+                                                           $body['limit'], (bool)$body['cancreate'])];
+    }
+}
+
+class PageSpecification
+{
+    public function __construct($count, $available, $offset, $limit, $can_create)
+    {
+        $this->count = (int)$count;
+        $this->available = (int)$available;
+        $this->has_create_button = $can_create;
+        $this->offset = (int)$offset;
+        $this->limit = (int)$limit;
+    }
+
+    public function available_pages() {
+        return (int)ceil((float)$this->available / $this->limit);
+    }
+
+    public function current_page() {
+        return $this->offset / $this->limit + 1;
+    }
+
+    public function page_offset($page) {
+        return $this->limit * ($page - 1);
+    }
+
+    public function next_offset() {
+        return $this->page_offset((int)$this->current_page()+1);
+    }
+
+    public function last_offset() {
+        return $this->page_offset((int)$this->current_page()-1);
     }
 }

@@ -284,7 +284,6 @@ class Domains(sdk.python.entities.Resource):
             return result[0]
         return None
 
-
 class EnrolledDomains(sdk.python.entities.Resource):
 
     entity_class = EnrolledDomain
