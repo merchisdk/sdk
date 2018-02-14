@@ -9,7 +9,7 @@
 import subprocess
 import shlex
 import logging
-from backend.error import log
+from backend.error import log  # pylint: disable=import-error
 
 
 def make_cert_directory():
