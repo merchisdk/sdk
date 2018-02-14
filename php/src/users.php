@@ -12,7 +12,8 @@ class User extends Entity
     public static $resource = '/users/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('password', 'string');

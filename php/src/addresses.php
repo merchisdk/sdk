@@ -8,7 +8,8 @@ class Address extends Entity
     public static $resource = '/addresses/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('line_one', 'string');
         $this->json_property('line_two', 'string');

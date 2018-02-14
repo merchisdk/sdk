@@ -9,7 +9,8 @@ class BidItem extends Entity
     public static $json_name = 'bid_item';
 
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('type', 'integer');
@@ -18,7 +19,8 @@ class BidItem extends Entity
         $this->json_property('unit_price', 'float');
     }
 
-    public function item_total(){
+    public function item_total()
+    {
         /*
             Calculate the total of the item by
             multiplying the unit_price and quantity. It then
@@ -29,7 +31,8 @@ class BidItem extends Entity
         return $total;
     }
 
-    public function item_type_name(){
+    public function item_type_name()
+    {
         // return name of the bid item type instead of type id
         return $item_type[$this->type];
     }
@@ -37,7 +40,8 @@ class BidItem extends Entity
 
 class BidItems extends resource
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->entity_class = 'BidItem';
         $this->json_name = 'bidItem';
     }

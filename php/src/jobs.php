@@ -8,7 +8,8 @@ class Job extends Entity
     public static $resource = '/jobs/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('quantity', 'integer');
         $this->json_property('notes', 'string');
