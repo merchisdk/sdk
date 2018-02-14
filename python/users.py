@@ -3,6 +3,7 @@ import datetime
 import sdk.python.util.roles
 import sdk.python.util.timezones
 import sdk.python.util.address_util as address_util
+import sdk.python.util.gravatar as gravatar
 from sdk.python.util.time_util import get_tzinfo_from_timezone_name
 import sdk.python.entities
 from sdk.python.user_companies import UserCompany
@@ -14,7 +15,6 @@ from sdk.python.notifications import Notification
 from sdk.python.files import File
 from sdk.python.products import Product
 from sdk.python.domains import EnrolledDomain
-import frontend.gravatar as gravatar
 
 
 class User(sdk.python.entities.Entity):

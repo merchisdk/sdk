@@ -1,6 +1,4 @@
 import requests
-import frontend
-import frontend.app
 import json
 from sdk.python.util.name_protocol import parse_json_key_camel, \
     unpack_recursive_json
@@ -22,7 +20,8 @@ def process_dict_param(embed):
 class Request(object):
 
     def __init__(self):
-        self.server = frontend.app.app.config["INTERNAL_BACKEND_URI"]
+        self.server = ''
+        self.host = ''
         self.version = 'v' + str(PROTOCOL_VERSION)
         self.method = 'GET'
         self.resource = '/'
@@ -82,15 +81,17 @@ class Request(object):
         if self.as_domain:
             self.query["as_domain"] = self.as_domain
 
-        self.headers['host'] = frontend.app.app.config["BACKEND_SERVER_NAME"]
+        self.headers['host'] = self.host
 
-        test_backend = getattr(frontend.app.app, 'test_backend', None)
-        if test_backend:
-            # in test mode we do not actually send requests over the wire
-            # but talk to the backend directly in-process
-            sender = test_backend.request
-        else:
-            sender = requests.request
+        sender = self.get_sender_func()
+
         return sender(self.method, url=self.url(), params=self.query,
                       headers=self.headers, data=data_post, files=self.files,
                       cookies=self.cookies, auth=self.auth())
+
+    def get_sender_func(self):
+        """ Return function that actually sends requests.
+
+            This can be overidden, e.g. for test mocks.
+        """
+        return requests.request
