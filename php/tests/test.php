@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 require_once 'php/src/products.php';
 require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
+require_once 'php/src/util/address.php';
 
 final class PhpSuite extends TestCase
 {
@@ -22,5 +23,10 @@ final class PhpSuite extends TestCase
     public function testCanCreateBank()
     {
         $this->assertNotNull(new Bank());
+    }
+
+    public function testAddressCountry()
+    {
+        $this->assertEquals(address_country('AU'), 'Australia');
     }
 }
