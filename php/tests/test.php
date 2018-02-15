@@ -3,11 +3,14 @@ declare(strict_types = 1);
 
 use PHPUnit\Framework\TestCase;
 
+require_once 'php/src/country_taxes.php';
+require_once 'php/src/component_tags.php';
 require_once 'php/src/products.php';
 require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
 require_once 'php/src/bid_items.php';
 require_once 'php/src/util/address.php';
+require_once 'php/src/categories.php';
 
 final class PhpSuite extends TestCase
 {
@@ -27,6 +30,11 @@ final class PhpSuite extends TestCase
         $this->assertEquals($item->item_type_name(), 'Shipping');
     }
 
+    public function testCanCreateCategory()
+    {
+        $this->assertNotNull(new Category());
+    }
+
     public function testCanCreateBackup()
     {
         $this->assertNotNull(new Backup());
@@ -37,8 +45,23 @@ final class PhpSuite extends TestCase
         $this->assertNotNull(new Bank());
     }
 
+    public function testCanCreateComponentTag()
+    {
+        $this->assertNotNull(new ComponentTag());
+    }
+
     public function testAddressCountry()
     {
         $this->assertEquals(address_country('AU'), 'Australia');
+    }
+
+    public function testCountryTax()
+    {
+        $tax = new CountryTax();
+        $tax->country = 'AU';
+        $tax->tax_name = 'GST';
+
+        $this->assertEquals($tax->country_name(), 'Australia');
+        $this->assertEquals($tax->full_name(), 'GST (Australia)');
     }
 }
