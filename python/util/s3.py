@@ -23,7 +23,7 @@ class S3UploadStream(object):
         self.mp = self.bucket.initiate_multipart_upload(file_row.upload_id,
                                                         headers=headers)
         self.index = 1
-        self.data = []
+        self.data = []  # type: ignore
 
     def write(self, data):
         self.data.append(data)
