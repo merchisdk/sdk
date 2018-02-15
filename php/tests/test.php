@@ -8,6 +8,7 @@ require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
 require_once 'php/src/bid_items.php';
 require_once 'php/src/util/address.php';
+require_once 'php/src/categories.php';
 
 final class PhpSuite extends TestCase
 {
@@ -25,6 +26,11 @@ final class PhpSuite extends TestCase
 
         $this->assertEquals($item->item_total(), 888);
         $this->assertEquals($item->item_type_name(), 'Shipping');
+    }
+
+    public function testCanCreateCategory()
+    {
+        $this->assertNotNull(new Category());
     }
 
     public function testCanCreateBackup()
