@@ -4,6 +4,8 @@ declare(strict_types = 1);
 use PHPUnit\Framework\TestCase;
 
 require_once 'php/src/products.php';
+require_once 'php/src/backups.php';
+require_once 'php/src/bank.php';
 require_once 'php/src/bid_items.php';
 require_once 'php/src/util/address.php';
 require_once 'php/src/categories.php';
@@ -29,6 +31,16 @@ final class PhpSuite extends TestCase
     public function testCanCreateCategory()
     {
         $this->assertNotNull(new Category());
+    }
+
+    public function testCanCreateBackup()
+    {
+        $this->assertNotNull(new Backup());
+    }
+
+    public function testCanCreateBank()
+    {
+        $this->assertNotNull(new Bank());
     }
 
     public function testAddressCountry()
