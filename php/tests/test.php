@@ -11,7 +11,7 @@ final class PhpSuite extends TestCase
 {
     public function testCanCreateProduct()
     {
-        new Product();
+        $this->assertNotNull(new Product());
     }
 
     public function testBidItem()
