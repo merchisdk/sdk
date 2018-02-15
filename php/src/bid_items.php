@@ -1,7 +1,7 @@
 <?php
 
 require_once 'entity.php';
-require_once './../php_aux/item_types.php';
+require_once 'util/item_types.php';
 
 class BidItem extends Entity
 {
@@ -11,7 +11,6 @@ class BidItem extends Entity
 
     public function __construct()
     {
-        parent::__construct();
         $this->json_property('id', 'integer');
         $this->json_property('type', 'integer');
         $this->json_property('quantity', 'integer');
@@ -34,7 +33,7 @@ class BidItem extends Entity
     public function item_type_name()
     {
         // return name of the bid item type instead of type id
-        return $item_type[$this->type];
+        return ITEM_TYPE[$this->type];
     }
 }
 
