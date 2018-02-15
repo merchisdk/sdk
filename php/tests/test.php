@@ -4,6 +4,7 @@ declare(strict_types = 1);
 use PHPUnit\Framework\TestCase;
 
 require_once 'php/src/country_taxes.php';
+require_once 'php/src/component_tags.php';
 require_once 'php/src/products.php';
 require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
@@ -42,6 +43,11 @@ final class PhpSuite extends TestCase
     public function testCanCreateBank()
     {
         $this->assertNotNull(new Bank());
+    }
+
+    public function testCanCreateComponentTag()
+    {
+        $this->assertNotNull(new ComponentTag());
     }
 
     public function testAddressCountry()
