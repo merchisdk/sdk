@@ -5,6 +5,7 @@ import requests
 from boto.s3.connection import S3Connection
 
 URL_TTL = 14400  # (seconds = 4 hours)
+BUFFER_FLUSH = 10485760  # flush to network if have > 10 MiB
 
 
 class S3UploadStream(object):
@@ -22,12 +23,19 @@ class S3UploadStream(object):
         self.mp = self.bucket.initiate_multipart_upload(file_row.upload_id,
                                                         headers=headers)
         self.index = 1
+        self.data = []
 
     def write(self, data):
-        with io.BytesIO(data) as chunk:
+        self.data.append(data)
+        if len(self.data) > BUFFER_FLUSH:
+            self._flush_buffer()
+
+    def _flush_buffer(self):
+        with io.BytesIO(self.data) as chunk:
             self.mp.upload_part_from_file(chunk, part_num=self.index)
-            self.file_row.size += len(data)
+            self.file_row.size += len(self.data)
         self.index += 1
+        self.data = []
 
     def close(self):
         self.mp.complete_upload()
