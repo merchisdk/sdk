@@ -9,7 +9,6 @@
 import subprocess
 import shlex
 import logging
-from backend.error import log  # pylint: disable=import-error
 
 
 def make_cert_directory():
@@ -21,7 +20,7 @@ def make_cert_directory():
     subprocess.check_call(['chmod', '-R', "ugo+rx", '/tmp/letsencrypt-auto'])
 
 
-def fetch_cert(email, cert_name, domain_names):
+def fetch_cert(email, cert_name, domain_names, log):
     """ Contact letsencrypt servers and ask them for a new certificate. """
     cmd = ('/usr/bin/certbot certonly --renew-by-default ' +
            '--cert-name ' + cert_name + ' ' +
@@ -38,7 +37,7 @@ def fetch_cert(email, cert_name, domain_names):
     log(logging.INFO, log_msg)
 
 
-def load_cert():
+def load_cert(log):
     """ Cause NGINX to reload its configuration file, including picking up
         any changes in TLS certificates.
     """
@@ -64,7 +63,7 @@ def load_cert():
     restart_container("merchi_proxy_setup_1")
 
 
-def renew_certs(email, cert_name, domain_names):
+def renew_certs(email, cert_name, domain_names, log):
     """ Create certificate for the given list of str domain names, using the
         provided email address for the letsencrypt account, then load the
         result into NGINX. Invoking for the first time will set up the
@@ -73,5 +72,5 @@ def renew_certs(email, cert_name, domain_names):
         limited by letsencrypt).
     """
     make_cert_directory()
-    fetch_cert(email, cert_name, domain_names)
-    load_cert()
+    fetch_cert(email, cert_name, domain_names, log)
+    load_cert(log)
