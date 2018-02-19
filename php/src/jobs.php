@@ -24,7 +24,7 @@ class Job extends Entity
                              $default = '1', $recursive = True);
         $this->json_property('domain', 'Domain', $many = False,
                              $default = '1', $recursive = True);
-        $this->json_property('clientFile', 'File', $default = [],
+        $this->json_property('clientFiles', 'File', $default = [],
                              $many = true, $recursive = True);
     }
 }
