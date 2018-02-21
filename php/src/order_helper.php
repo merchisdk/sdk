@@ -78,13 +78,13 @@
         $j->notes = $notes;
         $j->deadline = null;
 
-        $j->clientFile = [];
+        $j->clientFiles = [];
 
         foreach ($files as $info) {
             if ($info['size'] > 0) {
                 $f = new File_();
                 $f->from_php_info($info);
-                array_push($j->clientFile, $f);
+                array_push($j->clientFiles, $f);
             }
         }
 
