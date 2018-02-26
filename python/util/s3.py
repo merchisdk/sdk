@@ -71,14 +71,14 @@ class S3Bucket(object):
               filename: if mimetype not provided, it may be guesed from name
               with_retries: number of times to retry in the face of errors
         """
+        error = RuntimeError("failed to upload to s3")  # type: Exception
         for i in range(0, with_retries):
             try:
                 return self._upload_file(key, data, mimetype=mimetype,
                                          filename=filename)
             except Exception as e:
-                if i < with_retries:
-                    continue
-                raise e
+                error = e
+        raise error
 
     def _upload_file(self, key, data, mimetype=None, filename=None):
         key = str(key)
