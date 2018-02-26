@@ -10,7 +10,7 @@ from sdk.python.util.time_util import to_unix_timestamp
 from sdk.python.util.api_error import ApiError
 import sdk.python.util.errors
 from sdk.python.request import Request
-from frontend.views import user_time_from_unix_timestamp
+from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable=import-error
 from jinja2 import utils
 
 
