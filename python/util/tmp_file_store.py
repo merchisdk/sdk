@@ -53,7 +53,7 @@ class TemporyBucket(object):
               filename: if mimetype not provided, it may be guesed from name
         """
         error = RuntimeError("could not temporarily store")  # type: Exception
-        for i in range(0, with_retries):
+        for _ in range(0, with_retries):
             try:
                 return self._upload_file(key, data, mimetype=mimetype,
                                          filename=filename)

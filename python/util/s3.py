@@ -72,7 +72,7 @@ class S3Bucket(object):
               with_retries: number of times to retry in the face of errors
         """
         error = RuntimeError("failed to upload to s3")  # type: Exception
-        for i in range(0, with_retries):
+        for _ in range(0, with_retries):
             try:
                 return self._upload_file(key, data, mimetype=mimetype,
                                          filename=filename)
