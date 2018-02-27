@@ -76,7 +76,7 @@ class S3Bucket(object):
             try:
                 return self._upload_file(key, data, mimetype=mimetype,
                                          filename=filename)
-            except Exception as e:
+            except Exception as e:  # pylint: disable=broad-except
                 error = e
         raise error
 
