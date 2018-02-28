@@ -218,6 +218,15 @@ class Job(sdk.python.entities.Entity):
             return assignment.shipment
         return None
 
+    def suppliers_unarchived_assignment(self, user_id):
+        """ Returns an unarchived assignment of the given user id if such
+            assignment exists
+        """
+        for assignment in self.assignments:
+            if assignment.supplier.id is user_id and not assignment.archived:
+                return assignment
+        return None
+
     def product_unit_price(self):
         """ Display the product unit_price. This value takes into consideration
             discounted unit price based on server calculated product unit price
