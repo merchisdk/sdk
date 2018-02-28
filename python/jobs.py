@@ -57,12 +57,12 @@ class Job(sdk.python.entities.Entity):
         self.json_property(int, 'payment_status')
         self.json_property(int, 'shipping_status')
         self.json_property(bool, 'completed')
-        self.json_property(bool, 'archived')
         self.json_property(int, 'priority')
         self.recursive_json_property(File, 'production_files')
         self.recursive_json_property(File, 'client_files')
         self.recursive_json_property(Assignment, 'assignments')
         self.json_property(str, 'domain')
+        self.json_property(datetime.datetime, 'archived')
         self.json_property(datetime.datetime, 'received')
         self.json_property(datetime.datetime, 'deadline')
         self.json_property(datetime.datetime, 'updated')
@@ -216,6 +216,15 @@ class Job(sdk.python.entities.Entity):
         assignment = self.accepted_assignment()
         if assignment:
             return assignment.shipment
+        return None
+
+    def suppliers_unarchived_assignment(self, user_id):
+        """ Returns an unarchived assignment of the given user id if such
+            assignment exists
+        """
+        for assignment in self.assignments:
+            if assignment.supplier.id is user_id and not assignment.archived:
+                return assignment
         return None
 
     def product_unit_price(self):
@@ -417,6 +426,7 @@ class Assignment(sdk.python.entities.Entity):
         self.json_property(int, 'id')
         self.json_property(str, 'manager_accepts')
         self.json_property(str, 'supplier_refused')
+        self.json_property(datetime.datetime, 'archived')
         self.json_property(datetime.datetime, 'production_deadline')
         self.json_property(datetime.datetime, 'assignment_deadline')
         self.recursive_json_property(Job, 'job')
