@@ -34,12 +34,12 @@ class CachingBucket(object):
               mimetype: mimetype metadata to store with the file
               filename: if mimetype not provided, it may be guesed from name
         """
+        if hasattr(data, 'read'):
+            data = data.read()
         self.underlying_storage.upload_file(key, data, mimetype=mimetype,
                                             filename=filename)
         # add also to in memory cache
         key = str(key)
-        if hasattr(data, 'read'):
-            data = data.read()
         self.storage[key] = io.BytesIO(data)
         return len(data)
 
