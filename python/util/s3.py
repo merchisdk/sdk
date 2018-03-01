@@ -3,61 +3,9 @@ import mimetypes
 import io
 import requests
 import boto3
+import s3fs
 
 URL_TTL = 14400  # (seconds = 4 hours)
-BUFFER_FLUSH = 10485760  # flush to network if have > 10 MiB
-
-
-class S3UploadStream(object):
-
-    def __init__(self, s3, bucket_name, file_row):
-        self.s3 = s3
-        self.bucket_name = bucket_name
-        self.file_row = file_row
-        file_row.size = 0
-        if file_row.name and not file_row.mimetype:
-            file_row.mimetype = mimetypes.guess_type(file_row.name)[0]
-        if not file_row.mimetype:
-            file_row.mimetype = 'application/octet-stream'
-        mtype = file_row.mimetype
-        client = s3.meta.client
-        self.mp = client.create_multipart_upload(Bucket=bucket_name,
-                                                 Key=file_row.upload_id,
-                                                 ContentType=mtype)
-        self.index = 1
-        self.data = []  # type: ignore
-        self.parts = []  # type: ignore
-
-    def write(self, data):
-        self.data.append(data)
-        if len(self.data) > BUFFER_FLUSH:
-            self._flush_buffer()
-
-    def _flush_buffer(self):
-        part = self.s3.upload_part(Bucket=self.bucket_name,
-                                   Key=self.file_row.upload_id,
-                                   PartNumber=self.index,
-                                   UploadId=self.mp['UploadId'],
-                                   Body=self.data)
-        self.file_row.size += len(self.data)
-        self.parts.append({'PartNumber': self.index,
-                           'ETag': part['ETag']})
-
-        self.index += 1
-        self.data = []
-
-    def close(self):
-        args = {'Bucket': self.bucket_name,
-                'Key': self.file_row.upload_id,
-                'UploadId': self.mp['UploadId'],
-                'MultipartUpload': {'Parts': self.parts}}
-        self.s3.meta.client.complete_multipart_upload(**args)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        self.close()
 
 
 class S3Bucket(object):
@@ -109,7 +57,10 @@ class S3Bucket(object):
                                        Key=key)['ContentLength']
 
     def upload_stream(self, file_row):
-        return S3UploadStream(self.s3, self.bucket_name, file_row)
+        fs = s3fs.S3FileSystem(anon=False, key=self.access_key,
+                               secret=self.secret_key)
+        object_name = '{}/{}'.format(self.bucket_name, file_row.upload_id)
+        return fs.open(object_name, 'wb')
 
     def fetch_file(self, key):
         """ Retrieve file data from S3.
