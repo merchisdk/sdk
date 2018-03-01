@@ -1,4 +1,4 @@
-import urllib
+import urllib.parse
 import datetime
 import sdk.python.util.roles
 import sdk.python.util.timezones
