@@ -170,7 +170,7 @@ class Job(sdk.python.entities.Entity):
         """
         assignment = None
         for assignment in self.assignments:
-            if assignment.supplier.id is user_id:
+            if assignment.supplier.id == user_id:
                 assignment = assignment
         return assignment
 
@@ -223,7 +223,7 @@ class Job(sdk.python.entities.Entity):
             assignment exists
         """
         for assignment in self.assignments:
-            if assignment.supplier.id is user_id and not assignment.archived:
+            if assignment.supplier.id == user_id and not assignment.archived:
                 return assignment
         return None
 
