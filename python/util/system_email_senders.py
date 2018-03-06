@@ -1,8 +1,10 @@
 ORDERS = 1
 INVOICES = 2
+NOTIFICATIONS = 3
 
 SENDER_STRINGS = {ORDERS: "orders",
-                  INVOICES: "invoices"}
+                  INVOICES: "invoices",
+                  NOTIFICATIONS: "notifications"}
 
 
 def make_email_address(sender, email_domain):
