@@ -58,6 +58,8 @@ ALLOWED_SIGN_UP_ROLES = (DESIGNER, CLIENT, SUPPLIER)
 
 INVOICE_ROLES = {ADMIN, MANAGER, ACCOUNTANT}
 
+JOB_INFO_ROLES = {ADMIN, DESIGNER, MANAGER}
+
 
 def role_string(role_code):
     """ Given integer role_code denoting a users role, return a lower case
