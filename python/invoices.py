@@ -25,6 +25,7 @@ class Invoice(sdk.python.entities.Entity):
         self.json_property(datetime.datetime, 'creation_date')
         self.json_property(datetime.datetime, 'payment_deadline')
         self.json_property(datetime.datetime, 'reminded')
+        self.json_property(datetime.datetime, 'archived')
         self.json_property(int, 'id')
         self.json_property(bool, 'send_sms')
         self.json_property(bool, 'send_email')

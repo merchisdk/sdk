@@ -45,7 +45,10 @@ class Notification(sdk.python.entities.Entity):
         self.json_property(str, 'description')
         self.json_property(str, 'subject')
         self.json_property(str, 'message')
+
+        # not embedded by default, must be requested
         self.json_property(str, 'html_message')
+
         self.json_property(str, 'link')
         self.json_property(int, 'section')
 
