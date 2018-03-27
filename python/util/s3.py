@@ -72,7 +72,10 @@ class S3Bucket(object):
             Raises:
               KeyError: if no such key in bucket
         """
-        return self.s3.Object(self.bucket_name, key).get()['Body']
+        try:
+            return self.s3.Object(self.bucket_name, key).get()['Body']
+        except self.client.exceptions.NoSuchKey:
+            raise KeyError
 
     def fetch_file_by_url(self, url):
         """ Retrieve file data from S3 base on the entire url that given.
