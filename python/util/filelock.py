@@ -3,6 +3,7 @@ import os.path
 
 class CannotAquireLock(RuntimeError):
     """ Exception raised if lock already held. """
+
     pass
 
 
