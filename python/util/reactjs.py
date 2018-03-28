@@ -168,7 +168,11 @@ javascript = """
     function compile(code) {{
         const options = {{plugins: ["transform-react-jsx",
                                     "transform-remove-strict-mode"]}};
-        var lintFailures = lint(code);
+        try {{
+          var lintFailures = lint(code);
+        }} catch (e) {{
+           return [e, ''];
+        }}
         if (lintFailures.length !== 0) {{
             return [lintFailures, ''];
         }}
@@ -195,9 +199,9 @@ def tsx_to_javascript(jsx):
         are warnings or lint errors, a list of errors may be returned.
     """
     result = library.call('compile', jsx)
-    if result[0] == []:
-        return result[1]
-    return result[0]
+    if result[0] != []:
+        raise ValueError(result[0])
+    return result[1]
 
 
 def javascript_to_html(input_javascript, props):
@@ -221,7 +225,8 @@ def component_to_javascript(name, body):
     try:
         result = tsx_to_javascript(component)
     except (execjs._exceptions.RuntimeError,
-            execjs._exceptions.ProgramError) as e:
+            execjs._exceptions.ProgramError,
+            ValueError) as e:
         raise ValueError(str(e))
     if isinstance(result, list):
         # got lint errors
