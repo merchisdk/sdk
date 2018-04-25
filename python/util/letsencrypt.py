@@ -11,22 +11,14 @@ import shlex
 import logging
 
 
-def make_cert_directory():
-    """ Make the well known directory for placing lets encrypt challenge/
-        response files into, if it does not already exist.
-    """
-    dir = '/tmp/letsencrypt-auto/.well-known/acme-challenge/'
-    subprocess.check_call(['mkdir', '-p', dir])
-    subprocess.check_call(['chmod', '-R', "ugo+rx", '/tmp/letsencrypt-auto'])
-
-
 def fetch_cert(email, cert_name, domain_names, log):
     """ Contact letsencrypt servers and ask them for a new certificate. """
     cmd = ('/usr/bin/certbot certonly --renew-by-default ' +
            '--cert-name ' + cert_name + ' ' +
            '--non-interactive --agree-tos --email {} --server ' +
            'https://acme-v01.api.letsencrypt.org/directory --webroot -w' +
-           ' /tmp/letsencrypt-auto/')
+           ' /tmp/letsencrypt-auto/ --config-dir /etc/letsencrypt/config ' +
+           '--logs-dir /etc/letsencrypt/logs --work-dir /etc/letsencrypt/work ')
     cmd = cmd.format(shlex.quote(email))
     for domain_name in domain_names:
         cmd += ' -d ' + shlex.quote(domain_name)
@@ -71,6 +63,5 @@ def renew_certs(email, cert_name, domain_names, log):
         the exisiting certificate (an operation which is less heavily rate
         limited by letsencrypt).
     """
-    make_cert_directory()
     fetch_cert(email, cert_name, domain_names, log)
     load_cert(log)
