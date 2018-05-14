@@ -1,4 +1,4 @@
-from typing import Set  # noqa # pylint: disable=unused-import
+ffrom typing import Set  # noqa # pylint: disable=unused-import
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from sdk.python.util.css import validate_stylesheet, ValidateError
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         user = null,
         foundDomain = false,
         domain = null,
+        job = job,
         components;
 """
         for component in self.used_components:
@@ -85,7 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             component.name);
         var element = React.createElement(component,
                                           { currentUser: user,
-                                            currentDomain: domain });
+                                            currentDomain: domain,
+                                            job: job });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });

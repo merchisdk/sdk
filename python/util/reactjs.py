@@ -46,7 +46,9 @@ javascript = """
              "toastSettingsJobProductionAssignmentQuote": false,
              "$": false,
              "MERCHI": false,
-             "console": false
+             "console": false,
+             "job": false,
+             "currentUser": false,
             }},
             rules:
             {{"semi": 2,
