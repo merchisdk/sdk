@@ -1,4 +1,4 @@
-ffrom typing import Set  # noqa # pylint: disable=unused-import
+from typing import Set  # noqa # pylint: disable=unused-import
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from sdk.python.util.css import validate_stylesheet, ValidateError
