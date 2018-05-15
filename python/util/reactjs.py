@@ -49,6 +49,7 @@ javascript = """
              "console": false,
              "job": false,
              "currentUser": false,
+             "window": false,
             }},
             rules:
             {{"semi": 2,

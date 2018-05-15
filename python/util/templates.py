@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         user = null,
         foundDomain = false,
         domain = null,
-        job = job,
+        job = window.job,
         components;
 """
         for component in self.used_components:
