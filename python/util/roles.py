@@ -7,6 +7,9 @@
     enumeration type.
 """
 
+# a system role who is responding build all system templates componets
+SYSTEM_COMPONENT_BUILDER = 1
+
 PUBLIC = 0
 ADMIN = 1
 SALES = 2
