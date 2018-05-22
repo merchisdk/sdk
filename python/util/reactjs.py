@@ -39,8 +39,10 @@ javascript = """
         var lintOptions = {{
             "globals": {{
              "CURRENCY": false,
+             "PRODUCT_CHECKOUT_FORM": false,
              "React": false,
              "URL_MAP": false,
+             "UTILITIES_JSX": false,
              "moment": false,
              "toastSettingsJobProductionAssignmentComments": false,
              "toastSettingsJobProductionAssignmentQuote": false,
