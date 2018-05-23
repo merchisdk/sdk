@@ -262,8 +262,6 @@ class Entity(object):
                 data = o.get(camelize(json_property), None)
                 if type_ == datetime:
                     data = user_time_from_unix_timestamp(data)
-                if type_ == list:
-                    data = json.loads(data)
                 setattr(self, json_property, data)
             for json_property, relation in self.recursive_properties.items():
                 try:

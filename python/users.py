@@ -127,6 +127,11 @@ class User(sdk.python.entities.Entity):
             return "System Admin"
         return "Normal User"
 
+    def is_component_builder(self):
+        """ Return where current user is component builder """
+        return self.system_roles is not None and \
+            sdk.python.util.roles.SYSTEM_COMPONENT_BUILDER in self.system_roles
+
     def primary_company_name(self):
         """ Return the user's primary company name if the user has a company """
         if self.user_companies and self.user_companies[0].company:
