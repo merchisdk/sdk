@@ -9,11 +9,9 @@
 
 # a system role who is responding build all system templates componets
 SYSTEM_COMPONENT_BUILDER = 1
-SYSTEM_COMPONENT_DESTROYER = 2
 
 SYSTEM_ROLE_STRINGS = {
     SYSTEM_COMPONENT_BUILDER: "Component builder",
-    SYSTEM_COMPONENT_DESTROYER: "Component Destroyer"
 }
 
 PUBLIC = 0
