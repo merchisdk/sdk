@@ -189,6 +189,13 @@ class Domain(sdk.python.entities.Entity):
         if self.active_theme:
             return self.active_theme.job_drafting_page_compiled
 
+    def get_draft_preview_page_content(self, database):
+        """ Return HTML content for the public drafting preview page, if
+            a template has been created and activated.
+        """
+        if self.active_theme:
+            return self.active_theme.draft_preview_page_compiled
+
     def get_invoice_page_content(self, database):
         """ Return HTML content for the public invoice page, if
             a template has been created and activated.
