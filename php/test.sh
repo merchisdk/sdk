@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-phpunit php/tests/test.php
+phpunit  --whitelist php/src --coverage-clover php/clover.xml php/tests/test.php

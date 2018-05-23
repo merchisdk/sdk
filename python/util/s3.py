@@ -21,6 +21,7 @@ class S3Bucket(object):
         self.bucket = self.s3.Bucket(bucket_name)
         self.bucket_name = bucket_name
         self.client = self.s3.meta.client
+        self.client._client_config.retries = 50
 
     def upload_file(self, key, data, mimetype=None, filename=None,
                     with_retries=1):

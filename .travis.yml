@@ -2,13 +2,19 @@ matrix:
   include:
     - language: php
       php: 7.0
-      before_script:
+      install:
         - composer global require phpmd/phpmd
         - composer global require "squizlabs/php_codesniffer=*"
+        - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar -O coveralls.phar
+        - chmod +x coveralls.phar
+        - php coveralls.phar --version
       script:
         - export PATH=~/.composer/vendor/bin:$PATH
         - php/lint.sh
         - php/test.sh
+      after_success:
+        - travis_retry php coveralls.phar -v
+        - bash <(curl -s https://codecov.io/bash)
     - language: python
       python: 3.5
       install:
