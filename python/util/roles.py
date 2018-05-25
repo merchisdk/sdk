@@ -7,13 +7,6 @@
     enumeration type.
 """
 
-# a system role who is responding build all system templates componets
-SYSTEM_COMPONENT_BUILDER = 1
-
-SYSTEM_ROLE_STRINGS = {
-    SYSTEM_COMPONENT_BUILDER: "Component builder",
-}
-
 PUBLIC = 0
 ADMIN = 1
 SALES = 2

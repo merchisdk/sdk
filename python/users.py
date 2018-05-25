@@ -43,7 +43,6 @@ class User(sdk.python.entities.Entity):
         self.json_property(bool, 'enable_client_emails')
         self.json_property(bool, 'enable_invoice_reminders')
         self.json_property(bool, 'is_super_user')
-        self.json_property(list, 'system_roles')
         self.recursive_json_property(UserCompany, 'user_companies')
         self.recursive_json_property(Address, 'addresses')
         self.recursive_json_property(PhoneNumber, 'phone_numbers')
