@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
         user = null,
         foundDomain = false,
         domain = null,
-        job = window.job,
         components;
 """
         for component in self.used_components:
@@ -87,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var element = React.createElement(component,
                                           { currentUser: user,
                                             currentDomain: domain,
-                                            job: job });
+                                            job: window.job });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
