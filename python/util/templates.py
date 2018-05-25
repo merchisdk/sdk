@@ -85,7 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             component.name);
         var element = React.createElement(component,
                                           { currentUser: user,
-                                            currentDomain: domain });
+                                            currentDomain: domain,
+                                            job: window.job });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
