@@ -51,7 +51,6 @@ javascript = """
              "MERCHI": false,
              "console": false,
              "job": false,
-             "currentUser": false,
              "window": false,
             }},
             rules:
