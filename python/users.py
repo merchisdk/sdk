@@ -43,6 +43,7 @@ class User(sdk.python.entities.Entity):
         self.json_property(bool, 'enable_client_emails')
         self.json_property(bool, 'enable_invoice_reminders')
         self.json_property(bool, 'is_super_user')
+        self.json_property(list, 'system_roles')
         self.recursive_json_property(UserCompany, 'user_companies')
         self.recursive_json_property(Address, 'addresses')
         self.recursive_json_property(PhoneNumber, 'phone_numbers')
@@ -125,6 +126,11 @@ class User(sdk.python.entities.Entity):
         if self.is_super_user:
             return "System Admin"
         return "Normal User"
+
+    def is_component_builder(self):
+        """ Return where current user is component builder """
+        return self.system_roles is not None and \
+            sdk.python.util.roles.SYSTEM_COMPONENT_BUILDER in self.system_roles
 
     def primary_company_name(self):
         """ Return the user's primary company name if the user has a company """
