@@ -6,9 +6,9 @@ from sdk.python.util.css import validate_declaration_list
 import sdk.python.util.reactjs as reactjs
 
 
-ALLOWED_TAGS = {'address', 'article', 'aside', 'b', 'blockquote', 'button',
-                'br', 'caption', 'cite', 'code', 'col', 'colgroup', 'content',
-                'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
+ALLOWED_TAGS = {'a', 'address', 'article', 'aside', 'b', 'blockquote',
+                'button', 'br', 'caption', 'cite', 'code', 'col', 'colgroup',
+                'content', 'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
                 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h4', 'h5', 'h6',
                 'header', 'hr', 'i', 'label', 'li', 'listing', 'main',
                 'marquee', 'menu', 'menuitem', 'nav', 'ol', 'p', 'pre',
