@@ -21,8 +21,8 @@ ALLOWED_ATTRIBUTES = {'align', 'alt', 'autocomplete', 'autofocus', 'autosave',
                       'bgcolor', 'border', 'checked', 'class', 'color', 'cols',
                       'colspan', 'contenteditable', 'contextmenu',
                       'data-target', 'data-toggle', 'disabled', 'draggable',
-                      'dropzone', 'for', 'headers', 'height', 'hidden', 'id',
-                      'label', 'max', 'min', 'placeholder', 'readonly',
+                      'dropzone', 'for', 'headers', 'height', 'hidden', 'href',
+                      'id', 'label', 'max', 'min', 'placeholder', 'readonly',
                       'required', 'rows', 'rowspan', 'size', 'span',
                       'spellcheck', 'title', 'type', 'width', 'wrap'}
 
