@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var element = React.createElement(component,
                                           { currentUser: userCopy,
                                             currentDomain: domainCopy,
+                                            job: window.job,
                                             setDomain: setDomain });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
