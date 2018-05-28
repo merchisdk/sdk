@@ -70,7 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
         user = null,
         foundDomain = false,
         domain = null,
-        components;
+        components,
+        baseDomainEmbed = {logo: {},
+                           company: {},
+                           menus: {menuItems: {}}};
 """
         for component in self.used_components:
             script += self.compile_component(component)
@@ -83,12 +86,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var mountpoints = $('.react-mount-component-here.' +
                             component.name);
+        var userCopy = MERCHI.copyEnt(user);
+        var domainCopy = MERCHI.copyEnt(domain);
         var element = React.createElement(component,
-                                          { currentUser: user,
-                                            currentDomain: domain });
+                                          { currentUser: userCopy,
+                                            currentDomain: domainCopy,
+                                            setDomain: setDomain });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
+    }
+
+    function setDomain(newDomain, success, error) {
+       function _success () {
+         domain = newDomain;
+         redrawIfReady();
+         success();
+       }
+       newDomain.update(_success, error, baseDomainEmbed);
     }
 
     function redrawIfReady() {
@@ -120,9 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       didFindDomain(domain);
     }, function (domain) {
       didFindDomain(null);
-    }, {logo: {},
-        company: {},
-        menus: {menuItems: {}}});
+    }, baseDomainEmbed);
 });
 """
         return script
