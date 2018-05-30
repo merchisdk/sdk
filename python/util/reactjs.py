@@ -40,6 +40,7 @@ javascript = """
             "globals": {{
              "CURRENCY": false,
              "PRODUCT_CHECKOUT_FORM": false,
+             "PRODUCT_INPUTS_REACT": false,
              "PRODUCT_UTILITY_REACT": false,
              "React": false,
              "ReactDOM": false,
