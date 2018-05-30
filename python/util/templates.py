@@ -6,9 +6,9 @@ from sdk.python.util.css import validate_declaration_list
 import sdk.python.util.reactjs as reactjs
 
 
-ALLOWED_TAGS = {'address', 'article', 'aside', 'b', 'blockquote', 'button',
-                'br', 'caption', 'cite', 'code', 'col', 'colgroup', 'content',
-                'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
+ALLOWED_TAGS = {'a', 'address', 'article', 'aside', 'b', 'blockquote',
+                'button', 'br', 'caption', 'cite', 'code', 'col', 'colgroup',
+                'content', 'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
                 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h4', 'h5', 'h6',
                 'header', 'hr', 'i', 'label', 'li', 'listing', 'main',
                 'marquee', 'menu', 'menuitem', 'nav', 'ol', 'p', 'pre',
@@ -21,8 +21,8 @@ ALLOWED_ATTRIBUTES = {'align', 'alt', 'autocomplete', 'autofocus', 'autosave',
                       'bgcolor', 'border', 'checked', 'class', 'color', 'cols',
                       'colspan', 'contenteditable', 'contextmenu',
                       'data-target', 'data-toggle', 'disabled', 'draggable',
-                      'dropzone', 'for', 'headers', 'height', 'hidden', 'id',
-                      'label', 'max', 'min', 'placeholder', 'readonly',
+                      'dropzone', 'for', 'headers', 'height', 'hidden', 'href',
+                      'id', 'label', 'max', 'min', 'placeholder', 'readonly',
                       'required', 'rows', 'rowspan', 'size', 'span',
                       'spellcheck', 'title', 'type', 'width', 'wrap'}
 
@@ -171,6 +171,9 @@ def compile_template(string, components_database, with_script=True):
             except ValidateError as e:
                 err = "bad style attribute: '{}'".format(e.error_indication())
                 raise ValueError(err)
+        elif name == "href" and value and value[0] != '#':
+            err = "href value may only refer to a fragment"
+            raise ValueError(err)
         elif name not in ALLOWED_ATTRIBUTES:
             err = "unknown or dissallowed attribute '{}'".format(name)
             raise ValueError(err)
