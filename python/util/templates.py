@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ReactDOM.render(element, mountpoint);
         });
     }
+    components.map(redraw);
 });
 """
         return script
