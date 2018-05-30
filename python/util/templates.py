@@ -66,11 +66,7 @@ class ComponentsDatabase(ABC):
         script = """
 document.addEventListener("DOMContentLoaded", function () {
     'use strict';
-    var foundUser = false,
-        user = null,
-        foundDomain = false,
-        domain = null,
-        components;
+    var components;
 """
         for component in self.used_components:
             script += self.compile_component(component)
@@ -84,46 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
         var mountpoints = $('.react-mount-component-here.' +
                             component.name);
         var element = React.createElement(component,
-                                          { currentUser: user,
-                                            currentDomain: domain,
+                                          { currentUser: window.currentUser,
+                                            currentDomain: window.currentDomain,
                                             job: window.job });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
     }
-
-    function redrawIfReady() {
-       if (foundUser && foundDomain) {
-           components.map(redraw);
-       }
-    }
-
-    function didFindUser(data) {
-       foundUser = true;
-       user = data;
-       redrawIfReady();
-    }
-
-    function didFindDomain(data) {
-        foundDomain = true;
-        domain = data;
-        redrawIfReady();
-    }
-
-    MERCHI.getCurrentUser(function (currentUser) {
-        didFindUser(currentUser);
-    }, function () {
-        didFindUser(null);
-    }, { 'profilePicture': {},
-         'emailAddresses': {} });
-
-    (new MERCHI.Domain).id(window.publicDomainId).get(function (domain) {
-      didFindDomain(domain);
-    }, function (domain) {
-      didFindDomain(null);
-    }, {logo: {},
-        company: {},
-        menus: {menuItems: {}}});
 });
 """
         return script
