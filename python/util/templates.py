@@ -171,6 +171,9 @@ def compile_template(string, components_database, with_script=True):
             except ValidateError as e:
                 err = "bad style attribute: '{}'".format(e.error_indication())
                 raise ValueError(err)
+        elif name == "href" and value and value[0] != '#':
+            err = "href value may only refer to a fragment"
+            raise ValueError(err)
         elif name not in ALLOWED_ATTRIBUTES:
             err = "unknown or dissallowed attribute '{}'".format(name)
             raise ValueError(err)
