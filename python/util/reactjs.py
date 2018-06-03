@@ -39,14 +39,21 @@ javascript = """
         var lintOptions = {{
             "globals": {{
              "CURRENCY": false,
+             "PRODUCT_CHECKOUT_FORM": false,
+             "PRODUCT_INPUTS_REACT": false,
+             "PRODUCT_UTILITY_REACT": false,
              "React": false,
+             "ReactDOM": false,
              "URL_MAP": false,
+             "UTILITIES_JSX": false,
              "moment": false,
              "toastSettingsJobProductionAssignmentComments": false,
              "toastSettingsJobProductionAssignmentQuote": false,
              "$": false,
              "MERCHI": false,
-             "console": false
+             "console": false,
+             "job": false,
+             "window": false,
             }},
             rules:
             {{"semi": 2,
