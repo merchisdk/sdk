@@ -57,7 +57,6 @@ class Theme(sdk.python.entities.Entity):
         self.json_property(str, "header_compiled")
         self.json_property(str, "footer_template")
         self.json_property(str, "footer_compiled")
-        self.json_property(str, "template_scripts")
 
         self.json_property(str, "index_page_error")
         self.json_property(str, "invoices_page_error")
