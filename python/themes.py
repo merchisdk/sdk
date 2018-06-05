@@ -57,6 +57,7 @@ class Theme(sdk.python.entities.Entity):
         self.json_property(str, "header_compiled")
         self.json_property(str, "footer_template")
         self.json_property(str, "footer_compiled")
+        self.json_property(str, "template_scripts")
 
         self.json_property(str, "index_page_error")
         self.json_property(str, "invoices_page_error")
@@ -116,6 +117,10 @@ class Theme(sdk.python.entities.Entity):
         """ Check whether this theme can be a valid activated theme """
         return self.main_css_status >= VALID_BUT_NOT_UPDATED and \
             self.email_css_status >= VALID_BUT_NOT_UPDATED
+
+    def scripts_template(self):
+        """ Returs an empty div for a script element to be rendered into """
+        return '<div></div>'
 
 
 class Themes(sdk.python.entities.Resource):

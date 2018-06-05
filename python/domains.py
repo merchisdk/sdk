@@ -255,6 +255,17 @@ class Domain(sdk.python.entities.Entity):
         with open("sdk/python/util/templates/footer.html") as template_file:
             return compile_template(template_file.read(), database)
 
+    def get_template_scripts(self, database):
+        """ Return HTML content for the footers of public domain pages.
+
+            That will be the one from the theme, if there is one, otherwise
+            it will be the default. The caller is responsible for ensuring
+            that the active theme, and also its template is properly embedded.
+        """
+        return compile_template(self.active_theme.scripts_template(),
+                                database,
+                                with_script=True)
+
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
             PLATFORM_MASCOT_ICON
