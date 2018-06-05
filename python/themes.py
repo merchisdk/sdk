@@ -117,6 +117,10 @@ class Theme(sdk.python.entities.Entity):
         return self.main_css_status >= VALID_BUT_NOT_UPDATED and \
             self.email_css_status >= VALID_BUT_NOT_UPDATED
 
+    def scripts_template(self):
+        """ Returs an empty div for a script element to be rendered into """
+        return '<div></div>'
+
 
 class Themes(sdk.python.entities.Resource):
     """ Resource for a list of themes """
