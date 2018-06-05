@@ -23,7 +23,7 @@ class SystemRole(sdk.python.entities.Entity):
     json_name = 'system_role'
 
     def __init__(self, **kwargs):
-        super(SystemRole, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.json_property(int, 'role')
 
     def __repr__(self, **kwargs):
