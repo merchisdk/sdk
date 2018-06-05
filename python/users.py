@@ -17,6 +17,19 @@ from sdk.python.products import Product
 from sdk.python.domains import EnrolledDomain
 
 
+class SystemRole(sdk.python.entities.Entity):
+
+    resource = '/system_roles/'
+    json_name = 'system_role'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.json_property(int, 'role')
+
+    def __repr__(self, **kwargs):
+        return "<role {}>".format(self.role)
+
+
 class User(sdk.python.entities.Entity):
 
     resource = '/users/'
@@ -43,6 +56,7 @@ class User(sdk.python.entities.Entity):
         self.json_property(bool, 'enable_client_emails')
         self.json_property(bool, 'enable_invoice_reminders')
         self.json_property(bool, 'is_super_user')
+        self.recursive_json_property(SystemRole, 'system_roles')
         self.recursive_json_property(UserCompany, 'user_companies')
         self.recursive_json_property(Address, 'addresses')
         self.recursive_json_property(PhoneNumber, 'phone_numbers')
@@ -125,6 +139,11 @@ class User(sdk.python.entities.Entity):
         if self.is_super_user:
             return "System Admin"
         return "Normal User"
+
+    def has_system_role(self, role):
+        """ Return whether current user has a system role """
+        return self.system_roles is not None and \
+            any(system_role.role == role for system_role in self.system_roles)
 
     def primary_company_name(self):
         """ Return the user's primary company name if the user has a company """
