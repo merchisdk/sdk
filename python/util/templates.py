@@ -6,9 +6,9 @@ from sdk.python.util.css import validate_declaration_list
 import sdk.python.util.reactjs as reactjs
 
 
-ALLOWED_TAGS = {'address', 'article', 'aside', 'b', 'blockquote', 'button',
-                'br', 'caption', 'cite', 'code', 'col', 'colgroup', 'content',
-                'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
+ALLOWED_TAGS = {'a', 'address', 'article', 'aside', 'b', 'blockquote',
+                'button', 'br', 'caption', 'cite', 'code', 'col', 'colgroup',
+                'content', 'details', 'dialog', 'div', 'dl', 'dt', 'fieldset',
                 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h4', 'h5', 'h6',
                 'header', 'hr', 'i', 'label', 'li', 'listing', 'main',
                 'marquee', 'menu', 'menuitem', 'nav', 'ol', 'p', 'pre',
@@ -21,8 +21,8 @@ ALLOWED_ATTRIBUTES = {'align', 'alt', 'autocomplete', 'autofocus', 'autosave',
                       'bgcolor', 'border', 'checked', 'class', 'color', 'cols',
                       'colspan', 'contenteditable', 'contextmenu',
                       'data-target', 'data-toggle', 'disabled', 'draggable',
-                      'dropzone', 'for', 'headers', 'height', 'hidden', 'id',
-                      'label', 'max', 'min', 'placeholder', 'readonly',
+                      'dropzone', 'for', 'headers', 'height', 'hidden', 'href',
+                      'id', 'label', 'max', 'min', 'placeholder', 'readonly',
                       'required', 'rows', 'rowspan', 'size', 'span',
                       'spellcheck', 'title', 'type', 'width', 'wrap'}
 
@@ -66,14 +66,14 @@ class ComponentsDatabase(ABC):
         script = """
 document.addEventListener("DOMContentLoaded", function () {
     'use strict';
-    var foundUser = false,
-        user = null,
-        foundDomain = false,
-        domain = null,
-        components,
+    var components,
+        baseUserEmbed = {'profilePicture': {},
+                         'emailAddresses': {} },
+        baseJobEmbed = {},
         baseDomainEmbed = {logo: {},
                            company: {},
                            menus: {menuItems: {}}};
+    var components;
 """
         for component in self.used_components:
             script += self.compile_component(component)
@@ -86,12 +86,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var mountpoints = $('.react-mount-component-here.' +
                             component.name);
-        var userCopy = MERCHI.copyEnt(user);
-        var domainCopy = MERCHI.copyEnt(domain);
+        var userCopy = MERCHI.copyEnt(window.currentUser);
+        var domainCopy = MERCHI.copyEnt(window.currentDomain);
+        var jobCopy = MERCHI.copyEnt(window.job);
         var element = React.createElement(component,
                                           { currentUser: userCopy,
                                             currentDomain: domainCopy,
-                                            job: window.job,
+                                            job: jobCopy,
+                                            setUser: setUser,
+                                            setJob: setJob,
                                             setDomain: setDomain });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
@@ -100,43 +103,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setDomain(newDomain, success, error) {
        function _success () {
-         domain = newDomain;
-         redrawIfReady();
+         window.currentDomain = newDomain;
+         redrawAll();
          success();
        }
        newDomain.update(_success, error, baseDomainEmbed);
     }
 
-    function redrawIfReady() {
-       if (foundUser && foundDomain) {
-           components.map(redraw);
+    function setJob(newJob, success, error) {
+       function _success () {
+         window.job = newJob;
+         redrawAll();
+         success();
        }
+       newJob.update(_success, error, baseJobEmbed);
     }
 
-    function didFindUser(data) {
-       foundUser = true;
-       user = data;
-       redrawIfReady();
+    function setUser(newUser, success, error) {
+       function _success () {
+         window.currentUser = newUser;
+         redrawAll();
+         success();
+       }
+       newUser.update(_success, error, baseUserEmbed);
+    }
+    function redrawAll() {
+        components.map(redraw);
     }
 
-    function didFindDomain(data) {
-        foundDomain = true;
-        domain = data;
-        redrawIfReady();
-    }
-
-    MERCHI.getCurrentUser(function (currentUser) {
-        didFindUser(currentUser);
-    }, function () {
-        didFindUser(null);
-    }, { 'profilePicture': {},
-         'emailAddresses': {} });
-
-    (new MERCHI.Domain).id(window.publicDomainId).get(function (domain) {
-      didFindDomain(domain);
-    }, function (domain) {
-      didFindDomain(null);
-    }, baseDomainEmbed);
+    components.map(redraw);
 });
 """
         return script
@@ -220,6 +215,9 @@ def compile_template(string, components_database, with_script=True):
             except ValidateError as e:
                 err = "bad style attribute: '{}'".format(e.error_indication())
                 raise ValueError(err)
+        elif name == "href" and value and value[0] != '#':
+            err = "href value may only refer to a fragment"
+            raise ValueError(err)
         elif name not in ALLOWED_ATTRIBUTES:
             err = "unknown or dissallowed attribute '{}'".format(name)
             raise ValueError(err)
