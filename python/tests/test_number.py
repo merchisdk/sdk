@@ -445,7 +445,7 @@ def test_bool():
     assert bool(Number('1'))
 
 @given(integers())
-def test_number_str_int(i):
+def test_fuzzy_number_str_int(i):
     assert str(Number(i)) == str(i)
 
 @given(decimals())
@@ -453,7 +453,7 @@ def test_can_construct_from_decimal(d):
     Number(d)
 
 @given(floats(allow_infinity=False, allow_nan=False))
-def test_floating_point_number_round_trips(f):
+def test_fuzzy_floating_point_number_round_trips(f):
     assert float(Number(f)) == f
 
 @given(floats(allow_infinity=False, allow_nan=False))
