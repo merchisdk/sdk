@@ -21,6 +21,11 @@ matrix:
         - pip install -r python/requirements/dev.txt
       script:
         - python/lint.sh
+        - coverage run --source python -m pytest
+        - coverage report -m
+      after_success:
+        - coveralls
+        - codecov
 
 notifications:
   email:
