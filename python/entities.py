@@ -59,7 +59,7 @@ class Entity(object):
     file_data = []  # type: ignore
     request_class = Request
 
-    def __init__(self):
+    def __init__(self, values=None):
         self.escape_fields = []  # type: ignore
         # should not apply html safe to url fields
         self.url_fields = []  # type: ignore
