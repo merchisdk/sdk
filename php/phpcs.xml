@@ -51,6 +51,8 @@
         <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
         <exclude name="PEAR.Commenting.FileComment.MissingVersion" />
         <exclude name="Squiz.WhiteSpace.FunctionSpacing.After" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst" />
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceAfterDefault" />
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceBeforeEquals" />
         <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose" />
