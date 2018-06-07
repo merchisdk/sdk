@@ -3,6 +3,7 @@
 PYFILES=`find python/ -type f -name "*.py"`
 mypy --ignore-missing-imports --check-untyped-defs --strict-optional\
       --follow-imports=skip \
+      --config-file python/mypy.ini \
       --warn-no-return --warn-redundant-casts --warn-unused-ignores\
       $PYFILES || exit 1
 pycodestyle $PYFILES || exit 1

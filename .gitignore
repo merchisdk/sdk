@@ -26,3 +26,4 @@ pyenv/*
 php/clover.xml
 .pytest_cache/
 .tox
+.hypothesis/
