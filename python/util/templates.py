@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             job: jobCopy,
                                             setUser: setUser,
                                             setJob: setJob,
+                                            updateJob: updateJob,
                                             setDomain: setDomain });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
@@ -110,13 +111,26 @@ document.addEventListener("DOMContentLoaded", function () {
        newDomain.update(_success, error, baseDomainEmbed);
     }
 
-    function setJob(newJob, success, error) {
-       function _success () {
-         window.job = newJob;
-         redrawAll();
-         success();
-       }
-       newJob.update(_success, error, baseJobEmbed);
+    function updateJob(options) {
+        var jobCopy = new MERCHI.Job();
+        var embed = options.embed ? options.embed : baseJobEmbed;
+        function _success (jobData) {
+            window.job = jobData
+            redrawAll();
+            options.success();
+        }
+        jobCopy.id(window.job.id());
+        job.get(_success, options.error, embed);
+    }
+
+    function setJob(options) {
+        var embed = options.embed ? options.embed : baseJobEmbed;
+        function _success (jobData) {
+            window.job = options.responseUpdate ? jobData : options.job;
+            redrawAll();
+            options.success();
+        }
+        newJob.patch(_success, options.error, embed);
     }
 
     function setUser(newUser, success, error) {
