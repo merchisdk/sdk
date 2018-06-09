@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         'use strict';
 
         var mountpoints = document.getElementsByClassName(
-            '.react-mount-component-here.' + component.name);
+            'react-mount-component-here ' + component.name);
         var userCopy = MERCHI.copyEnt(window.currentUser);
         var domainCopy = MERCHI.copyEnt(window.currentDomain);
         var jobCopy = MERCHI.copyEnt(window.job);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             setJob: setJob,
                                             updateJob: updateJob,
                                             setDomain: setDomain });
-        mountpoints.each(function (_, mountpoint) {
+        Array.prototype.map.call(mountpoints, function (mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
     }
