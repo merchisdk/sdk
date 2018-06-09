@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function redraw(component) {
         'use strict';
 
-        var mountpoints = $('.react-mount-component-here.' +
-                            component.name);
+        var mountpoints = document.getElementsByClassName(
+            '.react-mount-component-here.' + component.name);
         var userCopy = MERCHI.copyEnt(window.currentUser);
         var domainCopy = MERCHI.copyEnt(window.currentDomain);
         var jobCopy = MERCHI.copyEnt(window.job);
