@@ -102,44 +102,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function setDomain(newDomain, success, error) {
+    function setDomain(options) {
        function _success () {
-         window.currentDomain = newDomain;
+         window.currentDomain = options.newDomain;
          redrawAll();
-         success();
+         options.success();
        }
-       newDomain.update(_success, error, baseDomainEmbed);
+       options.newDomain.update(_success, options.error, baseDomainEmbed);
     }
 
     function updateJob(options) {
         var jobCopy = new MERCHI.Job();
-        var embed = options.embed ? options.embed : baseJobEmbed;
-        function _success (jobData) {
-            window.job = jobData
+        function _success () {
+            window.job = jobCopy;
             redrawAll();
             options.success();
         }
         jobCopy.id(window.job.id());
-        job.get(_success, options.error, embed);
+        jobCopy.get(_success, options.error, baseJobEmbed);
     }
 
     function setJob(options) {
-        var embed = options.embed ? options.embed : baseJobEmbed;
-        function _success (jobData) {
-            window.job = options.responseUpdate ? jobData : options.job;
+        function _success () {
+            window.job = options.job;
             redrawAll();
             options.success();
         }
-        newJob.patch(_success, options.error, embed);
+        options.job.patch(_success, options.error, baseJobEmbed);
     }
 
-    function setUser(newUser, success, error) {
+    function setUser(options) {
        function _success () {
-         window.currentUser = newUser;
+         window.currentUser = options.newUser;
          redrawAll();
-         success();
+         options.success();
        }
-       newUser.update(_success, error, baseUserEmbed);
+       options.newUser.update(_success, options.error, baseUserEmbed);
     }
     function redrawAll() {
         components.map(redraw);
