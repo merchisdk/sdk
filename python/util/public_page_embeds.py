@@ -1,3 +1,6 @@
+from typing import Dict, Any  # noqa #pylint: disable=unused-import
+
+
 def append_embed_for_domain(embed):
     menu = embed.setdefault("menus", {})
     menu.setdefault("menuItems", {})
@@ -9,6 +12,7 @@ def append_embed_for_domain(embed):
     active.setdefault("mainCssFile", {})
     return embed
 
+
 PUBLIC_DOMAIN_INVITE_DOMAIN_EMBED = \
     append_embed_for_domain({'activeTheme':
                              {'domainInvitePageCompiled': {}}})
@@ -17,35 +21,35 @@ CLIENT_JOBS_DOMAIN_EMBED = \
     append_embed_for_domain({'activeTheme': {'jobsPageCompiled': {}}})
 
 CLIENT_JOB_DRAFTING_JOB_EMBED = {
-        "specificationsGroups":
-            {"specifications": {"specificationField": {"options": {}},
-                                "specificationFiles": {}}},
-        "specifications": {"specificationField": {"options": {}},
-                           "specificationFiles": {}},
-        "productionFiles": {},
-        "taxType": {},
-        "drafts": {"comments": {"file": {},
-                                "user": {"emailAddresses": {},
-                                         "profilePicture": {}}},
-                   "designer": {"profilePicture": {}},
-                   "job": {"drafts": {}, "domain": {}},
-                   "file": {}},
-        "clientFiles": {},
-        "draftComments": {"user": {"emailAddresses": {},
-                                   "profilePicture": {}},
-                          "file": {},
-                          "draft": {}},
-        "domain": {'logo': {}, 'company': {}},
-        "client": {"addresses": {},
-                   "emailAddresses": {},
-                   "phoneNumbers": {}},
-        "shipping": {},
-        "product": {"files": {},
-                    "domain": {"company": {}},
-                    "independentVariationFields":
-                        {"options": {"linkedFile": {}}},
-                    "groupVariationFields":
-                        {"options": {"linkedFile": {}}}}}
+    "specificationsGroups":
+        {"specifications": {"specificationField": {"options": {}},
+                            "specificationFiles": {}}},
+    "specifications": {"specificationField": {"options": {}},
+                       "specificationFiles": {}},
+    "productionFiles": {},
+    "taxType": {},
+    "drafts": {"comments": {"file": {},
+                            "user": {"emailAddresses": {},
+                                     "profilePicture": {}}},
+               "designer": {"profilePicture": {}},
+               "job": {"drafts": {}, "domain": {}},
+               "file": {}},
+    "clientFiles": {},
+    "draftComments": {"user": {"emailAddresses": {},
+                               "profilePicture": {}},
+                      "file": {},
+                      "draft": {}},
+    "domain": {'logo': {}, 'company': {}},
+    "client": {"addresses": {},
+               "emailAddresses": {},
+               "phoneNumbers": {}},
+    "shipping": {},
+    "product": {"files": {},
+                "domain": {"company": {}},
+                "independentVariationFields":
+                    {"options": {"linkedFile": {}}},
+                "groupVariationFields":
+                    {"options": {"linkedFile": {}}}}}
 
 CLIENT_JOB_DRAFTING_DOMAIN_EMBED = \
     append_embed_for_domain({'activeTheme': {'jobDraftingPageCompiled': {}},
@@ -55,7 +59,7 @@ DRAFT_FILE_PREVIEW_DOMAIN_EMBED = \
     append_embed_for_domain({'activeTheme': {'draftPreviewPageCompiled': {}},
                              'company': {}})
 
-DRAFT_FILE_PREVIEW_JOB_EMBED = {'domain': {}}
+DRAFT_FILE_PREVIEW_JOB_EMBED = {'domain': {}}  # type: Dict[Any, Any]
 
 CLIENT_INVOICES_DOMAIN_EMBED = \
     append_embed_for_domain({"activeTheme": {"invoicesPageCompiled": {}}})

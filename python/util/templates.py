@@ -161,6 +161,7 @@ def compile_template(string, components_database, with_script=True,
         job_embed = {}
     if domain_embed is None:
         domain_embed = {}
+
     def check_string(string):
         """ Replace {{ tag }}'s in string with react mountpoint divs.
 
