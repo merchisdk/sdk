@@ -1,5 +1,6 @@
 from typing import Set  # noqa # pylint: disable=unused-import
 from abc import ABC, abstractmethod
+import json
 from bs4 import BeautifulSoup
 from sdk.python.util.css import validate_stylesheet, ValidateError
 from sdk.python.util.css import validate_declaration_list
@@ -59,7 +60,7 @@ class ComponentsDatabase(ABC):
         component = self[component_name]
         return reactjs.component_to_javascript(component.name, component.body)
 
-    def generate_react_components(self):
+    def generate_react_components(self, user_embed, job_embed, domain_embed):
         """ Generate javascript to render every component which has been marked
             used in this ComponentsDatabase, if any.
         """
@@ -67,14 +68,15 @@ class ComponentsDatabase(ABC):
 document.addEventListener("DOMContentLoaded", function () {
     'use strict';
     var components,
-        baseUserEmbed = {'profilePicture': {},
-                         'emailAddresses': {} },
-        baseJobEmbed = {},
-        baseDomainEmbed = {logo: {},
-                           company: {},
-                           menus: {menuItems: {}}};
-    var components;
+        baseUserEmbed = {0},
+        baseJobEmbed = {1},
+        baseDomainEmbed = {2},
+        components;
 """
+        print("KKK", domain_embed, flush=True)
+        script = script.format(json.dumps(user_embed),
+                               json.dumps(job_embed),
+                               json.dumps(domain_embed))
         for component in self.used_components:
             script += self.compile_component(component)
         script += """
@@ -137,7 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return script
 
 
-def compile_template(string, components_database, with_script=True):
+def compile_template(string, components_database, with_script=True,
+                     user_embed=None, job_embed=None, domain_embed=None):
     """ Take a public page template to a compiled template string.
 
         In the output:
@@ -152,7 +155,13 @@ def compile_template(string, components_database, with_script=True):
         Not all HTML elements are supported, only those deemed safe to be
         provided by semi-trusted users. For example, script tags are banned.
         Using dissalowed elements will raise ValueError.
-     """
+    """
+    if user_embed is None:
+        user_embed = {}
+    if job_embed is None:
+        job_embed = {}
+    if domain_embed is None:
+        domain_embed = {}
     def check_string(string):
         """ Replace {{ tag }}'s in string with react mountpoint divs.
 
@@ -242,6 +251,7 @@ def compile_template(string, components_database, with_script=True):
     check_element(parse, element)
     if with_script:
         script_tag = parse.new_tag("script")
-        script_tag.string = components_database.generate_react_components()
+        script_tag.string = components_database.\
+            generate_react_components(user_embed, job_embed, domain_embed)
         element.append(script_tag)
     return str(element)
