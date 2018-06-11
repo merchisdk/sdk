@@ -5,6 +5,7 @@ from sdk.python.themes import Theme
 from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
 import sdk.python.util.menu_util as menu_util
+from sdk.python.util.public_page_embeds import DOMAIN_PRODUCTS_DOMAIN_EMBED
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON

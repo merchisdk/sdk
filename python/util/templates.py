@@ -65,7 +65,7 @@ class ComponentsDatabase(ABC):
             used in this ComponentsDatabase, if any.
         """
         script = """
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {{
     'use strict';
     var components,
         baseUserEmbed = {0},
@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
         baseDomainEmbed = {2},
         components;
 """
-        print("KKK", domain_embed, flush=True)
         script = script.format(json.dumps(user_embed),
                                json.dumps(job_embed),
                                json.dumps(domain_embed))
