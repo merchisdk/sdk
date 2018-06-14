@@ -8,7 +8,7 @@ import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
-from sdk.python.util.templates import compile_template
+from common.themes.templates import compile_template
 
 
 class Domain(sdk.python.entities.Entity):
