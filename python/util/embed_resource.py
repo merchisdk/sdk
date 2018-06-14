@@ -282,7 +282,6 @@ public_company_domain_embed = \
 company_profile_public_embed = \
     {'domain_embed': public_company_domain_embed,
      'company_embed': company_embed}  # type: Dict[str, Any]
-subdomain_company_profile_public_embed = company_profile_public_embed
 
 # Public draft
 public_draft_domain_embed = \
@@ -292,7 +291,6 @@ client_job_drafting_embed = \
     {'domain_embed': public_draft_domain_embed,
      'job_embed': job_drafting_embed,
      'draft_embed': draft_embed}  # type: Dict[str, Any]
-subdomain_client_job_drafting_embed = client_job_drafting_embed
 
 # Public draft file preview
 public_draft_file_preview_domain_embed = \
@@ -301,14 +299,12 @@ public_draft_file_preview_domain_embed = \
 draft_file_preview_embed = \
     {'domain_embed': public_draft_file_preview_domain_embed,
      'draft_embed': draft_embed}
-subdomain_draft_file_preview_embed = draft_file_preview_embed
 
 # Public index
 public_index_domain_embed = \
     append_embed_for_public_domain({'activeTheme': {'indexPageCompiled': {}}})
 domain_index_embed = \
     {'domain_embed': public_index_domain_embed}  # type: Dict[str, Any]
-subdomain_domain_index_embed = domain_index_embed
 
 # Public invite
 public_domain_invite_domain_embed = \
@@ -320,12 +316,11 @@ public_invite_embed = \
 public_domain_invite_embed = \
     {'domain_embed': public_domain_invite_domain_embed,
      'invite_embed': public_invite_embed}  # type: Dict[str, Any]
-subdomain_public_domain_invite_embed = public_domain_invite_embed
 
 # Public invoice
 public_invoice_domain_embed = \
     append_embed_for_public_domain(
-        {'activeTheme': {'invoicePageCompiled': {}},
+        {'acjob_list_embedtiveTheme': {'invoicePageCompiled': {}},
          'company': {'addresses': {},
                      'phoneNumbers': {},
                      'emailAddresses': {},
@@ -347,7 +342,6 @@ public_invoice_embed = \
 client_invoice_embed = \
     {'domain_embed': public_invoice_domain_embed,
      'invoice_embed': public_invoice_embed}  # type: Dict[str, Any]
-subdomain_client_invoice_embed = client_invoice_embed
 
 # Public invoices
 public_invoices_domain_embed = \
@@ -358,7 +352,6 @@ public_invoices_embed = {'jobs': invoice_job_embed,
 client_invoices_embed = \
     {'domain_embed': public_invoices_domain_embed,
      'invoices_embed': public_invoices_embed}  # type: Dict[str, Any]
-subdomain_client_invoices_embed = client_invoices_embed
 
 # Public jobs
 client_jobs_domain_embed = \
@@ -367,13 +360,11 @@ client_jobs_domain_embed = \
 client_jobs_embed = \
     {'domain_embed': client_jobs_domain_embed,
      'jobs_embed': job_list_embed}  # type: Dict[str, Any]
-subdomain_client_jobs_embed = client_jobs_embed
 
 # Public login
 public_login_domain_embed = append_embed_for_public_domain({})
 public_login_embed = \
     {'domain_embed': public_login_domain_embed}
-subdomain_public_login_embed = public_login_embed
 
 # Public password change
 public_password_change_domain_embed = \
@@ -381,7 +372,6 @@ public_password_change_domain_embed = \
         {'activeTheme': {'passwordChangePageCompiled': {}}})
 public_password_change_embed = \
     {'domain_embed': public_password_change_domain_embed}  # type: Dict[str, Any]
-subdomain_public_password_change_embed = public_password_change_embed
 
 # Public passwod reset
 public_reset_password_domain_embed = \
@@ -389,16 +379,14 @@ public_reset_password_domain_embed = \
         {'activeTheme': {'resetPasswordPageCompiled': {}}})
 public_reset_password_embed = \
     {'domain_embed': public_reset_password_domain_embed}  # type: Dict[str, Any]
-subdomain_public_reset_password_embed = public_reset_password_embed
 
 # Public product
 public_product_domain_embed = \
     append_embed_for_public_domain(
         {'activeTheme': {'productPageCompiled': {}}})
 domain_product_public_embed = \
-    {'domain_embed': public_products_domain_embed,
+    {'domain_embed': public_product_domain_embed,
      'product_embed': product_embed}  # type: Dict[str, Any]
-subdomain_domain_product_public_embed = domain_product_public_embed
 
 # Public products
 public_products_domain_embed = \
@@ -407,7 +395,6 @@ public_products_domain_embed = \
 domain_products_public_embed = \
     {'domain_embed': public_products_domain_embed,
      'products_embed': product_embed}  # type: Dict[str, Any]
-subdomain_domain_products_public_embed = domain_products_public_embed
 
 # Public sms confirm
 confirm_sms_token_domain_embed = \
@@ -415,7 +402,6 @@ confirm_sms_token_domain_embed = \
         {'activeTheme': {'smsTokenPageCompiled': {}}})
 public_confirm_sms_token_embed = \
     {'domain_embed': confirm_sms_token_domain_embed}  # type: Dict[str, Any]
-subdomain_public_confirm_sms_token_embed = public_confirm_sms_token_embed
 
 # Public sms login
 public_sms_login_domain_embed = \
@@ -423,7 +409,6 @@ public_sms_login_domain_embed = \
         {'activeTheme': {'smsLoginPageCompiled': {}}})
 public_sms_login_embed = \
     {'domain_embed': public_sms_login_domain_embed}  # type: Dict[str, Any]
-subdomain_public_sms_login_embed = public_sms_login_embed
 
 # Public user profile
 public_user_profile_domain_embed = \
@@ -432,5 +417,37 @@ public_user_profile_domain_embed = \
 user_profile_public_embed = \
     {'domain_embed': public_user_profile_domain_embed,
      'user_embed': user_setting_embed}  # type: Dict[str, Any]
-subdomain_user_profile_public_embed = user_profile_public_embed
 
+public_views_embed = \
+    {'company_profile_public': company_profile_public_embed,
+     'subdomain_company_profile_public': company_profile_public_embed,
+     'client_job_drafting': client_job_drafting_embed,
+     'subdomain_client_job_drafting': client_job_drafting_embed,
+     'draft_file_preview': draft_file_preview_embed,
+     'subdomain_draft_file_preview': draft_file_preview_embed,
+     'domain_index': domain_index_embed,
+     'subdomain_domain_index': domain_index_embed,
+     'public_domain_invite': public_domain_invite_embed,
+     'subdomain_public_domain_invite': public_domain_invite_embed,
+     'client_invoice': client_invoice_embed,
+     'subdomain_client_invoice': client_invoice_embed,
+     'client_invoices': client_invoices_embed,
+     'subdomain_client_invoices': client_invoices_embed,
+     'client_jobs': client_jobs_embed,
+     'subdomain_client_jobs': client_jobs_embed,
+     'public_login': public_login_embed,
+     'subdomain_public_login': public_login_embed,
+     'public_password_change': public_password_change_embed,
+     'subdomain_public_password_change': public_password_change_embed,
+     'public_reset_password': public_reset_password_embed,
+     'subdomain_public_reset_password': public_reset_password_embed,
+     'domain_product_public': domain_product_public_embed,
+     'subdomain_domain_product_public': domain_product_public_embed,
+     'domain_products_public': domain_products_public_embed,
+     'subdomain_domain_products_public': domain_products_public_embed,
+     'public_confirm_sms_token': public_confirm_sms_token_embed,
+     'subdomain_public_confirm_sms_token': public_confirm_sms_token_embed,
+     'public_sms_login': public_sms_login_embed,
+     'subdomain_public_sms_login': public_sms_login_embed,
+     'user_profile_public': user_profile_public_embed,
+     'subdomain_user_profile_public': user_profile_public_embed}  # type: Dict[str, Any]
