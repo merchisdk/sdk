@@ -383,7 +383,7 @@ public_password_change_domain_embed = \
         {'activeTheme': {'passwordChangePageCompiled': {}}})
 public_password_change_embed = \
     {'domain_embed':
-        public_password_change_domain_embed}  # type: Dict[str, Any]
+         public_password_change_domain_embed}  # type: Dict[str, Any]
 
 # Public passwod reset
 public_reset_password_domain_embed = \

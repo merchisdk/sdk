@@ -1,3 +1,4 @@
+import re
 import json
 import flask
 from typing import Set  # noqa # pylint: disable=unused-import
@@ -29,6 +30,8 @@ ALLOWED_ATTRIBUTES = {'align', 'alt', 'autocomplete', 'autofocus', 'autosave',
                       'required', 'rows', 'rowspan', 'size', 'span',
                       'spellcheck', 'title', 'type', 'width', 'wrap'}
 
+def to_camelcase(string):
+    return re.sub(r'(?!^)_([a-zA-Z])', lambda m: m.group(1).upper(), string)
 
 class ComponentsDatabase(ABC):
     """ Abstract Base Class for keeping track components for a template.
@@ -73,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var """
         for key, value in view_embeds.items():
-            script += str(key) + " = " + json.dumps(value) + ","
+            script += to_camelcase(str(key)) + " = " + json.dumps(value) + ","
             script += """
         """
         for component in self.used_components:
