@@ -1,8 +1,11 @@
+import json
+import flask
 from typing import Set  # noqa # pylint: disable=unused-import
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 from sdk.python.util.css import validate_stylesheet, ValidateError
 from sdk.python.util.css import validate_declaration_list
+from sdk.python.util.embed_resource import public_views_embed
 import sdk.python.util.reactjs as reactjs
 
 
@@ -63,15 +66,19 @@ class ComponentsDatabase(ABC):
         """ Generate javascript to render every component which has been marked
             used in this ComponentsDatabase, if any.
         """
+        view_embeds = public_views_embed.get(flask.request.endpoint, {})
         script = """
 document.addEventListener("DOMContentLoaded", function () {
     'use strict';
-    var components;
-"""
+
+    var """
+        for key, value in view_embeds.items():
+            script += str(key) + " = " + json.dumps(value) + ","
+            script += """
+        """
         for component in self.used_components:
             script += self.compile_component(component)
-        script += """
-        components = ["""
+        script += """components = ["""
         script += ', '.join(self.used_components)
         script += """];
     function redraw(component) {
