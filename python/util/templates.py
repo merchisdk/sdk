@@ -30,8 +30,10 @@ ALLOWED_ATTRIBUTES = {'align', 'alt', 'autocomplete', 'autofocus', 'autosave',
                       'required', 'rows', 'rowspan', 'size', 'span',
                       'spellcheck', 'title', 'type', 'width', 'wrap'}
 
+
 def to_camelcase(string):
     return re.sub(r'(?!^)_([a-zA-Z])', lambda m: m.group(1).upper(), string)
+
 
 class ComponentsDatabase(ABC):
     """ Abstract Base Class for keeping track components for a template.
