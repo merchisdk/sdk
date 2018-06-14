@@ -39,7 +39,7 @@ company_embed = {"emailAddresses": {},
                  "phoneNumbers": {},
                  "userCompanies": {'user': {'emailAddresses': {}}},
                  "banks": {"bankAddress": {}},
-                 "paymentPhoneNumbers": {}} # type: Dict[str, Any]
+                 "paymentPhoneNumbers": {}}  # type: Dict[str, Any]
 
 domain_small_embed = \
     {'company': {'logo': {}, 'addresses': {},
@@ -73,7 +73,7 @@ product_embed = \
      'groupVariationFields':
          {'options': {'linkedFile': {}}},
      'files': {}, 'discounts': {},
-     'domain': {'company': {'defaultTaxType': {}}}} # type: Dict[str, Any]
+     'domain': {'company': {'defaultTaxType': {}}}}  # type: Dict[str, Any]
 
 job_small_notifications_embed = \
     {'domain': {'logo': {}},
@@ -261,7 +261,9 @@ theme_edit_embed = \
      'mainCssFile': {}, 'emailCssFile': {},
      'cssImageFiles': {}, 'featureImage': {}}  # type: Dict[str, Any]
 
+
 # Public embed starts here
+
 
 def append_embed_for_public_domain(embed):
     menu = embed.setdefault('menus', {})
@@ -274,6 +276,7 @@ def append_embed_for_public_domain(embed):
     active.setdefault('footerCompiled', {})
     active.setdefault('mainCssFile', {})
     return embed
+
 
 # Public company profile
 public_company_domain_embed = \
@@ -346,7 +349,7 @@ client_invoice_embed = \
 # Public invoice paid
 invoice_paid_public_domain_embed = \
     append_embed_for_public_domain(
-      {'company': {}, 'activeTheme': {'invoicePageCompiled': {}}})
+        {'company': {}, 'activeTheme': {'invoicePageCompiled': {}}})
 invoice_paid_public_embed = \
     {'domain_embed': invoice_paid_public_domain_embed,
      'invoice_embed': public_invoice_embed}
@@ -379,7 +382,8 @@ public_password_change_domain_embed = \
     append_embed_for_public_domain(
         {'activeTheme': {'passwordChangePageCompiled': {}}})
 public_password_change_embed = \
-    {'domain_embed': public_password_change_domain_embed}  # type: Dict[str, Any]
+    {'domain_embed':
+        public_password_change_domain_embed}  # type: Dict[str, Any]
 
 # Public passwod reset
 public_reset_password_domain_embed = \
@@ -460,4 +464,5 @@ public_views_embed = \
      'public_sms_login': public_sms_login_embed,
      'subdomain_public_sms_login': public_sms_login_embed,
      'user_profile_public': user_profile_public_embed,
-     'subdomain_user_profile_public': user_profile_public_embed}  # type: Dict[str, Any]
+     'subdomain_user_profile_public':
+         user_profile_public_embed}  # type: Dict[str, Any]
