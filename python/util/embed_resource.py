@@ -343,6 +343,14 @@ client_invoice_embed = \
     {'domain_embed': public_invoice_domain_embed,
      'invoice_embed': public_invoice_embed}  # type: Dict[str, Any]
 
+# Public invoice paid
+invoice_paid_public_domain_embed = \
+    append_embed_for_public_domain(
+      {'company': {}, 'activeTheme': {'invoicePageCompiled': {}}})
+invoice_paid_public_embed = \
+    {'domain_embed': invoice_paid_public_domain_embed,
+     'invoice_embed': public_invoice_embed}
+
 # Public invoices
 public_invoices_domain_embed = \
     append_embed_for_public_domain(
@@ -433,6 +441,8 @@ public_views_embed = \
      'subdomain_client_invoice': client_invoice_embed,
      'client_invoices': client_invoices_embed,
      'subdomain_client_invoices': client_invoices_embed,
+     'invoice_paid_public': invoice_paid_public_embed,
+     'subdomain_invoice_paid_public': invoice_paid_public_embed,
      'client_jobs': client_jobs_embed,
      'subdomain_client_jobs': client_jobs_embed,
      'public_login': public_login_embed,
