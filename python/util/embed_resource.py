@@ -34,6 +34,13 @@ user_setting_embed = dict_append(user_profile_embed,
                                  {"enrolledDomains": {"domain": {}},
                                   "systemRoles": {}})
 
+company_embed = {"emailAddresses": {},
+                 "addresses": {},
+                 "phoneNumbers": {},
+                 "userCompanies": {'user': {'emailAddresses': {}}},
+                 "banks": {"bankAddress": {}},
+                 "paymentPhoneNumbers": {}} # type: Dict[str, Any]
+
 domain_small_embed = \
     {'company': {'logo': {}, 'addresses': {},
                  'defaultTaxType': {}}}  # type: Dict[str, Any]
@@ -60,6 +67,13 @@ html_notification_embed = {'sender': {'emailAddresses': {},
                            'htmlMessage': {},
                            'domain': {'logo': {}}}  # type: Dict[str, Any]
 
+product_embed = \
+    {'independentVariationFields':
+         {'options': {'linkedFile': {}}},
+     'groupVariationFields':
+         {'options': {'linkedFile': {}}},
+     'files': {}, 'discounts': {},
+     'domain': {'company': {'defaultTaxType': {}}}} # type: Dict[str, Any]
 
 job_small_notifications_embed = \
     {'domain': {'logo': {}},
@@ -84,6 +98,8 @@ invoice_client_embed = dict_append(phone_email_and_address_embed,
 invoice_job_embed = \
     {'product': {},
      'taxType': {},
+     'client': {},
+     'domain': domain_small_embed,
      'specifications': specifications_embed,
      'specificationsGroups': specification_groups_embed}  # type: Dict[str, Any]
 invoice_item_embed = {'taxType': {}}  # type: Dict[str, Any]
@@ -140,7 +156,8 @@ job_product_with_suppliers_embed = \
 job_list_embed = \
     {'domain': domain_small_embed,
      'client': invoice_client_embed,
-     'product': job_product_embed}  # type: Dict[str, Any]
+     'product': job_product_embed,
+     'invoice': {}}  # type: Dict[str, Any]
 
 job_universal_embed = \
     {'domain': domain_small_embed,
@@ -167,7 +184,7 @@ job_info_embed = dict_append(job_universal_embed,
 draft_embed = {'file': {},
                'job': {'domain': {},
                        'drafts': {}},
-               'designer': {},
+               'designer': {'profilePicture': {}},
                'comments': comments_embed}
 
 job_drafting_embed = \
@@ -243,3 +260,177 @@ theme_edit_embed = \
      'footerTemplate': {},
      'mainCssFile': {}, 'emailCssFile': {},
      'cssImageFiles': {}, 'featureImage': {}}  # type: Dict[str, Any]
+
+# Public embed starts here
+
+def append_embed_for_public_domain(embed):
+    menu = embed.setdefault('menus', {})
+    menu.setdefault('menuItems', {})
+    embed.setdefault('company', {})
+    embed.setdefault('logo', {})
+    embed.setdefault('themes', {'mainCssFile': {}})
+    active = embed.setdefault('activeTheme', {})
+    active.setdefault('headerCompiled', {})
+    active.setdefault('footerCompiled', {})
+    active.setdefault('mainCssFile', {})
+    return embed
+
+# Public company profile
+public_company_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'companyProfilePageCompiled': {}}})
+company_profile_public_embed = \
+    {'domain_embed': public_company_domain_embed,
+     'company_embed': company_embed}  # type: Dict[str, Any]
+subdomain_company_profile_public_embed = company_profile_public_embed
+
+# Public draft
+public_draft_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'jobDraftingPageCompiled': {}}})
+client_job_drafting_embed = \
+    {'domain_embed': public_draft_domain_embed,
+     'job_embed': job_drafting_embed,
+     'draft_embed': draft_embed}  # type: Dict[str, Any]
+subdomain_client_job_drafting_embed = client_job_drafting_embed
+
+# Public draft file preview
+public_draft_file_preview_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'draftPreviewPageCompiled': {}}})
+draft_file_preview_embed = \
+    {'domain_embed': public_draft_file_preview_domain_embed,
+     'draft_embed': draft_embed}
+subdomain_draft_file_preview_embed = draft_file_preview_embed
+
+# Public index
+public_index_domain_embed = \
+    append_embed_for_public_domain({'activeTheme': {'indexPageCompiled': {}}})
+domain_index_embed = \
+    {'domain_embed': public_index_domain_embed}  # type: Dict[str, Any]
+subdomain_domain_index_embed = domain_index_embed
+
+# Public invite
+public_domain_invite_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'domainInvitePageCompiled': {}}})
+public_invite_embed = \
+    {'user': {},
+     'domain': public_domain_invite_domain_embed}  # type: Dict[str, Any]
+public_domain_invite_embed = \
+    {'domain_embed': public_domain_invite_domain_embed,
+     'invite_embed': public_invite_embed}  # type: Dict[str, Any]
+subdomain_public_domain_invite_embed = public_domain_invite_embed
+
+# Public invoice
+public_invoice_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'invoicePageCompiled': {}},
+         'company': {'addresses': {},
+                     'phoneNumbers': {},
+                     'emailAddresses': {},
+                     'banks': {'bankAddress': {}}}})
+public_invoice_embed = \
+    {'shipping': {},
+     'jobs': invoice_job_embed,
+     'items': invoice_item_embed,
+     'client': invoice_client_embed,
+     'clientCompany': phone_email_embed,
+     'clientCompanyPhone': {},
+     'clientCompanyEmail': {},
+     'clientEmail': {},
+     'clientPhone': {},
+     'pdf': {},
+     'responsibleManager': {},
+     'payments': {},
+     'domain': public_invoice_domain_embed}  # type: Dict[str, Any]
+client_invoice_embed = \
+    {'domain_embed': public_invoice_domain_embed,
+     'invoice_embed': public_invoice_embed}  # type: Dict[str, Any]
+subdomain_client_invoice_embed = client_invoice_embed
+
+# Public invoices
+public_invoices_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'invoicesPageCompiled': {}}})
+public_invoices_embed = {'jobs': invoice_job_embed,
+                         'pdf': {}}  # type: Dict[str, Any]
+client_invoices_embed = \
+    {'domain_embed': public_invoices_domain_embed,
+     'invoices_embed': public_invoices_embed}  # type: Dict[str, Any]
+subdomain_client_invoices_embed = client_invoices_embed
+
+# Public jobs
+client_jobs_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'jobsPageCompiled': {}}})
+client_jobs_embed = \
+    {'domain_embed': client_jobs_domain_embed,
+     'jobs_embed': job_list_embed}  # type: Dict[str, Any]
+subdomain_client_jobs_embed = client_jobs_embed
+
+# Public login
+public_login_domain_embed = append_embed_for_public_domain({})
+public_login_embed = \
+    {'domain_embed': public_login_domain_embed}
+subdomain_public_login_embed = public_login_embed
+
+# Public password change
+public_password_change_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'passwordChangePageCompiled': {}}})
+public_password_change_embed = \
+    {'domain_embed': public_password_change_domain_embed}  # type: Dict[str, Any]
+subdomain_public_password_change_embed = public_password_change_embed
+
+# Public passwod reset
+public_reset_password_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'resetPasswordPageCompiled': {}}})
+public_reset_password_embed = \
+    {'domain_embed': public_reset_password_domain_embed}  # type: Dict[str, Any]
+subdomain_public_reset_password_embed = public_reset_password_embed
+
+# Public product
+public_product_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'productPageCompiled': {}}})
+domain_product_public_embed = \
+    {'domain_embed': public_products_domain_embed,
+     'product_embed': product_embed}  # type: Dict[str, Any]
+subdomain_domain_product_public_embed = domain_product_public_embed
+
+# Public products
+public_products_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'productsPageCompiled': {}}})
+domain_products_public_embed = \
+    {'domain_embed': public_products_domain_embed,
+     'products_embed': product_embed}  # type: Dict[str, Any]
+subdomain_domain_products_public_embed = domain_products_public_embed
+
+# Public sms confirm
+confirm_sms_token_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'smsTokenPageCompiled': {}}})
+public_confirm_sms_token_embed = \
+    {'domain_embed': confirm_sms_token_domain_embed}  # type: Dict[str, Any]
+subdomain_public_confirm_sms_token_embed = public_confirm_sms_token_embed
+
+# Public sms login
+public_sms_login_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'smsLoginPageCompiled': {}}})
+public_sms_login_embed = \
+    {'domain_embed': public_sms_login_domain_embed}  # type: Dict[str, Any]
+subdomain_public_sms_login_embed = public_sms_login_embed
+
+# Public user profile
+public_user_profile_domain_embed = \
+    append_embed_for_public_domain(
+        {'activeTheme': {'userProfilePageCompiled': {}}})
+user_profile_public_embed = \
+    {'domain_embed': public_user_profile_domain_embed,
+     'user_embed': user_setting_embed}  # type: Dict[str, Any]
+subdomain_user_profile_public_embed = user_profile_public_embed
+
