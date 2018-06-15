@@ -256,12 +256,15 @@ class Domain(sdk.python.entities.Entity):
         with open("sdk/python/util/templates/footer.html") as template_file:
             return compile_template(template_file.read(), database)
 
-    def get_template_scripts(self, database):
+    def get_template_scripts(self, database, entity_embeds=None):
         """ Return a div with the template script rendered inside of it. """
         template = ''
         if self.active_theme:
             template = self.active_theme.scripts_template()
-        return compile_template(template, database, with_script=True)
+        return compile_template(template,
+                                database,
+                                with_script=True,
+                                entity_embeds=entity_embeds)
 
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
