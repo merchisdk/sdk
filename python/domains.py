@@ -43,6 +43,7 @@ class Domain(sdk.python.entities.Entity):
         super(Domain, self).__init__()
 
         self.json_property(int, 'id')
+        self.json_property(int, 'active_theme_id')
         self.json_property(str, 'domain')
         self.json_property(str, 'sub_domain')
         self.json_property(str, 'email_domain')
