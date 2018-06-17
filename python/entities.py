@@ -223,22 +223,23 @@ class Entity(object):
                               for_updates=for_updates)
         return result, files
 
-    def to_json(self, camel_key=True, parse_date_format=True):
+    def to_json(self, camel_key=True, parse_date_format=True, html_safe=False):
+        serialise_kwargs = {"html_safe": html_safe}
         if parse_date_format:
-            data_json, _ = self. \
-                serialise(time_format="%Y-%m-%d %H:%M")
-        else:
-            data_json, _ = self.serialise()
+            serialise_kwargs["time_format"] = "%Y-%m-%d %H:%M"
+
+        data_json, _ = self.serialise(**serialise_kwargs)
+
         if camel_key:
             data_json = parse_json_key_camel(data_json)
         return data_json
 
-    def dump_to_json_str(self):
+    def dump_to_json_str(self, **kwargs):
         """ Dump to a json str where comply the convention of
             a javascript object.
         """
         try:
-            data_json_str = json.dumps(self.to_json())
+            data_json_str = json.dumps(self.to_json(**kwargs))
         except AttributeError:
             data_json_str = ""
         return data_json_str
