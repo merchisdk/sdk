@@ -56,12 +56,6 @@ class Job(sdk.python.entities.Entity):
         self.json_property(int, 'design_status')
         self.json_property(int, 'payment_status')
         self.json_property(int, 'shipping_status')
-        self.json_property(int, 'unread_notifications_count')
-        self.json_property(int, 'unread_job_info_notifications_count')
-        self.json_property(int, 'unread_job_drafting_notifications_count')
-        self.json_property(int, 'unread_job_production_notifications_count')
-        self.json_property(int, 'unread_job_shipping_notifications_count')
-        self.json_property(int, 'unread_job_invoicing_notifications_count')
         self.json_property(bool, 'completed')
         self.json_property(int, 'priority')
         self.recursive_json_property(File, 'production_files')
@@ -86,6 +80,14 @@ class Job(sdk.python.entities.Entity):
         self.recursive_json_property(Specification, 'specifications')
         self.recursive_json_property(Shipment, 'shipment')
         self.recursive_json_property(CountryTax, 'tax_type')
+
+        # not embedded by default, must be requested
+        self.json_property(int, 'unread_notifications_count')
+        self.json_property(int, 'unread_job_info_notifications_count')
+        self.json_property(int, 'unread_job_drafting_notifications_count')
+        self.json_property(int, 'unread_job_production_notifications_count')
+        self.json_property(int, 'unread_job_shipping_notifications_count')
+        self.json_property(int, 'unread_job_invoicing_notifications_count')
 
     def product_total_cost(self):
         """ Return the cost_per_unit multiplied by the total job
