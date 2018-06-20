@@ -66,6 +66,13 @@ class ComponentsDatabase(ABC):
         script = """
 document.addEventListener("DOMContentLoaded", function () {
     'use strict';
+    var components,
+        baseUserEmbed = {'profilePicture': {},
+                         'emailAddresses': {} },
+        baseJobEmbed = {},
+        baseDomainEmbed = {logo: {},
+                           company: {},
+                           menus: {menuItems: {}}};
     var components;
 """
         for component in self.used_components:
@@ -79,14 +86,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var mountpoints = $('.react-mount-component-here.' +
                             component.name);
+        var userCopy = MERCHI.copyEnt(window.currentUser);
+        var domainCopy = MERCHI.copyEnt(window.currentDomain);
+        var jobCopy = MERCHI.copyEnt(window.job);
         var element = React.createElement(component,
-                                          { currentUser: window.currentUser,
-                                            currentDomain: window.currentDomain,
-                                            job: window.job });
+                                          { currentUser: userCopy,
+                                            currentDomain: domainCopy,
+                                            job: jobCopy,
+                                            setUser: setUser,
+                                            setJob: setJob,
+                                            setDomain: setDomain });
         mountpoints.each(function (_, mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
     }
+
+    function setDomain(newDomain, success, error) {
+       function _success () {
+         window.currentDomain = newDomain;
+         redrawAll();
+         success();
+       }
+       newDomain.update(_success, error, baseDomainEmbed);
+    }
+
+    function setJob(newJob, success, error) {
+       function _success () {
+         window.job = newJob;
+         redrawAll();
+         success();
+       }
+       newJob.update(_success, error, baseJobEmbed);
+    }
+
+    function setUser(newUser, success, error) {
+       function _success () {
+         window.currentUser = newUser;
+         redrawAll();
+         success();
+       }
+       newUser.update(_success, error, baseUserEmbed);
+    }
+    function redrawAll() {
+        components.map(redraw);
+    }
+
     components.map(redraw);
 });
 """
