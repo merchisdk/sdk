@@ -55,6 +55,27 @@ class Domain(sdk.python.entities.Entity):
         self.json_property(bool, 'enable_notifications')
         self.json_property(bool, 'enable_email_notifications')
         self.json_property(bool, 'enable_sms_notifications')
+
+        # not serialised by default, must be embedded specifically
+        self.json_property(str, 'header_html')
+        self.json_property(str, 'footer_html')
+        self.json_property(str, 'index_html')
+        self.json_property(str, 'invoices_html')
+        self.json_property(str, 'products_html')
+        self.json_property(str, 'domain_invite_html')
+        self.json_property(str, 'password_reset_html')
+        self.json_property(str, 'password_change_html')
+        self.json_property(str, 'sms_login_html')
+        self.json_property(str, 'sms_token_html')
+        self.json_property(str, 'jobs_html')
+        self.json_property(str, 'job_drafting_html')
+        self.json_property(str, 'draft_preview_html')
+        self.json_property(str, 'invoice_html')
+        self.json_property(str, 'user_profile_html')
+        self.json_property(str, 'company_profile_html')
+        self.json_property(str, 'product_html')
+        self.json_property(str, 'invoice_paid_html')
+
         self.recursive_json_property(Theme, 'active_theme')
         self.recursive_json_property(DomainInvitation, 'domain_invitations')
         self.recursive_json_property(Company, "company")
@@ -105,156 +126,6 @@ class Domain(sdk.python.entities.Entity):
         script_parameters = extract_script_parameters(code)
         return reconstitute_conversion_script(script_parameters, invoice)
 
-    def get_index_page_content(self, database):
-        """ Return HTML content for the public domain index page.
-
-            That will be the one from the theme, if there is one, otherwise
-            it will be the default. The caller is responsible for ensuring
-            that the active theme, and also its template is properly embedded.
-        """
-        if self.active_theme:
-            return self.active_theme.index_page_compiled
-        with open("sdk/python/util/templates/index.html") as template_file:
-            return compile_template(template_file.read(), database)
-
-    def get_invoices_page_content(self, database):
-        """ Return HTML content for the public domain invoices page.
-
-            That will be the one from the theme, if there is one, otherwise
-            it will be the default. The caller is responsible for ensuring
-            that the active theme, and also its template is properly embedded.
-        """
-        if self.active_theme:
-            return self.active_theme.invoices_page_compiled
-        with open("sdk/python/util/templates/invoices.html") as template_file:
-            return compile_template(template_file.read(), database)
-
-    def get_products_page_content(self, database):
-        """ Return HTML content for the public domain products page.
-
-            That will be the one from the theme, if there is one, otherwise
-            it will be the default. The caller is responsible for ensuring
-            that the active theme, and also its template is properly embedded.
-        """
-        if self.active_theme:
-            return self.active_theme.products_page_compiled
-        with open("sdk/python/util/templates/products.html") as template_file:
-            return compile_template(template_file.read(), database)
-
-    def get_domain_invite_page_content(self, database):
-        """ Return HTML content for the public domain invite page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.domain_invite_page_compiled
-
-    def get_reset_password_page_content(self, database):
-        """ Return HTML content for the public password reset page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.reset_password_page_compiled
-
-    def get_password_change_page_content(self, database):
-        """ Return HTML content for the public password change page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.password_change_page_compiled
-
-    def get_sms_login_page_content(self, database):
-        """ Return HTML content for the public sms login page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.sms_login_page_compiled
-
-    def get_sms_token_page_content(self, database):
-        """ Return HTML content for the public sms token page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.sms_token_page_compiled
-
-    def get_jobs_page_content(self, database):
-        """ Return HTML content for the public jobs page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.jobs_page_compiled
-
-    def get_job_drafting_page_content(self, database):
-        """ Return HTML content for the public job drafting page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.job_drafting_page_compiled
-
-    def get_draft_preview_page_content(self, database):
-        """ Return HTML content for the public drafting preview page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.draft_preview_page_compiled
-
-    def get_invoice_page_content(self, database):
-        """ Return HTML content for the public invoice page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.invoice_page_compiled
-
-    def get_user_profile_page_content(self, database):
-        """ Return HTML content for the public user profile page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.user_profile_page_compiled
-
-    def get_company_profile_page_content(self, database):
-        """ Return HTML content for the company profile invite page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.company_profile_page_compiled
-
-    def get_product_page_content(self, database):
-        """ Return HTML content for the public product page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.product_page_compiled
-
-    def get_invoice_paid_page_content(self, database):
-        """ Return HTML content for the public invoice paid page, if
-            a template has been created and activated.
-        """
-        if self.active_theme:
-            return self.active_theme.invoice_paid_page_compiled
-
-    def get_header_content(self, database):
-        """ Return HTML content for the headers of public domain pages.
-
-            That will be the one from the theme, if there is one, otherwise
-            it will be the default. The caller is responsible for ensuring
-            that the active theme, and also its template is properly embedded.
-        """
-        if self.active_theme:
-            return self.active_theme.header_compiled
-        with open("sdk/python/util/templates/header.html") as template_file:
-            return compile_template(template_file.read(), database)
-
-    def get_footer_content(self, database):
-        """ Return HTML content for the footers of public domain pages.
-
-            That will be the one from the theme, if there is one, otherwise
-            it will be the default. The caller is responsible for ensuring
-            that the active theme, and also its template is properly embedded.
-        """
-        if self.active_theme:
-            return self.active_theme.footer_compiled
-        with open("sdk/python/util/templates/footer.html") as template_file:
-            return compile_template(template_file.read(), database)
 
     def get_template_scripts(self, database, entity_embeds=None):
         """ Return a div with the template script rendered inside of it. """
