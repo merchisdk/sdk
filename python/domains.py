@@ -5,6 +5,8 @@ from sdk.python.themes import Theme
 from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
 import sdk.python.util.menu_util as menu_util
+from sdk.python.util.public_page_embeds import DOMAIN_PRODUCTS_DOMAIN_EMBED,\
+    DOMAIN_INDEX_DOMAIN_EMBED, CLIENT_INVOICES_DOMAIN_EMBED
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
@@ -115,7 +117,8 @@ class Domain(sdk.python.entities.Entity):
         if self.active_theme:
             return self.active_theme.index_page_compiled
         with open("sdk/python/util/templates/index.html") as template_file:
-            return compile_template(template_file.read(), database)
+            return compile_template(template_file.read(), database,
+                                    domain_embed=DOMAIN_INDEX_DOMAIN_EMBED)
 
     def get_invoices_page_content(self, database):
         """ Return HTML content for the public domain invoices page.
@@ -127,7 +130,8 @@ class Domain(sdk.python.entities.Entity):
         if self.active_theme:
             return self.active_theme.invoices_page_compiled
         with open("sdk/python/util/templates/invoices.html") as template_file:
-            return compile_template(template_file.read(), database)
+            return compile_template(template_file.read(), database,
+                                    domain_embed=CLIENT_INVOICES_DOMAIN_EMBED)
 
     def get_products_page_content(self, database):
         """ Return HTML content for the public domain products page.
@@ -139,7 +143,8 @@ class Domain(sdk.python.entities.Entity):
         if self.active_theme:
             return self.active_theme.products_page_compiled
         with open("sdk/python/util/templates/products.html") as template_file:
-            return compile_template(template_file.read(), database)
+            return compile_template(template_file.read(), database,
+                                    domain_embed=DOMAIN_PRODUCTS_DOMAIN_EMBED)
 
     def get_domain_invite_page_content(self, database):
         """ Return HTML content for the public domain invite page, if
@@ -256,12 +261,15 @@ class Domain(sdk.python.entities.Entity):
         with open("sdk/python/util/templates/footer.html") as template_file:
             return compile_template(template_file.read(), database)
 
-    def get_template_scripts(self, database):
+    def get_template_scripts(self, database, user_embed=None, job_embed=None,
+                             domain_embed=None):
         """ Return a div with the template script rendered inside of it. """
         template = ''
         if self.active_theme:
             template = self.active_theme.scripts_template()
-        return compile_template(template, database, with_script=True)
+        return compile_template(template, database, user_embed=user_embed,
+                                job_embed=job_embed, domain_embed=domain_embed,
+                                with_script=True)
 
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
