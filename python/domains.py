@@ -8,7 +8,6 @@ import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
-from sdk.python.util.templates import compile_template
 
 
 class Domain(sdk.python.entities.Entity):
@@ -58,23 +57,41 @@ class Domain(sdk.python.entities.Entity):
 
         # not serialised by default, must be embedded specifically
         self.json_property(str, 'header_html')
+        self.json_property(str, 'header_js')
         self.json_property(str, 'footer_html')
+        self.json_property(str, 'footer_js')
         self.json_property(str, 'index_html')
+        self.json_property(str, 'index_js')
         self.json_property(str, 'invoices_html')
-        self.json_property(str, 'products_html')
+        self.json_property(str, 'invoices_js')
         self.json_property(str, 'domain_invite_html')
+        self.json_property(str, 'domain_invite_js')
         self.json_property(str, 'password_reset_html')
+        self.json_property(str, 'password_reset_js')
         self.json_property(str, 'password_change_html')
+        self.json_property(str, 'password_change_js')
         self.json_property(str, 'sms_login_html')
+        self.json_property(str, 'sms_login_js')
         self.json_property(str, 'sms_token_html')
+        self.json_property(str, 'sms_token_js')
         self.json_property(str, 'jobs_html')
+        self.json_property(str, 'jobs_js')
         self.json_property(str, 'job_drafting_html')
+        self.json_property(str, 'job_drafting_js')
         self.json_property(str, 'draft_preview_html')
+        self.json_property(str, 'draft_preview_js')
         self.json_property(str, 'invoice_html')
+        self.json_property(str, 'invoice_js')
         self.json_property(str, 'user_profile_html')
+        self.json_property(str, 'user_profile_js')
         self.json_property(str, 'company_profile_html')
+        self.json_property(str, 'company_profile_js')
         self.json_property(str, 'product_html')
+        self.json_property(str, 'product_js')
+        self.json_property(str, 'products_html')
+        self.json_property(str, 'products_js')
         self.json_property(str, 'invoice_paid_html')
+        self.json_property(str, 'invoice_paid_js')
 
         self.recursive_json_property(Theme, 'active_theme')
         self.recursive_json_property(DomainInvitation, 'domain_invitations')
@@ -125,13 +142,6 @@ class Domain(sdk.python.entities.Entity):
             return ''
         script_parameters = extract_script_parameters(code)
         return reconstitute_conversion_script(script_parameters, invoice)
-
-    def get_template_scripts(self, database):
-        """ Return a div with the template script rendered inside of it. """
-        template = ''
-        if self.active_theme:
-            template = self.active_theme.scripts_template()
-        return compile_template(template, database, with_script=True)
 
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
