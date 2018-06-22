@@ -64,8 +64,6 @@ class Domain(sdk.python.entities.Entity):
         self.json_property(str, 'index_js')
         self.json_property(str, 'invoices_html')
         self.json_property(str, 'invoices_js')
-        self.json_property(str, 'products_html')
-        self.json_property(str, 'products_js')
         self.json_property(str, 'domain_invite_html')
         self.json_property(str, 'domain_invite_js')
         self.json_property(str, 'password_reset_html')
@@ -90,6 +88,8 @@ class Domain(sdk.python.entities.Entity):
         self.json_property(str, 'company_profile_js')
         self.json_property(str, 'product_html')
         self.json_property(str, 'product_js')
+        self.json_property(str, 'products_html')
+        self.json_property(str, 'products_js')
         self.json_property(str, 'invoice_paid_html')
         self.json_property(str, 'invoice_paid_js')
 
