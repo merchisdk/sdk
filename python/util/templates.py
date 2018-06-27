@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function redraw(component) {
         'use strict';
 
-        var mountpoints = $('.react-mount-component-here.' +
-                            component.name);
+        var mountpoints = document.getElementsByClassName(
+            'react-mount-component-here ' + component.name);
         var userCopy = MERCHI.copyEnt(window.currentUser);
         var domainCopy = MERCHI.copyEnt(window.currentDomain);
         var jobCopy = MERCHI.copyEnt(window.job);
@@ -95,37 +95,49 @@ document.addEventListener("DOMContentLoaded", function () {
                                             job: jobCopy,
                                             setUser: setUser,
                                             setJob: setJob,
+                                            updateJob: updateJob,
                                             setDomain: setDomain });
-        mountpoints.each(function (_, mountpoint) {
+        Array.prototype.map.call(mountpoints, function (mountpoint) {
             ReactDOM.render(element, mountpoint);
         });
     }
 
-    function setDomain(newDomain, success, error) {
+    function setDomain(options) {
        function _success () {
-         window.currentDomain = newDomain;
+         window.currentDomain = options.newDomain;
          redrawAll();
-         success();
+         options.success();
        }
-       newDomain.update(_success, error, baseDomainEmbed);
+       options.newDomain.update(_success, options.error, baseDomainEmbed);
     }
 
-    function setJob(newJob, success, error) {
-       function _success () {
-         window.job = newJob;
-         redrawAll();
-         success();
-       }
-       newJob.update(_success, error, baseJobEmbed);
+    function updateJob(options) {
+        var jobCopy = new MERCHI.Job();
+        function _success () {
+            window.job = jobCopy;
+            redrawAll();
+            options.success();
+        }
+        jobCopy.id(window.job.id());
+        jobCopy.get(_success, options.error, baseJobEmbed);
     }
 
-    function setUser(newUser, success, error) {
+    function setJob(options) {
+        function _success () {
+            window.job = options.job;
+            redrawAll();
+            options.success();
+        }
+        options.job.patch(_success, options.error, baseJobEmbed);
+    }
+
+    function setUser(options) {
        function _success () {
-         window.currentUser = newUser;
+         window.currentUser = options.newUser;
          redrawAll();
-         success();
+         options.success();
        }
-       newUser.update(_success, error, baseUserEmbed);
+       options.newUser.update(_success, options.error, baseUserEmbed);
     }
     function redrawAll() {
         components.map(redraw);
