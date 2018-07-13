@@ -15,7 +15,11 @@ function check_response($response) {
     if ($response->status_code < 199 || $response->status_code > 299)
     {
         $body = json_decode($response->body, true);
-        $message = $body['message']['message'];
+        $message = $body['message'];
+        if (is_array($message) && array_key_exists('message', $message))
+        {
+            $message = $message['message'];
+        }
         throw new Exception($message);
     }
     return True;
