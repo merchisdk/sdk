@@ -44,10 +44,12 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 
-BUSINESS_ACCOUNTS = {SALES, DESIGNER, SUPPLIER, MANAGER, ACCOUNTANT, ADMIN}
-
 # users who are in the management team of the domain
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
+
+# users who are involved as business parties
+BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
+BUSINESS_ACCOUNTS.add(SUPPLIER)
 
 # users who are the users of the domain
 USER_ROLES = {SUPPLIER, CLIENT}
