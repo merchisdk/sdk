@@ -80,6 +80,8 @@ class Domain(sdk.python.entities.Entity):
         self.json_property(str, 'jobs_js')
         self.json_property(str, 'job_drafting_html')
         self.json_property(str, 'job_drafting_js')
+        self.json_property(str, 'job_quote_requested_html')
+        self.json_property(str, 'job_quote_requested_js')
         self.json_property(str, 'draft_preview_html')
         self.json_property(str, 'draft_preview_js')
         self.json_property(str, 'invoice_html')
