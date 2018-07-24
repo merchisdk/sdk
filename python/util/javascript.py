@@ -11,27 +11,30 @@ RESERVED_WORDS = {'do', 'if', 'in', 'for', 'let', 'new', 'try', 'var', 'case',
                   'implements', 'instanceof'}
 
 
+def is_valid_first_char(char):
+    """ Return whether char is a valid character for the start of a js symbol.
+
+        Reference: http://es5.github.io/x7.html#x7.6
+    """
+    category = unicodedata.category(char)
+    return char in {'$', '_'} or category in {'Lu', 'Ll', 'Lt' 'Lm', 'Lo', 'NI'}
+
+
+def is_valid_char(char):
+    """ Return whether char is a valid character for a js symbol.
+
+        Reference: http://es5.github.io/x7.html#x7.6
+    """
+    category = unicodedata.category(char)
+    allowed = {'Lu', 'Ll', 'Lt' 'Lm', 'Lo', 'NI', 'Mn', 'Mc', 'Nd', 'Pc'}
+    return char in {'$', '_', '\u200c', '\u200d'} or category in allowed
+
+
 def is_valid_variable_name(name):
     """ Return True if name is a possible javascript variable name, else False.
 
         Allows unicode characters - it's not checking if it's the name is good.
     """
-    def is_valid_first_char(c):
-        if unicodedata.category(c) in {'Lu', 'Ll', 'Lt', 'Lm', 'Lo', 'NI'}:
-            return True
-        if c in {'$', '_'}:
-            return True
-        return False
-
-    def is_valid_char(c):
-        valid_categories = {'Lu', 'Ll', 'Lt', 'Lm', 'Lo', 'NI', 'Mn', 'Mc',
-                            'Nd', 'Pc'}
-        if unicodedata.category(c) in valid_categories:
-            return True
-        if c in {'$', '_', '\u200c', '\u200d'}:
-            return True
-        return False
-
     if not name:
         return False
     if not is_valid_first_char(name[0]):
