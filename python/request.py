@@ -52,7 +52,7 @@ class Request(object):
 
     def wraps_request(self, data=None, files=None, email=None, password=None,
                       api_secret=None, query=None, embed=None, as_domain=None,
-                      include_archived=False):
+                      include_archived=False, skip_rights=None):
         """ Wrap user customized infomation to request """
         self.files = files
         self.data = data
@@ -62,6 +62,7 @@ class Request(object):
         self.embed = embed
         self.as_domain = as_domain
         self.include_archived = include_archived
+        self.skip_rights = skip_rights
         if not self.query:
             self.query = {}
         if query is not None:
@@ -85,6 +86,9 @@ class Request(object):
 
         if self.include_archived:
             self.query["include_archived"] = self.include_archived
+
+        if self.skip_rights:
+            self.query["skip_rights"] = self.skip_rights
 
         self.headers['host'] = self.host
 
