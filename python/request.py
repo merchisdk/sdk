@@ -51,7 +51,8 @@ class Request(object):
         return int(self.version[1:])
 
     def wraps_request(self, data=None, files=None, email=None, password=None,
-                      api_secret=None, query=None, embed=None, as_domain=None):
+                      api_secret=None, query=None, embed=None, as_domain=None,
+                      include_archived=False):
         """ Wrap user customized infomation to request """
         self.files = files
         self.data = data
@@ -60,13 +61,14 @@ class Request(object):
         self.api_secret = api_secret
         self.embed = embed
         self.as_domain = as_domain
+        self.include_archived = include_archived
         if not self.query:
             self.query = {}
         if query is not None:
             self.query.update(query)
 
     def send(self):
-        if self.data is not None and self.data != '':
+        if self.data:
             data_json = parse_json_key_camel(self.data)
             data_post = unpack_recursive_json(data_json, self.version_number())
         else:
@@ -80,6 +82,9 @@ class Request(object):
 
         if self.as_domain:
             self.query["as_domain"] = self.as_domain
+
+        if self.include_archived:
+            self.query["include_archived"] = self.include_archived
 
         self.headers['host'] = self.host
 
