@@ -32,6 +32,7 @@ class Request(object):
         self.password = None
         self.api_secret = None
         self.as_domain = None  # only be meaningful if using be master domain
+        self.include_archived = False
         self.data = {}  # type: ignore  # set to dict to send form encoded
         self.files = {}  # type: ignore
         self.cookies = {}  # type: ignore
