@@ -27,16 +27,14 @@ def enumerate_files(files):
     return result
 
 
-def generate_request(data, files, email, password, api_secret,
-                     query, embed, as_domain=None):
+def generate_request(**kwargs):
     """ Create and return a request object.
 
         Returns:
           Request: (not yet sent) object representing an API request
     """
     request = Entity.request_class()
-    request.wraps_request(data, files, email, password, api_secret,
-                          query, embed, as_domain)
+    request.wraps_request(**kwargs)
     return request
 
 
@@ -94,35 +92,27 @@ class Entity(object):
         check_response(response, 204)
         return response
 
-    def post(self, data='', embed=None, files=None, email=None,
-             password=None, query=None, api_secret=None, as_domain=None):
-        request = generate_request(data, files, email, password,
-                                   api_secret, query, embed, as_domain)
+    def post(self, **kwargs):
+        request = generate_request(**kwargs)
         request.method = 'POST'
         request.resource = self.resource
         response = request.send()
         return response
 
-    def create(self, embed=None, email=None, password=None, query=None,
-               api_secret=None, as_domain=None):
+    def create(self, **kwargs):
         self.process_before_transfer()
         data_json, files = self.serialise(consider_rights=False)
-        resp = self.post(data_json, embed=embed, email=email, password=password,
-                         files=enumerate_files(files), query=query,
-                         api_secret=api_secret, as_domain=as_domain)
+        resp = self.post(data=data_json, files=enumerate_files(files), **kwargs)
         check_response(resp, 201)
         self.from_json(resp.json())
 
-    def patch(self, data='', files=None, email=None, password=None, query=None,
-              api_secret=None, as_domain=None):
-        request = generate_request(data, files, email, password,
-                                   api_secret, query, None, as_domain)
+    def patch(self, **kwargs):
+        request = generate_request(**kwargs)
         request.method = 'PATCH'
         return self.send_to_entity(request, self.primary_value())
 
-    def update(self, query=None, only_updates=None, refresh=False, email=None,
-               password=None, api_secret=None, as_domain=None):
-        if only_updates and len(only_updates) > 0:
+    def update(self, only_updates=None, refresh=False, **kwargs):
+        if only_updates:
             empty_entity = self.__class__()
             for key in only_updates:
                 setattr(empty_entity, key, only_updates[key])
@@ -135,9 +125,9 @@ class Entity(object):
         data_json, files = self.serialise(force_primary=False,
                                           consider_rights=False,
                                           for_updates=True)
-        resp = self.patch(data_json, enumerate_files(files), query=query,
-                          email=email, password=password, api_secret=api_secret,
-                          as_domain=as_domain)
+        resp = self.patch(data=data_json,
+                          files=enumerate_files(files),
+                          **kwargs)
         check_response(resp, 200)
         if refresh:
             self.from_json(resp.json())
@@ -394,9 +384,7 @@ class Entity(object):
         return True
 
     @classmethod
-    def fetch(cls, identifier, embed=None, include_archived=False,
-              email=None, password=None, api_secret=None,
-              as_domain=None, query_string=None):
+    def fetch(cls, identifier, **kwargs):
         """ Factory method that returns an instance of this entity named by
             the given primary key.
 
@@ -407,12 +395,7 @@ class Entity(object):
                                 been taken into account
         """
         entity = cls()
-        request = generate_request(None, None, email, password,
-                                   api_secret, None, embed, as_domain)
-        if include_archived:
-            request.query['include_archived'] = True
-        if query_string:
-            request.query.update(query_string)
+        request = generate_request(**kwargs)
         response = entity.send_to_entity(request, identifier)
         check_response(response, 200)
         json_response = response.json()
@@ -426,12 +409,9 @@ class Resource(object):
         self.resource = self.entity_class.resource
         self.can_create = True
 
-    def get(self, embed=None, query=None, email=None,
-            password=None, api_secret=None, forbid_auto_update=False,
-            as_domain=None):
+    def get(self, forbid_auto_update=False, **kwargs):
         req = Entity.request_class(forbid_auto_update)
-        req.wraps_request(None, None, email, password, api_secret,
-                          query, embed, as_domain)
+        req.wraps_request(**kwargs)
         req.resource = self.resource
         resp = req.send()
         return resp
@@ -445,13 +425,8 @@ class Resource(object):
             result.append(entity)
         return result
 
-    def fetch(self, embed=None, query=None, forbid_auto_update=False,
-              email=None, password=None, api_secret=None,
-              as_domain=None):
-        resp = self.get(embed=embed, query=query, email=email,
-                        password=password, api_secret=api_secret,
-                        forbid_auto_update=forbid_auto_update,
-                        as_domain=as_domain)
+    def fetch(self, **kwargs):
+        resp = self.get(**kwargs)
         check_response(resp, 200)
         response_json = resp.json()
 
