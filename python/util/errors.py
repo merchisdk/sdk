@@ -11,3 +11,4 @@ CLIENT_ERROR = 2   # default if we only know that the user is at fault
 EMAIL_ALREADY_EXISTS = 3
 SUPPLIER_NOT_ADDED_TO_PRODUCT = 4
 EMAIL_NOT_FOUND = 5
+INVALID_PHONE_NUMBER = 6
