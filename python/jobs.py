@@ -9,6 +9,7 @@ from sdk.python.draft_comments import DraftComment
 from sdk.python.production_comments import ProductionComment
 from sdk.python.country_taxes import CountryTax
 from sdk.python.domains import Domain
+from sdk.python.domain_tags import DomainTag
 from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
@@ -80,6 +81,7 @@ class Job(sdk.python.entities.Entity):
         self.recursive_json_property(Specification, 'specifications')
         self.recursive_json_property(Shipment, 'shipment')
         self.recursive_json_property(CountryTax, 'tax_type')
+        self.recursive_json_property(DomainTag, 'tags')
 
         # not embedded by default, must be requested
         self.json_property(int, 'unread_notifications_count')
