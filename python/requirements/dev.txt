@@ -14,7 +14,7 @@ pylint-plugin-utils==0.2.6
 pytz==2017.3
 DAWG==0.7.8
 arrow==0.10.0
-Flask==0.12.2
+Flask==0.12.4
 pycountry==17.9.23
 requests==2.18.2
 bidict==0.13.1
