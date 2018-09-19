@@ -1,5 +1,6 @@
 import sdk.python.entities
 from sdk.python.domains import Domain
+from sdk.python.entities import Property
 
 
 class DomainTag(sdk.python.entities.Entity):
@@ -7,11 +8,9 @@ class DomainTag(sdk.python.entities.Entity):
     json_name = 'domainTag'
     resource = '/domains_tags/'
 
-    def __init__(self):
-        super(DomainTag, self).__init__()
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.recursive_json_property(Domain, 'domain')
+    id = Property(int)
+    name = Property(str)
+    domain = Property(Domain)
 
 
 class DomainTags(sdk.python.entities.Resource):

@@ -1,6 +1,6 @@
 import sdk.python.entities
-import sdk.python.invoices
 import sdk.python.country_taxes
+from sdk.python.entities import Property
 
 
 class Item(sdk.python.entities.Entity):
@@ -11,16 +11,14 @@ class Item(sdk.python.entities.Entity):
     def __init__(self):
         super(Item, self).__init__()
         self.escape_fields = ['tax_type']
-        self.json_property(str, 'description')
-        self.json_property(float, 'cost')
-        self.json_property(float, 'tax_amount')
-        self.json_property(float, 'quantity')
-        self.json_property(int, 'id')
 
-        self.recursive_json_property(sdk.python.invoices.Invoice,
-                                     'invoice')
-        self.recursive_json_property(sdk.python.country_taxes.CountryTax,
-                                     'tax_type')
+    description = Property(str)
+    cost = Property(float)
+    tax_amount = Property(float)
+    quantity = Property(float)
+    id = Property(int)
+
+    tax_type = Property(sdk.python.country_taxes.CountryTax)
 
     def item_total(self):
         """ Return the total value of the item

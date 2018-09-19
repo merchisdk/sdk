@@ -34,7 +34,10 @@ disable =
         invalid-unary-operand-type,
         invalid-sequence-index,
         arguments-differ,
-        anomalous-unicode-escape-in-string      
+        anomalous-unicode-escape-in-string,
+        bad-mcs-classmethod-argument,
+        unsubscriptable-object,
+        not-an-iterable
 
 [REPORTS]
 reports=no

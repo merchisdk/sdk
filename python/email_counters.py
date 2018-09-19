@@ -1,4 +1,5 @@
 import sdk.python.entities
+from sdk.python.entities import Property
 
 
 class EmailCounter(sdk.python.entities.Entity):
@@ -7,13 +8,10 @@ class EmailCounter(sdk.python.entities.Entity):
     json_name = 'emailCounter'
     primary_key = 'email_address'
 
-    def __init__(self):
-        super(EmailCounter, self).__init__()
-
-        self.json_property(str, 'email_address')
-        self.json_property(bool, "unsubscribed")
-        self.json_property(bool, "silenced")
-        self.json_property(int, "tokens")
+    email_address = Property(str)
+    unsubscribed = Property(bool)
+    silenced = Property(bool)
+    tokens = Property(int)
 
 
 class EmailCounters(sdk.python.entities.Resource):

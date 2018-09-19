@@ -7,6 +7,7 @@ from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
 import sdk.python.users
 import sdk.python.country_taxes
+from sdk.python.entities import Property
 
 
 class Company(sdk.python.entities.Entity):
@@ -14,39 +15,34 @@ class Company(sdk.python.entities.Entity):
     resource = '/companies/'
     json_name = 'company'
 
-    def __init__(self):
-        from sdk.python.company_invitations import CompanyInvitation
-        super(Company, self).__init__()
+    id = Property(int)
+    name = Property(str)
+    website = Property(str)
+    tax_number = Property(str)
+    tax_number_type = Property(int)
+    default_currency = Property(str)
+    paypal_account = Property(str)
+    paypal_password = Property(str)
+    paypal_signature = Property(str)
+    is_paypal_valid = Property(bool)
+    stripe_publishable_key = Property(str)
+    stripe_api_key = Property(str)
+    is_stripe_valid = Property(bool)
+    accept_stripe = Property(bool)
+    accept_paypal = Property(bool)
+    accept_bank_transfer = Property(bool)
+    accept_phone_payment = Property(bool)
+    temporary_created = Property(bool)
+    logo = Property(File)
+    email_addresses = Property(EmailAddress)
+    addresses = Property(Address)
+    phone_numbers = Property(PhoneNumber)
+    payment_phone_numbers = Property(PhoneNumber)
+    user_companies = Property(sdk.python.user_companies.UserCompany,
+                              backref="company")
 
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.json_property(str, 'website')
-        self.json_property(str, 'tax_number')
-        self.json_property(int, 'tax_number_type')
-        self.json_property(str, 'default_currency')
-        self.json_property(str, 'paypal_account')
-        self.json_property(str, 'paypal_password')
-        self.json_property(str, 'paypal_signature')
-        self.json_property(bool, 'is_paypal_valid')
-        self.json_property(str, 'stripe_publishable_key')
-        self.json_property(str, 'stripe_api_key')
-        self.json_property(bool, 'is_stripe_valid')
-        self.json_property(bool, 'accept_stripe')
-        self.json_property(bool, 'accept_paypal')
-        self.json_property(bool, 'accept_bank_transfer')
-        self.json_property(bool, 'accept_phone_payment')
-        self.json_property(bool, 'temporary_created')
-        self.recursive_json_property(File, 'logo')
-        self.recursive_json_property(EmailAddress, 'email_addresses')
-        self.recursive_json_property(Address, 'addresses')
-        self.recursive_json_property(PhoneNumber, 'phone_numbers')
-        self.recursive_json_property(PhoneNumber, 'payment_phone_numbers')
-        self.recursive_json_property(sdk.python.user_companies.UserCompany,
-                                     'user_companies')
-        self.recursive_json_property(Bank, 'banks')
-        self.recursive_json_property(CompanyInvitation, 'company_invitations')
-        self.recursive_json_property(sdk.python.country_taxes.CountryTax,
-                                     'default_tax_type')
+    banks = Property(Bank)
+    default_tax_type = Property(sdk.python.country_taxes.CountryTax)
 
     @property
     def default_banks(self):
