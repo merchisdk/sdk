@@ -53,12 +53,13 @@ MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 # users who enrolled in the domain but are not one of the  management team
 USER_ROLES = {SUPPLIER, CLIENT, THEME_EDITOR}
 
-# users who are involved as business parties
-BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
-BUSINESS_ACCOUNTS.add(SUPPLIER)
+# all registered user type
+ACCOUNTS = MANAGEMENT_ROLES.copy()
+ACCOUNTS.update(USER_ROLES)
 
-ACCOUNTS = BUSINESS_ACCOUNTS.copy()
-ACCOUNTS.add(CLIENT)
+# users who are involved as business parties
+BUSINESS_ACCOUNTS = ACCOUNTS.copy()
+BUSINESS_ACCOUNTS.remove(CLIENT)
 
 ALL_ROLES = ACCOUNTS.copy()
 ALL_ROLES.add(PUBLIC)
