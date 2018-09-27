@@ -25,10 +25,10 @@ class Meta(type):
     def __new__(cls, name, bases, attrs):
         scalar_properties = {}
         recursive_properties = {}
-        attrs["_is_entity"] = True
+        attrs["_is_merchi_entity"] = True
         for key, value in attrs.items():
             if isinstance(value, Property):
-                if getattr(value.remote_type, '_is_entity', False):
+                if getattr(value.remote_type, '_is_merchi_entity', False):
                     recursive_properties[key] = value.remote_type
                 else:
                     scalar_properties[key] = value.remote_type
@@ -48,7 +48,8 @@ class Meta(type):
         new_cls.__init__ = functools.update_wrapper(wrap_init, inner_init)  # type: ignore  # noqa
         for key, value in attrs.items():
             if isinstance(value, Property) and getattr(value.remote_type,
-                                                       '_is_entity', False) \
+                                                       '_is_merchi_entity',
+                                                       False) \
                and value.backref:
 
                 value.remote_type.recursive_properties[value.backref] = new_cls
