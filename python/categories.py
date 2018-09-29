@@ -1,5 +1,6 @@
 import sdk.python.entities
 from sdk.python.domains import Domain
+from sdk.python.entities import Property
 
 
 class Category(sdk.python.entities.Entity):
@@ -7,14 +8,11 @@ class Category(sdk.python.entities.Entity):
     resource = '/categories/'
     json_name = 'category'
 
-    def __init__(self):
-        super(Category, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.json_property(bool, "show_dashboard")
-        self.json_property(bool, "show_public")
-        self.recursive_json_property(Domain, 'domain')
+    id = Property(int)
+    name = Property(str)
+    show_dashboard = Property(bool)
+    show_public = Property(bool)
+    domain = Property(Domain, backref="categories")
 
 
 class Categories(sdk.python.entities.Resource):

@@ -1,8 +1,8 @@
 import datetime
 import sdk.python.entities
-import sdk.python.invoices
 import sdk.python.users
 from sdk.python.util.business_default import PAYMENT_TYPES
+from sdk.python.entities import Property
 
 
 class Payment(sdk.python.entities.Entity):
@@ -13,17 +13,15 @@ class Payment(sdk.python.entities.Entity):
     def __init__(self):
         super(Payment, self).__init__()
         self.escape_fields = ['payment_type', 'pay_date']
-        self.json_property(int, 'id')
-        self.json_property(str, 'note')
-        self.json_property(int, 'payment_type')
-        self.json_property(datetime.datetime, 'pay_date')
-        self.json_property(float, 'amount')
-        self.recursive_json_property(sdk.python.invoices.Invoice,
-                                     'invoice')
-        self.recursive_json_property(sdk.python.users.Users,
-                                     'payment_recorder')
-        self.json_property(bool, 'send_sms')
-        self.json_property(bool, 'send_email')
+
+    id = Property(int)
+    note = Property(str)
+    payment_type = Property(int)
+    pay_date = Property(datetime.datetime)
+    amount = Property(float)
+    payment_recorder = Property(sdk.python.users.Users)
+    send_sms = Property(bool)
+    send_email = Property(bool)
 
     def payment_type_string(self):
         """ Return the string value of payment type from the

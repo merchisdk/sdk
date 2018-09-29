@@ -1,3 +1,4 @@
+import functools
 import math
 from datetime import datetime
 import json
@@ -12,6 +13,47 @@ import sdk.python.util.errors
 from sdk.python.request import Request
 from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable=import-error
 from jinja2 import utils
+
+
+class Property(object):
+    def __init__(self, remote_type, backref=None):
+        self.remote_type = remote_type
+        self.backref = backref
+
+
+class Meta(type):
+    def __new__(cls, name, bases, attrs):
+        scalar_properties = {}
+        recursive_properties = {}
+        attrs["_is_merchi_entity"] = True
+        for key, value in attrs.items():
+            if isinstance(value, Property):
+                if getattr(value.remote_type, '_is_merchi_entity', False):
+                    recursive_properties[key] = value.remote_type
+                else:
+                    scalar_properties[key] = value.remote_type
+        attrs["json_properties"] = scalar_properties
+        attrs["recursive_properties"] = recursive_properties
+        new_cls = super().__new__(cls, name, bases, attrs)
+        inner_init = new_cls.__init__  # type: ignore
+
+        def wrap_init(*args, **kwargs):
+            inner_init(*args, **kwargs)
+            object = args[0]
+            for prop in object.json_properties:
+                setattr(object, prop, None)
+            for prop in object.recursive_properties:
+                setattr(object, prop, None)
+
+        new_cls.__init__ = functools.update_wrapper(wrap_init, inner_init)  # type: ignore  # noqa
+        for key, value in attrs.items():
+            if isinstance(value, Property) and getattr(value.remote_type,
+                                                       '_is_merchi_entity',
+                                                       False) \
+               and value.backref:
+
+                value.remote_type.recursive_properties[value.backref] = new_cls
+        return new_cls
 
 
 def enumerate_files(files):
@@ -51,7 +93,7 @@ def intercept_missing_entities(e):
     raise e
 
 
-class Entity(object):
+class Entity(object, metaclass=Meta):
 
     primary_key = 'id'
     file_data = []  # type: ignore
@@ -61,8 +103,6 @@ class Entity(object):
         self.escape_fields = []  # type: ignore
         # should not apply html safe to url fields
         self.url_fields = []  # type: ignore
-        self.json_properties = {}  # type: ignore
-        self.recursive_properties = {}  # type: ignore
         self.rights = Rights(ALL_RIGHTS)
         # if it is set to True the entity should
         # only be treat as a reference to the backend
@@ -300,18 +340,6 @@ class Entity(object):
             if recursive_property and isinstance(recursive_property, Entity) \
                     and not recursive_property.is_empty():
                 recursive_property.process_before_transfer()
-
-    def json_property(self, type_, attr):
-        if not hasattr(self, 'json_properties'):
-            self.json_properties = {}
-        setattr(self, attr, None)
-        self.json_properties[attr] = type_
-
-    def recursive_json_property(self, other, attr):
-        if not hasattr(self, 'recursive_properties'):
-            self.recursive_properties = {}
-        setattr(self, attr, None)
-        self.recursive_properties[attr] = other
 
     def primary_value(self):
         return getattr(self, self.primary_key)
