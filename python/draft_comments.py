@@ -1,9 +1,8 @@
 import datetime
 import sdk.python.entities
-import sdk.python.drafts
+from sdk.python.entities import Property
 import sdk.python.users
 from sdk.python.files import File
-import sdk.python.notifications
 
 
 class DraftComment(sdk.python.entities.Entity):
@@ -11,26 +10,15 @@ class DraftComment(sdk.python.entities.Entity):
     resource = '/draft_comments/'
     json_name = 'draft_comment'
 
-    def __init__(self):
-        super(DraftComment, self).__init__()
-
-        self.json_property(int, 'id')
-        self.recursive_json_property(sdk.python.drafts.Draft,
-                                     'draft')
-        self.recursive_json_property(sdk.python.jobs.Job,
-                                     'job')
-        self.recursive_json_property(sdk.python.users.User, 'user')
-        self.recursive_json_property(File, 'file')
-        self.recursive_json_property(sdk.python.users.User, 'forwards')
-        self.recursive_json_property(sdk.python.notifications.Notification,
-                                     'notifications')
-        self.json_property(int, 'urgency')
-        self.json_property(str, 'subject')
-        self.json_property(datetime.datetime, 'date')
-        self.json_property(str, 'text')
-        self.json_property(bool, 'change_request')
-        self.json_property(bool, 'send_sms')
-        self.json_property(bool, 'send_email')
+    id = Property(int)
+    file = Property(File)
+    urgency = Property(int)
+    subject = Property(str)
+    date = Property(datetime.datetime)
+    text = Property(str)
+    change_request = Property(bool)
+    send_sms = Property(bool)
+    send_email = Property(bool)
 
 
 class DraftComments(sdk.python.entities.Resource):

@@ -1,5 +1,6 @@
 import copy
 import sdk.python.entities
+from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.specification_field_type import SELECT, CHECKBOX, RADIO, \
     has_options_array, COLOUR_SELECT, FILE_UPLOAD
@@ -13,14 +14,15 @@ class SpecificationFieldOption(sdk.python.entities.Entity):
     def __init__(self):
         super(SpecificationFieldOption, self).__init__()
         self.escape_fields = ["default"]
-        self.json_property(int, 'id')
-        self.json_property(str, 'value')
-        self.json_property(str, 'colour')
-        self.json_property(int, 'position')
-        self.json_property(float, 'specification_cost')
-        self.json_property(float, 'specification_unit_cost')
-        self.json_property(float, 'default')
-        self.recursive_json_property(File, "linked_file")
+
+    id = Property(int)
+    value = Property(str)
+    colour = Property(str)
+    position = Property(int)
+    specification_cost = Property(float)
+    specification_unit_cost = Property(float)
+    default = Property(float)
+    linked_file = Property(File)
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
@@ -41,33 +43,31 @@ class SpecificationField(sdk.python.entities.Entity):
     def __init__(self):
         super(SpecificationField, self).__init__()
         self.escape_fields = ['field_type', 'required', 'specification_cost']
-        self.json_property(int, 'id')
-        self.json_property(int, 'field_type')
-        self.json_property(int, 'position')
-        self.json_property(int, 'rows')
-        self.json_property(int, 'field_min')
-        self.json_property(int, 'field_max')
-        self.json_property(bool, 'required')
-        self.json_property(bool, 'independent')
-        self.json_property(bool, 'show_file_preview')
-        self.json_property(bool, 'allow_decimal')
-        self.json_property(bool, 'allow_file_multiple')
-        self.json_property(bool, 'allow_file_jpeg')
-        self.json_property(bool, 'allow_file_gif')
-        self.json_property(bool, 'allow_file_pdf')
-        self.json_property(bool, 'allow_file_png')
-        self.json_property(bool, 'allow_file_ai')
-        self.json_property(bool, 'multiple_select')
-        self.json_property(str, 'name')
-        self.json_property(str, 'default_value')
-        self.json_property(str, 'placeholder')
-        self.json_property(float, 'specification_cost')
-        self.json_property(float, 'specification_unit_cost')
-        self.json_property(float, 'cost')
-        self.recursive_json_property(SpecificationFieldOption,
-                                     "options")
-        self.recursive_json_property(SpecificationFieldOption,
-                                     "default_options")
+    id = Property(int)
+    field_type = Property(int)
+    position = Property(int)
+    rows = Property(int)
+    field_min = Property(int)
+    field_max = Property(int)
+    required = Property(bool)
+    independent = Property(bool)
+    show_file_preview = Property(bool)
+    allow_decimal = Property(bool)
+    allow_file_multiple = Property(bool)
+    allow_file_jpeg = Property(bool)
+    allow_file_gif = Property(bool)
+    allow_file_pdf = Property(bool)
+    allow_file_png = Property(bool)
+    allow_file_ai = Property(bool)
+    multiple_select = Property(bool)
+    name = Property(str)
+    default_value = Property(str)
+    placeholder = Property(str)
+    specification_cost = Property(float)
+    specification_unit_cost = Property(float)
+    cost = Property(float)
+    options = Property(SpecificationFieldOption)
+    default_options = Property(SpecificationFieldOption)
 
     def is_select(self):
         return self.field_type == SELECT
@@ -95,10 +95,10 @@ class SpecificationField(sdk.python.entities.Entity):
         specification_built.once_off_cost = 0
         specification_built.value = ""
         if self.field_type == CHECKBOX:
-            specification_built.value = []  # type: ignore
+            specification_built.value = []
             for option in self.options:
                 if option.default:
-                    specification_built.value.append(option.id)  # type: ignore
+                    specification_built.value.append(option.id)
                     specification_built.once_off_cost +=\
                         option.specification_cost
             specification_built.value = \
@@ -122,17 +122,15 @@ class SpecificationField(sdk.python.entities.Entity):
 class SpecificationOption(sdk.python.entities.Entity):
     json_name = 'specification_option'
 
-    def __init__(self):
-        super(SpecificationOption, self).__init__()
-        self.json_property(int, 'option_id')
-        self.json_property(int, 'quantity')
-        self.json_property(str, 'value')
-        self.json_property(str, 'colour')
-        self.json_property(str, 'field_name')
-        self.json_property(float, 'once_off_cost')
-        self.json_property(float, 'unit_cost')
-        self.json_property(float, 'unit_cost_total')
-        self.json_property(float, 'total_cost')
+    option_id = Property(int)
+    quantity = Property(int)
+    value = Property(str)
+    colour = Property(str)
+    field_name = Property(str)
+    once_off_cost = Property(float)
+    unit_cost = Property(float)
+    unit_cost_total = Property(float)
+    total_cost = Property(float)
 
 
 class Specification(sdk.python.entities.Entity):
@@ -140,19 +138,16 @@ class Specification(sdk.python.entities.Entity):
     resource = '/specifications/'
     json_name = 'specification'
 
-    def __init__(self):
-        super(Specification, self).__init__()
-        self.json_property(int, 'id')
-        self.json_property(int, 'quantity')
-        self.json_property(str, 'value')
-        self.json_property(float, 'cost')
-        self.json_property(float, 'once_off_cost')
-        self.json_property(float, 'unit_cost')
-        self.json_property(float, 'unit_cost_total')
-        self.recursive_json_property(SpecificationOption, 'selected_options')
-        self.recursive_json_property(File, 'specification_files')
-        self.recursive_json_property(SpecificationField,
-                                     "specification_field")
+    id = Property(int)
+    quantity = Property(int)
+    value = Property(str)
+    cost = Property(float)
+    once_off_cost = Property(float)
+    unit_cost = Property(float)
+    unit_cost_total = Property(float)
+    selected_options = Property(SpecificationOption)
+    specification_files = Property(File)
+    specification_field = Property(SpecificationField)
 
     def is_selectable(self):
         """ Returns True if the field type is selectable """
@@ -236,13 +231,10 @@ class SpecificationsGroup(sdk.python.entities.Entity):
     resource = "/specifications_groups/"
     json_name = "specifications_group"
 
-    def __init__(self):
-        super(SpecificationsGroup, self).__init__()
-        self.json_property(int, 'id')
-        self.json_property(int, 'quantity')
-        self.json_property(float, 'group_cost')
-        self.recursive_json_property(Specification,
-                                     "specifications")
+    id = Property(int)
+    quantity = Property(int)
+    group_cost = Property(float)
+    specifications = Property(Specification)
 
     def link_to_fields(self, fields):
         for specification in self.specifications:

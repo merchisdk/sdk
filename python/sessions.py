@@ -1,4 +1,5 @@
 import sdk.python.entities
+from sdk.python.entities import Property
 from sdk.python.users import User
 from sdk.python.domains import Domain
 
@@ -13,14 +14,11 @@ class Session(sdk.python.entities.Entity):
     resource = '/sessions/'
     json_name = 'session'
 
-    def __init__(self):
-        super(Session, self).__init__()
-
-        self.json_property(str, 'ip')
-        self.recursive_json_property(User, 'user')
-        self.recursive_json_property(Domain, 'domain')
-        self.json_property(str, 'token')
-        self.json_property(bool, 'remember')
+    ip = Property(str)
+    user = Property(User)
+    domain = Property(Domain)
+    token = Property(str)
+    remember = Property(bool)
 
     def cookie_ttl(self):
         if self.remember:

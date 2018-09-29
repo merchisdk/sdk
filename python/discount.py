@@ -1,5 +1,5 @@
 import sdk.python.entities
-import sdk.python.products
+from sdk.python.entities import Property
 
 
 class Discount(sdk.python.entities.Entity):
@@ -7,12 +7,9 @@ class Discount(sdk.python.entities.Entity):
     resource = '/discount/'
     json_name = 'discount'
 
-    def __init__(self):
-        super(Discount, self).__init__()
-        self.json_property(int, 'id')
-        self.json_property(float, 'lower_limit')
-        self.json_property(float, 'amount')
-        self.recursive_json_property(sdk.python.products.Product, 'product')
+    id = Property(int)
+    lower_limit = Property(float)
+    amount = Property(float)
 
 
 class Discounts(sdk.python.entities.Resource):

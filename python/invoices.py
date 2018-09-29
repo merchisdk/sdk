@@ -1,6 +1,5 @@
 import datetime
 import sdk.python.entities
-import sdk.python.jobs
 from sdk.python.payments import Payment
 from sdk.python.items import Item
 from sdk.python.addresses import Address
@@ -12,6 +11,7 @@ from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
 from sdk.python.util.money_protocol import format_currency
 import sdk.python.util.invoice_status
+from sdk.python.entities import Property
 
 
 class Invoice(sdk.python.entities.Entity):
@@ -19,44 +19,41 @@ class Invoice(sdk.python.entities.Entity):
     resource = '/invoices/'
     json_name = 'invoice'
 
-    def __init__(self):
-        super(Invoice, self).__init__()
-        self.json_property(str, 'note')
-        self.json_property(datetime.datetime, 'creation_date')
-        self.json_property(datetime.datetime, 'payment_deadline')
-        self.json_property(datetime.datetime, 'reminded')
-        self.json_property(datetime.datetime, 'archived')
-        self.json_property(int, 'id')
-        self.json_property(bool, 'send_sms')
-        self.json_property(bool, 'send_email')
-        self.json_property(bool, 'unpaid')
-        self.json_property(bool, 'accept_stripe')
-        self.json_property(bool, 'accept_paypal')
-        self.json_property(bool, 'accept_bank_transfer')
-        self.json_property(bool, 'accept_phone_payment')
-        self.json_property(bool, 'is_remindable')
-        self.json_property(bool, 'force_reminders')
-        self.json_property(float, 'total_cost')
-        self.json_property(float, 'subtotal_cost')
-        self.json_property(float, 'tax_amount')
-        self.json_property(str, 'currency')
-        self.json_property(str, 'invoice_token')
-        self.json_property(str, 'reminder_message')
-        self.recursive_json_property(User, 'responsible_manager')
-        self.recursive_json_property(User, 'creator')
-        self.recursive_json_property(User, 'client')
-        self.recursive_json_property(PhoneNumber, 'client_phone')
-        self.recursive_json_property(EmailAddress, 'client_email')
-        self.recursive_json_property(sdk.python.jobs.Job, 'jobs')
-        self.recursive_json_property(Company, 'client_company')
-        self.recursive_json_property(PhoneNumber, 'client_company_phone')
-        self.recursive_json_property(EmailAddress, 'client_company_email')
-        self.recursive_json_property(Item, 'items')
-        self.recursive_json_property(Address, 'shipping')
-        self.recursive_json_property(Domain, 'domain')
-        self.recursive_json_property(File, 'pdf')
-        self.recursive_json_property(File, 'receipt')
-        self.recursive_json_property(Payment, 'payments')
+    note = Property(str)
+    creation_date = Property(datetime.datetime)
+    payment_deadline = Property(datetime.datetime)
+    reminded = Property(datetime.datetime)
+    archived = Property(datetime.datetime)
+    id = Property(int)
+    send_sms = Property(bool)
+    send_email = Property(bool)
+    unpaid = Property(bool)
+    accept_stripe = Property(bool)
+    accept_paypal = Property(bool)
+    accept_bank_transfer = Property(bool)
+    accept_phone_payment = Property(bool)
+    is_remindable = Property(bool)
+    force_reminders = Property(bool)
+    total_cost = Property(float)
+    subtotal_cost = Property(float)
+    tax_amount = Property(float)
+    currency = Property(str)
+    invoice_token = Property(str)
+    reminder_message = Property(str)
+    responsible_manager = Property(User)
+    creator = Property(User)
+    client = Property(User)
+    client_phone = Property(PhoneNumber)
+    client_email = Property(EmailAddress)
+    client_company = Property(Company)
+    client_company_phone = Property(PhoneNumber)
+    client_company_email = Property(EmailAddress)
+    items = Property(Item, backref="invoice")
+    shipping = Property(Address)
+    domain = Property(Domain)
+    pdf = Property(File)
+    receipt = Property(File)
+    payments = Property(Payment, backref="invoice")
 
     def process_for_transfer(self):
         # can not update product by updating invoice
