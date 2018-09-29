@@ -2,6 +2,7 @@ import datetime
 from werkzeug.utils import secure_filename
 import sdk.python.entities
 import sdk.python.users
+from sdk.python.entities import Property
 
 
 class File(sdk.python.entities.Entity):
@@ -10,17 +11,17 @@ class File(sdk.python.entities.Entity):
     json_name = 'file'
     url_fields = ['view_url', 'download_url']
 
+    id = Property(int)
+    name = Property(str)
+    size = Property(int)
+    mimetype = Property(str)
+    view_url = Property(str)
+    download_url = Property(str)
+    creation_date = Property(datetime.datetime)
+
     def __init__(self):
         super(File, self).__init__()
         self.url_fields = ['view_url', 'download_url']
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.json_property(int, 'size')
-        self.json_property(str, 'mimetype')
-        self.json_property(str, 'view_url')
-        self.json_property(str, 'download_url')
-        self.json_property(datetime.datetime, 'creation_date')
-        self.recursive_json_property(sdk.python.users.User, "uploader")
         self.file_data = []  # type: ignore
 
     def from_flask_file(self, flask_file):

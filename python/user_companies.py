@@ -1,5 +1,5 @@
 import sdk.python.entities
-from sdk.python.companies import Company
+from sdk.python.entities import Property
 
 
 class UserCompany(sdk.python.entities.Entity):
@@ -8,13 +8,11 @@ class UserCompany(sdk.python.entities.Entity):
     json_name = 'userCompany'
 
     def __init__(self):
-        from sdk.python.users import User
         super(UserCompany, self).__init__()
         self.escape_fields = ['main', 'is_admin']
-        self.json_property(bool, 'main')
-        self.json_property(bool, 'is_admin')
-        self.recursive_json_property(Company, 'company')
-        self.recursive_json_property(User, 'user')
+
+    main = Property(bool)
+    is_admin = Property(bool)
 
 
 class UserCompanies(sdk.python.entities.Resource):
