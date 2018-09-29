@@ -1,5 +1,6 @@
 import sdk.python.entities
 from sdk.python.util.item_types import item_type
+from sdk.python.entities import Property
 
 
 class BidItem(sdk.python.entities.Entity):
@@ -7,14 +8,11 @@ class BidItem(sdk.python.entities.Entity):
     resource = '/bid_items'
     json_name = 'bid_item'
 
-    def __init__(self):
-        super(BidItem, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(int, 'type')
-        self.json_property(int, 'quantity')
-        self.json_property(str, 'description')
-        self.json_property(float, 'unit_price')  # unit cents in db
+    id = Property(int)
+    type = Property(int)
+    quantity = Property(int)
+    description = Property(str)
+    unit_price = Property(float)  # unit cents in db
 
     def item_total(self):
         """ Calculate the total of the item by

@@ -1,4 +1,5 @@
 import sdk.python.entities
+from sdk.python.entities import Property
 from sdk.python.categories import Category
 from sdk.python.discount import Discount
 from sdk.python.domains import Domain
@@ -12,43 +13,36 @@ class Product(sdk.python.entities.Entity):
     resource = '/products/'
     json_name = 'product'
 
-    def __init__(self):
-        super(Product, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.json_property(str, 'notes')
-        self.json_property(str, 'description')
-        self.json_property(float, 'unit_price')
-        self.json_property(float, 'unit_amount')
-        self.json_property(float, 'minimum')
-        self.json_property(float, 'unit_weight')
-        self.json_property(float, 'unit_height')
-        self.json_property(float, 'unit_width')
-        self.json_property(float, 'unit_depth')
-        self.json_property(float, 'unit_volume')
-        self.json_property(bool, "needs_drafting")
-        self.json_property(bool, "needs_production")
-        self.json_property(bool, "needs_shipping")
-        self.json_property(bool, 'show_public')
-        self.json_property(bool, "accept_stripe")
-        self.json_property(bool, "accept_paypal")
-        self.json_property(bool, "accept_bank_transfer")
-        self.json_property(bool, 'accept_phone_payment')
-        self.json_property(bool, 'allow_payment_upfront')
-        self.json_property(bool, 'allow_quotation')
-        self.json_property(int, 'delivery_days_normal')
-        self.json_property(float, 'best_price')
-        self.recursive_json_property(Category, 'categories')
-        self.recursive_json_property(Discount, 'discounts')
-        self.recursive_json_property(Domain, 'domain')
-        self.recursive_json_property(File, 'files')
-        self.recursive_json_property(SpecificationField,
-                                     "independent_variation_fields")
-        self.recursive_json_property(SpecificationField,
-                                     "group_variation_fields")
-        self.recursive_json_property(sdk.python.users.User,
-                                     'suppliers')
+    id = Property(int)
+    name = Property(str)
+    notes = Property(str)
+    description = Property(str)
+    unit_price = Property(float)
+    unit_amount = Property(float)
+    minimum = Property(float)
+    unit_weight = Property(float)
+    unit_height = Property(float)
+    unit_width = Property(float)
+    unit_depth = Property(float)
+    unit_volume = Property(float)
+    needs_drafting = Property(bool)
+    needs_production = Property(bool)
+    needs_shipping = Property(bool)
+    show_public = Property(bool)
+    accept_stripe = Property(bool)
+    accept_paypal = Property(bool)
+    accept_bank_transfer = Property(bool)
+    accept_phone_payment = Property(bool)
+    allow_payment_upfront = Property(bool)
+    allow_quotation = Property(bool)
+    delivery_days_normal = Property(int)
+    best_price = Property(float)
+    categories = Property(Category)
+    discounts = Property(Discount, backref="product")
+    domain = Property(Domain, backref="products")
+    files = Property(File)
+    independent_variation_fields = Property(SpecificationField)
+    group_variation_fields = Property(SpecificationField)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
