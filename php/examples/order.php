@@ -52,7 +52,8 @@
 
     $product_list = get_products_for_domain($domain);
 
-    function generate_notes() {
+    function generate_notes()
+    {
         global $sitename, $product_list, $product, $notes, $quantity;
         $result = "order from: $sitename\n";
         foreach ($product_list as $a_product) {
@@ -68,7 +69,8 @@
         return $result;
     }
 
-    function transpose($file_post) {
+    function transpose($file_post)
+    {
         $file_ary = [];
         $file_count = count($file_post['name']);
         $file_keys = array_keys($file_post);
@@ -81,7 +83,8 @@
         return $file_ary;
     }
 
-    function text_input($label, $id, $value, $err) {
+    function text_input($label, $id, $value, $err)
+    {
         echo "<div>";
         echo "<label for=\"$id\">$label:</label>";
         echo "<input type=\"text\" id=\"$id\" name=\"$id\"";
@@ -91,7 +94,8 @@
         echo "</div>";
     }
 
-    function product_select() {
+    function product_select()
+    {
         global $product_list, $product;
         echo "<div><label for=\"product\">product:</label>";
         echo "<select name=\"product\">";

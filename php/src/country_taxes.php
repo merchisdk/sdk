@@ -16,7 +16,8 @@ class CountryTax extends Entity
         $this->json_property('tax_percent', 'float');
     }
 
-    function country_name(){
+    function country_name()
+    {
         global $COUNTRIES;
         if ($this->country) {
             return $COUNTRIES[$this->country];
@@ -25,7 +26,8 @@ class CountryTax extends Entity
         }
     }
 
-    function full_name(){
+    function full_name()
+    {
         $format = "%s (%s)";
         return sprintf($format, $this->tax_name, $this->country_name());
     }
