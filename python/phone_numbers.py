@@ -1,4 +1,5 @@
 import sdk.python.entities
+from sdk.python.entities import Property
 
 
 class PhoneNumber(sdk.python.entities.Entity):
@@ -24,11 +25,11 @@ class PhoneNumber(sdk.python.entities.Entity):
         super(PhoneNumber, self).__init__()
         self.escape_fields = ['code']
 
-        self.json_property(int, 'id')
-        self.json_property(str, 'number')
-        self.json_property(str, 'code')
-        self.json_property(str, 'local_format_number')
-        self.json_property(str, 'international_format_number')
+    id = Property(int)
+    number = Property(str)
+    code = Property(str)
+    local_format_number = Property(str)
+    international_format_number = Property(str)
 
 
 class PhoneNumbers(sdk.python.entities.Resource):

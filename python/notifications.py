@@ -3,13 +3,12 @@ import sdk.python.entities
 import sdk.python.job_comments
 import sdk.python.draft_comments
 import sdk.python.production_comments
-import sdk.python.users
 import sdk.python.domains
-import sdk.python.jobs
 import sdk.python.files
 import sdk.python.util.notification_sources as note_source
 import sdk.python.util.notification_type as note_type
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
+from sdk.python.entities import Property
 
 
 class Notification(sdk.python.entities.Entity):
@@ -17,40 +16,30 @@ class Notification(sdk.python.entities.Entity):
     resource = '/notifications/'
     json_name = 'notification'
 
-    def __init__(self):
-        super(Notification, self).__init__()
+    id = Property(int)
+    date = Property(datetime.datetime)
+    domain = Property(sdk.python.domains.Domain)
+    related_job_comment = Property(sdk.python.job_comments.JobComment,
+                                   backref="notifications")
+    related_draft_comment = Property(sdk.python.draft_comments.DraftComment)
+    related_production_comment = Property(sdk.python.production_comments.
+                                          ProductionComment,
+                                          backref="notifications")
+    attachment = Property(sdk.python.files.File)
+    seen = Property(bool)
+    send_email = Property(bool)
+    send_sms = Property(bool)
+    urgency = Property(int)
+    notification_type = Property(int)
+    description = Property(str)
+    subject = Property(str)
+    message = Property(str)
 
-        self.json_property(int, 'id')
-        self.recursive_json_property(sdk.python.users.User,
-                                     'recipient')
-        self.recursive_json_property(sdk.python.users.User,
-                                     'sender')
-        self.json_property(datetime.datetime, 'date')
-        self.recursive_json_property(sdk.python.domains.Domain, 'domain')
-        self.recursive_json_property(sdk.python.jobs.Job, 'related_job')
-        self.recursive_json_property(sdk.python.job_comments.JobComment,
-                                     'related_job_comment')
-        self.recursive_json_property(sdk.python.draft_comments.DraftComment,
-                                     'related_draft_comment')
-        self.recursive_json_property(sdk.python.production_comments.
-                                     ProductionComment,
-                                     'related_production_comment')
-        self.recursive_json_property(sdk.python.files.File,
-                                     "attachment")
-        self.json_property(bool, 'seen')
-        self.json_property(bool, 'send_email')
-        self.json_property(bool, 'send_sms')
-        self.json_property(int, 'urgency')
-        self.json_property(int, 'notification_type')
-        self.json_property(str, 'description')
-        self.json_property(str, 'subject')
-        self.json_property(str, 'message')
+    # not embedded by default, must be requested
+    html_message = Property(str)
 
-        # not embedded by default, must be requested
-        self.json_property(str, 'html_message')
-
-        self.json_property(str, 'link')
-        self.json_property(int, 'section')
+    link = Property(str)
+    section = Property(int)
 
     def have_link(self):
         return self.link and self.link.lower() != 'none'

@@ -8,6 +8,7 @@ import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
+from sdk.python.entities import Property
 
 
 class Domain(sdk.python.entities.Entity):
@@ -36,33 +37,25 @@ class Domain(sdk.python.entities.Entity):
     resource = '/domains/'
     json_name = 'domain'
 
-    def __init__(self):
-        from sdk.python.products import Product
-        from sdk.python.categories import Category
-        super(Domain, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(int, 'active_theme_id')
-        self.json_property(str, 'domain')
-        self.json_property(str, 'sub_domain')
-        self.json_property(str, 'email_domain')
-        self.json_property(str, 'theme')
-        self.json_property(str, 'sms_name')
-        self.json_property(str, 'api_secret')
-        self.json_property(str, 'conversion_tracking_code')
-        self.json_property(bool, 'show_domain_publicly')
-        self.json_property(bool, 'enable_notifications')
-        self.json_property(bool, 'enable_email_notifications')
-        self.json_property(bool, 'enable_sms_notifications')
-
-        self.recursive_json_property(Theme, 'active_theme')
-        self.recursive_json_property(DomainInvitation, 'domain_invitations')
-        self.recursive_json_property(Company, "company")
-        self.recursive_json_property(File, "logo")
-        self.recursive_json_property(Product, "products")
-        self.recursive_json_property(Category, 'categories')
-        self.recursive_json_property(Theme, 'themes')
-        self.recursive_json_property(Menu, 'menus')
+    id = Property(int)
+    active_theme_id = Property(int)
+    domain = Property(str)
+    sub_domain = Property(str)
+    email_domain = Property(str)
+    theme = Property(str)
+    sms_name = Property(str)
+    api_secret = Property(str)
+    conversion_tracking_code = Property(str)
+    show_domain_publicly = Property(bool)
+    enable_notifications = Property(bool)
+    enable_email_notifications = Property(bool)
+    enable_sms_notifications = Property(bool)
+    active_theme = Property(Theme, backref="domain")
+    domain_invitations = Property(DomainInvitation, backref='domain')
+    company = Property(Company)
+    logo = Property(File)
+    themes = Property(Theme)
+    menus = Property(Menu)
 
     def public_categories(self):
         """ Return domain categories which are public """
@@ -119,14 +112,9 @@ class EnrolledDomain(sdk.python.entities.Entity):
     resource = '/enrolled_domains/'
     json_name = 'enrolled_domain'
 
-    def __init__(self):
-        from sdk.python.users import User
-
-        super(EnrolledDomain, self).__init__()
-        self.json_property(int, 'id')
-        self.json_property(str, 'role')
-        self.recursive_json_property(Domain, "domain")
-        self.recursive_json_property(User, "user")
+    id = Property(int)
+    role = Property(str)
+    domain = Property(Domain)
 
 
 class Domains(sdk.python.entities.Resource):

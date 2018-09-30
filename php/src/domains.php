@@ -9,7 +9,8 @@ class Domain extends Entity
     public static $resource = '/domains/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('domain', 'string');
         $this->json_property('email_domain', 'string');
@@ -21,7 +22,8 @@ class Domain extends Entity
 
 class Domains_ extends Resource
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->entity_class = 'Domain';
         $this->json_name = 'domainss';
     }
