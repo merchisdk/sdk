@@ -8,7 +8,8 @@ class Bank extends Entity
     public static $resource = '/banks/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('bank_name', 'string');
         $this->json_property('account_number', 'string');
