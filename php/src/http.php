@@ -21,11 +21,13 @@ class Request
     public $data = [];
     public $files = [];
 
-    public function path() {
+    public function path()
+    {
         return $this->version . $this->resource;
     }
 
-    public function url() {
+    public function url()
+    {
         $query_string = '?' . http_build_query($this->query);
         $result = $this->server . $this->path();
         if ($query_string !== '') {
@@ -34,7 +36,8 @@ class Request
         return $result;
     }
 
-    public function send() {
+    public function send()
+    {
         $handle = curl_init();
         $data = $this->data;
         $file_count = count($this->files);
@@ -66,7 +69,8 @@ class Request
         return $response;
     }
 
-    function __construct() {
+    function __construct()
+    {
         $this->server = BACKEND_PROTO . BACKEND_URI;
     }
 

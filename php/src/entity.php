@@ -3,7 +3,8 @@
 require_once 'http.php';
 require_once 'utility.php';
 
-function generate_request($data, $email = null, $password = null) {
+function generate_request($data, $email = null, $password = null)
+{
     $request = new Request();
     $request->data = $data;
     $request->username = $email;
@@ -11,7 +12,8 @@ function generate_request($data, $email = null, $password = null) {
     return $request;
 }
 
-function check_response($response) {
+function check_response($response)
+{
     if ($response->status_code < 199 || $response->status_code > 299)
     {
         $body = json_decode($response->body, true);
@@ -33,12 +35,14 @@ class Entity
     public $escape_fields = [];
     public $recursive_properties = [];
 
-    public function send_to_entity($request, $identifier) {
+    public function send_to_entity($request, $identifier)
+    {
         $request->resource = $this::$resource . $identifier . '/';
         return $request->send();
     }
 
-    public function get($identifier, $embed = null) {
+    public function get($identifier, $embed = null)
+    {
         $request = new Request();
         $request->query['embed'] = $embed;
         $response = $this->send_to_entity($request, $identifier);
@@ -47,20 +51,23 @@ class Entity
         return $this->from_json($body);
     }
 
-    public function delete($identifier) {
+    public function delete($identifier)
+    {
         $request = new Request();
         $request->method = 'DELETE';
         return $this->send_to_entity($request, $identifier);
     }
 
-    public function destroy() {
+    public function destroy()
+    {
         list($_, $status) = $this->delete($this->primary_value());
         if ($status != 204) {
             throw new Exception('could not destroy object.');
         }
     }
 
-    public function create($email = null, $password = null) {
+    public function create($email = null, $password = null)
+    {
         list($data, $files) = $this->serialise();
         $request = generate_request($data, $email, $password);
         $request->method = 'POST';
@@ -70,31 +77,36 @@ class Entity
         check_response($response);
     }
 
-    public function put($data = '', $email = null, $password = null) {
+    public function put($data = '', $email = null, $password = null)
+    {
         $request = generate_request($data, $email, $password);
         $request->method = 'PUT';
         return $this->sent_to_entity($request, $this->primary_value());
     }
 
-    public function patch($data = '', $email = null, $password = null) {
+    public function patch($data = '', $email = null, $password = null)
+    {
         $request = generate_request($data, $email, $password);
         $request->method = 'PATCH';
         return $this->send_to_entity($request, $this->primary_value());
     }
 
-    public function primary_value() {
+    public function primary_value()
+    {
         $key = self::$primary_key;
         return $this->$key;
     }
 
     public function json_property($name, $type, $default = null,
-                                  $many = False, $recursive = null) {
+                                  $many = False, $recursive = null)
+    {
         $this->json_properties[$name] = [$type, $many, $recursive];
         $this->$name = $default;
     }
 
     public function serialise($force_primary = True, $files = [],
-                              $render_nulls = False) {
+                              $render_nulls = False)
+    {
         $result = [];
         if ($force_primary) {
             $result[self::$primary_key] = $this->primary_value();
@@ -155,7 +167,8 @@ class Entity
         return "<Entity " . get_class($this) . ">";
     }
 
-    public function from_json($json) {
+    public function from_json($json)
+    {
         $given_type = gettype($json);
         $my_class = get_class($this);
         $my_name = $my_class::$json_name;
@@ -205,7 +218,8 @@ class Entity
 
 class Resource
 {
-    public function from_json($json) {
+    public function from_json($json)
+    {
         $result = [];
         $o = $json[$this->json_name];
         foreach ($o as $item) {
@@ -217,13 +231,15 @@ class Resource
         return $result;
     }
 
-    public function uri() {
+    public function uri()
+    {
         $class = $this->entity_class;
         $entity = new $class();
         return $entity::$resource;
     }
 
-    public function get($embed = Null) {
+    public function get($embed = Null)
+    {
         $request = new Request();
         $request->query['embed'] = $embed;
         $request->resource = $this->uri();

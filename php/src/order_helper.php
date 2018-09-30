@@ -10,7 +10,8 @@
     require_once 'companies.php';
     require_once 'entity.php';
 
-    function send_order_request($user, $job) {
+    function send_order_request($user, $job)
+    {
         list($user_data, $_) = $user->serialise();
         $temp_array = [];
         foreach ($user_data as $key => $value) {
@@ -91,7 +92,8 @@
         send_order_request($u, $j);
     }
 
-    function get_products_for_domain($domain_id) {
+    function get_products_for_domain($domain_id)
+    {
         $domain_object = new Domain();
         $domain_object->id = $domain_id;
         $domain_object->get($domain_id, $embed = '{"products": {}}');
