@@ -50,16 +50,16 @@ ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 # users who are in the management team of the domain
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
-# users who enrolled in the domain but are not one of the  management team
-USER_ROLES = {SUPPLIER, CLIENT, THEME_EDITOR}
-
-# all registered user type
-ACCOUNTS = MANAGEMENT_ROLES.copy()
-ACCOUNTS.update(USER_ROLES)
+# users who have works with the domain but are not one of the management team
+DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR}
 
 # users who are involved as business parties
-BUSINESS_ACCOUNTS = ACCOUNTS.copy()
-BUSINESS_ACCOUNTS.remove(CLIENT)
+BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
+BUSINESS_ACCOUNTS.update(DOMAIN_WORKERS)
+
+# all registered user type
+ACCOUNTS = BUSINESS_ACCOUNTS.copy()
+ACCOUNTS.add(CLIENT)
 
 ALL_ROLES = ACCOUNTS.copy()
 ALL_ROLES.add(PUBLIC)
