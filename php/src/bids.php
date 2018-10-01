@@ -3,7 +3,8 @@
 require_once 'entity.php';
 require_once 'bid_items.php';
 
-function addup_subtotal($prev_total, $b){
+function addup_subtotal($prev_total, $b)
+{
     // Return the value of object.quantity * object.unit_price
     return $prev_total + ($b->quantity * $b->unit_price);
 }

@@ -1,5 +1,6 @@
 import pycountry
 import sdk.python.entities
+from sdk.python.entities import Property
 
 
 class CountryTax(sdk.python.entities.Entity):
@@ -7,13 +8,10 @@ class CountryTax(sdk.python.entities.Entity):
     resource = '/country_taxes/'
     json_name = 'countryTax'
 
-    def __init__(self):
-        super(CountryTax, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(str, 'country')
-        self.json_property(str, 'tax_name')
-        self.json_property(float, 'tax_percent')
+    id = Property(int)
+    country = Property(str)
+    tax_name = Property(str)
+    tax_percent = Property(float)
 
     def country_name(self):
         if not self.country:

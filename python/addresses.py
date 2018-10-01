@@ -1,5 +1,6 @@
 import pycountry
 import sdk.python.entities
+from sdk.python.entities import Property
 
 
 class Address(sdk.python.entities.Entity):
@@ -7,16 +8,13 @@ class Address(sdk.python.entities.Entity):
     resource = '/addresses/'
     json_name = 'address'
 
-    def __init__(self):
-        super(Address, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(str, 'line_one')
-        self.json_property(str, 'line_two')
-        self.json_property(str, 'city')
-        self.json_property(str, 'state')
-        self.json_property(str, 'country')
-        self.json_property(str, 'postcode')
+    id = Property(int)
+    line_one = Property(str)
+    line_two = Property(str)
+    city = Property(str)
+    state = Property(str)
+    country = Property(str)
+    postcode = Property(str)
 
     def __repr__(self):
         return "{},{},{},{},{}".format(self.line_one,

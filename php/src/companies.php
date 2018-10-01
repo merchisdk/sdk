@@ -8,7 +8,8 @@ class Company extends Entity
     public static $resource = '/companies/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
         $this->json_property('default_currency', 'string');

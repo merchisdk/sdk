@@ -8,7 +8,8 @@ class EmailAddress extends Entity
     public static $resource = '/email_addresses/';
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->json_property('id', 'integer');
         $this->json_property('emailAddress', 'string');
     }

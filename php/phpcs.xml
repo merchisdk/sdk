@@ -36,7 +36,6 @@
         <exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
         <exclude name="Squiz.WhiteSpace.OperatorSpacing.SpacingAfter" />
         <exclude name="quiz.NamingConventions.ValidVariableName.NotCamelCaps" />
-        <exclude name="PEAR.Functions.FunctionDeclaration.BraceOnSameLine" />
         <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
         <exclude name="Squiz.Commenting.VariableComment.Missing" />

@@ -6,6 +6,7 @@ import sdk.python.util.address_util as address_util
 import sdk.python.util.gravatar as gravatar
 from sdk.python.util.time_util import get_tzinfo_from_timezone_name
 import sdk.python.entities
+from sdk.python.entities import Property
 from sdk.python.user_companies import UserCompany
 from sdk.python.email_addresses import EmailAddress
 from sdk.python.addresses import Address
@@ -15,6 +16,12 @@ from sdk.python.notifications import Notification
 from sdk.python.files import File
 from sdk.python.products import Product
 from sdk.python.domains import EnrolledDomain
+from sdk.python.themes import Theme
+from sdk.python.domain_invitations import DomainInvitation
+from sdk.python.job_comments import JobComment
+from sdk.python.drafts import Draft
+from sdk.python.draft_comments import DraftComment
+from sdk.python.production_comments import ProductionComment
 
 
 class SystemRole(sdk.python.entities.Entity):
@@ -22,9 +29,7 @@ class SystemRole(sdk.python.entities.Entity):
     resource = '/system_roles/'
     json_name = 'system_role'
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.json_property(int, 'role')
+    role = Property(int)
 
     def __repr__(self, **kwargs):
         return "<role {}>".format(self.role)
@@ -35,37 +40,48 @@ class User(sdk.python.entities.Entity):
     resource = '/users/'
     json_name = 'user'
 
-    def __init__(self):
-        super(User, self).__init__()
-
-        self.json_property(int, 'id')
-        self.json_property(str, 'name')
-        self.json_property(str, 'password')
-        self.json_property(str, 'reset_token')
-        self.json_property(datetime.datetime, 'created')
-        self.json_property(str, 'timezone')
-        self.recursive_json_property(EmailAddress, 'email_addresses')
-        # not embedded by default, must be requested
-        self.json_property(int, 'incomplete_jobs_count')
-        self.json_property(int, 'unpaid_jobs_count')
-        self.json_property(int, 'ready_for_shipping_count')
-        self.json_property(int, 'production_quoting_count')
-        self.json_property(str, 'comments')
-        self.json_property(str, 'preferred_language')
-        self.json_property(bool, 'enable_crash_reports')
-        self.json_property(bool, 'enable_client_emails')
-        self.json_property(bool, 'enable_invoice_reminders')
-        self.json_property(bool, 'is_super_user')
-        self.recursive_json_property(SystemRole, 'system_roles')
-        self.recursive_json_property(UserCompany, 'user_companies')
-        self.recursive_json_property(Address, 'addresses')
-        self.recursive_json_property(PhoneNumber, 'phone_numbers')
-        self.recursive_json_property(Category, 'categories')
-        self.recursive_json_property(Notification, 'notifications')
-        self.recursive_json_property(EnrolledDomain, 'enrolled_domains')
-        # products that supplier can produce
-        self.recursive_json_property(Product, 'products')
-        self.recursive_json_property(File, 'profile_picture')
+    id = Property(int)
+    name = Property(str)
+    password = Property(str)
+    reset_token = Property(str)
+    created = Property(datetime.datetime)
+    timezone = Property(str)
+    email_addresses = Property(EmailAddress)
+    # not embedded by default, must be requested
+    incomplete_jobs_count = Property(int)
+    unpaid_jobs_count = Property(int)
+    ready_for_shipping_count = Property(int)
+    production_quoting_count = Property(int)
+    comments = Property(str)
+    preferred_language = Property(str)
+    enable_crash_reports = Property(bool)
+    enable_client_emails = Property(bool)
+    enable_invoice_reminders = Property(bool)
+    is_super_user = Property(bool)
+    system_roles = Property(SystemRole)
+    user_companies = Property(UserCompany, backref="user")
+    addresses = Property(Address)
+    phone_numbers = Property(PhoneNumber)
+    categories = Property(Category)
+    notifications = Property(Notification)
+    enrolled_domains = Property(EnrolledDomain, backref="user")
+    # products that supplier can produce
+    products = Property(Product, backref="suppliers")
+    profile_picture = Property(File)
+    upload_files = Property(File, backref="uploader")
+    themes = Property(Theme, backref="author")
+    sent_domain_invitations = Property(DomainInvitation, backref="sender")
+    received_domain_invitations = Property(DomainInvitation, backref="user")
+    job_comments = Property(JobComment, backref="user")
+    forwarded_job_comments = Property(JobComment, backref="forwards")
+    drafts = Property(Draft, backref="designer")
+    draft_comments = Property(DraftComment, backref="user")
+    forwarded_draft_comments = Property(DraftComment, backref="forwards")
+    production_comments = Property(ProductionComment, backref="user")
+    forwarded_production_comments = Property(ProductionComment,
+                                             backref="forwards")
+    notifications = Property(Notification, backref="recipient")
+    sent_notifications = Property(Notification, backref="sender")
 
     def role_in_domain(self, domain_id):
         """ The role of this user of specific domain id """

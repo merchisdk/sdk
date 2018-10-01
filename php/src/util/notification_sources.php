@@ -43,7 +43,8 @@ const JOB_SECTION_STRINGS = [SYSTEM =>  "system",
                        INVOICE =>  'invoice',
                        REMINDER =>  'reminder'];
 
-function section_string($section_code){
+function section_string($section_code)
+{
     /*
         Given integer section_code denoting the job section, return a
         lower case string naming that section. Defaults to 'system'
