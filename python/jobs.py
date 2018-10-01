@@ -80,7 +80,7 @@ class Job(sdk.python.entities.Entity):
     specifications = Property(Specification)
     shipment = Property(Shipment, backref="jobs")
     tax_type = Property(CountryTax)
-    tags = Property(DomainTag)
+    tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")
     drafts = Property(Draft, backref="job")
     draft_comments = Property(DraftComment, backref="job")
