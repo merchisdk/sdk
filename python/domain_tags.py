@@ -10,7 +10,7 @@ class DomainTag(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
-    domain = Property(Domain)
+    domain = Property(Domain, backref="tags")
 
 
 class DomainTags(sdk.python.entities.Resource):
