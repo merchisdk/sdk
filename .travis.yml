@@ -6,8 +6,8 @@ matrix:
         - composer global require phpmd/phpmd
         - composer global require "squizlabs/php_codesniffer=*"
       script:
-        - export PATH=~/.composer/vendor/bin:$PATH
-        - ls ~/.composer/vendor/bin
+        - export PATH=~/.config/composer/vendor/bin:$PATH
+        - ls ~/.config/composer/vendor/bin
         - echo $PATH
         - which phpmd 
         - php/lint.sh
