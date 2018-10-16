@@ -22,6 +22,7 @@ SUPPLIER = 4
 CLIENT = 5
 MANAGER = 6
 ACCOUNTANT = 7
+THEME_EDITOR = 8
 
 ROLE_STRINGS = {PUBLIC: "public",
                 ADMIN: "admin",
@@ -30,7 +31,8 @@ ROLE_STRINGS = {PUBLIC: "public",
                 SUPPLIER: "supplier",
                 CLIENT: "client",
                 MANAGER: "manager",
-                ACCOUNTANT: "accountant"}
+                ACCOUNTANT: "accountant",
+                THEME_EDITOR: "theme editor"}
 
 ROLE_CSS_CLASS = {PUBLIC: "default",
                   ADMIN: "inverse",
@@ -39,7 +41,8 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
                   SUPPLIER: "warning",
                   CLIENT: "danger",
                   MANAGER: "primary",
-                  ACCOUNTANT: 'info'}
+                  ACCOUNTANT: 'info',
+                  THEME_EDITOR: "success"}
 
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
@@ -47,13 +50,14 @@ ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 # users who are in the management team of the domain
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
+# users who have works with the domain but are not one of the management team
+DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR}
+
 # users who are involved as business parties
 BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
-BUSINESS_ACCOUNTS.add(SUPPLIER)
+BUSINESS_ACCOUNTS.update(DOMAIN_WORKERS)
 
-# users who are the users of the domain
-USER_ROLES = {SUPPLIER, CLIENT}
-
+# all registered user type
 ACCOUNTS = BUSINESS_ACCOUNTS.copy()
 ACCOUNTS.add(CLIENT)
 
