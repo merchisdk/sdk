@@ -7,6 +7,10 @@ from sdk.python.domain_invitations import DomainInvitation
 import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
+from sdk.python.util.google import reconstitute_global_script
+from sdk.python.util.google import extract_new_global_script_parameters
+from sdk.python.util.google import reconstitute_new_conversion_script
+from sdk.python.util.google import extract_new_conversion_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
 
 
@@ -50,6 +54,8 @@ class Domain(sdk.python.entities.Entity):
         self.json_property(str, 'sms_name')
         self.json_property(str, 'api_secret')
         self.json_property(str, 'conversion_tracking_code')
+        self.json_property(str, 'new_conversion_tracking_code')
+        self.json_property(str, 'new_global_tracking_code')
         self.json_property(bool, 'show_domain_publicly')
         self.json_property(bool, 'enable_notifications')
         self.json_property(bool, 'enable_email_notifications')
@@ -104,6 +110,42 @@ class Domain(sdk.python.entities.Entity):
             return ''
         script_parameters = extract_script_parameters(code)
         return reconstitute_conversion_script(script_parameters, invoice)
+
+    def safe_new_conversion_tracking_code(self, invoice=None):
+        """ Return javascript conversion code string safe to serve to clients.
+
+            Javascript is 'santised' to remove any unknown parts by simply
+            extracting known parameters from the format that a correct
+            conversion tracking code is expected to be in, and then
+            rerendering it in that format. In the process, any extra code
+            gets thrown away.
+
+            If invoice is supplied, it may be used to fill in any missing
+            non domain constant details like currency and value.
+        """
+        code = self.new_conversion_tracking_code
+        if code is None or code == '':
+            return ''
+        script_parameters = extract_new_conversion_script_parameters(code)
+        return reconstitute_new_conversion_script(script_parameters, invoice)
+
+    def safe_new_global_tracking_code(self, invoice=None):
+        """ Return javascript tracking code string safe to serve to clients.
+
+            Javascript is 'santised' to remove any unknown parts by simply
+            extracting known parameters from the format that a correct
+            conversion tracking code is expected to be in, and then
+            rerendering it in that format. In the process, any extra code
+            gets thrown away.
+
+            If invoice is supplied, it may be used to fill in any missing
+            non domain constant details like currency and value.
+        """
+        code = self.new_global_tracking_code
+        if code is None or code == '':
+            return ''
+        script_parameters = extract_new_global_script_parameters(code)
+        return reconstitute_global_script(script_parameters, invoice)
 
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
