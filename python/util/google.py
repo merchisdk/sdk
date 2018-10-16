@@ -26,6 +26,26 @@ var google_remarketing_only = {remarketing_only};
 </noscript>
 """
 
+global_script = """
+<script async src="https://www.googletagmanager.com/gtag/js?id={}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{}');
+</script>
+"""
+
+
+conversion_script = """
+<script>
+  gtag('event', 'conversion', {'send_to': '{}',
+                               'currency': {},
+                               'value': {}});
+</script>
+"""
+
 
 class ScriptError(Exception):
 
@@ -113,6 +133,39 @@ r_remarketing_only = re.compile(r_dec("google_remarketing_only",
                                       r_val(r_bool_or_str_bool)))
 
 
+def r_gtag_call(contents):
+    return r"\s*gtag\(\s*" + contents + r"\s*\)\s*"
+
+
+def r_config_call(param):
+    return r_gtag_call(r"['\"]config['\"]\s*,\s*" + param)
+
+
+r_tag_fmt = r"[A-Z][A-Z]-[0-9]+"
+
+r_str_global = r_config_call(r"['\"]" + r_val(r_tag_fmt) + r"['\"]")
+
+
+def r_conversion_call(param):
+    conversion = r"['\"]event['\"]\s*,\s*['\"]conversion['\"]\s*,\s*" + param
+    return r_gtag_call(conversion)
+
+
+def r_send_to_call(param):
+    send_to = r"{\s*['\"]send_to['\"]\s*:\s*" + param + r"\s*}"
+    return r_conversion_call(send_to)
+
+
+r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9]+"
+
+r_str_new_conversion = r_send_to_call(r"['\"]" + r_val(r_new_conversion_id) +
+                                      r"['\"]")
+
+r_global_gtag = re.compile(r_str_global)
+
+r_new_conversion = re.compile(r_str_new_conversion)
+
+
 class ScriptParameters(object):
 
     def __init__(self, conversion_id, conversion_language, conversion_format,
@@ -191,6 +244,52 @@ def extract_script_parameters(text):
                             conversion_currency, remarketing_only, pixel_url)
 
 
+def extract_new_global_script_parameters(text):
+    """ Extract the variable parameters from a global google analytics script.
+
+        If the provided text appears to be of the correct format (see
+        `format` above), return a gtag id.
+
+        If the pattern is not matched, raise ScriptError with a message
+        describing the problem.
+
+        Dangerous or uncheckable constructs are not allowed. Whitespace is
+        mostly ignored where reasonable, but full parsing is not done. E.G.
+        javascript string escaping is not supported.
+
+        The resulting values are safe to render directly into a javascript
+        context (strings should be quoted, as in the pattern, but need not be
+        escaped).
+    """
+    gtag_id = get_group(r_global_gtag, text)
+    if gtag_id is None:
+        raise ScriptError("could not find  gtag id")
+    return gtag_id
+
+
+def extract_new_conversion_script_parameters(text):
+    """ Extract the variable parameters from a new style conversion script.
+
+        If the provided text appears to be of the correct format (see
+        `format` above), return a gtag conversion id.
+
+        If the pattern is not matched, raise ScriptError with a message
+        describing the problem.
+
+        Dangerous or uncheckable constructs are not allowed. Whitespace is
+        mostly ignored where reasonable, but full parsing is not done. E.G.
+        javascript string escaping is not supported.
+
+        The resulting values are safe to render directly into a javascript
+        context (strings should be quoted, as in the pattern, but need not be
+        escaped).
+    """
+    gtag_id = get_group(r_new_conversion, text)
+    if gtag_id is None:
+        raise ScriptError("could not find gtag id")
+    return gtag_id
+
+
 def reconstitute_conversion_script(parameters, invoice=None):
     """ Render a ScriptParameters into a google analytics script string.
 
@@ -211,3 +310,27 @@ def reconstitute_conversion_script(parameters, invoice=None):
                          remarketing_only=parameters.remarketing_only,
                          conversion_value=parameters.conversion_value,
                          pixel_url=parameters.pixel_url)
+
+
+def reconstitute_global_script(gtag_id):
+    """ Render a tag id into a google tracking script string.
+
+        Performs no escaping or validation -- dangerous or incorrect parameters
+        should all already have been rejected at input time.
+    """
+    return global_script.format(gtag_id, gtag_id)
+
+
+def reconstitute_new_conversion_script(conversion_id, invoice=None):
+    """ Render a tag id into a google convesion tracking script string.
+
+        Performs no escaping or validation -- dangerous or incorrect parameters
+        should all already have been rejected at input time.
+    """
+    conversion_currency = 'undefined'
+    conversion_value = 'undefined'
+    if invoice:
+        conversion_currency = invoice.currency
+        conversion_value = invoice.total_cost
+    return conversion_script.format(conversion_id, conversion_currency,
+                                    conversion_value)
