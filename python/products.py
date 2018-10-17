@@ -18,7 +18,6 @@ class Product(sdk.python.entities.Entity):
     notes = Property(str)
     description = Property(str)
     unit_price = Property(float)
-    unit_amount = Property(float)
     minimum = Property(float)
     unit_weight = Property(float)
     unit_height = Property(float)
