@@ -1,7 +1,6 @@
 import datetime
 import sdk.python.entities
 import sdk.python.job_comments
-import sdk.python.draft_comments
 import sdk.python.production_comments
 import sdk.python.domains
 import sdk.python.files
@@ -21,7 +20,7 @@ class Notification(sdk.python.entities.Entity):
     domain = Property(sdk.python.domains.Domain)
     related_job_comment = Property(sdk.python.job_comments.JobComment,
                                    backref="notifications")
-    related_draft_comment = Property(sdk.python.draft_comments.DraftComment)
+    related_draft_comment = Property("sdk.python.draft_comments.DraftComment")
     related_production_comment = Property(sdk.python.production_comments.
                                           ProductionComment,
                                           backref="notifications")

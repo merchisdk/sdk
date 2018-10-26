@@ -2,8 +2,6 @@
 import collections
 import datetime
 import sdk.python.entities
-from sdk.python.users import User
-from sdk.python.products import Product
 from sdk.python.job_comments import JobComment
 from sdk.python.draft_comments import DraftComment
 from sdk.python.production_comments import ProductionComment
@@ -39,10 +37,10 @@ class Job(sdk.python.entities.Entity):
         self.escape_fields = ['product', 'quantity', 'tax_type']
 
     id = Property(int)
-    client = Property(User)
-    manager = Property(User)
-    designer = Property(User)
-    product = Property(Product)
+    client = Property('sdk.python.users.User')
+    manager = Property('sdk.python.users.User')
+    designer = Property('sdk.python.users.User')
+    product = Property('sdk.python.products.Product')
     comments = Property(JobComment)
     draft_comments = Property(DraftComment)
     drafts = Property(Draft)
@@ -441,7 +439,7 @@ class Assignment(sdk.python.entities.Entity):
     production_deadline = Property(datetime.datetime)
     assignment_deadline = Property(datetime.datetime)
     job = Property(Job, backref="assignments")
-    supplier = Property(User)
+    supplier = Property('sdk.python.users.User')
     bid = Property(Bid, backref="assignments")
     comments = Property(ProductionComment, backref="assignment")
     shipment = Property(Shipment, backref="assignments")
