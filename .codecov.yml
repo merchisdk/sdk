@@ -17,7 +17,6 @@ coverage:
         if_no_uploads: error
         if_not_found: success
         if_ci_failed: error
-    # pull requests only: this commit status will measure the
     patch:
       default:
         enabled: yes
@@ -26,11 +25,4 @@ coverage:
         if_no_uploads: error
         if_not_found: success
         if_ci_failed: error
-    changes:
-      default:
-        enabled: yes
-        if_no_uploads: error
-        if_not_found: success
-        if_ci_failed: error
-
 comment: false

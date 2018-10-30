@@ -122,7 +122,7 @@ class Domain(sdk.python.entities.Entity):
         script_parameters = extract_new_conversion_script_parameters(code)
         return reconstitute_new_conversion_script(script_parameters, invoice)
 
-    def safe_new_global_tracking_code(self, invoice=None):
+    def safe_new_global_tracking_code(self):
         """ Return javascript tracking code string safe to serve to clients.
 
             Javascript is 'santised' to remove any unknown parts by simply
@@ -130,15 +130,12 @@ class Domain(sdk.python.entities.Entity):
             conversion tracking code is expected to be in, and then
             rerendering it in that format. In the process, any extra code
             gets thrown away.
-
-            If invoice is supplied, it may be used to fill in any missing
-            non domain constant details like currency and value.
         """
         code = self.new_global_tracking_code
         if code is None or code == '':
             return ''
         script_parameters = extract_new_global_script_parameters(code)
-        return reconstitute_global_script(script_parameters, invoice)
+        return reconstitute_global_script(script_parameters)
 
     def logo_url(self):
         """ Return the domain logo if there is one or else return the
