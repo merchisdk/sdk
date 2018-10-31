@@ -13,10 +13,10 @@ const LOW_STRING = "low";
 
 // map strings to integers
 const PRIORITY_OPTIONS = [
-    URGENT_STRING =>  URGENT_JOB_PRIORITY,
-    HIGH_STRING =>  HIGH_JOB_PRIORITY,
-    MEDIUM_STRING =>  MEDIUM_JOB_PRIORITY,
-    LOW_STRING =>  LOW_JOB_PRIORITY];
+    URGENT_STRING => URGENT_JOB_PRIORITY,
+    HIGH_STRING => HIGH_JOB_PRIORITY,
+    MEDIUM_STRING => MEDIUM_JOB_PRIORITY,
+    LOW_STRING => LOW_JOB_PRIORITY];
 
 // map integers to strings
 $PRIORITY_OPTIONS_REVERSE_MAP = [];
@@ -34,13 +34,13 @@ const PHONE_PAYMENT = 6;
 const CREDIT_CARD = 7;
 
 const PAYMENT_TYPES = [
-    ONLINE_PAYMENT =>  "Online Payment",
-    PAYPAL_PAYMENT =>  "PayPal Payment",
-    BANK_TRANSFER =>  "Bank Transfer",
-    CASH =>  "Cash",
-    CHEQUE =>  "Cheque",
-    PHONE_PAYMENT =>  "Phone Payment",
-    CREDIT_CARD =>  "Credit Card"];
+    ONLINE_PAYMENT => "Online Payment",
+    PAYPAL_PAYMENT => "PayPal Payment",
+    BANK_TRANSFER => "Bank Transfer",
+    CASH => "Cash",
+    CHEQUE => "Cheque",
+    PHONE_PAYMENT => "Phone Payment",
+    CREDIT_CARD => "Credit Card"];
 
 $PAYMENT_TYPES_OPTIONS = [];
 foreach (PAYMENT_TYPES as $key => $value){
