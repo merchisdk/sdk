@@ -12,7 +12,7 @@ coverage:
     project:
       default:
         enabled: yes
-        target: 0%
+        target: 12%
         threshold: 1%
         if_no_uploads: error
         if_not_found: success
