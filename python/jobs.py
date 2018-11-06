@@ -17,6 +17,8 @@ from sdk.python.addresses import Address
 from sdk.python.bids import Bid
 from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
+from sdk.python.phone_numbers import PhoneNumber
+from sdk.python.email_addresses import EmailAddress
 from sdk.python.specifications import Specification, SpecificationsGroup
 from sdk.python.notifications import Notification
 from sdk.python.util.status import PRODUCTION_STATUS, PAYMENT_STATUS, \
