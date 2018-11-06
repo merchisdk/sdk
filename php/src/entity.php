@@ -127,8 +127,8 @@ class Entity
             } else if ($actual_type === "array" && $many) {
                 $i = 0;
                 foreach ($value as $property) {
-                    list($sub_data, $files) =
-                        $property->serialise($force_primary, $files);
+                    list($sub_data,
+                         $files) = $property->serialise($force_primary, $files);
                     // $remote_name = $property::$json_name;
                     foreach ($sub_data as $subname => $subvalue) {
                         if ($subname === 'id') continue;
@@ -139,8 +139,8 @@ class Entity
                     $result[$name . '-count'] = $i;
                 }
             } else if ($actual_type === "object") {
-                list($sub_data, $files) =
-                    $value->serialise($force_primary, $files);
+                list($sub_data, $files) = $value->serialise($force_primary,
+                                                            $files);
                 foreach ($sub_data as $subname => $subvalue) {
                     $result[$name . '-' . $subname] = $subvalue;
                 }

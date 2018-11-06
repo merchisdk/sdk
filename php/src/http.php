@@ -43,7 +43,7 @@ class Request
         $file_count = count($this->files);
         for ($i = 0; $i < $file_count; ++$i) {
             $file = $this->files[$i];
-            $data[strval($i)] =  new CurlFile(realpath($file->file_data),
+            $data[strval($i)] = new CurlFile(realpath($file->file_data),
                                               $file->mimetype, strval($i));
         }
         curl_setopt_array($handle,

@@ -67,6 +67,8 @@ class User(sdk.python.entities.Entity):
     enrolled_domains = Property(EnrolledDomain, backref="user")
     # products that supplier can produce
     products = Property(Product, backref="suppliers")
+    # products that are saved by user for future reference
+    saved_products = Property(Product, backref="saved_by")
     profile_picture = Property(File)
     upload_files = Property(File, backref="uploader")
     themes = Property(Theme, backref="author")
