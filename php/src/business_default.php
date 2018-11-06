@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 const DEFAULT_INVOICE_DUE_TIME = 24;  // default 1 day count by hours
 
 const URGENT_JOB_PRIORITY = 1;
