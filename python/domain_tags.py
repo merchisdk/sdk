@@ -10,6 +10,7 @@ class DomainTag(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    colour = Property(int)
     domain = Property(Domain, backref="tags")
 
 
