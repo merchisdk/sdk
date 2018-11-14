@@ -12,7 +12,7 @@ class SupplyDomainAndProduct(sdk.python.entities.Entity):
     id = Property(int)
     product = Property(Product, backref="supplied_by_domain_products")
     supply_product = Property(Product, backref="supplied_products")
-    supply_domain = Property(User, backref="supplied_products")
+    supply_domain = Property(Domain, backref="supplied_products")
 
 
 class SupplyDomainAndProducts(sdk.python.entities.Resource):
