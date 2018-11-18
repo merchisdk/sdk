@@ -15,6 +15,8 @@ from sdk.python.addresses import Address
 from sdk.python.bids import Bid
 from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
+from sdk.python.phone_numbers import PhoneNumber
+from sdk.python.email_addresses import EmailAddress
 from sdk.python.specifications import Specification, SpecificationsGroup
 from sdk.python.notifications import Notification
 from sdk.python.util.status import PRODUCTION_STATUS, PAYMENT_STATUS, \
@@ -49,7 +51,11 @@ class Job(sdk.python.entities.Entity):
     shipping = Property(Address)
     production_shipping_address = Property(Address)
     notifications = Property(Notification)
+    client_phone = Property(PhoneNumber)
+    client_email = Property(EmailAddress)
     client_company = Property(Company)
+    client_company_phone = Property(PhoneNumber)
+    client_company_email = Property(EmailAddress)
     quantity = Property(int)
     notes = Property(str)
     production_notes = Property(str)
