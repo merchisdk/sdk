@@ -53,7 +53,6 @@ class Meta(type):
                 setattr(object, prop, None)
             for prop, remote_type in object.recursive_properties.items():
                 # dynamically import module if module specified as string
-                print(object.__module__)
                 if isinstance(remote_type, str):
                     remote_module_path = '.'.join(remote_type.split('.')[:-1])
                     remote_cls_name = remote_type.split('.')[-1]
