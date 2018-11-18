@@ -16,6 +16,13 @@ from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable
 from jinja2 import utils
 
 
+backref_globals = {}
+
+
+def full_class_path(obj):
+    return obj.__module__ + "." + obj.__class__.__qualname__
+
+
 class Property(object):
     def __init__(self, remote_type, backref=None):
         self.remote_type = remote_type
@@ -46,6 +53,7 @@ class Meta(type):
                 setattr(object, prop, None)
             for prop, remote_type in object.recursive_properties.items():
                 # dynamically import module if module specified as string
+                print(object.__module__)
                 if isinstance(remote_type, str):
                     remote_module_path = '.'.join(remote_type.split('.')[:-1])
                     remote_cls_name = remote_type.split('.')[-1]
@@ -53,17 +61,26 @@ class Meta(type):
                     object.recursive_properties[prop] = \
                         getattr(remote_module, remote_cls_name)
                 setattr(object, prop, None)
+            # backref of dynamic importing
+            for backref, remote_cls in \
+                    backref_globals.get(full_class_path(object), []):
+                object.recursive_properties[backref] = remote_cls
 
         new_cls.__init__ = functools.update_wrapper(wrap_init, inner_init)  # type: ignore  # noqa
         for key, value in attrs.items():
             if isinstance(value, Property) and value.backref:
-                # TODO: 'Dynamic module load should also support backref'
+                # if remote_type is str then go to dynamic import procedures
                 if isinstance(value.remote_type, str):
-                    raise NotImplementedError('Backref has not been supported'
-                                              'for dynamic module reference')
-                if not getattr(value.remote_type, '_is_merchi_entity', False):
+                    if value.remote_type not in backref_globals:
+                        backref_globals[value.remote_type] = \
+                            set([(value.backref, new_cls)])
+                    else:
+                        backref_globals[value.remote_type].add(value.backref)
+                elif getattr(value.remote_type, '_is_merchi_entity', False):
+                    value.remote_type.recursive_properties[value.backref] = \
+                        new_cls
+                else:
                     raise ValueError('Backref should only apply on module')
-                value.remote_type.recursive_properties[value.backref] = new_cls
         return new_cls
 
 
