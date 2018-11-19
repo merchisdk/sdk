@@ -16,7 +16,7 @@ from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable
 from jinja2 import utils
 
 
-backref_globals = {}
+backref_globals = {}  # type: Dict[Any]
 
 
 def full_class_path(obj):
