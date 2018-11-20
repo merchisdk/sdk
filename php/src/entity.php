@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 require_once 'http.php';
 require_once 'utility.php';
