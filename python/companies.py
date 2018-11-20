@@ -5,7 +5,6 @@ from sdk.python.addresses import Address
 from sdk.python.files import File
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
-from sdk.python.products import Product
 import sdk.python.users
 import sdk.python.country_taxes
 from sdk.python.entities import Property
