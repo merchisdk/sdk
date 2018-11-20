@@ -6,6 +6,7 @@ import simplejson
 import arrow
 import flask
 import importlib
+from typing import Dict, Any  # noqa #pylint: disable=unused-import
 from sdk.python.util.rights import Rights, ALL_RIGHTS
 from sdk.python.util.name_protocol import camelize, parse_json_key_camel
 from sdk.python.util.time_util import to_unix_timestamp
@@ -16,7 +17,7 @@ from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable
 from jinja2 import utils
 
 
-backref_globals = {}  # type: Any
+backref_globals = {}  # type: Dict[Any]
 
 
 def full_class_path(obj):
