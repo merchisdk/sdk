@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 require_once 'entity.php';
 require_once 'email_addresses.php';
