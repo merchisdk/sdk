@@ -22,8 +22,9 @@ backref_globals = {}  # type: Dict[Any, Any]
 def parse_time_hook(timestamp, as_user=None):
     """ Return a datetime.datetime object from a unix timestamp integer.
 
-        The ignored as_user parameter is due to an override version of this function
-        defined and used by merchi frontend to enforce more complex processing.
+        The ignored as_user parameter is due to an override version of this
+        function defined and used by merchi frontend to enforce more complex
+        processing.
      """
     try:
         return from_unix_timestamp(timestamp)
