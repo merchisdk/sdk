@@ -14,6 +14,7 @@ require_once 'php/src/bid_items.php';
 require_once 'php/src/util/address.php';
 require_once 'php/src/util/money_protocol.php';
 require_once 'php/src/categories.php';
+require_once 'php/src/util/country_code.php';
 
 final class PhpSuite extends TestCase
 {
@@ -81,5 +82,10 @@ final class PhpSuite extends TestCase
 
         $this->assertEquals($tax->country_name(), 'Australia');
         $this->assertEquals($tax->full_name(), 'GST (Australia)');
+    }
+
+    public function testCountryCode()
+    {
+        $this->assertEquals($COUNTRIES['AU'], 'Australia');
     }
 }
