@@ -1,7 +1,6 @@
 import datetime
 from werkzeug.utils import secure_filename
 import sdk.python.entities
-import sdk.python.users
 from sdk.python.entities import Property
 
 

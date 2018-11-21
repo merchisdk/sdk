@@ -5,6 +5,8 @@ import json
 import simplejson
 import arrow
 import flask
+import importlib
+from typing import Dict, Any  # noqa #pylint: disable=unused-import
 from sdk.python.util.rights import Rights, ALL_RIGHTS
 from sdk.python.util.name_protocol import camelize, parse_json_key_camel
 from sdk.python.util.time_util import to_unix_timestamp
@@ -13,6 +15,13 @@ import sdk.python.util.errors
 from sdk.python.request import Request
 from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable=import-error
 from jinja2 import utils
+
+
+backref_globals = {}  # type: Dict[Any, Any]
+
+
+def full_class_path(obj):
+    return obj.__module__ + "." + obj.__class__.__qualname__
 
 
 class Property(object):
@@ -28,7 +37,8 @@ class Meta(type):
         attrs["_is_merchi_entity"] = True
         for key, value in attrs.items():
             if isinstance(value, Property):
-                if getattr(value.remote_type, '_is_merchi_entity', False):
+                if getattr(value.remote_type, '_is_merchi_entity', False) or \
+                        isinstance(value.remote_type, str):
                     recursive_properties[key] = value.remote_type
                 else:
                     scalar_properties[key] = value.remote_type
@@ -42,17 +52,35 @@ class Meta(type):
             object = args[0]
             for prop in object.json_properties:
                 setattr(object, prop, None)
-            for prop in object.recursive_properties:
+            for prop, remote_type in object.recursive_properties.items():
+                # dynamically import module if module specified as string
+                if isinstance(remote_type, str):
+                    remote_module_path = '.'.join(remote_type.split('.')[:-1])
+                    remote_cls_name = remote_type.split('.')[-1]
+                    remote_module = importlib.import_module(remote_module_path)
+                    object.recursive_properties[prop] = \
+                        getattr(remote_module, remote_cls_name)
                 setattr(object, prop, None)
+            # backref of dynamic importing
+            for backref, remote_cls in \
+                    backref_globals.get(full_class_path(object), []):
+                object.recursive_properties[backref] = remote_cls
 
         new_cls.__init__ = functools.update_wrapper(wrap_init, inner_init)  # type: ignore  # noqa
         for key, value in attrs.items():
-            if isinstance(value, Property) and getattr(value.remote_type,
-                                                       '_is_merchi_entity',
-                                                       False) \
-               and value.backref:
-
-                value.remote_type.recursive_properties[value.backref] = new_cls
+            if isinstance(value, Property) and value.backref:
+                # if remote_type is str then go to dynamic import procedures
+                if isinstance(value.remote_type, str):
+                    if value.remote_type not in backref_globals:
+                        backref_globals[value.remote_type] = \
+                            set([(value.backref, new_cls)])
+                    else:
+                        backref_globals[value.remote_type].add(value.backref)
+                elif getattr(value.remote_type, '_is_merchi_entity', False):
+                    value.remote_type.recursive_properties[value.backref] = \
+                        new_cls
+                else:
+                    raise ValueError('Backref should only apply on module')
         return new_cls
 
 
