@@ -40,7 +40,9 @@ class Company(sdk.python.entities.Entity):
     payment_phone_numbers = Property(PhoneNumber)
     user_companies = Property(sdk.python.user_companies.UserCompany,
                               backref="company")
-
+    # products that are saved by company for future reference
+    saved_products = Property(sdk.python.products.Product,
+                              backref="saved_by_companies")
     banks = Property(Bank)
     default_tax_type = Property(sdk.python.country_taxes.CountryTax)
 

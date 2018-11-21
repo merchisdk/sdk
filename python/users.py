@@ -11,7 +11,6 @@ from sdk.python.user_companies import UserCompany
 from sdk.python.email_addresses import EmailAddress
 from sdk.python.addresses import Address
 from sdk.python.phone_numbers import PhoneNumber
-from sdk.python.categories import Category
 from sdk.python.notifications import Notification
 from sdk.python.files import File
 from sdk.python.products import Product
@@ -62,13 +61,13 @@ class User(sdk.python.entities.Entity):
     user_companies = Property(UserCompany, backref="user")
     addresses = Property(Address)
     phone_numbers = Property(PhoneNumber)
-    categories = Property(Category)
+    categories = Property('sdk.python.categories.Category')
     notifications = Property(Notification)
     enrolled_domains = Property(EnrolledDomain, backref="user")
     # products that supplier can produce
     products = Property(Product, backref="suppliers")
     # products that are saved by user for future reference
-    saved_products = Property(Product, backref="saved_by")
+    saved_products = Property(Product, backref="saved_by_users")
     profile_picture = Property(File)
     upload_files = Property(File, backref="uploader")
     themes = Property(Theme, backref="author")
