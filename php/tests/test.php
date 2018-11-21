@@ -86,6 +86,7 @@ final class PhpSuite extends TestCase
 
     public function testCountryCode()
     {
+        global $COUNTRIES;
         $this->assertEquals($COUNTRIES['AU'], 'Australia');
     }
 }
