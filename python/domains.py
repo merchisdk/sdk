@@ -1,5 +1,4 @@
 import sdk.python.entities
-from sdk.python.companies import Company
 from sdk.python.files import File
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
@@ -58,7 +57,7 @@ class Domain(sdk.python.entities.Entity):
     enable_sms_notifications = Property(bool)
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
-    company = Property(Company)
+    company = Property("sdk.python.companies.Company")
     logo = Property(File)
     themes = Property(Theme)
     menus = Property(Menu)

@@ -1,7 +1,6 @@
 import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
-import sdk.python.users
 from sdk.python.files import File
 
 
