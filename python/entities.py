@@ -9,15 +9,26 @@ import importlib
 from typing import Dict, Any  # noqa #pylint: disable=unused-import
 from sdk.python.util.rights import Rights, ALL_RIGHTS
 from sdk.python.util.name_protocol import camelize, parse_json_key_camel
-from sdk.python.util.time_util import to_unix_timestamp
+from sdk.python.util.time_util import to_unix_timestamp, from_unix_timestamp
 from sdk.python.util.api_error import ApiError
 import sdk.python.util.errors
 from sdk.python.request import Request
-from frontend.views import user_time_from_unix_timestamp  # noqa pylint: disable=import-error
 from jinja2 import utils
 
 
 backref_globals = {}  # type: Dict[Any, Any]
+
+
+def parse_time_hook(timestamp, as_user=None):
+    """ Return a datetime.datetime object from a unix timestamp integer.
+
+        The ignored as_user parameter is due to an override version of this function
+        defined and used by merchi frontend to enforce more complex processing.
+     """
+    try:
+        return from_unix_timestamp(timestamp)
+    except (TypeError, ValueError):
+        return timestamp
 
 
 def full_class_path(obj):
@@ -320,7 +331,7 @@ class Entity(object, metaclass=Meta):
             for json_property, type_ in self.json_properties.items():
                 data = o.get(camelize(json_property), None)
                 if type_ == datetime:
-                    data = user_time_from_unix_timestamp(data)
+                    data = parse_time_hook(data)
                 setattr(self, json_property, data)
             for json_property, relation in self.recursive_properties.items():
                 try:
