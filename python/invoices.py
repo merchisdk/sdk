@@ -4,6 +4,7 @@ from sdk.python.payments import Payment
 from sdk.python.items import Item
 from sdk.python.addresses import Address
 from sdk.python.domains import Domain
+from sdk.python.domain_tags import DomainTag
 from sdk.python.users import User
 from sdk.python.files import File
 from sdk.python.companies import Company
@@ -54,6 +55,7 @@ class Invoice(sdk.python.entities.Entity):
     pdf = Property(File)
     receipt = Property(File)
     payments = Property(Payment, backref="invoice")
+    tags = Property(DomainTag, backref="invoices")
 
     def process_for_transfer(self):
         # can not update product by updating invoice
