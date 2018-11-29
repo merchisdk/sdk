@@ -12,6 +12,7 @@ class Bank(sdk.python.entities.Entity):
     default = Property(bool)
     bank_name = Property(str)
     account_number = Property(str)
+    account_name = Property(str)
     bsb = Property(str)
     swift_code = Property(str)
     iban = Property(str)
