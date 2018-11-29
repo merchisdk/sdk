@@ -14,6 +14,7 @@ class Bank extends Entity
         $this->json_property('id', 'integer');
         $this->json_property('bank_name', 'string');
         $this->json_property('account_number', 'string');
+        $this->json_property('account_name', 'string');
         $this->json_property('bsb', 'string');
         $this->json_property('swift_code', 'string');
         $this->json_property('iban', 'string');
