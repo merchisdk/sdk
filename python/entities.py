@@ -59,11 +59,27 @@ class Meta(type):
         new_cls = super().__new__(cls, name, bases, attrs)
         inner_init = new_cls.__init__  # type: ignore
 
+        def add_property(prop, object):
+            hidden_name = "_" + prop
+            setattr(object, hidden_name, None)
+
+            def get_prop(obj):
+                return getattr(obj, hidden_name)
+
+            def set_prop(obj, value):
+                obj.wants_update[prop] = True
+                obj._is_dirty = True
+                return setattr(obj, hidden_name, value)
+            setattr(new_cls, prop, property(get_prop, set_prop))
+
         def wrap_init(*args, **kwargs):
             inner_init(*args, **kwargs)
             object = args[0]
+            object.wants_update = {}
+            object._is_dirty = False
             for prop in object.json_properties:
-                setattr(object, prop, None)
+                add_property(prop, object)
+                object.wants_update[prop] = False
             for prop, remote_type in object.recursive_properties.items():
                 # dynamically import module if module specified as string
                 if isinstance(remote_type, str):
@@ -72,7 +88,8 @@ class Meta(type):
                     remote_module = importlib.import_module(remote_module_path)
                     object.recursive_properties[prop] = \
                         getattr(remote_module, remote_cls_name)
-                setattr(object, prop, None)
+                add_property(prop, object)
+                object.wants_update[prop] = False
             # backref of dynamic importing
             for backref, remote_cls in \
                     backref_globals.get(full_class_path(object), []):
@@ -204,7 +221,8 @@ class Entity(object, metaclass=Meta):
         self.process_before_transfer()
         data_json, files = self.serialise(force_primary=False,
                                           consider_rights=False,
-                                          for_updates=True)
+                                          for_updates=True,
+                                          exclude_old=True)
         resp = self.patch(data=data_json,
                           files=enumerate_files(files),
                           **kwargs)
@@ -214,7 +232,7 @@ class Entity(object, metaclass=Meta):
 
     def serialise(self, force_primary=True, files=None,
                   time_format=None, consider_rights=True,
-                  for_updates=False, html_safe=False):
+                  for_updates=False, html_safe=False, exclude_old=False):
         result = {}  # type: ignore
 
         def insert_primary_key(result_dict):
@@ -246,6 +264,8 @@ class Entity(object, metaclass=Meta):
             result[Rights.json_name] = self.rights.to_dict()
 
         for property_name, type_ in list(self.json_properties.items()):
+            if exclude_old and not self.wants_update[property_name]:
+                continue
             data = getattr(self, property_name)
             if data is None:
                 continue
@@ -267,9 +287,12 @@ class Entity(object, metaclass=Meta):
         for property_name in self.recursive_properties:
             recursive_property = getattr(self, property_name)
             if recursive_property is None:
-                # skip when the recursive property do not exist
                 pass
             elif isinstance(recursive_property, list):
+                if exclude_old and not (self.wants_update[property_name] or \
+                        any(getattr(r, '_is_dirty', False) for r in
+                            recursive_property)):
+                    continue
                 result[property_name] = []  # type: ignore
                 recursive_properties = recursive_property
                 for each_property in recursive_properties:
@@ -280,12 +303,17 @@ class Entity(object, metaclass=Meta):
                                   for_updates=for_updates)
                     result[property_name].append(d)  # type: ignore
             elif isinstance(recursive_property, int):
+                if exclude_old and not self.wants_update[property_name]:
+                    continue
                 count_key = property_name + '-count'
                 count = result.get(count_key, 0)
                 result[count_key] = count + 1
                 result[property_name + '-{0}-id'.format(count)] = \
                     recursive_property
             else:
+                if exclude_old and not (self.wants_update[property_name] or \
+                        recursive_property._is_dirty):
+                    continue
                 result[property_name], files = recursive_property.\
                     serialise(force_primary, files,
                               html_safe=html_safe,
@@ -314,7 +342,7 @@ class Entity(object, metaclass=Meta):
             data_json_str = ""
         return data_json_str
 
-    def from_json(self, json_object):
+    def from_json(self, json_object, makes_dirty=True):
         try:
             o = json_object[self.json_name]
             if not isinstance(o, (dict, int)):
@@ -325,7 +353,7 @@ class Entity(object, metaclass=Meta):
         if isinstance(o, dict):
             try:
                 rights_codes = o[Rights.json_name]
-                self.rights.from_json(rights_codes)
+                self.rights.from_json(rights_codes, makes_dirty=makes_dirty)
             except KeyError:
                 self.rights.from_json(ALL_RIGHTS)
 
@@ -333,32 +361,50 @@ class Entity(object, metaclass=Meta):
                 data = o.get(camelize(json_property), None)
                 if type_ == datetime:
                     data = parse_time_hook(data)
-                setattr(self, json_property, data)
+                if makes_dirty:
+                    setattr(self, json_property, data)
+                else:
+                    setattr(self, "_" + json_property, data)
             for json_property, relation in self.recursive_properties.items():
+                hidden_name = "_" + json_property
                 try:
                     element = o[camelize(json_property)]
                 except KeyError:
-                    setattr(self, json_property, None)
+                    if makes_dirty:
+                        setattr(self, json_property, None)
+                    else:
+                        setattr(self, hidden_name, None)
                     continue
                 if isinstance(element, int):
                     instance = relation()
-                    instance.from_json(element)
-                    setattr(self, json_property, instance)
+                    instance.from_json(element, makes_dirty=makes_dirty)
+                    if makes_dirty:
+                        setattr(self, json_property, instance)
+                    else:
+                        setattr(self, hidden_name, instance)
                 elif isinstance(element, dict):
                     instance = relation()
-                    instance.from_json(element)
-                    setattr(self, json_property, instance)
+                    instance.from_json(element, makes_dirty=makes_dirty)
+                    if makes_dirty:
+                        setattr(self, json_property, instance)
+                    else:
+                        setattr(self, hidden_name, instance)
                 elif isinstance(element, list):
                     result = []
                     for e in element:
                         # embedded record
                         instance = relation()
-                        instance.from_json(e)
+                        instance.from_json(e, makes_dirty=makes_dirty)
                         result.append(instance)
-                    setattr(self, json_property, result)
+                    if makes_dirty:
+                        setattr(self, json_property, result)
+                    else:
+                        setattr(self, hidden_name, result)
                 else:
-                    setattr(self, json_property, element)
-
+                    if makes_dirty:
+                        setattr(self, json_property, element)
+                    else:
+                        setattr(self, hidden_name, element)
         elif isinstance(o, int):
             setattr(self, self.primary_key, o)
 
@@ -467,7 +513,7 @@ class Entity(object, metaclass=Meta):
         response = entity.send_to_entity(request, identifier)
         check_response(response, 200)
         json_response = response.json()
-        entity.from_json(json_response)
+        entity.from_json(json_response, makes_dirty=False)
         return entity
 
 
@@ -484,12 +530,12 @@ class Resource(object):
         resp = req.send()
         return resp
 
-    def from_json(self, json_object):
+    def from_json(self, json_object, makes_dirty=True):
         result = []
         o = json_object[self.json_name]
         for item in o:
             entity = self.entity_class()
-            entity.from_json(item[entity.json_name])
+            entity.from_json(item[entity.json_name], makes_dirty=makes_dirty)
             result.append(entity)
         return result
 
@@ -498,7 +544,7 @@ class Resource(object):
         check_response(resp, 200)
         response_json = resp.json()
 
-        return (self.from_json(response_json),
+        return (self.from_json(response_json, makes_dirty=False),
                 PageSpecification(response_json['count'],
                                   response_json['available'],
                                   response_json['offset'],
