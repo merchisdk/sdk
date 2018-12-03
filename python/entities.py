@@ -289,9 +289,9 @@ class Entity(object, metaclass=Meta):
             if recursive_property is None:
                 pass
             elif isinstance(recursive_property, list):
-                if exclude_old and not (self.wants_update[property_name] or \
-                        any(getattr(r, '_is_dirty', False) for r in
-                            recursive_property)):
+                if exclude_old and not (self.wants_update[property_name] or
+                                        any(getattr(r, '_is_dirty', False) for
+                                            r in recursive_property)):
                     continue
                 result[property_name] = []  # type: ignore
                 recursive_properties = recursive_property
@@ -311,8 +311,8 @@ class Entity(object, metaclass=Meta):
                 result[property_name + '-{0}-id'.format(count)] = \
                     recursive_property
             else:
-                if exclude_old and not (self.wants_update[property_name] or \
-                        recursive_property._is_dirty):
+                if exclude_old and not (self.wants_update[property_name] or
+                                        recursive_property._is_dirty):
                     continue
                 result[property_name], files = recursive_property.\
                     serialise(force_primary, files,
