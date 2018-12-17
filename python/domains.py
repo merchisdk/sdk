@@ -1,5 +1,6 @@
 import sdk.python.entities
 from sdk.python.files import File
+from sdk.python.supply_domains import SupplyDomain
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
@@ -58,6 +59,7 @@ class Domain(sdk.python.entities.Entity):
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")
+    supply_products = Property(SupplyDomain)
     logo = Property(File)
     themes = Property(Theme)
     menus = Property(Menu)

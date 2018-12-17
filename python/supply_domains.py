@@ -8,11 +8,9 @@ class SupplyDomain(sdk.python.entities.Entity):
     json_name = 'supplyDomain'
 
     id = Property(int)
-    product = Property('sdk.python.products.Product',
-                       backref="supplied_by_domains")
-    supply_product = Property('sdk.python.products.Product',
-                              backref="supply_domains")
-    domain = Property('sdk.python.domains.Domain', backref="supply_products")
+    product = Property('sdk.python.products.Product')
+    supply_product = Property('sdk.python.products.Product')
+    domain = Property('sdk.python.domains.Domain')
 
 
 class SupplyDomains(sdk.python.entities.Resource):
