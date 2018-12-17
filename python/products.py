@@ -3,7 +3,6 @@ from sdk.python.entities import Property
 from sdk.python.categories import Category
 from sdk.python.discount import Discount
 from sdk.python.domains import Domain
-from sdk.python.supply_domains import SupplyDomain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
 from sdk.python.specifications import SpecificationField,\

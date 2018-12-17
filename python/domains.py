@@ -1,6 +1,5 @@
 import sdk.python.entities
 from sdk.python.files import File
-from sdk.python.supply_domains import SupplyDomain
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
