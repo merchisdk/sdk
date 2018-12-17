@@ -27,14 +27,14 @@ def test_supply_domain_backref_valid():
     product = Product()
     # ensure product supply_domains and supplied_by_domains attributes exists
     try:
-        product.supply_domains
-        product.supplied_by_domains
+        assert product.supply_domains is None
+        assert product.supplied_by_domains is None
     except AttributeError:
         assert False
 
     domain = Domain()
     # ensure domain supply_products attributes exists
     try:
-        domain.supply_products
+        assert domain.supply_products is None
     except AttributeError:
         assert False
