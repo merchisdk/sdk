@@ -59,7 +59,6 @@ class Domain(sdk.python.entities.Entity):
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")
-    supply_products = Property(SupplyDomain)
     logo = Property(File)
     themes = Property(Theme)
     menus = Property(Menu)

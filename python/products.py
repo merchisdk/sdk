@@ -45,8 +45,6 @@ class Product(sdk.python.entities.Entity):
     independent_variation_fields = Property(SpecificationField)
     group_variation_fields = Property(SpecificationField)
     tags = Property(DomainTag, backref="products")
-    supplied_by_domains = Property(SupplyDomain)
-    supply_domains = Property(SupplyDomain)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
