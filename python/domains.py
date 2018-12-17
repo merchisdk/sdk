@@ -2,6 +2,7 @@ import sdk.python.entities
 from sdk.python.files import File
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
+from sdk.python.supply_domains import SupplyDomain
 from sdk.python.domain_invitations import DomainInvitation
 import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
@@ -61,6 +62,7 @@ class Domain(sdk.python.entities.Entity):
     logo = Property(File)
     themes = Property(Theme)
     menus = Property(Menu)
+    supply_products = Property(SupplyDomain)
 
     def public_categories(self):
         """ Return domain categories which are public """

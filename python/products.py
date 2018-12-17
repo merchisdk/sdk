@@ -5,6 +5,7 @@ from sdk.python.discount import Discount
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
+from sdk.python.supply_domains import SupplyDomain
 from sdk.python.specifications import SpecificationField,\
     SpecificationsGroup
 
@@ -44,6 +45,8 @@ class Product(sdk.python.entities.Entity):
     independent_variation_fields = Property(SpecificationField)
     group_variation_fields = Property(SpecificationField)
     tags = Property(DomainTag, backref="products")
+    # supplied_by_domains = Property(SupplyDomain)
+    # supply_domains = Property(SupplyDomain)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
