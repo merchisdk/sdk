@@ -30,5 +30,5 @@ beautifulsoup4==4.6.0
 inflection==0.3.1
 pyOpenSSL==17.5.0
 pytest==3.6.1
-lxml==4.2.5
+lxml==3.8.0
 Babel==2.5.1
