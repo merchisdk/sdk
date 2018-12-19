@@ -87,7 +87,8 @@ class Meta(type):
                         backref_globals[value.remote_type] = \
                             set([(value.backref, new_cls)])
                     else:
-                        backref_globals[value.remote_type].add(value.backref)
+                        backref_globals[value.remote_type].\
+                            add((value.backref, new_cls))
                 elif getattr(value.remote_type, '_is_merchi_entity', False):
                     value.remote_type.recursive_properties[value.backref] = \
                         new_cls
