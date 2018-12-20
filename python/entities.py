@@ -60,6 +60,13 @@ class Meta(type):
         inner_init = new_cls.__init__  # type: ignore
 
         def add_property(prop, object):
+            """ Set up a property on the given entity.
+
+                `prop` should be the name of the property.
+                The real value will be stored at `object._prop`, and
+                `object.prop` will be setup as a property object that
+                manages caching and serialising concerns.
+            """
             hidden_name = "_" + prop
             setattr(object, hidden_name, None)
 
@@ -70,6 +77,7 @@ class Meta(type):
                 obj.wants_update[prop] = True
                 obj._is_dirty = True
                 return setattr(obj, hidden_name, value)
+
             setattr(new_cls, prop, property(get_prop, set_prop))
 
         def wrap_init(*args, **kwargs):
