@@ -359,6 +359,17 @@ class Entity(object, metaclass=Meta):
         except (KeyError, TypeError):
             o = json_object
 
+        def set_attribute(public_property, hidden_property, value):
+            """ Set the value of an attribute on self.
+
+                Iff `makes_dirty`, the property will be marked as stale and
+                thus included in any request sent to the backend.
+            """
+            if makes_dirty:
+                setattr(self, public_property, value)
+            else:
+                setattr(self, hidden_property, value)
+
         if isinstance(o, dict):
             try:
                 rights_codes = o[Rights.json_name]
@@ -370,34 +381,22 @@ class Entity(object, metaclass=Meta):
                 data = o.get(camelize(json_property), None)
                 if type_ == datetime:
                     data = parse_time_hook(data)
-                if makes_dirty:
-                    setattr(self, json_property, data)
-                else:
-                    setattr(self, "_" + json_property, data)
+                set_attribute(json_property, '_' + json_property, data)
             for json_property, relation in self.recursive_properties.items():
                 hidden_name = "_" + json_property
                 try:
                     element = o[camelize(json_property)]
                 except KeyError:
-                    if makes_dirty:
-                        setattr(self, json_property, None)
-                    else:
-                        setattr(self, hidden_name, None)
+                    set_attribute(json_property, hidden_name, None)
                     continue
                 if isinstance(element, int):
                     instance = relation()
                     instance.from_json(element, makes_dirty=makes_dirty)
-                    if makes_dirty:
-                        setattr(self, json_property, instance)
-                    else:
-                        setattr(self, hidden_name, instance)
+                    set_attribute(json_property, hidden_name, instance)
                 elif isinstance(element, dict):
                     instance = relation()
                     instance.from_json(element, makes_dirty=makes_dirty)
-                    if makes_dirty:
-                        setattr(self, json_property, instance)
-                    else:
-                        setattr(self, hidden_name, instance)
+                    set_attribute(json_property, hidden_name, instance)
                 elif isinstance(element, list):
                     result = []
                     for e in element:
@@ -405,15 +404,9 @@ class Entity(object, metaclass=Meta):
                         instance = relation()
                         instance.from_json(e, makes_dirty=makes_dirty)
                         result.append(instance)
-                    if makes_dirty:
-                        setattr(self, json_property, result)
-                    else:
-                        setattr(self, hidden_name, result)
+                    set_attribute(json_property, hidden_name, result)
                 else:
-                    if makes_dirty:
-                        setattr(self, json_property, element)
-                    else:
-                        setattr(self, hidden_name, element)
+                    set_attribute(json_property, hidden_name, element)
         elif isinstance(o, int):
             setattr(self, self.primary_key, o)
 
