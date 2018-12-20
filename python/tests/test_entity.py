@@ -42,3 +42,21 @@ def test_withhold_object_non_edits():
     output = j.serialise(exclude_old=True)[0]
     assert output['client']['name'] == 'elephant'
     assert 'quantity' not in output
+
+
+def test_withhold_array_non_edits():
+    # load new data without marking it fresh. this time with nested drafts
+    j = Job()
+    new_data = {'quantity': 42,
+                'drafts': [{'draft': {'viewed': False}}]}
+    j.from_json(new_data, makes_dirty=False)
+    assert j.drafts[0].viewed is False
+    output = j.serialise(exclude_old=True)[0]
+    assert 'drafts' not in output
+    assert 'quantity' not in output
+    # now we touch the drafts viewed
+    j.drafts[0].viewed = True
+    # although j.drafts was not touched directly we need it in the output now
+    output = j.serialise(exclude_old=True)[0]
+    assert output['drafts'][0]['viewed'] is True
+    assert 'quantity' not in output
