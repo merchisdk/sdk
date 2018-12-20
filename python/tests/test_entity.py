@@ -1,7 +1,7 @@
 from python.jobs import Job
 
 
-def test_withhold_non_edits():
+def test_withhold_scalar_non_edits():
     j = Job()
     data = {'quantity': 42}
     # loading data without marking it as fresh
@@ -15,6 +15,9 @@ def test_withhold_non_edits():
     # therefore, it is included by default even in POST requests
     assert j.serialise(exclude_old=True)[0]['quantity'] == 24
     assert j.serialise(exclude_old=False)[0]['quantity'] == 24
+
+
+def test_withhold_object_non_edits():
     # load new data without marking it fresh. this time with a nested user
     j = Job()
     new_data = {'client': {'user': {'name': 'turtle'}}, 'quantity': 42}
