@@ -29,7 +29,7 @@ class Rights(object):
                 return_codes.append(code)
         return return_codes
 
-    def from_json(self, right_codes):
+    def from_json(self, right_codes, makes_dirty=True):
         """ Parse json specification of rights given in right_codes and set
             this object to match the given specification. Returns None.
         """
