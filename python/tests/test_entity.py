@@ -17,6 +17,16 @@ def test_withhold_scalar_non_edits():
     assert j.serialise(exclude_old=False)[0]['quantity'] == 24
 
 
+def test_force_dirty_scalar_edits():
+    j = Job()
+    data = {'quantity': 42}
+    # loading data while insisting that it be considered fresh
+    j.from_json(data, makes_dirty=True)
+    # since quanity is fresh, it will be included in POSTs
+    assert j.serialise(exclude_old=True)[0]['quantity'] == 42
+    assert j.serialise(exclude_old=False)[0]['quantity'] == 42
+
+
 def test_withhold_object_non_edits():
     # load new data without marking it fresh. this time with a nested user
     j = Job()
