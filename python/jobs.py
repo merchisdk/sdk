@@ -64,6 +64,7 @@ class Job(sdk.python.entities.Entity):
     payment_status = Property(int)
     shipping_status = Property(int)
     completed = Property(bool)
+    job_info_approved_by_client = Property(bool)
     priority = Property(int)
     production_files = Property(File)
     client_files = Property(File)
