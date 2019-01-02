@@ -2,8 +2,8 @@
 /**
     The ISO alpha-2 ocuntry codes
 
-    @codeCoverageIgnore
  **/
+// @codeCoverageIgnoreStart
 $COUNTRIES = [
     'AF' => 'Afghanistan',
     'AX' => 'Aland Islands',
@@ -251,3 +251,4 @@ $COUNTRIES = [
     'ZM' => 'Zambia',
     'ZW' => 'Zimbabwe',
 ];
+// @codeCoverageIgnoreEnd
