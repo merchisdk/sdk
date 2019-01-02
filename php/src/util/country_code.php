@@ -1,6 +1,7 @@
 <?php
 /**
     The ISO alpha-2 ocuntry codes
+
     @codeCoverageIgnore
  **/
 $COUNTRIES = [
