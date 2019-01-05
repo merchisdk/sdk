@@ -2,11 +2,12 @@ import functools
 import math
 from datetime import datetime
 import json
+import queue
 import simplejson
 import arrow
 import flask
 import importlib
-from typing import Dict, Any  # noqa #pylint: disable=unused-import
+from typing import Dict, Any, Set  # noqa #pylint: disable=unused-import
 from sdk.python.util.rights import Rights, ALL_RIGHTS
 from sdk.python.util.name_protocol import camelize, parse_json_key_camel
 from sdk.python.util.time_util import to_unix_timestamp, from_unix_timestamp
@@ -75,8 +76,8 @@ class Meta(type):
 
             def set_prop(obj, value):
                 obj.wants_update[prop] = True
-                obj._is_dirty = True
-                return setattr(obj, hidden_name, value)
+                obj.mark_dirty()
+                return obj._set_hidden(hidden_name, value)
 
             setattr(new_cls, prop, property(get_prop, set_prop))
 
@@ -84,7 +85,6 @@ class Meta(type):
             inner_init(*args, **kwargs)
             object = args[0]
             object.wants_update = {}
-            object._is_dirty = False
             for prop in object.json_properties:
                 add_property(prop, object)
                 object.wants_update[prop] = False
@@ -174,6 +174,38 @@ class Entity(object, metaclass=Meta):
         # only be treat as a reference to the backend
         # entity
         self.only_for_reference = False
+        self._is_dirty = False
+        self._back_objects = set()  # type: Set[Entity]
+
+    def _set_hidden(self, hidden_property, value):
+        """ Set an attribute of this entity.
+
+            This method handles dependency tracking for the purposes of
+            computing which objects have changes compared to the server.
+        """
+        if getattr(value, "_is_merchi_entity", False):
+            value._back_objects.add(self)
+        elif isinstance(value, list):
+            for item in value:
+                if getattr(item, "_is_merchi_entity", False):
+                    item._back_objects.add(self)
+        return setattr(self, hidden_property, value)
+
+    def mark_dirty(self):
+        """ Mark this object, and recursively all objects that have refered
+            to it, as changed compared to the backend.
+        """
+        open_set = queue.Queue()  # type:  queue.Queue[Entity]
+        closed_set = set()  # type: Set[Entity]
+        open_set.put(self)
+        while not open_set.empty():
+            current = open_set.get()
+            if current in closed_set:
+                continue
+            current._is_dirty = True
+            closed_set.add(current)
+            for child in current._back_objects:
+                open_set.put(child)
 
     def send_to_entity(self, request, identifier):
         """ Cause the given request to be sent, using this entities URI as
@@ -368,7 +400,7 @@ class Entity(object, metaclass=Meta):
             if makes_dirty:
                 setattr(self, public_property, value)
             else:
-                setattr(self, hidden_property, value)
+                self._set_hidden(hidden_property, value)
 
         if isinstance(o, dict):
             try:
