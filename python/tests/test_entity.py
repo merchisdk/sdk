@@ -60,3 +60,25 @@ def test_withhold_array_non_edits():
     output = j.serialise(exclude_old=True)[0]
     assert output['drafts'][0]['viewed'] is True
     assert 'quantity' not in output
+
+
+def test_include_doubly_indirect_dirty():
+    # load new data without marking it fresh. this time with three layers
+    # of nesting
+    j = Job()
+    new_data = {'client': {'user': {'name': 'turtle',
+                                    'drafts': [{'draft': {'viewed': False}}]}},
+                'quantity': 42}
+    j.from_json(new_data, makes_dirty=False)
+    assert j.client.name == 'turtle'
+    output = j.serialise(exclude_old=True)[0]
+    assert 'client' not in output
+    assert 'quantity' not in output
+    assert 'drafts' not in output
+    # now we touch the draft
+    j.client.drafts[0].viewed = True
+    # although j.client was only touched via an indirection we need it in
+    # the output
+    output = j.serialise(exclude_old=True)[0]
+    assert output['client']['drafts'][0]['viewed'] is True
+    assert 'quantity' not in output
