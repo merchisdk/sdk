@@ -446,6 +446,7 @@ class Assignment(sdk.python.entities.Entity):
     production_deadline = Property(datetime.datetime)
     assignment_deadline = Property(datetime.datetime)
     job = Property(Job, backref="assignments")
+    supply_job = Property(Job, backref="supply_assignment")
     supplier = Property('sdk.python.users.User')
     bid = Property(Bid, backref="assignments")
     comments = Property(ProductionComment, backref="assignment")
