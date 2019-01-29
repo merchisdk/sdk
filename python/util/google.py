@@ -40,9 +40,9 @@ global_script = """
 
 conversion_script = """
 <script>
-  gtag('event', 'conversion', {'send_to': '{}',
-                               'currency': {},
-                               'value': {}});
+  gtag('event', 'conversion', {{'send_to': '{}',
+                                'currency': {},
+                                'value': {}}});
 </script>
 """
 
