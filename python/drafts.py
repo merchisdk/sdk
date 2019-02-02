@@ -1,6 +1,5 @@
 import datetime
 import sdk.python.entities
-import sdk.python.draft_comments
 from sdk.python.files import File
 from sdk.python.entities import Property
 from sdk.python.draft_comments import DraftComment
@@ -18,7 +17,6 @@ class Draft(sdk.python.entities.Entity):
     resend_date = Property(datetime.datetime)
     viewed = Property(bool)
     just_viewed = Property(bool)
-    comments = Property(sdk.python.draft_comments.DraftComment)
     send_sms = Property(bool)
     send_email = Property(bool)
     comments = Property(DraftComment, backref="draft")
