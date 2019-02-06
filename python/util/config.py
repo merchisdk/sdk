@@ -1,7 +1,7 @@
 import os
 
-PLATFORM_NAME = 'Merchi'
-PLATFORM_COPYRIGHT = 2017
+PLATFORM_NAME = 'merchi'
+PLATFORM_COPYRIGHT = 2019
 
 
 def load_configuration(app, config_keys):
