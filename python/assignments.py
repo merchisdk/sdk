@@ -1,4 +1,5 @@
 import datetime
+import sdk.python.entities
 from sdk.python.production_comments import ProductionComment
 from sdk.python.jobs import Job
 from sdk.python.shipments import Shipment
