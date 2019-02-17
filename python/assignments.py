@@ -1,9 +1,11 @@
 import datetime
 import sdk.python.entities
+from sdk.python.bids import Bid
 from sdk.python.production_comments import ProductionComment
 from sdk.python.jobs import Job
 from sdk.python.shipments import Shipment
 from sdk.python.notifications import Notification
+from sdk.python.entities import Property
 
 
 class Assignment(sdk.python.entities.Entity):
