@@ -4,7 +4,6 @@ import datetime
 import sdk.python.entities
 from sdk.python.job_comments import JobComment
 from sdk.python.draft_comments import DraftComment
-from sdk.python.production_comments import ProductionComment
 from sdk.python.country_taxes import CountryTax
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
@@ -12,7 +11,6 @@ from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
 from sdk.python.addresses import Address
-from sdk.python.bids import Bid
 from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
@@ -434,31 +432,4 @@ class Jobs(sdk.python.entities.Resource):
     json_name = 'jobs'
 
 
-class Assignment(sdk.python.entities.Entity):
-
-    resource = '/assignments/'
-    json_name = 'assignment'
-
-    id = Property(int)
-    manager_accepts = Property(str)
-    supplier_refused = Property(str)
-    archived = Property(datetime.datetime)
-    production_deadline = Property(datetime.datetime)
-    assignment_deadline = Property(datetime.datetime)
-    job = Property(Job, backref="assignments")
-    supply_job = Property(Job, backref="supply_assignment")
-    supplier = Property('sdk.python.users.User')
-    bid = Property(Bid, backref="assignments")
-    comments = Property(ProductionComment, backref="assignment")
-    shipment = Property(Shipment, backref="assignments")
-    notifications = Property(Notification)
-
-
-class Assignments(sdk.python.entities.Resource):
-
-    entity_class = Assignment
-    json_name = 'assignments'
-
-
 jobs = Jobs()
-assignments = Assignments()
