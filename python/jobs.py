@@ -79,6 +79,7 @@ class Job(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
+    set_quote = Property(bool)
     specifications_groups = Property(SpecificationsGroup)
     specifications = Property(Specification)
     shipment = Property(Shipment, backref="jobs")
