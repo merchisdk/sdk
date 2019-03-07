@@ -5,8 +5,8 @@ from sdk.python.discount import Discount
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
-from sdk.python.specifications import SpecificationField,\
-    SpecificationsGroup
+from sdk.python.variations import VariationField,\
+    VariationsGroup
 
 
 class Product(sdk.python.entities.Entity):
@@ -41,8 +41,8 @@ class Product(sdk.python.entities.Entity):
     discounts = Property(Discount, backref="product")
     domain = Property(Domain, backref="products")
     files = Property(File)
-    independent_variation_fields = Property(SpecificationField)
-    group_variation_fields = Property(SpecificationField)
+    independent_variation_fields = Property(VariationField)
+    group_variation_fields = Property(VariationField)
     tags = Property(DomainTag, backref="products")
 
     def create(self, embed=None, email=None, password=None, query=None,
@@ -71,22 +71,22 @@ class Product(sdk.python.entities.Entity):
         if self.files and len(self.files) > 0:
             return self.files[0].view_url
 
-    def build_empty_specifications_group(self):
-        specifications_group_built = SpecificationsGroup()
-        specifications_group_built.quantity = 0
-        specifications_group_built.specifications = []
-        specifications_group_built.group_cost = 0
-        for specification_field in self.group_variation_fields:
-            empty_specification = \
-                specification_field.build_empty_specification()
-            specifications_group_built.specifications.\
-                append(empty_specification)
-            specifications_group_built.group_cost += \
-                empty_specification.cost
-        return specifications_group_built
+    def build_empty_variations_group(self):
+        variations_group_built = VariationsGroup()
+        variations_group_built.quantity = 0
+        variations_group_built.variations = []
+        variations_group_built.group_cost = 0
+        for variation_field in self.group_variation_fields:
+            empty_variation = \
+                variation_field.build_empty_variation()
+            variations_group_built.variations.\
+                append(empty_variation)
+            variations_group_built.group_cost += \
+                empty_variation.cost
+        return variations_group_built
 
-    def build_empty_independent_specifications(self):
-        return [field.build_empty_specification() for field
+    def build_empty_independent_variations(self):
+        return [field.build_empty_variation() for field
                 in self.independent_variation_fields]
 
 

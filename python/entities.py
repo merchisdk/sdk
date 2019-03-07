@@ -579,14 +579,14 @@ class Resource(object):
         response_json = resp.json()
 
         return (self.from_json(response_json, makes_dirty=False),
-                PageSpecification(response_json['count'],
+                PageVariation(response_json['count'],
                                   response_json['available'],
                                   response_json['offset'],
                                   response_json['limit'],
                                   bool(response_json['canCreate'])))
 
 
-class PageSpecification(object):
+class PageVariation(object):
 
     def __init__(self, count, available, offset, limit, can_create):
         self.count = int(count)

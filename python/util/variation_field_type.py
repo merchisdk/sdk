@@ -11,7 +11,7 @@ COLOUR_PICKER = 10
 COLOUR_SELECT = 11
 
 
-specification_fields_dict = {
+variation_fields_dict = {
     TEXT_INPUT: "Text Input",
     SELECT: "Select",
     FILE_UPLOAD: "File Upload",

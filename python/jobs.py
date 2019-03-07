@@ -15,7 +15,7 @@ from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
-from sdk.python.specifications import Specification, SpecificationsGroup
+from sdk.python.variations import Variation, VariationsGroup
 from sdk.python.notifications import Notification
 from sdk.python.util.status import PRODUCTION_STATUS, PAYMENT_STATUS, \
     DESIGN_STATUS, SHIPPING_STATUS, status_info
@@ -79,8 +79,8 @@ class Job(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
-    specifications_groups = Property(SpecificationsGroup)
-    specifications = Property(Specification)
+    variations_groups = Property(VariationsGroup)
+    variations = Property(Variation)
     shipment = Property(Shipment, backref="jobs")
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")
