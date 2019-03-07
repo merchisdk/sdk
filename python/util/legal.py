@@ -47,6 +47,8 @@ def is_legal_theme_file_mimetype(mimetype):
                         'application/font-opentype',
                         'application/x-font-opentype',
                         'application/font-ttf',
+                        'font/ttf',
+                        'application/octet-stream',
                         'application/x-font-ttf',
                         'application/font-truetype',
                         'application/x-font-truetype',
