@@ -79,6 +79,7 @@ class Job(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
+    deduction_date = Property(datetime.datetime)
     variations_groups = Property(VariationsGroup)
     variations = Property(Variation)
     quote_set = Property(bool)
