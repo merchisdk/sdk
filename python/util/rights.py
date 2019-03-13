@@ -30,8 +30,8 @@ class Rights(object):
         return return_codes
 
     def from_json(self, right_codes, makes_dirty=True):
-        """ Parse json specification of rights given in right_codes and set
-            this object to match the given specification. Returns None.
+        """ Parse json variation of rights given in right_codes and set
+            this object to match the given variation. Returns None.
         """
         for code, name in right_names.items():
             if code in right_codes:
