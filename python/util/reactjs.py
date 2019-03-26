@@ -51,6 +51,7 @@ javascript = """
              "toastSettingsJobProductionAssignmentQuote": false,
              "$": false,
              "MERCHI": false,
+             "urlFor": false,
              "console": false,
              "job": false,
              "window": false,
