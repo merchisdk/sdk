@@ -13,6 +13,7 @@ class Company extends Entity
     {
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
+        $this->json_property('country', 'string');
         $this->json_property('default_currency', 'string');
         $this->json_property('paypal_account', 'string');
         $this->json_property('paypal_password', 'string');
