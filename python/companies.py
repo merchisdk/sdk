@@ -18,6 +18,7 @@ class Company(sdk.python.entities.Entity):
     id = Property(int)
     name = Property(str)
     website = Property(str)
+    country = Property(str)
     tax_number = Property(str)
     tax_number_type = Property(int)
     default_currency = Property(str)
