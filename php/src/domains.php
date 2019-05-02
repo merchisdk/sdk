@@ -14,6 +14,7 @@ class Domain extends Entity
     {
         $this->json_property('id', 'integer');
         $this->json_property('domain', 'string');
+        $this->json_property('domain_type', 'integer');
         $this->json_property('email_domain', 'string');
         $this->json_property('theme', 'string');
         $this->json_property('products', 'Product', null, $many = True,
