@@ -40,7 +40,7 @@ class Product(sdk.python.entities.Entity):
     categories = Property(Category)
     discounts = Property(Discount, backref="product")
     domain = Property(Domain, backref="products")
-    files = Property(File)
+    images = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     tags = Property(DomainTag, backref="products")
@@ -56,20 +56,20 @@ class Product(sdk.python.entities.Entity):
         """ Return the first product image object if one exists and
             return None if no images exists
         """
-        if self.files and len(self.files) > 0:
-            return self.files[0]
+        if self.images and len(self.images) > 0:
+            return self.images[0]
 
     def preview_images(self, max_images):
         """ Only will return max_images of files """
-        return self.files[:max_images]
+        return self.images[:max_images]
 
     def default_currency(self):
         return self.domain.company.default_currency
 
     def primary_product_image(self):
         """ Return the first product image if it exists else return None """
-        if self.files and len(self.files) > 0:
-            return self.files[0].view_url
+        if self.images and len(self.images) > 0:
+            return self.images[0].view_url
 
     def build_empty_variations_group(self):
         variations_group_built = VariationsGroup()
