@@ -1,0 +1,3 @@
+MOO = 0
+MOQ = 1
+SELLER = 2
