@@ -16,6 +16,7 @@ class Product(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    product_type = Property(str)
     notes = Property(str)
     description = Property(str)
     unit_price = Property(float)

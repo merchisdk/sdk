@@ -13,6 +13,7 @@ class Product extends Entity
     {
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
+        $this->json_property('productType', 'string');
         $this->json_property('notes', 'string');
         $this->json_property('unitPrice', 'integer');
         $this->json_property('bestPrice', 'integer');
