@@ -14,6 +14,15 @@ matrix:
         - php/test.sh
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+    - language: node_js
+      node_js:
+        - "7"
+      script:
+        - yarn global add typescript
+        - cd typescript
+        - tsc
+        - ./node_modules/eslint/bin/eslint.js src/index.tsx 
+        - yarn test
     - language: python
       python: 3.5
       install:
