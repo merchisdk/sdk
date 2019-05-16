@@ -14,14 +14,14 @@ function mockFetch(ok: boolean, data: any, status: number) {
   );
 }
 
-test('basic', () => {
+test('can pass through data from server', () => {
    mockFetch(true, {'animal': 'turtle'}, 200);
    return apiFetch('/test').then(data => {
       expect(data.animal).toBe('turtle')
    });
 });
 
-test('basic', () => {
+test('404 creates ApiError', () => {
    mockFetch(false, {'statusCode': 404}, 404);
    (window as any).merchiBackendUri = 'override.example.com';
    apiFetch('/test').catch(e => {
