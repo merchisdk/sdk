@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "repository": "git@github.com:merchisdk/sdk.git",
   "author": "Daniel Collins <mail@dcollins.info>",
-  "license": "GPL-3.0-only",
+  "license": "GPL-3.0",
   "scripts": {
     "test": "jest --coverage"
   },
