@@ -20,6 +20,7 @@ matrix:
       script:
         - yarn global add typescript
         - cd typescript
+        - yarn
         - tsc
         - ./node_modules/eslint/bin/eslint.js src/index.tsx 
         - yarn test
