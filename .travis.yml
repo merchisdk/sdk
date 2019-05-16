@@ -16,7 +16,7 @@ matrix:
         - bash <(curl -s https://codecov.io/bash)
     - language: node_js
       node_js:
-        - "9.10.0"
+        - "10"
       script:
         - yarn global add typescript
         - cd typescript
