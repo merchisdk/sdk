@@ -207,7 +207,7 @@ def tsx_to_javascript(jsx):
         are warnings or lint errors, a list of errors may be returned.
     """
     result = library.call('compile', jsx)
-    if result[0] != []:
+    if result[0] != {}:
         raise ValueError(result[0])
     return result[1]
 
