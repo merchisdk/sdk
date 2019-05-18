@@ -1,0 +1,7 @@
+export enum DraftingStatus {
+  INIT = 0,
+  WAIT_DRAFTING = 1,
+  CHANGES_REQUESTED = 2,
+  DRAFTING_UPLOADED = 3,
+  DRAFTINGA_APPROVED = 4,
+}
