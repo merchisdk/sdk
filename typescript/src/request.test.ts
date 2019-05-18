@@ -1,4 +1,4 @@
-import { apiFetch } from './index';
+import { apiFetch } from './request';
 
 beforeEach(function() {
   (global as any).BACKEND_URI = 'example.com';
