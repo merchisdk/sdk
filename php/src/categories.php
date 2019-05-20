@@ -14,7 +14,7 @@ class Category extends Entity
         $this->json_property('name', 'string');
         $this->json_property('show_dashboard', 'boolean');
         $this->json_property('show_public', 'boolean');
-        $this->json_property('domain', 'Domain', '',
+        $this->json_property('store', 'Store', '',
                               $many = False, $recursive = True);
     }
 }

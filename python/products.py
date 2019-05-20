@@ -2,8 +2,8 @@ import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.categories import Category
 from sdk.python.discount import Discount
-from sdk.python.domains import Domain
-from sdk.python.domain_tags import DomainTag
+from sdk.python.stores import Store
+from sdk.python.store_tags import StoreTag
 from sdk.python.files import File
 from sdk.python.variations import VariationField,\
     VariationsGroup
@@ -40,18 +40,18 @@ class Product(sdk.python.entities.Entity):
     best_price = Property(float)
     categories = Property(Category)
     discounts = Property(Discount, backref="product")
-    domain = Property(Domain, backref="products")
+    store = Property(Store, backref="products")
     images = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
-    tags = Property(DomainTag, backref="products")
+    tags = Property(StoreTag, backref="products")
 
     def create(self, embed=None, email=None, password=None, query=None,
-               api_secret=None, as_domain=None):
+               api_secret=None, as_store=None):
         self.unit_price = float(self.unit_price)
         super(Product, self).\
             create(embed=embed, email=email, password=password, query=query,
-                   api_secret=api_secret, as_domain=as_domain)
+                   api_secret=api_secret, as_store=as_store)
 
     def primary_image(self):
         """ Return the first product image object if one exists and
@@ -65,7 +65,7 @@ class Product(sdk.python.entities.Entity):
         return self.images[:max_images]
 
     def default_currency(self):
-        return self.domain.company.default_currency
+        return self.store.company.default_currency
 
     def primary_product_image(self):
         """ Return the first product image if it exists else return None """

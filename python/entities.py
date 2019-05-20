@@ -222,9 +222,9 @@ class Entity(object, metaclass=Meta):
         response = request.send()
         return response
 
-    def destroy(self, as_domain=None):
+    def destroy(self, as_store=None):
         request = self.request_class()
-        request.as_domain = as_domain
+        request.as_store = as_store
         request.method = 'DELETE'
         response = self.send_to_entity(request, self.primary_value())
         check_response(response, 204)

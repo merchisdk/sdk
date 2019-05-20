@@ -36,9 +36,9 @@ class Theme(sdk.python.entities.Entity):
     products_page_template = Property(str)
     products_html = Property(str)
     products_js = Property(str)
-    domain_invite_page_template = Property(str)
-    domain_invite_html = Property(str)
-    domain_invite_js = Property(str)
+    store_invite_page_template = Property(str)
+    store_invite_html = Property(str)
+    store_invite_js = Property(str)
     reset_password_page_template = Property(str)
     password_reset_html = Property(str)
     password_reset_js = Property(str)
@@ -82,7 +82,7 @@ class Theme(sdk.python.entities.Entity):
     index_page_error = Property(str)
     invoices_page_error = Property(str)
     products_page_error = Property(str)
-    domain_invite_page_error = Property(str)
+    store_invite_page_error = Property(str)
     reset_password_page_error = Property(str)
     password_change_page_error = Property(str)
     sms_login_page_error = Property(str)
@@ -117,7 +117,7 @@ class Theme(sdk.python.entities.Entity):
             self.index_page_error is None and\
             self.invoices_page_error is None and\
             self.products_page_error is None and\
-            self.domain_invite_page_error is None and\
+            self.store_invite_page_error is None and\
             self.reset_password_page_error is None and\
             self.password_change_page_error is None and\
             self.sms_login_page_error is None and\

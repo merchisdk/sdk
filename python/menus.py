@@ -15,13 +15,13 @@ class MenuItem(sdk.python.entities.Entity):
     link_uri = Property(str)
     position = Property(int)
 
-    def url(self, host, domain=None):
+    def url(self, host, store=None):
         """ Check to see if the menu type is a redirect or an
             internal link, then return a full url constructed from the
-            link_uri and the domain
+            link_uri and the store
         """
-        if domain and self.link_type == menu_util.INTERNAL_PAGE:
-            return 'http://{0}.{1}/{2}/'.format(str(domain.sub_domain),
+        if store and self.link_type == menu_util.INTERNAL_PAGE:
+            return 'http://{0}.{1}/{2}/'.format(str(store.sub_store),
                                                 host,
                                                 self.link_uri)
         return self.link_uri

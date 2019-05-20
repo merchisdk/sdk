@@ -2,7 +2,7 @@ import datetime
 import sdk.python.entities
 import sdk.python.job_comments
 import sdk.python.production_comments
-import sdk.python.domains
+import sdk.python.stores
 import sdk.python.files
 import sdk.python.util.notification_sources as note_source
 import sdk.python.util.notification_type as note_type
@@ -17,7 +17,7 @@ class Notification(sdk.python.entities.Entity):
 
     id = Property(int)
     date = Property(datetime.datetime)
-    domain = Property(sdk.python.domains.Domain)
+    store = Property(sdk.python.stores.Store)
     related_job_comment = Property(sdk.python.job_comments.JobComment,
                                    backref="notifications")
     related_draft_comment = Property("sdk.python.draft_comments.DraftComment")
@@ -60,7 +60,7 @@ class Notification(sdk.python.entities.Entity):
         if self.subject and self.subject != "None":
             if self.related_job:
                 return "{0} - {1}".format(self.subject,
-                                          self.domain.email_domain)
+                                          self.store.email_store)
             return self.subject
         return self.description
 
@@ -78,19 +78,19 @@ class Notification(sdk.python.entities.Entity):
         """
         notification_type = self.notification_type
         sender = self.sender
-        domain = self.domain
+        store = self.store
         if notification_type in note_type.SHOW_USER_AVATAR and sender:
             return sender.profile_picture_url(50)
-        if notification_type in note_type.SHOW_DOMAIN_AVATAR and domain:
-            return domain.logo_url()
-        if notification_type in note_type.SHOW_USER_OR_DOMAIN_AVATAR:
+        if notification_type in note_type.SHOW_STORE_AVATAR and store:
+            return store.logo_url()
+        if notification_type in note_type.SHOW_USER_OR_STORE_AVATAR:
             if sender:
                 return sender.profile_picture_url(50)
-            if domain:
-                return domain.logo_url()
-        if notification_type in note_type.SHOW_DOMAIN_OR_USER_AVATAR:
-            if domain:
-                return domain.logo_url()
+            if store:
+                return store.logo_url()
+        if notification_type in note_type.SHOW_STORE_OR_USER_AVATAR:
+            if store:
+                return store.logo_url()
             if sender:
                 return sender.profile_picture_url(50)
         return PLATFORM_MASCOT_ICON

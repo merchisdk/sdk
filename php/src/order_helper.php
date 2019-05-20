@@ -5,7 +5,7 @@
     require_once 'addresses.php';
     require_once 'email_addresses.php';
     require_once 'phone_numbers.php';
-    require_once 'domains.php';
+    require_once 'stores.php';
     require_once 'roles.php';
     require_once 'jobs.php';
     require_once 'files.php';
@@ -37,7 +37,7 @@
 
     function place_order($lineOne, $lineTwo, $city, $state, $country, $postcode,
                          $emailAddress, $phoneCode, $phoneNumber, $name,
-                         $company_name, $product, $quantity, $domain, $notes,
+                         $company_name, $product, $quantity, $store, $notes,
                          $files)
     {
         $a = new Address();
@@ -60,7 +60,7 @@
         $u->emailAddresses = [$e];
         $u->address = [$a];
         $u->phoneNumbers = [$p];
-        $u->domain = intval($domain);
+        $u->store = intval($store);
 
         if ($company_name) {
             $c = new Company();
@@ -77,7 +77,7 @@
         $j = new Job();
         $j->product = intval($product);
         $j->quantity = intval($quantity);
-        $j->domain = intval($domain);
+        $j->store = intval($store);
         $j->notes = $notes;
         $j->deadline = null;
 
@@ -94,10 +94,10 @@
         send_order_request($u, $j);
     }
 
-    function get_products_for_domain($domain_id)
+    function get_products_for_store($store_id)
     {
-        $domain_object = new Domain();
-        $domain_object->id = $domain_id;
-        $domain_object->get($domain_id, $embed = '{"products": {}}');
-        return $domain_object->products;
+        $store_object = new Store();
+        $store_object->id = $store_id;
+        $store_object->get($store_id, $embed = '{"products": {}}');
+        return $store_object->products;
     }

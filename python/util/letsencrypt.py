@@ -6,7 +6,7 @@ import shlex
 import logging
 
 
-def fetch_cert(email, cert_name, domain_names, log, config):
+def fetch_cert(email, cert_name, store_names, log, config):
     """ Contact letsencrypt servers and ask them for a new certificate. """
     cmd = ('certbot certonly --renew-by-default ' +
            '--cert-name ' + cert_name + ' ' +
@@ -17,8 +17,8 @@ def fetch_cert(email, cert_name, domain_names, log, config):
            '--logs-dir /etc/letsencrypt/logs ' +
            '--work-dir /etc/letsencrypt/work')
     cmd = cmd.format(shlex.quote(email))
-    for domain_name in domain_names:
-        cmd += ' -d' + shlex.quote(domain_name)
+    for store_name in store_names:
+        cmd += ' -d' + shlex.quote(store_name)
     log_msg = "renew cmd: '{}'".format(cmd)
     log(logging.INFO, log_msg)
     env = os.environ.copy()
@@ -53,13 +53,13 @@ def load_cert(log):
     restart_container("merchi_proxy_1")
 
 
-def renew_certs(email, cert_name, domain_names, log, config):
-    """ Create certificate for the given list of str domain names, using the
+def renew_certs(email, cert_name, store_names, log, config):
+    """ Create certificate for the given list of str store names, using the
         provided email address for the letsencrypt account, then load the
         result into NGINX. Invoking for the first time will set up the
         required directory structure. Invoking subsequent times will renew
         the exisiting certificate (an operation which is less heavily rate
         limited by letsencrypt).
     """
-    fetch_cert(email, cert_name, domain_names, log, config)
+    fetch_cert(email, cert_name, store_names, log, config)
     load_cert(log)

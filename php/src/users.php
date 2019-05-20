@@ -28,7 +28,7 @@ class User extends Entity
                              $recursive = True);
         $this->json_property('companies', 'Company', $many = True,
                              $recursive = True);
-        $this->json_property('domain', 'Domain', $many = False,
+        $this->json_property('store', 'Store', $many = False,
                              $default = '1', $recursive = True);
     }
 }

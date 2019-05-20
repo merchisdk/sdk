@@ -47,15 +47,15 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 
-# users who are in the management team of the domain
+# users who are in the management team of the store
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
-# users who have works with the domain but are not one of the management team
-DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR}
+# users who have works with the store but are not one of the management team
+STORE_WORKERS = {SUPPLIER, THEME_EDITOR}
 
 # users who are involved as business parties
 BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
-BUSINESS_ACCOUNTS.update(DOMAIN_WORKERS)
+BUSINESS_ACCOUNTS.update(STORE_WORKERS)
 
 # all registered user type
 ACCOUNTS = BUSINESS_ACCOUNTS.copy()

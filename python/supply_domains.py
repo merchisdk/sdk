@@ -2,23 +2,23 @@ import sdk.python.entities
 from sdk.python.entities import Property
 
 
-class SupplyDomain(sdk.python.entities.Entity):
+class SupplyStore(sdk.python.entities.Entity):
 
-    resource = '/supply_domains/'
-    json_name = 'supplyDomain'
+    resource = '/supply_stores/'
+    json_name = 'supplyStore'
 
     id = Property(int)
     product = Property('sdk.python.products.Product',
-                       backref='supply_domains')
+                       backref='supply_stores')
     supply_product = Property('sdk.python.products.Product',
-                              backref='supplied_by_domains')
-    domain = Property('sdk.python.domains.Domain', backref='supply_products')
+                              backref='supplied_by_stores')
+    store = Property('sdk.python.stores.Store', backref='supply_products')
 
 
-class SupplyDomains(sdk.python.entities.Resource):
+class SupplyStores(sdk.python.entities.Resource):
 
-    entity_class = SupplyDomain
-    json_name = 'supplyDomains'
+    entity_class = SupplyStore
+    json_name = 'supplyStores'
 
 
-supply_domains = SupplyDomains()
+supply_stores = SupplyStores()

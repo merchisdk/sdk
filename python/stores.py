@@ -2,7 +2,7 @@ import sdk.python.entities
 from sdk.python.files import File
 from sdk.python.themes import Theme
 from sdk.python.menus import Menu
-from sdk.python.domain_invitations import DomainInvitation
+from sdk.python.store_invitations import StoreInvitation
 import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import extract_script_parameters
@@ -14,50 +14,50 @@ from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
 from sdk.python.entities import Property
 
 
-class Domain(sdk.python.entities.Entity):
-    """ merchi python SDK object representing Domains.
+class Store(sdk.python.entities.Entity):
+    """ merchi python SDK object representing Stores.
 
-        A domain originally represented only a domain in the DNS sense, being
+        A store originally represented only a store in the DNS sense, being
         an entity that is allowed to use the merchi API on a website, etc.
 
-        In newer versions, much of the system is segregated by domain.
-        Products, Jobs, Categories and Managers belong to a domain, and the
-        settings of the domain will impact the behaviour and options of the
+        In newer versions, much of the system is segregated by store.
+        Products, Jobs, Categories and Managers belong to a store, and the
+        settings of the store will impact the behaviour and options of the
         other entities that fall under it.
 
-        Domains defer to their Company for some of their settings.
+        Stores defer to their Company for some of their settings.
 
-        All user login Sessions maintain an awareness of from which domain
+        All user login Sessions maintain an awareness of from which store
         the user logged in. It is illegal to create a Session except via
-        a website with an attached Domain that is acting as a proxy. The domain
+        a website with an attached Store that is acting as a proxy. The store
         will authenticate itself as well as the user when asking to create
         the session.
 
-        Methods for making requests to get information or update the domains
+        Methods for making requests to get information or update the stores
         settings are inherited from sdk.python.entities.Entity.
     """
 
-    resource = '/domains/'
-    json_name = 'domain'
+    resource = '/stores/'
+    json_name = 'store'
 
     id = Property(int)
     active_theme_id = Property(int)
-    domain = Property(str)
-    domain_type = Property(int)
-    sub_domain = Property(str)
-    email_domain = Property(str)
+    store = Property(str)
+    store_type = Property(int)
+    sub_store = Property(str)
+    email_store = Property(str)
     theme = Property(str)
     sms_name = Property(str)
     api_secret = Property(str)
     conversion_tracking_code = Property(str)
     new_conversion_tracking_code = Property(str)
     new_global_tracking_code = Property(str)
-    show_domain_publicly = Property(bool)
+    show_store_publicly = Property(bool)
     enable_notifications = Property(bool)
     enable_email_notifications = Property(bool)
     enable_sms_notifications = Property(bool)
-    active_theme = Property(Theme, backref="domain")
-    domain_invitations = Property(DomainInvitation, backref='domain')
+    active_theme = Property(Theme, backref="store")
+    store_invitations = Property(StoreInvitation, backref='store')
     company = Property("sdk.python.companies.Company")
     logo = Property(File)
     favicon = Property(File)
@@ -65,17 +65,17 @@ class Domain(sdk.python.entities.Entity):
     menus = Property(Menu)
 
     def public_categories(self):
-        """ Return domain categories which are public """
+        """ Return store categories which are public """
         return [category for category in self.categories if
                 category.show_public]
 
     def email_notifications_enabled(self):
-        """ Return True if the domain has email notifications switched on """
+        """ Return True if the store has email notifications switched on """
         return self.enable_notifications and\
             self.enable_email_notifications
 
     def sms_notifications_enabled(self):
-        """ Return True if the domain has SMS notifications switched on """
+        """ Return True if the store has SMS notifications switched on """
         return self.enable_notifications and\
             self.enable_sms_notifications
 
@@ -97,7 +97,7 @@ class Domain(sdk.python.entities.Entity):
             gets thrown away.
 
             If invoice is supplied, it may be used to fill in any missing
-            non domain constant details like currency and value.
+            non store constant details like currency and value.
         """
         code = self.conversion_tracking_code
         if code is None or code == '':
@@ -115,7 +115,7 @@ class Domain(sdk.python.entities.Entity):
             gets thrown away.
 
             If invoice is supplied, it may be used to fill in any missing
-            non domain constant details like currency and value.
+            non store constant details like currency and value.
         """
         code = self.new_conversion_tracking_code
         if code is None or code == '':
@@ -139,7 +139,7 @@ class Domain(sdk.python.entities.Entity):
         return reconstitute_global_script(script_parameters)
 
     def logo_url(self):
-        """ Return the domain logo if there is one or else return the
+        """ Return the store logo if there is one or else return the
             PLATFORM_MASCOT_ICON
         """
         if self.logo:
@@ -147,20 +147,20 @@ class Domain(sdk.python.entities.Entity):
         return PLATFORM_MASCOT_ICON
 
 
-class EnrolledDomain(sdk.python.entities.Entity):
+class EnrolledStore(sdk.python.entities.Entity):
 
-    resource = '/enrolled_domains/'
-    json_name = 'enrolled_domain'
+    resource = '/enrolled_stores/'
+    json_name = 'enrolled_store'
 
     id = Property(int)
     role = Property(str)
-    domain = Property(Domain)
+    store = Property(Store)
 
 
-class Domains(sdk.python.entities.Resource):
+class Stores(sdk.python.entities.Resource):
 
-    entity_class = Domain
-    json_name = 'domains'
+    entity_class = Store
+    json_name = 'stores'
 
     def get_by_name(self, name, api_secret):
         result, _ = self.fetch(query={'name': name},
@@ -170,11 +170,11 @@ class Domains(sdk.python.entities.Resource):
         return None
 
 
-class EnrolledDomains(sdk.python.entities.Resource):
+class EnrolledStores(sdk.python.entities.Resource):
 
-    entity_class = EnrolledDomain
-    json_name = 'enrolled_domains'
+    entity_class = EnrolledStore
+    json_name = 'enrolled_stores'
 
 
-domains = Domains()
-enrolled_domains = EnrolledDomains()
+stores = Stores()
+enrolled_stores = EnrolledStores()

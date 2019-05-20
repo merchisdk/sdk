@@ -14,9 +14,9 @@ from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.notifications import Notification
 from sdk.python.files import File
 from sdk.python.products import Product
-from sdk.python.domains import EnrolledDomain
+from sdk.python.stores import EnrolledStore
 from sdk.python.themes import Theme
-from sdk.python.domain_invitations import DomainInvitation
+from sdk.python.store_invitations import StoreInvitation
 from sdk.python.job_comments import JobComment
 from sdk.python.drafts import Draft
 from sdk.python.draft_comments import DraftComment
@@ -63,7 +63,7 @@ class User(sdk.python.entities.Entity):
     phone_numbers = Property(PhoneNumber)
     categories = Property('sdk.python.categories.Category')
     notifications = Property(Notification)
-    enrolled_domains = Property(EnrolledDomain, backref="user")
+    enrolled_stores = Property(EnrolledStore, backref="user")
     # products that supplier can produce
     products = Property(Product, backref="suppliers")
     # products that are saved by user for future reference
@@ -71,8 +71,8 @@ class User(sdk.python.entities.Entity):
     profile_picture = Property(File)
     upload_files = Property(File, backref="uploader")
     themes = Property(Theme, backref="author")
-    sent_domain_invitations = Property(DomainInvitation, backref="sender")
-    received_domain_invitations = Property(DomainInvitation, backref="user")
+    sent_store_invitations = Property(StoreInvitation, backref="sender")
+    received_store_invitations = Property(StoreInvitation, backref="user")
     job_comments = Property(JobComment, backref="user")
     forwarded_job_comments = Property(JobComment, backref="forwards")
     drafts = Property(Draft, backref="designer")
@@ -84,12 +84,12 @@ class User(sdk.python.entities.Entity):
     notifications = Property(Notification, backref="recipient")
     sent_notifications = Property(Notification, backref="sender")
 
-    def role_in_domain(self, domain_id):
-        """ The role of this user of specific domain id """
-        if self.enrolled_domains:
-            for enrolled_domain in self.enrolled_domains:
-                if enrolled_domain.domain.id == domain_id:
-                    return enrolled_domain.role
+    def role_in_store(self, store_id):
+        """ The role of this user of specific store id """
+        if self.enrolled_stores:
+            for enrolled_store in self.enrolled_stores:
+                if enrolled_store.store.id == store_id:
+                    return enrolled_store.role
         return sdk.python.util.roles.PUBLIC
 
     def all_roles(self):
@@ -98,7 +98,7 @@ class User(sdk.python.entities.Entity):
         """
         if self.is_super_user:
             return sdk.python.util.roles.ALL_ROLES
-        roles_dict = set(ed.role for ed in self.enrolled_domains)
+        roles_dict = set(ed.role for ed in self.enrolled_stores)
         roles_dict.add(sdk.python.util.roles.PUBLIC)
         return roles_dict
 
@@ -107,48 +107,48 @@ class User(sdk.python.entities.Entity):
         user_all_roles = self.all_roles()
         return combination_method(role in user_all_roles for role in roles)
 
-    def has_authority(self, domain_id, roles):
-        """ Check whether user is in one of the roles in certain domain """
-        return self.is_super_user or self.role_in_domain(domain_id) in roles
+    def has_authority(self, store_id, roles):
+        """ Check whether user is in one of the roles in certain store """
+        return self.is_super_user or self.role_in_store(store_id) in roles
 
-    def is_not_client(self, domain_id):
-        """ Check to see if the user is part of the domain staff. """
-        return self.has_authority(domain_id,
+    def is_not_client(self, store_id):
+        """ Check to see if the user is part of the store staff. """
+        return self.has_authority(store_id,
                                   sdk.python.util.roles.BUSINESS_ACCOUNTS)
 
     def can_view_info_section(self, job):
         """ Return whether current user should need to view info
             section of a job.
         """
-        return self.has_authority(job.domain.id,
+        return self.has_authority(job.store.id,
                                   sdk.python.util.roles.BUSINESS_ACCOUNTS)
 
     def can_view_payment_section(self, job):
         """ Return whether current user should need to view payment
             section of a job.
         """
-        return self.has_authority(job.domain.id,
+        return self.has_authority(job.store.id,
                                   sdk.python.util.roles.INVOICE_ROLES)
 
     def can_view_production_section(self, job):
         """ Return whether current user should need to view production
             section of a job.
         """
-        return self.has_authority(job.domain.id,
+        return self.has_authority(job.store.id,
                                   sdk.python.util.roles.PRODUCTION_SECTION)
 
     def can_view_drafting_section(self, job):
         """ Return whether current user should need to view drafting
             section of a job.
         """
-        return self.has_authority(job.domain.id,
+        return self.has_authority(job.store.id,
                                   sdk.python.util.roles.DESIGN_SECTION)
 
     def can_view_shipping_section(self, job):
         """ Return whether current user should need to view shipping
             section of a job.
         """
-        return self.has_authority(job.domain.id,
+        return self.has_authority(job.store.id,
                                   sdk.python.util.roles.SHIPPING_SECTION)
 
     def user_type(self):

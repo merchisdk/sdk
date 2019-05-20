@@ -1,7 +1,7 @@
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.users import User
-from sdk.python.domains import Domain
+from sdk.python.stores import Store
 
 
 def years_to_seconds(years):
@@ -16,7 +16,7 @@ class Session(sdk.python.entities.Entity):
 
     ip = Property(str)
     user = Property(User)
-    domain = Property(Domain)
+    store = Property(Store)
     token = Property(str)
     remember = Property(bool)
 

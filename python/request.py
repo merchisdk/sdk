@@ -31,7 +31,7 @@ class Request(object):
         self.embed = None
         self.password = None
         self.api_secret = None
-        self.as_domain = None  # only be meaningful if using be master domain
+        self.as_store = None  # only be meaningful if using be master store
         self.include_archived = False
         self.skip_rights = False
         self.data = {}  # type: ignore  # set to dict to send form encoded
@@ -53,7 +53,7 @@ class Request(object):
         return int(self.version[1:])
 
     def wraps_request(self, data=None, files=None, email=None, password=None,
-                      api_secret=None, query=None, embed=None, as_domain=None,
+                      api_secret=None, query=None, embed=None, as_store=None,
                       include_archived=None, skip_rights=None):
         """ Wrap user customized infomation to request """
         self.files = files
@@ -62,7 +62,7 @@ class Request(object):
         self.password = password
         self.api_secret = api_secret
         self.embed = embed
-        self.as_domain = as_domain
+        self.as_store = as_store
         if include_archived:
             self.include_archived = include_archived
         if skip_rights:
@@ -86,8 +86,8 @@ class Request(object):
         if self.embed:
             self.query["embed"] = process_dict_param(self.embed)
 
-        if self.as_domain:
-            self.query["as_domain"] = self.as_domain
+        if self.as_store:
+            self.query["as_store"] = self.as_store
 
         if self.include_archived:
             self.query["include_archived"] = self.include_archived

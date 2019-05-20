@@ -16,7 +16,7 @@ class Job extends Entity
         $this->json_property('notes', 'string');
         $this->json_property('cost', 'integer');
         $this->json_property('gst', 'integer');
-        $this->json_property('domain', 'string');
+        $this->json_property('store', 'string');
         $this->json_property('deadline', 'integer', $default = NULL);
         $this->json_property('production_status', 'integer');
         $this->json_property('design_status', 'integer');
@@ -24,7 +24,7 @@ class Job extends Entity
         $this->json_property('payment_status', 'integer');
         $this->json_property('product', 'Product', $many = False,
                              $default = '1', $recursive = True);
-        $this->json_property('domain', 'Domain', $many = False,
+        $this->json_property('store', 'Store', $many = False,
                              $default = '1', $recursive = True);
         $this->json_property('clientFiles', 'File', $default = [],
                              $many = true, $recursive = True);

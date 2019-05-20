@@ -2,7 +2,7 @@
     require_once 'products.php';
     require_once 'order_helper.php';
 
-    $domain = 1; // this should be set to the sales site id
+    $store = 1; // this should be set to the sales site id
     $sitename = "Example Merchi Order Form";
 
     $validates = true;
@@ -50,7 +50,7 @@
     $company = '';
     $companyErr = '';
 
-    $product_list = get_products_for_domain($domain);
+    $product_list = get_products_for_store($store);
 
     function generate_notes()
     {
@@ -171,7 +171,7 @@
             try {
                 place_order($lineOne, $lineTwo, $city, $state, $country,
                             $postcode, $emailAddress, $phoneCode, $phoneNumber,
-                            $name, $company, $product, $quantity, $domain,
+                            $name, $company, $product, $quantity, $store,
                             generate_notes(), transpose($_FILES['files']));
                 $resultMsg = 'order has been placed!';
             } catch (Exception $e) {

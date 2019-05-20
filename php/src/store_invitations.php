@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 require_once 'entity.php';
-require_once 'domains.php';
+require_once 'stores.php';
 require_once 'users.php';
 
-class DomainInvitation extends Entity
+class StoreInvitation extends Entity
 {
-    public static $resource = '/domain_invitations/';
-    public static $json_name = 'domainInvitation';
+    public static $resource = '/store_invitations/';
+    public static $json_name = 'storeInvitation';
 
     public function __construct()
     {
@@ -16,7 +16,7 @@ class DomainInvitation extends Entity
         $this->json_property('user_name', 'string');
         $this->json_property('user_email', 'string');
         $this->json_property('role', 'integer');
-        $this->json_property('domain', 'Domain', '',
+        $this->json_property('store', 'Store', '',
                               $many = False, $recursive = True);
         $this->json_property('sender', 'User', '',
                               $many = False, $recursive = True);
@@ -25,13 +25,13 @@ class DomainInvitation extends Entity
     }
 }
 
-class DomainInvitations extends Resource
+class StoreInvitations extends Resource
 {
     public function __construct()
     {
-        $this->entity_class = 'DomainInvitation';
-        $this->json_name = 'domainInvitations';
+        $this->entity_class = 'StoreInvitation';
+        $this->json_name = 'storeInvitations';
     }
 }
 
-$domain_invitations = new DomainInvitations();
+$store_invitations = new StoreInvitations();

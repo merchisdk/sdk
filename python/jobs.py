@@ -5,8 +5,8 @@ import sdk.python.entities
 from sdk.python.job_comments import JobComment
 from sdk.python.draft_comments import DraftComment
 from sdk.python.country_taxes import CountryTax
-from sdk.python.domains import Domain
-from sdk.python.domain_tags import DomainTag
+from sdk.python.stores import Store
+from sdk.python.store_tags import StoreTag
 from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
@@ -45,7 +45,7 @@ class Job(sdk.python.entities.Entity):
     draft_comments = Property(DraftComment)
     drafts = Property(Draft)
     invoice = Property(Invoice, backref="jobs")
-    domain = Property(Domain)
+    store = Property(Store)
     shipping = Property(Address)
     production_shipping_address = Property(Address)
     notifications = Property(Notification)
@@ -86,7 +86,7 @@ class Job(sdk.python.entities.Entity):
     quote_set = Property(bool)
     shipment = Property(Shipment, backref="jobs")
     tax_type = Property(CountryTax)
-    tags = Property(DomainTag, backref="jobs")
+    tags = Property(StoreTag, backref="jobs")
     comments = Property(JobComment, backref="job")
     drafts = Property(Draft, backref="job")
     draft_comments = Property(DraftComment, backref="job")
@@ -162,7 +162,7 @@ class Job(sdk.python.entities.Entity):
 
     def is_production_in_house(self):
         """ Return True if one of the job assignment suppliers is a manager """
-        return any(a.supplier.has_authority(self.domain.id, [ADMIN, MANAGER])
+        return any(a.supplier.has_authority(self.store.id, [ADMIN, MANAGER])
                    for a in self.assignments)
 
     def in_house_assignment(self):
