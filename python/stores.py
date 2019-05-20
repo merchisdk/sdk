@@ -44,7 +44,7 @@ class Store(sdk.python.entities.Entity):
     active_theme_id = Property(int)
     store = Property(str)
     store_type = Property(int)
-    sub_store = Property(str)
+    sub_domain = Property(str)
     email_store = Property(str)
     theme = Property(str)
     sms_name = Property(str)

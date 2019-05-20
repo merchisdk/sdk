@@ -21,7 +21,7 @@ class MenuItem(sdk.python.entities.Entity):
             link_uri and the store
         """
         if store and self.link_type == menu_util.INTERNAL_PAGE:
-            return 'http://{0}.{1}/{2}/'.format(str(store.sub_store),
+            return 'http://{0}.{1}/{2}/'.format(str(store.sub_domain),
                                                 host,
                                                 self.link_uri)
         return self.link_uri
