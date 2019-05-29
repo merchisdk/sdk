@@ -45,6 +45,7 @@ class Product(sdk.python.entities.Entity):
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     tags = Property(StoreTag, backref="products")
+    feature_image = Property(File, backref="featured_products")
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_store=None):
