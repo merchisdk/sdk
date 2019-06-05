@@ -13,9 +13,9 @@ class Store extends Entity
     public function __construct()
     {
         $this->json_property('id', 'integer');
-        $this->json_property('store', 'string');
+        $this->json_property('domain', 'string');
         $this->json_property('store_type', 'integer');
-        $this->json_property('email_store', 'string');
+        $this->json_property('email_domain', 'string');
         $this->json_property('theme', 'string');
         $this->json_property('products', 'Product', null, $many = True,
                              $recursive = True);
