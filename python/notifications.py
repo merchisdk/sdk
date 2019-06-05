@@ -60,7 +60,7 @@ class Notification(sdk.python.entities.Entity):
         if self.subject and self.subject != "None":
             if self.related_job:
                 return "{0} - {1}".format(self.subject,
-                                          self.store.email_store)
+                                          self.store.email_domain)
             return self.subject
         return self.description
 

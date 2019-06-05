@@ -20,7 +20,7 @@ def test_supply_store_from_json_works():
     assert supply_store.supply_product.id == 2
     assert supply_store.supply_product.notes == 'this is supply product'
     assert supply_store.store.id == 3
-    assert supply_store.store.store == 'store.com'
+    assert supply_store.store.domain == 'store.com'
 
 
 def test_supply_store_backref_valid():
