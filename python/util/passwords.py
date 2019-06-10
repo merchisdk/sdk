@@ -76,10 +76,10 @@ def get_passwords_from_dumps():
 
 def normalise_for_db(password):
     """ Convert (very) similar passwords into a single canonical form. """
-    password = unicodedata.normalize('NFKC')
+    password = unicodedata.normalize('NFKC', password)
     password = password.casefold()
     password = password.strip()
-    password = unicodedata.normalize('NFKC')
+    password = unicodedata.normalize('NFKC', password)
 
 
 def get_valid_passwords_from_dumps():
