@@ -73,6 +73,14 @@ def get_passwords_from_dumps():
             yield password
 
 
+def normalise_for_db(password):
+    """ Convert (very) similar passwords into a single canonical form. """
+    password = unicodedata.normalize('NFKC')
+    password = password.casefold()
+    password = password.strip()
+    password = unicodedata.normalize('NFKC')
+
+
 def get_valid_passwords_from_dumps():
     """ Yield every line in every text file in password_dumps directory that
         is within the password length requirements.
@@ -82,7 +90,9 @@ def get_valid_passwords_from_dumps():
             continue
         if len(password) > crypto.MAX_PASSWORD_LENGTH:
             continue
-        yield password
+        password = normalise_for_db(password)
+        if password:
+            yield password
 
 
 def build_dawg_from_dumps():
@@ -90,8 +100,7 @@ def build_dawg_from_dumps():
         password (listed on a new line) in every file in password_dumps
         directory.
     """
-    return dawg.DAWG((password.rstrip().lower() for password in
-                      get_valid_passwords_from_dumps() if password.rstrip()))
+    return dawg.DAWG(get_valid_passwords_from_dumps())
 
 
 def compile_password_list():
@@ -132,6 +141,5 @@ def is_password_known_bad(password: str) -> bool:
     """
     if password is None:
         return True
-    password = password.rstrip()
-    password = password.lower()
+    password = normalise_for_db(password)
     return password == '' or password in get_password_database()
