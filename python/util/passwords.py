@@ -41,6 +41,7 @@
     into memory using `get_password_database()`.
 """
 import os
+import unicodedata
 import dawg
 import sdk.python.util.crypto as crypto
 
