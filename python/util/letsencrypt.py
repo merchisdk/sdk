@@ -43,13 +43,6 @@ def load_cert(log):
         cmd = cmd.format(name)
         subprocess.call(cmd, shell=True)
 
-    # depending on the name of the current user, and whether the production or
-    # production setup proxies are running, only one of the following calls
-    # is likely to succeed, but it is easier to just request all possibilities
-    # restart themselves, and ignore any failures, rather than finding out
-    # which, if any, are actually running
-    restart_container("dockercompose_proxy_1")
-    restart_container("admin_proxy_1")
     restart_container("merchi_proxy_1")
 
 
