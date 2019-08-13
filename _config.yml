@@ -21,7 +21,7 @@ collections:
     title: Protocol
     position: 2
   typescript:
-    title: TypeScript/Javascript SDK
+    title: TypeScript SDK
     position: 3
   endpoints:
     title: Endpoint Reference
