@@ -5,9 +5,9 @@ parameters:
   - name:
     content:
 content_markdown: |-
-  Welcome to our API.
+  Welcome to the official merchi CRM API documentation page.
 
-  This API document is designed for those interested in developing for our platform.
+  This API document is designed for those interested in developing for the merchi CRM platform.
 
   This API is still under development and will evolve.
 
