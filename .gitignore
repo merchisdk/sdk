@@ -27,3 +27,5 @@ php/clover.xml
 .pytest_cache/
 .tox
 .hypothesis/
+node_modules/
+coverage/
