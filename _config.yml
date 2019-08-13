@@ -14,12 +14,18 @@ baseurl:
 timezone: Etc/UTC
 
 collections:
-  documentation:
-    title: Documentation
+  overview:
+    title: Overview
     position: 1
-  api:
-    title: APIs
+  protocol:
+    title: Protocol
     position: 2
+  typescript:
+    title: TypeScript/Javascript SDK
+    position: 3
+  endpoints:
+    title: Endpoint Reference
+    position: 4
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
