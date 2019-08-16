@@ -4,7 +4,7 @@ branches:
 matrix:
   include:
     - language: php
-      php: 7.0
+      php: 7.2
       install:
         - composer global require phpmd/phpmd
         - composer global require "squizlabs/php_codesniffer=*"
@@ -14,6 +14,16 @@ matrix:
         - php/test.sh
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+    - language: node_js
+      node_js:
+        - "10"
+      script:
+        - yarn global add typescript
+        - cd typescript
+        - yarn
+        - tsc
+        - ./node_modules/eslint/bin/eslint.js 'src/**.ts'
+        - yarn test
     - language: python
       python: 3.5
       install:
