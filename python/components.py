@@ -1,6 +1,7 @@
 import sdk.python.entities
 from sdk.python.component_tags import ComponentTag
 from sdk.python.entities import Property
+from sdk.python.files import File
 
 
 class Component(sdk.python.entities.Entity):
@@ -13,6 +14,7 @@ class Component(sdk.python.entities.Entity):
     body = Property(str)
     description = Property(str)
     tags = Property(ComponentTag)
+    images = Property(File)
 
 
 class Components(sdk.python.entities.Resource):
