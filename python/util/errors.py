@@ -17,7 +17,7 @@ RESOURCE_NOT_FOUND = 8  # i.e. HTTP 404
 RESOURCE_GONE = 9  # a requested object has been deleted (i.e. HTTP 410)
 REQUEST_TOO_LARGE = 10  # too many bytes sent or too complex a query
 UNKNOWN_DOMAIN = 11  # request comes from a domain that is not allowed
-UNSUPPORTED_METHOD = 12 # i.e. HTTP 405
+UNSUPPORTED_METHOD = 12  # i.e. HTTP 405
 
 # the following are websocket related
 MISSING_EVENT_TYPES = 13
