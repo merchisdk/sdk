@@ -1,6 +1,3 @@
-import sdk.python.util.errors
-
-
 class ApiError(Exception):
 
     def __init__(self, message, status_code, error_code, debug_message=None):
