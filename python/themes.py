@@ -106,6 +106,7 @@ class Theme(sdk.python.entities.Entity):
     email_css_template_editing = Property(File)
     email_css_template_using = Property(File)
     feature_image = Property(File)
+    images = Property(File)
     css_image_files = Property(File)
 
     def is_valid_and_updated(self):
