@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { ErrorType, getErrorFromCode } from './constants/errors';
 
 /* this constant are expected to be defined in webpack (or provided as
