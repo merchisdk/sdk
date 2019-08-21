@@ -80,6 +80,7 @@ def normalise_for_db(password):
     password = password.casefold()
     password = password.strip()
     password = unicodedata.normalize('NFKC', password)
+    return password
 
 
 def get_valid_passwords_from_dumps():
