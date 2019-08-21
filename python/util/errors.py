@@ -76,7 +76,7 @@ MISSING_TOKEN = 54
 
 MISSING_ADDRESS_LINE_ONE = 55
 MISSING_ADDRESS_LINE_TWO = 56
-MISSING_CITY = 57 
+MISSING_CITY = 57
 MISSING_POSTCODE = 58
 MISSING_COUNTRY = 59
 MISSING_STATE = 60
@@ -117,14 +117,14 @@ BAD_NAME = 91
 
 MISSING_ADMIN = 92  # company admin not defined
 MISSING_BANK = 93
-MISSING_PHONE = 94 
+MISSING_PHONE = 94
 MISSING_PAYPAL = 95
 MISSING_STRIPE = 96
 
 NO_SUCH_RELATION = 97  # tried to embed something that doesn't exist
 DUPLICATE_DATA = 98
 NO_DATA = 99  # client didn't send anything
-MISSING_PRIMARY = 100 # at least one thing must exist, and be marked as primary
+MISSING_PRIMARY = 100  # at least one thing must exist, and be marked as primary
 
 NOT_SELECTABLE = 101  # tried to choose options on something with none
 TOO_MANY_SELECTIONS = 102  # only one option may be chosen
