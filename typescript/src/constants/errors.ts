@@ -1,4 +1,4 @@
-export enum Error {
+export enum ErrorType {
   UNKNOWN_ERROR = 0,
   SERVER_ERROR = 1,
   CLIENT_ERROR = 2,
@@ -22,4 +22,11 @@ export enum Error {
   DUPLICATE_SUBSCRIPTION_TOKEN = 20,
   BAD_SMS_TOKEN = 21,
   DOMAIN_NOT_FOUND = 22,
+}
+
+export function getErrorFromCode(code: number): ErrorType {
+  if (code in ErrorType) {
+    return code;
+  }
+  return ErrorType.UNKNOWN_ERROR;
 }

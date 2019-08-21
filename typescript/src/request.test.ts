@@ -1,4 +1,5 @@
 import { apiFetch } from './request';
+import { ErrorType } from './constants/errors';
 
 beforeEach(function() {
   (global as any).BACKEND_URI = 'example.com';
@@ -22,10 +23,21 @@ test('can pass through data from server', () => {
 });
 
 test('404 creates ApiError', () => {
-  mockFetch(false, {'statusCode': 404}, 404);
+  mockFetch(false, {'statusCode': 404, 'errorCode': 8}, 404);
   (window as any).merchiBackendUri = 'override.example.com';
   apiFetch('/test').catch(e => {
     expect(e.statusCode).toBe(404);
     expect(e.name).toBe('ApiError');
+    expect(e.errorCode).toBe(ErrorType.RESOURCE_NOT_FOUND);
+  });
+});
+
+test('will get default errorCode', () => {
+  mockFetch(false, {'statusCode': 404, 'errorCode': -1}, 404);
+  (window as any).merchiBackendUri = 'override.example.com';
+  apiFetch('/test').catch(e => {
+    expect(e.statusCode).toBe(404);
+    expect(e.name).toBe('ApiError');
+    expect(e.errorCode).toBe(ErrorType.UNKNOWN_ERROR);
   });
 });
