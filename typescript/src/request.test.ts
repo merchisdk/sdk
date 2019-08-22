@@ -1,19 +1,10 @@
 import { apiFetch } from './request';
 import { ErrorType } from './constants/errors';
+import { mockFetch } from './test_util';
 
 beforeEach(function() {
   (global as any).BACKEND_URI = 'example.com';
 });
-
-function mockFetch(ok: boolean, data: any, status: number) {
-  (global as any).fetch = jest.fn().mockImplementation(() =>
-    Promise.resolve({
-      status: status,
-      ok: ok,
-      json: () => Promise.resolve(data)
-    })
-  );
-}
 
 test('can pass through data from server', () => {
   mockFetch(true, {'animal': 'turtle'}, 200);
