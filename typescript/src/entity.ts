@@ -71,10 +71,10 @@ export class Entity {
     const resource = `/${this.resourceName}/`;
     return apiFetch(resource).then((data: any) => {
       const metadata = {canCreate: data.canCreate,
-                        available: data.available,
-                        count: data.count,
-                        limit: data.limit,
-                        offset: data.offset};
+        available: data.available,
+        count: data.count,
+        limit: data.limit,
+        offset: data.offset};
       const pluralName = this.pluralName;
       const items: Array<object> = data[pluralName];
       const entities = [];
@@ -84,7 +84,7 @@ export class Entity {
         entities.push(entity);
       }
       return {items: entities,
-              metadata: metadata};
+        metadata: metadata};
     });
   }
 
