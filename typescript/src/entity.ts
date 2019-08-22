@@ -53,8 +53,8 @@ export class Entity {
   }
 
   public fromJson(json: any) {
-    const constructor = this.constructor as typeof Entity
-    const singularName: string = constructor.singularName
+    const constructor = this.constructor as typeof Entity;
+    const singularName: string = constructor.singularName;
     const data: object = json[singularName];
     for (const key in data) {
       const value: any = (data as any)[key];
