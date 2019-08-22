@@ -31,3 +31,17 @@ test('handle nonsense from server', () => {
   (window as any).merchiBackendUri = 'override.example.com';
   Product.get(1);
 });
+
+test('can list products from server', () => {
+  mockFetch(true, {'products': [{'product': {'name': 'p1'}},
+                                {'product': {'name': 'p2'}}],
+                   'available': 2,
+                   'count': 2}, 200);
+  (window as any).merchiBackendUri = 'override.example.com';
+  return Product.list().then(({items: d, metadata: md}) => {
+    expect(d.length).toBe(2); 
+    expect(d[0].name).toBe('p1');
+    expect(d[1].name).toBe('p2');
+    expect(md.available).toBe(2);
+  });
+});

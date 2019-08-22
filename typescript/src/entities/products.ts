@@ -3,6 +3,7 @@ import { Entity } from '../entity';
 export class Product extends Entity {
   protected static resourceName: string = "products";
   protected static singularName: string = "product";
+  protected static pluralName: string = "products";
 
   @Product.property("id")
   private _id?: number;
