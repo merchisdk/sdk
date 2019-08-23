@@ -1,16 +1,19 @@
+// eslint-disable-next-line no-unused-vars
+import { ErrorType, getErrorFromCode } from './constants/errors';
+
 /* this constant are expected to be defined in webpack (or provided as
    globals by some other means. */
 declare const BACKEND_URI: String;
 
 export class ApiError extends Error {
   statusCode?: number;
-  errorCode?: number;
+  errorCode?: ErrorType;
   constructor(err: any) {
     const message = JSON.stringify(err);
     /* istanbul ignore next */
     super(message);
     this.statusCode = err.statusCode;
-    this.errorCode = err.errorCode;
+    this.errorCode = getErrorFromCode(err.errorCode);
     this.name = 'ApiError';
     this.message = message;
   }
