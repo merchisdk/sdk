@@ -28,4 +28,3 @@ class CartItems(sdk.python.entities.Resource):
 
 
 cart_items = CartItems()
-
