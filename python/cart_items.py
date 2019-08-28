@@ -4,6 +4,7 @@ from sdk.python.entities import Property
 from sdk.python.variations import Variation, VariationsGroup
 from sdk.python.country_taxes import CountryTax
 
+
 class CartItem(sdk.python.entities.Entity):
 
     resource = '/cart_items/'
