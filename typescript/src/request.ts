@@ -5,6 +5,10 @@ import { ErrorType, getErrorFromCode } from './constants/errors';
    globals by some other means. */
 declare const BACKEND_URI: String;
 
+export interface RequestOptions extends RequestInit {
+  query?: Array<Array<string>>;
+}
+
 export class ApiError extends Error {
   statusCode?: number;
   errorCode?: ErrorType;
@@ -19,23 +23,28 @@ export class ApiError extends Error {
   }
 }
 
-export function apiFetch(resource: string, options?: RequestInit) {
-  return backendFetch(resource, options).then(function (response) {
-    if (response.status < 200 || response.status > 299) {
-      return response.json().then(function (json) {
-        const err = new ApiError(json);
-        return Promise.reject(err);
-      });
-    } else {
-      return response.json(); 
-    }
-  });
+export function apiFetch(resource: string, options?: RequestOptions) {
+  return backendFetch(resource, options as RequestInit | undefined).
+    then(function (response) {
+      if (response.status < 200 || response.status > 299) {
+        return response.json().then(function (json) {
+          const err = new ApiError(json);
+          return Promise.reject(err);
+        });
+      } else {
+        return response.json();
+      }});
 }
 
-function backendFetch(resource: string, options?: RequestInit) {
+function backendFetch(resource: string, options?: RequestOptions) {
   const server = (window as any).merchiBackendUri ?
     (window as any).merchiBackendUri : BACKEND_URI;
   const version = 'v6';
-  const url = server + version + resource;
-  return fetch(url, options);
+  const url = new URL(server + version + resource);
+  if (options && options.query) {
+    for (let entry of options.query) {
+      url.searchParams.append(entry[0], entry[1]);
+    }
+  }
+  return fetch(url.toString(), options);
 }
