@@ -1,5 +1,5 @@
 import { Entity } from '../entity';
-import { Category } from './categories';
+import { Category } from './category';
 
 export class Product extends Entity {
   protected static resourceName: string = "products";

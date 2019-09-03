@@ -1,6 +1,6 @@
 import { Entity } from './entity';
-import { Category } from './entities/categories';
-import { Product } from './entities/products';
+import { Category } from './entities/category';
+import { Product } from './entities/product';
 import { generateUUID } from './uuid';
 
 
