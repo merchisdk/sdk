@@ -29,6 +29,18 @@ test('can fetch product from server', () => {
   return merchi.Product.get(1).then(product => expect(product.name).toBe(testName));
 });
 
+test('can specify options in request', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  mockFetch(true, {'product': {'name': testName}}, 200);
+  (window as any).merchiBackendUri = 'http://override.example.com/';
+  const options = {includeArchived: true,
+                   withRights: true}; 
+  return merchi.Product.get(1, options).then(product => expect(product.name).toBe(testName));
+});
+
+
+
 test('can fetch product with category', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';

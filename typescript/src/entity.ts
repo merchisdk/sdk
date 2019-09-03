@@ -10,6 +10,8 @@ interface EmbedDescriptor {
 
 interface GetOptions {
   embed?: EmbedDescriptor;
+  includeArchived?: boolean;
+  withRights?: boolean;
 }
 
 interface ListOptions {
@@ -114,8 +116,15 @@ export class Entity {
      Promise<InstanceType<T>>{
     const resource = `/${this.resourceName}/${String(id)}/`;
     const fetchOptions: RequestOptions = {};
+    fetchOptions.query = [];
     if (options && options.embed) {
-      fetchOptions.query = [['embed', JSON.stringify(options.embed)]];
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
+    if (options && options.includeArchived) {
+      fetchOptions.query.push(['include_archived', 'true']);
+    }
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
     }
     return apiFetch(resource, fetchOptions).then((data: any) => {
       const result: InstanceType<T> = (new this()) as InstanceType<T>;
