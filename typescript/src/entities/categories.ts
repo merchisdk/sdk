@@ -1,4 +1,5 @@
 import { Entity } from '../entity';
+import { Product } from './products';
 
 export class Category extends Entity {
   protected static resourceName: string = "categories";
@@ -27,5 +28,18 @@ export class Category extends Entity {
   set name(newName: string | undefined) {
     this._name = newName;
     this._isDirty = true;
+  }
+
+  @Category.property("products", "Product")
+  private _products?: Array<Product> | undefined;
+
+  get products(): Array<Product> | undefined {
+    return this._products;
+  }
+
+  set products(newProducts: Array<Product> | undefined) {
+    this._products = newProducts;
+    this._isDirty = true;
+    this.checkSameSessionList(newProducts);
   }
 }
