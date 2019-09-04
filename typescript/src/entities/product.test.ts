@@ -32,14 +32,15 @@ test('can fetch product from server', () => {
 test('can specify options in request', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
-  mockFetch(true, {'product': {'name': testName}}, 200);
+  const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
   (window as any).merchiBackendUri = 'http://override.example.com/';
   const options = {includeArchived: true,
                    withRights: true}; 
-  return merchi.Product.get(1, options).then(product => expect(product.name).toBe(testName));
+  const invocation = merchi.Product.get(1, options).then(product => expect(product.name).toBe(testName));
+  const correct = [['include_archived', 'true']];
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  return invocation;
 });
-
-
 
 test('can fetch product with category', () => {
   const merchi = new Merchi();
