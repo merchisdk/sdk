@@ -21,8 +21,25 @@ test('can get and set name', () => {
   expect(product.name).toBe('example');
 });
 
+test('can get and set domain', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const domain = new merchi.Domain();
+  product.domain = domain;
+  expect(product.domain).toBe(domain);
+});
+
 test('can fetch product from server', () => {
   const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  mockFetch(true, {'product': {'name': testName}}, 200);
+  (window as any).merchiBackendUri = 'http://override.example.com/';
+  return merchi.Product.get(1).then(product => expect(product.name).toBe(testName));
+});
+
+test('can fetch with explicit session token', () => {
+  const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
+  const merchi = new Merchi(testToken);
   const testName = 'S7qHUfV_dr5l';
   mockFetch(true, {'product': {'name': testName}}, 200);
   (window as any).merchiBackendUri = 'http://override.example.com/';
@@ -43,6 +60,24 @@ test('can fetch product with category', () => {
     expect(((product.categories as any)[0] as any).name).toBe(categoryName);
   });
 });
+
+test('can fetch product with category and explcit session', () => {
+  const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
+  const merchi = new Merchi(testToken);
+  const testName = 'S7qHUfV_dr5l';
+  const categoryName = 'l3VfG#S+';
+  const categoryData = {'name': categoryName};
+  mockFetch(true, {'product': {'name': testName,
+                               'categories': [categoryData]}}, 200);
+  (window as any).merchiBackendUri = 'http://override.example.com/';
+  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
+  return r.then(product => {
+    expect(product.name).toBe(testName);
+    expect(((product.categories as any)[0] as any).name).toBe(categoryName);
+  });
+});
+
+
 
 test('handle nonsense from server', () => {
   const merchi = new Merchi();
@@ -86,4 +121,36 @@ test('can list products from server with category', () => {
     expect(md.available).toBe(2);
     expect((d[0].categories as any)[0].name).toBe('c1');
   });
+});
+
+test('can save product', () => {
+  const merchi = new Merchi();
+  const c1 = new merchi.Category();
+  const p = new merchi.Product();
+  const c2 = new merchi.Category();
+  const d = new merchi.Domain();
+  p.categories = [c2];
+  p.domain = d;
+  c1.products = [p];
+  c1.save();
+  d.domain = "3onrb6o4";
+  p.name = "pHyz7ZucK#";
+  c2.name = "8&OaUsDgJ$ev3FYZ3";
+  p.save();
+  (global as any).fetch = jest.fn().mockImplementation((url, data) => {
+    expect(data.method).toBe("PATCH");
+    const correct =  [['products-0-name', 'pHyz7ZucK#'],
+      ['products-0-categories-0-name', '8&OaUsDgJ$ev3FYZ3'],
+      ['products-0-categories-count', '1'],
+      ['products-0-domain-0-domain', '3onrb6o4'],
+      ['products-0-domain-count', '1'],
+      ['products-count', '1']];
+    expect(Array.from(data.body.entries())).toEqual(correct);
+    return Promise.resolve({
+      status: 200,
+      ok: true,
+      json: () => Promise.resolve({})
+    })
+  });
+  c1.save();
 });

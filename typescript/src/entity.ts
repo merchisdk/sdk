@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 // eslint-disable-next-line no-unused-vars
-import { apiFetch, RequestOptions } from './request';
+import { RequestOptions } from './request';
 // eslint-disable-next-line no-unused-vars
 import { Merchi } from './merchi';
 
@@ -29,11 +29,18 @@ interface ListResponse<T> {
   metadata: ListMetadata,
 }
 
+interface SerialiseOptions {
+  existing?: FormData;
+  excludeOld?: boolean;
+  files?: Array<any>;
+  prefix?: string;
+}
+
 interface PropertyInfo {
   property: string;  // this is the json name, e.g. 'id'
   attribute: string;  // this is the js attribute name, e.g. '_id'
   type: Function;  // e.g. Number
-  arrayType: Entity;  // if type is an array, arrayType is the element type
+  arrayType?: Entity;  // if type is an array, arrayType is the element type
 }
 
 export class Entity {
@@ -50,7 +57,7 @@ export class Entity {
 
   protected _isDirty: boolean = false;
   // maps json names like 'id' to information about that property
-  protected propertiesMap: Map<string, PropertyInfo>;
+  public propertiesMap: Map<string, PropertyInfo>;
 
   protected static property(jsonName: string, arrayType?: string) {
     return function (target: Entity, propertyKey: string) {
@@ -117,11 +124,12 @@ export class Entity {
     if (options && options.embed) {
       fetchOptions.query = [['embed', JSON.stringify(options.embed)]];
     }
-    return apiFetch(resource, fetchOptions).then((data: any) => {
-      const result: InstanceType<T> = (new this()) as InstanceType<T>;
-      result.fromJson(data);
-      return result;
-    });
+    return this.prototype.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        const result: InstanceType<T> = (new this()) as InstanceType<T>;
+        result.fromJson(data);
+        return result;
+      });
   }
 
   public static list<T extends typeof Entity>(this: T, options?: ListOptions):
@@ -131,7 +139,7 @@ export class Entity {
     if (options && options.embed) {
       fetchOptions.query = [['embed', JSON.stringify(options.embed)]];
     }
-    return apiFetch(resource, fetchOptions).then((data: any) => {
+    return this.prototype.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
       const metadata = {canCreate: data.canCreate,
         available: data.available,
         count: data.count,
@@ -149,6 +157,19 @@ export class Entity {
         metadata: metadata};
     });
   }
+
+  public save = () => {
+    const primaryKey: number = (this as any).id;
+    const resourceName:string = (this.constructor as any).resourceName;
+    const resource = `/${resourceName}/${String(primaryKey)}/`;
+    const data = this.toFormData();
+    const fetchOptions = {method: 'PATCH',
+      body: data};
+    return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
+      this.fromJson(data);
+      return this;
+    });
+  };
 
   private getEntityClass = (name: string) => {
     return (this.merchi as any)[name];
@@ -193,5 +214,72 @@ export class Entity {
         }
       }
     }
+  }
+
+  protected forEachProperty = (fn: (i: PropertyInfo) => void) => {
+    for (const info of this.propertiesMap.values()) {
+      fn(info);
+    }
+  }
+
+  protected toFormData = (options?: SerialiseOptions): FormData => {
+    options = options || {};
+    const result = options.existing || new FormData();
+    const prefix = options.prefix || '';
+    const appendData = (name: string, value: any) => {
+      /* istanbul ignore next */
+      if (name === undefined || value === undefined) {
+        /* istanbul ignore next */
+        return;
+      }
+      if (prefix) {
+        name = prefix + '-' + name;
+      }
+      result.set(name, value);
+    };
+    const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
+      const remoteCount = value.length;
+      const initialLength = Array.from((result as any).entries()).length;
+      for (let i = 0; i < remoteCount; ++i) {
+        let innerPrefix = info.property + '-' + i;
+        if (prefix) {
+          innerPrefix = prefix + '-' + innerPrefix;
+        }
+        value[i].toFormData({existing: result, prefix: innerPrefix});
+      }
+      const finalLength = Array.from((result as any).entries()).length;
+      if ((finalLength - initialLength) > 0) {
+        appendData(info.property + '-count', remoteCount);
+      }
+    };
+    const processSingleEntityProperty = (info: PropertyInfo, value: Entity) => {
+      let innerPrefix = info.property + '-0';
+      if (prefix) {
+        innerPrefix = prefix + '-' + innerPrefix;
+      }
+      const initialLength = Array.from((result as any).entries()).length;
+      value.toFormData({existing: result, prefix: innerPrefix});
+      const finalLength = Array.from((result as any).entries()).length;
+      if ((finalLength - initialLength) > 0) {
+        appendData(info.property + '-count', 1);
+      }
+    };
+    const processScalarProperty = (info: PropertyInfo, value: any) => {
+      appendData(info.property, value);
+    };
+    const processProperty = (info: PropertyInfo) => {
+      const value = (this as any)[info.attribute];
+      if (value === undefined) {
+        return;
+      } else if (info.arrayType) {
+        processArrayProperty(info, value);
+      } else if (info.type.prototype.merchi === this.merchi) {
+        processSingleEntityProperty(info, value);
+      } else {
+        processScalarProperty(info, value);
+      }
+    };
+    this.forEachProperty(processProperty);
+    return result;
   }
 }
