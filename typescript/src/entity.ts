@@ -52,6 +52,10 @@ export class Entity {
   // maps json names like 'id' to information about that property
   protected propertiesMap: Map<string, PropertyInfo>;
 
+  public get isDirty(): boolean {
+    return this._isDirty;
+  }
+
   protected static property(jsonName: string, arrayType?: string) {
     return function (target: Entity, propertyKey: string) {
       let properties = Reflect.getMetadata(Entity.propertiesSetKey,
