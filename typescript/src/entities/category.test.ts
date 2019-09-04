@@ -37,3 +37,21 @@ test('can get and set product', () => {
   p1.categories = undefined;
   expect(p1.categories).toBe(undefined);
 });
+
+test('independence of entities', () => {
+  const merchi = new Merchi();
+  const c1 = new merchi.Category();
+  const c2 = new merchi.Category();
+  const p = new merchi.Product();
+  const name = "vMjssEhwpHtMT";
+  const products = [p];
+  c1.name = name;
+  c1.products = products;
+  expect(c1.name).toBe(name);
+  expect(c1.products).toBe(products);
+  expect(c1.isDirty).toBe(true);
+  // c2 is a different object, and therefore totally unnaffected
+  expect(c2.name).toBe(undefined);
+  expect(c2.products).toBe(undefined);
+  expect(c2.isDirty).toBe(false);
+});
