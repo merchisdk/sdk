@@ -1,5 +1,7 @@
 import { Merchi } from '../merchi';
-import { mockFetch } from '../test_util';
+import { setup, mockFetch } from '../test_util';
+
+setup();
 
 test('can make product', () => {
   const merchi = new Merchi();
@@ -25,7 +27,6 @@ test('can fetch product from server', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
   mockFetch(true, {'product': {'name': testName}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   return merchi.Product.get(1).then(product => expect(product.name).toBe(testName));
 });
 
@@ -36,7 +37,6 @@ test('can fetch product with category', () => {
   const categoryData = {'name': categoryName};
   mockFetch(true, {'product': {'name': testName,
                                'categories': [categoryData]}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   const r = merchi.Product.get(1, {'embed': {'categories': {}}});
   return r.then(product => {
     expect(product.name).toBe(testName);
@@ -48,7 +48,6 @@ test('handle nonsense from server', () => {
   const merchi = new Merchi();
   // non existent property just ignored. no crash, no update
   mockFetch(true, {'product': {'no such property!!!': 'unused'}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   merchi.Product.get(1);
 });
 
@@ -58,7 +57,6 @@ test('can list products from server', () => {
                                 {'product': {'name': 'p2'}}],
                    'available': 2,
                    'count': 2}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   return merchi.Product.list().then(({items: d, metadata: md}) => {
     expect(d.length).toBe(2);
     expect(d[0].name).toBe('p1');
@@ -77,7 +75,6 @@ test('can list products from server with category', () => {
                                              'categories': categoriesData}}],
                    'available': 2,
                    'count': 2}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   const r = merchi.Product.list({'embed': {'categories': {}}});
   return r.then(({items: d, metadata: md}) => {
     expect(d.length).toBe(2); 
