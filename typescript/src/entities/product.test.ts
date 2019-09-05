@@ -125,8 +125,6 @@ test('can list products from server with explicit session token', () => {
   });
 });
 
-
-
 test('can list products from server with category', () => {
   const merchi = new Merchi();
   const categoriesData = [{'name': 'c1'}];
@@ -160,20 +158,35 @@ test('can save product', () => {
   p.name = "pHyz7ZucK#";
   c2.name = "8&OaUsDgJ$ev3FYZ3";
   p.save();
-  (global as any).fetch = jest.fn().mockImplementation((url, data) => {
-    expect(data.method).toBe("PATCH");
-    const correct =  [['products-0-name', 'pHyz7ZucK#'],
-      ['products-0-categories-0-name', '8&OaUsDgJ$ev3FYZ3'],
-      ['products-0-categories-count', '1'],
-      ['products-0-domain-0-domain', '3onrb6o4'],
-      ['products-0-domain-count', '1'],
-      ['products-count', '1']];
-    expect(Array.from(data.body.entries())).toEqual(correct);
-    return Promise.resolve({
-      status: 200,
-      ok: true,
-      json: () => Promise.resolve({})
-    });
-  });
+  const fetch = mockFetch(true, {}, 200);
   c1.save();
+  const correct =  [['products-0-name', 'pHyz7ZucK#'],
+    ['products-0-categories-0-name', '8&OaUsDgJ$ev3FYZ3'],
+    ['products-0-categories-count', '1'],
+    ['products-0-domain-0-domain', '3onrb6o4'],
+    ['products-0-domain-count', '1'],
+    ['products-count', '1']];
+
+  expect(Array.from(fetch.mock.calls[0][1]['body'].entries())).toEqual(correct);
+});
+
+test('can serialise product to form data understood by backend', () => {
+  const merchi = new Merchi();
+  const c1 = new merchi.Category();
+  const p = new merchi.Product();
+  const c2 = new merchi.Category();
+  const d = new merchi.Domain();
+  p.categories = [c2];
+  p.domain = d;
+  c1.products = [p];
+  c1.save();
+  d.domain = "3onrb6o4";
+  p.name = "pHyz7ZucK#";
+  c2.name = "8&OaUsDgJ$ev3FYZ3";
+  const correct = [[ 'name', 'pHyz7ZucK#'],
+    ['categories-0-name', '8&OaUsDgJ$ev3FYZ3'],
+    ['categories-count', '1'],
+    ['domain-0-domain', '3onrb6o4'],
+    ['domain-count', '1']];
+  expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
 });
