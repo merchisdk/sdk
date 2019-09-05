@@ -235,7 +235,7 @@ export class Entity {
     }
   }
 
-  protected toFormData = (options?: SerialiseOptions): FormData => {
+  public toFormData = (options?: SerialiseOptions): FormData => {
     options = options || {};
     const result = options.existing || new FormData();
     const prefix = options.prefix || '';

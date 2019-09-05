@@ -44,6 +44,7 @@ test('can fetch with explicit session token', () => {
   const testName = 'S7qHUfV_dr5l';
   mockFetch(true, {'product': {'name': testName}}, 200);
   return merchi.Product.get(1).then(product => expect(product.name).toBe(testName));
+});
 
 test('can specify options in request', () => {
   const merchi = new Merchi();
@@ -156,7 +157,7 @@ test('can save product', () => {
       status: 200,
       ok: true,
       json: () => Promise.resolve({})
-    })
+    });
   });
   c1.save();
 });
