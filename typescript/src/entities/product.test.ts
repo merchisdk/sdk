@@ -87,8 +87,6 @@ test('can fetch product with category and explcit session', () => {
   });
 });
 
-
-
 test('handle nonsense from server', () => {
   const merchi = new Merchi();
   // non existent property just ignored. no crash, no update
@@ -110,6 +108,24 @@ test('can list products from server', () => {
     expect(d[0].categories).toBe(undefined);
   });
 });
+
+test('can list products from server with explicit session token', () => {
+  const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
+  const merchi = new Merchi(testToken);
+  mockFetch(true, {'products': [{'product': {'name': 'p1'}},
+                                {'product': {'name': 'p2'}}],
+                   'available': 2,
+                   'count': 2}, 200);
+  return merchi.Product.list().then(({items: d, metadata: md}) => {
+    expect(d.length).toBe(2);
+    expect(d[0].name).toBe('p1');
+    expect(d[1].name).toBe('p2');
+    expect(md.available).toBe(2);
+    expect(d[0].categories).toBe(undefined);
+  });
+});
+
+
 
 test('can list products from server with category', () => {
   const merchi = new Merchi();
