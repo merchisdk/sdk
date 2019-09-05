@@ -34,7 +34,6 @@ test('can specify options in request', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
   const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   const options = {includeArchived: true,
                    withRights: true}; 
   const invocation = merchi.Product.get(1, options).then(product => expect(product.name).toBe(testName));
