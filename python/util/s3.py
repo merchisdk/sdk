@@ -140,6 +140,17 @@ class S3Bucket(object):
 
     def all_keys(self):
         """ Generator that yields every key in the bucket """
-        objects = self.client.list_objects(Bucket=self.bucket_name)
-        for key in objects['Contents']:
-            yield key['Key']
+        continuation_token = None
+        kwargs = {'Bucket': self.bucket_name,
+                  'MaxKeys': 1000}
+        while True:
+            if continuation_token is not None:
+                kwargs['ContinuationToken'] = continuation_token
+            response = self.client.list_objects_v2(**kwargs)
+            objects = response['Contents']
+            has_more_pages = response['IsTruncated']
+            for key in objects:
+                yield key['Key']
+            if not has_more_pages:
+                break
+            continuation_token = response.get('NextContinuationToken')
