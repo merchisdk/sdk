@@ -43,7 +43,6 @@ test('can fetch with explicit session token', () => {
   const merchi = new Merchi(testToken);
   const testName = 'S7qHUfV_dr5l';
   mockFetch(true, {'product': {'name': testName}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   return merchi.Product.get(1).then(product => expect(product.name).toBe(testName));
 
 test('can specify options in request', () => {
@@ -80,7 +79,6 @@ test('can fetch product with category and explcit session', () => {
   const categoryData = {'name': categoryName};
   mockFetch(true, {'product': {'name': testName,
                                'categories': [categoryData]}}, 200);
-  (window as any).merchiBackendUri = 'http://override.example.com/';
   const r = merchi.Product.get(1, {'embed': {'categories': {}}});
   return r.then(product => {
     expect(product.name).toBe(testName);
