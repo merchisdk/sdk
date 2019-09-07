@@ -3,6 +3,7 @@
     "target": "ES5",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "lib": ["es2015", "DOM"],
     "moduleResolution": "node",
     "module": "ES6",

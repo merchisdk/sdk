@@ -1,5 +1,6 @@
 import { Entity } from '../entity';
 import { Category } from './category';
+import { Domain } from './domain';
 
 export class Product extends Entity {
   protected static resourceName: string = "products";
@@ -41,5 +42,18 @@ export class Product extends Entity {
     this._categories = newCategories;
     this._isDirty = true;
     this.checkSameSessionList(newCategories);
+  }
+
+  @Product.property("domain")
+  private _domain?: Domain;
+
+  get domain(): Domain | undefined {
+    return this._domain;
+  }
+
+  set domain(newDomain: Domain | undefined) {
+    this.checkSameSession(newDomain);
+    this._isDirty = true;
+    this._domain = newDomain;
   }
 }
