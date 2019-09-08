@@ -184,6 +184,18 @@ export class Entity {
     });
   };
 
+  public create = () => {
+    const resourceName:string = (this.constructor as any).resourceName;
+    const resource = `/${resourceName}/`;
+    const data = this.toFormData();
+    const fetchOptions = {method: 'POST',
+      body: data};
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        this.fromJson(data);
+        return this;});
+  };
+
   private getEntityClass = (name: string) => {
     return (this.merchi as any)[name];
   }
