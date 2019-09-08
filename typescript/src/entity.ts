@@ -3,6 +3,16 @@ import 'reflect-metadata';
 import { RequestOptions } from './request';
 // eslint-disable-next-line no-unused-vars
 import { Merchi } from './merchi';
+// eslint-disable-next-line no-unused-vars
+import { NotificationType } from './constants/notification_types';
+// eslint-disable-next-line no-unused-vars
+import { NotificationSection } from './constants/notification_sections';
+// eslint-disable-next-line no-unused-vars
+import { Role } from './constants/roles';
+
+function toUnixTimestamp(date: Date) {
+  return parseInt(String(date.getTime() / 1000)).toFixed(0);
+}
 
 interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
@@ -14,8 +24,54 @@ interface GetOptions {
   withRights?: boolean;
 }
 
+export enum SortOrder {
+  // eslint-disable-next-line no-unused-vars
+  ASCENDING,
+  // eslint-disable-next-line no-unused-vars
+  DESCENDING
+}
+
 interface ListOptions {
   embed?: EmbedDescriptor;
+  offset?: number;
+  limit?: number;
+  q?: string;
+  sort?: string;
+  order?: SortOrder;
+  tab?: string;
+  as?: string;
+  withRights?: boolean; 
+  state?: string;
+  categoryId?: number;
+  inDomain?: number;
+  inDomainRoles?: Array<number>;
+  asRole?: Role;
+  publicOnly?: boolean; 
+  managedOnly?: boolean;
+  memberOnly?: boolean;
+  domainRoles?: Array<Role>;
+  managedDomainsOnly?: boolean;
+  businessDomainsOnly?: boolean;
+  dateFrom?: Date;
+  dateTo?: Date;
+  relatedJob?: number;
+  relatedProduct?: number;
+  jobNotifiable?: number;
+  notificationType?: NotificationType;
+  notificationRecipient?: number;
+  notificationJob?: number;
+  relatedUser?: number;
+  clientId?: number;
+  clientCompanyId?: number;
+  savedByUser?: number;
+  receiverId?: number;
+  companyId?: number;
+  componentId?: number;
+  section?: NotificationSection;
+  senderRole?: Role;
+  isOrder?: boolean;
+  tags?: Array<number>;
+  exclude?: Array<number>;
 }
 
 interface ListMetadata {
@@ -149,8 +205,147 @@ export class Entity {
       Promise<ListResponse<InstanceType<T>>> {
     const resource = `/${this.resourceName}/`;
     const fetchOptions: RequestOptions = {};
-    if (options && options.embed) {
-      fetchOptions.query = [['embed', JSON.stringify(options.embed)]];
+    fetchOptions.query = [];
+    if (options) {
+      if (options.embed) {
+        fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+      }
+      if (options.offset !== undefined) {
+        fetchOptions.query.push(['offset', options.offset.toString()]);
+      }
+      if (options.limit !== undefined) {
+        fetchOptions.query.push(['limit', options.limit.toString()]);
+      }
+      if (options.q !== undefined) {
+        fetchOptions.query.push(['q', options.q]);
+      }
+      if (options.sort !== undefined) {
+        fetchOptions.query.push(['sort', options.sort]);
+      }
+      if (options.order !== undefined) {
+        if (options.order === SortOrder.ASCENDING) {
+          fetchOptions.query.push(['order', 'asc']);
+        } else {
+          fetchOptions.query.push(['order', 'desc']);
+        }
+      }
+      if (options.tab !== undefined) {
+        fetchOptions.query.push(['tab', options.tab]);
+      }
+      if (options.as !== undefined) {
+        fetchOptions.query.push(['as', options.as]);
+      }
+      if (options.state !== undefined) {
+        fetchOptions.query.push(['state', options.state]);
+      }
+      if (options.categoryId !== undefined) {
+        fetchOptions.query.push(['category_id', options.categoryId.toString()]);
+      }
+      if (options.inDomain !== undefined) {
+        fetchOptions.query.push(['in_domain', options.inDomain.toString()]);
+      }
+      if (options.inDomainRoles !== undefined) {
+        fetchOptions.query.push(['in_domain_roles',
+          options.inDomainRoles.join(',')]);
+      } 
+      if (options.asRole !== undefined) {
+        fetchOptions.query.push(['as_role', options.asRole.toString()]);
+      } 
+      if (options.publicOnly !== undefined) {
+        fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
+      } 
+      if (options.managedOnly !== undefined) {
+        fetchOptions.query.push(['managed_only',
+          options.managedOnly.toString()]);
+      } 
+      if (options.memberOnly !== undefined) {
+        fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
+      } 
+      if (options.domainRoles) {
+        fetchOptions.query.push(['domain_roles',
+          options.domainRoles.join(',')]);
+      }
+      if (options.managedDomainsOnly !== undefined) {
+        fetchOptions.query.push(['managed_domains_only',
+          options.managedDomainsOnly.toString()]);
+      }
+      if (options.businessDomainsOnly !== undefined) {
+        fetchOptions.query.push(['business_domains_only',
+          options.businessDomainsOnly.toString()]);
+      }
+      if (options.dateFrom !== undefined) {
+        fetchOptions.query.push(['date_from',
+          toUnixTimestamp(options.dateFrom)]);
+      }
+      if (options.dateTo !== undefined) {
+        fetchOptions.query.push(['date_to', toUnixTimestamp(options.dateTo)]);
+      }
+      if (options.relatedJob !== undefined) {
+        fetchOptions.query.push(['related_job', options.relatedJob.toString()]);
+      }
+      if (options.relatedProduct !== undefined) {
+        fetchOptions.query.push(['related_product',
+          options.relatedProduct.toString()]);
+      }
+      if (options.jobNotifiable !== undefined) {
+        fetchOptions.query.push(['job_notifiable',
+          options.jobNotifiable.toString()]);
+      }
+      if (options.notificationType !== undefined) {
+        fetchOptions.query.push(['notification_type',
+          options.notificationType.toString()]);
+      }
+      if (options.notificationRecipient !== undefined) {
+        fetchOptions.query.push(['notification_recipient',
+          options.notificationRecipient.toString()]);
+      }
+      if (options.notificationJob !== undefined) {
+        fetchOptions.query.push(['notification_job',
+          options.notificationJob.toString()]);
+      }
+      if (options.relatedUser !== undefined) {
+        fetchOptions.query.push(['related_user',
+          options.relatedUser.toString()]);
+      }
+      if (options.clientId !== undefined) {
+        fetchOptions.query.push(['client_id', options.clientId.toString()]);
+      }
+      if (options.clientCompanyId !== undefined) {
+        fetchOptions.query.push(['client_company_id',
+          options.clientCompanyId.toString()]);
+      }
+      if (options.savedByUser !== undefined) {
+        fetchOptions.query.push(['saved_by_user',
+          options.savedByUser.toString()]);
+      }
+      if (options.receiverId !== undefined) {
+        fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
+      }
+      if (options.companyId !== undefined) {
+        fetchOptions.query.push(['company_id', options.companyId.toString()]);
+      }
+      if (options.componentId !== undefined) {
+        fetchOptions.query.push(['component_id',
+          options.componentId.toString()]);
+      }
+      if (options.section !== undefined) {
+        fetchOptions.query.push(['section', options.section.toString()]);
+      }
+      if (options.senderRole !== undefined) {
+        fetchOptions.query.push(['senderRole', options.senderRole.toString()]);
+      }
+      if (options.isOrder) {
+        fetchOptions.query.push(['is_order', 'true']);
+      }
+      if (options.tags !== undefined) {
+        fetchOptions.query.push(['tags', options.tags.join(',')]);
+      }
+      if (options.exclude !== undefined) {
+        fetchOptions.query.push(['exclude', options.exclude.join(',')]);
+      }
+    }
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
     }
     return this.prototype.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
       const metadata = {canCreate: data.canCreate,
