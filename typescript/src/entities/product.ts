@@ -16,7 +16,7 @@ export class Product extends Entity {
 
   set id(newId: number | undefined) {
     this._id = newId;
-    this._isDirty = true;
+    this.markDirty("id", newId);
   }
 
   @Product.property("name")
@@ -28,7 +28,7 @@ export class Product extends Entity {
 
   set name(newName: string | undefined) {
     this._name = newName;
-    this._isDirty = true;
+    this.markDirty("name", newName);
   }
 
   @Product.property("categories", "Category")
@@ -40,8 +40,9 @@ export class Product extends Entity {
 
   set categories(newCategories: Array<Category> | undefined) {
     this._categories = newCategories;
-    this._isDirty = true;
     this.checkSameSessionList(newCategories);
+    this.addBackObjectList(newCategories);
+    this.markDirty("categories", newCategories)
   }
 
   @Product.property("domain")
@@ -53,7 +54,8 @@ export class Product extends Entity {
 
   set domain(newDomain: Domain | undefined) {
     this.checkSameSession(newDomain);
-    this._isDirty = true;
     this._domain = newDomain;
+    this.addBackObject(newDomain);
+    this.markDirty("domain", newDomain)
   }
 }

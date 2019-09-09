@@ -33,6 +33,8 @@ test('can get and set domain', () => {
   const domain = new merchi.Domain();
   product.domain = domain;
   expect(product.domain).toBe(domain);
+  product.domain = undefined;
+  expect(product.domain).toBe(undefined);
 });
 
 test('can fetch product from server', () => {
@@ -62,17 +64,30 @@ test('can specify options in request', () => {
   return invocation;
 });
 
-test('can fetch product with category', () => {
+test('can fetch product with category and domain', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
   const categoryName = 'l3VfG#S+';
   const categoryData = {'name': categoryName};
+  const domainData = {'domain': 'example.com'};
   mockFetch(true, {'product': {'name': testName,
-                               'categories': [categoryData]}}, 200);
-  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
+                               'categories': [categoryData],
+                               'domain': domainData}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {},
+                                             'domain': {}}});
   return r.then(product => {
     expect(product.name).toBe(testName);
     expect(((product.categories as any)[0] as any).name).toBe(categoryName);
+    const serialised = Array.from((product.toFormData() as any).entries());
+    // although product has a name, that name is from the server, and therefore
+    // does not need to be serialised back to the server.
+    expect(serialised).toEqual([]);
+    // if we manually set the name, it's a different matter:
+    const manualName = "caUHebUMlRvu2"
+    product.name = manualName; 
+    const newSerialised = Array.from((product.toFormData() as any).entries());
+    const correct = [['name', manualName]];
+    expect(newSerialised).toEqual(correct);
   });
 });
 
