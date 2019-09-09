@@ -548,4 +548,14 @@ export class Entity {
       }
     }
   }
+
+  public delete = () => {
+    const primaryKey: number = (this as any).id;
+    const resourceName:string = (this.constructor as any).resourceName;
+    const resource = `/${resourceName}/${String(primaryKey)}/`;
+    const fetchOptions = {method: 'DELETE'};
+    return this.merchi.authenticatedFetch(resource, fetchOptions).then(() => {
+      return null;
+    });
+  };
 }
