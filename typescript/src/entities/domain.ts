@@ -14,7 +14,7 @@ export class Domain extends Entity {
 
   set id(newId: number | undefined) {
     this._id = newId;
-    this._isDirty = true;
+    this.markDirty("id", newId);
   }
 
   @Domain.property("domain")
@@ -26,6 +26,6 @@ export class Domain extends Entity {
 
   set domain(newDomain: string | undefined) {
     this._domain = newDomain;
-    this._isDirty = true;
+    this.markDirty("domain", newDomain);
   }
 }

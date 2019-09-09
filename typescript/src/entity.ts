@@ -99,6 +99,7 @@ interface PropertyInfo {
   attribute: string;  // this is the js attribute name, e.g. '_id'
   type: Function;  // e.g. Number
   arrayType?: Entity;  // if type is an array, arrayType is the element type
+  dirty: boolean;  // true if out of date with server
 }
 
 export class Entity {
@@ -113,13 +114,10 @@ export class Entity {
   // this will be set by the parent Merchi object
   public merchi!: Merchi;
 
-  protected _isDirty: boolean = false;
+  public isDirty: boolean = false;
   // maps json names like 'id' to information about that property
   public propertiesMap: Map<string, PropertyInfo>;
-
-  public get isDirty(): boolean {
-    return this._isDirty;
-  }
+  public readonly backObjects: Set<Entity> = new Set();
 
   protected static property(jsonName: string, arrayType?: string) {
     return function (target: Entity, propertyKey: string) {
@@ -168,7 +166,8 @@ export class Entity {
       const propertyInfo = {property: jsonName,
         attribute: attributeName,
         type: propertyType,
-        arrayType: self.getEntityClass(arrayType)};
+        arrayType: self.getEntityClass(arrayType),
+        dirty: true};
       map.set(jsonName, propertyInfo);
     }); 
     return map;
@@ -417,6 +416,7 @@ export class Entity {
       const value: any = (data as any)[key];
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
+        propertyInfo.dirty = false;
         const attributeName: string = propertyInfo.attribute;
         if (propertyInfo.arrayType) {
           const nestedName = (propertyInfo.arrayType as any).singularName;
@@ -460,6 +460,17 @@ export class Entity {
     const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
       const remoteCount = value.length;
       const initialLength = Array.from((result as any).entries()).length;
+      let isDirty = false;
+      for (const item of value) {
+        if (item.isDirty) {
+          isDirty = true;
+          break;
+        }
+      }
+      isDirty = isDirty || info.dirty;
+      if (!isDirty) {
+        return;
+      }
       for (let i = 0; i < remoteCount; ++i) {
         let innerPrefix = info.property + '-' + i;
         if (prefix) {
@@ -474,6 +485,9 @@ export class Entity {
     };
     const processSingleEntityProperty = (info: PropertyInfo, value: Entity) => {
       let innerPrefix = info.property + '-0';
+      if (!(info.dirty || value.isDirty)) {
+        return;
+      }
       if (prefix) {
         innerPrefix = prefix + '-' + innerPrefix;
       }
@@ -485,7 +499,9 @@ export class Entity {
       }
     };
     const processScalarProperty = (info: PropertyInfo, value: any) => {
-      appendData(info.property, value);
+      if (info.dirty) {
+        appendData(info.property, value);
+      }
     };
     const processProperty = (info: PropertyInfo) => {
       const value = (this as any)[info.attribute];
@@ -501,5 +517,35 @@ export class Entity {
     };
     this.forEachProperty(processProperty);
     return result;
+  }
+
+  protected addBackObject = (remote?: Entity) => {
+    if (remote !== undefined) {
+      remote.backObjects.add(this);
+    }
+  }
+
+  protected addBackObjectList = (remotes?: Array<Entity>) => {
+    if (remotes !== undefined) {
+      remotes.forEach(this.addBackObject);
+    }
+  }
+
+  protected markDirty = (property: string, newValue: any) => {
+    if (newValue === undefined) {
+      return;
+    } 
+    (this.propertiesMap.get(property) as PropertyInfo).dirty = true;
+    const openSet: Array<Entity> = [];  /* Queue (BFS) */
+    const closedSet = new Set();
+    openSet.push(this);
+    while (openSet.length > 0) {
+      const current = openSet.shift() as Entity;
+      if (!closedSet.has(current)) {
+        current.isDirty = true;
+        closedSet.add(current);
+        for (const child of current.backObjects) openSet.push(child);
+      }
+    }
   }
 }

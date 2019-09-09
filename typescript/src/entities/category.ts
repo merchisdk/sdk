@@ -15,7 +15,7 @@ export class Category extends Entity {
 
   set id(newId: number | undefined) {
     this._id = newId;
-    this._isDirty = true;
+    this.markDirty("id", newId);
   }
 
   @Category.property("name")
@@ -27,7 +27,7 @@ export class Category extends Entity {
 
   set name(newName: string | undefined) {
     this._name = newName;
-    this._isDirty = true;
+    this.markDirty("name", newName);
   }
 
   @Category.property("products", "Product")
@@ -39,7 +39,8 @@ export class Category extends Entity {
 
   set products(newProducts: Array<Product> | undefined) {
     this._products = newProducts;
-    this._isDirty = true;
     this.checkSameSessionList(newProducts);
+    this.addBackObjectList(newProducts);
+    this.markDirty("products", newProducts);
   }
 }
