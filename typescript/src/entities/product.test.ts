@@ -1,5 +1,9 @@
 import { Merchi } from '../merchi';
 import { setup, mockFetch } from '../test_util';
+import { Role } from '../constants/roles';
+import { NotificationSection } from '../constants/notification_sections';
+import { NotificationType } from '../constants/notification_types';
+import { SortOrder } from '../entity';
 
 setup();
 
@@ -109,6 +113,96 @@ test('can list products from server', () => {
   });
 });
 
+test('can list products with options set', () => {
+  const merchi = new Merchi();
+  const options = {embed: {},
+                   offset: 0,
+                   limit: 20,
+                   q: 'example',
+                   sort: 'name',
+                   order: SortOrder.ASCENDING,
+                   tab: 'job',
+                   as: 'a',
+                   withRights: true,
+                   state: "yes",
+                   categoryId: 2,
+                   inDomain: 2,
+                   inDomainRoles: [2],
+                   asRole: 2,
+                   publicOnly: false,
+                   managedOnly: false,
+                   memberOnly: false,
+                   domainRoles: [Role.ADMIN],
+                   managedDomainsOnly: true,
+                   businessDomainsOnly: true,
+                   dateFrom: new Date(0),
+                   dateTo: new Date(1),
+                   relatedJob: 3,
+                   relatedProduct: 45,
+                   jobNotifiable: 1,
+                   notificationType: NotificationType.DRAFT_SENT,
+                   notificationRecipient: 87,
+                   notificationJob: 27,
+                   relatedUser: 55,
+                   clientId: 349,
+                   clientCompanyId: 124,
+                   savedByUser: 24,
+                   receiverId: 86,
+                   companyId: 91,
+                   componentId: 37,
+                   section: NotificationSection.JOB_INFO,
+                   senderRole: Role.MANAGER,
+                   isOrder: true,
+                   tags: [2, 3, 5],
+                   exclude: [8]};
+  const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
+                                {'product': {'name': 'p2'}}],
+                   'available': 2,
+                   'count': 2}, 200);
+  const invocation = merchi.Product.list(options);
+  const correct = [['embed', '{}'],
+        ['offset', '0'],
+        ['limit', '20'],
+        ['q', 'example'],
+        ['sort', 'name'],
+        ['order', 'asc'],
+        ['tab', 'job'],
+        ['as', 'a'],
+        ['state', 'yes'],
+        ['category_id', '2'],
+        ['in_domain', '2'],
+        ['in_domain_roles', '2'],
+        ['as_role', '2'],
+        ['public_only', 'false'],
+        ['managed_only', 'false'],
+        ['member_only', 'false'],
+        ['domain_roles', '1'],
+        ['managed_domains_only', 'true'],
+        ['business_domains_only', 'true'],
+        ['date_from', '0'],
+        ['date_to', '0'],
+        ['related_job', '3'],
+        ['related_product', '45'],
+        ['job_notifiable', '1'],
+        ['notification_type', '1'],
+        ['notification_recipient', '87'],
+        ['notification_job', '27'],
+        ['related_user', '55'],
+        ['client_id', '349'],
+        ['client_company_id', '124'],
+        ['saved_by_user', '24'],
+        ['receiver_id', '86'],
+        ['company_id', '91'],
+        ['component_id', '37'],
+        ['section', '2'],
+        ['senderRole', '6'],
+        ['is_order', 'true'],
+        ['tags', '2,3,5'],
+        ['exclude', '8']];
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  return invocation;
+});
+
 test('can list products from server with explicit session token', () => {
   const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
   const merchi = new Merchi(testToken);
@@ -116,7 +210,8 @@ test('can list products from server with explicit session token', () => {
                                 {'product': {'name': 'p2'}}],
                    'available': 2,
                    'count': 2}, 200);
-  return merchi.Product.list().then(({items: d, metadata: md}) => {
+  const options = {order: SortOrder.DESCENDING};
+  return merchi.Product.list(options).then(({items: d, metadata: md}) => {
     expect(d.length).toBe(2);
     expect(d[0].name).toBe('p1');
     expect(d[1].name).toBe('p2');

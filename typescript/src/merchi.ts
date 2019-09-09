@@ -49,7 +49,9 @@ export class Merchi {
 
   public authenticatedFetch = (resource: string, options: RequestOptions) => {
     if (this.sessionToken) {
+      /* istanbul ignore next */
       if (!options.query) {
+        /* istanbul ignore next */
         options.query = [];
       }
       options.query.push(['session_token', this.sessionToken]);
