@@ -261,7 +261,7 @@ export class Entity {
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
       } 
-      if (options.domainRoles) {
+      if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
           options.domainRoles.join(',')]);
       }
