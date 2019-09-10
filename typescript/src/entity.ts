@@ -100,6 +100,7 @@ interface PropertyInfo {
   type: Function;  // e.g. Number
   arrayType?: Entity;  // if type is an array, arrayType is the element type
   dirty: boolean;  // true if out of date with server
+  currentValue?: any;  // type is actually `this.type | undefined`
 }
 
 export class Entity {
@@ -175,6 +176,58 @@ export class Entity {
 
   constructor() {
     this.propertiesMap = this.makePropertiesMap();
+    this.setupProperties();
+  }
+
+  private setupProperties = () => {
+    const properties: any = {};
+    const makeSetSingle = (info: PropertyInfo) => {
+      const get = () => {
+        return info.currentValue;
+      };
+      const set = (newValue?: Entity) => {
+        this.checkSameSession(newValue);
+        info.currentValue = newValue;
+        this.addBackObject(newValue);
+        this.markDirty(info.property, newValue);
+      };
+      return { get: get,
+        set: set};
+    };
+    const makeSetScalar = (info: PropertyInfo) => {
+      const get = () => {
+        return info.currentValue;
+      };
+      const set = (newValue: any) => {
+        info.currentValue = newValue;
+        this.markDirty(info.property, newValue);
+      };
+      return { get: get,
+        set: set};
+    };
+    const makeSetArray = (info: PropertyInfo) => {
+      const get = () => {
+        return info.currentValue;
+      };
+      const set = (newValue?: Array<Entity>) => {
+        info.currentValue = newValue;
+        this.checkSameSessionList(newValue);
+        this.addBackObjectList(newValue);
+        this.markDirty(info.property, newValue);
+      };
+      return { get: get,
+        set: set}; 
+    };
+    for (const info of this.propertiesMap.values()) {
+      if (info.type.prototype instanceof Entity) {
+        properties[info.attribute] = makeSetSingle(info);
+      } else if (info.arrayType) {
+        properties[info.attribute] = makeSetArray(info);
+      } else {
+        properties[info.attribute] = makeSetScalar(info);
+      }
+    }
+    Object.defineProperties(this, properties);
   }
 
   public static get<T extends typeof Entity>(this: T, id: number,
@@ -417,7 +470,6 @@ export class Entity {
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = false;
-        const attributeName: string = propertyInfo.attribute;
         if (propertyInfo.arrayType) {
           const nestedName = (propertyInfo.arrayType as any).singularName;
           const array = [];
@@ -428,9 +480,16 @@ export class Entity {
             nested.fromJson(itemData);
             array.push(nested);
           }
-          (this as any)[attributeName] = array;
+          propertyInfo.currentValue = array;
+        } else if (propertyInfo.type.prototype instanceof Entity) {
+          const nested = new (propertyInfo.type as any)();
+          const nestedName = (propertyInfo.type as any).singularName;
+          const itemData: any = {};
+          itemData[nestedName] = value;
+          nested.fromJson(itemData);
+          propertyInfo.currentValue = nested;
         } else {
-          (this as any)[attributeName] = value;
+          propertyInfo.currentValue = value;
         }
       }
     }
@@ -556,4 +615,14 @@ export class Entity {
       }
     }
   }
+
+  public delete = () => {
+    const primaryKey: number = (this as any).id;
+    const resourceName:string = (this.constructor as any).resourceName;
+    const resource = `/${resourceName}/${String(primaryKey)}/`;
+    const fetchOptions = {method: 'DELETE'};
+    return this.merchi.authenticatedFetch(resource, fetchOptions).then(() => {
+      return null;
+    });
+  };
 }
