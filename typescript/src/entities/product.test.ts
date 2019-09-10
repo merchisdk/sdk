@@ -300,3 +300,11 @@ test('can serialise product to form data understood by backend', () => {
     ['domain-count', '1']];
   expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
 });
+
+test('cannot mix sessions', () => {
+  const m1 = new Merchi();
+  const p = new m1.Product();
+  const m2 = new Merchi();
+  const d = new m2.Domain();
+  expect(() => p.domain = d).toThrow();
+});
