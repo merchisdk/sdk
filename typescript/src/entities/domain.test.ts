@@ -33,3 +33,12 @@ test('can create domain on server', () => {
   const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
   expect(sentToServer).toEqual(data);
 });
+
+test('can delete domain', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 1;
+  const fetch = mockFetch(true, {}, 204); 
+  domain.delete();
+  expect(fetch.mock.calls[0][1].method).toBe('DELETE');
+});
