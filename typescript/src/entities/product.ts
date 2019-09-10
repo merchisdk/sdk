@@ -1,6 +1,7 @@
 import { Entity } from '../entity';
 import { Category } from './category';
 import { Domain } from './domain';
+import { MerchiFile } from './file';
 
 export class Product extends Entity {
   protected static resourceName: string = "products";
@@ -18,4 +19,7 @@ export class Product extends Entity {
 
   @Product.property("domain")
   public domain?: Domain;
+
+  @Product.property("featureImage")
+  public featureImage?: MerchiFile;
 }

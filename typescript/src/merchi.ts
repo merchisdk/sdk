@@ -1,6 +1,7 @@
 import { Entity } from './entity';
 import { Category } from './entities/category';
 import { Domain } from './entities/domain';
+import { MerchiFile } from './entities/file';
 import { Product } from './entities/product';
 import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,7 @@ export class Merchi {
 
   public Category: typeof Category
   public Domain: typeof Domain;
+  public MerchiFile: typeof MerchiFile;
   public Product: typeof Product;
 
   public sessionToken?: string;
@@ -44,6 +46,7 @@ export class Merchi {
     // re-export configured versions of all classes
     this.Category = setupClass(this, Category) as typeof Category;
     this.Domain = setupClass(this, Domain) as typeof Domain;
+    this.MerchiFile = setupClass(this, MerchiFile) as typeof MerchiFile;
     this.Product = setupClass(this, Product) as typeof Product;
   }
 

@@ -90,8 +90,8 @@ interface ListResponse<T> {
 interface SerialiseOptions {
   existing?: FormData;
   excludeOld?: boolean;
-  files?: Array<any>;
-  prefix?: string;
+  _prefix?: string;
+  _fileIndex?: number;
 }
 
 interface PropertyInfo {
@@ -509,7 +509,8 @@ export class Entity {
   public toFormData = (options?: SerialiseOptions): FormData => {
     options = options || {};
     const result = options.existing || new FormData();
-    const prefix = options.prefix || '';
+    const prefix = options._prefix || '';
+    let fileIndex = options._fileIndex || 0;
     const appendData = (name: string, value: any) => {
       /* istanbul ignore next */
       if (name === undefined || value === undefined) {
@@ -521,6 +522,11 @@ export class Entity {
       }
       result.set(name, value);
     };
+    if ((this as any).fileData !== undefined) {
+      appendData(String(fileIndex), (this as any).fileData);
+      appendData('fileDataIndex', fileIndex);
+      fileIndex++;
+    }
     const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
       const remoteCount = value.length;
       const initialLength = Array.from((result as any).entries()).length;
@@ -540,7 +546,8 @@ export class Entity {
         if (prefix) {
           innerPrefix = prefix + '-' + innerPrefix;
         }
-        value[i].toFormData({existing: result, prefix: innerPrefix});
+        value[i].toFormData({existing: result, _prefix: innerPrefix,
+          _fileIndex: fileIndex});
       }
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
@@ -556,7 +563,8 @@ export class Entity {
         innerPrefix = prefix + '-' + innerPrefix;
       }
       const initialLength = Array.from((result as any).entries()).length;
-      value.toFormData({existing: result, prefix: innerPrefix});
+      value.toFormData({existing: result, _prefix: innerPrefix,
+        _fileIndex: fileIndex});
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
         appendData(info.property + '-count', 1);

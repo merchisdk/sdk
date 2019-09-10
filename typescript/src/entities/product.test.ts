@@ -27,6 +27,14 @@ test('can get and set name', () => {
   expect(product.name).toBe('example');
 });
 
+test('can get and set featureImage', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const file = new merchi.MerchiFile();
+  product.featureImage = file;
+  expect(product.featureImage).toBe(file); 
+});
+
 test('can get and set domain', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();
