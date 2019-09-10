@@ -112,8 +112,9 @@ export class Entity {
   protected static singularName: string;
   protected static pluralName: string;
 
-  // this will be set by the parent Merchi object
+  // these will be set by the parent Merchi object
   public merchi!: Merchi;
+  public static merchi: Merchi;
 
   public isDirty: boolean = false;
   // maps json names like 'id' to information about that property
@@ -174,7 +175,10 @@ export class Entity {
     return map;
   }
 
-  constructor() {
+  constructor(merchi?: Merchi) {
+    if (merchi) {
+      this.merchi = merchi;
+    }
     this.propertiesMap = this.makePropertiesMap();
     this.setupProperties();
   }
@@ -245,7 +249,7 @@ export class Entity {
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
     }
-    return this.prototype.merchi.authenticatedFetch(resource, fetchOptions).
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         const result: InstanceType<T> = (new this()) as InstanceType<T>;
         result.fromJson(data);
@@ -399,7 +403,7 @@ export class Entity {
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
     }
-    return this.prototype.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
+    return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
       const metadata = {canCreate: data.canCreate,
         available: data.available,
         count: data.count,
@@ -444,13 +448,14 @@ export class Entity {
   };
 
   private getEntityClass = (name: string) => {
+    if (name === undefined) {
+      return undefined;
+    }
     return (this.merchi as any)[name];
   }
 
   protected checkSameSession = (other?: Entity) => {
-    /* istanbul ignore next */
     if (other !== undefined && other.merchi !== this.merchi) {
-      /* istanbul ignore next */
       throw new Error('cannot mix objects from different sessions');
     }
   };
@@ -576,7 +581,7 @@ export class Entity {
         return;
       } else if (info.arrayType) {
         processArrayProperty(info, value);
-      } else if (info.type.prototype.merchi === this.merchi) {
+      } else if (info.type.prototype instanceof Entity) {
         processSingleEntityProperty(info, value);
       } else {
         processScalarProperty(info, value);

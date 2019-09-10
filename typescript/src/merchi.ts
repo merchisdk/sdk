@@ -13,9 +13,9 @@ import { getCookie } from './cookie';
 export interface Type<T, A extends any[]> extends
    Function { new(...args: A): T; }
 
-function cloneClass<T, A extends []>(original: Type<T, A>): Type<T, A> {
+function cloneClass<T, A extends []>(original: Type<T, A>, arg: any): Type<T, A> {
   // copy the constructor, but use the empty object as `this`
-  const copy = original.bind({});
+  const copy = original.bind({} , arg);
   // pick up any static members (this is shallow, the members are not copied)
   Object.assign(copy, original);
   return copy;
@@ -39,8 +39,8 @@ export class Merchi {
     }
     function setupClass(merchi: Merchi, cls: typeof Entity) {
       // copy, to prevent interference from other merchi sessions
-      const result = cloneClass(cls) as typeof Entity;
-      result.prototype.merchi = merchi;
+      const result = cloneClass(cls, merchi) as typeof Entity;
+      result.merchi = merchi;
       return result;
     }
     // re-export configured versions of all classes
