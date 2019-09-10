@@ -6,26 +6,8 @@ export class Domain extends Entity {
   protected static pluralName: string = "domains";
 
   @Domain.property("id")
-  private _id?: number;
-
-  get id(): number | undefined {
-    return this._id;
-  }
-
-  set id(newId: number | undefined) {
-    this._id = newId;
-    this.markDirty("id", newId);
-  }
+  public id?: number;
 
   @Domain.property("domain")
-  private _domain?: string;
-
-  get domain(): string | undefined {
-    return this._domain;
-  }
-
-  set domain(newDomain: string | undefined) {
-    this._domain = newDomain;
-    this.markDirty("domain", newDomain);
-  }
+  public domain?: string;
 }
