@@ -151,13 +151,7 @@ export class Entity {
       // of an arrays elements, which we need
       const arrayType = Reflect.getMetadata(Entity.arrayTypeKey, self,
         attributeName);
-      if (arrayType === undefined) {
-        /* istanbul ignore next */
-        if (propertyType === Object) {
-          /* istanbul ignore next */
-          throw new Error('array properties must have an arrayType');
-        }
-      } else {
+      if (arrayType !== undefined) {
         /* istanbul ignore next */
         if (propertyType !== Object && propertyType !== Array) {
           /* istanbul ignore next */
@@ -176,7 +170,8 @@ export class Entity {
   }
 
   constructor(merchi?: Merchi) {
-    if (merchi) {
+    /* istanbul ignore next */
+    if (merchi !== undefined) {
       this.merchi = merchi;
     }
     this.propertiesMap = this.makePropertiesMap();
@@ -479,7 +474,7 @@ export class Entity {
           const nestedName = (propertyInfo.arrayType as any).singularName;
           const array = [];
           for (const item of value) {
-            const nested = new (propertyInfo.arrayType as any)();
+            const nested = new (propertyInfo.arrayType as any)(this.merchi);
             const itemData: any = {};
             itemData[nestedName] = item;
             nested.fromJson(itemData);
@@ -487,7 +482,7 @@ export class Entity {
           }
           propertyInfo.currentValue = array;
         } else if (propertyInfo.type.prototype instanceof Entity) {
-          const nested = new (propertyInfo.type as any)();
+          const nested = new (propertyInfo.type as any)(this.merchi);
           const nestedName = (propertyInfo.type as any).singularName;
           const itemData: any = {};
           itemData[nestedName] = value;
