@@ -24,6 +24,18 @@ export class CartItem extends Entity {
   @CartItem.property("creationDate")
   public creationDate?: Date;
 
+  @CartItem.property("currency")
+  public currency?: number;
+
+  @CartItem.property("subtotalCost")
+  public subtotalCost?: number;
+
+  @CartItem.property("taxAmount")
+  public taxAmount?: number;
+
+  @CartItem.property("totalCost")
+  public totalCost?: number;
+
   @CartItem.property("product")
   public product?: Product;
 

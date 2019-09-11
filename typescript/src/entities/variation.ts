@@ -23,6 +23,18 @@ export class Variation extends Entity {
   @Variation.property("cost")
   public cost?: number;
 
+  @Variation.property("quantity")
+  public quantity?: number;
+
+  @Variation.property("onceOffCost")
+  public onceOffCost?: number;
+
+  @Variation.property("unitCost")
+  public unitCost?: number;
+
+  @Variation.property("unitCostTotal")
+  public unitCostTotal?: number;
+
   @Variation.property("variationField")
   public variationField?: VariationField;
 
