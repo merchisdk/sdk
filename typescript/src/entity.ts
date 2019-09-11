@@ -16,6 +16,7 @@ function toUnixTimestamp(date: Date) {
 
 interface PropertyOptions {
   embeddedByDefault?: boolean;
+  isPrimaryKey?: boolean;
 }
 
 interface EmbedDescriptor {
@@ -106,6 +107,7 @@ interface PropertyInfo {
   dirty: boolean;  // true if out of date with server
   currentValue?: any;  // type is actually `this.type | undefined`
   embeddedByDefault: boolean;
+  isPrimaryKey: boolean;
 }
 
 export class Entity {
@@ -177,11 +179,13 @@ export class Entity {
         propertyType.prototype instanceof Entity);
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
+      const isPrimaryKey = options.isPrimaryKey || jsonName === 'id';
       const propertyInfo = {property: jsonName,
         attribute: attributeName,
         type: propertyType,
         arrayType: realArrayType,
         embeddedByDefault: embeddedByDefault,
+        isPrimaryKey: isPrimaryKey,
         dirty: true};
       map.set(jsonName, propertyInfo);
     }); 
@@ -195,6 +199,26 @@ export class Entity {
     }
     this.propertiesMap = this.makePropertiesMap();
     this.setupProperties();
+  }
+
+  protected getPrimaryKeyProperty = () => {
+    for (const info of this.propertiesMap.values()) {
+      if (info.isPrimaryKey) {
+        return info;
+      }
+    }
+    /* istanbul ignore next */
+    return null;
+  }
+
+  public getPrimaryKeyValue = () => {
+    const property = this.getPrimaryKeyProperty();
+    /* istanbul ignore next */
+    if (property) {
+      return property.currentValue;
+    }
+    /* istanbul ignore next */
+    return null;
   }
 
   private setupProperties = () => {
@@ -248,10 +272,10 @@ export class Entity {
     Object.defineProperties(this, properties);
   }
 
-  public static get<T extends typeof Entity>(this: T, id: number,
+  public static get<T extends typeof Entity>(this: T, key: number,
     options?: GetOptions):
      Promise<InstanceType<T>>{
-    const resource = `/${this.resourceName}/${String(id)}/`;
+    const resource = `/${this.resourceName}/${String(key)}/`;
     const fetchOptions: RequestOptions = {};
     fetchOptions.query = [];
     if (options && options.embed) {
@@ -437,7 +461,7 @@ export class Entity {
   }
 
   public save = () => {
-    const primaryKey: number = (this as any).id;
+    const primaryKey: number = this.getPrimaryKeyValue();
     const resourceName:string = (this.constructor as any).resourceName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const data = this.toFormData();
@@ -636,7 +660,7 @@ export class Entity {
   }
 
   public delete = () => {
-    const primaryKey: number = (this as any).id;
+    const primaryKey: number = this.getPrimaryKeyValue();
     const resourceName:string = (this.constructor as any).resourceName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const fetchOptions = {method: 'DELETE'};

@@ -5,7 +5,7 @@ export class EmailCounter extends Entity {
   protected static singularName: string = "emailCounter";
   protected static pluralName: string = "emailCounters";
 
-  @EmailCounter.property("emailAddress")
+  @EmailCounter.property("emailAddress", undefined, {isPrimaryKey: true})
   public emailAddress?: string;
 
   @EmailCounter.property("unsubscribed")

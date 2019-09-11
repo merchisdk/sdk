@@ -13,7 +13,7 @@ export class Session extends Entity {
   @Session.property("ip")
   public ip?: string | null;
 
-  @Session.property("token")
+  @Session.property("token", undefined, {isPrimaryKey: true})
   public token?: string;
 
   @Session.property("remember")
