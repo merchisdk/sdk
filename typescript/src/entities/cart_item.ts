@@ -1,4 +1,5 @@
 import { Cart } from './cart';
+import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -41,6 +42,9 @@ export class CartItem extends Entity {
 
   @CartItem.property("cart")
   public cart?: Cart;
+
+  @CartItem.property("taxType", undefined, {embeddedByDefault: false})
+  public taxType?: CountryTax;
 
   @CartItem.property("variationsGroups", "VariationsGroup")
   public variationsGroups?: Array<VariationsGroup>;
