@@ -92,7 +92,7 @@ export class Invoice extends Entity {
   public paidMoney?: number;
 
   @Invoice.property("isCompletelyPaid", undefined, {embeddedByDefault: false})
-  public isCompletelyPaid?: number;
+  public isCompletelyPaid?: boolean;
 
   @Invoice.property("responsibleManager")
   public responsibleManager?: User | null;
