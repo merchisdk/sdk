@@ -16,6 +16,8 @@ class CartItem(sdk.python.entities.Entity):
     total_cost = Property(float)
     subtotal_cost = Property(float)
     tax_amount = Property(float)
+    currency = Property(str)
+    notes = Property(str)
     tax_type = Property(CountryTax)
     product = Property('sdk.python.products.Product')
     variations_groups = Property(VariationsGroup)
