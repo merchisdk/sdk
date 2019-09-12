@@ -4,6 +4,7 @@ export class EmailCounter extends Entity {
   protected static resourceName: string = "email_counters";
   protected static singularName: string = "emailCounter";
   protected static pluralName: string = "emailCounters";
+  protected static primaryKey: string = "emailAddress";
 
   @EmailCounter.property("emailAddress")
   public emailAddress?: string;
