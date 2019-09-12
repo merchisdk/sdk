@@ -7,15 +7,15 @@ export class InventoryUnitVariation extends Entity {
   protected static singularName: string = "inventoryUnitVariation";
   protected static pluralName: string = "inventoryUnitVariations";
 
-  @InventoryUnitVariation.property("archived")
+  @InventoryUnitVariation.property()
   public archived?: Date | null;
 
-  @InventoryUnitVariation.property("id")
+  @InventoryUnitVariation.property()
   public id?: number;
 
-  @InventoryUnitVariation.property("inventory")
+  @InventoryUnitVariation.property()
   public inventory?: Inventory;
 
-  @InventoryUnitVariation.property("variationFieldsOption")
+  @InventoryUnitVariation.property()
   public variationFieldsOption?: VariationFieldsOption;
 }

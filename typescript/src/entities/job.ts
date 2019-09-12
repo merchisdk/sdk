@@ -25,192 +25,186 @@ export class Job extends Entity {
   protected static singularName: string = "job";
   protected static pluralName: string = "jobs";
 
-  @Job.property("archived")
+  @Job.property()
   public archived?: Date | null;
 
-  @Job.property("id")
+  @Job.property()
   public id?: number;
 
-  @Job.property("quantity")
+  @Job.property()
   public quantity?: number;
 
-  @Job.property("notes")
+  @Job.property()
   public notes?: string | null;
 
-  @Job.property("productionNotes")
+  @Job.property()
   public productionNotes?: string | null;
 
-  @Job.property("productionStatus")
+  @Job.property()
   public productionStatus?: number | null;
 
-  @Job.property("designStatus")
+  @Job.property()
   public designStatus?: number | null;
 
-  @Job.property("needsDrafting")
+  @Job.property()
   public needsDrafting?: boolean;
 
-  @Job.property("needsProduction")
+  @Job.property()
   public needsProduction?: boolean;
 
-  @Job.property("needsShipping")
+  @Job.property()
   public needsShipping?: boolean;
 
-  @Job.property("quoteSet")
+  @Job.property()
   public quoteSet?: boolean;
 
-  @Job.property("jobInfoApprovedByClient")
+  @Job.property()
   public jobInfoApprovedByClient?: boolean;
 
-  @Job.property("paymentStatus")
+  @Job.property()
   public paymentStatus?: number | null;
 
-  @Job.property("deductionDate")
+  @Job.property()
   public deductionDate?: Date | null;
 
-  @Job.property("shippingStatus")
+  @Job.property()
   public shippingStatus?: number | null;
 
-  @Job.property("completed")
+  @Job.property()
   public completed?: boolean;
 
-  @Job.property("priority")
+  @Job.property()
   public priority?: number;
 
-  @Job.property("jobWeight")
+  @Job.property()
   public jobWeight?: number | null;
 
-  @Job.property("jobVolume")
+  @Job.property()
   public jobVolume?: number | null;
 
-  @Job.property("received")
+  @Job.property()
   public received?: Date;
 
-  @Job.property("deadline")
+  @Job.property()
   public deadline?: Date;
 
-  @Job.property("updated")
+  @Job.property()
   public updated?: Date;
 
-  @Job.property("automaticPriceEnabled")
+  @Job.property()
   public automaticPriceEnabled?: boolean;
 
-  @Job.property("costPerUnit")
+  @Job.property()
   public costPerUnit?: number | null;
 
-  @Job.property("cost")
+  @Job.property()
   public cost?: number | null;
 
-  @Job.property("taxAmount")
+  @Job.property()
   public taxAmount?: number | null;
 
-  @Job.property("canDeduct", undefined, {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public canDeduct?: boolean;
 
-  @Job.property("unreadNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadNotificationsCount?: number;
 
-  @Job.property("unreadJobInfoNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadJobInfoNotificationsCount?: number;
 
-  @Job.property("unreadJobDraftingNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadJobDraftingNotificationsCount?: number;
 
-  @Job.property("unreadJobProductionNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadJobProductionNotificationsCount?: number;
 
-  @Job.property("unreadJobShippingNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadJobShippingNotificationsCount?: number;
 
-  @Job.property("unreadJobInvoicingNotificationsCount", undefined,
-                {embeddedByDefault: false})
+  @Job.property(undefined, {embeddedByDefault: false})
   public unreadJobInvoicingNotificationsCount?: number;
 
-  @Job.property("drafts", "Draft")
+  @Job.property("Draft")
   public drafts?: Array<Draft>;
 
-  @Job.property("comments", "JobComment")
+  @Job.property("JobComment")
   public comments?: Array<JobComment>;
 
-  @Job.property("client")
+  @Job.property()
   public client?: User;
 
-  @Job.property("manager")
+  @Job.property()
   public manager?: User | null;
 
-  @Job.property("designer")
+  @Job.property()
   public designer?: User | null;
 
-  @Job.property("clientCompany")
+  @Job.property()
   public clientCompany?: Company | null;
 
-  @Job.property("clientPhone")
+  @Job.property()
   public clientPhone?: PhoneNumber | null;
 
-  @Job.property("clientEmail")
+  @Job.property()
   public clientEmail?: EmailAddress | null;
 
-  @Job.property("clientCompanyPhone")
+  @Job.property()
   public clientCompanyPhone?: PhoneNumber | null;
 
-  @Job.property("clientCompanyEmail")
+  @Job.property()
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Job.property("product")
+  @Job.property()
   public product?: Product;
 
-  @Job.property("draftComments", "DraftComment")
+  @Job.property("DraftComment")
   public draftComments?: Array<DraftComment>;
 
-  @Job.property("taxType")
+  @Job.property()
   public taxType?: CountryTax | null;
 
-  @Job.property("tags", "DomainTag")
+  @Job.property("DomainTag")
   public tags?: Array<DomainTag>;
 
-  @Job.property("shipping")
+  @Job.property()
   public shipping?: Address | null;
 
-  @Job.property("productionShippingAddress")
+  @Job.property()
   public productionShippingAddress?: Address | null;
 
-  @Job.property("domain")
+  @Job.property()
   public domain?: Domain;
 
-  @Job.property("invoice")
+  @Job.property()
   public invoice?: Invoice | null;
 
-  @Job.property("productionFiles", "MerchiFile")
+  @Job.property("MerchiFile")
   public productionFiles?: Array<MerchiFile>;
 
-  @Job.property("clientFiles", "MerchiFile")
+  @Job.property("MerchiFile")
   public clientFiles?: Array<MerchiFile>;
 
-  @Job.property("shipment")
+  @Job.property()
   public shipment?: Shipment | null;
 
-  @Job.property("inventory")
+  @Job.property()
   public inventory?: Inventory | null;
 
-  @Job.property("variationsGroups", "VariationsGroup")
+  @Job.property("VariationsGroup")
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Job.property("variations", "Variation")
+  @Job.property("Variation")
   public variations?: Array<Variation>;
 
-  @Job.property("notifications", "Notification")
+  @Job.property("Notification")
   public notifications?: Array<Notification>;
 
-  @Job.property("assignments", "Assignment")
+  @Job.property("Assignment")
   public assignments?: Array<Assignment>;
 
-  @Job.property("supplyAssignment")
+  @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property("matchingInventory", "Inventory", {embeddedByDefault: false})
+  @Job.property("Inventory", {embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
 }

@@ -7,21 +7,21 @@ export class UserCompany extends Entity {
   protected static singularName: string = "userCompany";
   protected static pluralName: string = "userCompanies";
 
-  @UserCompany.property("archived")
+  @UserCompany.property()
   public archived?: Date | null;
 
-  @UserCompany.property("id")
+  @UserCompany.property()
   public id?: number;
 
-  @UserCompany.property("main")
+  @UserCompany.property()
   public main?: boolean | null;
 
-  @UserCompany.property("isAdmin")
+  @UserCompany.property()
   public isAdmin?: boolean;
 
-  @UserCompany.property("user")
+  @UserCompany.property()
   public user?: User | null;
 
-  @UserCompany.property("company")
+  @UserCompany.property()
   public company?: Company | null;
 }

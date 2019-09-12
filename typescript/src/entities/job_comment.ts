@@ -9,39 +9,39 @@ export class JobComment extends Entity {
   protected static singularName: string = "jobComment";
   protected static pluralName: string = "jobComments";
 
-  @JobComment.property("archived")
+  @JobComment.property()
   public archived?: Date | null;
 
-  @JobComment.property("id")
+  @JobComment.property()
   public id?: number;
 
-  @JobComment.property("date")
+  @JobComment.property()
   public date?: Date | null;
 
-  @JobComment.property("text")
+  @JobComment.property()
   public text?: string;
 
-  @JobComment.property("sendSms")
+  @JobComment.property()
   public sendSms?: boolean;
 
-  @JobComment.property("sendEmail")
+  @JobComment.property()
   public sendEmail?: boolean;
 
-  @JobComment.property("urgency")
+  @JobComment.property()
   public urgency?: number;
 
-  @JobComment.property("file")
+  @JobComment.property()
   public file?: MerchiFile | null;
 
-  @JobComment.property("forwards", "User")
+  @JobComment.property("User")
   public forwards?: Array<User>;
 
-  @JobComment.property("notifications", "Notification")
+  @JobComment.property("Notification")
   public notifications?: Array<Notification>;
 
-  @JobComment.property("job")
+  @JobComment.property()
   public job?: Job;
 
-  @JobComment.property("user")
+  @JobComment.property()
   public user?: User;
 }

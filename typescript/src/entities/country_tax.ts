@@ -9,30 +9,30 @@ export class CountryTax extends Entity {
   protected static singularName: string = "countryTax";
   protected static pluralName: string = "countryTaxes";
 
-  @CountryTax.property("archived")
+  @CountryTax.property()
   public archived?: Date | null;
 
-  @CountryTax.property("id")
+  @CountryTax.property()
   public id?: number;
 
-  @CountryTax.property("country")
+  @CountryTax.property()
   public country?: string | null;
 
-  @CountryTax.property("taxName")
+  @CountryTax.property()
   public taxName?: string;
 
-  @CountryTax.property("taxPercent")
+  @CountryTax.property()
   public taxPercent?: number | null;
 
-  @CountryTax.property("shipments", "Shipment")
+  @CountryTax.property("Shipment")
   public shipments?: Array<Shipment>;
 
-  @CountryTax.property("companies", "Company")
+  @CountryTax.property("Company")
   public companies?: Array<Company>;
 
-  @CountryTax.property("jobs", "Job")
+  @CountryTax.property("Job")
   public jobs?: Array<Job>;
 
-  @CountryTax.property("items", "Item")
+  @CountryTax.property("Item")
   public items?: Array<Item>;
 }

@@ -7,30 +7,30 @@ export class Component extends Entity {
   protected static singularName: string = "component";
   protected static pluralName: string = "components";
 
-  @Component.property("archived")
+  @Component.property()
   public archived?: Date | null;
 
-  @Component.property("id")
+  @Component.property()
   public id?: number;
 
-  @Component.property("name")
+  @Component.property()
   public name?: string;
 
-  @Component.property("body")
+  @Component.property()
   public body?: string;
 
-  @Component.property("description")
+  @Component.property()
   public description?: string;
 
-  @Component.property("compiled")
+  @Component.property()
   public compiled?: string;
 
-  @Component.property("images", "MerchiFile")
+  @Component.property("MerchiFile")
   public images?: Array<MerchiFile>;
 
-  @Component.property("featureImage")
+  @Component.property()
   public featureImage?: MerchiFile | null;
 
-  @Component.property("tags", "ComponentTag")
+  @Component.property("ComponentTag")
   public tags?: Array<ComponentTag>;
 }

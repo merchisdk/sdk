@@ -7,24 +7,24 @@ export class Menu extends Entity {
   protected static singularName: string = "menu";
   protected static pluralName: string = "menus";
 
-  @Menu.property("archived")
+  @Menu.property()
   public archived?: Date | null;
 
-  @Menu.property("id")
+  @Menu.property()
   public id?: number;
 
-  @Menu.property("name")
+  @Menu.property()
   public name?: string;
 
-  @Menu.property("menuHandle")
+  @Menu.property()
   public menuHandle?: string;
 
-  @Menu.property("menuType")
+  @Menu.property()
   public menuType?: number;
 
-  @Menu.property("domain")
+  @Menu.property()
   public domain?: Domain;
 
-  @Menu.property("menuItems", "MenuItem")
+  @Menu.property("MenuItem")
   public menuItems?: Array<MenuItem>;
 }
