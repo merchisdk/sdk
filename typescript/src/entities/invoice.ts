@@ -82,6 +82,18 @@ export class Invoice extends Entity {
   @Invoice.property("invoiceToken")
   public invoiceToken?: string | null;
 
+  @Invoice.property("isRemindable")
+  public isRemindable?: boolean;
+
+  @Invoice.property("owedMoney", undefined, {embeddedByDefault: false})
+  public owedMoney?: number;
+
+  @Invoice.property("paidMoney", undefined, {embeddedByDefault: false})
+  public paidMoney?: number;
+
+  @Invoice.property("isCompletelyPaid", undefined, {embeddedByDefault: false})
+  public isCompletelyPaid?: boolean;
+
   @Invoice.property("responsibleManager")
   public responsibleManager?: User | null;
 

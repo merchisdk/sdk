@@ -63,6 +63,12 @@ export class MerchiFile extends Entity {
   @MerchiFile.property("uploader")
   public uploader?: User | null;
 
+  @MerchiFile.property("viewUrl")
+  public viewUrl?: string;
+
+  @MerchiFile.property("downloadUrl")
+  public downloadUrl?: string;
+
   @MerchiFile.property("components", "Component")
   public components?: Array<Component>;
 

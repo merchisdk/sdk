@@ -27,4 +27,12 @@ export class PhoneNumber extends Entity {
 
   @PhoneNumber.property("paymentCompanies", "Company")
   public paymentCompanies?: Array<Company>;
+
+  @PhoneNumber.property("localFormatNumber", undefined,
+                        {embeddedByDefault: false})
+  public localFormatNumber?: string;
+
+  @PhoneNumber.property("internationalFormatNumber", undefined,
+                        {embeddedByDefault: false})
+  public internationalFormatNumber?: string;
 }
