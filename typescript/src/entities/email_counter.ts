@@ -5,15 +5,15 @@ export class EmailCounter extends Entity {
   protected static singularName: string = "emailCounter";
   protected static pluralName: string = "emailCounters";
 
-  @EmailCounter.property("emailAddress")
+  @EmailCounter.property()
   public emailAddress?: string;
 
-  @EmailCounter.property("unsubscribed")
+  @EmailCounter.property()
   public unsubscribed?: boolean;
 
-  @EmailCounter.property("silenced")
+  @EmailCounter.property()
   public silenced?: boolean;
 
-  @EmailCounter.property("tokens")
+  @EmailCounter.property()
   public tokens?: number;
 }

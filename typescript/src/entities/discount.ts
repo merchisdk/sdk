@@ -6,18 +6,18 @@ export class Discount extends Entity {
   protected static singularName: string = "discount";
   protected static pluralName: string = "discounts";
 
-  @Discount.property("archived")
+  @Discount.property()
   public archived?: Date | null;
 
-  @Discount.property("id")
+  @Discount.property()
   public id?: number;
 
-  @Discount.property("lowerLimit")
+  @Discount.property()
   public lowerLimit?: number;
 
-  @Discount.property("amount")
+  @Discount.property()
   public amount?: number;
 
-  @Discount.property("product")
+  @Discount.property()
   public product?: Product | null;
 }

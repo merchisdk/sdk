@@ -7,18 +7,18 @@ export class Bid extends Entity {
   protected static singularName: string = "bid";
   protected static pluralName: string = "bids";
 
-  @Bid.property("archived")
+  @Bid.property()
   public archived?: Date | null;
 
-  @Bid.property("id")
+  @Bid.property()
   public id?: number;
 
-  @Bid.property("agreedDeadline")
+  @Bid.property()
   public agreedDeadline?: Date | null;
 
-  @Bid.property("bidItems", "BidItem")
+  @Bid.property("BidItem")
   public bidItems?: Array<BidItem>;
 
-  @Bid.property("assignments", "Assignment")
+  @Bid.property("Assignment")
   public assignments?: Array<Assignment>;
 }

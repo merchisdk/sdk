@@ -7,18 +7,18 @@ export class EmailAddress extends Entity {
   protected static singularName: string = "emailAddress";
   protected static pluralName: string = "emailAddresses";
 
-  @EmailAddress.property("archived")
+  @EmailAddress.property()
   public archived?: Date | null;
 
-  @EmailAddress.property("id")
+  @EmailAddress.property()
   public id?: number;
 
-  @EmailAddress.property("emailAddress")
+  @EmailAddress.property()
   public emailAddress?: string;
 
-  @EmailAddress.property("users", "User")
+  @EmailAddress.property("User")
   public users?: Array<User>;
 
-  @EmailAddress.property("companies", "Company")
+  @EmailAddress.property("Company")
   public companies?: Array<Company>;
 }

@@ -9,42 +9,42 @@ export class ProductionComment extends Entity {
   protected static singularName: string = "productionComment";
   protected static pluralName: string = "productionComments";
 
-  @ProductionComment.property("archived")
+  @ProductionComment.property()
   public archived?: Date | null;
 
-  @ProductionComment.property("id")
+  @ProductionComment.property()
   public id?: number;
 
-  @ProductionComment.property("date")
+  @ProductionComment.property()
   public date?: Date | null;
 
-  @ProductionComment.property("urgency")
+  @ProductionComment.property()
   public urgency?: number;
 
-  @ProductionComment.property("text")
+  @ProductionComment.property()
   public text?: string;
 
-  @ProductionComment.property("isUrgentQuestion")
+  @ProductionComment.property()
   public isUrgentQuestion?: boolean;
 
-  @ProductionComment.property("sendSms")
+  @ProductionComment.property()
   public sendSms?: boolean;
 
-  @ProductionComment.property("sendEmail")
+  @ProductionComment.property()
   public sendEmail?: boolean;
 
-  @ProductionComment.property("file")
+  @ProductionComment.property()
   public file?: MerchiFile | null;
 
-  @ProductionComment.property("user")
+  @ProductionComment.property()
   public user?: User;
 
-  @ProductionComment.property("forwards", "User")
+  @ProductionComment.property("User")
   public forwards?: Array<User>;
 
-  @ProductionComment.property("notifications", "Notification")
+  @ProductionComment.property("Notification")
   public notifications?: Array<Notification>;
 
-  @ProductionComment.property("assignment")
+  @ProductionComment.property()
   public assignment?: Assignment;
 }

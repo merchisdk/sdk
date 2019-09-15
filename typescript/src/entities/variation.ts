@@ -11,45 +11,45 @@ export class Variation extends Entity {
   protected static singularName: string = "variation";
   protected static pluralName: string = "variations";
 
-  @Variation.property("archived")
+  @Variation.property()
   public archived?: Date | null;
 
-  @Variation.property("id")
+  @Variation.property()
   public id?: number;
 
-  @Variation.property("value")
+  @Variation.property()
   public value?: string | null;
 
-  @Variation.property("cost")
+  @Variation.property()
   public cost?: number;
 
-  @Variation.property("quantity")
+  @Variation.property()
   public quantity?: number;
 
-  @Variation.property("onceOffCost")
+  @Variation.property()
   public onceOffCost?: number;
 
-  @Variation.property("unitCost")
+  @Variation.property()
   public unitCost?: number;
 
-  @Variation.property("unitCostTotal")
+  @Variation.property()
   public unitCostTotal?: number;
 
-  @Variation.property("variationField")
+  @Variation.property()
   public variationField?: VariationField;
 
-  @Variation.property("variationsGroup")
+  @Variation.property()
   public variationsGroup?: VariationsGroup | null;
 
-  @Variation.property("job")
+  @Variation.property()
   public job?: Job | null;
 
-  @Variation.property("cartItem")
+  @Variation.property()
   public cartItem?: CartItem | null;
 
-  @Variation.property("variationFiles", "MerchiFile")
+  @Variation.property("MerchiFile")
   public variationFiles?: Array<MerchiFile>;
 
-  @Variation.property("selectedOptions", "VariationFieldsOption")
+  @Variation.property("VariationFieldsOption")
   public selectedOptions?: Array<VariationFieldsOption>;
 }

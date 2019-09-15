@@ -11,42 +11,42 @@ export class Assignment extends Entity {
   protected static singularName: string = "assignment";
   protected static pluralName: string = "assignments";
 
-  @Assignment.property("archived")
+  @Assignment.property()
   public archived?: Date | null;
 
-  @Assignment.property("id")
+  @Assignment.property()
   public id?: number;
 
-  @Assignment.property("managerAccepts")
+  @Assignment.property()
   public managerAccepts?: Date | null;
 
-  @Assignment.property("supplierRefused")
+  @Assignment.property()
   public supplierRefused?: Date | null;
 
-  @Assignment.property("productionDeadline")
+  @Assignment.property()
   public productionDeadline?: Date;
 
-  @Assignment.property("assignmentDeadline")
+  @Assignment.property()
   public assignmentDeadline?: Date;
 
-  @Assignment.property("job")
+  @Assignment.property()
   public job?: Job | null;
 
-  @Assignment.property("supplyJob")
+  @Assignment.property()
   public supplyJob?: Job | null;
 
-  @Assignment.property("supplier")
+  @Assignment.property()
   public supplier?: User | null;
 
-  @Assignment.property("bid")
+  @Assignment.property()
   public bid?: Bid | null;
 
-  @Assignment.property("comments", "ProductionComment")
+  @Assignment.property("ProductionComment")
   public comments?: Array<ProductionComment>;
 
-  @Assignment.property("shipment")
+  @Assignment.property()
   public shipment?: Shipment | null;
 
-  @Assignment.property("notifications", "Notification")
+  @Assignment.property("Notification")
   public notifications?: Array<Notification>;
 }

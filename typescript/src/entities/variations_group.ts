@@ -9,27 +9,27 @@ export class VariationsGroup extends Entity {
   protected static singularName: string = "variationsGroup";
   protected static pluralName: string = "variationsGroups";
 
-  @VariationsGroup.property("archived")
+  @VariationsGroup.property()
   public archived?: Date | null;
 
-  @VariationsGroup.property("id")
+  @VariationsGroup.property()
   public id?: number;
 
-  @VariationsGroup.property("quantity")
+  @VariationsGroup.property()
   public quantity?: number;
 
-  @VariationsGroup.property("groupCost")
+  @VariationsGroup.property()
   public groupCost?: number | null;
 
-  @VariationsGroup.property("job")
+  @VariationsGroup.property()
   public job?: Job | null;
 
-  @VariationsGroup.property("cartItem")
+  @VariationsGroup.property()
   public cartItem?: CartItem | null;
 
-  @VariationsGroup.property("inventory")
+  @VariationsGroup.property()
   public inventory?: Inventory | null;
 
-  @VariationsGroup.property("variations", "Variation")
+  @VariationsGroup.property("Variation")
   public variations?: Array<Variation>;
 }

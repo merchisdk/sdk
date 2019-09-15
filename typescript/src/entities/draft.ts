@@ -10,42 +10,42 @@ export class Draft extends Entity {
   protected static singularName: string = "draft";
   protected static pluralName: string = "drafts";
 
-  @Draft.property("archived")
+  @Draft.property()
   public archived?: Date | null;
 
-  @Draft.property("id")
+  @Draft.property()
   public id?: number;
 
-  @Draft.property("date")
+  @Draft.property()
   public date?: Date | null;
 
-  @Draft.property("accepted")
+  @Draft.property()
   public accepted?: Date | null;
 
-  @Draft.property("resendDate")
+  @Draft.property()
   public resendDate?: Date | null;
 
-  @Draft.property("viewed")
+  @Draft.property()
   public viewed?: boolean | null;
 
-  @Draft.property("sendSms")
+  @Draft.property()
   public sendSms?: boolean;
 
-  @Draft.property("sendEmail")
+  @Draft.property()
   public sendEmail?: boolean;
 
-  @Draft.property("comments", "DraftComment")
+  @Draft.property("DraftComment")
   public comments?: Array<DraftComment>;
 
-  @Draft.property("designer")
+  @Draft.property()
   public designer?: User;
 
-  @Draft.property("file")
+  @Draft.property()
   public file?: MerchiFile;
 
-  @Draft.property("notification", "Notification")
+  @Draft.property("Notification")
   public notification?: Array<Notification>;
 
-  @Draft.property("job")
+  @Draft.property()
   public job?: Job;
 }

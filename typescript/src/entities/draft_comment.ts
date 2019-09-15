@@ -10,45 +10,45 @@ export class DraftComment extends Entity {
   protected static singularName: string = "draftComment";
   protected static pluralName: string = "draftComments";
 
-  @DraftComment.property("archived")
+  @DraftComment.property()
   public archived?: Date | null;
 
-  @DraftComment.property("id")
+  @DraftComment.property()
   public id?: number;
 
-  @DraftComment.property("date")
+  @DraftComment.property()
   public date?: Date | null;
 
-  @DraftComment.property("urgency")
+  @DraftComment.property()
   public urgency?: number;
 
-  @DraftComment.property("text")
+  @DraftComment.property()
   public text?: string;
 
-  @DraftComment.property("changeRequest")
+  @DraftComment.property()
   public changeRequest?: boolean;
 
-  @DraftComment.property("sendSms")
+  @DraftComment.property()
   public sendSms?: boolean;
 
-  @DraftComment.property("sendEmail")
+  @DraftComment.property()
   public sendEmail?: boolean;
 
-  @DraftComment.property("user")
+  @DraftComment.property()
   public user?: User;
 
-  @DraftComment.property("file")
+  @DraftComment.property()
   public file?: MerchiFile | null;
 
-  @DraftComment.property("forwards", "User")
+  @DraftComment.property("User")
   public forwards?: Array<User>;
 
-  @DraftComment.property("notifications", "Notification")
+  @DraftComment.property("Notification")
   public notifications?: Array<Notification>;
 
-  @DraftComment.property("draft")
+  @DraftComment.property()
   public draft?: Draft | null;
 
-  @DraftComment.property("job")
+  @DraftComment.property()
   public job?: Job | null;
 }

@@ -6,9 +6,9 @@ export class Backup extends Entity {
   protected static singularName: string = "backup";
   protected static pluralName: string = "backups";
 
-  @Backup.property("id")
+  @Backup.property()
   public id?: number;
 
-  @Backup.property("file")
+  @Backup.property()
   public file?: MerchiFile;
 }

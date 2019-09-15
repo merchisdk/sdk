@@ -6,24 +6,24 @@ export class BidItem extends Entity {
   protected static singularName: string = "bidItem";
   protected static pluralName: string = "bitItems";
 
-  @BidItem.property("archived")
+  @BidItem.property()
   public archived?: Date | null;
 
-  @BidItem.property("id")
+  @BidItem.property()
   public id?: number;
 
-  @BidItem.property("type")
+  @BidItem.property()
   public type?: number;
 
-  @BidItem.property("quantity")
+  @BidItem.property()
   public quantity?: number;
 
-  @BidItem.property("description")
+  @BidItem.property()
   public description?: string | null;
 
-  @BidItem.property("unitPrice")
+  @BidItem.property()
   public unitPrice?: number | null;
 
-  @BidItem.property("bid")
+  @BidItem.property()
   public bid?: Bid;
 }

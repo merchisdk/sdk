@@ -6,12 +6,12 @@ export class SystemRole extends Entity {
   protected static singularName: string = "systemRole";
   protected static pluralName: string = "systemRoles";
 
-  @SystemRole.property("id")
+  @SystemRole.property()
   public id?: number;
 
-  @SystemRole.property("role")
+  @SystemRole.property()
   public role?: number;
 
-  @SystemRole.property("user")
+  @SystemRole.property()
   public user?: User;
 }

@@ -10,30 +10,30 @@ export class DomainTag extends Entity {
   protected static singularName: string = "domainTag";
   protected static pluralName: string = "domainTags";
 
-  @DomainTag.property("id")
+  @DomainTag.property()
   public id?: number;
 
-  @DomainTag.property("colour")
+  @DomainTag.property()
   public colour?: number;
 
-  @DomainTag.property("name")
+  @DomainTag.property()
   public name?: string;
 
-  @DomainTag.property("description")
+  @DomainTag.property()
   public description?: string;
 
-  @DomainTag.property("domain")
+  @DomainTag.property()
   public domain?: Domain;
 
-  @DomainTag.property("jobs", "Job")
+  @DomainTag.property("Job")
   public jobs?: Array<Job>;
 
-  @DomainTag.property("products", "Product")
+  @DomainTag.property("Product")
   public products?: Array<Product>;
 
-  @DomainTag.property("invoices", "Invoice")
+  @DomainTag.property("Invoice")
   public invoices?: Array<Invoice>;
 
-  @DomainTag.property("shipments", "Shipment")
+  @DomainTag.property("Shipment")
   public shipments?: Array<Shipment>;
 }
