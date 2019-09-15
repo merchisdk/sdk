@@ -29,6 +29,27 @@ export class Cart extends Entity {
   @Cart.property("receiverNotes")
   public receiverNotes?: string | null;
 
+  @Cart.property("currency")
+  public currency?: number;
+
+  @Cart.property("cartItemsSubtotalCost")
+  public cartItemsSubtotalCost?: number;
+
+  @Cart.property("cartItemsTaxAmount")
+  public cartItemsTaxAmount?: number;
+
+  @Cart.property("cartItemsTotalCost")
+  public cartItemsTotalCost?: number;
+
+  @Cart.property("subtotalCost")
+  public subtotalCost?: number;
+
+  @Cart.property("taxAmount")
+  public taxAmount?: number;
+
+  @Cart.property("totalCost")
+  public totalCost?: number;
+
   @Cart.property("client")
   public client?: User | null;
 

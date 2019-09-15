@@ -103,6 +103,33 @@ export class Job extends Entity {
   @Job.property("taxAmount")
   public taxAmount?: number | null;
 
+  @Job.property("canDeduct", undefined, {embeddedByDefault: false})
+  public canDeduct?: boolean;
+
+  @Job.property("unreadNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadNotificationsCount?: number;
+
+  @Job.property("unreadJobInfoNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadJobInfoNotificationsCount?: number;
+
+  @Job.property("unreadJobDraftingNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadJobDraftingNotificationsCount?: number;
+
+  @Job.property("unreadJobProductionNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadJobProductionNotificationsCount?: number;
+
+  @Job.property("unreadJobShippingNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadJobShippingNotificationsCount?: number;
+
+  @Job.property("unreadJobInvoicingNotificationsCount", undefined,
+                {embeddedByDefault: false})
+  public unreadJobInvoicingNotificationsCount?: number;
+
   @Job.property("drafts", "Draft")
   public drafts?: Array<Draft>;
 
@@ -183,4 +210,7 @@ export class Job extends Entity {
 
   @Job.property("supplyAssignment")
   public supplyAssignment?: Assignment;
+
+  @Job.property("matchingInventory", "Inventory", {embeddedByDefault: false})
+  public matchingInventory?: Inventory | null;
 }

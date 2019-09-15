@@ -14,6 +14,10 @@ function toUnixTimestamp(date: Date) {
   return parseInt(String(date.getTime() / 1000)).toFixed(0);
 }
 
+interface PropertyOptions {
+  embeddedByDefault?: boolean;
+}
+
 interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
@@ -101,11 +105,13 @@ interface PropertyInfo {
   arrayType?: Entity;  // if type is an array, arrayType is the element type
   dirty: boolean;  // true if out of date with server
   currentValue?: any;  // type is actually `this.type | undefined`
+  embeddedByDefault: boolean;
 }
 
 export class Entity {
   private static jsonNameKey = Symbol('jsonName');
   private static arrayTypeKey = Symbol('arrayType');
+  private static extraOptionsKey = Symbol('extraOptions');
   private static propertiesSetKey = Symbol('propertiesSet')
 
   protected static resourceName: string;
@@ -121,8 +127,12 @@ export class Entity {
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
 
-  protected static property(jsonName: string, arrayType?: string) {
+  protected static property(jsonName: string, arrayType?: string,
+    options?: PropertyOptions) {
     return function (target: Entity, propertyKey: string) {
+      if (!options) {
+        options = {};
+      }
       let properties = Reflect.getMetadata(Entity.propertiesSetKey,
         target.constructor);
       properties = properties || new Set();
@@ -132,6 +142,8 @@ export class Entity {
       Reflect.defineMetadata(Entity.jsonNameKey, jsonName, target,
         propertyKey);
       Reflect.defineMetadata(Entity.arrayTypeKey, arrayType, target,
+        propertyKey);
+      Reflect.defineMetadata(Entity.extraOptionsKey, options, target,
         propertyKey);
     };
   }
@@ -151,6 +163,9 @@ export class Entity {
       // of an arrays elements, which we need
       const arrayType = Reflect.getMetadata(Entity.arrayTypeKey, self,
         attributeName);
+      const realArrayType = self.getEntityClass(arrayType);
+      const options: PropertyOptions =
+         Reflect.getMetadata(Entity.extraOptionsKey, self, attributeName);
       if (arrayType !== undefined) {
         /* istanbul ignore next */
         if (propertyType !== Object && propertyType !== Array) {
@@ -158,11 +173,15 @@ export class Entity {
           throw new Error('array type can only be given for arrays');
         }
       }
-
+      const normallyEmbeddedByDefault = !(realArrayType || 
+        propertyType.prototype instanceof Entity);
+      const embeddedByDefault = options.embeddedByDefault !== undefined ?
+        options.embeddedByDefault : normallyEmbeddedByDefault;
       const propertyInfo = {property: jsonName,
         attribute: attributeName,
         type: propertyType,
-        arrayType: self.getEntityClass(arrayType),
+        arrayType: realArrayType,
+        embeddedByDefault: embeddedByDefault,
         dirty: true};
       map.set(jsonName, propertyInfo);
     }); 

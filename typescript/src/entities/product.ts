@@ -86,6 +86,12 @@ export class Product extends Entity {
   @Product.property("allowQuotation")
   public allowQuotation?: boolean;
 
+  @Product.property("bestPrice")
+  public bestPrice?: number;
+
+  @Product.property("unitVolume")
+  public unitVolume?: number;
+
   @Product.property("categories", "Category")
   public categories?: Array<Category>;
 

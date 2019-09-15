@@ -1,4 +1,5 @@
 import { Cart } from './cart';
+import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -24,11 +25,26 @@ export class CartItem extends Entity {
   @CartItem.property("creationDate")
   public creationDate?: Date;
 
+  @CartItem.property("currency")
+  public currency?: number;
+
+  @CartItem.property("subtotalCost")
+  public subtotalCost?: number;
+
+  @CartItem.property("taxAmount")
+  public taxAmount?: number;
+
+  @CartItem.property("totalCost")
+  public totalCost?: number;
+
   @CartItem.property("product")
   public product?: Product;
 
   @CartItem.property("cart")
   public cart?: Cart;
+
+  @CartItem.property("taxType", undefined, {embeddedByDefault: false})
+  public taxType?: CountryTax;
 
   @CartItem.property("variationsGroups", "VariationsGroup")
   public variationsGroups?: Array<VariationsGroup>;
