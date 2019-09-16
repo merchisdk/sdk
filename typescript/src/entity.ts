@@ -261,7 +261,7 @@ export class Entity {
     Object.defineProperties(this, properties);
   }
 
-  public static get<T extends typeof Entity>(this: T, key: number,
+  public static get<T extends typeof Entity>(this: T, key: number | string,
     options?: GetOptions):
      Promise<InstanceType<T>>{
     const resource = `/${this.resourceName}/${String(key)}/`;
@@ -450,7 +450,7 @@ export class Entity {
   }
 
   public save = () => {
-    const primaryKey: number = this.getPrimaryKeyValue();
+    const primaryKey: number | string = this.getPrimaryKeyValue();
     const resourceName:string = (this.constructor as any).resourceName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const data = this.toFormData();
