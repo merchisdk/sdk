@@ -26,9 +26,9 @@ export class Category extends Entity {
   @Category.property()
   public domain?: Domain;
 
-  @Category.property("Product")
+  @Category.property({arrayType: "Product"})
   public products?: Array<Product>;
 
-  @Category.property("User")
+  @Category.property({arrayType: "User"})
   public users?: Array<User>;
 }

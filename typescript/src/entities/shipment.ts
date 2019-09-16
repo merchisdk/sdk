@@ -91,12 +91,12 @@ export class Shipment extends Entity {
   @Shipment.property()
   public invoice?: Invoice | null;
 
-  @Shipment.property("DomainTag")
+  @Shipment.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
-  @Shipment.property("Assignment")
+  @Shipment.property({arrayType: "Assignment"})
   public assignments?: Array<Assignment>;
 
-  @Shipment.property("Job")
+  @Shipment.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 }

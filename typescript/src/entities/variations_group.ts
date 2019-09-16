@@ -30,6 +30,6 @@ export class VariationsGroup extends Entity {
   @VariationsGroup.property()
   public inventory?: Inventory | null;
 
-  @VariationsGroup.property("Variation")
+  @VariationsGroup.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
 }

@@ -65,6 +65,6 @@ export class Cart extends Entity {
   @Cart.property()
   public receiverAddress?: Address | null;
 
-  @Cart.property("CartItem")
+  @Cart.property({arrayType: "CartItem"})
   public cartItems?: Array<CartItem>;
 }

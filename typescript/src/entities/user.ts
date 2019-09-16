@@ -95,120 +95,120 @@ export class User extends Entity {
   @User.property()
   public enableInvoiceReminders?: boolean;
 
-  @User.property("JobComment")
+  @User.property({arrayType: "JobComment"})
   public jobComments?: Array<JobComment>;
 
-  @User.property("EmailAddress")
+  @User.property({arrayType: "EmailAddress"})
   public _emailAddresses?: Array<EmailAddress>;
 
-  @User.property("PhoneNumber")
+  @User.property({arrayType: "PhoneNumber"})
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property("Address")
+  @User.property({arrayType: "Address"})
   public _addresses?: Array<Address>;
 
-  @User.property("UserCompany")
+  @User.property({arrayType: "UserCompany"})
   public _companies?: Array<UserCompany>;
 
-  @User.property("Category")
+  @User.property({arrayType: "Category"})
   public categories?: Array<Category>;
 
-  @User.property("Product")
+  @User.property({arrayType: "Product"})
   public products?: Array<Product>;
 
   @User.property()
   public profilePicture?: MerchiFile | null;
 
-  @User.property("PhoneNumber")
+  @User.property({arrayType: "PhoneNumber"})
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property("Session")
+  @User.property({arrayType: "Session"})
   public sessions?: Array<Session>;
 
-  @User.property("Shipment")
+  @User.property({arrayType: "Shipment"})
   public shipmentsAsSender?: Array<Shipment>;
 
-  @User.property("Shipment")
+  @User.property({arrayType: "Shipment"})
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @User.property("DraftComment")
+  @User.property({arrayType: "DraftComment"})
   public draftComments?: Array<DraftComment>;
 
-  @User.property("DraftComment")
+  @User.property({arrayType: "DraftComment"})
   public forwardedDraftComments?: Array<DraftComment>;
 
-  @User.property("SystemRole")
+  @User.property({arrayType: "SystemRole"})
   public systemRoles?: Array<SystemRole>;
 
-  @User.property("EmailAddress")
+  @User.property({arrayType: "EmailAddress"})
   public emailAddresses?: Array<EmailAddress>;
 
-  @User.property("Notification")
+  @User.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
-  @User.property("Notification")
+  @User.property({arrayType: "Notification"})
   public sentNotifications?: Array<Notification>;
 
-  @User.property("Assignment")
+  @User.property({arrayType: "Assignment"})
   public assignments?: Array<Assignment>;
 
-  @User.property("UserCompany")
+  @User.property({arrayType: "UserCompany"})
   public userCompanies?: Array<UserCompany>;
 
-  @User.property("Draft")
+  @User.property({arrayType: "Draft"})
   public drafts?: Array<Draft>;
 
-  @User.property("CompanyInvitation")
+  @User.property({arrayType: "CompanyInvitation"})
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @User.property("Address")
+  @User.property({arrayType: "Address"})
   public addresses?: Array<Address>;
 
-  @User.property("MerchiFile")
+  @User.property({arrayType: "MerchiFile"})
   public uploadFiles?: Array<MerchiFile>;
 
-  @User.property("JobComment")
+  @User.property({arrayType: "JobComment"})
   public forwardedJobComments?: Array<JobComment>;
 
-  @User.property("Job")
+  @User.property({arrayType: "Job"})
   public appliedJobs?: Array<Job>;
 
-  @User.property("Job")
+  @User.property({arrayType: "Job"})
   public managedJobs?: Array<Job>;
 
-  @User.property("Job")
+  @User.property({arrayType: "Job"})
   public draftingJobs?: Array<Job>;
 
-  @User.property("Product")
+  @User.property({arrayType: "Product"})
   public saved_products?: Array<Product>;
 
-  @User.property("Cart")
+  @User.property({arrayType: "Cart"})
   public carts?: Array<Cart>;
 
-  @User.property("Payment")
+  @User.property({arrayType: "Payment"})
   public payments?: Array<Payment>;
 
-  @User.property("EnrolledDomain")
+  @User.property({arrayType: "EnrolledDomain"})
   public enrolledDomains?: Array<EnrolledDomain>;
 
-  @User.property("Invoice")
+  @User.property({arrayType: "Invoice"})
   public responsibleInvoices?: Array<Invoice>;
 
-  @User.property("Invoice")
+  @User.property({arrayType: "Invoice"})
   public createdInvoices?: Array<Invoice>;
 
-  @User.property("Invoice")
+  @User.property({arrayType: "Invoice"})
   public invoicesHas?: Array<Invoice>;
 
-  @User.property("DomainInvitation")
+  @User.property({arrayType: "DomainInvitation"})
   public sentDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property("DomainInvitation")
+  @User.property({arrayType: "DomainInvitation"})
   public receivedDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property("Theme")
+  @User.property({arrayType: "Theme"})
   public themes?: Array<Theme>;
 
-  @User.property("ProductionComment")
+  @User.property({arrayType: "ProductionComment"})
   public forwardedProductionComments?: Array<ProductionComment>;
 }
