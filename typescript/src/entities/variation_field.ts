@@ -8,84 +8,84 @@ export class VariationField extends Entity {
   protected static singularName: string = "variationField";
   protected static pluralName: string = "variationFields";
 
-  @VariationField.property("archived")
+  @VariationField.property()
   public archived?: Date | null;
 
-  @VariationField.property("id")
+  @VariationField.property()
   public id?: number;
 
-  @VariationField.property("position")
+  @VariationField.property()
   public position?: number;
 
-  @VariationField.property("required")
+  @VariationField.property()
   public required?: boolean;
 
-  @VariationField.property("independent")
+  @VariationField.property()
   public independent?: boolean;
 
-  @VariationField.property("name")
+  @VariationField.property()
   public name?: string;
 
-  @VariationField.property("placeholder")
+  @VariationField.property()
   public placeholder?: string | null;
 
-  @VariationField.property("defaultValue")
+  @VariationField.property()
   public defaultValue?: string;
 
-  @VariationField.property("fieldType")
+  @VariationField.property()
   public fieldType?: number;
 
-  @VariationField.property("variationCost")
+  @VariationField.property()
   public variationCost?: number;
 
-  @VariationField.property("rows")
+  @VariationField.property()
   public rows?: number;
 
-  @VariationField.property("fieldMin")
+  @VariationField.property()
   public fieldMin?: number | null;
 
-  @VariationField.property("fieldMax")
+  @VariationField.property()
   public fieldMax?: number | null;
 
-  @VariationField.property("allowDecimal")
+  @VariationField.property()
   public allowDecimal?: boolean;
 
-  @VariationField.property("multipleSelect")
+  @VariationField.property()
   public multipleSelect?: boolean;
 
-  @VariationField.property("showFilePreview")
+  @VariationField.property()
   public showFilePreview?: boolean;
 
-  @VariationField.property("allowFileMultiple")
+  @VariationField.property()
   public allowFileMultiple?: boolean;
 
-  @VariationField.property("allowFileJpeg")
+  @VariationField.property()
   public allowFileJpeg?: boolean;
 
-  @VariationField.property("allowFileGif")
+  @VariationField.property()
   public allowFileGif?: boolean;
 
-  @VariationField.property("allowFilePdf")
+  @VariationField.property()
   public allowFilePdf?: boolean;
 
-  @VariationField.property("allowFilePng")
+  @VariationField.property()
   public allowFilePng?: boolean;
 
-  @VariationField.property("allowFileAi")
+  @VariationField.property()
   public allowFileAi?: boolean;
 
-  @VariationField.property("variationUnitCost")
+  @VariationField.property()
   public variationUnitCost?: number;
 
-  @VariationField.property("variations", "Variation")
+  @VariationField.property("Variation")
   public variations?: Array<Variation>;
 
-  @VariationField.property("productGroupBackref")
+  @VariationField.property()
   public productGroupBackref?: Product | null;
 
-  @VariationField.property("productIndependentBackref")
+  @VariationField.property()
   public productIndependentBackref?: Product | null;
 
-  @VariationField.property("options", "VariationFieldsOption")
+  @VariationField.property("VariationFieldsOption")
   public options?: Array<VariationFieldsOption>;
 }

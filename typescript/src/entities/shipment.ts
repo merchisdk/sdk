@@ -13,90 +13,90 @@ export class Shipment extends Entity {
   protected static singularName: string = "shipment";
   protected static pluralName: string = "shipments";
 
-  @Shipment.property("archived")
+  @Shipment.property()
   public archived?: Date | null;
 
-  @Shipment.property("id")
+  @Shipment.property()
   public id?: number;
 
-  @Shipment.property("creationDate")
+  @Shipment.property()
   public creationDate?: Date | null;
 
-  @Shipment.property("dispatchedDate")
+  @Shipment.property()
   public dispatchedDate?: Date | null;
 
-  @Shipment.property("dispatchDate")
+  @Shipment.property()
   public dispatchDate?: Date | null;
 
-  @Shipment.property("expectedReceiveDate")
+  @Shipment.property()
   public expectedReceiveDate?: Date | null;
 
-  @Shipment.property("receivedDate")
+  @Shipment.property()
   public receivedDate?: Date | null;
 
-  @Shipment.property("senderResponsible")
+  @Shipment.property()
   public senderResponsible?: boolean;
 
-  @Shipment.property("senderNotes")
+  @Shipment.property()
   public senderNotes?: string | null;
 
-  @Shipment.property("receiverNotes")
+  @Shipment.property()
   public receiverNotes?: string | null;
 
-  @Shipment.property("transportCompany")
+  @Shipment.property()
   public transportCompany?: number | null;
 
-  @Shipment.property("trackingNumber")
+  @Shipment.property()
   public trackingNumber?: string | null;
 
-  @Shipment.property("cost")
+  @Shipment.property()
   public cost?: number | null;
 
-  @Shipment.property("taxAmount")
+  @Shipment.property()
   public taxAmount?: number | null;
 
-  @Shipment.property("maxWeight")
+  @Shipment.property()
   public maxWeight?: number | null;
 
-  @Shipment.property("maxVolume")
+  @Shipment.property()
   public maxVolume?: number | null;
 
-  @Shipment.property("sendSms")
+  @Shipment.property()
   public sendSms?: boolean;
 
-  @Shipment.property("sendEmail")
+  @Shipment.property()
   public sendEmail?: boolean;
 
-  @Shipment.property("taxType")
+  @Shipment.property()
   public taxType?: CountryTax | null;
 
-  @Shipment.property("sender")
+  @Shipment.property()
   public sender?: User | null;
 
-  @Shipment.property("senderCompany")
+  @Shipment.property()
   public senderCompany?: Company | null;
 
-  @Shipment.property("senderAddress")
+  @Shipment.property()
   public senderAddress?: Address | null;
 
-  @Shipment.property("receiver")
+  @Shipment.property()
   public receiver?: User | null;
 
-  @Shipment.property("receiverCompany")
+  @Shipment.property()
   public receiverCompany?: Company | null;
 
-  @Shipment.property("receiverAddress")
+  @Shipment.property()
   public receiverAddress?: Address | null;
 
-  @Shipment.property("invoice")
+  @Shipment.property()
   public invoice?: Invoice | null;
 
-  @Shipment.property("tags", "DomainTag")
+  @Shipment.property("DomainTag")
   public tags?: Array<DomainTag>;
 
-  @Shipment.property("assignments", "Assignment")
+  @Shipment.property("Assignment")
   public assignments?: Array<Assignment>;
 
-  @Shipment.property("jobs", "Job")
+  @Shipment.property("Job")
   public jobs?: Array<Job>;
 }

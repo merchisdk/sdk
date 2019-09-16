@@ -19,135 +19,135 @@ export class Invoice extends Entity {
   protected static singularName: string = "invoice";
   protected static pluralName: string = "invoices";
 
-  @Invoice.property("archived")
+  @Invoice.property()
   public archived?: Date | null;
 
-  @Invoice.property("id")
+  @Invoice.property()
   public id?: number;
 
-  @Invoice.property("creationDate")
+  @Invoice.property()
   public creationDate?: Date | null;
 
-  @Invoice.property("paymentDeadline")
+  @Invoice.property()
   public paymentDeadline?: Date | null;
 
-  @Invoice.property("reminded")
+  @Invoice.property()
   public reminded?: Date | null;
 
-  @Invoice.property("reminderMessage")
+  @Invoice.property()
   public reminderMessage?: string;
 
-  @Invoice.property("forceReminders")
+  @Invoice.property()
   public forceReminders?: boolean;
 
-  @Invoice.property("note")
+  @Invoice.property()
   public note?: string | null;
 
-  @Invoice.property("terms")
+  @Invoice.property()
   public terms?: Date | null;
 
-  @Invoice.property("subtotalCost")
+  @Invoice.property()
   public subtotalCost?: number | null;
 
-  @Invoice.property("taxAmount")
+  @Invoice.property()
   public taxAmount?: number | null;
 
-  @Invoice.property("totalCost")
+  @Invoice.property()
   public totalCost?: number | null;
 
-  @Invoice.property("sendSms")
+  @Invoice.property()
   public sendSms?: boolean | null;
 
-  @Invoice.property("sendEmail")
+  @Invoice.property()
   public sendEmail?: boolean | null;
 
-  @Invoice.property("unpaid")
+  @Invoice.property()
   public unpaid?: boolean | null;
 
-  @Invoice.property("currency")
+  @Invoice.property()
   public currency?: string;
 
-  @Invoice.property("acceptStripe")
+  @Invoice.property()
   public acceptStripe?: boolean;
 
-  @Invoice.property("acceptPaypal")
+  @Invoice.property()
   public acceptPaypal?: boolean;
 
-  @Invoice.property("acceptBankTransfer")
+  @Invoice.property()
   public acceptBankTransfer?: boolean;
 
-  @Invoice.property("acceptPhonePayment")
+  @Invoice.property()
   public acceptPhonePayment?: boolean;
 
-  @Invoice.property("invoiceToken")
+  @Invoice.property()
   public invoiceToken?: string | null;
 
-  @Invoice.property("isRemindable")
+  @Invoice.property()
   public isRemindable?: boolean;
 
-  @Invoice.property("owedMoney", undefined, {embeddedByDefault: false})
+  @Invoice.property(undefined, {embeddedByDefault: false})
   public owedMoney?: number;
 
-  @Invoice.property("paidMoney", undefined, {embeddedByDefault: false})
+  @Invoice.property(undefined, {embeddedByDefault: false})
   public paidMoney?: number;
 
-  @Invoice.property("isCompletelyPaid", undefined, {embeddedByDefault: false})
+  @Invoice.property(undefined, {embeddedByDefault: false})
   public isCompletelyPaid?: boolean;
 
-  @Invoice.property("responsibleManager")
+  @Invoice.property()
   public responsibleManager?: User | null;
 
-  @Invoice.property("creator")
+  @Invoice.property()
   public creator?: User | null;
 
-  @Invoice.property("client")
+  @Invoice.property()
   public client?: User;
 
-  @Invoice.property("clientCompany")
+  @Invoice.property()
   public clientCompany?: Company | null;
 
-  @Invoice.property("shipping")
+  @Invoice.property()
   public shipping?: Address | null;
 
-  @Invoice.property("domain")
+  @Invoice.property()
   public domain?: Domain;
 
-  @Invoice.property("items", "Item")
+  @Invoice.property("Item")
   public items?: Array<Item>;
 
-  @Invoice.property("pdf")
+  @Invoice.property()
   public pdf?: MerchiFile | null;
 
-  @Invoice.property("receipt")
+  @Invoice.property()
   public receipt?: MerchiFile | null;
 
-  @Invoice.property("clientPhone")
+  @Invoice.property()
   public clientPhone?: PhoneNumber | null;
 
-  @Invoice.property("clientEmail")
+  @Invoice.property()
   public clientEmail?: EmailAddress | null;
 
-  @Invoice.property("clientCompanyPhone")
+  @Invoice.property()
   public clientCompanyPhone?: PhoneNumber | null;
 
-  @Invoice.property("clientCompanyEmail")
+  @Invoice.property()
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Invoice.property("tags", "DomainTag")
+  @Invoice.property("DomainTag")
   public tags?: Array<DomainTag>;
 
-  @Invoice.property("shipments", "Shipment")
+  @Invoice.property("Shipment")
   public shipments?: Array<Shipment>;
 
-  @Invoice.property("notifications", "Notification")
+  @Invoice.property("Notification")
   public notifications?: Array<Notification>;
 
-  @Invoice.property("jobs", "Job")
+  @Invoice.property("Job")
   public jobs?: Array<Job>;
 
-  @Invoice.property("cart")
+  @Invoice.property()
   public cart?: Cart;
 
-  @Invoice.property("payments", "Payment")
+  @Invoice.property("Payment")
   public payments?: Array<Payment>;
 }

@@ -7,30 +7,30 @@ export class DomainInvitation extends Entity {
   protected static singularName: string = "domainInvitation";
   protected static pluralName: string = "domainInvitations";
 
-  @DomainInvitation.property("archived")
+  @DomainInvitation.property()
   public archived?: Date | null;
 
-  @DomainInvitation.property("id")
+  @DomainInvitation.property()
   public id?: number;
 
-  @DomainInvitation.property("userName")
+  @DomainInvitation.property()
   public userName?: string;
 
-  @DomainInvitation.property("userEmail")
+  @DomainInvitation.property()
   public userEmail?: string;
 
-  @DomainInvitation.property("role")
+  @DomainInvitation.property()
   public role?: number;
 
-  @DomainInvitation.property("token")
+  @DomainInvitation.property()
   public token?: string;
 
-  @DomainInvitation.property("domain")
+  @DomainInvitation.property()
   public domain?: Domain;
 
-  @DomainInvitation.property("sender")
+  @DomainInvitation.property()
   public sender?: User;
 
-  @DomainInvitation.property("user")
+  @DomainInvitation.property()
   public user?: User | null;
 }

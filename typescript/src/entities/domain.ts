@@ -20,108 +20,108 @@ export class Domain extends Entity {
   protected static singularName: string = "domain";
   protected static pluralName: string = "domains";
 
-  @Domain.property("archived")
+  @Domain.property()
   public archived?: Date | null;
 
-  @Domain.property("id")
+  @Domain.property()
   public id?: number;
 
-  @Domain.property("domain")
+  @Domain.property()
   public domain?: string;
 
-  @Domain.property("isMaster")
+  @Domain.property()
   public isMaster?: boolean;
 
-  @Domain.property("domainType")
+  @Domain.property()
   public domainType?: number;
 
-  @Domain.property("subDomain")
+  @Domain.property()
   public subDomain?: string;
 
-  @Domain.property("emailDomain")
+  @Domain.property()
   public emailDomain?: string;
 
-  @Domain.property("smsName")
+  @Domain.property()
   public smsName?: string;
 
-  @Domain.property("showDomainPublicly")
+  @Domain.property()
   public showDomainPublicly?: boolean;
 
-  @Domain.property("enableEmailNotifications")
+  @Domain.property()
   public enableEmailNotifications?: boolean;
 
-  @Domain.property("enableSmsNotifications")
+  @Domain.property()
   public enableSmsNotifications?: boolean;
 
-  @Domain.property("enableNotifications")
+  @Domain.property()
   public enableNotifications?: boolean;
 
-  @Domain.property("conversionTrackingCode")
+  @Domain.property()
   public conversionTrackingCode?: string | null;
 
-  @Domain.property("newConversionTrackingCode")
+  @Domain.property()
   public newConversionTrackingCode?: string | null;
 
-  @Domain.property("newGlobalTrackingCode")
+  @Domain.property()
   public newGlobalTrackingCode?: string | null;
 
-  @Domain.property("apiSecret")
+  @Domain.property()
   public apiSecret?: string | null;
 
-  @Domain.property("company")
+  @Domain.property()
   public company?: Company;
 
-  @Domain.property("logo")
+  @Domain.property()
   public logo?: MerchiFile | null;
 
-  @Domain.property("favicon")
+  @Domain.property()
   public favicon?: MerchiFile | null;
 
-  @Domain.property("activeTheme")
+  @Domain.property()
   public activeTheme?: Theme;
 
-  @Domain.property("tags", "DomainTag")
+  @Domain.property("DomainTag")
   public tags?: Array<DomainTag>;
 
-  @Domain.property("canSupply", "Domain")
+  @Domain.property("Domain")
   public canSupply?: Array<Domain>;
 
-  @Domain.property("suppliedBy", "Domain")
+  @Domain.property("Domain")
   public suppliedBy?: Array<Domain>;
 
-  @Domain.property("menus", "Menu")
+  @Domain.property("Menu")
   public menus?: Array<Menu>;
 
-  @Domain.property("sessions", "Session")
+  @Domain.property("Session")
   public sessions?: Array<Session>;
 
-  @Domain.property("categories", "Category")
+  @Domain.property("Category")
   public categories?: Array<Category>;
 
-  @Domain.property("notifications", "Notification")
+  @Domain.property("Notification")
   public notifications?: Array<Notification>;
 
-  @Domain.property("products", "Product")
+  @Domain.property("Product")
   public products?: Array<Product>;
 
-  @Domain.property("supplyProducts", "SupplyDomain")
+  @Domain.property("SupplyDomain")
   public supplyProducts?: Array<SupplyDomain>;
 
-  @Domain.property("jobs", "Job")
+  @Domain.property("Job")
   public jobs?: Array<Job>;
 
-  @Domain.property("carts", "Cart")
+  @Domain.property("Cart")
   public carts?: Array<Cart>;
 
-  @Domain.property("enrollments", "EnrolledDomain")
+  @Domain.property("EnrolledDomain")
   public enrollments?: Array<EnrolledDomain>;
 
-  @Domain.property("invoices", "Invoice")
+  @Domain.property("Invoice")
   public invoices?: Array<Invoice>;
 
-  @Domain.property("domainInvitations", "DomainInvitation")
+  @Domain.property("DomainInvitation")
   public domainInvitations?: Array<DomainInvitation>;
 
-  @Domain.property("themes", "Theme")
+  @Domain.property("Theme")
   public themes?: Array<Theme>;
 }

@@ -8,21 +8,21 @@ export class Session extends Entity {
   protected static pluralName: string = "sessions";
   protected static primaryKey: string = "token";
 
-  @Session.property("archived")
+  @Session.property()
   public archived?: Date | null;
 
-  @Session.property("ip")
+  @Session.property()
   public ip?: string | null;
 
-  @Session.property("token")
+  @Session.property()
   public token?: string;
 
-  @Session.property("remember")
+  @Session.property()
   public remember?: boolean | null;
 
-  @Session.property("user")
+  @Session.property()
   public user?: User;
 
-  @Session.property("domain")
+  @Session.property()
   public domain?: Domain | null;
 }

@@ -9,39 +9,39 @@ export class VariationFieldsOption extends Entity {
   protected static singularName: string = "variationFieldsOption";
   protected static pluralName: string = "variationFieldsOptions";
 
-  @VariationFieldsOption.property("archived")
+  @VariationFieldsOption.property()
   public archived?: Date | null;
 
-  @VariationFieldsOption.property("id")
+  @VariationFieldsOption.property()
   public id?: number;
 
-  @VariationFieldsOption.property("value")
+  @VariationFieldsOption.property()
   public value?: string | null;
 
-  @VariationFieldsOption.property("colour")
+  @VariationFieldsOption.property()
   public colour?: string | null;
 
-  @VariationFieldsOption.property("default")
+  @VariationFieldsOption.property()
   public default?: boolean;
 
-  @VariationFieldsOption.property("position")
+  @VariationFieldsOption.property()
   public position?: number;
 
-  @VariationFieldsOption.property("variationCost")
+  @VariationFieldsOption.property()
   public variationCost?: number;
 
-  @VariationFieldsOption.property("variationUnitCost")
+  @VariationFieldsOption.property()
   public variationUnitCost?: number;
 
-  @VariationFieldsOption.property("variationField")
+  @VariationFieldsOption.property()
   public variationField?: VariationField | null;
 
-  @VariationFieldsOption.property("linkedFile")
+  @VariationFieldsOption.property()
   public linkedFile?: MerchiFile | null;
 
-  @VariationFieldsOption.property("selectedByVariations", "Variation")
+  @VariationFieldsOption.property("Variation")
   public selectedByVariations?: Array<Variation>;
 
-  @VariationFieldsOption.property("inventoryUnitVariations", "InventoryUnitVariation")
+  @VariationFieldsOption.property("InventoryUnitVariation")
   public inventoryUnitVariations?: Array<InventoryUnitVariation>;
 }

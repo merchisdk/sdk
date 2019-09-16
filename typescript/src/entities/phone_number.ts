@@ -7,32 +7,30 @@ export class PhoneNumber extends Entity {
   protected static singularName: string = "phoneNumber";
   protected static pluralName: string = "phoneNumbers";
 
-  @PhoneNumber.property("archived")
+  @PhoneNumber.property()
   public archived?: Date | null;
 
-  @PhoneNumber.property("id")
+  @PhoneNumber.property()
   public id?: number;
 
-  @PhoneNumber.property("number")
+  @PhoneNumber.property()
   public number?: string;
 
-  @PhoneNumber.property("code")
+  @PhoneNumber.property()
   public code?: string;
 
-  @PhoneNumber.property("users", "User")
+  @PhoneNumber.property("User")
   public users?: Array<User>;
 
-  @PhoneNumber.property("companies", "Company")
+  @PhoneNumber.property("Company")
   public companies?: Array<Company>;
 
-  @PhoneNumber.property("paymentCompanies", "Company")
+  @PhoneNumber.property("Company")
   public paymentCompanies?: Array<Company>;
 
-  @PhoneNumber.property("localFormatNumber", undefined,
-                        {embeddedByDefault: false})
+  @PhoneNumber.property(undefined, {embeddedByDefault: false})
   public localFormatNumber?: string;
 
-  @PhoneNumber.property("internationalFormatNumber", undefined,
-                        {embeddedByDefault: false})
+  @PhoneNumber.property(undefined, {embeddedByDefault: false})
   public internationalFormatNumber?: string;
 }

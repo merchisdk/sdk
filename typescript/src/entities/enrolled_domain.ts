@@ -7,18 +7,18 @@ export class EnrolledDomain extends Entity {
   protected static singularName: string = "enrolledDomain";
   protected static pluralName: string = "enrolledDomains";
 
-  @EnrolledDomain.property("archived")
+  @EnrolledDomain.property()
   public archived?: Date | null;
 
-  @EnrolledDomain.property("id")
+  @EnrolledDomain.property()
   public id?: number;
 
-  @EnrolledDomain.property("role")
+  @EnrolledDomain.property()
   public role?: number;
 
-  @EnrolledDomain.property("user")
+  @EnrolledDomain.property()
   public user?: User;
 
-  @EnrolledDomain.property("domain")
+  @EnrolledDomain.property()
   public domain?: Domain;
 }

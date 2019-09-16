@@ -7,30 +7,30 @@ export class ShortUrl extends Entity {
   protected static singularName: string = "shortUrl";
   protected static pluralName: string = "shortUrls";
 
-  @ShortUrl.property("archived")
+  @ShortUrl.property()
   public archived?: Date | null;
 
-  @ShortUrl.property("id")
+  @ShortUrl.property()
   public id?: number;
 
-  @ShortUrl.property("prefixToken")
+  @ShortUrl.property()
   public prefixToken?: string;
 
-  @ShortUrl.property("suffixToken")
+  @ShortUrl.property()
   public suffixToken?: string;
 
-  @ShortUrl.property("originalLink")
+  @ShortUrl.property()
   public originalLink?: string;
 
-  @ShortUrl.property("triedTimes")
+  @ShortUrl.property()
   public triedTimes?: number;
 
-  @ShortUrl.property("lastLookup")
+  @ShortUrl.property()
   public lastLookup?: Date | null;
 
-  @ShortUrl.property("user")
+  @ShortUrl.property()
   public user?: User | null;
 
-  @ShortUrl.property("notification", "Notification")
+  @ShortUrl.property("Notification")
   public notification?: Array<Notification>;
 }

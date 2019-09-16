@@ -29,186 +29,186 @@ export class User extends Entity {
   protected static singularName: string = "user";
   protected static pluralName: string = "users";
 
-  @User.property("archived")
+  @User.property()
   public archived?: Date | null;
 
-  @User.property("id")
+  @User.property()
   public id?: number;
 
-  @User.property("isSuperUser")
+  @User.property()
   public isSuperUser?: boolean;
 
-  @User.property("password")
+  @User.property()
   public password?: string | null;
 
-  @User.property("salt")
+  @User.property()
   public salt?: string | null;
 
-  @User.property("facebookUserId")
+  @User.property()
   public facebookUserId?: string | null;
 
-  @User.property("resetToken")
+  @User.property()
   public resetToken?: string | null;
 
-  @User.property("resetTokenDate")
+  @User.property()
   public resetTokenDate?: Date | null;
 
-  @User.property("smsToken")
+  @User.property()
   public smsToken?: string | null;
 
-  @User.property("resetSmsTokenDate")
+  @User.property()
   public resetSmsTokenDate?: Date | null;
 
-  @User.property("smsClientToken")
+  @User.property()
   public smsClientToken?: string | null;
 
-  @User.property("smsTokenConfirmed")
+  @User.property()
   public smsTokenConfirmed?: boolean;
 
-  @User.property("smsLoginThreshold")
+  @User.property()
   public smsLoginThreshold?: number;
 
-  @User.property("enableCrashReports")
+  @User.property()
   public enableCrashReports?: boolean;
 
-  @User.property("enableClientEmails")
+  @User.property()
   public enableClientEmails?: boolean;
 
-  @User.property("clientToken")
+  @User.property()
   public clientToken?: string | null;
 
-  @User.property("name")
+  @User.property()
   public name?: string;
 
-  @User.property("comments")
+  @User.property()
   public comments?: string | null;
 
-  @User.property("timezone")
+  @User.property()
   public timezone?: string | null;
 
-  @User.property("created")
+  @User.property()
   public created?: Date | null;
 
-  @User.property("preferredLanguage")
+  @User.property()
   public preferredLanguage?: string | null;
 
-  @User.property("enableInvoiceReminders")
+  @User.property()
   public enableInvoiceReminders?: boolean;
 
-  @User.property("jobComments", "JobComment")
+  @User.property("JobComment")
   public jobComments?: Array<JobComment>;
 
-  @User.property("_emailAddresses", "EmailAddress")
+  @User.property("EmailAddress")
   public _emailAddresses?: Array<EmailAddress>;
 
-  @User.property("_phoneNumbers", "PhoneNumber")
+  @User.property("PhoneNumber")
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property("_addresses", "Address")
+  @User.property("Address")
   public _addresses?: Array<Address>;
 
-  @User.property("_companies", "UserCompany")
+  @User.property("UserCompany")
   public _companies?: Array<UserCompany>;
 
-  @User.property("categories", "Category")
+  @User.property("Category")
   public categories?: Array<Category>;
 
-  @User.property("products", "Product")
+  @User.property("Product")
   public products?: Array<Product>;
 
-  @User.property("profilePicture")
+  @User.property()
   public profilePicture?: MerchiFile | null;
 
-  @User.property("phoneNumbers", "PhoneNumber")
+  @User.property("PhoneNumber")
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property("sessions", "Session")
+  @User.property("Session")
   public sessions?: Array<Session>;
 
-  @User.property("shipmentsAsSender", "Shipment")
+  @User.property("Shipment")
   public shipmentsAsSender?: Array<Shipment>;
 
-  @User.property("shipmentsAsReceiver", "Shipment")
+  @User.property("Shipment")
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @User.property("draftComments", "DraftComment")
+  @User.property("DraftComment")
   public draftComments?: Array<DraftComment>;
 
-  @User.property("forwardedDraftComments", "DraftComment")
+  @User.property("DraftComment")
   public forwardedDraftComments?: Array<DraftComment>;
 
-  @User.property("systemRoles", "SystemRole")
+  @User.property("SystemRole")
   public systemRoles?: Array<SystemRole>;
 
-  @User.property("emailAddresses", "EmailAddress")
+  @User.property("EmailAddress")
   public emailAddresses?: Array<EmailAddress>;
 
-  @User.property("notifications", "Notification")
+  @User.property("Notification")
   public notifications?: Array<Notification>;
 
-  @User.property("sentNotifications", "Notification")
+  @User.property("Notification")
   public sentNotifications?: Array<Notification>;
 
-  @User.property("assignments", "Assignment")
+  @User.property("Assignment")
   public assignments?: Array<Assignment>;
 
-  @User.property("userCompanies", "UserCompany")
+  @User.property("UserCompany")
   public userCompanies?: Array<UserCompany>;
 
-  @User.property("drafts", "Draft")
+  @User.property("Draft")
   public drafts?: Array<Draft>;
 
-  @User.property("companyInvitations", "CompanyInvitation")
+  @User.property("CompanyInvitation")
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @User.property("addresses", "Address")
+  @User.property("Address")
   public addresses?: Array<Address>;
 
-  @User.property("uploadFiles", "MerchiFile")
+  @User.property("MerchiFile")
   public uploadFiles?: Array<MerchiFile>;
 
-  @User.property("forwardedJobComments", "JobComment")
+  @User.property("JobComment")
   public forwardedJobComments?: Array<JobComment>;
 
-  @User.property("appliedJobs", "Job")
+  @User.property("Job")
   public appliedJobs?: Array<Job>;
 
-  @User.property("managedJobs", "Job")
+  @User.property("Job")
   public managedJobs?: Array<Job>;
 
-  @User.property("draftingJobs", "Job")
+  @User.property("Job")
   public draftingJobs?: Array<Job>;
 
-  @User.property("saved_products", "Product")
+  @User.property("Product")
   public saved_products?: Array<Product>;
 
-  @User.property("carts", "Cart")
+  @User.property("Cart")
   public carts?: Array<Cart>;
 
-  @User.property("payments", "Payment")
+  @User.property("Payment")
   public payments?: Array<Payment>;
 
-  @User.property("enrolledDomains", "EnrolledDomain")
+  @User.property("EnrolledDomain")
   public enrolledDomains?: Array<EnrolledDomain>;
 
-  @User.property("responsibleInvoices", "Invoice")
+  @User.property("Invoice")
   public responsibleInvoices?: Array<Invoice>;
 
-  @User.property("createdInvoices", "Invoice")
+  @User.property("Invoice")
   public createdInvoices?: Array<Invoice>;
 
-  @User.property("invoicesHas", "Invoice")
+  @User.property("Invoice")
   public invoicesHas?: Array<Invoice>;
 
-  @User.property("sentDomainInvitations", "DomainInvitation")
+  @User.property("DomainInvitation")
   public sentDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property("receivedDomainInvitations", "DomainInvitation")
+  @User.property("DomainInvitation")
   public receivedDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property("themes", "Theme")
+  @User.property("Theme")
   public themes?: Array<Theme>;
 
-  @User.property("forwardedProductionComments", "ProductionComment")
+  @User.property("ProductionComment")
   public forwardedProductionComments?: Array<ProductionComment>;
 }

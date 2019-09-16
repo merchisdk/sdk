@@ -7,33 +7,33 @@ export class Payment extends Entity {
   protected static singularName: string = "payment";
   protected static pluralName: string = "payments";
 
-  @Payment.property("archived")
+  @Payment.property()
   public archived?: Date | null;
 
-  @Payment.property("id")
+  @Payment.property()
   public id?: number;
 
-  @Payment.property("payDate")
+  @Payment.property()
   public payDate?: Date;
 
-  @Payment.property("paymentType")
+  @Payment.property()
   public paymentType?: number;
 
-  @Payment.property("note")
+  @Payment.property()
   public note?: string;
 
-  @Payment.property("amount")
+  @Payment.property()
   public amount?: number;
 
-  @Payment.property("sendSms")
+  @Payment.property()
   public sendSms?: boolean;
 
-  @Payment.property("sendEmail")
+  @Payment.property()
   public sendEmail?: boolean;
 
-  @Payment.property("invoice")
+  @Payment.property()
   public invoice?: Invoice | null;
 
-  @Payment.property("paymentRecorder")
+  @Payment.property()
   public paymentRecorder?: User | null;
 }

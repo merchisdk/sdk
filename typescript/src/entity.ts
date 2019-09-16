@@ -16,6 +16,7 @@ function toUnixTimestamp(date: Date) {
 
 interface PropertyOptions {
   embeddedByDefault?: boolean;
+  jsonName?: string;
 }
 
 interface EmbedDescriptor {
@@ -128,12 +129,12 @@ export class Entity {
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
 
-  protected static property(jsonName: string, arrayType?: string,
-    options?: PropertyOptions) {
+  protected static property(arrayType?: string, options?: PropertyOptions) {
     return function (target: Entity, propertyKey: string) {
       if (!options) {
         options = {};
       }
+      const jsonName = options.jsonName || propertyKey;
       let properties = Reflect.getMetadata(Entity.propertiesSetKey,
         target.constructor);
       properties = properties || new Set();

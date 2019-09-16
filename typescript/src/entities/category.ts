@@ -8,27 +8,27 @@ export class Category extends Entity {
   protected static singularName: string = "category";
   protected static pluralName: string = "categories";
 
-  @Category.property("archived")
+  @Category.property()
   public archived?: Date | null;
 
-  @Category.property("id")
+  @Category.property()
   public id?: number;
 
-  @Category.property("name")
+  @Category.property()
   public name?: string;
 
-  @Category.property("showDashboard")
+  @Category.property()
   public showDashboard?: boolean;
 
-  @Category.property("showPublic")
+  @Category.property()
   public showPublic?: boolean;
 
-  @Category.property("domain")
+  @Category.property()
   public domain?: Domain;
 
-  @Category.property("products", "Product")
+  @Category.property("Product")
   public products?: Array<Product>;
 
-  @Category.property("users", "User")
+  @Category.property("User")
   public users?: Array<User>;
 }

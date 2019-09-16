@@ -10,45 +10,45 @@ export class CartItem extends Entity {
   protected static singularName: string = "cartItem";
   protected static pluralName: string = "cartItems";
 
-  @CartItem.property("archived")
+  @CartItem.property()
   public archived?: Date | null;
 
-  @CartItem.property("id")
+  @CartItem.property()
   public id?: number;
 
-  @CartItem.property("quantity")
+  @CartItem.property()
   public quantity?: number;
 
-  @CartItem.property("notes")
+  @CartItem.property()
   public notes?: string | null;
 
-  @CartItem.property("creationDate")
+  @CartItem.property()
   public creationDate?: Date;
 
-  @CartItem.property("currency")
+  @CartItem.property()
   public currency?: number;
 
-  @CartItem.property("subtotalCost")
+  @CartItem.property()
   public subtotalCost?: number;
 
-  @CartItem.property("taxAmount")
+  @CartItem.property()
   public taxAmount?: number;
 
-  @CartItem.property("totalCost")
+  @CartItem.property()
   public totalCost?: number;
 
-  @CartItem.property("product")
+  @CartItem.property()
   public product?: Product;
 
-  @CartItem.property("cart")
+  @CartItem.property()
   public cart?: Cart;
 
-  @CartItem.property("taxType", undefined, {embeddedByDefault: false})
+  @CartItem.property(undefined, {embeddedByDefault: false})
   public taxType?: CountryTax;
 
-  @CartItem.property("variationsGroups", "VariationsGroup")
+  @CartItem.property("VariationsGroup")
   public variationsGroups?: Array<VariationsGroup>;
 
-  @CartItem.property("variations", "Variation")
+  @CartItem.property("Variation")
   public variations?: Array<Variation>;
 }

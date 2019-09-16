@@ -7,27 +7,27 @@ export class Item extends Entity {
   protected static singularName: string = "item";
   protected static pluralName: string = "items";
 
-  @Item.property("archived")
+  @Item.property()
   public archived?: Date | null;
 
-  @Item.property("id")
+  @Item.property()
   public id?: number;
 
-  @Item.property("quantity")
+  @Item.property()
   public quantity?: number | null;
 
-  @Item.property("description")
+  @Item.property()
   public description?: string;
 
-  @Item.property("cost")
+  @Item.property()
   public cost?: number;
 
-  @Item.property("taxAmount")
+  @Item.property()
   public taxAmount?: number | null;
 
-  @Item.property("taxType")
+  @Item.property()
   public taxType?: CountryTax | null;
 
-  @Item.property("invoice")
+  @Item.property()
   public invoice?: Invoice | null;
 }

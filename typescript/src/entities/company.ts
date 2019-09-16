@@ -19,126 +19,126 @@ export class Company extends Entity {
   protected static singularName: string = "company";
   protected static pluralName: string = "companies";
 
-  @Company.property("archived")
+  @Company.property()
   public archived?: Date | null;
 
-  @Company.property("id")
+  @Company.property()
   public id?: number;
 
-  @Company.property("name")
+  @Company.property()
   public name?: string;
 
-  @Company.property("website")
+  @Company.property()
   public website?: string | null;
 
-  @Company.property("temporaryCreated")
+  @Company.property()
   public temporaryCreated?: boolean;
 
-  @Company.property("taxNumber")
+  @Company.property()
   public taxNumber?: string | null;
 
-  @Company.property("taxNumberType")
+  @Company.property()
   public taxNumberType?: number | null;
 
-  @Company.property("paypalAccount")
+  @Company.property()
   public paypalAccount?: string | null;
 
-  @Company.property("paypalPassword")
+  @Company.property()
   public paypalPassword?: string | null;
 
-  @Company.property("paypalSignature")
+  @Company.property()
   public paypalSignature?: string | null;
 
-  @Company.property("isPaypalValid")
+  @Company.property()
   public isPaypalValid?: boolean;
 
-  @Company.property("stripePublishableKey")
+  @Company.property()
   public stripePublishableKey?: string | null;
 
-  @Company.property("stripeApiKey")
+  @Company.property()
   public stripeApiKey?: string | null;
 
-  @Company.property("isStripeValid")
+  @Company.property()
   public isStripeValid?: boolean;
 
-  @Company.property("acceptStripe")
+  @Company.property()
   public acceptStripe?: boolean;
 
-  @Company.property("acceptPaypal")
+  @Company.property()
   public acceptPaypal?: boolean;
 
-  @Company.property("acceptBankTransfer")
+  @Company.property()
   public acceptBankTransfer?: boolean;
 
-  @Company.property("acceptPhonePayment")
+  @Company.property()
   public acceptPhonePayment?: boolean;
 
-  @Company.property("defaultCurrency")
+  @Company.property()
   public defaultCurrency?: string;
 
-  @Company.property("country")
+  @Company.property()
   public country?: string;
 
-  @Company.property("logo")
+  @Company.property()
   public logo?: MerchiFile | null;
 
-  @Company.property("defaultTaxType")
+  @Company.property()
   public defaultTaxType?: CountryTax | null;
 
-  @Company.property("_emailAddresses", "EmailAddress")
+  @Company.property("EmailAddress")
   public _emailAddresses?: Array<EmailAddress>;
 
-  @Company.property("_paymentPhoneNumbers", "PhoneNumber")
+  @Company.property("PhoneNumber")
   public _paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("_phoneNumbers", "PhoneNumber")
+  @Company.property("PhoneNumber")
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("_addresses", "Address")
+  @Company.property("Address")
   public _addresses?: Array<Address>;
 
-  @Company.property("_users", "UserCompany")
+  @Company.property("UserCompany")
   public _users?: Array<UserCompany>;
 
-  @Company.property("shipmentsAsSender", "Shipment")
+  @Company.property("Shipment")
   public shipmentsAsSender?: Array<Shipment>;
 
-  @Company.property("shipmentsAsReceiver", "Shipment")
+  @Company.property("Shipment")
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @Company.property("saved_products", "Product")
+  @Company.property("Product")
   public saved_products?: Array<Product>;
 
-  @Company.property("banks", "Bank")
+  @Company.property("Bank")
   public banks?: Array<Bank>;
 
-  @Company.property("userCompanies", "UserCompany")
+  @Company.property("UserCompany")
   public userCompanies?: Array<UserCompany>;
 
-  @Company.property("companyInvitations", "CompanyInvitation")
+  @Company.property("CompanyInvitation")
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @Company.property("appliedJobs", "Job")
+  @Company.property("Job")
   public appliedJobs?: Array<Job>;
 
-  @Company.property("carts", "Cart")
+  @Company.property("Cart")
   public carts?: Array<Cart>;
 
-  @Company.property("domains", "Domain")
+  @Company.property("Domain")
   public domains?: Array<Domain>;
 
-  @Company.property("emailAddresses", "EmailAddress")
+  @Company.property("EmailAddress")
   public emailAddresses?: Array<EmailAddress>;
 
-  @Company.property("phoneNumbers", "PhoneNumber")
+  @Company.property("PhoneNumber")
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("paymentPhoneNumbers", "PhoneNumber")
+  @Company.property("PhoneNumber")
   public paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("invoicesHas", "Invoice")
+  @Company.property("Invoice")
   public invoicesHas?: Array<Invoice>;
 
-  @Company.property("addresses", "Address")
+  @Company.property("Address")
   public addresses?: Array<Address>;
 }
