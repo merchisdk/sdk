@@ -6,12 +6,12 @@ export class ComponentTag extends Entity {
   protected static singularName: string = "componentTag";
   protected static pluralName: string = "componentTags";
 
-  @ComponentTag.property("id")
+  @ComponentTag.property()
   public id?: number;
 
-  @ComponentTag.property("name")
+  @ComponentTag.property()
   public name?: string;
 
-  @ComponentTag.property("component")
+  @ComponentTag.property()
   public component?: Component;
 }

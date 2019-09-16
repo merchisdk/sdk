@@ -17,126 +17,126 @@ export class Product extends Entity {
   protected static singularName: string = "product";
   protected static pluralName: string = "products";
 
-  @Product.property("archived")
+  @Product.property()
   public archived?: Date | null;
 
-  @Product.property("id")
+  @Product.property()
   public id?: number;
 
-  @Product.property("productType")
+  @Product.property()
   public productType?: number;
 
-  @Product.property("minimum")
+  @Product.property()
   public minimum?: number;
 
-  @Product.property("deliveryDaysNormal")
+  @Product.property()
   public deliveryDaysNormal?: number;
 
-  @Product.property("unitPrice")
+  @Product.property()
   public unitPrice?: number;
 
-  @Product.property("unitWeight")
+  @Product.property()
   public unitWeight?: number | null;
 
-  @Product.property("unitHeight")
+  @Product.property()
   public unitHeight?: number | null;
 
-  @Product.property("unitWidth")
+  @Product.property()
   public unitWidth?: number | null;
 
-  @Product.property("unitDepth")
+  @Product.property()
   public unitDepth?: number | null;
 
-  @Product.property("name")
+  @Product.property()
   public name?: string;
 
-  @Product.property("description")
+  @Product.property()
   public description?: string | null;
 
-  @Product.property("notes")
+  @Product.property()
   public notes?: string | null;
 
-  @Product.property("needsDrafting")
+  @Product.property()
   public needsDrafting?: boolean;
 
-  @Product.property("needsProduction")
+  @Product.property()
   public needsProduction?: boolean;
 
-  @Product.property("needsShipping")
+  @Product.property()
   public needsShipping?: boolean;
 
-  @Product.property("showPublic")
+  @Product.property()
   public showPublic?: boolean;
 
-  @Product.property("acceptStripe")
+  @Product.property()
   public acceptStripe?: boolean;
 
-  @Product.property("acceptPaypal")
+  @Product.property()
   public acceptPaypal?: boolean;
 
-  @Product.property("acceptBankTransfer")
+  @Product.property()
   public acceptBankTransfer?: boolean;
 
-  @Product.property("acceptPhonePayment")
+  @Product.property()
   public acceptPhonePayment?: boolean;
 
-  @Product.property("allowPaymentUpfront")
+  @Product.property()
   public allowPaymentUpfront?: boolean;
 
-  @Product.property("allowQuotation")
+  @Product.property()
   public allowQuotation?: boolean;
 
-  @Product.property("bestPrice")
+  @Product.property()
   public bestPrice?: number;
 
-  @Product.property("unitVolume")
+  @Product.property()
   public unitVolume?: number;
 
-  @Product.property("categories", "Category")
+  @Product.property("Category")
   public categories?: Array<Category>;
 
-  @Product.property("discounts", "Discount")
+  @Product.property("Discount")
   public discounts?: Array<Discount>;
 
-  @Product.property("domain")
+  @Product.property()
   public domain?: Domain;
 
-  @Product.property("images", "MerchiFile")
+  @Product.property("MerchiFile")
   public images?: Array<MerchiFile>;
 
-  @Product.property("groupVariationFields", "VariationField")
+  @Product.property("VariationField")
   public groupVariationFields?: Array<VariationField>;
 
-  @Product.property("independentVariationFields", "VariationField")
+  @Product.property("VariationField")
   public independentVariationFields?: Array<VariationField>;
 
-  @Product.property("tags", "DomainTag")
+  @Product.property("DomainTag")
   public tags?: Array<DomainTag>;
 
-  @Product.property("featureImage")
+  @Product.property()
   public featureImage?: MerchiFile | null;
 
-  @Product.property("saved_by_companies", "Company")
-  public saved_by_companies?: Array<Company>;
+  @Product.property("Company", {jsonName: "saved_by_companies"})
+  public savedByCompanies?: Array<Company>;
 
-  @Product.property("suppliedByDomains", "SupplyDomain")
+  @Product.property("SupplyDomain")
   public suppliedByDomains?: Array<SupplyDomain>;
 
-  @Product.property("supplyDomains", "SupplyDomain")
+  @Product.property("SupplyDomain")
   public supplyDomains?: Array<SupplyDomain>;
 
-  @Product.property("inventories", "Inventory")
+  @Product.property("Inventory")
   public inventories?: Array<Inventory>;
 
-  @Product.property("cartItems", "CartItem")
+  @Product.property("CartItem")
   public cartItems?: Array<CartItem>;
 
-  @Product.property("jobs", "Job")
+  @Product.property("Job")
   public jobs?: Array<Job>;
 
-  @Product.property("saved_by_users", "User")
-  public saved_by_users?: Array<User>;
+  @Product.property("User", {jsonName: "saved_by_users"})
+  public savedByUsers?: Array<User>;
 
-  @Product.property("suppliers", "User")
+  @Product.property("User")
   public suppliers?: Array<User>;
 }

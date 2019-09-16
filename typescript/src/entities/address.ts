@@ -12,54 +12,54 @@ export class Address extends Entity {
   protected static singularName: string = "address";
   protected static pluralName: string = "addresses";
 
-  @Address.property("archived")
+  @Address.property()
   public archived?: Date | null;
 
-  @Address.property("id")
+  @Address.property()
   public id?: number;
 
-  @Address.property("lineOne")
+  @Address.property()
   public lineOne?: string | null;
 
-  @Address.property("lineTwo")
+  @Address.property()
   public lineTwo?: string | null;
 
-  @Address.property("city")
+  @Address.property()
   public city?: string | null;
 
-  @Address.property("state")
+  @Address.property()
   public state?: string | null;
 
-  @Address.property("country")
+  @Address.property()
   public country?: string | null;
 
-  @Address.property("postcode")
+  @Address.property()
   public postcode?: string | null;
 
-  @Address.property("shipmentAsSenderAddress", "Shipment")
+  @Address.property("Shipment")
   public shipmentAsSenderAddress?: Array<Shipment>;
 
-  @Address.property("shipmentsAsReceiverAddress", "Shipment")
+  @Address.property("Shipment")
   public shipmentsAsReceiverAddress?: Array<Shipment>;
 
-  @Address.property("banks", "Bank")
+  @Address.property("Bank")
   public banks?: Array<Bank>;
 
-  @Address.property("users", "User")
+  @Address.property("User")
   public users?: Array<User>;
 
-  @Address.property("inventories", "Inventory")
+  @Address.property("Inventory")
   public inventories?: Array<Inventory>;
 
-  @Address.property("jobs", "Job")
+  @Address.property("Job")
   public jobs?: Array<Job>;
 
-  @Address.property("productedJobs", "Job")
+  @Address.property("Job")
   public productedJobs?: Array<Job>;
 
-  @Address.property("shippingTo", "Invoice")
+  @Address.property("Invoice")
   public shippingTo?: Array<Invoice>;
 
-  @Address.property("companies", "Company")
+  @Address.property("Company")
   public companies?: Array<Company>;
 }

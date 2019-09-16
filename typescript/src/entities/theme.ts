@@ -8,297 +8,297 @@ export class Theme extends Entity {
   protected static singularName: string = "theme";
   protected static pluralName: string = "themes";
 
-  @Theme.property("archived")
+  @Theme.property()
   public archived?: Date | null;
 
-  @Theme.property("id")
+  @Theme.property()
   public id?: number;
 
-  @Theme.property("mainCssStatus")
+  @Theme.property()
   public mainCssStatus?: number;
 
-  @Theme.property("mainCssErrorMessage")
+  @Theme.property()
   public mainCssErrorMessage?: string | null;
 
-  @Theme.property("emailCssStatus")
+  @Theme.property()
   public emailCssStatus?: number;
 
-  @Theme.property("emailCssErrorMessage")
+  @Theme.property()
   public emailCssErrorMessage?: string | null;
 
-  @Theme.property("name")
+  @Theme.property()
   public name?: string;
 
-  @Theme.property("description")
+  @Theme.property()
   public description?: string;
 
-  @Theme.property("headerTemplate")
+  @Theme.property()
   public headerTemplate?: string;
 
-  @Theme.property("headerError")
+  @Theme.property()
   public headerError?: string | null;
 
-  @Theme.property("headerHtml")
+  @Theme.property()
   public headerHtml?: string;
 
-  @Theme.property("headerJs")
+  @Theme.property()
   public headerJs?: string;
 
-  @Theme.property("footerTemplate")
+  @Theme.property()
   public footerTemplate?: string;
 
-  @Theme.property("footerError")
+  @Theme.property()
   public footerError?: string | null;
 
-  @Theme.property("footerHtml")
+  @Theme.property()
   public footerHtml?: string;
 
-  @Theme.property("footerJs")
+  @Theme.property()
   public footerJs?: string;
 
-  @Theme.property("indexPageTemplate")
+  @Theme.property()
   public indexPageTemplate?: string;
 
-  @Theme.property("indexPageError")
+  @Theme.property()
   public indexPageError?: string | null;
 
-  @Theme.property("indexHtml")
+  @Theme.property()
   public indexHtml?: string;
 
-  @Theme.property("indexJs")
+  @Theme.property()
   public indexJs?: string;
 
-  @Theme.property("invoicesPageTemplate")
+  @Theme.property()
   public invoicesPageTemplate?: string;
 
-  @Theme.property("invoicesPageError")
+  @Theme.property()
   public invoicesPageError?: string | null;
 
-  @Theme.property("invoicesHtml")
+  @Theme.property()
   public invoicesHtml?: string;
 
-  @Theme.property("invoicesJs")
+  @Theme.property()
   public invoicesJs?: string;
 
-  @Theme.property("productsPageTemplate")
+  @Theme.property()
   public productsPageTemplate?: string;
 
-  @Theme.property("productsPageError")
+  @Theme.property()
   public productsPageError?: string | null;
 
-  @Theme.property("productsHtml")
+  @Theme.property()
   public productsHtml?: string;
 
-  @Theme.property("productsJs")
+  @Theme.property()
   public productsJs?: string;
 
-  @Theme.property("domainInvitePageTemplate")
+  @Theme.property()
   public domainInvitePageTemplate?: string | null;
 
-  @Theme.property("domainInvitePageError")
+  @Theme.property()
   public domainInvitePageError?: string | null;
 
-  @Theme.property("domainInviteHtml")
+  @Theme.property()
   public domainInviteHtml?: string;
 
-  @Theme.property("domainInviteJs")
+  @Theme.property()
   public domainInviteJs?: string;
 
-  @Theme.property("resetPasswordPageTemplate")
+  @Theme.property()
   public resetPasswordPageTemplate?: string | null;
 
-  @Theme.property("resetPasswordPageError")
+  @Theme.property()
   public resetPasswordPageError?: string | null;
 
-  @Theme.property("passwordResetHtml")
+  @Theme.property()
   public passwordResetHtml?: string;
 
-  @Theme.property("passwordResetJs")
+  @Theme.property()
   public passwordResetJs?: string;
 
-  @Theme.property("passwordChangePageTemplate")
+  @Theme.property()
   public passwordChangePageTemplate?: string | null;
 
-  @Theme.property("passwordChangePageError")
+  @Theme.property()
   public passwordChangePageError?: string | null;
 
-  @Theme.property("passwordChangeHtml")
+  @Theme.property()
   public passwordChangeHtml?: string;
 
-  @Theme.property("passwordChangeJs")
+  @Theme.property()
   public passwordChangeJs?: string;
 
-  @Theme.property("smsLoginPageTemplate")
+  @Theme.property()
   public smsLoginPageTemplate?: string | null;
 
-  @Theme.property("smsLoginPageError")
+  @Theme.property()
   public smsLoginPageError?: string | null;
 
-  @Theme.property("smsLoginHtml")
+  @Theme.property()
   public smsLoginHtml?: string;
 
-  @Theme.property("smsLoginJs")
+  @Theme.property()
   public smsLoginJs?: string;
 
-  @Theme.property("smsTokenPageTemplate")
+  @Theme.property()
   public smsTokenPageTemplate?: string | null;
 
-  @Theme.property("smsTokenPageError")
+  @Theme.property()
   public smsTokenPageError?: string | null;
 
-  @Theme.property("smsTokenHtml")
+  @Theme.property()
   public smsTokenHtml?: string;
 
-  @Theme.property("smsTokenJs")
+  @Theme.property()
   public smsTokenJs?: string;
 
-  @Theme.property("jobsPageTemplate")
+  @Theme.property()
   public jobsPageTemplate?: string | null;
 
-  @Theme.property("jobsPageError")
+  @Theme.property()
   public jobsPageError?: string | null;
 
-  @Theme.property("jobsHtml")
+  @Theme.property()
   public jobsHtml?: string;
 
-  @Theme.property("jobsJs")
+  @Theme.property()
   public jobsJs?: string;
 
-  @Theme.property("jobDraftingPageTemplate")
+  @Theme.property()
   public jobDraftingPageTemplate?: string | null;
 
-  @Theme.property("jobDraftingPageError")
+  @Theme.property()
   public jobDraftingPageError?: string | null;
 
-  @Theme.property("jobDraftingHtml")
+  @Theme.property()
   public jobDraftingHtml?: string;
 
-  @Theme.property("jobDraftingJs")
+  @Theme.property()
   public jobDraftingJs?: string;
 
-  @Theme.property("jobQuoteRequestedPageTemplate")
+  @Theme.property()
   public jobQuoteRequestedPageTemplate?: string | null;
 
-  @Theme.property("jobQuoteRequestedPageError")
+  @Theme.property()
   public jobQuoteRequestedPageError?: string | null;
 
-  @Theme.property("jobQuoteRequestedHtml")
+  @Theme.property()
   public jobQuoteRequestedHtml?: string;
 
-  @Theme.property("jobQuoteRequestedJs")
+  @Theme.property()
   public jobQuoteRequestedJs?: string;
 
-  @Theme.property("draftPreviewPageTemplate")
+  @Theme.property()
   public draftPreviewPageTemplate?: string | null;
 
-  @Theme.property("draftPreviewPageError")
+  @Theme.property()
   public draftPreviewPageError?: string | null;
 
-  @Theme.property("draftPreviewHtml")
+  @Theme.property()
   public draftPreviewHtml?: string;
 
-  @Theme.property("draftPreviewJs")
+  @Theme.property()
   public draftPreviewJs?: string;
 
-  @Theme.property("invoicePageTemplate")
+  @Theme.property()
   public invoicePageTemplate?: string | null;
 
-  @Theme.property("invoicePageError")
+  @Theme.property()
   public invoicePageError?: string | null;
 
-  @Theme.property("invoiceHtml")
+  @Theme.property()
   public invoiceHtml?: string;
 
-  @Theme.property("invoiceJs")
+  @Theme.property()
   public invoiceJs?: string;
 
-  @Theme.property("userProfilePageTemplate")
+  @Theme.property()
   public userProfilePageTemplate?: string | null;
 
-  @Theme.property("userProfilePageError")
+  @Theme.property()
   public userProfilePageError?: string | null;
 
-  @Theme.property("userProfileHtml")
+  @Theme.property()
   public userProfileHtml?: string;
 
-  @Theme.property("userProfileJs")
+  @Theme.property()
   public userProfileJs?: string;
 
-  @Theme.property("companyProfilePageTemplate")
+  @Theme.property()
   public companyProfilePageTemplate?: string | null;
 
-  @Theme.property("companyProfilePageError")
+  @Theme.property()
   public companyProfilePageError?: string | null;
 
-  @Theme.property("companyProfileHtml")
+  @Theme.property()
   public companyProfileHtml?: string;
 
-  @Theme.property("companyProfileJs")
+  @Theme.property()
   public companyProfileJs?: string;
 
-  @Theme.property("productPageTemplate")
+  @Theme.property()
   public productPageTemplate?: string | null;
 
-  @Theme.property("productPageError")
+  @Theme.property()
   public productPageError?: string | null;
 
-  @Theme.property("productHtml")
+  @Theme.property()
   public productHtml?: string;
 
-  @Theme.property("productJs")
+  @Theme.property()
   public productJs?: string;
 
-  @Theme.property("invoicePaidPageTemplate")
+  @Theme.property()
   public invoicePaidPageTemplate?: string | null;
 
-  @Theme.property("invoicePaidPageError")
+  @Theme.property()
   public invoicePaidPageError?: string | null;
 
-  @Theme.property("invoicePaidHtml")
+  @Theme.property()
   public invoicePaidHtml?: string;
 
-  @Theme.property("invoicePaidJs")
+  @Theme.property()
   public invoicePaidJs?: string;
 
-  @Theme.property("lastUpdated")
+  @Theme.property()
   public lastUpdated?: Date;
 
-  @Theme.property("public")
+  @Theme.property()
   public public?: boolean;
 
-  @Theme.property("mainCssFile")
+  @Theme.property()
   public mainCssFile?: MerchiFile | null;
 
-  @Theme.property("mainCssTemplateUsing")
+  @Theme.property()
   public mainCssTemplateUsing?: MerchiFile | null;
 
-  @Theme.property("mainCssTemplateEditing")
+  @Theme.property()
   public mainCssTemplateEditing?: MerchiFile | null;
 
-  @Theme.property("emailCssFile")
+  @Theme.property()
   public emailCssFile?: MerchiFile | null;
 
-  @Theme.property("emailCssTemplateUsing")
+  @Theme.property()
   public emailCssTemplateUsing?: MerchiFile | null;
 
-  @Theme.property("emailCssTemplateEditing")
+  @Theme.property()
   public emailCssTemplateEditing?: MerchiFile | null;
 
-  @Theme.property("cssImageFiles", "MerchiFile")
+  @Theme.property("MerchiFile")
   public cssImageFiles?: Array<MerchiFile>;
 
-  @Theme.property("featureImage")
+  @Theme.property()
   public featureImage?: MerchiFile | null;
 
-  @Theme.property("domain")
+  @Theme.property()
   public domain?: Domain | null;
 
-  @Theme.property("author")
+  @Theme.property()
   public author?: User | null;
 
-  @Theme.property("images", "MerchiFile")
+  @Theme.property("MerchiFile")
   public images?: Array<MerchiFile>;
 
-  @Theme.property("domains", "Domain")
+  @Theme.property("Domain")
   public domains?: Array<Domain>;
 }

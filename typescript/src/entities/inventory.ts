@@ -10,33 +10,33 @@ export class Inventory extends Entity {
   protected static singularName: string = "inventory";
   protected static pluralName: string = "inventories";
 
-  @Inventory.property("archived")
+  @Inventory.property()
   public archived?: Date | null;
 
-  @Inventory.property("id")
+  @Inventory.property()
   public id?: number;
 
-  @Inventory.property("quantity")
+  @Inventory.property()
   public quantity?: number;
 
-  @Inventory.property("name")
+  @Inventory.property()
   public name?: string;
 
-  @Inventory.property("notes")
+  @Inventory.property()
   public notes?: string;
 
-  @Inventory.property("product")
+  @Inventory.property()
   public product?: Product;
 
-  @Inventory.property("address")
+  @Inventory.property()
   public address?: Address | null;
 
-  @Inventory.property("variationsGroups", "VariationsGroup")
+  @Inventory.property("VariationsGroup")
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Inventory.property("jobs", "Job")
+  @Inventory.property("Job")
   public jobs?: Array<Job>;
 
-  @Inventory.property("inventoryUnitVariations", "InventoryUnitVariation")
+  @Inventory.property("InventoryUnitVariation")
   public inventoryUnitVariations?: Array<InventoryUnitVariation>;
 }

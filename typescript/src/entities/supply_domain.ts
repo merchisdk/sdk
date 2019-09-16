@@ -7,18 +7,18 @@ export class SupplyDomain extends Entity {
   protected static singularName: string = "supplyDomain";
   protected static pluralName: string = "supplyDomains";
 
-  @SupplyDomain.property("archived")
+  @SupplyDomain.property()
   public archived?: Date | null;
 
-  @SupplyDomain.property("id")
+  @SupplyDomain.property()
   public id?: number;
 
-  @SupplyDomain.property("product")
+  @SupplyDomain.property()
   public product?: Product;
 
-  @SupplyDomain.property("supplyProduct")
+  @SupplyDomain.property()
   public supplyProduct?: Product | null;
 
-  @SupplyDomain.property("domain")
+  @SupplyDomain.property()
   public domain?: Domain;
 }

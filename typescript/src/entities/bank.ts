@@ -7,39 +7,39 @@ export class Bank extends Entity {
   protected static singularName: string = "bank";
   protected static pluralName: string = "banks";
 
-  @Bank.property("archived")
+  @Bank.property()
   public archived?: Date | null;
 
-  @Bank.property("id")
+  @Bank.property()
   public id?: number;
 
-  @Bank.property("default")
+  @Bank.property()
   public default?: boolean;
 
-  @Bank.property("bankName")
+  @Bank.property()
   public bankName?: string;
 
-  @Bank.property("accountNumber")
+  @Bank.property()
   public accountNumber?: string;
 
-  @Bank.property("accountName")
+  @Bank.property()
   public accountName?: string;
 
-  @Bank.property("bsb")
+  @Bank.property()
   public bsb?: string | null;
 
-  @Bank.property("swiftCode")
+  @Bank.property()
   public swiftCode?: string | null;
 
-  @Bank.property("iban")
+  @Bank.property()
   public iban?: string | null;
 
-  @Bank.property("bankCode")
+  @Bank.property()
   public bankCode?: string | null;
 
-  @Bank.property("bankAddress")
+  @Bank.property()
   public bankAddress?: Address | null;
 
-  @Bank.property("company")
+  @Bank.property()
   public company?: Company;
 }

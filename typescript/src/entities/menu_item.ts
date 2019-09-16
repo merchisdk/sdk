@@ -6,24 +6,24 @@ export class MenuItem extends Entity {
   protected static singularName: string = "menuItem";
   protected static pluralName: string = "menuItems";
 
-  @MenuItem.property("archived")
+  @MenuItem.property()
   public archived?: Date | null;
 
-  @MenuItem.property("id")
+  @MenuItem.property()
   public id?: number;
 
-  @MenuItem.property("name")
+  @MenuItem.property()
   public name?: string;
 
-  @MenuItem.property("linkType")
+  @MenuItem.property()
   public linkType?: number;
 
-  @MenuItem.property("linkUri")
+  @MenuItem.property()
   public linkUri?: string;
 
-  @MenuItem.property("position")
+  @MenuItem.property()
   public position?: number;
 
-  @MenuItem.property("menu")
+  @MenuItem.property()
   public menu?: Menu;
 }

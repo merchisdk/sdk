@@ -11,60 +11,60 @@ export class Cart extends Entity {
   protected static singularName: string = "cart";
   protected static pluralName: string = "carts";
 
-  @Cart.property("archived")
+  @Cart.property()
   public archived?: Date | null;
 
-  @Cart.property("id")
+  @Cart.property()
   public id?: number;
 
-  @Cart.property("creationDate")
+  @Cart.property()
   public creationDate?: Date;
 
-  @Cart.property("ip")
+  @Cart.property()
   public ip?: string | null;
 
-  @Cart.property("token")
+  @Cart.property()
   public token?: string | null;
 
-  @Cart.property("receiverNotes")
+  @Cart.property()
   public receiverNotes?: string | null;
 
-  @Cart.property("currency")
+  @Cart.property()
   public currency?: number;
 
-  @Cart.property("cartItemsSubtotalCost")
+  @Cart.property()
   public cartItemsSubtotalCost?: number;
 
-  @Cart.property("cartItemsTaxAmount")
+  @Cart.property()
   public cartItemsTaxAmount?: number;
 
-  @Cart.property("cartItemsTotalCost")
+  @Cart.property()
   public cartItemsTotalCost?: number;
 
-  @Cart.property("subtotalCost")
+  @Cart.property()
   public subtotalCost?: number;
 
-  @Cart.property("taxAmount")
+  @Cart.property()
   public taxAmount?: number;
 
-  @Cart.property("totalCost")
+  @Cart.property()
   public totalCost?: number;
 
-  @Cart.property("client")
+  @Cart.property()
   public client?: User | null;
 
-  @Cart.property("clientCompany")
+  @Cart.property()
   public clientCompany?: Company | null;
 
-  @Cart.property("domain")
+  @Cart.property()
   public domain?: Domain;
 
-  @Cart.property("invoice")
+  @Cart.property()
   public invoice?: Invoice | null;
 
-  @Cart.property("receiverAddress")
+  @Cart.property()
   public receiverAddress?: Address | null;
 
-  @Cart.property("cartItems", "CartItem")
+  @Cart.property("CartItem")
   public cartItems?: Array<CartItem>;
 }

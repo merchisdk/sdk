@@ -7,27 +7,27 @@ export class CompanyInvitation extends Entity {
   protected static singularName: string = "companyInvitation";
   protected static pluralName: string = "companyInvitations";
 
-  @CompanyInvitation.property("archived")
+  @CompanyInvitation.property()
   public archived?: Date | null;
 
-  @CompanyInvitation.property("id")
+  @CompanyInvitation.property()
   public id?: number;
 
-  @CompanyInvitation.property("userName")
+  @CompanyInvitation.property()
   public userName?: string;
 
-  @CompanyInvitation.property("userEmail")
+  @CompanyInvitation.property()
   public userEmail?: string;
 
-  @CompanyInvitation.property("inviteAsAdmin")
+  @CompanyInvitation.property()
   public inviteAsAdmin?: boolean;
 
-  @CompanyInvitation.property("token")
+  @CompanyInvitation.property()
   public token?: string;
 
-  @CompanyInvitation.property("company")
+  @CompanyInvitation.property()
   public company?: Company;
 
-  @CompanyInvitation.property("sender")
+  @CompanyInvitation.property()
   public sender?: User;
 }

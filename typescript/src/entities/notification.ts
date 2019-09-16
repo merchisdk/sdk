@@ -16,81 +16,81 @@ export class Notification extends Entity {
   protected static singularName: string = "notification";
   protected static pluralName: string = "notifications";
 
-  @Notification.property("archived")
+  @Notification.property()
   public archived?: Date | null;
 
-  @Notification.property("id")
+  @Notification.property()
   public id?: number;
 
-  @Notification.property("notificationType")
+  @Notification.property()
   public notificationType?: number;
 
-  @Notification.property("date")
+  @Notification.property()
   public date?: Date;
 
-  @Notification.property("seen")
+  @Notification.property()
   public seen?: boolean;
 
-  @Notification.property("sendEmail")
+  @Notification.property()
   public sendEmail?: boolean;
 
-  @Notification.property("sendSms")
+  @Notification.property()
   public sendSms?: boolean;
 
-  @Notification.property("urgency")
+  @Notification.property()
   public urgency?: number;
 
-  @Notification.property("description")
+  @Notification.property()
   public description?: string | null;
 
-  @Notification.property("subject")
+  @Notification.property()
   public subject?: string | null;
 
-  @Notification.property("message")
+  @Notification.property()
   public message?: string;
 
-  @Notification.property("htmlMessage")
+  @Notification.property()
   public htmlMessage?: string;
 
-  @Notification.property("link")
+  @Notification.property()
   public link?: string | null;
 
-  @Notification.property("section")
+  @Notification.property()
   public section?: number;
 
-  @Notification.property("shortUrl")
+  @Notification.property()
   public shortUrl?: ShortUrl | null;
 
-  @Notification.property("recipient")
+  @Notification.property()
   public recipient?: User;
 
-  @Notification.property("sender")
+  @Notification.property()
   public sender?: User | null;
 
-  @Notification.property("relatedJob")
+  @Notification.property()
   public relatedJob?: Job | null;
 
-  @Notification.property("relatedDraft")
+  @Notification.property()
   public relatedDraft?: Draft | null;
 
-  @Notification.property("relatedAssignment")
+  @Notification.property()
   public relatedAssignment?: Assignment | null;
 
-  @Notification.property("relatedInvoice")
+  @Notification.property()
   public relatedInvoice?: Invoice | null;
 
-  @Notification.property("relatedJobComment")
+  @Notification.property()
   public relatedJobComment?: JobComment | null;
 
-  @Notification.property("relatedDraftComment")
+  @Notification.property()
   public relatedDraftComment?: DraftComment | null;
 
-  @Notification.property("relatedProductionComment")
+  @Notification.property()
   public relatedProductionComment?: ProductionComment | null;
 
-  @Notification.property("domain")
+  @Notification.property()
   public domain?: Domain;
 
-  @Notification.property("attachment")
+  @Notification.property()
   public attachment?: MerchiFile | null;
 }
