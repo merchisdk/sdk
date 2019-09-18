@@ -598,7 +598,8 @@ export class Entity {
       }
     };
     const processScalarProperty = (info: PropertyInfo, value: any) => {
-      if (info.dirty) {
+      const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
+      if (info.dirty || (info.property === primaryKey && value)) {
         appendData(info.property, value);
       }
     };
