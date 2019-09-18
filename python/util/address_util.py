@@ -1,4 +1,6 @@
 import pycountry
+from sdk.python.util.api_error import ApiError
+from sdk.python.util.errors import BAD_COUNTRY
 
 
 def address_country(code):
@@ -16,3 +18,16 @@ def name_primary(counter, name):
     if counter == 0:
         name += " (Primary)"
     return name
+
+
+def validate_country_code(country_code, raise_error=False):
+    """ Validate whether a country code like 'AU' is a valid country code """
+    try:
+        pycountry.countries.get(alpha_2=country_code)
+    except KeyError:
+        if raise_error:
+            err = "'{}' is not an ISO 3166-1 alpha-2 country code"
+            err = err.format(country_code)
+            raise ApiError(err, 400, BAD_COUNTRY)
+        return False
+    return True
