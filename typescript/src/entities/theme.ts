@@ -311,4 +311,19 @@ export class Theme extends Entity {
     return this.mainCssStatus >= validStatus &&
       this.emailCssStatus >= validStatus;
   }
+
+  public isActiveOnDomain = (domainId: number) => {
+    const domain = this.domain;
+    if (domain === undefined) {
+      throw new Error("domain is unknown");
+    }
+    if (domain === null) {
+      return false;
+    }
+    const activeTheme = domain.activeTheme;
+    if (activeTheme === undefined) {
+      throw new Error("activeTheme is unknown");
+    }
+    return domain.id == domainId && activeTheme.id === this.id;
+  }
 }
