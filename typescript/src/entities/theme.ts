@@ -2,6 +2,7 @@ import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { User } from './user';
+import { ThemeStatus } from '../constants/theme_status';
 
 export class Theme extends Entity {
   protected static resourceName: string = "themes";
@@ -301,4 +302,13 @@ export class Theme extends Entity {
 
   @Theme.property("Domain")
   public domains?: Array<Domain>;
+
+  public canBeActivated = () => {
+    const validStatus = ThemeStatus.VALID_BUT_NOT_UPDATED;
+    if (this.mainCssStatus === undefined || this.emailCssStatus === undefined) {
+      throw new Error("status is unknown");
+    }
+    return this.mainCssStatus >= validStatus &&
+      this.emailCssStatus >= validStatus;
+  }
 }
