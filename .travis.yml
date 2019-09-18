@@ -30,8 +30,6 @@ matrix:
         - python/lint.sh
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
         - coverage report -m
-      after_success:
-        - codecov
 
 notifications:
   email:
