@@ -9,9 +9,9 @@ test('can make VariationFieldsOption', () => {
 test('totalCost', () => {
   const merchi = new Merchi();
   const vfo = new merchi.VariationFieldsOption();
-  expect(vfo.totalCost).toThrow();
+  expect(() => vfo.totalCost(33)).toThrow();
   vfo.variationCost = 12.4;
-  expect(vfo.totalCost).toThrow();
+  expect(() => vfo.totalCost(33)).toThrow();
   vfo.variationUnitCost = 9.98;
   expect(vfo.totalCost(33)).toEqual(341.74);
 });
