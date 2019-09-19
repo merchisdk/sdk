@@ -12,6 +12,7 @@ matrix:
         - export PATH=~/.config/composer/vendor/bin:$PATH
         - php/lint.sh
         - php/test.sh
+        - php php/check.php clover.xml 80
       after_success:
         - bash <(curl -s https://codecov.io/bash)
     - language: node_js
