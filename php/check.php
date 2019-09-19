@@ -1,5 +1,4 @@
 <?php
-// coverage-checker.php
 $inputFile  = $argv[1];
 $percentage = min(100, max(0, (int) $argv[2]));
 

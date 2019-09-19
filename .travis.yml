@@ -12,7 +12,7 @@ matrix:
         - export PATH=~/.config/composer/vendor/bin:$PATH
         - php/lint.sh
         - php/test.sh
-        - php php/check.php php/clover.xml 80
+        - php php/check.php php/clover.xml 10
       after_success:
         - bash <(curl -s https://codecov.io/bash)
     - language: node_js
@@ -32,7 +32,9 @@ matrix:
       script:
         - python/lint.sh
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
-        - coverage report -m --fail-under 70
+        - coverage report -m --fail-under 60
+      after_success:
+        - codecov
 
 notifications:
   email:
