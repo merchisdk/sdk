@@ -27,6 +27,14 @@ test('can get and set name', () => {
   expect(product.name).toBe('example');
 });
 
+test('can get and set featureImage', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const file = new merchi.MerchiFile();
+  product.featureImage = file;
+  expect(product.featureImage).toBe(file); 
+});
+
 test('can get and set domain', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();
@@ -300,3 +308,24 @@ test('can serialise product to form data understood by backend', () => {
     ['domain-count', '1']];
   expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
 });
+
+test('cannot mix sessions', () => {
+  const m1 = new Merchi();
+  const p = new m1.Product();
+  const m2 = new Merchi();
+  const d = new m2.Domain();
+  expect(() => p.domain = d).toThrow();
+});
+
+test('primary key always serialised', () => {
+  const merchi = new Merchi();
+  const testId = 42;
+  mockFetch(true, {'product': {'id': testId}}, 200);
+  return merchi.Product.get(1).then(product => {
+    const backData = Array.from((product.toFormData() as any).entries());
+    const correct = [['id', '42']];
+    expect(backData).toEqual(correct);
+  });
+});
+
+
