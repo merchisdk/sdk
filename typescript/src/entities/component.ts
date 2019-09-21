@@ -25,12 +25,12 @@ export class Component extends Entity {
   @Component.property()
   public compiled?: string;
 
-  @Component.property("MerchiFile")
+  @Component.property({arrayType: "MerchiFile"})
   public images?: Array<MerchiFile>;
 
   @Component.property()
   public featureImage?: MerchiFile | null;
 
-  @Component.property("ComponentTag")
+  @Component.property({arrayType: "ComponentTag"})
   public tags?: Array<ComponentTag>;
 }

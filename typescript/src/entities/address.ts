@@ -36,30 +36,30 @@ export class Address extends Entity {
   @Address.property()
   public postcode?: string | null;
 
-  @Address.property("Shipment")
+  @Address.property({arrayType: "Shipment"})
   public shipmentAsSenderAddress?: Array<Shipment>;
 
-  @Address.property("Shipment")
+  @Address.property({arrayType: "Shipment"})
   public shipmentsAsReceiverAddress?: Array<Shipment>;
 
-  @Address.property("Bank")
+  @Address.property({arrayType: "Bank"})
   public banks?: Array<Bank>;
 
-  @Address.property("User")
+  @Address.property({arrayType: "User"})
   public users?: Array<User>;
 
-  @Address.property("Inventory")
+  @Address.property({arrayType: "Inventory"})
   public inventories?: Array<Inventory>;
 
-  @Address.property("Job")
+  @Address.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @Address.property("Job")
+  @Address.property({arrayType: "Job"})
   public productedJobs?: Array<Job>;
 
-  @Address.property("Invoice")
+  @Address.property({arrayType: "Invoice"})
   public shippingTo?: Array<Invoice>;
 
-  @Address.property("Company")
+  @Address.property({arrayType: "Company"})
   public companies?: Array<Company>;
 }

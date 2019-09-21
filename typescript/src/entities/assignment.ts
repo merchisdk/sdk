@@ -41,12 +41,12 @@ export class Assignment extends Entity {
   @Assignment.property()
   public bid?: Bid | null;
 
-  @Assignment.property("ProductionComment")
+  @Assignment.property({arrayType: "ProductionComment"})
   public comments?: Array<ProductionComment>;
 
   @Assignment.property()
   public shipment?: Shipment | null;
 
-  @Assignment.property("Notification")
+  @Assignment.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 }

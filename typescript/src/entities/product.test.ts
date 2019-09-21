@@ -316,3 +316,16 @@ test('cannot mix sessions', () => {
   const d = new m2.Domain();
   expect(() => p.domain = d).toThrow();
 });
+
+test('primary key always serialised', () => {
+  const merchi = new Merchi();
+  const testId = 42;
+  mockFetch(true, {'product': {'id': testId}}, 200);
+  return merchi.Product.get(1).then(product => {
+    const backData = Array.from((product.toFormData() as any).entries());
+    const correct = [['id', '42']];
+    expect(backData).toEqual(correct);
+  });
+});
+
+

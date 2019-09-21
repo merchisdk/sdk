@@ -39,10 +39,10 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property()
   public linkedFile?: MerchiFile | null;
 
-  @VariationFieldsOption.property("Variation")
+  @VariationFieldsOption.property({arrayType: "Variation"})
   public selectedByVariations?: Array<Variation>;
 
-  @VariationFieldsOption.property("InventoryUnitVariation")
+  @VariationFieldsOption.property({arrayType: "InventoryUnitVariation"})
   public inventoryUnitVariations?: Array<InventoryUnitVariation>;
 
   public totalCost = (quantity: number) => {

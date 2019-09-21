@@ -19,18 +19,18 @@ export class PhoneNumber extends Entity {
   @PhoneNumber.property()
   public code?: string;
 
-  @PhoneNumber.property("User")
+  @PhoneNumber.property({arrayType: "User"})
   public users?: Array<User>;
 
-  @PhoneNumber.property("Company")
+  @PhoneNumber.property({arrayType: "Company"})
   public companies?: Array<Company>;
 
-  @PhoneNumber.property("Company")
+  @PhoneNumber.property({arrayType: "Company"})
   public paymentCompanies?: Array<Company>;
 
-  @PhoneNumber.property(undefined, {embeddedByDefault: false})
+  @PhoneNumber.property({embeddedByDefault: false})
   public localFormatNumber?: string;
 
-  @PhoneNumber.property(undefined, {embeddedByDefault: false})
+  @PhoneNumber.property({embeddedByDefault: false})
   public internationalFormatNumber?: string;
 }
