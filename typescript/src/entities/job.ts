@@ -103,31 +103,31 @@ export class Job extends Entity {
   @Job.property()
   public taxAmount?: number | null;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public canDeduct?: boolean;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadJobInfoNotificationsCount?: number;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadJobDraftingNotificationsCount?: number;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadJobProductionNotificationsCount?: number;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadJobShippingNotificationsCount?: number;
 
-  @Job.property(undefined, {embeddedByDefault: false})
+  @Job.property({embeddedByDefault: false})
   public unreadJobInvoicingNotificationsCount?: number;
 
-  @Job.property("Draft")
+  @Job.property({arrayType: "Draft"})
   public drafts?: Array<Draft>;
 
-  @Job.property("JobComment")
+  @Job.property({arrayType: "JobComment"})
   public comments?: Array<JobComment>;
 
   @Job.property()
@@ -157,13 +157,13 @@ export class Job extends Entity {
   @Job.property()
   public product?: Product;
 
-  @Job.property("DraftComment")
+  @Job.property({arrayType: "DraftComment"})
   public draftComments?: Array<DraftComment>;
 
   @Job.property()
   public taxType?: CountryTax | null;
 
-  @Job.property("DomainTag")
+  @Job.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
   @Job.property()
@@ -178,10 +178,10 @@ export class Job extends Entity {
   @Job.property()
   public invoice?: Invoice | null;
 
-  @Job.property("MerchiFile")
+  @Job.property({arrayType: "MerchiFile"})
   public productionFiles?: Array<MerchiFile>;
 
-  @Job.property("MerchiFile")
+  @Job.property({arrayType: "MerchiFile"})
   public clientFiles?: Array<MerchiFile>;
 
   @Job.property()
@@ -190,21 +190,22 @@ export class Job extends Entity {
   @Job.property()
   public inventory?: Inventory | null;
 
-  @Job.property("VariationsGroup")
+  @Job.property({arrayType: "VariationsGroup"})
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Job.property("Variation")
+  @Job.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
 
-  @Job.property("Notification")
+  @Job.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
-  @Job.property("Assignment")
+  @Job.property({arrayType: "Assignment"})
   public assignments?: Array<Assignment>;
 
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property("Inventory", {embeddedByDefault: false})
+  @Job.property({arrayType: "Inventory",
+                 embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
 }

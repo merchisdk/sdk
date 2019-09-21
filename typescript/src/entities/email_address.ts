@@ -16,9 +16,9 @@ export class EmailAddress extends Entity {
   @EmailAddress.property()
   public emailAddress?: string;
 
-  @EmailAddress.property("User")
+  @EmailAddress.property({arrayType: "User"})
   public users?: Array<User>;
 
-  @EmailAddress.property("Company")
+  @EmailAddress.property({arrayType: "Company"})
   public companies?: Array<Company>;
 }

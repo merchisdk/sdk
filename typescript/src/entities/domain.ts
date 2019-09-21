@@ -80,48 +80,48 @@ export class Domain extends Entity {
   @Domain.property()
   public activeTheme?: Theme;
 
-  @Domain.property("DomainTag")
+  @Domain.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
-  @Domain.property("Domain")
+  @Domain.property({arrayType: "Domain"})
   public canSupply?: Array<Domain>;
 
-  @Domain.property("Domain")
+  @Domain.property({arrayType: "Domain"})
   public suppliedBy?: Array<Domain>;
 
-  @Domain.property("Menu")
+  @Domain.property({arrayType: "Menu"})
   public menus?: Array<Menu>;
 
-  @Domain.property("Session")
+  @Domain.property({arrayType: "Session"})
   public sessions?: Array<Session>;
 
-  @Domain.property("Category")
+  @Domain.property({arrayType: "Category"})
   public categories?: Array<Category>;
 
-  @Domain.property("Notification")
+  @Domain.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
-  @Domain.property("Product")
+  @Domain.property({arrayType: "Product"})
   public products?: Array<Product>;
 
-  @Domain.property("SupplyDomain")
+  @Domain.property({arrayType: "SupplyDomain"})
   public supplyProducts?: Array<SupplyDomain>;
 
-  @Domain.property("Job")
+  @Domain.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @Domain.property("Cart")
+  @Domain.property({arrayType: "Cart"})
   public carts?: Array<Cart>;
 
-  @Domain.property("EnrolledDomain")
+  @Domain.property({arrayType: "EnrolledDomain"})
   public enrollments?: Array<EnrolledDomain>;
 
-  @Domain.property("Invoice")
+  @Domain.property({arrayType: "Invoice"})
   public invoices?: Array<Invoice>;
 
-  @Domain.property("DomainInvitation")
+  @Domain.property({arrayType: "DomainInvitation"})
   public domainInvitations?: Array<DomainInvitation>;
 
-  @Domain.property("Theme")
+  @Domain.property({arrayType: "Theme"})
   public themes?: Array<Theme>;
 }

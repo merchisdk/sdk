@@ -31,12 +31,12 @@ export class Inventory extends Entity {
   @Inventory.property()
   public address?: Address | null;
 
-  @Inventory.property("VariationsGroup")
+  @Inventory.property({arrayType: "VariationsGroup"})
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Inventory.property("Job")
+  @Inventory.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @Inventory.property("InventoryUnitVariation")
+  @Inventory.property({arrayType: "InventoryUnitVariation"})
   public inventoryUnitVariations?: Array<InventoryUnitVariation>;
 }

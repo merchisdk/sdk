@@ -31,6 +31,6 @@ export class ShortUrl extends Entity {
   @ShortUrl.property()
   public user?: User | null;
 
-  @ShortUrl.property("Notification")
+  @ShortUrl.property({arrayType: "Notification"})
   public notification?: Array<Notification>;
 }
