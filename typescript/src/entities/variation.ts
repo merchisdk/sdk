@@ -47,9 +47,9 @@ export class Variation extends Entity {
   @Variation.property()
   public cartItem?: CartItem | null;
 
-  @Variation.property("MerchiFile")
+  @Variation.property({arrayType: "MerchiFile"})
   public variationFiles?: Array<MerchiFile>;
 
-  @Variation.property("VariationFieldsOption")
+  @Variation.property({arrayType: "VariationFieldsOption"})
   public selectedOptions?: Array<VariationFieldsOption>;
 }

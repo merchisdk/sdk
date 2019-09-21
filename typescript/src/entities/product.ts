@@ -92,51 +92,51 @@ export class Product extends Entity {
   @Product.property()
   public unitVolume?: number;
 
-  @Product.property("Category")
+  @Product.property({arrayType: "Category"})
   public categories?: Array<Category>;
 
-  @Product.property("Discount")
+  @Product.property({arrayType: "Discount"})
   public discounts?: Array<Discount>;
 
   @Product.property()
   public domain?: Domain;
 
-  @Product.property("MerchiFile")
+  @Product.property({arrayType: "MerchiFile"})
   public images?: Array<MerchiFile>;
 
-  @Product.property("VariationField")
+  @Product.property({arrayType: "VariationField"})
   public groupVariationFields?: Array<VariationField>;
 
-  @Product.property("VariationField")
+  @Product.property({arrayType: "VariationField"})
   public independentVariationFields?: Array<VariationField>;
 
-  @Product.property("DomainTag")
+  @Product.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
   @Product.property()
   public featureImage?: MerchiFile | null;
 
-  @Product.property("Company", {jsonName: "saved_by_companies"})
+  @Product.property({arrayType: "Company", jsonName: "saved_by_companies"})
   public savedByCompanies?: Array<Company>;
 
-  @Product.property("SupplyDomain")
+  @Product.property({arrayType: "SupplyDomain"})
   public suppliedByDomains?: Array<SupplyDomain>;
 
-  @Product.property("SupplyDomain")
+  @Product.property({arrayType: "SupplyDomain"})
   public supplyDomains?: Array<SupplyDomain>;
 
-  @Product.property("Inventory")
+  @Product.property({arrayType: "Inventory"})
   public inventories?: Array<Inventory>;
 
-  @Product.property("CartItem")
+  @Product.property({arrayType: "CartItem"})
   public cartItems?: Array<CartItem>;
 
-  @Product.property("Job")
+  @Product.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @Product.property("User", {jsonName: "saved_by_users"})
+  @Product.property({arrayType: "User", jsonName: "saved_by_users"})
   public savedByUsers?: Array<User>;
 
-  @Product.property("User")
+  @Product.property({arrayType: "User"})
   public suppliers?: Array<User>;
 }

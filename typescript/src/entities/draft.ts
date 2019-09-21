@@ -34,7 +34,7 @@ export class Draft extends Entity {
   @Draft.property()
   public sendEmail?: boolean;
 
-  @Draft.property("DraftComment")
+  @Draft.property({arrayType: "DraftComment"})
   public comments?: Array<DraftComment>;
 
   @Draft.property()
@@ -43,7 +43,7 @@ export class Draft extends Entity {
   @Draft.property()
   public file?: MerchiFile;
 
-  @Draft.property("Notification")
+  @Draft.property({arrayType: "Notification"})
   public notification?: Array<Notification>;
 
   @Draft.property()

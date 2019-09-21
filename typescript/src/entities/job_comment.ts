@@ -33,10 +33,10 @@ export class JobComment extends Entity {
   @JobComment.property()
   public file?: MerchiFile | null;
 
-  @JobComment.property("User")
+  @JobComment.property({arrayType: "User"})
   public forwards?: Array<User>;
 
-  @JobComment.property("Notification")
+  @JobComment.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
   @JobComment.property()

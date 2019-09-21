@@ -16,9 +16,9 @@ export class Bid extends Entity {
   @Bid.property()
   public agreedDeadline?: Date | null;
 
-  @Bid.property("BidItem")
+  @Bid.property({arrayType: "BidItem"})
   public bidItems?: Array<BidItem>;
 
-  @Bid.property("Assignment")
+  @Bid.property({arrayType: "Assignment"})
   public assignments?: Array<Assignment>;
 }
