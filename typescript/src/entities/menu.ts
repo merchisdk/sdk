@@ -25,6 +25,6 @@ export class Menu extends Entity {
   @Menu.property()
   public domain?: Domain;
 
-  @Menu.property("MenuItem")
+  @Menu.property({arrayType: "MenuItem"})
   public menuItems?: Array<MenuItem>;
 }

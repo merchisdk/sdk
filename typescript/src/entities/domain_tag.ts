@@ -25,15 +25,15 @@ export class DomainTag extends Entity {
   @DomainTag.property()
   public domain?: Domain;
 
-  @DomainTag.property("Job")
+  @DomainTag.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @DomainTag.property("Product")
+  @DomainTag.property({arrayType: "Product"})
   public products?: Array<Product>;
 
-  @DomainTag.property("Invoice")
+  @DomainTag.property({arrayType: "Invoice"})
   public invoices?: Array<Invoice>;
 
-  @DomainTag.property("Shipment")
+  @DomainTag.property({arrayType: "Shipment"})
   public shipments?: Array<Shipment>;
 }

@@ -43,12 +43,12 @@ export class CartItem extends Entity {
   @CartItem.property()
   public cart?: Cart;
 
-  @CartItem.property(undefined, {embeddedByDefault: false})
+  @CartItem.property({embeddedByDefault: false})
   public taxType?: CountryTax;
 
-  @CartItem.property("VariationsGroup")
+  @CartItem.property({arrayType: "VariationsGroup"})
   public variationsGroups?: Array<VariationsGroup>;
 
-  @CartItem.property("Variation")
+  @CartItem.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
 }

@@ -39,10 +39,10 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public user?: User;
 
-  @ProductionComment.property("User")
+  @ProductionComment.property({arrayType: "User"})
   public forwards?: Array<User>;
 
-  @ProductionComment.property("Notification")
+  @ProductionComment.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
   @ProductionComment.property()

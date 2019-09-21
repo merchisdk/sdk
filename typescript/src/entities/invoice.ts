@@ -85,13 +85,13 @@ export class Invoice extends Entity {
   @Invoice.property()
   public isRemindable?: boolean;
 
-  @Invoice.property(undefined, {embeddedByDefault: false})
+  @Invoice.property({embeddedByDefault: false})
   public owedMoney?: number;
 
-  @Invoice.property(undefined, {embeddedByDefault: false})
+  @Invoice.property({embeddedByDefault: false})
   public paidMoney?: number;
 
-  @Invoice.property(undefined, {embeddedByDefault: false})
+  @Invoice.property({embeddedByDefault: false})
   public isCompletelyPaid?: boolean;
 
   @Invoice.property()
@@ -112,7 +112,7 @@ export class Invoice extends Entity {
   @Invoice.property()
   public domain?: Domain;
 
-  @Invoice.property("Item")
+  @Invoice.property({arrayType: "Item"})
   public items?: Array<Item>;
 
   @Invoice.property()
@@ -133,21 +133,21 @@ export class Invoice extends Entity {
   @Invoice.property()
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Invoice.property("DomainTag")
+  @Invoice.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
-  @Invoice.property("Shipment")
+  @Invoice.property({arrayType: "Shipment"})
   public shipments?: Array<Shipment>;
 
-  @Invoice.property("Notification")
+  @Invoice.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
-  @Invoice.property("Job")
+  @Invoice.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
   @Invoice.property()
   public cart?: Cart;
 
-  @Invoice.property("Payment")
+  @Invoice.property({arrayType: "Payment"})
   public payments?: Array<Payment>;
 }

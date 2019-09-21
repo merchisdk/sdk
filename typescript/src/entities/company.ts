@@ -85,60 +85,60 @@ export class Company extends Entity {
   @Company.property()
   public defaultTaxType?: CountryTax | null;
 
-  @Company.property("EmailAddress")
+  @Company.property({arrayType: "EmailAddress"})
   public _emailAddresses?: Array<EmailAddress>;
 
-  @Company.property("PhoneNumber")
+  @Company.property({arrayType: "PhoneNumber"})
   public _paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("PhoneNumber")
+  @Company.property({arrayType: "PhoneNumber"})
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("Address")
+  @Company.property({arrayType: "Address"})
   public _addresses?: Array<Address>;
 
-  @Company.property("UserCompany")
+  @Company.property({arrayType: "UserCompany"})
   public _users?: Array<UserCompany>;
 
-  @Company.property("Shipment")
+  @Company.property({arrayType: "Shipment"})
   public shipmentsAsSender?: Array<Shipment>;
 
-  @Company.property("Shipment")
+  @Company.property({arrayType: "Shipment"})
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @Company.property("Product")
+  @Company.property({arrayType: "Product"})
   public saved_products?: Array<Product>;
 
-  @Company.property("Bank")
+  @Company.property({arrayType: "Bank"})
   public banks?: Array<Bank>;
 
-  @Company.property("UserCompany")
+  @Company.property({arrayType: "UserCompany"})
   public userCompanies?: Array<UserCompany>;
 
-  @Company.property("CompanyInvitation")
+  @Company.property({arrayType: "CompanyInvitation"})
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @Company.property("Job")
+  @Company.property({arrayType: "Job"})
   public appliedJobs?: Array<Job>;
 
-  @Company.property("Cart")
+  @Company.property({arrayType: "Cart"})
   public carts?: Array<Cart>;
 
-  @Company.property("Domain")
+  @Company.property({arrayType: "Domain"})
   public domains?: Array<Domain>;
 
-  @Company.property("EmailAddress")
+  @Company.property({arrayType: "EmailAddress"})
   public emailAddresses?: Array<EmailAddress>;
 
-  @Company.property("PhoneNumber")
+  @Company.property({arrayType: "PhoneNumber"})
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("PhoneNumber")
+  @Company.property({arrayType: "PhoneNumber"})
   public paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property("Invoice")
+  @Company.property({arrayType: "Invoice"})
   public invoicesHas?: Array<Invoice>;
 
-  @Company.property("Address")
+  @Company.property({arrayType: "Address"})
   public addresses?: Array<Address>;
 }
