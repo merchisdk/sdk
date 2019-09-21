@@ -24,15 +24,15 @@ export class CountryTax extends Entity {
   @CountryTax.property()
   public taxPercent?: number | null;
 
-  @CountryTax.property("Shipment")
+  @CountryTax.property({arrayType: "Shipment"})
   public shipments?: Array<Shipment>;
 
-  @CountryTax.property("Company")
+  @CountryTax.property({arrayType: "Company"})
   public companies?: Array<Company>;
 
-  @CountryTax.property("Job")
+  @CountryTax.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @CountryTax.property("Item")
+  @CountryTax.property({arrayType: "Item"})
   public items?: Array<Item>;
 }

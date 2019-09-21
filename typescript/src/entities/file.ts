@@ -69,90 +69,90 @@ export class MerchiFile extends Entity {
   @MerchiFile.property()
   public downloadUrl?: string;
 
-  @MerchiFile.property("Component")
+  @MerchiFile.property({arrayType: "Component"})
   public components?: Array<Component>;
 
-  @MerchiFile.property("Component")
+  @MerchiFile.property({arrayType: "Component"})
   public componentFeatureImages?: Array<Component>;
 
-  @MerchiFile.property("DraftComment")
+  @MerchiFile.property({arrayType: "DraftComment"})
   public draftComments?: Array<DraftComment>;
 
-  @MerchiFile.property("Variation")
+  @MerchiFile.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
 
-  @MerchiFile.property("Backup")
+  @MerchiFile.property({arrayType: "Backup"})
   public backups?: Array<Backup>;
 
-  @MerchiFile.property("Notification")
+  @MerchiFile.property({arrayType: "Notification"})
   public notification?: Array<Notification>;
 
-  @MerchiFile.property("Company")
+  @MerchiFile.property({arrayType: "Company"})
   public companyLogos?: Array<Company>;
 
-  @MerchiFile.property("Product")
+  @MerchiFile.property({arrayType: "Product"})
   public products?: Array<Product>;
 
-  @MerchiFile.property("Product")
+  @MerchiFile.property({arrayType: "Product"})
   public featuredProducts?: Array<Product>;
 
-  @MerchiFile.property("Draft")
+  @MerchiFile.property({arrayType: "Draft"})
   public drafts?: Array<Draft>;
 
-  @MerchiFile.property("VariationFieldsOption")
+  @MerchiFile.property({arrayType: "VariationFieldsOption"})
   public options?: Array<VariationFieldsOption>;
 
-  @MerchiFile.property("JobComment")
+  @MerchiFile.property({arrayType: "JobComment"})
   public jobComments?: Array<JobComment>;
 
-  @MerchiFile.property("Job")
+  @MerchiFile.property({arrayType: "Job"})
   public jobs?: Array<Job>;
 
-  @MerchiFile.property("Job")
+  @MerchiFile.property({arrayType: "Job"})
   public clientJobs?: Array<Job>;
 
-  @MerchiFile.property("Domain")
+  @MerchiFile.property({arrayType: "Domain"})
   public domainLogos?: Array<Domain>;
 
-  @MerchiFile.property("Domain")
+  @MerchiFile.property({arrayType: "Domain"})
   public domainFavicons?: Array<Domain>;
 
-  @MerchiFile.property("User")
+  @MerchiFile.property({arrayType: "User"})
   public userProfilePictures?: Array<User>;
 
-  @MerchiFile.property("Invoice")
+  @MerchiFile.property({arrayType: "Invoice"})
   public invoices?: Array<Invoice>;
 
-  @MerchiFile.property("Invoice")
+  @MerchiFile.property({arrayType: "Invoice"})
   public invoicesPaid?: Array<Invoice>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeMainCss?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeMainCssUsing?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeMainCssEditing?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeEmailCss?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeEmailCssUsing?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeEmailCssEditing?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themes?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeFeatureImages?: Array<Theme>;
 
-  @MerchiFile.property("Theme")
+  @MerchiFile.property({arrayType: "Theme"})
   public themeImages?: Array<Theme>;
 
-  @MerchiFile.property("ProductionComment")
+  @MerchiFile.property({arrayType: "ProductionComment"})
   public productionComments?: Array<ProductionComment>;
 }

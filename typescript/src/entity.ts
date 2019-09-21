@@ -17,6 +17,7 @@ function toUnixTimestamp(date: Date) {
 interface PropertyOptions {
   embeddedByDefault?: boolean;
   jsonName?: string;
+  arrayType?: string;
 }
 
 interface EmbedDescriptor {
@@ -129,11 +130,12 @@ export class Entity {
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
 
-  protected static property(arrayType?: string, options?: PropertyOptions) {
+  protected static property(options?: PropertyOptions) {
     return function (target: Entity, propertyKey: string) {
       if (!options) {
         options = {};
       }
+      const arrayType = options.arrayType;
       const jsonName = options.jsonName || propertyKey;
       let properties = Reflect.getMetadata(Entity.propertiesSetKey,
         target.constructor);
@@ -598,7 +600,8 @@ export class Entity {
       }
     };
     const processScalarProperty = (info: PropertyInfo, value: any) => {
-      if (info.dirty) {
+      const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
+      if (info.dirty || (info.property === primaryKey && value)) {
         appendData(info.property, value);
       }
     };

@@ -40,10 +40,10 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public file?: MerchiFile | null;
 
-  @DraftComment.property("User")
+  @DraftComment.property({arrayType: "User"})
   public forwards?: Array<User>;
 
-  @DraftComment.property("Notification")
+  @DraftComment.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
   @DraftComment.property()

@@ -285,7 +285,7 @@ export class Theme extends Entity {
   @Theme.property()
   public emailCssTemplateEditing?: MerchiFile | null;
 
-  @Theme.property("MerchiFile")
+  @Theme.property({arrayType: "MerchiFile"})
   public cssImageFiles?: Array<MerchiFile>;
 
   @Theme.property()
@@ -297,10 +297,10 @@ export class Theme extends Entity {
   @Theme.property()
   public author?: User | null;
 
-  @Theme.property("MerchiFile")
+  @Theme.property({arrayType: "MerchiFile"})
   public images?: Array<MerchiFile>;
 
-  @Theme.property("Domain")
+  @Theme.property({arrayType: "Domain"})
   public domains?: Array<Domain>;
 
   public canBeActivated = () => {
