@@ -1,5 +1,6 @@
 import sdk.python.util.address_util as address_util
 import sdk.python.entities
+from sdk.python.country_taxes import CountryTax
 from sdk.python.email_addresses import EmailAddress
 from sdk.python.addresses import Address
 from sdk.python.files import File
@@ -21,6 +22,7 @@ class Company(sdk.python.entities.Entity):
     country = Property(str)
     tax_number = Property(str)
     tax_number_type = Property(int)
+    default_tax_type = Property(CountryTax)
     default_currency = Property(str)
     paypal_account = Property(str)
     paypal_password = Property(str)
