@@ -11,7 +11,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
-    originAddress = Property(Address)
+    origin_address = Property(Address)
     company = Property("sdk.python.companies.Company")
     default_cost = Property(float)
     currency = Property(str)
