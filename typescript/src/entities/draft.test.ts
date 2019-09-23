@@ -6,18 +6,18 @@ test('can make Draft', () => {
   expect(draft).toBeTruthy();
 });
 
-test('whereChangesRequested', () => {
+test('wereChangesRequested', () => {
   const merchi = new Merchi();
   const draft = new merchi.Draft();
-  expect(draft.whereChangesRequested).toThrow();
+  expect(draft.wereChangesRequested).toThrow();
   draft.comments = [];
-  expect(draft.whereChangesRequested()).toBe(false);
+  expect(draft.wereChangesRequested()).toBe(false);
   draft.comments = [new merchi.DraftComment()]; 
-  expect(draft.whereChangesRequested).toThrow();
+  expect(draft.wereChangesRequested).toThrow();
   draft.comments[0].changeRequest = false;
-  expect(draft.whereChangesRequested()).toBe(false);
+  expect(draft.wereChangesRequested()).toBe(false);
   draft.comments[0].changeRequest = true;
-  expect(draft.whereChangesRequested()).toBe(true);
+  expect(draft.wereChangesRequested()).toBe(true);
 });
 
 test('commentsYoungestToEldest', () => {

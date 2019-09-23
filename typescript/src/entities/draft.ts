@@ -49,7 +49,7 @@ export class Draft extends Entity {
   @Draft.property()
   public job?: Job;
 
-  public whereChangesRequested = () => {
+  public wereChangesRequested = () => {
     /* true if any comment is/was a change request comment. */
     if (this.comments === undefined) {
       throw "comments is undefined. did you forget to embed it?";
