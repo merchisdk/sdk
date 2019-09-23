@@ -30,4 +30,15 @@ export class Item extends Entity {
 
   @Item.property()
   public invoice?: Invoice | null;
+
+  public totalCost = () => {
+    if (this.quantity === undefined) {
+      throw "quantity is undefined, did you forget to embed it?";
+    }
+    if (this.cost === undefined) {
+      throw "cost is undefined, did you forget to embed it?";
+    }
+    const quantity = this.quantity === null ? 0 : this.quantity;
+    return quantity * this.cost;
+  }
 }
