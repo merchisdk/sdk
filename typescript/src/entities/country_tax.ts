@@ -35,4 +35,12 @@ export class CountryTax extends Entity {
 
   @CountryTax.property({arrayType: "Item"})
   public items?: Array<Item>;
+
+  public static getNoTax() {
+    const result = new this.merchi.CountryTax();
+    result.id = 3;  // 3 is a reserved id for 'no tax' by the backend
+    result.taxName = 'No tax';
+    result.taxPercent = 0;
+    return result;
+  }
 }

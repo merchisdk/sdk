@@ -67,4 +67,16 @@ export class Cart extends Entity {
 
   @Cart.property({arrayType: "CartItem"})
   public cartItems?: Array<CartItem>;
+
+  public requiresShipment = () => {
+    if (this.cartItems === undefined) {
+      throw "cartItems is undefined, did you forget to embed it?";
+    }
+    for (const cartItem of this.cartItems) {
+      if (cartItem.requiresShipment()) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

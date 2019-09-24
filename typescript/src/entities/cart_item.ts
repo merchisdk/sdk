@@ -51,4 +51,14 @@ export class CartItem extends Entity {
 
   @CartItem.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
+
+  public requiresShipment = () => {
+    if (this.product === undefined) {
+      throw "product is undefined, did you forget to embed it?";
+    }
+    if (this.product.needsShipping === undefined) {
+      throw "needsShipping is undefined, did you forget to embed it?";
+    }
+    return this.product.needsShipping;
+  }
 }
