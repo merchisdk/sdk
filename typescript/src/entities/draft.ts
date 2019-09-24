@@ -48,4 +48,32 @@ export class Draft extends Entity {
 
   @Draft.property()
   public job?: Job;
+
+  public wereChangesRequested = () => {
+    /* true if any comment is/was a change request comment. */
+    if (this.comments === undefined) {
+      throw "comments is undefined. did you forget to embed it?";
+    }
+    for (const comment of this.comments) {
+      if (comment.changeRequest === undefined) {
+        throw "changeRequest is undefined.";
+      }
+      if (comment.changeRequest) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public commentsYoungestToEldest = () => {
+    if (this.comments === undefined) {
+      throw "comments is undefined. did you forget to embed it?";
+    }
+    return this.comments.sort((a, b) => {
+      if (a.id === undefined || b.id === undefined) {
+        throw "comment id is undefined. did you forget to embed it?";
+      }
+      return a.id - b.id;
+    });
+  }
 }
