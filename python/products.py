@@ -5,6 +5,7 @@ from sdk.python.discount import Discount
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
+from sdk.python.addresses import Address
 from sdk.python.variations import VariationField,\
     VariationsGroup
 
@@ -44,6 +45,7 @@ class Product(sdk.python.entities.Entity):
     images = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
+    origin_address = Property("Address")
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
 
