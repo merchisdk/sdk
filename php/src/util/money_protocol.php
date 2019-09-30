@@ -120,7 +120,7 @@ const CURRENCY_MAP = ["ALL" => "L",
                 "YER" => "﷼",
                 "ZWD" => "Z$"];
 
-function format_currency($amount, $currency, $decimal = 2)
+function format_currency($amount, $currency, $decimal=2)
 {
     if (CURRENCY_MAP[$currency]) {
         $symbol = CURRENCY_MAP[$currency];
