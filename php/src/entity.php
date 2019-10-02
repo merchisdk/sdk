@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once 'http.php';
 require_once 'utility.php';
 
-function generate_request($data, $email = null, $password = null)
+function generate_request($data, $email=null, $password=null)
 {
     $request = new Request();
     $request->data = $data;
@@ -42,7 +42,7 @@ class Entity
         return $request->send();
     }
 
-    public function get($identifier, $embed = null)
+    public function get($identifier, $embed=null)
     {
         $request = new Request();
         $request->query['embed'] = $embed;
@@ -67,7 +67,7 @@ class Entity
         }
     }
 
-    public function create($email = null, $password = null)
+    public function create($email=null, $password=null)
     {
         list($data, $files) = $this->serialise();
         $request = generate_request($data, $email, $password);
@@ -78,14 +78,14 @@ class Entity
         check_response($response);
     }
 
-    public function put($data = '', $email = null, $password = null)
+    public function put($data='', $email=null, $password=null)
     {
         $request = generate_request($data, $email, $password);
         $request->method = 'PUT';
         return $this->sent_to_entity($request, $this->primary_value());
     }
 
-    public function patch($data = '', $email = null, $password = null)
+    public function patch($data='', $email=null, $password=null)
     {
         $request = generate_request($data, $email, $password);
         $request->method = 'PATCH';
@@ -98,15 +98,15 @@ class Entity
         return $this->$key;
     }
 
-    public function json_property($name, $type, $default = null,
-                                  $many = False, $recursive = null)
+    public function json_property($name, $type, $default=null,
+                                  $many=False, $recursive=null)
     {
         $this->json_properties[$name] = [$type, $many, $recursive];
         $this->$name = $default;
     }
 
-    public function serialise($force_primary = True, $files = [],
-                              $render_nulls = False)
+    public function serialise($force_primary=True, $files=[],
+                              $render_nulls=False)
     {
         $result = [];
         if ($force_primary) {
@@ -239,7 +239,7 @@ class Resource
         return $entity::$resource;
     }
 
-    public function get($embed = Null)
+    public function get($embed=Null)
     {
         $request = new Request();
         $request->query['embed'] = $embed;
