@@ -11,7 +11,7 @@ class CartShipmentQuote(sdk.python.entities.Entity):
     subtotal_cost = Property(float)
     tax_amount = Property(float)
     total_cost = Property(float)
-    shipment_method = Property("sdk.python.shipment_method.ShipmentMethod")
+    shipment_method = Property("sdk.python.shipment_methods.ShipmentMethod")
 
 
 class CartShipmentQuotes(sdk.python.entities.Resource):
