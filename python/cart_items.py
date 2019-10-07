@@ -8,7 +8,7 @@ from sdk.python.country_taxes import CountryTax
 class CartItem(sdk.python.entities.Entity):
 
     resource = '/cart_items/'
-    json_name = 'cart_item'
+    json_name = 'cartItem'
 
     creation_date = Property(datetime.datetime)
     id = Property(int)
