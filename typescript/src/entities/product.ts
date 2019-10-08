@@ -139,4 +139,138 @@ export class Product extends Entity {
 
   @Product.property({arrayType: "User"})
   public suppliers?: Array<User>;
+
+  public duplicate = () => {
+    /* create a clone of this product on the backend, returning it. */
+    const resourceName = (this.constructor as typeof Product).resourceName;
+    const resource = `/${resourceName}/${String(this.id)}/copy/`;
+    const fetchOptions = {method: 'POST'};
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        const product = new this.merchi.Product();
+        product.fromJson(data);
+        return product;
+      });
+  }
+
+  public primaryImage = () => {
+    if (this.featureImage === undefined) {
+      throw new Error("featureImage is undefined, did you forget to embed it?");
+    }
+    if (this.images === undefined) {
+      throw new Error("images is undefined, did you forget to embed it?");
+    }
+    if (this.featureImage !== null) {
+      return this.featureImage;
+    }
+    if (this.images.length > 0) {
+      return this.images[0];
+    }
+    return null;
+  }
+
+  public currency = () => {
+    if (this.domain === undefined) {
+      throw new Error("domain is undefined, did you forget to embed it?");
+    }
+    return this.domain.defaultCurrency();
+  }
+
+  public hasGroupVariationFields = () => {
+    if (this.groupVariationFields === undefined) {
+      const err = "groupVariationFields is undefined, did you forget to embed" +
+        " it?";
+      throw new Error(err);
+    }
+    return this.groupVariationFields.length > 0;
+  }
+
+  public hasIndependentVariationFields = () => {
+    if (this.independentVariationFields === undefined) {
+      const err = "independentVariationFields is undefined, did you forget to" +
+        " embed it?";
+      throw new Error(err);
+    }
+    return this.independentVariationFields.length > 0;
+  }
+
+  public taxType = () => {
+    if (this.domain === undefined) {
+      throw new Error("domain is undefined, did you forget to embed it?");
+    }
+    return this.domain.defaultTaxType();
+  }
+
+  public allVariationFields = () => {
+    if (this.groupVariationFields === undefined) {
+      const err = "groupVariationFields is undefined, did you forget to embed" +
+        " it?";
+      throw new Error(err);
+    }
+    if (this.independentVariationFields === undefined) {
+      const err = "independentVariationFields is undefined, did you forget to" +
+        " embed it?";
+      throw new Error(err);
+    }
+    const result: Array<VariationField> = [];
+    return result.concat(this.groupVariationFields,
+                         this.independentVariationFields);
+  }
+
+  public buildEmptyVariations = () => {
+    if (this.independentVariationFields === undefined) {
+      const err = "independentVariationFields is undefined, did you forget to" +
+        " embed it?";
+      throw new Error(err);
+    }
+    return this.independentVariationFields.map(field =>
+      field.buildEmptyVariation());
+  }
+
+  public buildEmptyVariationGroup = () => {
+    if (this.groupVariationFields === undefined) {
+      const err = "groupVariationFields is undefined, did you forget to embed" +
+        " it?";
+      throw new Error(err);
+    }
+    const result = new this.merchi.VariationsGroup();
+    const variations = [];
+    let cost = 0;
+    result.quantity = 0;
+    for (const variationField of this.groupVariationFields) {
+      const empty = variationField.buildEmptyVariation(); 
+      variations.push(empty);
+      cost += empty.cost as number;
+    }
+    result.groupCost = cost;
+    result.variations = variations;
+    return result; 
+  }
+
+  public removeVariationField = (variationField: VariationField) => {
+    if (variationField.independent === undefined) {
+      throw new Error("variation.independent is undefined, did you " +
+                      "forget to embed it?"); 
+    }
+    if (this.independentVariationFields === undefined) {
+      const err = "independentVariationFields is undefined, did you forget to" +
+        " embed it?";
+      throw new Error(err);
+    }
+    if (this.groupVariationFields === undefined) {
+      const err = "groupVariationFields is undefined, did you forget to embed" +
+        " it?";
+      throw new Error(err);
+    }
+    const variationFields = variationField.independent ?
+      this.independentVariationFields : this.groupVariationFields;
+    const index = variationFields.findIndex(v => {
+      if (v.id === undefined) {
+        throw new Error("variation id is undefined, did you forget to " +
+          "embed it?");
+      }
+      return v.id === variationField.id;
+    });
+    return variationFields.splice(index, 1);
+  }
 }

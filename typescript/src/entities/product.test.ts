@@ -328,4 +328,133 @@ test('primary key always serialised', () => {
   });
 });
 
+test('duplicate', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const testName = 'qkc6fYD8HkR';
+  mockFetch(true, {'product': {'name': testName}}, 200);
+  return product.duplicate().then(clone => {
+    expect(clone.name).toEqual(testName);
+  });
+});
 
+test('primaryImage', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const i1 = new merchi.MerchiFile();
+  const i2 = new merchi.MerchiFile();
+  expect(product.primaryImage).toThrow();
+  product.featureImage = i1; 
+  expect(product.primaryImage).toThrow();
+  product.images = [i2];
+  expect(product.primaryImage()).toBe(i1);
+  product.featureImage = null;
+  expect(product.primaryImage()).toBe(i2);
+  product.images = [];
+  expect(product.primaryImage()).toBe(null);
+});
+
+test('currency', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.currency).toThrow();
+  product.domain = new merchi.Domain();
+  expect(product.currency).toThrow();
+  product.domain.company = new merchi.Company();
+  expect(product.currency).toThrow();
+  product.domain.company.defaultCurrency = "MMK";
+  expect(product.currency()).toEqual("MMK");
+});
+
+test('hasGroupVariationFields', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.hasGroupVariationFields).toThrow();
+  product.groupVariationFields = [];
+  expect(product.hasGroupVariationFields()).toBe(false);
+  product.groupVariationFields = [new merchi.VariationField()];
+  expect(product.hasGroupVariationFields()).toBe(true);
+});
+
+test('hasIndependentVariationFields', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.hasIndependentVariationFields).toThrow();
+  product.independentVariationFields = [];
+  expect(product.hasIndependentVariationFields()).toBe(false);
+  product.independentVariationFields = [new merchi.VariationField()];
+  expect(product.hasIndependentVariationFields()).toBe(true);
+});
+
+test('taxType', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.taxType).toThrow();
+  product.domain = new merchi.Domain();
+  expect(product.taxType).toThrow();
+  product.domain.company = new merchi.Company();
+  expect(product.taxType).toThrow();
+  const tax = new merchi.CountryTax();
+  product.domain.company.defaultTaxType = tax;
+  expect(product.taxType()).toBe(tax);
+  product.domain.company.defaultTaxType = null;
+  expect(product.taxType()).toBe(null);
+});
+
+test('allVariationFields', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const vf1 = new merchi.VariationField();
+  const vf2 = new merchi.VariationField();
+  expect(product.allVariationFields).toThrow();
+  product.groupVariationFields = [vf1];
+  expect(product.allVariationFields).toThrow();
+  product.independentVariationFields = [vf2];
+  expect(product.allVariationFields()).toEqual([vf1, vf2]);
+});
+
+test('removeVariationField', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const vf = new merchi.VariationField();
+  expect(() => product.removeVariationField(vf)).toThrow();
+  vf.independent = false;
+  expect(() => product.removeVariationField(vf)).toThrow();
+  product.independentVariationFields = [];
+  expect(() => product.removeVariationField(vf)).toThrow();
+  product.groupVariationFields = [vf];
+  expect(() => product.removeVariationField(vf)).toThrow();
+  vf.id = 1;
+  expect(product.removeVariationField(vf).length).toEqual(1);
+  expect(product.groupVariationFields.length).toEqual(0);
+  vf.independent = true;
+  product.independentVariationFields = [vf];
+  expect(product.removeVariationField(vf).length).toEqual(1);
+  expect(product.independentVariationFields.length).toEqual(0);
+});
+
+test('buildEmptyVariations', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.buildEmptyVariations).toThrow();
+  product.independentVariationFields = [];
+  expect(product.buildEmptyVariations()).toEqual([]);
+  product.independentVariationFields = [new merchi.VariationField()];
+  product.independentVariationFields[0].defaultValue = "";
+  product.independentVariationFields[0].fieldType = 11;
+  product.independentVariationFields[0].variationCost = 2;
+  product.independentVariationFields[0].options = [];
+  expect(product.buildEmptyVariations().length).toEqual(1);
+});
+
+test('buildEmptyVariationGroup', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  expect(product.buildEmptyVariationGroup).toThrow();
+  product.groupVariationFields = [new merchi.VariationField()];
+  product.groupVariationFields[0].defaultValue = "";
+  product.groupVariationFields[0].fieldType = 11;
+  product.groupVariationFields[0].variationCost = 2;
+  product.groupVariationFields[0].options = [];
+  expect(product.buildEmptyVariationGroup().groupCost).toEqual(0);
+});
