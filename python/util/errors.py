@@ -139,3 +139,5 @@ BAD_TOKEN = 109
 BAD_CART_TOKEN = 110
 
 STATE_WITHOUT_COUNTRY = 111
+
+BAD_SLUG = 112  # provided value that cannot be used in url
