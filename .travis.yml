@@ -13,8 +13,6 @@ matrix:
         - php/lint.sh
         - php/test.sh
         - php php/check.php php/clover.xml 10
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
     - language: node_js
       node_js:
         - "10"
@@ -34,7 +32,6 @@ matrix:
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
         - coverage report -m --fail-under 55
       after_success:
-        - codecov
 
 notifications:
   email:
