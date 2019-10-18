@@ -10,3 +10,4 @@ class Page(sdk.python.entities.Entity):
     id = Property(int)
     name = Property(str)
     slug = Property(str)
+    template = Property(str)
