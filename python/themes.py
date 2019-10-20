@@ -2,6 +2,7 @@ import sdk.python.entities
 from sdk.python.entities import Property
 import datetime
 from sdk.python.files import File
+from sdk.python.pages import Page
 from sdk.python.util.theme_status import VALID_AND_UPDATED, \
     VALID_BUT_NOT_UPDATED
 
@@ -108,6 +109,7 @@ class Theme(sdk.python.entities.Entity):
     feature_image = Property(File)
     images = Property(File)
     css_image_files = Property(File)
+    pages = Property(Page)
 
     def is_valid_and_updated(self):
         """ Check both main css template and email css template
