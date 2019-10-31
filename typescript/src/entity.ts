@@ -535,6 +535,16 @@ export class Entity {
     }
   }
 
+  public merge = (otherEntity: Entity, onlyAttributes?: Array<string>) => {
+    const mergeProperty = (info: PropertyInfo) => {
+      const value = (otherEntity as any)[info.attribute];
+      if (value !== undefined && (!onlyAttributes || onlyAttributes.includes(info.attribute))) {
+        (this as any)[info.attribute] = value;
+      }
+    };
+    this.forEachProperty(mergeProperty);
+  }
+
   public toFormData = (options?: SerialiseOptions): FormData => {
     options = options || {};
     const result = options.existing || new FormData();
