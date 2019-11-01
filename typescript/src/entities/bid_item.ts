@@ -4,7 +4,7 @@ import { Entity } from '../entity';
 export class BidItem extends Entity {
   protected static resourceName: string = "bid_items";
   protected static singularName: string = "bidItem";
-  protected static pluralName: string = "bitItems";
+  protected static pluralName: string = "bidItems";
 
   @BidItem.property()
   public archived?: Date | null;
