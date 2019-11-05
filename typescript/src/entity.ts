@@ -46,13 +46,13 @@ interface ListOptions {
   order?: SortOrder;
   tab?: string;
   as?: string;
-  withRights?: boolean; 
+  withRights?: boolean;
   state?: string;
   categoryId?: number;
   inDomain?: number;
   inDomainRoles?: Array<number>;
   asRole?: Role;
-  publicOnly?: boolean; 
+  publicOnly?: boolean;
   managedOnly?: boolean;
   memberOnly?: boolean;
   domainRoles?: Array<Role>;
@@ -177,7 +177,7 @@ export class Entity {
           throw new Error('array type can only be given for arrays');
         }
       }
-      const normallyEmbeddedByDefault = !(realArrayType || 
+      const normallyEmbeddedByDefault = !(realArrayType ||
         propertyType.prototype instanceof Entity);
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
@@ -188,7 +188,7 @@ export class Entity {
         embeddedByDefault: embeddedByDefault,
         dirty: true};
       map.set(jsonName, propertyInfo);
-    }); 
+    });
     return map;
   }
 
@@ -249,7 +249,7 @@ export class Entity {
         this.markDirty(info.property, newValue);
       };
       return { get: get,
-        set: set}; 
+        set: set};
     };
     for (const info of this.propertiesMap.values()) {
       if (info.type.prototype instanceof Entity) {
@@ -332,20 +332,20 @@ export class Entity {
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
           options.inDomainRoles.join(',')]);
-      } 
+      }
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
-      } 
+      }
       if (options.publicOnly !== undefined) {
         fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
-      } 
+      }
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',
           options.managedOnly.toString()]);
-      } 
+      }
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
-      } 
+      }
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
           options.domainRoles.join(',')]);
@@ -502,6 +502,7 @@ export class Entity {
     for (const key in data) {
       const value: any = (data as any)[key];
       const propertyInfo = this.propertiesMap.get(key);
+
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = false;
         if (propertyInfo.arrayType) {
@@ -636,7 +637,7 @@ export class Entity {
   protected markDirty = (property: string, newValue: any) => {
     if (newValue === undefined) {
       return;
-    } 
+    }
     (this.propertiesMap.get(property) as PropertyInfo).dirty = true;
     const openSet: Array<Entity> = [];  /* Queue (BFS) */
     const closedSet = new Set();
