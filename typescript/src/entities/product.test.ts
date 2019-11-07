@@ -32,7 +32,7 @@ test('can get and set featureImage', () => {
   const product = new merchi.Product();
   const file = new merchi.MerchiFile();
   product.featureImage = file;
-  expect(product.featureImage).toBe(file); 
+  expect(product.featureImage).toBe(file);
 });
 
 test('can get and set domain', () => {
