@@ -1,28 +1,29 @@
-import { Address } from './address';
-import { Assignment } from './assignment';
-import { Cart } from './cart';
-import { Category } from './category';
-import { CompanyInvitation } from './company_invitation';
-import { DomainInvitation } from './domain_invitation';
-import { Draft } from './draft';
-import { DraftComment } from './draft_comment';
-import { EmailAddress } from './email_address';
-import { EnrolledDomain } from './enrolled_domain';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { JobComment } from './job_comment';
-import { Notification } from './notification';
-import { Payment } from './payment';
-import { PhoneNumber } from './phone_number';
-import { Product } from './product';
-import { ProductionComment } from './production_comment';
-import { Session } from './session';
-import { Shipment } from './shipment';
-import { SystemRole } from './system_role';
-import { Theme } from './theme';
-import { UserCompany } from './user_company';
+import { Address } from "./address";
+import { Assignment } from "./assignment";
+import { Cart } from "./cart";
+import { Category } from "./category";
+import { CompanyInvitation } from "./company_invitation";
+import { DomainInvitation } from "./domain_invitation";
+import { Draft } from "./draft";
+import { DraftComment } from "./draft_comment";
+import { EmailAddress } from "./email_address";
+import { EnrolledDomain } from "./enrolled_domain";
+import { Entity } from "../entity";
+import { MerchiFile } from "./file";
+import { Invoice } from "./invoice";
+import { Job } from "./job";
+import { JobComment } from "./job_comment";
+import { Notification } from "./notification";
+import { Payment } from "./payment";
+import { PhoneNumber } from "./phone_number";
+import { Product } from "./product";
+import { ProductionComment } from "./production_comment";
+import { Session } from "./session";
+import { Shipment } from "./shipment";
+import { SystemRole } from "./system_role";
+import { Theme } from "./theme";
+import { UserCompany } from "./user_company";
+import moment from "moment-timezone";
 
 export class User extends Entity {
   protected static resourceName: string = "users";
@@ -95,120 +96,128 @@ export class User extends Entity {
   @User.property()
   public enableInvoiceReminders?: boolean;
 
-  @User.property({arrayType: "JobComment"})
+  @User.property({ arrayType: "JobComment" })
   public jobComments?: Array<JobComment>;
 
-  @User.property({arrayType: "EmailAddress"})
+  @User.property({ arrayType: "EmailAddress" })
   public _emailAddresses?: Array<EmailAddress>;
 
-  @User.property({arrayType: "PhoneNumber"})
+  @User.property({ arrayType: "PhoneNumber" })
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property({arrayType: "Address"})
+  @User.property({ arrayType: "Address" })
   public _addresses?: Array<Address>;
 
-  @User.property({arrayType: "UserCompany"})
+  @User.property({ arrayType: "UserCompany" })
   public _companies?: Array<UserCompany>;
 
-  @User.property({arrayType: "Category"})
+  @User.property({ arrayType: "Category" })
   public categories?: Array<Category>;
 
-  @User.property({arrayType: "Product"})
+  @User.property({ arrayType: "Product" })
   public products?: Array<Product>;
 
   @User.property()
   public profilePicture?: MerchiFile | null;
 
-  @User.property({arrayType: "PhoneNumber"})
+  @User.property({ arrayType: "PhoneNumber" })
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @User.property({arrayType: "Session"})
+  @User.property({ arrayType: "Session" })
   public sessions?: Array<Session>;
 
-  @User.property({arrayType: "Shipment"})
+  @User.property({ arrayType: "Shipment" })
   public shipmentsAsSender?: Array<Shipment>;
 
-  @User.property({arrayType: "Shipment"})
+  @User.property({ arrayType: "Shipment" })
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @User.property({arrayType: "DraftComment"})
+  @User.property({ arrayType: "DraftComment" })
   public draftComments?: Array<DraftComment>;
 
-  @User.property({arrayType: "DraftComment"})
+  @User.property({ arrayType: "DraftComment" })
   public forwardedDraftComments?: Array<DraftComment>;
 
-  @User.property({arrayType: "SystemRole"})
+  @User.property({ arrayType: "SystemRole" })
   public systemRoles?: Array<SystemRole>;
 
-  @User.property({arrayType: "EmailAddress"})
+  @User.property({ arrayType: "EmailAddress" })
   public emailAddresses?: Array<EmailAddress>;
 
-  @User.property({arrayType: "Notification"})
+  @User.property({ arrayType: "Notification" })
   public notifications?: Array<Notification>;
 
-  @User.property({arrayType: "Notification"})
+  @User.property({ arrayType: "Notification" })
   public sentNotifications?: Array<Notification>;
 
-  @User.property({arrayType: "Assignment"})
+  @User.property({ arrayType: "Assignment" })
   public assignments?: Array<Assignment>;
 
-  @User.property({arrayType: "UserCompany"})
+  @User.property({ arrayType: "UserCompany" })
   public userCompanies?: Array<UserCompany>;
 
-  @User.property({arrayType: "Draft"})
+  @User.property({ arrayType: "Draft" })
   public drafts?: Array<Draft>;
 
-  @User.property({arrayType: "CompanyInvitation"})
+  @User.property({ arrayType: "CompanyInvitation" })
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @User.property({arrayType: "Address"})
+  @User.property({ arrayType: "Address" })
   public addresses?: Array<Address>;
 
-  @User.property({arrayType: "MerchiFile"})
+  @User.property({ arrayType: "MerchiFile" })
   public uploadFiles?: Array<MerchiFile>;
 
-  @User.property({arrayType: "JobComment"})
+  @User.property({ arrayType: "JobComment" })
   public forwardedJobComments?: Array<JobComment>;
 
-  @User.property({arrayType: "Job"})
+  @User.property({ arrayType: "Job" })
   public appliedJobs?: Array<Job>;
 
-  @User.property({arrayType: "Job"})
+  @User.property({ arrayType: "Job" })
   public managedJobs?: Array<Job>;
 
-  @User.property({arrayType: "Job"})
+  @User.property({ arrayType: "Job" })
   public draftingJobs?: Array<Job>;
 
-  @User.property({arrayType: "Product"})
+  @User.property({ arrayType: "Product" })
   public saved_products?: Array<Product>;
 
-  @User.property({arrayType: "Cart"})
+  @User.property({ arrayType: "Cart" })
   public carts?: Array<Cart>;
 
-  @User.property({arrayType: "Payment"})
+  @User.property({ arrayType: "Payment" })
   public payments?: Array<Payment>;
 
-  @User.property({arrayType: "EnrolledDomain"})
+  @User.property({ arrayType: "EnrolledDomain" })
   public enrolledDomains?: Array<EnrolledDomain>;
 
-  @User.property({arrayType: "Invoice"})
+  @User.property({ arrayType: "Invoice" })
   public responsibleInvoices?: Array<Invoice>;
 
-  @User.property({arrayType: "Invoice"})
+  @User.property({ arrayType: "Invoice" })
   public createdInvoices?: Array<Invoice>;
 
-  @User.property({arrayType: "Invoice"})
+  @User.property({ arrayType: "Invoice" })
   public invoicesHas?: Array<Invoice>;
 
-  @User.property({arrayType: "DomainInvitation"})
+  @User.property({ arrayType: "DomainInvitation" })
   public sentDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property({arrayType: "DomainInvitation"})
+  @User.property({ arrayType: "DomainInvitation" })
   public receivedDomainInvitations?: Array<DomainInvitation>;
 
-  @User.property({arrayType: "Theme"})
+  @User.property({ arrayType: "Theme" })
   public themes?: Array<Theme>;
 
-  @User.property({arrayType: "ProductionComment"})
+  @User.property({ arrayType: "ProductionComment" })
   public forwardedProductionComments?: Array<ProductionComment>;
+
+  public userLocalTimeFormat = (time: Date, formatString?: string): string => {
+    var format = formatString ? formatString : "ddd Do MMM YY";
+    var timezone = this.timezone ? this.timezone: "	Australia/Victoria";
+    return moment(time)
+      .tz(timezone)
+      .format(format);
+  };
 }

@@ -18,8 +18,11 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.141",
+    "@types/moment-timezone": "^0.5.12",
     "@types/node": "^12.0.2",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
     "reflect-metadata": "^0.1.13"
   }
 }
