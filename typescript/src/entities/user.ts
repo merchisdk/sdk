@@ -215,7 +215,7 @@ export class User extends Entity {
 
   public userLocalTimeFormat = (time: Date, formatString?: string): string => {
     var format = formatString ? formatString : "ddd Do MMM YY";
-    var timezone = this.timezone ? this.timezone: "	Australia/Victoria";
+    var timezone = this.timezone ? this.timezone: "Australia/Melbourne";
     return moment(time)
       .tz(timezone)
       .format(format);
