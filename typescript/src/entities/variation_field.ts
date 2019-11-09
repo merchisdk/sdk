@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import * as _ from 'lodash';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -6,9 +6,9 @@ import { VariationFieldsOption } from './variation_fields_option';
 import { FieldType } from '../constants/field_types';
 
 export class VariationField extends Entity {
-  protected static resourceName: string = "variation_fields";
-  protected static singularName: string = "variationField";
-  protected static pluralName: string = "variationFields";
+  protected static resourceName: string = 'variation_fields';
+  protected static singularName: string = 'variationField';
+  protected static pluralName: string = 'variationFields';
 
   @VariationField.property()
   public archived?: Date | null;
@@ -79,7 +79,7 @@ export class VariationField extends Entity {
   @VariationField.property()
   public variationUnitCost?: number;
 
-  @VariationField.property({arrayType: "Variation"})
+  @VariationField.property({ arrayType: 'Variation' })
   public variations?: Array<Variation>;
 
   @VariationField.property()
@@ -88,31 +88,33 @@ export class VariationField extends Entity {
   @VariationField.property()
   public productIndependentBackref?: Product | null;
 
-  @VariationField.property({arrayType: "VariationFieldsOption"})
+  @VariationField.property({ arrayType: 'VariationFieldsOption' })
   public options?: Array<VariationFieldsOption>;
 
   public isSelectable = () => {
     if (this.fieldType === undefined) {
-      throw new Error("fieldType is undefined, did you forget to embed it?");
+      throw new Error('fieldType is undefined, did you forget to embed it?');
     }
-    const selectable = new Set([FieldType.SELECT,
-                                FieldType.CHECKBOX,
-                                FieldType.RADIO,
-                                FieldType.IMAGE_SELECT,
-                                FieldType.COLOUR_SELECT]);
+    const selectable = new Set([
+      FieldType.SELECT,
+      FieldType.CHECKBOX,
+      FieldType.RADIO,
+      FieldType.IMAGE_SELECT,
+      FieldType.COLOUR_SELECT
+    ]);
     return selectable.has(this.fieldType);
-  }
+  };
 
   public buildEmptyVariation = () => {
     if (this.defaultValue === undefined) {
-      throw new Error("defaultValue is undefined, did you forget to embed it?");
+      throw new Error('defaultValue is undefined, did you forget to embed it?');
     }
     if (this.variationCost === undefined) {
-      const err = "variationCost is undefined, did you forget to embed it?";
+      const err = 'variationCost is undefined, did you forget to embed it?';
       throw new Error(err);
     }
     if (this.options === undefined) {
-      throw new Error("options is undefined, did you forget to embed it?");
+      throw new Error('options is undefined, did you forget to embed it?');
     }
     const result = new this.merchi.Variation(this.merchi);
     if (this.isSelectable()) {
@@ -121,13 +123,15 @@ export class VariationField extends Entity {
       for (const option of this.options) {
         if (option.default) {
           if (option.variationCost === undefined) {
-            throw new Error("option.variationCost is undefined, did you " +
-                            "forget to embed it?");
+            throw new Error(
+              'option.variationCost is undefined, did you ' +
+                'forget to embed it?'
+            );
           }
           value.push(option.id);
           onceOffCost += option.variationCost;
         }
-      } 
+      }
       result.value = value.join();
       result.onceOffCost = onceOffCost;
     } else {
@@ -143,5 +147,5 @@ export class VariationField extends Entity {
     }
     result.variationField = _.cloneDeepWith(this, customiser);
     return result;
-  }
+  };
 }

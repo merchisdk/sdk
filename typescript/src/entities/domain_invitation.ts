@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class DomainInvitation extends Entity {
-  protected static resourceName: string = "domain_invitations";
-  protected static singularName: string = "domainInvitation";
-  protected static pluralName: string = "domainInvitations";
+  protected static resourceName: string = 'domain_invitations';
+  protected static singularName: string = 'domainInvitation';
+  protected static pluralName: string = 'domainInvitations';
 
   @DomainInvitation.property()
   public archived?: Date | null;

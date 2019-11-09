@@ -3,9 +3,9 @@ import { Company } from './company';
 import { Entity } from '../entity';
 
 export class Bank extends Entity {
-  protected static resourceName: string = "banks";
-  protected static singularName: string = "bank";
-  protected static pluralName: string = "banks";
+  protected static resourceName: string = 'banks';
+  protected static singularName: string = 'bank';
+  protected static pluralName: string = 'banks';
 
   @Bank.property()
   public archived?: Date | null;

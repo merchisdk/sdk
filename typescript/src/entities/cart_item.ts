@@ -6,9 +6,9 @@ import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
 export class CartItem extends Entity {
-  protected static resourceName: string = "cart_items";
-  protected static singularName: string = "cartItem";
-  protected static pluralName: string = "cartItems";
+  protected static resourceName: string = 'cart_items';
+  protected static singularName: string = 'cartItem';
+  protected static pluralName: string = 'cartItems';
 
   @CartItem.property()
   public archived?: Date | null;
@@ -43,22 +43,22 @@ export class CartItem extends Entity {
   @CartItem.property()
   public cart?: Cart;
 
-  @CartItem.property({embeddedByDefault: false})
+  @CartItem.property({ embeddedByDefault: false })
   public taxType?: CountryTax;
 
-  @CartItem.property({arrayType: "VariationsGroup"})
+  @CartItem.property({ arrayType: 'VariationsGroup' })
   public variationsGroups?: Array<VariationsGroup>;
 
-  @CartItem.property({arrayType: "Variation"})
+  @CartItem.property({ arrayType: 'Variation' })
   public variations?: Array<Variation>;
 
   public requiresShipment = () => {
     if (this.product === undefined) {
-      throw "product is undefined, did you forget to embed it?";
+      throw 'product is undefined, did you forget to embed it?';
     }
     if (this.product.needsShipping === undefined) {
-      throw "needsShipping is undefined, did you forget to embed it?";
+      throw 'needsShipping is undefined, did you forget to embed it?';
     }
     return this.product.needsShipping;
-  }
+  };
 }

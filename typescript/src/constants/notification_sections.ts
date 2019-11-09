@@ -8,5 +8,5 @@ export enum NotificationSection {
   JOB_SHIPPING = 6,
   INVOICE = 7,
   JOB_NOTIFICATIONS = 8,
-  REMINDER = 9,
+  REMINDER = 9
 }

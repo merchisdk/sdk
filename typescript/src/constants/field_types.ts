@@ -9,5 +9,5 @@ export enum FieldType {
   FIELD_INSTRUCTIONS = 8,
   IMAGE_SELECT = 9,
   COLOUR_PICKER = 10,
-  COLOUR_SELECT = 11,
+  COLOUR_SELECT = 11
 }

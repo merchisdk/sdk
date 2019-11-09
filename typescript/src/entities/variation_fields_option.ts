@@ -5,9 +5,9 @@ import { Variation } from './variation';
 import { VariationField } from './variation_field';
 
 export class VariationFieldsOption extends Entity {
-  protected static resourceName: string = "variation_fields_options";
-  protected static singularName: string = "variationFieldsOption";
-  protected static pluralName: string = "variationFieldsOptions";
+  protected static resourceName: string = 'variation_fields_options';
+  protected static singularName: string = 'variationFieldsOption';
+  protected static pluralName: string = 'variationFieldsOptions';
 
   @VariationFieldsOption.property()
   public archived?: Date | null;
@@ -39,19 +39,19 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property()
   public linkedFile?: MerchiFile | null;
 
-  @VariationFieldsOption.property({arrayType: "Variation"})
+  @VariationFieldsOption.property({ arrayType: 'Variation' })
   public selectedByVariations?: Array<Variation>;
 
-  @VariationFieldsOption.property({arrayType: "InventoryUnitVariation"})
+  @VariationFieldsOption.property({ arrayType: 'InventoryUnitVariation' })
   public inventoryUnitVariations?: Array<InventoryUnitVariation>;
 
   public totalCost = (quantity: number) => {
     if (this.variationCost === undefined) {
-      throw new Error("variationCost is unknown");
+      throw new Error('variationCost is unknown');
     }
     if (this.variationUnitCost === undefined) {
-      throw new Error("variationUnitCost is unknown");
+      throw new Error('variationUnitCost is unknown');
     }
     return this.variationCost + this.variationUnitCost * quantity;
-  }
+  };
 }

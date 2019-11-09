@@ -29,7 +29,7 @@ test('can create domain on server', () => {
   domain.domain = 'example.com';
   const data = Array.from((domain.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
-  domain.create()
+  domain.create();
   const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
   expect(sentToServer).toEqual(data);
 });
@@ -38,7 +38,7 @@ test('can delete domain', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
   domain.id = 1;
-  const fetch = mockFetch(true, {}, 204); 
+  const fetch = mockFetch(true, {}, 204);
   domain.delete();
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
 });

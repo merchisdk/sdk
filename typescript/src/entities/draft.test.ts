@@ -12,7 +12,7 @@ test('wereChangesRequested', () => {
   expect(draft.wereChangesRequested).toThrow();
   draft.comments = [];
   expect(draft.wereChangesRequested()).toBe(false);
-  draft.comments = [new merchi.DraftComment()]; 
+  draft.comments = [new merchi.DraftComment()];
   expect(draft.wereChangesRequested).toThrow();
   draft.comments[0].changeRequest = false;
   expect(draft.wereChangesRequested()).toBe(false);

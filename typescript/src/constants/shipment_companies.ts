@@ -10,5 +10,5 @@ export enum ShipmentCompany {
   CUSTOM_TRACK_LINK = 8,
   FASTWAY = 9,
   REALTIME_EXPRESS = 10,
-  UBER = 11, 
+  UBER = 11
 }

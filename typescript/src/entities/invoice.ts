@@ -15,9 +15,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Invoice extends Entity {
-  protected static resourceName: string = "invoices";
-  protected static singularName: string = "invoice";
-  protected static pluralName: string = "invoices";
+  protected static resourceName: string = 'invoices';
+  protected static singularName: string = 'invoice';
+  protected static pluralName: string = 'invoices';
 
   @Invoice.property()
   public archived?: Date | null;
@@ -85,13 +85,13 @@ export class Invoice extends Entity {
   @Invoice.property()
   public isRemindable?: boolean;
 
-  @Invoice.property({embeddedByDefault: false})
+  @Invoice.property({ embeddedByDefault: false })
   public owedMoney?: number;
 
-  @Invoice.property({embeddedByDefault: false})
+  @Invoice.property({ embeddedByDefault: false })
   public paidMoney?: number;
 
-  @Invoice.property({embeddedByDefault: false})
+  @Invoice.property({ embeddedByDefault: false })
   public isCompletelyPaid?: boolean;
 
   @Invoice.property()
@@ -112,7 +112,7 @@ export class Invoice extends Entity {
   @Invoice.property()
   public domain?: Domain;
 
-  @Invoice.property({arrayType: "Item"})
+  @Invoice.property({ arrayType: 'Item' })
   public items?: Array<Item>;
 
   @Invoice.property()
@@ -133,21 +133,21 @@ export class Invoice extends Entity {
   @Invoice.property()
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Invoice.property({arrayType: "DomainTag"})
+  @Invoice.property({ arrayType: 'DomainTag' })
   public tags?: Array<DomainTag>;
 
-  @Invoice.property({arrayType: "Shipment"})
+  @Invoice.property({ arrayType: 'Shipment' })
   public shipments?: Array<Shipment>;
 
-  @Invoice.property({arrayType: "Notification"})
+  @Invoice.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 
-  @Invoice.property({arrayType: "Job"})
+  @Invoice.property({ arrayType: 'Job' })
   public jobs?: Array<Job>;
 
   @Invoice.property()
   public cart?: Cart;
 
-  @Invoice.property({arrayType: "Payment"})
+  @Invoice.property({ arrayType: 'Payment' })
   public payments?: Array<Payment>;
 }

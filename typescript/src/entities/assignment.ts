@@ -7,9 +7,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Assignment extends Entity {
-  protected static resourceName: string = "assignments";
-  protected static singularName: string = "assignment";
-  protected static pluralName: string = "assignments";
+  protected static resourceName: string = 'assignments';
+  protected static singularName: string = 'assignment';
+  protected static pluralName: string = 'assignments';
 
   @Assignment.property()
   public archived?: Date | null;
@@ -41,12 +41,12 @@ export class Assignment extends Entity {
   @Assignment.property()
   public bid?: Bid | null;
 
-  @Assignment.property({arrayType: "ProductionComment"})
+  @Assignment.property({ arrayType: 'ProductionComment' })
   public comments?: Array<ProductionComment>;
 
   @Assignment.property()
   public shipment?: Shipment | null;
 
-  @Assignment.property({arrayType: "Notification"})
+  @Assignment.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 }

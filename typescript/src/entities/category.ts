@@ -4,9 +4,9 @@ import { Product } from './product';
 import { User } from './user';
 
 export class Category extends Entity {
-  protected static resourceName: string = "categories";
-  protected static singularName: string = "category";
-  protected static pluralName: string = "categories";
+  protected static resourceName: string = 'categories';
+  protected static singularName: string = 'category';
+  protected static pluralName: string = 'categories';
 
   @Category.property()
   public archived?: Date | null;
@@ -26,9 +26,9 @@ export class Category extends Entity {
   @Category.property()
   public domain?: Domain;
 
-  @Category.property({arrayType: "Product"})
+  @Category.property({ arrayType: 'Product' })
   public products?: Array<Product>;
 
-  @Category.property({arrayType: "User"})
+  @Category.property({ arrayType: 'User' })
   public users?: Array<User>;
 }

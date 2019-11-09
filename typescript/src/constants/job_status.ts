@@ -3,7 +3,7 @@ export enum DraftingStatus {
   WAIT_DRAFTING = 1,
   CHANGES_REQUESTED = 2,
   DRAFTING_UPLOADED = 3,
-  DRAFTING_APPROVED = 4,
+  DRAFTING_APPROVED = 4
 }
 
 export enum PaymentStatus {
@@ -11,7 +11,7 @@ export enum PaymentStatus {
   ISSUED = 1,
   OVERDUE = 2,
   PARTIAL_PAID = 3,
-  FULLY_PAID = 4,
+  FULLY_PAID = 4
 }
 
 export enum ProductionStatus {
@@ -24,7 +24,7 @@ export enum ProductionStatus {
   QUESTIONING = 6,
   COMMENCED = 7,
   FINISHED = 8,
-  SHIPPED = 9,
+  SHIPPED = 9
 }
 
 export enum ShipmentStatus {
@@ -36,5 +36,5 @@ export enum ShipmentStatus {
   DISPATCHED = 5,
   EXPECTED_RECEIVE_DATE_WARNING = 6,
   EXPECTED_RECEIVE_DATE_PAST = 7,
-  REEIVED = 8,
+  REEIVED = 8
 }

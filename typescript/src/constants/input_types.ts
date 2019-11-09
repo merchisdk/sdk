@@ -9,5 +9,5 @@ export enum InputType {
   INSTRUCTIONS = 8,
   IMAGE_SELECT = 9,
   COLUR_PICKER = 10,
-  COLOUR_SELECT = 11,
+  COLOUR_SELECT = 11
 }

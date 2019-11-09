@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class PhoneNumber extends Entity {
-  protected static resourceName: string = "phone_numbers";
-  protected static singularName: string = "phoneNumber";
-  protected static pluralName: string = "phoneNumbers";
+  protected static resourceName: string = 'phone_numbers';
+  protected static singularName: string = 'phoneNumber';
+  protected static pluralName: string = 'phoneNumbers';
 
   @PhoneNumber.property()
   public archived?: Date | null;
@@ -19,18 +19,18 @@ export class PhoneNumber extends Entity {
   @PhoneNumber.property()
   public code?: string;
 
-  @PhoneNumber.property({arrayType: "User"})
+  @PhoneNumber.property({ arrayType: 'User' })
   public users?: Array<User>;
 
-  @PhoneNumber.property({arrayType: "Company"})
+  @PhoneNumber.property({ arrayType: 'Company' })
   public companies?: Array<Company>;
 
-  @PhoneNumber.property({arrayType: "Company"})
+  @PhoneNumber.property({ arrayType: 'Company' })
   public paymentCompanies?: Array<Company>;
 
-  @PhoneNumber.property({embeddedByDefault: false})
+  @PhoneNumber.property({ embeddedByDefault: false })
   public localFormatNumber?: string;
 
-  @PhoneNumber.property({embeddedByDefault: false})
+  @PhoneNumber.property({ embeddedByDefault: false })
   public internationalFormatNumber?: string;
 }

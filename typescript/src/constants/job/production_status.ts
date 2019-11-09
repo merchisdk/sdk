@@ -7,5 +7,5 @@ export enum ProductionStatus {
   QUESTIONING = 6,
   COMMENCED = 7,
   FINISHED = 8,
-  SHIPPED = 9,
+  SHIPPED = 9
 }

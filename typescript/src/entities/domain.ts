@@ -16,9 +16,9 @@ import { SupplyDomain } from './supply_domain';
 import { Theme } from './theme';
 
 export class Domain extends Entity {
-  protected static resourceName: string = "domains";
-  protected static singularName: string = "domain";
-  protected static pluralName: string = "domains";
+  protected static resourceName: string = 'domains';
+  protected static singularName: string = 'domain';
+  protected static pluralName: string = 'domains';
 
   @Domain.property()
   public archived?: Date | null;
@@ -80,72 +80,73 @@ export class Domain extends Entity {
   @Domain.property()
   public activeTheme?: Theme;
 
-  @Domain.property({arrayType: "DomainTag"})
+  @Domain.property({ arrayType: 'DomainTag' })
   public tags?: Array<DomainTag>;
 
-  @Domain.property({arrayType: "Domain"})
+  @Domain.property({ arrayType: 'Domain' })
   public canSupply?: Array<Domain>;
 
-  @Domain.property({arrayType: "Domain"})
+  @Domain.property({ arrayType: 'Domain' })
   public suppliedBy?: Array<Domain>;
 
-  @Domain.property({arrayType: "Menu"})
+  @Domain.property({ arrayType: 'Menu' })
   public menus?: Array<Menu>;
 
-  @Domain.property({arrayType: "Session"})
+  @Domain.property({ arrayType: 'Session' })
   public sessions?: Array<Session>;
 
-  @Domain.property({arrayType: "Category"})
+  @Domain.property({ arrayType: 'Category' })
   public categories?: Array<Category>;
 
-  @Domain.property({arrayType: "Notification"})
+  @Domain.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 
-  @Domain.property({arrayType: "Product"})
+  @Domain.property({ arrayType: 'Product' })
   public products?: Array<Product>;
 
-  @Domain.property({arrayType: "SupplyDomain"})
+  @Domain.property({ arrayType: 'SupplyDomain' })
   public supplyProducts?: Array<SupplyDomain>;
 
-  @Domain.property({arrayType: "Job"})
+  @Domain.property({ arrayType: 'Job' })
   public jobs?: Array<Job>;
 
-  @Domain.property({arrayType: "Cart"})
+  @Domain.property({ arrayType: 'Cart' })
   public carts?: Array<Cart>;
 
-  @Domain.property({arrayType: "EnrolledDomain"})
+  @Domain.property({ arrayType: 'EnrolledDomain' })
   public enrollments?: Array<EnrolledDomain>;
 
-  @Domain.property({arrayType: "Invoice"})
+  @Domain.property({ arrayType: 'Invoice' })
   public invoices?: Array<Invoice>;
 
-  @Domain.property({arrayType: "DomainInvitation"})
+  @Domain.property({ arrayType: 'DomainInvitation' })
   public domainInvitations?: Array<DomainInvitation>;
 
-  @Domain.property({arrayType: "Theme"})
+  @Domain.property({ arrayType: 'Theme' })
   public themes?: Array<Theme>;
 
   public defaultCurrency = () => {
     if (this.company === undefined) {
-      throw new Error("company is undefined, did you forget to embed it?");
+      throw new Error('company is undefined, did you forget to embed it?');
     }
     if (this.company.defaultCurrency === undefined) {
-      const err = "company.defaultCurrency is undefined, did you forget to" +
-        " embed it?"; 
+      const err =
+        'company.defaultCurrency is undefined, did you forget to' +
+        ' embed it?';
       throw new Error(err);
     }
     return this.company.defaultCurrency;
-  }
+  };
 
   public defaultTaxType = () => {
     if (this.company === undefined) {
-      throw new Error("company is undefined, did you forget to embed it?");
+      throw new Error('company is undefined, did you forget to embed it?');
     }
     if (this.company.defaultTaxType === undefined) {
-      const err = "company.defaultTaxType is undefined, did you forget to" +
-        " embed it?"; 
+      const err =
+        'company.defaultTaxType is undefined, did you forget to' + ' embed it?';
       throw new Error(err);
     }
     return this.company.defaultTaxType;
-  }
+  };
 }

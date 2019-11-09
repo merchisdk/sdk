@@ -9,9 +9,9 @@ import { Job } from './job';
 import { User } from './user';
 
 export class Shipment extends Entity {
-  protected static resourceName: string = "shipments";
-  protected static singularName: string = "shipment";
-  protected static pluralName: string = "shipments";
+  protected static resourceName: string = 'shipments';
+  protected static singularName: string = 'shipment';
+  protected static pluralName: string = 'shipments';
 
   @Shipment.property()
   public archived?: Date | null;
@@ -91,12 +91,12 @@ export class Shipment extends Entity {
   @Shipment.property()
   public invoice?: Invoice | null;
 
-  @Shipment.property({arrayType: "DomainTag"})
+  @Shipment.property({ arrayType: 'DomainTag' })
   public tags?: Array<DomainTag>;
 
-  @Shipment.property({arrayType: "Assignment"})
+  @Shipment.property({ arrayType: 'Assignment' })
   public assignments?: Array<Assignment>;
 
-  @Shipment.property({arrayType: "Job"})
+  @Shipment.property({ arrayType: 'Job' })
   public jobs?: Array<Job>;
 }

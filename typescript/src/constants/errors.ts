@@ -21,7 +21,7 @@ export enum ErrorType {
   WRONG_SECRET_KEY = 19,
   DUPLICATE_SUBSCRIPTION_TOKEN = 20,
   BAD_SMS_TOKEN = 21,
-  DOMAIN_NOT_FOUND = 22,
+  DOMAIN_NOT_FOUND = 22
 }
 
 export function getErrorFromCode(code: number): ErrorType {

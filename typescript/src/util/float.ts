@@ -5,8 +5,8 @@ export function kahanSum(values: Iterable<number>) {
   for (const value of values) {
     const y = value - compensation;
     const t = accumulator + y;
-    compensation = (t - accumulator) - y; 
-    accumulator = t; 
+    compensation = t - accumulator - y;
+    accumulator = t;
   }
   return accumulator;
 }

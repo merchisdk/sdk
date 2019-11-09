@@ -6,9 +6,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class DraftComment extends Entity {
-  protected static resourceName: string = "draft_comments";
-  protected static singularName: string = "draftComment";
-  protected static pluralName: string = "draftComments";
+  protected static resourceName: string = 'draft_comments';
+  protected static singularName: string = 'draftComment';
+  protected static pluralName: string = 'draftComments';
 
   @DraftComment.property()
   public archived?: Date | null;
@@ -40,10 +40,10 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public file?: MerchiFile | null;
 
-  @DraftComment.property({arrayType: "User"})
+  @DraftComment.property({ arrayType: 'User' })
   public forwards?: Array<User>;
 
-  @DraftComment.property({arrayType: "Notification"})
+  @DraftComment.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 
   @DraftComment.property()

@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { Invoice } from './invoice';
 
 export class Item extends Entity {
-  protected static resourceName: string = "items";
-  protected static singularName: string = "item";
-  protected static pluralName: string = "items";
+  protected static resourceName: string = 'items';
+  protected static singularName: string = 'item';
+  protected static pluralName: string = 'items';
 
   @Item.property()
   public archived?: Date | null;
@@ -33,12 +33,12 @@ export class Item extends Entity {
 
   public totalCost = () => {
     if (this.quantity === undefined) {
-      throw "quantity is undefined, did you forget to embed it?";
+      throw 'quantity is undefined, did you forget to embed it?';
     }
     if (this.cost === undefined) {
-      throw "cost is undefined, did you forget to embed it?";
+      throw 'cost is undefined, did you forget to embed it?';
     }
     const quantity = this.quantity === null ? 0 : this.quantity;
     return quantity * this.cost;
-  }
+  };
 }

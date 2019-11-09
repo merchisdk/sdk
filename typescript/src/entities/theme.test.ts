@@ -28,7 +28,7 @@ test('is active on domain', () => {
   expect(() => theme.isActiveOnDomain(1)).toThrow();
   theme.domain = null;
   expect(theme.isActiveOnDomain(1)).toBe(false);
-  theme.domain = domain; 
+  theme.domain = domain;
   expect(() => theme.isActiveOnDomain(1)).toThrow();
   domain.activeTheme = otherTheme;
   expect(theme.isActiveOnDomain(1)).toBe(false);

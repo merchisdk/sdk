@@ -7,9 +7,9 @@ import { Invoice } from './invoice';
 import { User } from './user';
 
 export class Cart extends Entity {
-  protected static resourceName: string = "carts";
-  protected static singularName: string = "cart";
-  protected static pluralName: string = "carts";
+  protected static resourceName: string = 'carts';
+  protected static singularName: string = 'cart';
+  protected static pluralName: string = 'carts';
 
   @Cart.property()
   public archived?: Date | null;
@@ -65,12 +65,12 @@ export class Cart extends Entity {
   @Cart.property()
   public receiverAddress?: Address | null;
 
-  @Cart.property({arrayType: "CartItem"})
+  @Cart.property({ arrayType: 'CartItem' })
   public cartItems?: Array<CartItem>;
 
   public requiresShipment = () => {
     if (this.cartItems === undefined) {
-      throw "cartItems is undefined, did you forget to embed it?";
+      throw 'cartItems is undefined, did you forget to embed it?';
     }
     for (const cartItem of this.cartItems) {
       if (cartItem.requiresShipment()) {
@@ -78,5 +78,5 @@ export class Cart extends Entity {
       }
     }
     return false;
-  }
+  };
 }

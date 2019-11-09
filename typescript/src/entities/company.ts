@@ -15,9 +15,9 @@ import { Shipment } from './shipment';
 import { UserCompany } from './user_company';
 
 export class Company extends Entity {
-  protected static resourceName: string = "companies";
-  protected static singularName: string = "company";
-  protected static pluralName: string = "companies";
+  protected static resourceName: string = 'companies';
+  protected static singularName: string = 'company';
+  protected static pluralName: string = 'companies';
 
   @Company.property()
   public archived?: Date | null;
@@ -85,60 +85,60 @@ export class Company extends Entity {
   @Company.property()
   public defaultTaxType?: CountryTax | null;
 
-  @Company.property({arrayType: "EmailAddress"})
+  @Company.property({ arrayType: 'EmailAddress' })
   public _emailAddresses?: Array<EmailAddress>;
 
-  @Company.property({arrayType: "PhoneNumber"})
+  @Company.property({ arrayType: 'PhoneNumber' })
   public _paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property({arrayType: "PhoneNumber"})
+  @Company.property({ arrayType: 'PhoneNumber' })
   public _phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property({arrayType: "Address"})
+  @Company.property({ arrayType: 'Address' })
   public _addresses?: Array<Address>;
 
-  @Company.property({arrayType: "UserCompany"})
+  @Company.property({ arrayType: 'UserCompany' })
   public _users?: Array<UserCompany>;
 
-  @Company.property({arrayType: "Shipment"})
+  @Company.property({ arrayType: 'Shipment' })
   public shipmentsAsSender?: Array<Shipment>;
 
-  @Company.property({arrayType: "Shipment"})
+  @Company.property({ arrayType: 'Shipment' })
   public shipmentsAsReceiver?: Array<Shipment>;
 
-  @Company.property({arrayType: "Product"})
+  @Company.property({ arrayType: 'Product' })
   public saved_products?: Array<Product>;
 
-  @Company.property({arrayType: "Bank"})
+  @Company.property({ arrayType: 'Bank' })
   public banks?: Array<Bank>;
 
-  @Company.property({arrayType: "UserCompany"})
+  @Company.property({ arrayType: 'UserCompany' })
   public userCompanies?: Array<UserCompany>;
 
-  @Company.property({arrayType: "CompanyInvitation"})
+  @Company.property({ arrayType: 'CompanyInvitation' })
   public companyInvitations?: Array<CompanyInvitation>;
 
-  @Company.property({arrayType: "Job"})
+  @Company.property({ arrayType: 'Job' })
   public appliedJobs?: Array<Job>;
 
-  @Company.property({arrayType: "Cart"})
+  @Company.property({ arrayType: 'Cart' })
   public carts?: Array<Cart>;
 
-  @Company.property({arrayType: "Domain"})
+  @Company.property({ arrayType: 'Domain' })
   public domains?: Array<Domain>;
 
-  @Company.property({arrayType: "EmailAddress"})
+  @Company.property({ arrayType: 'EmailAddress' })
   public emailAddresses?: Array<EmailAddress>;
 
-  @Company.property({arrayType: "PhoneNumber"})
+  @Company.property({ arrayType: 'PhoneNumber' })
   public phoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property({arrayType: "PhoneNumber"})
+  @Company.property({ arrayType: 'PhoneNumber' })
   public paymentPhoneNumbers?: Array<PhoneNumber>;
 
-  @Company.property({arrayType: "Invoice"})
+  @Company.property({ arrayType: 'Invoice' })
   public invoicesHas?: Array<Invoice>;
 
-  @Company.property({arrayType: "Address"})
+  @Company.property({ arrayType: 'Address' })
   public addresses?: Array<Address>;
 }

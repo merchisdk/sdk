@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class EmailAddress extends Entity {
-  protected static resourceName: string = "email_addresses";
-  protected static singularName: string = "emailAddress";
-  protected static pluralName: string = "emailAddresses";
+  protected static resourceName: string = 'email_addresses';
+  protected static singularName: string = 'emailAddress';
+  protected static pluralName: string = 'emailAddresses';
 
   @EmailAddress.property()
   public archived?: Date | null;
@@ -16,9 +16,9 @@ export class EmailAddress extends Entity {
   @EmailAddress.property()
   public emailAddress?: string;
 
-  @EmailAddress.property({arrayType: "User"})
+  @EmailAddress.property({ arrayType: 'User' })
   public users?: Array<User>;
 
-  @EmailAddress.property({arrayType: "Company"})
+  @EmailAddress.property({ arrayType: 'Company' })
   public companies?: Array<Company>;
 }

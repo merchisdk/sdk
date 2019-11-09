@@ -5,9 +5,9 @@ import { User } from './user';
 import { ThemeStatus } from '../constants/theme_status';
 
 export class Theme extends Entity {
-  protected static resourceName: string = "themes";
-  protected static singularName: string = "theme";
-  protected static pluralName: string = "themes";
+  protected static resourceName: string = 'themes';
+  protected static singularName: string = 'theme';
+  protected static pluralName: string = 'themes';
 
   @Theme.property()
   public archived?: Date | null;
@@ -285,7 +285,7 @@ export class Theme extends Entity {
   @Theme.property()
   public emailCssTemplateEditing?: MerchiFile | null;
 
-  @Theme.property({arrayType: "MerchiFile"})
+  @Theme.property({ arrayType: 'MerchiFile' })
   public cssImageFiles?: Array<MerchiFile>;
 
   @Theme.property()
@@ -297,33 +297,34 @@ export class Theme extends Entity {
   @Theme.property()
   public author?: User | null;
 
-  @Theme.property({arrayType: "MerchiFile"})
+  @Theme.property({ arrayType: 'MerchiFile' })
   public images?: Array<MerchiFile>;
 
-  @Theme.property({arrayType: "Domain"})
+  @Theme.property({ arrayType: 'Domain' })
   public domains?: Array<Domain>;
 
   public canBeActivated = () => {
     const validStatus = ThemeStatus.VALID_BUT_NOT_UPDATED;
     if (this.mainCssStatus === undefined || this.emailCssStatus === undefined) {
-      throw new Error("status is unknown");
+      throw new Error('status is unknown');
     }
-    return this.mainCssStatus >= validStatus &&
-      this.emailCssStatus >= validStatus;
-  }
+    return (
+      this.mainCssStatus >= validStatus && this.emailCssStatus >= validStatus
+    );
+  };
 
   public isActiveOnDomain = (domainId: number) => {
     const domain = this.domain;
     if (domain === undefined) {
-      throw new Error("domain is unknown");
+      throw new Error('domain is unknown');
     }
     if (domain === null) {
       return false;
     }
     const activeTheme = domain.activeTheme;
     if (activeTheme === undefined) {
-      throw new Error("activeTheme is unknown");
+      throw new Error('activeTheme is unknown');
     }
     return domain.id == domainId && activeTheme.id === this.id;
-  }
+  };
 }

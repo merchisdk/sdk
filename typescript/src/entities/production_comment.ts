@@ -5,9 +5,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class ProductionComment extends Entity {
-  protected static resourceName: string = "production_comments";
-  protected static singularName: string = "productionComment";
-  protected static pluralName: string = "productionComments";
+  protected static resourceName: string = 'production_comments';
+  protected static singularName: string = 'productionComment';
+  protected static pluralName: string = 'productionComments';
 
   @ProductionComment.property()
   public archived?: Date | null;
@@ -39,10 +39,10 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public user?: User;
 
-  @ProductionComment.property({arrayType: "User"})
+  @ProductionComment.property({ arrayType: 'User' })
   public forwards?: Array<User>;
 
-  @ProductionComment.property({arrayType: "Notification"})
+  @ProductionComment.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 
   @ProductionComment.property()

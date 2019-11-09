@@ -21,9 +21,9 @@ import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
 export class Job extends Entity {
-  protected static resourceName: string = "jobs";
-  protected static singularName: string = "job";
-  protected static pluralName: string = "jobs";
+  protected static resourceName: string = 'jobs';
+  protected static singularName: string = 'job';
+  protected static pluralName: string = 'jobs';
 
   @Job.property()
   public archived?: Date | null;
@@ -103,31 +103,31 @@ export class Job extends Entity {
   @Job.property()
   public taxAmount?: number | null;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public canDeduct?: boolean;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadNotificationsCount?: number;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadJobInfoNotificationsCount?: number;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadJobDraftingNotificationsCount?: number;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadJobProductionNotificationsCount?: number;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadJobShippingNotificationsCount?: number;
 
-  @Job.property({embeddedByDefault: false})
+  @Job.property({ embeddedByDefault: false })
   public unreadJobInvoicingNotificationsCount?: number;
 
-  @Job.property({arrayType: "Draft"})
+  @Job.property({ arrayType: 'Draft' })
   public drafts?: Array<Draft>;
 
-  @Job.property({arrayType: "JobComment"})
+  @Job.property({ arrayType: 'JobComment' })
   public comments?: Array<JobComment>;
 
   @Job.property()
@@ -157,13 +157,13 @@ export class Job extends Entity {
   @Job.property()
   public product?: Product;
 
-  @Job.property({arrayType: "DraftComment"})
+  @Job.property({ arrayType: 'DraftComment' })
   public draftComments?: Array<DraftComment>;
 
   @Job.property()
   public taxType?: CountryTax | null;
 
-  @Job.property({arrayType: "DomainTag"})
+  @Job.property({ arrayType: 'DomainTag' })
   public tags?: Array<DomainTag>;
 
   @Job.property()
@@ -178,10 +178,10 @@ export class Job extends Entity {
   @Job.property()
   public invoice?: Invoice | null;
 
-  @Job.property({arrayType: "MerchiFile"})
+  @Job.property({ arrayType: 'MerchiFile' })
   public productionFiles?: Array<MerchiFile>;
 
-  @Job.property({arrayType: "MerchiFile"})
+  @Job.property({ arrayType: 'MerchiFile' })
   public clientFiles?: Array<MerchiFile>;
 
   @Job.property()
@@ -190,22 +190,21 @@ export class Job extends Entity {
   @Job.property()
   public inventory?: Inventory | null;
 
-  @Job.property({arrayType: "VariationsGroup"})
+  @Job.property({ arrayType: 'VariationsGroup' })
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Job.property({arrayType: "Variation"})
+  @Job.property({ arrayType: 'Variation' })
   public variations?: Array<Variation>;
 
-  @Job.property({arrayType: "Notification"})
+  @Job.property({ arrayType: 'Notification' })
   public notifications?: Array<Notification>;
 
-  @Job.property({arrayType: "Assignment"})
+  @Job.property({ arrayType: 'Assignment' })
   public assignments?: Array<Assignment>;
 
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property({arrayType: "Inventory",
-                 embeddedByDefault: false})
+  @Job.property({ arrayType: 'Inventory', embeddedByDefault: false })
   public matchingInventory?: Inventory | null;
 }

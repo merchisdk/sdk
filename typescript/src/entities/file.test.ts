@@ -19,7 +19,7 @@ test('can get and set id', () => {
 test('can upload file', () => {
   const merchi = new Merchi();
   const file = new merchi.MerchiFile();
-  const jsFile = new File([""], "name");
+  const jsFile = new File([''], 'name');
   file.fromFormFile(jsFile);
   const fetch = mockFetch(true, {}, 200);
   file.create();

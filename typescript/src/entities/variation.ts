@@ -7,9 +7,9 @@ import { VariationFieldsOption } from './variation_fields_option';
 import { VariationsGroup } from './variations_group';
 
 export class Variation extends Entity {
-  protected static resourceName: string = "variations";
-  protected static singularName: string = "variation";
-  protected static pluralName: string = "variations";
+  protected static resourceName: string = 'variations';
+  protected static singularName: string = 'variation';
+  protected static pluralName: string = 'variations';
 
   @Variation.property()
   public archived?: Date | null;
@@ -47,9 +47,9 @@ export class Variation extends Entity {
   @Variation.property()
   public cartItem?: CartItem | null;
 
-  @Variation.property({arrayType: "MerchiFile"})
+  @Variation.property({ arrayType: 'MerchiFile' })
   public variationFiles?: Array<MerchiFile>;
 
-  @Variation.property({arrayType: "VariationFieldsOption"})
+  @Variation.property({ arrayType: 'VariationFieldsOption' })
   public selectedOptions?: Array<VariationFieldsOption>;
 }
