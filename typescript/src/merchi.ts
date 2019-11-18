@@ -1,57 +1,57 @@
-import { Entity } from "./entity";
-import { Session } from "./entities/session";
-import { JobComment } from "./entities/job_comment";
-import { Domain } from "./entities/domain";
-import { Job } from "./entities/job";
-import { Menu } from "./entities/menu";
-import { Backup } from "./entities/backup";
-import { VariationField } from "./entities/variation_field";
-import { ProductionComment } from "./entities/production_comment";
-import { Product } from "./entities/product";
-import { Inventory } from "./entities/inventory";
-import { BidItem } from "./entities/bid_item";
-import { Category } from "./entities/category";
-import { Invoice } from "./entities/invoice";
-import { UserCompany } from "./entities/user_company";
-import { InventoryUnitVariation } from "./entities/inventory_unit_variation";
-import { VariationFieldsOption } from "./entities/variation_fields_option";
-import { Bank } from "./entities/bank";
-import { Shipment } from "./entities/shipment";
-import { DomainInvitation } from "./entities/domain_invitation";
-import { EmailCounter } from "./entities/email_counter";
-import { MenuItem } from "./entities/menu_item";
-import { SupplyDomain } from "./entities/supply_domain";
-import { Cart } from "./entities/cart";
-import { Theme } from "./entities/theme";
-import { Component } from "./entities/component";
-import { MerchiFile } from "./entities/file";
-import { EmailAddress } from "./entities/email_address";
-import { ShortUrl } from "./entities/short_url";
-import { VariationsGroup } from "./entities/variations_group";
-import { Bid } from "./entities/bid";
-import { Draft } from "./entities/draft";
-import { Discount } from "./entities/discount";
-import { User } from "./entities/user";
-import { Company } from "./entities/company";
-import { ComponentTag } from "./entities/component_tag";
-import { EnrolledDomain } from "./entities/enrolled_domain";
-import { CountryTax } from "./entities/country_tax";
-import { Item } from "./entities/item";
-import { DomainTag } from "./entities/domain_tag";
-import { DraftComment } from "./entities/draft_comment";
-import { Notification } from "./entities/notification";
-import { Payment } from "./entities/payment";
-import { CompanyInvitation } from "./entities/company_invitation";
-import { SystemRole } from "./entities/system_role";
-import { PhoneNumber } from "./entities/phone_number";
-import { Variation } from "./entities/variation";
-import { CartItem } from "./entities/cart_item";
-import { Address } from "./entities/address";
-import { Assignment } from "./entities/assignment";
-import { generateUUID } from "./uuid";
+import { Entity } from './entity';
+import { Session } from './entities/session';
+import { JobComment } from './entities/job_comment';
+import { Domain } from './entities/domain';
+import { Job } from './entities/job';
+import { Menu } from './entities/menu';
+import { Backup } from './entities/backup';
+import { VariationField } from './entities/variation_field';
+import { ProductionComment } from './entities/production_comment';
+import { Product } from './entities/product';
+import { Inventory } from './entities/inventory';
+import { BidItem } from './entities/bid_item';
+import { Category } from './entities/category';
+import { Invoice } from './entities/invoice';
+import { UserCompany } from './entities/user_company';
+import { InventoryUnitVariation } from './entities/inventory_unit_variation';
+import { VariationFieldsOption } from './entities/variation_fields_option';
+import { Bank } from './entities/bank';
+import { Shipment } from './entities/shipment';
+import { DomainInvitation } from './entities/domain_invitation';
+import { EmailCounter } from './entities/email_counter';
+import { MenuItem } from './entities/menu_item';
+import { SupplyDomain } from './entities/supply_domain';
+import { Cart } from './entities/cart';
+import { Theme } from './entities/theme';
+import { Component } from './entities/component';
+import { MerchiFile } from './entities/file';
+import { EmailAddress } from './entities/email_address';
+import { ShortUrl } from './entities/short_url';
+import { VariationsGroup } from './entities/variations_group';
+import { Bid } from './entities/bid';
+import { Draft } from './entities/draft';
+import { Discount } from './entities/discount';
+import { User } from './entities/user';
+import { Company } from './entities/company';
+import { ComponentTag } from './entities/component_tag';
+import { EnrolledDomain } from './entities/enrolled_domain';
+import { CountryTax } from './entities/country_tax';
+import { Item } from './entities/item';
+import { DomainTag } from './entities/domain_tag';
+import { DraftComment } from './entities/draft_comment';
+import { Notification } from './entities/notification';
+import { Payment } from './entities/payment';
+import { CompanyInvitation } from './entities/company_invitation';
+import { SystemRole } from './entities/system_role';
+import { PhoneNumber } from './entities/phone_number';
+import { Variation } from './entities/variation';
+import { CartItem } from './entities/cart_item';
+import { Address } from './entities/address';
+import { Assignment } from './entities/assignment';
+import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
-import { RequestOptions, apiFetch } from "./request";
-import { getCookie } from "./cookie";
+import { RequestOptions, apiFetch } from './request';
+import { getCookie } from './cookie';
 
 // the type of classes
 export interface Type<T, A extends any[]> extends Function {
@@ -128,7 +128,7 @@ export class Merchi {
     if (sessionToken) {
       this.sessionToken = sessionToken;
     } else {
-      this.sessionToken = getCookie("session_token");
+      this.sessionToken = getCookie('session_token');
     }
     function setupClass(merchi: Merchi, cls: typeof Entity) {
       // copy, to prevent interference from other merchi sessions
@@ -219,7 +219,7 @@ export class Merchi {
         /* istanbul ignore next */
         options.query = [];
       }
-      options.query.push(["session_token", this.sessionToken]);
+      options.query.push(['session_token', this.sessionToken]);
     }
     return apiFetch(resource, options);
   };
