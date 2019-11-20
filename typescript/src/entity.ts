@@ -281,7 +281,7 @@ export class Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         const result: InstanceType<T> = (new this()) as InstanceType<T>;
-        result.fromJson(data);
+        result.fromJson(data[this.singularName]);
         return result;
       });
   }
@@ -439,11 +439,12 @@ export class Entity {
         limit: data.limit,
         offset: data.offset};
       const pluralName = this.pluralName;
-      const items: Array<object> = data[pluralName];
+      const singularName = this.singularName;
+      const items: Array<any> = data[pluralName];
       const entities = [];
       for (let item of items) {
         const entity: InstanceType<T> = (new this()) as InstanceType<T>;
-        entity.fromJson(item);
+        entity.fromJson(item[singularName]);
         entities.push(entity);
       }
       return {items: entities,
@@ -453,26 +454,30 @@ export class Entity {
 
   public save = () => {
     const primaryKey: number | string = this.getPrimaryKeyValue();
-    const resourceName:string = (this.constructor as any).resourceName;
+    const constructor = this.constructor as typeof Entity;
+    const resourceName:string = constructor.resourceName;
+    const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const data = this.toFormData();
     const fetchOptions = {method: 'PATCH',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
-      this.fromJson(data);
+      this.fromJson(data[singularName]);
       return this;
     });
   };
 
   public create = () => {
-    const resourceName:string = (this.constructor as any).resourceName;
+    const constructor = this.constructor as typeof Entity;
+    const resourceName:string = constructor.resourceName;
+    const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
     const fetchOptions = {method: 'POST',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
-        this.fromJson(data);
+        this.fromJson(data[singularName]);
         return this;});
   };
 
@@ -496,30 +501,22 @@ export class Entity {
   };
 
   public fromJson = (json: any) => {
-    const constructor = this.constructor as typeof Entity;
-    const singularName: string = constructor.singularName;
-    const data: object = json[singularName];
-    for (const key in data) {
-      const value: any = (data as any)[key];
+    for (const key in json) {
+      const value: any = (json as any)[key];
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = false;
         if (propertyInfo.arrayType) {
-          const nestedName = (propertyInfo.arrayType as any).singularName;
           const array = [];
           for (const item of value) {
             const nested = new (propertyInfo.arrayType as any)(this.merchi);
-            const itemData: any = {};
-            itemData[nestedName] = item;
-            nested.fromJson(itemData);
+            nested.fromJson(item);
             array.push(nested);
           }
           propertyInfo.currentValue = array;
         } else if (propertyInfo.type.prototype instanceof Entity) {
           const nested = new (propertyInfo.type as any)(this.merchi);
-          const nestedName = (propertyInfo.type as any).singularName;
           const itemData: any = {};
-          itemData[nestedName] = value;
           nested.fromJson(itemData);
           propertyInfo.currentValue = nested;
         } else {
