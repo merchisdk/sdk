@@ -517,8 +517,7 @@ export class Entity {
           propertyInfo.currentValue = array;
         } else if (propertyInfo.type.prototype instanceof Entity) {
           const nested = new (propertyInfo.type as any)(this.merchi);
-          const itemData: any = {};
-          nested.fromJson(itemData);
+          nested.fromJson(value);
           propertyInfo.currentValue = nested;
         } else {
           propertyInfo.currentValue = value;
@@ -532,12 +531,17 @@ export class Entity {
     for (const entry of this.propertiesMap.entries()) {
       const propertyName = entry[0];
       const propertyInfo = entry[1];
-      console.log("debug here ", propertyName, propertyInfo.currentValue);
       if (propertyInfo.currentValue !== undefined) {
-        json[propertyName] = propertyInfo.currentValue;
+        if (propertyInfo.arrayType) {
+          const array = propertyInfo.currentValue.map((v: any) => v.toJson());
+          json[propertyName] = array;
+        } else if (propertyInfo.type.prototype instanceof Entity) {
+          json[propertyName] = propertyInfo.currentValue.toJson();
+        } else {
+          json[propertyName] = propertyInfo.currentValue;
+        }
       }
     }
-    console.log("debug here json", json);
     return json;
   }
 

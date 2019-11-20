@@ -312,9 +312,32 @@ test('can serialise product to form data understood by backend', () => {
 test('can convert product data json format', () => {
   const merchi = new Merchi();
   const p = new merchi.Product();
+  const d = new merchi.Domain();
+  const c1 = new merchi.Category();
+  c1.name = 'category 1';
+  const c2 = new merchi.Category();
+  c2.name = 'category 2';
   p.name = 'product name';
-  const correct = {name: p.name};
+  d.domain = 'domain name';
+  p.domain = d;
+  p.categories = [c1, c2];
+  const correct = {
+    name: p.name,
+    domain: {domain: d.domain},
+    categories: [{name: c1.name}, {name: c2.name}]
+  };
   expect(p.toJson()).toEqual(correct);
+});
+
+test('json serialisable in both directions', () => {
+  const json = {
+    name: 'product name',
+    categories: [{name: 'c1'}, {name: 'c2'}]
+  };
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.fromJson(json);
+  expect(p.toJson()).toEqual(json);
 });
 
 test('cannot mix sessions', () => {
