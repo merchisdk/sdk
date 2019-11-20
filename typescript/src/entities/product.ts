@@ -142,14 +142,16 @@ export class Product extends Entity {
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
-    const resourceName = (this.constructor as typeof Product).resourceName;
+    const constructor = this.constructor as typeof Product;
+    const resourceName = constructor.resourceName;
+    const singularName = constructor.singularName;
     const resource = `/${resourceName}/${String(this.id)}/copy/`;
     const fetchOptions = { method: 'POST' };
     return this.merchi
       .authenticatedFetch(resource, fetchOptions)
       .then((data: any) => {
         const product = new this.merchi.Product();
-        product.fromJson(data);
+        product.fromJson(data[singularName]);
         return product;
       });
   };
