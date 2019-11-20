@@ -177,7 +177,7 @@ def tax(amount, tax_type):
         which may be None for no tax. Amount may be given in cents or dollars.
     """
     if tax_type is None:
-        return 0.0
+        return Decimal(0.0)
     return (amount * tax_type.tax_percent) / Decimal(100.0)
 
 
