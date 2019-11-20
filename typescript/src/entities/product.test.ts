@@ -65,7 +65,7 @@ test('can specify options in request', () => {
   const testName = 'S7qHUfV_dr5l';
   const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
   const options = {includeArchived: true,
-                   withRights: true}; 
+                   withRights: true};
   const invocation = merchi.Product.get(1, options).then(product => expect(product.name).toBe(testName));
   const correct = [['include_archived', 'true']];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
@@ -92,7 +92,7 @@ test('can fetch product with category and domain', () => {
     expect(serialised).toEqual([]);
     // if we manually set the name, it's a different matter:
     const manualName = "caUHebUMlRvu2"
-    product.name = manualName; 
+    product.name = manualName;
     const newSerialised = Array.from((product.toFormData() as any).entries());
     const correct = [['name', manualName]];
     expect(newSerialised).toEqual(correct);
@@ -254,7 +254,7 @@ test('can list products from server with category', () => {
                    'count': 2}, 200);
   const r = merchi.Product.list({'embed': {'categories': {}}});
   return r.then(({items: d, metadata: md}) => {
-    expect(d.length).toBe(2); 
+    expect(d.length).toBe(2);
     expect(d[0].name).toBe('p1');
     expect(d[1].name).toBe('p2');
     expect(md.available).toBe(2);
@@ -309,6 +309,37 @@ test('can serialise product to form data understood by backend', () => {
   expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
 });
 
+test('can convert product data json format', () => {
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  const d = new merchi.Domain();
+  const c1 = new merchi.Category();
+  c1.name = 'category 1';
+  const c2 = new merchi.Category();
+  c2.name = 'category 2';
+  p.name = 'product name';
+  d.domain = 'domain name';
+  p.domain = d;
+  p.categories = [c1, c2];
+  const correct = {
+    name: p.name,
+    domain: {domain: d.domain},
+    categories: [{name: c1.name}, {name: c2.name}]
+  };
+  expect(p.toJson()).toEqual(correct);
+});
+
+test('json serialisable in both directions', () => {
+  const json = {
+    name: 'product name',
+    categories: [{name: 'c1'}, {name: 'c2'}]
+  };
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.fromJson(json);
+  expect(p.toJson()).toEqual(json);
+});
+
 test('cannot mix sessions', () => {
   const m1 = new Merchi();
   const p = new m1.Product();
@@ -344,7 +375,7 @@ test('primaryImage', () => {
   const i1 = new merchi.MerchiFile();
   const i2 = new merchi.MerchiFile();
   expect(product.primaryImage).toThrow();
-  product.featureImage = i1; 
+  product.featureImage = i1;
   expect(product.primaryImage).toThrow();
   product.images = [i2];
   expect(product.primaryImage()).toBe(i1);
