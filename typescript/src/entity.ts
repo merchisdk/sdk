@@ -500,6 +500,7 @@ export class Entity {
     }
   };
 
+
   public fromJson = (json: any) => {
     for (const key in json) {
       const value: any = (json as any)[key];
@@ -524,6 +525,20 @@ export class Entity {
         }
       }
     }
+  }
+
+  public toJson = () => {
+    const json: any = {};
+    for (const entry of this.propertiesMap.entries()) {
+      const propertyName = entry[0];
+      const propertyInfo = entry[1];
+      console.log("debug here ", propertyName, propertyInfo.currentValue);
+      if (propertyInfo.currentValue !== undefined) {
+        json[propertyName] = propertyInfo.currentValue;
+      }
+    }
+    console.log("debug here json", json);
+    return json;
   }
 
   protected forEachProperty = (fn: (i: PropertyInfo) => void) => {
