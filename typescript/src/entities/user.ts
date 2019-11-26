@@ -23,7 +23,6 @@ import { Shipment } from "./shipment";
 import { SystemRole } from "./system_role";
 import { Theme } from "./theme";
 import { UserCompany } from "./user_company";
-import moment from "moment-timezone";
 
 export class User extends Entity {
   protected static resourceName: string = "users";
@@ -213,11 +212,4 @@ export class User extends Entity {
   @User.property({ arrayType: "ProductionComment" })
   public forwardedProductionComments?: Array<ProductionComment>;
 
-  public userLocalTimeFormat = (time: Date, formatString?: string): string => {
-    var format = formatString ? formatString : "ddd Do MMM YY";
-    var timezone = this.timezone ? this.timezone: "Australia/Melbourne";
-    return moment(time)
-      .tz(timezone)
-      .format(format);
-  };
 }
