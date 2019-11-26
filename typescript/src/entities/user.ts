@@ -211,4 +211,8 @@ export class User extends Entity {
 
   @User.property({arrayType: "ProductionComment"})
   public forwardedProductionComments?: Array<ProductionComment>;
+
+  public getProfileUrl = (defaultUrl?: string): string | undefined => {
+    return this.profilePicture ? this.profilePicture.viewUrl : defaultUrl;
+  };
 }

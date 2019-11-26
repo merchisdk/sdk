@@ -49,13 +49,7 @@ export class MerchiFile extends Entity {
   public creationDate?: Date | null;
 
   @MerchiFile.property()
-  public cachedViewUrl?: string | null;
-
-  @MerchiFile.property()
   public viewUrlExpires?: Date | null;
-
-  @MerchiFile.property()
-  public cachedDownloadUrl?: string | null;
 
   @MerchiFile.property()
   public downloadUrlExpires?: Date | null;
