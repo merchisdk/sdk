@@ -14,5 +14,5 @@ export function mockFetch(ok: boolean, data: any, status: number) {
     })
   );
   (global as any).fetch = mock;
-  return mock; 
+  return mock;
 }
