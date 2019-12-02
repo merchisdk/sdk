@@ -524,6 +524,7 @@ export class Entity {
         }
       }
     }
+    return this;
   }
 
   public toJson = () => {
