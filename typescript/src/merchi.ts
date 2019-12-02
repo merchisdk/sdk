@@ -53,14 +53,17 @@ import { generateUUID } from './uuid';
 import { RequestOptions, apiFetch } from './request';
 import { getCookie } from './cookie';
 
-
 // the type of classes
-export interface Type<T, A extends any[]> extends
-   Function { new(...args: A): T; }
+export interface Type<T, A extends any[]> extends Function {
+  new (...args: A): T;
+}
 
-function cloneClass<T, A extends []>(original: Type<T, A>, arg: any): Type<T, A> {
+function cloneClass<T, A extends []>(
+  original: Type<T, A>,
+  arg: any
+): Type<T, A> {
   // copy the constructor, but use the empty object as `this`
-  const copy = original.bind({} , arg);
+  const copy = original.bind({}, arg);
   // pick up any static members (this is shallow, the members are not copied)
   Object.assign(copy, original);
   return copy;
@@ -148,19 +151,37 @@ export class Merchi {
     this.Job = setupClass(this, Job) as typeof Job;
     this.ComponentTag = setupClass(this, ComponentTag) as typeof ComponentTag;
     this.Category = setupClass(this, Category) as typeof Category;
-    this.VariationField = setupClass(this, VariationField) as typeof VariationField;
-    this.InventoryUnitVariation = setupClass(this, InventoryUnitVariation) as typeof InventoryUnitVariation;
+    this.VariationField = setupClass(
+      this,
+      VariationField
+    ) as typeof VariationField;
+    this.InventoryUnitVariation = setupClass(
+      this,
+      InventoryUnitVariation
+    ) as typeof InventoryUnitVariation;
     this.PhoneNumber = setupClass(this, PhoneNumber) as typeof PhoneNumber;
     this.BidItem = setupClass(this, BidItem) as typeof BidItem;
     this.Menu = setupClass(this, Menu) as typeof Menu;
     this.Assignment = setupClass(this, Assignment) as typeof Assignment;
     this.Draft = setupClass(this, Draft) as typeof Draft;
-    this.VariationsGroup = setupClass(this, VariationsGroup) as typeof VariationsGroup;
-    this.EnrolledDomain = setupClass(this, EnrolledDomain) as typeof EnrolledDomain;
-    this.CompanyInvitation = setupClass(this, CompanyInvitation) as typeof CompanyInvitation;
+    this.VariationsGroup = setupClass(
+      this,
+      VariationsGroup
+    ) as typeof VariationsGroup;
+    this.EnrolledDomain = setupClass(
+      this,
+      EnrolledDomain
+    ) as typeof EnrolledDomain;
+    this.CompanyInvitation = setupClass(
+      this,
+      CompanyInvitation
+    ) as typeof CompanyInvitation;
     this.Bid = setupClass(this, Bid) as typeof Bid;
     this.EmailAddress = setupClass(this, EmailAddress) as typeof EmailAddress;
-    this.ProductionComment = setupClass(this, ProductionComment) as typeof ProductionComment;
+    this.ProductionComment = setupClass(
+      this,
+      ProductionComment
+    ) as typeof ProductionComment;
     this.Backup = setupClass(this, Backup) as typeof Backup;
     this.CountryTax = setupClass(this, CountryTax) as typeof CountryTax;
     this.ShortUrl = setupClass(this, ShortUrl) as typeof ShortUrl;
@@ -169,11 +190,17 @@ export class Merchi {
     this.CartItem = setupClass(this, CartItem) as typeof CartItem;
     this.UserCompany = setupClass(this, UserCompany) as typeof UserCompany;
     this.DomainTag = setupClass(this, DomainTag) as typeof DomainTag;
-    this.VariationFieldsOption = setupClass(this, VariationFieldsOption) as typeof VariationFieldsOption;
+    this.VariationFieldsOption = setupClass(
+      this,
+      VariationFieldsOption
+    ) as typeof VariationFieldsOption;
     this.Address = setupClass(this, Address) as typeof Address;
     this.Item = setupClass(this, Item) as typeof Item;
     this.SupplyDomain = setupClass(this, SupplyDomain) as typeof SupplyDomain;
-    this.DomainInvitation = setupClass(this, DomainInvitation) as typeof DomainInvitation;
+    this.DomainInvitation = setupClass(
+      this,
+      DomainInvitation
+    ) as typeof DomainInvitation;
     this.EmailCounter = setupClass(this, EmailCounter) as typeof EmailCounter;
     this.Session = setupClass(this, Session) as typeof Session;
     this.Bank = setupClass(this, Bank) as typeof Bank;
@@ -195,5 +222,14 @@ export class Merchi {
       options.query.push(['session_token', this.sessionToken]);
     }
     return apiFetch(resource, options);
-  }
+  };
+
+  public getCurrentUser = () => {
+    if (!this.sessionToken) {
+      return Promise.resolve(null);
+    }
+    return this.Session.get(this.sessionToken, {
+      embed: { user: { enrolledDomains: {} } }
+    }).then((session: any) => session.user);
+  };
 }

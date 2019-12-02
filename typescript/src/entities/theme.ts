@@ -267,23 +267,23 @@ export class Theme extends Entity {
   @Theme.property()
   public public?: boolean;
 
-  @Theme.property()
-  public mainCssFile?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public mainCss?: string | null;
 
-  @Theme.property()
-  public mainCssTemplateUsing?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public mainCssTemplateUsing?: string | null;
 
-  @Theme.property()
-  public mainCssTemplateEditing?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public mainCssTemplateEditing?: string | null;
 
-  @Theme.property()
-  public emailCssFile?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public emailCss?: string | null;
 
-  @Theme.property()
-  public emailCssTemplateUsing?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public emailCssTemplateUsing?: string | null;
 
-  @Theme.property()
-  public emailCssTemplateEditing?: MerchiFile | null;
+  @Theme.property({embeddedByDefault: false})
+  public emailCssTemplateEditing?: string | null;
 
   @Theme.property({arrayType: "MerchiFile"})
   public cssImageFiles?: Array<MerchiFile>;
