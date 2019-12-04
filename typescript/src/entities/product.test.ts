@@ -99,17 +99,25 @@ test('can fetch product with category and domain', () => {
   });
 });
 
-test('can fetch product with categories erase will show in patch payload', () => {
+test('product with empty categories will not have count payload', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  mockFetch(true, {'product': {'name': testName, 'categories': []}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
+  return r.then(product => {
+    const serialised = Array.from((product.toFormData() as any).entries());
+    expect(serialised.length).toEqual(0);
+  });
+});
+
+test('product with zero categories erase will show in patch payload', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
   const categoryName = 'l3VfG#S+';
   const categoryData = {'name': categoryName};
-  const domainData = {'domain': 'example.com'};
   mockFetch(true, {'product': {'name': testName,
-                               'categories': [categoryData],
-                               'domain': domainData}}, 200);
-  const r = merchi.Product.get(1, {'embed': {'categories': {},
-                                             'domain': {}}});
+                               'categories': [categoryData]}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
   return r.then(product => {
     product.categories = [];
     const serialised = Array.from((product.toFormData() as any).entries());

@@ -576,7 +576,7 @@ export class Entity {
     const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
       const remoteCount = value.length;
       const initialLength = Array.from((result as any).entries()).length;
-      if (remoteCount === 0) {
+      if (remoteCount === 0 && info.dirty) {
         appendData(info.property + '-count', 0);
         return;
       }
