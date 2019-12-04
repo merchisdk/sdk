@@ -99,6 +99,25 @@ test('can fetch product with category and domain', () => {
   });
 });
 
+test('can fetch product with categories erase will show in patch payload', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  const categoryName = 'l3VfG#S+';
+  const categoryData = {'name': categoryName};
+  const domainData = {'domain': 'example.com'};
+  mockFetch(true, {'product': {'name': testName,
+                               'categories': [categoryData],
+                               'domain': domainData}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {},
+                                             'domain': {}}});
+  return r.then(product => {
+    product.categories = [];
+    const serialised = Array.from((product.toFormData() as any).entries());
+    const correct = [['categories-count', '0']];
+    expect(serialised).toEqual(correct);
+  });
+});
+
 test('can fetch product with category and explcit session', () => {
   const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
   const merchi = new Merchi(testToken);
