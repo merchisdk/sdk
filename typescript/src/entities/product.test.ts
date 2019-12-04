@@ -99,6 +99,33 @@ test('can fetch product with category and domain', () => {
   });
 });
 
+test('product with empty categories will not have count payload', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  mockFetch(true, {'product': {'name': testName, 'categories': []}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
+  return r.then(product => {
+    const serialised = Array.from((product.toFormData() as any).entries());
+    expect(serialised.length).toEqual(0);
+  });
+});
+
+test('product with zero categories erase will show in patch payload', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  const categoryName = 'l3VfG#S+';
+  const categoryData = {'name': categoryName};
+  mockFetch(true, {'product': {'name': testName,
+                               'categories': [categoryData]}}, 200);
+  const r = merchi.Product.get(1, {'embed': {'categories': {}}});
+  return r.then(product => {
+    product.categories = [];
+    const serialised = Array.from((product.toFormData() as any).entries());
+    const correct = [['categories-count', '0']];
+    expect(serialised).toEqual(correct);
+  });
+});
+
 test('can fetch product with category and explcit session', () => {
   const testToken = "YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl";
   const merchi = new Merchi(testToken);
