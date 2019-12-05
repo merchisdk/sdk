@@ -75,6 +75,7 @@ class Job(sdk.python.entities.Entity):
     automatic_price_enabled = Property(bool)
     tax_amount = Property(float)
     cost = Property(float)
+    total_cost = Property(float)
     job_weight = Property(float)
     job_volume = Property(float)
     needs_production = Property(bool)

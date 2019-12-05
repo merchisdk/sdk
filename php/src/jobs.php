@@ -15,6 +15,7 @@ class Job extends Entity
         $this->json_property('quantity', 'integer');
         $this->json_property('notes', 'string');
         $this->json_property('cost', 'integer');
+        $this->json_property('total_cost', 'integer');
         $this->json_property('gst', 'integer');
         $this->json_property('domain', 'string');
         $this->json_property('deadline', 'integer', $default = NULL);
