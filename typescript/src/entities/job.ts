@@ -103,6 +103,9 @@ export class Job extends Entity {
   @Job.property()
   public taxAmount?: number | null;
 
+  @Job.property()
+  public totalCost?: number | null;
+
   @Job.property({embeddedByDefault: false})
   public canDeduct?: boolean;
 
