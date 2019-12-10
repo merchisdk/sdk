@@ -88,7 +88,7 @@ interface ListMetadata {
   offset: number;
 }
 
-interface ListResponse<T> {
+export interface ListResponse<T> {
   items: Array<T>,
   metadata: ListMetadata,
 }
@@ -569,7 +569,7 @@ export class Entity {
       result.set(name, value);
     };
     if ((this as any).fileData !== undefined) {
-      appendData(String(fileIndex), (this as any).fileData);
+      result.set(String(fileIndex), (this as any).fileData);
       appendData('fileDataIndex', fileIndex);
       fileIndex++;
     }
