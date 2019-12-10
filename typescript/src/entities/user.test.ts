@@ -17,11 +17,15 @@ test("role helper function", () => {
   const enrolledDomain = new merchi.EnrolledDomain();
   domain1.id = 1;
   domain2.id = 2;
-  enrolledDomain.user = user;
-  enrolledDomain.domain = domain1;
   enrolledDomain.role = Role.ADMIN;
-  user.enrolledDomains = [enrolledDomain];
+  // throw error if enrolledDomains is undefined which seems a embed issue
+  expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
 
+  // throw error if enrolledDomain.domain is undefined which seems a embed issue
+  user.enrolledDomains = [enrolledDomain];
+  expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
+
+  enrolledDomain.domain = domain1;
   expect(user.roleInDomain(domain1)).toBe(Role.ADMIN);
   expect(user.roleInDomain(domain2)).toBe(Role.PUBLIC);
 
@@ -30,5 +34,5 @@ test("role helper function", () => {
 
   // have two match enrolled domain is invalid data
   user.enrolledDomains = [enrolledDomain, enrolledDomain];
-  expect(user.roleInDomain(domain1)).toThrow();
+  expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
 });
