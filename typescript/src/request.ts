@@ -19,8 +19,7 @@ export class ApiError extends Error {
     this.statusCode = err.statusCode;
     this.errorCode = getErrorFromCode(err.errorCode);
     this.name = 'ApiError';
-    this.message = message;
-  }
+    this.message = err.message;
 }
 
 export function apiFetch(resource: string, options?: RequestOptions) {
