@@ -391,12 +391,20 @@ test('json serialisable in both directions', () => {
   expect(p.toJson()).toEqual(json);
 });
 
-test('cannot mix sessions', () => {
-  const m1 = new Merchi();
+test('cannot mix sessions with different token', () => {
+  const m1 = new Merchi('token1');
   const p = new m1.Product();
-  const m2 = new Merchi();
+  const m2 = new Merchi('token2');
   const d = new m2.Domain();
   expect(() => p.domain = d).toThrow();
+});
+
+test('can mix sessions with same token', () => {
+  const m1 = new Merchi('token');
+  const p = new m1.Product();
+  const m2 = new Merchi('token');
+  const d = new m2.Domain();
+  expect(() => p.domain = d).not.toThrow();
 });
 
 test('primary key always serialised', () => {

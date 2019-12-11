@@ -8,6 +8,7 @@ import { Draft } from './draft';
 import { DraftComment } from './draft_comment';
 import { EmailAddress } from './email_address';
 import { EnrolledDomain } from './enrolled_domain';
+import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Invoice } from './invoice';
@@ -23,6 +24,7 @@ import { Shipment } from './shipment';
 import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
+import { Role, MANAGEMENT_TEAM } from '../constants/roles'
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
@@ -212,4 +214,36 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: Array<ProductionComment>;
 
+  public roleInDomain = (domain: Domain) => {
+    if (this.enrolledDomains === undefined) {
+      const err = 'enrolledDomains is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    if (
+      this.enrolledDomains
+        .map(enrolledDomain => enrolledDomain.domain)
+        .some(domain => domain === undefined)
+    ) {
+      const err =
+        'Domain of enrolled domain is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    const matchingEnrolledDomains = this.enrolledDomains.filter(
+      enrolledDomain => enrolledDomain.domain!.id === domain.id
+    );
+
+    if (matchingEnrolledDomains.length > 1) {
+      const err =
+        'Multiple enrolled domains are matching, seems like something is wrong';
+      throw new Error(err);
+    }
+    if (matchingEnrolledDomains.length === 0) {
+      return Role.PUBLIC;
+    }
+    return matchingEnrolledDomains[0].role!;
+  };
+
+  public isManagementTeam(domain: Domain) {
+    return MANAGEMENT_TEAM.includes(this.roleInDomain(domain));
+  }
 }

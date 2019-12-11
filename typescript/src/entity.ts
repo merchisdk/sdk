@@ -501,7 +501,7 @@ export class Entity {
   }
 
   protected checkSameSession = (other?: Entity) => {
-    if (other !== undefined && other.merchi !== this.merchi) {
+    if (other !== undefined && other.merchi.sessionToken !== this.merchi.sessionToken) {
       throw new Error('cannot mix objects from different sessions');
     }
   };
