@@ -24,6 +24,14 @@ interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
+interface SaveOptions {
+  withRights?: boolean;
+}
+
+interface DeleteOptions {
+  withRights?: boolean;
+}
+
 interface GetOptions {
   embed?: EmbedDescriptor;
   includeArchived?: boolean;
@@ -452,15 +460,19 @@ export class Entity {
     });
   }
 
-  public save = () => {
+  public save = (options?: SaveOptions) => {
     const primaryKey: number | string = this.getPrimaryKeyValue();
     const constructor = this.constructor as typeof Entity;
     const resourceName:string = constructor.resourceName;
     const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const data = this.toFormData();
-    const fetchOptions = {method: 'PATCH',
+    const fetchOptions: RequestOptions = {method: 'PATCH',
       body: data};
+    fetchOptions.query = [];
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
+    }
     return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
       this.fromJson(data[singularName]);
       return this;
@@ -473,7 +485,7 @@ export class Entity {
     const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
-    const fetchOptions = {method: 'POST',
+    const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
@@ -673,11 +685,15 @@ export class Entity {
     }
   }
 
-  public delete = () => {
+  public delete = (options?: DeleteOptions) => {
     const primaryKey: number = this.getPrimaryKeyValue();
     const resourceName:string = (this.constructor as any).resourceName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
-    const fetchOptions = {method: 'DELETE'};
+    const fetchOptions: RequestOptions = {method: 'DELETE'};
+    fetchOptions.query = [];
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
+    }
     return this.merchi.authenticatedFetch(resource, fetchOptions).then(() => {
       return null;
     });
