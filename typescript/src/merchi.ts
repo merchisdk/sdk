@@ -229,7 +229,7 @@ export class Merchi {
       return Promise.resolve(null);
     }
     return this.Session.get(this.sessionToken, {
-      embed: { user: { enrolledDomains: {} } }
+      embed: { user: { enrolledDomains: {domain: {}} } }
     }).then((session: any) => session.user);
   };
 }
