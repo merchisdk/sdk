@@ -8,7 +8,6 @@ test("can make User", () => {
   expect(user).toBeTruthy();
 });
 
-
 test("role helper function", () => {
   const merchi = new Merchi();
   const user = new merchi.User();

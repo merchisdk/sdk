@@ -170,6 +170,8 @@ export class Entity {
         attributeName);
       const propertyType = Reflect.getMetadata('design:type', self,
         attributeName);
+      console.log(propertyType.name);
+      console.log('debug here propertyType', propertyType, attributeName);
       // the array type is needed because 'design:type' breaks down
       // with recursive classes, and also, does not contain the type
       // of an arrays elements, which we need
@@ -185,7 +187,7 @@ export class Entity {
           throw new Error('array type can only be given for arrays');
         }
       }
-      const normallyEmbeddedByDefault = !(realArrayType || 
+      const normallyEmbeddedByDefault = !(realArrayType ||
         propertyType.prototype instanceof Entity);
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
@@ -196,7 +198,7 @@ export class Entity {
         embeddedByDefault: embeddedByDefault,
         dirty: true};
       map.set(jsonName, propertyInfo);
-    }); 
+    });
     return map;
   }
 
