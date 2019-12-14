@@ -214,6 +214,9 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: Array<ProductionComment>;
 
+  public publicCreate = this.createFactory(
+    {resourceName: 'public-user-create'});
+
   public roleInDomain = (domain: Domain) => {
     if (this.enrolledDomains === undefined) {
       const err = 'enrolledDomains is undefined, did you forget to embed it?';

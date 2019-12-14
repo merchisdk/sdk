@@ -479,19 +479,21 @@ export class Entity {
     });
   };
 
-  public create = () => {
-    const constructor = this.constructor as typeof Entity;
-    const resourceName:string = constructor.resourceName;
-    const singularName: string = constructor.singularName;
+  public createFactory = (
+    {resourceName = (this.constructor as typeof Entity).resourceName}
+  ) => () => {
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
+    const singularName = (this.constructor as typeof Entity).singularName
     const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         this.fromJson(data[singularName]);
         return this;});
-  };
+  }
+
+  public create = this.createFactory({});
 
   private getEntityClass = (name: string) => {
     if (name === undefined) {
