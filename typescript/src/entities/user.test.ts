@@ -17,7 +17,6 @@ test('can issue public create request to server', () => {
   const data = Array.from((user.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
   user.publicCreate()
-  console.log('debug here', fetch.mock.calls[0][0]);
   const fetchUrl = fetch.mock.calls[0][0]
   const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
   expect(sentToServer).toEqual(data);
