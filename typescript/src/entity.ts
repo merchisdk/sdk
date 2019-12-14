@@ -488,7 +488,7 @@ export class Entity {
   ) => () => {
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
-    const singularName = (this.constructor as typeof Entity).singularName
+    const singularName = (this.constructor as typeof Entity).singularName;
     const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).
