@@ -26,6 +26,7 @@ interface EmbedDescriptor {
 
 interface SaveOptions {
   withRights?: boolean;
+  embed?: EmbedDescriptor;
 }
 
 interface DeleteOptions {
@@ -470,6 +471,9 @@ export class Entity {
     const fetchOptions: RequestOptions = {method: 'PATCH',
       body: data};
     fetchOptions.query = [];
+    if (options && options.embed) {
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
     }
