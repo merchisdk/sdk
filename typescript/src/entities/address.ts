@@ -12,28 +12,28 @@ export class Address extends Entity {
   protected static singularName: string = "address";
   protected static pluralName: string = "addresses";
 
-  @Address.property()
+  @Address.property({type: Date})
   public archived?: Date | null;
 
   @Address.property()
   public id?: number;
 
-  @Address.property()
+  @Address.property({type: String})
   public lineOne?: string | null;
 
-  @Address.property()
+  @Address.property({type: String})
   public lineTwo?: string | null;
 
-  @Address.property()
+  @Address.property({type: String})
   public city?: string | null;
 
-  @Address.property()
+  @Address.property({type: String})
   public state?: string | null;
 
-  @Address.property()
+  @Address.property({type: String})
   public country?: string | null;
 
-  @Address.property()
+  @Address.property({type: String})
   public postcode?: string | null;
 
   @Address.property({arrayType: "Shipment"})

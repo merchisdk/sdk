@@ -9,13 +9,13 @@ export class JobComment extends Entity {
   protected static singularName: string = "jobComment";
   protected static pluralName: string = "jobComments";
 
-  @JobComment.property()
+  @JobComment.property({type: Date})
   public archived?: Date | null;
 
   @JobComment.property()
   public id?: number;
 
-  @JobComment.property()
+  @JobComment.property({type: Date})
   public date?: Date | null;
 
   @JobComment.property()
@@ -30,7 +30,7 @@ export class JobComment extends Entity {
   @JobComment.property()
   public urgency?: number;
 
-  @JobComment.property()
+  @JobComment.property({type: Date})
   public file?: MerchiFile | null;
 
   @JobComment.property({arrayType: "User"})

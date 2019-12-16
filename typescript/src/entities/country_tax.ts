@@ -9,19 +9,19 @@ export class CountryTax extends Entity {
   protected static singularName: string = "countryTax";
   protected static pluralName: string = "countryTaxes";
 
-  @CountryTax.property()
+  @CountryTax.property({type: Date})
   public archived?: Date | null;
 
   @CountryTax.property()
   public id?: number;
 
-  @CountryTax.property()
+  @CountryTax.property({type: String})
   public country?: string | null;
 
   @CountryTax.property()
   public taxName?: string;
 
-  @CountryTax.property()
+  @CountryTax.property({type: Number})
   public taxPercent?: number | null;
 
   @CountryTax.property({arrayType: "Shipment"})

@@ -24,14 +24,18 @@ import { Shipment } from './shipment';
 import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
-import { Role, MANAGEMENT_TEAM } from '../constants/roles'
+import { Role,
+  DOMAIN_MANAGERS, 
+  MANAGEMENT_TEAM, 
+  BUSINESS_ACCOUNTS
+} from '../constants/roles'
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
   protected static singularName: string = 'user';
   protected static pluralName: string = 'users';
 
-  @User.property()
+  @User.property({type: Date})
   public archived?: Date | null;
 
   @User.property()
@@ -40,28 +44,28 @@ export class User extends Entity {
   @User.property()
   public isSuperUser?: boolean;
 
-  @User.property()
+  @User.property({type: String})
   public password?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public salt?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public facebookUserId?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public resetToken?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public resetTokenDate?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public smsToken?: string | null;
 
-  @User.property()
+  @User.property({type: Date})
   public resetSmsTokenDate?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public smsClientToken?: string | null;
 
   @User.property()
@@ -76,22 +80,22 @@ export class User extends Entity {
   @User.property()
   public enableClientEmails?: boolean;
 
-  @User.property()
+  @User.property({type: String})
   public clientToken?: string | null;
 
   @User.property()
   public name?: string;
 
-  @User.property()
+  @User.property({type: String})
   public comments?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public timezone?: string | null;
 
-  @User.property()
+  @User.property({type: Date})
   public created?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public preferredLanguage?: string | null;
 
   @User.property()
@@ -118,7 +122,7 @@ export class User extends Entity {
   @User.property({ arrayType: 'Product' })
   public products?: Array<Product>;
 
-  @User.property()
+  @User.property({type: 'MerchiFile'})
   public profilePicture?: MerchiFile | null;
 
   @User.property({ arrayType: 'PhoneNumber' })
@@ -214,6 +218,9 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: Array<ProductionComment>;
 
+  public publicCreate = this.createFactory(
+    {resourceName: 'public-user-create'});
+
   public roleInDomain = (domain: Domain) => {
     if (this.enrolledDomains === undefined) {
       const err = 'enrolledDomains is undefined, did you forget to embed it?';
@@ -243,7 +250,15 @@ export class User extends Entity {
     return matchingEnrolledDomains[0].role!;
   };
 
+  public isDomainManager(domain: Domain) {
+    return DOMAIN_MANAGERS.includes(this.roleInDomain(domain));
+  }
+
   public isManagementTeam(domain: Domain) {
     return MANAGEMENT_TEAM.includes(this.roleInDomain(domain));
+  }
+
+  public isNotClient(domain: Domain) {
+    return BUSINESS_ACCOUNTS.includes(this.roleInDomain(domain));
   }
 }

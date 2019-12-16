@@ -9,13 +9,13 @@ export class ProductionComment extends Entity {
   protected static singularName: string = "productionComment";
   protected static pluralName: string = "productionComments";
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: Date})
   public archived?: Date | null;
 
   @ProductionComment.property()
   public id?: number;
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: Date})
   public date?: Date | null;
 
   @ProductionComment.property()
@@ -33,7 +33,7 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public sendEmail?: boolean;
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: MerchiFile})
   public file?: MerchiFile | null;
 
   @ProductionComment.property()

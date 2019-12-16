@@ -9,7 +9,7 @@ export class Theme extends Entity {
   protected static singularName: string = "theme";
   protected static pluralName: string = "themes";
 
-  @Theme.property()
+  @Theme.property({type: Date})
   public archived?: Date | null;
 
   @Theme.property()
@@ -18,13 +18,13 @@ export class Theme extends Entity {
   @Theme.property()
   public mainCssStatus?: number;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public mainCssErrorMessage?: string | null;
 
   @Theme.property()
   public emailCssStatus?: number;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public emailCssErrorMessage?: string | null;
 
   @Theme.property()
@@ -36,7 +36,7 @@ export class Theme extends Entity {
   @Theme.property()
   public headerTemplate?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public headerError?: string | null;
 
   @Theme.property()
@@ -48,7 +48,7 @@ export class Theme extends Entity {
   @Theme.property()
   public footerTemplate?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public footerError?: string | null;
 
   @Theme.property()
@@ -60,7 +60,7 @@ export class Theme extends Entity {
   @Theme.property()
   public indexPageTemplate?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public indexPageError?: string | null;
 
   @Theme.property()
@@ -72,7 +72,7 @@ export class Theme extends Entity {
   @Theme.property()
   public invoicesPageTemplate?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public invoicesPageError?: string | null;
 
   @Theme.property()
@@ -84,7 +84,7 @@ export class Theme extends Entity {
   @Theme.property()
   public productsPageTemplate?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public productsPageError?: string | null;
 
   @Theme.property()
@@ -93,10 +93,10 @@ export class Theme extends Entity {
   @Theme.property()
   public productsJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public domainInvitePageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public domainInvitePageError?: string | null;
 
   @Theme.property()
@@ -105,10 +105,10 @@ export class Theme extends Entity {
   @Theme.property()
   public domainInviteJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public resetPasswordPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public resetPasswordPageError?: string | null;
 
   @Theme.property()
@@ -117,10 +117,10 @@ export class Theme extends Entity {
   @Theme.property()
   public passwordResetJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public passwordChangePageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public passwordChangePageError?: string | null;
 
   @Theme.property()
@@ -129,10 +129,10 @@ export class Theme extends Entity {
   @Theme.property()
   public passwordChangeJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public smsLoginPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public smsLoginPageError?: string | null;
 
   @Theme.property()
@@ -141,10 +141,10 @@ export class Theme extends Entity {
   @Theme.property()
   public smsLoginJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public smsTokenPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public smsTokenPageError?: string | null;
 
   @Theme.property()
@@ -153,10 +153,10 @@ export class Theme extends Entity {
   @Theme.property()
   public smsTokenJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobsPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobsPageError?: string | null;
 
   @Theme.property()
@@ -165,10 +165,10 @@ export class Theme extends Entity {
   @Theme.property()
   public jobsJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobDraftingPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobDraftingPageError?: string | null;
 
   @Theme.property()
@@ -177,10 +177,10 @@ export class Theme extends Entity {
   @Theme.property()
   public jobDraftingJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobQuoteRequestedPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public jobQuoteRequestedPageError?: string | null;
 
   @Theme.property()
@@ -189,10 +189,10 @@ export class Theme extends Entity {
   @Theme.property()
   public jobQuoteRequestedJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public draftPreviewPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public draftPreviewPageError?: string | null;
 
   @Theme.property()
@@ -201,10 +201,10 @@ export class Theme extends Entity {
   @Theme.property()
   public draftPreviewJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public invoicePageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public invoicePageError?: string | null;
 
   @Theme.property()
@@ -213,10 +213,10 @@ export class Theme extends Entity {
   @Theme.property()
   public invoiceJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public userProfilePageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public userProfilePageError?: string | null;
 
   @Theme.property()
@@ -225,10 +225,10 @@ export class Theme extends Entity {
   @Theme.property()
   public userProfileJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public companyProfilePageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public companyProfilePageError?: string | null;
 
   @Theme.property()
@@ -237,10 +237,10 @@ export class Theme extends Entity {
   @Theme.property()
   public companyProfileJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public productPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public productPageError?: string | null;
 
   @Theme.property()
@@ -249,10 +249,10 @@ export class Theme extends Entity {
   @Theme.property()
   public productJs?: string;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public invoicePaidPageTemplate?: string | null;
 
-  @Theme.property()
+  @Theme.property({type: String})
   public invoicePaidPageError?: string | null;
 
   @Theme.property()
@@ -267,34 +267,34 @@ export class Theme extends Entity {
   @Theme.property()
   public public?: boolean;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public mainCss?: string | null;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public mainCssTemplateUsing?: string | null;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public mainCssTemplateEditing?: string | null;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public emailCss?: string | null;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public emailCssTemplateUsing?: string | null;
 
-  @Theme.property({embeddedByDefault: false})
+  @Theme.property({embeddedByDefault: false, type: String})
   public emailCssTemplateEditing?: string | null;
 
   @Theme.property({arrayType: "MerchiFile"})
   public cssImageFiles?: Array<MerchiFile>;
 
-  @Theme.property()
+  @Theme.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
 
-  @Theme.property()
+  @Theme.property({type: 'Domain'})
   public domain?: Domain | null;
 
-  @Theme.property()
+  @Theme.property({type: User})
   public author?: User | null;
 
   @Theme.property({arrayType: "MerchiFile"})

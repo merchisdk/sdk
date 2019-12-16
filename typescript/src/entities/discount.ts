@@ -6,7 +6,7 @@ export class Discount extends Entity {
   protected static singularName: string = "discount";
   protected static pluralName: string = "discounts";
 
-  @Discount.property()
+  @Discount.property({type: Date})
   public archived?: Date | null;
 
   @Discount.property()
@@ -18,7 +18,7 @@ export class Discount extends Entity {
   @Discount.property()
   public amount?: number;
 
-  @Discount.property()
+  @Discount.property({type: Product})
   public product?: Product | null;
 
   public discountedUnitCost = (product: Product) => {

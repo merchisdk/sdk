@@ -11,16 +11,16 @@ export class Assignment extends Entity {
   protected static singularName: string = "assignment";
   protected static pluralName: string = "assignments";
 
-  @Assignment.property()
+  @Assignment.property({type: Date})
   public archived?: Date | null;
 
   @Assignment.property()
   public id?: number;
 
-  @Assignment.property()
+  @Assignment.property({type: Date})
   public managerAccepts?: Date | null;
 
-  @Assignment.property()
+  @Assignment.property({type: Date})
   public supplierRefused?: Date | null;
 
   @Assignment.property()
@@ -29,22 +29,22 @@ export class Assignment extends Entity {
   @Assignment.property()
   public assignmentDeadline?: Date;
 
-  @Assignment.property()
+  @Assignment.property({type: 'Job'})
   public job?: Job | null;
 
-  @Assignment.property()
+  @Assignment.property({type: 'Job'})
   public supplyJob?: Job | null;
 
-  @Assignment.property()
+  @Assignment.property({type: User})
   public supplier?: User | null;
 
-  @Assignment.property()
+  @Assignment.property({type: Bid})
   public bid?: Bid | null;
 
   @Assignment.property({arrayType: "ProductionComment"})
   public comments?: Array<ProductionComment>;
 
-  @Assignment.property()
+  @Assignment.property({type: Shipment})
   public shipment?: Shipment | null;
 
   @Assignment.property({arrayType: "Notification"})

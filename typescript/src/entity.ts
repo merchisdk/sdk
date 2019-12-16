@@ -17,6 +17,7 @@ function toUnixTimestamp(date: Date) {
 interface PropertyOptions {
   embeddedByDefault?: boolean;
   jsonName?: string;
+  type?: any;
   arrayType?: string;
 }
 
@@ -26,6 +27,7 @@ interface EmbedDescriptor {
 
 interface SaveOptions {
   withRights?: boolean;
+  embed?: EmbedDescriptor;
 }
 
 interface DeleteOptions {
@@ -189,9 +191,27 @@ export class Entity {
         propertyType.prototype instanceof Entity);
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
+      let type;
+      if (options.type === undefined) {
+        type = propertyType;
+      } else {
+        type = options.type;
+        if (typeof type === 'string') {
+          type = self.getEntityClass(type);
+        }
+        type = self.merchi.setupClass(type);
+      }
+      /* istanbul ignore next */
+      if (type === Object) {
+        /* istanbul ignore next */
+        const resource = (self.constructor as typeof Entity).resourceName;
+        const err = 'Bad attribute type ' +
+          `${resource}.${attributeName}: ${type}`;
+        throw new Error(err);
+      }
       const propertyInfo = {property: jsonName,
         attribute: attributeName,
-        type: propertyType,
+        type: type,
         arrayType: realArrayType,
         embeddedByDefault: embeddedByDefault,
         dirty: true};
@@ -470,6 +490,9 @@ export class Entity {
     const fetchOptions: RequestOptions = {method: 'PATCH',
       body: data};
     fetchOptions.query = [];
+    if (options && options.embed) {
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
     }
@@ -479,19 +502,21 @@ export class Entity {
     });
   };
 
-  public create = () => {
-    const constructor = this.constructor as typeof Entity;
-    const resourceName:string = constructor.resourceName;
-    const singularName: string = constructor.singularName;
+  public createFactory = (
+    {resourceName = (this.constructor as typeof Entity).resourceName}
+  ) => () => {
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
+    const singularName = (this.constructor as typeof Entity).singularName;
     const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         this.fromJson(data[singularName]);
         return this;});
-  };
+  }
+
+  public create = this.createFactory({});
 
   private getEntityClass = (name: string) => {
     if (name === undefined) {

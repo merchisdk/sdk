@@ -10,7 +10,7 @@ export class Inventory extends Entity {
   protected static singularName: string = "inventory";
   protected static pluralName: string = "inventories";
 
-  @Inventory.property()
+  @Inventory.property({type: Date})
   public archived?: Date | null;
 
   @Inventory.property()
@@ -28,7 +28,7 @@ export class Inventory extends Entity {
   @Inventory.property()
   public product?: Product;
 
-  @Inventory.property()
+  @Inventory.property({type: Address})
   public address?: Address | null;
 
   @Inventory.property({arrayType: "VariationsGroup"})

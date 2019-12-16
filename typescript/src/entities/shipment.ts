@@ -13,52 +13,52 @@ export class Shipment extends Entity {
   protected static singularName: string = "shipment";
   protected static pluralName: string = "shipments";
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public archived?: Date | null;
 
   @Shipment.property()
   public id?: number;
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public creationDate?: Date | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public dispatchedDate?: Date | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public dispatchDate?: Date | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public expectedReceiveDate?: Date | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Date})
   public receivedDate?: Date | null;
 
   @Shipment.property()
   public senderResponsible?: boolean;
 
-  @Shipment.property()
+  @Shipment.property({type: String})
   public senderNotes?: string | null;
 
-  @Shipment.property()
+  @Shipment.property({type: String})
   public receiverNotes?: string | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Number})
   public transportCompany?: number | null;
 
-  @Shipment.property()
+  @Shipment.property({type: String})
   public trackingNumber?: string | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Number})
   public cost?: number | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Number})
   public taxAmount?: number | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Number})
   public maxWeight?: number | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Number})
   public maxVolume?: number | null;
 
   @Shipment.property()
@@ -67,28 +67,28 @@ export class Shipment extends Entity {
   @Shipment.property()
   public sendEmail?: boolean;
 
-  @Shipment.property()
+  @Shipment.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
-  @Shipment.property()
+  @Shipment.property({type: User})
   public sender?: User | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Company})
   public senderCompany?: Company | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Address})
   public senderAddress?: Address | null;
 
-  @Shipment.property()
+  @Shipment.property({type: User})
   public receiver?: User | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Company})
   public receiverCompany?: Company | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Address})
   public receiverAddress?: Address | null;
 
-  @Shipment.property()
+  @Shipment.property({type: Invoice})
   public invoice?: Invoice | null;
 
   @Shipment.property({arrayType: "DomainTag"})
