@@ -24,7 +24,11 @@ import { Shipment } from './shipment';
 import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
-import { Role, MANAGEMENT_TEAM } from '../constants/roles'
+import { Role,
+  DOMAIN_MANAGERS, 
+  MANAGEMENT_TEAM, 
+  BUSINESS_ACCOUNTS
+} from '../constants/roles'
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
@@ -214,6 +218,9 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: Array<ProductionComment>;
 
+  public publicCreate = this.createFactory(
+    {resourceName: 'public-user-create'});
+
   public roleInDomain = (domain: Domain) => {
     if (this.enrolledDomains === undefined) {
       const err = 'enrolledDomains is undefined, did you forget to embed it?';
@@ -243,7 +250,15 @@ export class User extends Entity {
     return matchingEnrolledDomains[0].role!;
   };
 
+  public isDomainManager(domain: Domain) {
+    return DOMAIN_MANAGERS.includes(this.roleInDomain(domain));
+  }
+
   public isManagementTeam(domain: Domain) {
     return MANAGEMENT_TEAM.includes(this.roleInDomain(domain));
+  }
+
+  public isNotClient(domain: Domain) {
+    return BUSINESS_ACCOUNTS.includes(this.roleInDomain(domain));
   }
 }
