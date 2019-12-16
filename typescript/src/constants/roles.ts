@@ -6,7 +6,7 @@ export enum Role {
   SUPPLIER = 4,
   CLIENT = 5,
   MANAGER = 6,
-  ACCOUNTANT = 7
+  ACCOUNTANT = 7,
 }
 
 export const MANAGEMENT_TEAM = [
@@ -15,5 +15,18 @@ export const MANAGEMENT_TEAM = [
   Role.DESIGNER,
   Role.SUPPLIER,
   Role.MANAGER,
-  Role.ACCOUNTANT
+  Role.ACCOUNTANT,
+];
+
+export const MANAGEMENT_TEAM_EXCLUDE_SUPPLIER = [
+  Role.ADMIN,
+  Role.SALES,
+  Role.DESIGNER,
+  Role.MANAGER,
+  Role.ACCOUNTANT,
+];
+
+export const DOMAIN_MANAGERS = [
+  Role.ADMIN,
+  Role.MANAGER,
 ];
