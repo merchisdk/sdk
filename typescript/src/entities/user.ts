@@ -24,8 +24,11 @@ import { Shipment } from './shipment';
 import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
-import { Role, DOMAIN_MANAGERS, MANAGEMENT_TEAM,
-  MANAGEMENT_TEAM_EXCLUDE_SUPPLIER } from '../constants/roles'
+import { Role,
+  DOMAIN_MANAGERS, 
+  MANAGEMENT_TEAM, 
+  BUSINESS_ACCOUNTS
+} from '../constants/roles'
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
@@ -255,7 +258,7 @@ export class User extends Entity {
     return MANAGEMENT_TEAM.includes(this.roleInDomain(domain));
   }
 
-  public isManagmentTeamExcludeSupplier(domain: Domain) {
-    return MANAGEMENT_TEAM_EXCLUDE_SUPPLIER.includes(this.roleInDomain(domain));
+  public isNotClient(domain: Domain) {
+    return BUSINESS_ACCOUNTS.includes(this.roleInDomain(domain));
   }
 }

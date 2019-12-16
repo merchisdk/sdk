@@ -34,7 +34,7 @@ test("role helper function", () => {
   domain1.id = 1;
   domain2.id = 2;
   enrolledDomain.role = Role.ADMIN;
-  enrolledDomainSupplier.role = Role.Supplier;
+  enrolledDomainSupplier.role = Role.SUPPLIER;
   // throw error if enrolledDomains is undefined which seems to be an embed issue
   expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
 
@@ -42,7 +42,7 @@ test("role helper function", () => {
   user.enrolledDomains = [enrolledDomain];
   expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
 
-  userSupplier.enrolledDomains [enrolledDomainSupplier];
+  userSupplier.enrolledDomains = [enrolledDomainSupplier];
 
   enrolledDomain.domain = domain1;
   enrolledDomainSupplier.domain = domain1;
@@ -54,8 +54,9 @@ test("role helper function", () => {
   expect(user.isManagementTeam(domain2)).toBe(false);
   expect(user.isDomainManager(domain1)).toBe(true);
   expect(user.isDomainManager(domain2)).toBe(false);
-  expect(user.isManagmentTeamExcludeSupplier(domain1)).toBe(true);
-  expect(userSupplier.isManagmentTeamExcludeSupplier(domain1)).toBe(false);
+  expect(user.isNotClient(domain1)).toBe(true);
+  expect(userSupplier.isManagementTeam(domain1)).toBe(false);
+  expect(userSupplier.isNotClient(domain1)).toBe(true);
 
   // have two match enrolled domain is invalid data
   user.enrolledDomains = [enrolledDomain, enrolledDomain];

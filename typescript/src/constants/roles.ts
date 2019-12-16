@@ -15,18 +15,13 @@ export const DOMAIN_MANAGERS = [
 ];
 
 export const MANAGEMENT_TEAM = [
-  Role.ADMIN,
+  ...DOMAIN_MANAGERS,
   Role.SALES,
   Role.DESIGNER,
-  Role.SUPPLIER,
-  Role.MANAGER,
   Role.ACCOUNTANT,
 ];
 
-export const MANAGEMENT_TEAM_EXCLUDE_SUPPLIER = [
-  Role.ADMIN,
-  Role.SALES,
-  Role.DESIGNER,
-  Role.MANAGER,
-  Role.ACCOUNTANT,
+export const BUSINESS_ACCOUNTS = [
+    ...MANAGEMENT_TEAM,
+    Role.SUPPLIER
 ];
