@@ -9,7 +9,7 @@ export class VariationsGroup extends Entity {
   protected static singularName: string = "variationsGroup";
   protected static pluralName: string = "variationsGroups";
 
-  @VariationsGroup.property()
+  @VariationsGroup.property({type: Date})
   public archived?: Date | null;
 
   @VariationsGroup.property()
@@ -18,16 +18,16 @@ export class VariationsGroup extends Entity {
   @VariationsGroup.property()
   public quantity?: number;
 
-  @VariationsGroup.property()
+  @VariationsGroup.property({type: Number})
   public groupCost?: number | null;
 
-  @VariationsGroup.property()
+  @VariationsGroup.property({type: Job})
   public job?: Job | null;
 
-  @VariationsGroup.property()
+  @VariationsGroup.property({type: CartItem})
   public cartItem?: CartItem | null;
 
-  @VariationsGroup.property()
+  @VariationsGroup.property({type: Inventory})
   public inventory?: Inventory | null;
 
   @VariationsGroup.property({arrayType: "Variation"})

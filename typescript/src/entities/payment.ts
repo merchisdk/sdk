@@ -7,7 +7,7 @@ export class Payment extends Entity {
   protected static singularName: string = "payment";
   protected static pluralName: string = "payments";
 
-  @Payment.property()
+  @Payment.property({type: Date})
   public archived?: Date | null;
 
   @Payment.property()
@@ -31,9 +31,9 @@ export class Payment extends Entity {
   @Payment.property()
   public sendEmail?: boolean;
 
-  @Payment.property()
+  @Payment.property({type: Invoice})
   public invoice?: Invoice | null;
 
-  @Payment.property()
+  @Payment.property({type: User})
   public paymentRecorder?: User | null;
 }

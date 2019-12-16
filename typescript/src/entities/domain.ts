@@ -20,7 +20,7 @@ export class Domain extends Entity {
   protected static singularName: string = "domain";
   protected static pluralName: string = "domains";
 
-  @Domain.property()
+  @Domain.property({type: Date})
   public archived?: Date | null;
 
   @Domain.property()
@@ -56,25 +56,25 @@ export class Domain extends Entity {
   @Domain.property()
   public enableNotifications?: boolean;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public conversionTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public newConversionTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public newGlobalTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public apiSecret?: string | null;
 
   @Domain.property()
   public company?: Company;
 
-  @Domain.property()
+  @Domain.property({type: MerchiFile})
   public logo?: MerchiFile | null;
 
-  @Domain.property()
+  @Domain.property({type: MerchiFile})
   public favicon?: MerchiFile | null;
 
   @Domain.property()

@@ -7,7 +7,7 @@ export class CompanyInvitation extends Entity {
   protected static singularName: string = "companyInvitation";
   protected static pluralName: string = "companyInvitations";
 
-  @CompanyInvitation.property()
+  @CompanyInvitation.property({type: Date})
   public archived?: Date | null;
 
   @CompanyInvitation.property()

@@ -7,7 +7,7 @@ export class InventoryUnitVariation extends Entity {
   protected static singularName: string = "inventoryUnitVariation";
   protected static pluralName: string = "inventoryUnitVariations";
 
-  @InventoryUnitVariation.property()
+  @InventoryUnitVariation.property({type: Date})
   public archived?: Date | null;
 
   @InventoryUnitVariation.property()

@@ -6,7 +6,7 @@ export class BidItem extends Entity {
   protected static singularName: string = "bidItem";
   protected static pluralName: string = "bidItems";
 
-  @BidItem.property()
+  @BidItem.property({type: Date})
   public archived?: Date | null;
 
   @BidItem.property()
@@ -18,10 +18,10 @@ export class BidItem extends Entity {
   @BidItem.property()
   public quantity?: number;
 
-  @BidItem.property()
+  @BidItem.property({type: String})
   public description?: string | null;
 
-  @BidItem.property()
+  @BidItem.property({type: Number})
   public unitPrice?: number | null;
 
   @BidItem.property()

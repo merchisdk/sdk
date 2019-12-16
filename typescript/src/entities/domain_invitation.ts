@@ -7,7 +7,7 @@ export class DomainInvitation extends Entity {
   protected static singularName: string = "domainInvitation";
   protected static pluralName: string = "domainInvitations";
 
-  @DomainInvitation.property()
+  @DomainInvitation.property({type: Date})
   public archived?: Date | null;
 
   @DomainInvitation.property()
@@ -31,6 +31,6 @@ export class DomainInvitation extends Entity {
   @DomainInvitation.property()
   public sender?: User;
 
-  @DomainInvitation.property()
+  @DomainInvitation.property({type: Date})
   public user?: User | null;
 }

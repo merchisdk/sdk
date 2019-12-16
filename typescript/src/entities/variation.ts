@@ -11,13 +11,13 @@ export class Variation extends Entity {
   protected static singularName: string = "variation";
   protected static pluralName: string = "variations";
 
-  @Variation.property()
+  @Variation.property({type: Date})
   public archived?: Date | null;
 
   @Variation.property()
   public id?: number;
 
-  @Variation.property()
+  @Variation.property({type: String})
   public value?: string | null;
 
   @Variation.property()
@@ -38,13 +38,13 @@ export class Variation extends Entity {
   @Variation.property()
   public variationField?: VariationField;
 
-  @Variation.property()
+  @Variation.property({type: VariationsGroup})
   public variationsGroup?: VariationsGroup | null;
 
-  @Variation.property()
+  @Variation.property({type: Job})
   public job?: Job | null;
 
-  @Variation.property()
+  @Variation.property({type: CartItem})
   public cartItem?: CartItem | null;
 
   @Variation.property({arrayType: "MerchiFile"})

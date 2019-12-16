@@ -7,7 +7,7 @@ export class EnrolledDomain extends Entity {
   protected static singularName: string = "enrolledDomain";
   protected static pluralName: string = "enrolledDomains";
 
-  @EnrolledDomain.property()
+  @EnrolledDomain.property({type: Date})
   public archived?: Date | null;
 
   @EnrolledDomain.property()

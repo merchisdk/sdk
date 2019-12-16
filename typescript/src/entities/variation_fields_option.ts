@@ -9,16 +9,16 @@ export class VariationFieldsOption extends Entity {
   protected static singularName: string = "variationFieldsOption";
   protected static pluralName: string = "variationFieldsOptions";
 
-  @VariationFieldsOption.property()
+  @VariationFieldsOption.property({type: Date})
   public archived?: Date | null;
 
   @VariationFieldsOption.property()
   public id?: number;
 
-  @VariationFieldsOption.property()
+  @VariationFieldsOption.property({type: String})
   public value?: string | null;
 
-  @VariationFieldsOption.property()
+  @VariationFieldsOption.property({type: String})
   public colour?: string | null;
 
   @VariationFieldsOption.property()
@@ -33,10 +33,10 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property()
   public variationUnitCost?: number;
 
-  @VariationFieldsOption.property()
+  @VariationFieldsOption.property({type: VariationField})
   public variationField?: VariationField | null;
 
-  @VariationFieldsOption.property()
+  @VariationFieldsOption.property({type: MerchiFile})
   public linkedFile?: MerchiFile | null;
 
   @VariationFieldsOption.property({arrayType: "Variation"})

@@ -27,7 +27,7 @@ export class MerchiFile extends Entity {
     this.fileData = file;
   }
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: Date})
   public archived?: Date | null;
 
   @MerchiFile.property()
@@ -36,31 +36,31 @@ export class MerchiFile extends Entity {
   @MerchiFile.property()
   public uploadId?: string;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: String})
   public name?: string | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: String})
   public mimetype?: string | null;
 
   @MerchiFile.property()
   public size?: number;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: Date})
   public creationDate?: Date | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: String})
   public cachedViewUrl?: string | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: Date})
   public viewUrlExpires?: Date | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: String})
   public cachedDownloadUrl?: string | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: Date})
   public downloadUrlExpires?: Date | null;
 
-  @MerchiFile.property()
+  @MerchiFile.property({type: User})
   public uploader?: User | null;
 
   @MerchiFile.property()

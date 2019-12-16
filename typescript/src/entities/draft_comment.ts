@@ -10,13 +10,13 @@ export class DraftComment extends Entity {
   protected static singularName: string = "draftComment";
   protected static pluralName: string = "draftComments";
 
-  @DraftComment.property()
+  @DraftComment.property({type: Date})
   public archived?: Date | null;
 
   @DraftComment.property()
   public id?: number;
 
-  @DraftComment.property()
+  @DraftComment.property({type: Date})
   public date?: Date | null;
 
   @DraftComment.property()
@@ -37,7 +37,7 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public user?: User;
 
-  @DraftComment.property()
+  @DraftComment.property({type: MerchiFile})
   public file?: MerchiFile | null;
 
   @DraftComment.property({arrayType: "User"})
@@ -46,9 +46,9 @@ export class DraftComment extends Entity {
   @DraftComment.property({arrayType: "Notification"})
   public notifications?: Array<Notification>;
 
-  @DraftComment.property()
+  @DraftComment.property({type: Draft})
   public draft?: Draft | null;
 
-  @DraftComment.property()
+  @DraftComment.property({type: Job})
   public job?: Job | null;
 }
