@@ -10,22 +10,22 @@ export class Draft extends Entity {
   protected static singularName: string = "draft";
   protected static pluralName: string = "drafts";
 
-  @Draft.property()
+  @Draft.property({type: Date})
   public archived?: Date | null;
 
   @Draft.property()
   public id?: number;
 
-  @Draft.property()
+  @Draft.property({type: Date})
   public date?: Date | null;
 
-  @Draft.property()
+  @Draft.property({type: Date})
   public accepted?: Date | null;
 
-  @Draft.property()
+  @Draft.property({type: Date})
   public resendDate?: Date | null;
 
-  @Draft.property()
+  @Draft.property({type: Date})
   public viewed?: boolean | null;
 
   @Draft.property()

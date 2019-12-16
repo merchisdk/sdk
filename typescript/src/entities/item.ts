@@ -7,13 +7,13 @@ export class Item extends Entity {
   protected static singularName: string = "item";
   protected static pluralName: string = "items";
 
-  @Item.property()
+  @Item.property({type: Date})
   public archived?: Date | null;
 
   @Item.property()
   public id?: number;
 
-  @Item.property()
+  @Item.property({type: Number})
   public quantity?: number | null;
 
   @Item.property()
@@ -22,13 +22,13 @@ export class Item extends Entity {
   @Item.property()
   public cost?: number;
 
-  @Item.property()
+  @Item.property({type: Number})
   public taxAmount?: number | null;
 
-  @Item.property()
+  @Item.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
-  @Item.property()
+  @Item.property({type: Invoice})
   public invoice?: Invoice | null;
 
   public totalCost = () => {

@@ -17,7 +17,7 @@ export class Product extends Entity {
   protected static singularName: string = "product";
   protected static pluralName: string = "products";
 
-  @Product.property()
+  @Product.property({type: Date})
   public archived?: Date | null;
 
   @Product.property()
@@ -35,25 +35,25 @@ export class Product extends Entity {
   @Product.property()
   public unitPrice?: number;
 
-  @Product.property()
+  @Product.property({type: Number})
   public unitWeight?: number | null;
 
-  @Product.property()
+  @Product.property({type: Number})
   public unitHeight?: number | null;
 
-  @Product.property()
+  @Product.property({type: Number})
   public unitWidth?: number | null;
 
-  @Product.property()
+  @Product.property({type: Number})
   public unitDepth?: number | null;
 
   @Product.property()
   public name?: string;
 
-  @Product.property()
+  @Product.property({type: String})
   public description?: string | null;
 
-  @Product.property()
+  @Product.property({type: String})
   public notes?: string | null;
 
   @Product.property()
@@ -113,7 +113,7 @@ export class Product extends Entity {
   @Product.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
-  @Product.property()
+  @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
 
   @Product.property({arrayType: "Company", jsonName: "saved_by_companies"})

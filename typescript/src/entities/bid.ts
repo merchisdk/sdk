@@ -8,13 +8,13 @@ export class Bid extends Entity {
   protected static singularName: string = "bid";
   protected static pluralName: string = "bids";
 
-  @Bid.property()
+  @Bid.property({type: Date})
   public archived?: Date | null;
 
   @Bid.property()
   public id?: number;
 
-  @Bid.property()
+  @Bid.property({type: Date})
   public agreedDeadline?: Date | null;
 
   @Bid.property({arrayType: "BidItem"})

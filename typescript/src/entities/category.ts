@@ -8,7 +8,7 @@ export class Category extends Entity {
   protected static singularName: string = "category";
   protected static pluralName: string = "categories";
 
-  @Category.property()
+  @Category.property({type: Date})
   public archived?: Date | null;
 
   @Category.property()

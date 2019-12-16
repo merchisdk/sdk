@@ -7,7 +7,7 @@ export class PhoneNumber extends Entity {
   protected static singularName: string = "phoneNumber";
   protected static pluralName: string = "phoneNumbers";
 
-  @PhoneNumber.property()
+  @PhoneNumber.property({type: Date})
   public archived?: Date | null;
 
   @PhoneNumber.property()
