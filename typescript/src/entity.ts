@@ -170,8 +170,6 @@ export class Entity {
         attributeName);
       const propertyType = Reflect.getMetadata('design:type', self,
         attributeName);
-      console.log(propertyType.name);
-      console.log('debug here propertyType', propertyType, attributeName);
       // the array type is needed because 'design:type' breaks down
       // with recursive classes, and also, does not contain the type
       // of an arrays elements, which we need
