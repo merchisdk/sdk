@@ -7,7 +7,7 @@ export class Component extends Entity {
   protected static singularName: string = "component";
   protected static pluralName: string = "components";
 
-  @Component.property()
+  @Component.property({type: Date})
   public archived?: Date | null;
 
   @Component.property()
@@ -28,7 +28,7 @@ export class Component extends Entity {
   @Component.property({arrayType: "MerchiFile"})
   public images?: Array<MerchiFile>;
 
-  @Component.property()
+  @Component.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
 
   @Component.property({arrayType: "ComponentTag"})

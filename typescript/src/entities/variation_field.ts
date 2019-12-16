@@ -10,7 +10,7 @@ export class VariationField extends Entity {
   protected static singularName: string = "variationField";
   protected static pluralName: string = "variationFields";
 
-  @VariationField.property()
+  @VariationField.property({type: Date})
   public archived?: Date | null;
 
   @VariationField.property()
@@ -28,7 +28,7 @@ export class VariationField extends Entity {
   @VariationField.property()
   public name?: string;
 
-  @VariationField.property()
+  @VariationField.property({type: String})
   public placeholder?: string | null;
 
   @VariationField.property()
@@ -43,10 +43,10 @@ export class VariationField extends Entity {
   @VariationField.property()
   public rows?: number;
 
-  @VariationField.property()
+  @VariationField.property({type: Number})
   public fieldMin?: number | null;
 
-  @VariationField.property()
+  @VariationField.property({type: Number})
   public fieldMax?: number | null;
 
   @VariationField.property()
@@ -82,10 +82,10 @@ export class VariationField extends Entity {
   @VariationField.property({arrayType: "Variation"})
   public variations?: Array<Variation>;
 
-  @VariationField.property()
+  @VariationField.property({type: Product})
   public productGroupBackref?: Product | null;
 
-  @VariationField.property()
+  @VariationField.property({type: Product})
   public productIndependentBackref?: Product | null;
 
   @VariationField.property({arrayType: "VariationFieldsOption"})

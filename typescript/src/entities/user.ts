@@ -35,7 +35,7 @@ export class User extends Entity {
   protected static singularName: string = 'user';
   protected static pluralName: string = 'users';
 
-  @User.property()
+  @User.property({type: Date})
   public archived?: Date | null;
 
   @User.property()
@@ -44,28 +44,28 @@ export class User extends Entity {
   @User.property()
   public isSuperUser?: boolean;
 
-  @User.property()
+  @User.property({type: String})
   public password?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public salt?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public facebookUserId?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public resetToken?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public resetTokenDate?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public smsToken?: string | null;
 
-  @User.property()
+  @User.property({type: Date})
   public resetSmsTokenDate?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public smsClientToken?: string | null;
 
   @User.property()
@@ -80,22 +80,22 @@ export class User extends Entity {
   @User.property()
   public enableClientEmails?: boolean;
 
-  @User.property()
+  @User.property({type: String})
   public clientToken?: string | null;
 
   @User.property()
   public name?: string;
 
-  @User.property()
+  @User.property({type: String})
   public comments?: string | null;
 
-  @User.property()
+  @User.property({type: String})
   public timezone?: string | null;
 
-  @User.property()
+  @User.property({type: Date})
   public created?: Date | null;
 
-  @User.property()
+  @User.property({type: String})
   public preferredLanguage?: string | null;
 
   @User.property()
@@ -122,7 +122,7 @@ export class User extends Entity {
   @User.property({ arrayType: 'Product' })
   public products?: Array<Product>;
 
-  @User.property()
+  @User.property({type: 'MerchiFile'})
   public profilePicture?: MerchiFile | null;
 
   @User.property({ arrayType: 'PhoneNumber' })

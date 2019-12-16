@@ -10,7 +10,7 @@ export class CartItem extends Entity {
   protected static singularName: string = "cartItem";
   protected static pluralName: string = "cartItems";
 
-  @CartItem.property()
+  @CartItem.property({type: Date})
   public archived?: Date | null;
 
   @CartItem.property()
@@ -19,7 +19,7 @@ export class CartItem extends Entity {
   @CartItem.property()
   public quantity?: number;
 
-  @CartItem.property()
+  @CartItem.property({type: String})
   public notes?: string | null;
 
   @CartItem.property()

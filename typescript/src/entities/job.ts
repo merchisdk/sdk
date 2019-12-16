@@ -25,7 +25,7 @@ export class Job extends Entity {
   protected static singularName: string = "job";
   protected static pluralName: string = "jobs";
 
-  @Job.property()
+  @Job.property({type: Date})
   public archived?: Date | null;
 
   @Job.property()
@@ -34,16 +34,16 @@ export class Job extends Entity {
   @Job.property()
   public quantity?: number;
 
-  @Job.property()
+  @Job.property({type: String})
   public notes?: string | null;
 
-  @Job.property()
+  @Job.property({type: String})
   public productionNotes?: string | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public productionStatus?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public designStatus?: number | null;
 
   @Job.property()
@@ -61,13 +61,13 @@ export class Job extends Entity {
   @Job.property()
   public jobInfoApprovedByClient?: boolean;
 
-  @Job.property()
+  @Job.property({type: Number})
   public paymentStatus?: number | null;
 
-  @Job.property()
+  @Job.property({type: Date})
   public deductionDate?: Date | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public shippingStatus?: number | null;
 
   @Job.property()
@@ -76,10 +76,10 @@ export class Job extends Entity {
   @Job.property()
   public priority?: number;
 
-  @Job.property()
+  @Job.property({type: Number})
   public jobWeight?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public jobVolume?: number | null;
 
   @Job.property()
@@ -94,16 +94,16 @@ export class Job extends Entity {
   @Job.property()
   public automaticPriceEnabled?: boolean;
 
-  @Job.property()
+  @Job.property({type: Number})
   public costPerUnit?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public cost?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public taxAmount?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
@@ -136,25 +136,25 @@ export class Job extends Entity {
   @Job.property()
   public client?: User;
 
-  @Job.property()
+  @Job.property({type: User})
   public manager?: User | null;
 
-  @Job.property()
+  @Job.property({type: User})
   public designer?: User | null;
 
-  @Job.property()
+  @Job.property({type: Company})
   public clientCompany?: Company | null;
 
-  @Job.property()
+  @Job.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;
 
-  @Job.property()
+  @Job.property({type: EmailAddress})
   public clientEmail?: EmailAddress | null;
 
-  @Job.property()
+  @Job.property({type: PhoneNumber})
   public clientCompanyPhone?: PhoneNumber | null;
 
-  @Job.property()
+  @Job.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
 
   @Job.property()
@@ -163,22 +163,22 @@ export class Job extends Entity {
   @Job.property({arrayType: "DraftComment"})
   public draftComments?: Array<DraftComment>;
 
-  @Job.property()
+  @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
   @Job.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
 
-  @Job.property()
+  @Job.property({type: Address})
   public shipping?: Address | null;
 
-  @Job.property()
+  @Job.property({type: Address})
   public productionShippingAddress?: Address | null;
 
   @Job.property()
   public domain?: Domain;
 
-  @Job.property()
+  @Job.property({type: Invoice})
   public invoice?: Invoice | null;
 
   @Job.property({arrayType: "MerchiFile"})
@@ -187,10 +187,10 @@ export class Job extends Entity {
   @Job.property({arrayType: "MerchiFile"})
   public clientFiles?: Array<MerchiFile>;
 
-  @Job.property()
+  @Job.property({type: Shipment})
   public shipment?: Shipment | null;
 
-  @Job.property()
+  @Job.property({type: Inventory})
   public inventory?: Inventory | null;
 
   @Job.property({arrayType: "VariationsGroup"})
@@ -209,6 +209,7 @@ export class Job extends Entity {
   public supplyAssignment?: Assignment;
 
   @Job.property({arrayType: "Inventory",
+                 type: "Inventory",
                  embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
 }

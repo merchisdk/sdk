@@ -7,7 +7,7 @@ export class Menu extends Entity {
   protected static singularName: string = "menu";
   protected static pluralName: string = "menus";
 
-  @Menu.property()
+  @Menu.property({type: Date})
   public archived?: Date | null;
 
   @Menu.property()

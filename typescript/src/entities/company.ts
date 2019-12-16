@@ -19,7 +19,7 @@ export class Company extends Entity {
   protected static singularName: string = "company";
   protected static pluralName: string = "companies";
 
-  @Company.property()
+  @Company.property({type: Date})
   public archived?: Date | null;
 
   @Company.property()
@@ -28,34 +28,34 @@ export class Company extends Entity {
   @Company.property()
   public name?: string;
 
-  @Company.property()
+  @Company.property({type: String})
   public website?: string | null;
 
   @Company.property()
   public temporaryCreated?: boolean;
 
-  @Company.property()
+  @Company.property({type: String})
   public taxNumber?: string | null;
 
-  @Company.property()
+  @Company.property({type: Number})
   public taxNumberType?: number | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalAccount?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalPassword?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalSignature?: string | null;
 
   @Company.property()
   public isPaypalValid?: boolean;
 
-  @Company.property()
+  @Company.property({type: String})
   public stripePublishableKey?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public stripeApiKey?: string | null;
 
   @Company.property()
@@ -79,10 +79,10 @@ export class Company extends Entity {
   @Company.property()
   public country?: string;
 
-  @Company.property()
+  @Company.property({type: MerchiFile})
   public logo?: MerchiFile | null;
 
-  @Company.property()
+  @Company.property({type: CountryTax})
   public defaultTaxType?: CountryTax | null;
 
   @Company.property({arrayType: "EmailAddress"})

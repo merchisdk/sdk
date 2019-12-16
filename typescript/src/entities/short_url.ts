@@ -7,7 +7,7 @@ export class ShortUrl extends Entity {
   protected static singularName: string = "shortUrl";
   protected static pluralName: string = "shortUrls";
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: Date})
   public archived?: Date | null;
 
   @ShortUrl.property()
@@ -25,10 +25,10 @@ export class ShortUrl extends Entity {
   @ShortUrl.property()
   public triedTimes?: number;
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: Date})
   public lastLookup?: Date | null;
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: User})
   public user?: User | null;
 
   @ShortUrl.property({arrayType: "Notification"})

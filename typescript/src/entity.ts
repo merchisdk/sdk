@@ -17,6 +17,7 @@ function toUnixTimestamp(date: Date) {
 interface PropertyOptions {
   embeddedByDefault?: boolean;
   jsonName?: string;
+  type?: any;
   arrayType?: string;
 }
 
@@ -190,9 +191,27 @@ export class Entity {
         propertyType.prototype instanceof Entity);
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
+      let type;
+      if (options.type === undefined) {
+        type = propertyType;
+      } else {
+        type = options.type;
+        if (typeof type === 'string') {
+          type = self.getEntityClass(type);
+        }
+        type = self.merchi.setupClass(type);
+      }
+      /* istanbul ignore next */
+      if (type === Object) {
+        /* istanbul ignore next */
+        const resource = (self.constructor as typeof Entity).resourceName;
+        const err = 'Bad attribute type ' +
+          `${resource}.${attributeName}: ${type}`;
+        throw new Error(err);
+      }
       const propertyInfo = {property: jsonName,
         attribute: attributeName,
-        type: propertyType,
+        type: type,
         arrayType: realArrayType,
         embeddedByDefault: embeddedByDefault,
         dirty: true};
