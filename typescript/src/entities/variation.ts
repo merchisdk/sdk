@@ -21,6 +21,9 @@ export class Variation extends Entity {
   public value?: string | null;
 
   @Variation.property()
+  public currency?: string;
+
+  @Variation.property()
   public cost?: number;
 
   @Variation.property()
