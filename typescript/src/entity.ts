@@ -359,7 +359,7 @@ export class Entity {
       }
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
-          options.inDomainRoles.join(',')]);
+          JSON.stringify(options.inDomainRoles)]);
       } 
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
