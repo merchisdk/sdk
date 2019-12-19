@@ -359,7 +359,7 @@ export class Entity {
       }
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
-          options.inDomainRoles.join(',')]);
+          JSON.stringify(options.inDomainRoles)]);
       } 
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
@@ -661,6 +661,9 @@ export class Entity {
     const processScalarProperty = (info: PropertyInfo, value: any) => {
       const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
       if (info.dirty || (info.property === primaryKey && value)) {
+        if (info.type === Date && !!value) {
+          value = value.getTime() / 1000;
+        }
         appendData(info.property, value);
       }
     };

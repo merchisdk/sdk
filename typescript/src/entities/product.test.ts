@@ -246,7 +246,7 @@ test('can list products with options set', () => {
         ['state', 'yes'],
         ['category_id', '2'],
         ['in_domain', '2'],
-        ['in_domain_roles', '2'],
+        ['in_domain_roles', '[2]'],
         ['as_role', '2'],
         ['public_only', 'false'],
         ['managed_only', 'false'],
