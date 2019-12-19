@@ -662,7 +662,7 @@ export class Entity {
       const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
       if (info.dirty || (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
-            value = value.getTime() / 1000;
+          value = value.getTime() / 1000;
         }
         appendData(info.property, value);
       }
