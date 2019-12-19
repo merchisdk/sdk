@@ -670,7 +670,10 @@ export class Entity {
         return;
       } else if (info.arrayType) {
         processArrayProperty(info, value);
-      } else if (info.type.prototype instanceof Entity) {
+        // the choice of 'Product' below is unimportant -- all Entities should
+        // have the same prototype but i don't know how to get instanceof
+        // working, so i just compare prototypes directly.
+      } else if (info.type.prototype === this.merchi.Product.prototype) {
         processSingleEntityProperty(info, value);
       } else {
         processScalarProperty(info, value);
