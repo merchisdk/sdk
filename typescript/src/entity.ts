@@ -359,7 +359,7 @@ export class Entity {
       }
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
-          options.inDomainRoles.join(',')]);
+          JSON.stringify(options.inDomainRoles)]);
       } 
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
@@ -661,6 +661,9 @@ export class Entity {
     const processScalarProperty = (info: PropertyInfo, value: any) => {
       const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
       if (info.dirty || (info.property === primaryKey && value)) {
+        if (info.type === Date && !!value) {
+          value = value.getTime() / 1000;
+        }
         appendData(info.property, value);
       }
     };
@@ -670,7 +673,11 @@ export class Entity {
         return;
       } else if (info.arrayType) {
         processArrayProperty(info, value);
-      } else if (info.type.prototype instanceof Entity) {
+        // the choice of 'Product' below is unimportant -- all Entities should
+        // have the same prototype but i don't know how to get instanceof
+        // working, so i just compare prototypes directly.
+      } else if (info.type.prototype === this.merchi.Product.prototype ||
+                 info.type.prototype instanceof Entity) {
         processSingleEntityProperty(info, value);
       } else {
         processScalarProperty(info, value);
