@@ -6,7 +6,7 @@ test('can make Job', () => {
   expect(job).toBeTruthy();
 });
 
-test('Job deadline serialised to mini seconds', () => {
+test('Job deadline serialised to milliseconds', () => {
   const merchi = new Merchi();
   const job = new merchi.Job();
   job.deadline = new Date('Feb 28 2013 19:00:00 GMT-0500');

@@ -199,7 +199,9 @@ export class Entity {
         if (typeof type === 'string') {
           type = self.getEntityClass(type);
         }
-        type = self.merchi.setupClass(type);
+        if (type.prototype instanceof Entity) {
+          type = self.merchi.setupClass(type);
+        }
       }
       /* istanbul ignore next */
       if (type === Object) {
