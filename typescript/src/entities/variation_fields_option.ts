@@ -22,7 +22,7 @@ export class VariationFieldsOption extends Entity {
   public colour?: string | null;
 
   @VariationFieldsOption.property()
-  public defaultCurrency?: string;
+  public currency?: string;
 
   @VariationFieldsOption.property()
   public default?: boolean;
