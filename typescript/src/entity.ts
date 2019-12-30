@@ -25,6 +25,10 @@ interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
+interface fromJsonOptions {
+  makeDirty: boolean;
+}
+
 interface SaveOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
@@ -538,24 +542,36 @@ export class Entity {
   };
 
 
-  public fromJson = (json: any) => {
+  public fromJson = (json: any, options?: fromJsonOptions) => {
+    options = options || {makeDirty: false};
     for (const key in json) {
       const value: any = (json as any)[key];
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
-        propertyInfo.dirty = false;
+        propertyInfo.dirty = options.makeDirty;
         if (propertyInfo.arrayType) {
-          const array = [];
-          for (const item of value) {
+          const newValue: any = value.map((item: any, index: number) => {
+            const currentValue: any = propertyInfo.currentValue;
+            // if property already have an array of entities as relationship,
+            // try to merge with json one by one, this behavior may need to be
+            // configurable in the future.
+            if ( currentValue && currentValue[index] ) {
+                return currentValue[index].fromJson(item, options);
+            }
             const nested = new (propertyInfo.arrayType as any)(this.merchi);
-            nested.fromJson(item);
-            array.push(nested);
-          }
-          propertyInfo.currentValue = array;
+            return nested.fromJson(item, options);
+          });
+          propertyInfo.currentValue = newValue;
         } else if (propertyInfo.type.prototype instanceof Entity) {
-          const nested = new (propertyInfo.type as any)(this.merchi);
-          nested.fromJson(value);
-          propertyInfo.currentValue = nested;
+          // if property already have a entity as relationship, try to merge
+          // with json first, this behavior may need to be configurable in the
+          // future.
+          if (propertyInfo.currentValue) {
+            propertyInfo.currentValue.fromJson(value, options);
+          } else {
+            const nested = new (propertyInfo.type as any)(this.merchi);
+            propertyInfo.currentValue = nested.fromJson(value, options);
+          }
         } else {
           propertyInfo.currentValue = value;
         }
