@@ -555,7 +555,7 @@ export class Entity {
             // if property already have an array of entities as relationship,
             // try to merge with json one by one, this behavior may need to be
             // configurable in the future.
-            if ( currentValue && currentValue[index] ) {
+            if (currentValue && currentValue[index]) {
                 return currentValue[index].fromJson(item, options);
             }
             const nested = new (propertyInfo.arrayType as any)(this.merchi);
