@@ -407,7 +407,7 @@ test('use from json to merge json into entity', () => {
     categories: [{name: 'a1'}, {name: 'c2'}]
   };
   p.fromJson(updatedJson);
-  expect(p.name).toEqual('product name');
+  expect(p.name).toEqual('product new name');
   expect(p.domain!.domain).toEqual('domain 1');
   expect(p.categories![0]!.name).toEqual('a1');
   expect(p.categories![1]!.name).toEqual('c2');
