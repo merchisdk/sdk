@@ -36,7 +36,7 @@ export function apiFetch(resource: string, options?: RequestOptions) {
       }});
 }
 
-function backendFetch(resource: string, options?: RequestOptions) {
+export function backendFetch(resource: string, options?: RequestOptions) {
   const server = (window as any).merchiBackendUri ?
     (window as any).merchiBackendUri : BACKEND_URI;
   const version = 'v6';

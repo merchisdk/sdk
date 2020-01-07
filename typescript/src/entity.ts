@@ -9,6 +9,7 @@ import { NotificationType } from './constants/notification_types';
 import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { Role } from './constants/roles';
+import { backendFetch, ApiError } from './request';
 
 function toUnixTimestamp(date: Date) {
   return parseInt(String(date.getTime() / 1000)).toFixed(0);
@@ -728,8 +729,18 @@ export class Entity {
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
     }
-    return this.merchi.authenticatedFetch(resource, fetchOptions).then(() => {
-      return null;
+    if (this.merchi.sessionToken) {
+      fetchOptions.query.push(['session_token', this.merchi.sessionToken]);
+    }
+    return backendFetch(resource, fetchOptions).then((response) => {
+      if (response.status < 200 || response.status > 299) {
+        return response.json().then(json => {
+          const err = new ApiError(json);
+          return Promise.reject(err);
+        });
+      } else {
+        return Promise.resolve(null);
+      }
     });
   };
 }

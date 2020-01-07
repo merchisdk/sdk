@@ -42,3 +42,13 @@ test('can delete domain', () => {
   domain.delete();
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
 });
+
+test('fail to delete non-existant domain', () => {
+  const merchi = new Merchi('YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl');
+  const domain = new merchi.Domain();
+  domain.id = -1;
+  const fetch = mockFetch(true, {statusCode: 404}, 404);
+  const invocation = domain.delete();
+  expect(fetch.mock.calls[0][1].method).toBe('DELETE');
+  return invocation.catch(e => expect(e.statusCode).toEqual(404));
+});
