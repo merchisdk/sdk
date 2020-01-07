@@ -14,6 +14,10 @@ function toUnixTimestamp(date: Date) {
   return parseInt(String(date.getTime() / 1000)).toFixed(0);
 }
 
+interface Counter {
+  value: number;
+}
+
 interface PropertyOptions {
   embeddedByDefault?: boolean;
   jsonName?: string;
@@ -111,7 +115,6 @@ interface SerialiseOptions {
   existing?: FormData;
   excludeOld?: boolean;
   _prefix?: string;
-  _fileIndex?: number;
 }
 
 interface PropertyInfo {
@@ -607,11 +610,16 @@ export class Entity {
     }
   }
 
-  public toFormData = (options?: SerialiseOptions): FormData => {
-    options = options || {};
+  public toFormData = (options?: SerialiseOptions,
+    fileIndex?: Counter): FormData => {
+    if (options === undefined) {
+      options = {};
+    }
     const result = options.existing || new FormData();
     const prefix = options._prefix || '';
-    let fileIndex = options._fileIndex || 0;
+    if (fileIndex === undefined) {
+      fileIndex = {value: 0};
+    }
     const appendData = (name: string, value: any) => {
       /* istanbul ignore next */
       if (name === undefined || value === undefined) {
@@ -624,9 +632,9 @@ export class Entity {
       result.set(name, value);
     };
     if ((this as any).fileData !== undefined) {
-      result.set(String(fileIndex), (this as any).fileData);
-      appendData('fileDataIndex', fileIndex);
-      fileIndex++;
+      result.set(String(fileIndex.value), (this as any).fileData);
+      appendData('fileDataIndex', fileIndex.value);
+      fileIndex.value++;
     }
     const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
       const remoteCount = value.length;
@@ -652,8 +660,8 @@ export class Entity {
         if (prefix) {
           innerPrefix = prefix + '-' + innerPrefix;
         }
-        value[i].toFormData({existing: result, _prefix: innerPrefix,
-          _fileIndex: fileIndex});
+        value[i].toFormData({existing: result, _prefix: innerPrefix},
+          fileIndex);
       }
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
@@ -669,8 +677,8 @@ export class Entity {
         innerPrefix = prefix + '-' + innerPrefix;
       }
       const initialLength = Array.from((result as any).entries()).length;
-      value.toFormData({existing: result, _prefix: innerPrefix,
-        _fileIndex: fileIndex});
+      value.toFormData({existing: result, _prefix: innerPrefix},
+        fileIndex);
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
         appendData(info.property + '-count', 1);
