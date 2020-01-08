@@ -35,6 +35,9 @@ export class VariationField extends Entity {
   public defaultValue?: string;
 
   @VariationField.property()
+  public currency?: string;
+
+  @VariationField.property()
   public fieldType?: FieldType;
 
   @VariationField.property()
