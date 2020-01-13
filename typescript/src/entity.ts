@@ -589,6 +589,9 @@ export class Entity {
           }
         } else {
           propertyInfo.currentValue = value;
+          if (propertyInfo.type === Date && !!value) {
+            propertyInfo.currentValue = new Date(value * 1000);
+          }
         }
       }
     }
@@ -607,7 +610,11 @@ export class Entity {
         } else if (this.isSingleEntityProperty(propertyInfo)) {
           json[propertyName] = propertyInfo.currentValue.toJson();
         } else {
-          json[propertyName] = propertyInfo.currentValue;
+          const value = propertyInfo.currentValue;
+          json[propertyName] = value;
+          if (propertyInfo.type === Date && !!value) {
+            json[propertyName] = value.getTime() / 1000;
+          }
         }
       }
     }
@@ -700,7 +707,9 @@ export class Entity {
     };
     const processScalarProperty = (info: PropertyInfo, value: any) => {
       const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
-      if (info.dirty || (info.property === primaryKey && value)) {
+      if (!excludeOld ||
+        info.dirty ||
+        (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
           value = value.getTime() / 1000;
         }
