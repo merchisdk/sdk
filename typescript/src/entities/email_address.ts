@@ -7,7 +7,7 @@ export class EmailAddress extends Entity {
   protected static singularName: string = "emailAddress";
   protected static pluralName: string = "emailAddresses";
 
-  @EmailAddress.property({type: EmailAddress})
+  @EmailAddress.property({type: Date})
   public archived?: Date | null;
 
   @EmailAddress.property()
