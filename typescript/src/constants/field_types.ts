@@ -1,7 +1,7 @@
 export enum FieldType {
   TEXT_INPUT = 1,
   SELECT = 2,
-  FILE_UPLOAD = 2,
+  FILE_UPLOAD = 3,
   TEXT_AREA = 4,
   NUMBER_INPUT = 5,
   CHECKBOX = 6,
