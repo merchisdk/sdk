@@ -30,6 +30,10 @@ interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
+interface fromJsonOptions {
+  makeDirty: boolean;
+}
+
 interface SaveOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
@@ -143,6 +147,16 @@ export class Entity {
   // maps json names like 'id' to information about that property
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
+
+  protected isSingleEntityProperty(info: PropertyInfo) {
+    // the choice of 'Product' below is unimportant -- all Entities should
+    // have the same prototype but i don't know how to get instanceof
+    // working, so i just compare prototypes directly.
+    return (
+      info.type.prototype === this.merchi.Product.prototype ||
+      info.type.prototype instanceof Entity
+    );
+  }
 
   protected static property(options?: PropertyOptions) {
     return function (target: Entity, propertyKey: string) {
@@ -544,26 +558,41 @@ export class Entity {
   };
 
 
-  public fromJson = (json: any) => {
+  public fromJson = (json: any, options?: fromJsonOptions) => {
+    options = options || {makeDirty: false};
     for (const key in json) {
       const value: any = (json as any)[key];
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
-        propertyInfo.dirty = false;
+        propertyInfo.dirty = options.makeDirty;
         if (propertyInfo.arrayType) {
-          const array = [];
-          for (const item of value) {
+          const newValue: any = value.map((item: any, index: number) => {
+            const currentValue: any = propertyInfo.currentValue;
+            // if property already have an array of entities as relationship,
+            // try to merge with json one by one, this behavior may need to be
+            // configurable in the future.
+            if (currentValue && currentValue[index]) {
+              return currentValue[index].fromJson(item, options);
+            }
             const nested = new (propertyInfo.arrayType as any)(this.merchi);
-            nested.fromJson(item);
-            array.push(nested);
+            return nested.fromJson(item, options);
+          });
+          propertyInfo.currentValue = newValue;
+        } else if (this.isSingleEntityProperty(propertyInfo)) {
+          // if property already have a entity as relationship, try to merge
+          // with json first, this behavior may need to be configurable in the
+          // future.
+          if (propertyInfo.currentValue) {
+            propertyInfo.currentValue.fromJson(value, options);
+          } else {
+            const nested = new (propertyInfo.type as any)(this.merchi);
+            propertyInfo.currentValue = nested.fromJson(value, options);
           }
-          propertyInfo.currentValue = array;
-        } else if (propertyInfo.type.prototype instanceof Entity) {
-          const nested = new (propertyInfo.type as any)(this.merchi);
-          nested.fromJson(value);
-          propertyInfo.currentValue = nested;
         } else {
           propertyInfo.currentValue = value;
+          if (propertyInfo.type === Date && !!value) {
+            propertyInfo.currentValue = new Date(value * 1000);
+          }
         }
       }
     }
@@ -579,10 +608,14 @@ export class Entity {
         if (propertyInfo.arrayType) {
           const array = propertyInfo.currentValue.map((v: any) => v.toJson());
           json[propertyName] = array;
-        } else if (propertyInfo.type.prototype instanceof Entity) {
+        } else if (this.isSingleEntityProperty(propertyInfo)) {
           json[propertyName] = propertyInfo.currentValue.toJson();
         } else {
-          json[propertyName] = propertyInfo.currentValue;
+          const value = propertyInfo.currentValue;
+          json[propertyName] = value;
+          if (propertyInfo.type === Date && !!value) {
+            json[propertyName] = value.getTime() / 1000;
+          }
         }
       }
     }
@@ -602,6 +635,8 @@ export class Entity {
     }
     const result = options.existing || new FormData();
     const prefix = options._prefix || '';
+    const excludeOld = options.excludeOld === undefined ?
+      true : options.excludeOld;
     if (fileIndex === undefined) {
       fileIndex = {value: 0};
     }
@@ -637,7 +672,7 @@ export class Entity {
         }
       }
       isDirty = isDirty || info.dirty;
-      if (!isDirty) {
+      if (!isDirty && excludeOld) {
         return;
       }
       for (let i = 0; i < remoteCount; ++i) {
@@ -645,7 +680,8 @@ export class Entity {
         if (prefix) {
           innerPrefix = prefix + '-' + innerPrefix;
         }
-        value[i].toFormData({existing: result, _prefix: innerPrefix},
+        value[i].toFormData(
+          {existing: result, _prefix: innerPrefix, excludeOld: excludeOld},
           fileIndex);
       }
       const finalLength = Array.from((result as any).entries()).length;
@@ -655,14 +691,15 @@ export class Entity {
     };
     const processSingleEntityProperty = (info: PropertyInfo, value: Entity) => {
       let innerPrefix = info.property + '-0';
-      if (!(info.dirty || value.isDirty)) {
+      if (!(info.dirty || (value.isDirty)) && excludeOld) {
         return;
       }
       if (prefix) {
         innerPrefix = prefix + '-' + innerPrefix;
       }
       const initialLength = Array.from((result as any).entries()).length;
-      value.toFormData({existing: result, _prefix: innerPrefix},
+      value.toFormData(
+        {existing: result, _prefix: innerPrefix, excludeOld: excludeOld},
         fileIndex);
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
@@ -671,7 +708,9 @@ export class Entity {
     };
     const processScalarProperty = (info: PropertyInfo, value: any) => {
       const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
-      if (info.dirty || (info.property === primaryKey && value)) {
+      if (!excludeOld ||
+        info.dirty ||
+        (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
           value = value.getTime() / 1000;
         }
@@ -684,11 +723,7 @@ export class Entity {
         return;
       } else if (info.arrayType) {
         processArrayProperty(info, value);
-        // the choice of 'Product' below is unimportant -- all Entities should
-        // have the same prototype but i don't know how to get instanceof
-        // working, so i just compare prototypes directly.
-      } else if (info.type.prototype === this.merchi.Product.prototype ||
-                 info.type.prototype instanceof Entity) {
+      } else if (this.isSingleEntityProperty(info)) {
         processSingleEntityProperty(info, value);
       } else {
         processScalarProperty(info, value);

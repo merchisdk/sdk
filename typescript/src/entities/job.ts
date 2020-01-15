@@ -15,15 +15,17 @@ import { JobComment } from './job_comment';
 import { Notification } from './notification';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
+import { RequestOptions } from '../request';
 import { Shipment } from './shipment';
 import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
+
 export class Job extends Entity {
-  protected static resourceName: string = "jobs";
-  protected static singularName: string = "job";
-  protected static pluralName: string = "jobs";
+  protected static resourceName: string = 'jobs';
+  protected static singularName: string = 'job';
+  protected static pluralName: string = 'jobs';
 
   @Job.property({type: Date})
   public archived?: Date | null;
@@ -127,10 +129,10 @@ export class Job extends Entity {
   @Job.property({embeddedByDefault: false})
   public unreadJobInvoicingNotificationsCount?: number;
 
-  @Job.property({arrayType: "Draft"})
+  @Job.property({arrayType: 'Draft'})
   public drafts?: Array<Draft>;
 
-  @Job.property({arrayType: "JobComment"})
+  @Job.property({arrayType: 'JobComment'})
   public comments?: Array<JobComment>;
 
   @Job.property()
@@ -160,13 +162,13 @@ export class Job extends Entity {
   @Job.property()
   public product?: Product;
 
-  @Job.property({arrayType: "DraftComment"})
+  @Job.property({arrayType: 'DraftComment'})
   public draftComments?: Array<DraftComment>;
 
   @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
-  @Job.property({arrayType: "DomainTag"})
+  @Job.property({arrayType: 'DomainTag'})
   public tags?: Array<DomainTag>;
 
   @Job.property({type: Address})
@@ -181,10 +183,10 @@ export class Job extends Entity {
   @Job.property({type: Invoice})
   public invoice?: Invoice | null;
 
-  @Job.property({arrayType: "MerchiFile"})
+  @Job.property({arrayType: 'MerchiFile'})
   public productionFiles?: Array<MerchiFile>;
 
-  @Job.property({arrayType: "MerchiFile"})
+  @Job.property({arrayType: 'MerchiFile'})
   public clientFiles?: Array<MerchiFile>;
 
   @Job.property({type: Shipment})
@@ -193,23 +195,35 @@ export class Job extends Entity {
   @Job.property({type: Inventory})
   public inventory?: Inventory | null;
 
-  @Job.property({arrayType: "VariationsGroup"})
+  @Job.property({arrayType: 'VariationsGroup'})
   public variationsGroups?: Array<VariationsGroup>;
 
-  @Job.property({arrayType: "Variation"})
+  @Job.property({arrayType: 'Variation'})
   public variations?: Array<Variation>;
 
-  @Job.property({arrayType: "Notification"})
+  @Job.property({arrayType: 'Notification'})
   public notifications?: Array<Notification>;
 
-  @Job.property({arrayType: "Assignment"})
+  @Job.property({arrayType: 'Assignment'})
   public assignments?: Array<Assignment>;
 
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property({arrayType: "Inventory",
-                 type: "Inventory",
+  @Job.property({arrayType: 'Inventory',
+                 type: 'Inventory',
                  embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
+
+  public getQuote = () => {
+    const resource = '/specialised-order-estimate/';
+    const data = this.toFormData({excludeOld: false});
+    const fetchOptions: RequestOptions = {method: 'POST', body: data};
+    fetchOptions.query = [];
+    fetchOptions.query.push(['skip_rights', 'y']);
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => { this.fromJson(data, {makeDirty: true});
+        return this;});
+  }
 }
