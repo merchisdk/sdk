@@ -10,6 +10,7 @@ import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { Role } from './constants/roles';
 import { backendFetch, ApiError } from './request';
+import { generateUUID } from './uuid';
 
 function toUnixTimestamp(date: Date) {
   return parseInt(String(date.getTime() / 1000)).toFixed(0);
@@ -147,6 +148,8 @@ export class Entity {
   // maps json names like 'id' to information about that property
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
+
+  public key = generateUUID();
 
   protected isSingleEntityProperty(info: PropertyInfo) {
     // the choice of 'Product' below is unimportant -- all Entities should
