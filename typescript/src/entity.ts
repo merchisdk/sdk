@@ -126,6 +126,7 @@ interface PropertyInfo {
   arrayType?: Entity;  // if type is an array, arrayType is the element type
   dirty: boolean;  // true if out of date with server
   currentValue?: any;  // type is actually `this.type | undefined`
+  updatingOrder: boolean;
   embeddedByDefault: boolean;
 }
 
@@ -232,12 +233,13 @@ export class Entity {
           `${resource}.${attributeName}: ${type}`;
         throw new Error(err);
       }
-      const propertyInfo = {property: jsonName,
+      const propertyInfo: PropertyInfo = {property: jsonName,
         attribute: attributeName,
         type: type,
         arrayType: realArrayType,
         embeddedByDefault: embeddedByDefault,
-        dirty: true};
+        dirty: true,
+        updatingOrder: false};
       map.set(jsonName, propertyInfo);
     }); 
     return map;
@@ -690,6 +692,9 @@ export class Entity {
       const finalLength = Array.from((result as any).entries()).length;
       if ((finalLength - initialLength) > 0) {
         appendData(info.property + '-count', remoteCount);
+        if (info.updatingOrder) {
+          appendData(info.property + '-*updateOrder', 'true');
+        }
       }
     };
     const processSingleEntityProperty = (info: PropertyInfo, value: Entity) => {
@@ -747,6 +752,10 @@ export class Entity {
       remotes.forEach(this.addBackObject);
     }
   }
+
+  public updateOrder = (property: string) => {
+    (this.propertiesMap.get(property) as PropertyInfo).updatingOrder = true;
+  };
 
   protected markDirty = (property: string, newValue: any) => {
     if (newValue === undefined) {
