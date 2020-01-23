@@ -441,6 +441,22 @@ test('primary key always serialised', () => {
   });
 });
 
+test('orderable attribute request', () => {
+  const merchi = new Merchi();
+  const product = new merchi.Product();
+  const f = new merchi.MerchiFile(); 
+  f.id = 24;
+  product.id = 42;
+  product.images = [f];
+  product.updateOrder('images');
+  const correct = [['id', '42'],
+                   ['images-0-id', '24'],
+                   ['images-count', '1'],
+                   ['images-*updateOrder', 'true']];
+  const got = Array.from((product.toFormData() as any).entries());
+  expect(got).toEqual(correct);
+});
+
 test('duplicate', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();
