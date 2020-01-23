@@ -21,7 +21,7 @@ export class MerchiFile extends Entity {
   protected static singularName: string = "file";
   protected static pluralName: string = "files";
 
-  protected fileData?: File;
+  public fileData?: File;
 
   public fromFormFile = (file: File) => {
     this.fileData = file;
