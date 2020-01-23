@@ -62,3 +62,27 @@ test("role helper function", () => {
   user.enrolledDomains = [enrolledDomain, enrolledDomain];
   expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
 });
+
+
+test("domainsByRoles", () => {
+  const merchi = new Merchi();
+  const user = new merchi.User();
+  expect(() => user.domainsByRoles([])).toThrow();
+  user.enrolledDomains = [];
+  expect(user.domainsByRoles([])).toEqual([]);
+  const ed = new merchi.EnrolledDomain();
+  user.enrolledDomains = [ed];
+  expect(() => user.domainsByRoles([])).toThrow();
+  const d = new merchi.Domain();
+  ed.domain = d;
+  expect(() => user.domainsByRoles([])).toThrow();
+  user.isSuperUser = false;
+  expect(user.domainsByRoles([])).toEqual([]);
+  user.isSuperUser = true;
+  expect(user.domainsByRoles([])).toEqual([d]);
+  user.isSuperUser = false;
+  ed.role = Role.MANAGER;
+  expect(user.domainsByRoles([Role.MANAGER])).toEqual([d]);
+  ed.role = Role.DESIGNER;
+  expect(user.domainsByRoles([Role.MANAGER])).toEqual([]);
+});

@@ -261,4 +261,40 @@ export class User extends Entity {
   public isNotClient(domain: Domain) {
     return BUSINESS_ACCOUNTS.includes(this.roleInDomain(domain));
   }
+
+  public domainsByRoles(roles: Array<Role>) {
+    if (this.enrolledDomains === undefined) {
+      const err = 'enrolledDomains is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    const result = [];
+    for (let i = 0; i < this.enrolledDomains.length; ++i) {
+      const domain = this.enrolledDomains[i].domain;
+      if (domain === undefined) {
+        const err = 'domain is undefined, did you forget to embed it?';
+        throw new Error(err);
+      }
+      if (this.hasAuthority(domain, roles)) {
+        result.push(domain);
+      }      
+    }
+    return result;
+  }
+
+  public hasAuthority(domain: Domain, roles: Array<Role>) {
+    if (this.isSuperUser === undefined) {
+      const err = 'isSuperUser is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    if (this.isSuperUser) {
+      return true;
+    }
+    const role = this.roleInDomain(domain);
+    for (let i = 0; i < roles.length; ++i) {
+      if (roles[i] === role) {
+        return true;
+      }
+    }
+    return false;
+  } 
 }
