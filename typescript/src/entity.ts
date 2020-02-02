@@ -698,12 +698,20 @@ export class Entity {
       }
     };
     const processSingleEntityProperty = (info: PropertyInfo, value: Entity) => {
+      const primaryKey: string = (this.constructor as typeof Entity).primaryKey;
       let innerPrefix = info.property + '-0';
-      if (!(info.dirty || (value.isDirty)) && excludeOld) {
-        return;
-      }
       if (prefix) {
         innerPrefix = prefix + '-' + innerPrefix;
+      }
+      if (value === null) {
+        if (info.dirty || !excludeOld) {
+          appendData(innerPrefix + '-' + primaryKey, '-1');
+          appendData(info.property + '-count', 1);
+        }
+        return;
+      }
+      if (!(info.dirty || (value.isDirty)) && excludeOld) {
+        return;
       }
       const initialLength = Array.from((result as any).entries()).length;
       value.toFormData(
