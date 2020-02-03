@@ -587,3 +587,20 @@ test('buildEmptyVariationGroup', () => {
   product.groupVariationFields[0].options = [];
   expect(product.buildEmptyVariationGroup().groupCost).toEqual(0);
 });
+
+test('delete single subentitiy', () => {
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.id = 42;
+  (p.propertiesMap.get('featureImage') as any).currentValue = null;
+  (p.propertiesMap.get('featureImage') as any).dirty = false;
+  const correct = [['id','42'],
+                   ['featureImage-0-id', '-1'],
+                   ['featureImage-count', '1']]
+  const serialised1 = Array.from((p.toFormData({excludeOld: false}) as any).entries());
+  expect(serialised1).toEqual(correct);
+  p.toFormData();
+  p.featureImage = null;  // specifies that p.featureImage should be deleted
+  const serialised2 = Array.from((p.toFormData() as any).entries());
+  expect(serialised2).toEqual(correct);
+});
