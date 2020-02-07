@@ -12,7 +12,7 @@ export interface RequestOptions extends RequestInit {
 export class ApiError extends Error {
   statusCode?: number;
   errorCode?: ErrorType;
-  jsonMessage: any;
+  original: any;
   constructor(err: any) {
     const message = JSON.stringify(err);
     /* istanbul ignore next */
@@ -20,7 +20,7 @@ export class ApiError extends Error {
     this.statusCode = err.statusCode;
     this.errorCode = getErrorFromCode(err.errorCode);
     this.name = 'ApiError';
-    this.jsonMessage = err.message;
+    this.original = err;
   }
 }
 
