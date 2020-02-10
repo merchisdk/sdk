@@ -229,6 +229,7 @@ test('can list products with options set', () => {
                    senderRole: Role.MANAGER,
                    isOrder: true,
                    tags: [2, 3, 5],
+                   tagNames: ['a'],
                    exclude: [8]};
   const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
                                 {'product': {'name': 'p2'}}],
@@ -273,6 +274,7 @@ test('can list products with options set', () => {
         ['senderRole', '6'],
         ['is_order', 'true'],
         ['tags', '2,3,5'],
+        ['tags_name', 'a'],
         ['exclude', '8']];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
