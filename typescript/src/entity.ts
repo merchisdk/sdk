@@ -97,6 +97,7 @@ interface ListOptions {
   senderRole?: Role;
   isOrder?: boolean;
   tags?: Array<number>;
+  tagNames?: Array<string>;
   exclude?: Array<number>;
 }
 
@@ -477,6 +478,9 @@ export class Entity {
       }
       if (options.tags !== undefined) {
         fetchOptions.query.push(['tags', options.tags.join(',')]);
+      }
+      if (options.tagNames !== undefined) {
+        fetchOptions.query.push(['tags_name', options.tagNames.join(',')]);
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
