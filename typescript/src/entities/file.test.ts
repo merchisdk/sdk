@@ -29,3 +29,15 @@ test('can upload file', () => {
   expect(data[0][1]).toBe(jsFile);
   expect(data[1]).toEqual(['fileDataIndex', '0']);
 });
+
+test('isImage', () => {
+  const merchi = new Merchi();
+  const file = new merchi.MerchiFile();
+  expect(file.isImage).toThrow();
+  file.mimetype = null;
+  expect(file.isImage()).toEqual(false);
+  file.mimetype = 'application/pdf';
+  expect(file.isImage()).toEqual(false);
+  file.mimetype = 'image/png';
+  expect(file.isImage()).toEqual(true);
+});
