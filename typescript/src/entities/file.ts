@@ -155,4 +155,15 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: "ProductionComment"})
   public productionComments?: Array<ProductionComment>;
+
+  public isImage = () => {
+    if (this.mimetype === undefined) {
+      const err = 'mimetype is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    if (this.mimetype === null) {
+      return false;
+    }
+    return this.mimetype.split('/')[0] === 'image';
+  }
 }
