@@ -2,6 +2,7 @@ import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { User } from './user';
+import { Page } from './page';
 import { ThemeStatus } from '../constants/theme_status';
 
 export class Theme extends Entity {
@@ -302,6 +303,9 @@ export class Theme extends Entity {
 
   @Theme.property({arrayType: "Domain"})
   public domains?: Array<Domain>;
+
+  @Theme.property({arrayType: "Page"})
+  public pages?: Array<Page>;
 
   public canBeActivated = () => {
     const validStatus = ThemeStatus.VALID_BUT_NOT_UPDATED;
