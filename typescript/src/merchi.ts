@@ -41,6 +41,7 @@ import { DomainTag } from './entities/domain_tag';
 import { DraftComment } from './entities/draft_comment';
 import { Notification } from './entities/notification';
 import { Payment } from './entities/payment';
+import { Page } from './entities/page';
 import { CompanyInvitation } from './entities/company_invitation';
 import { SystemRole } from './entities/system_role';
 import { PhoneNumber } from './entities/phone_number';
@@ -114,6 +115,7 @@ export class Merchi {
   public EmailCounter: typeof EmailCounter;
   public Domain: typeof Domain;
   public Payment: typeof Payment;
+  public Page: typeof Page;
   public ShortUrl: typeof ShortUrl;
   public CartItem: typeof CartItem;
   public InventoryUnitVariation: typeof InventoryUnitVariation;
@@ -198,6 +200,7 @@ export class Merchi {
     this.Bank = this.setupClass(Bank) as typeof Bank;
     this.Discount = this.setupClass(Discount) as typeof Discount;
     this.Payment = this.setupClass(Payment) as typeof Payment;
+    this.Page = this.setupClass(Page) as typeof Page;
     this.Cart = this.setupClass(Cart) as typeof Cart;
     this.MerchiFile = this.setupClass(MerchiFile) as typeof MerchiFile;
     this.User = this.setupClass(User) as typeof User;
