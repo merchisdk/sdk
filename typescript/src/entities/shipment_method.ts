@@ -13,7 +13,7 @@ export class ShipmentMethod extends Entity {
   public id?: number;
 
   @ShipmentMethod.property()
-  public name?: string | null;
+  public name?: string;
 
   @ShipmentMethod.property({type: Address})
   public originAddress?: Address | null;
