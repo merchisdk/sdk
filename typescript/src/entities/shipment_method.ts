@@ -10,7 +10,7 @@ export class ShipmentMethod extends Entity {
   protected static pluralName: string = "shipmentMethods";
 
   @ShipmentMethod.property()
-  public id?: number | null;
+  public id?: number;
 
   @ShipmentMethod.property()
   public name?: string | null;

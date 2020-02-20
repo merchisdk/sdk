@@ -8,7 +8,7 @@ export class ShipmentMethodVariation extends Entity {
   protected static pluralName: string = "shipmentMethodVariations";
 
   @ShipmentMethodVariation.property()
-  public id?: number | null;
+  public id?: number;
 
   @ShipmentMethodVariation.property()
   public destinationCountry?: string | null;
