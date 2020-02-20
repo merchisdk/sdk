@@ -1,6 +1,4 @@
 import { Entity } from '../entity';
-import { Address } from './address';
-import { Company } from './company';
 import { CountryTax } from './country_tax';
 import { ShipmentMethod } from './shipment_method';
 
