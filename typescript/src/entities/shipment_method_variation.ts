@@ -10,17 +10,17 @@ export class ShipmentMethodVariation extends Entity {
   @ShipmentMethodVariation.property()
   public id?: number;
 
-  @ShipmentMethodVariation.property()
+  @ShipmentMethodVariation.property({type: String})
   public destinationCountry?: string | null;
 
-  @ShipmentMethodVariation.property()
+  @ShipmentMethodVariation.property({type: String})
   public destinationState?: string | null;
 
   @ShipmentMethodVariation.property({type: Number})
   public cost?: number | null;
 
   @ShipmentMethodVariation.property()
-  public currency?: string | null;
+  public currency?: string;
 
   @ShipmentMethodVariation.property({type: Number})
   public maxWeight?: number | null;
