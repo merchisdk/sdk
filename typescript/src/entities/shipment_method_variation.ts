@@ -28,6 +28,6 @@ export class ShipmentMethodVariation extends Entity {
   @ShipmentMethodVariation.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
-  @ShipmentMethodVariation.property({type: ShipmentMethod})
+  @ShipmentMethodVariation.property()
   public shipmentMethod?: ShipmentMethod;
 }
