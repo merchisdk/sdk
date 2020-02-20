@@ -25,7 +25,7 @@ export class ShipmentMethodVariation extends Entity {
   @ShipmentMethodVariation.property({type: Number})
   public maxWeight?: number | null;
 
-  @ShipmentMethodVariation.property({type: CountryTax})
+  @ShipmentMethodVariation.property({type: "CountryTax"})
   public taxType?: CountryTax | null;
 
   @ShipmentMethodVariation.property()
