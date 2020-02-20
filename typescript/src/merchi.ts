@@ -17,6 +17,8 @@ import { InventoryUnitVariation } from './entities/inventory_unit_variation';
 import { VariationFieldsOption } from './entities/variation_fields_option';
 import { Bank } from './entities/bank';
 import { Shipment } from './entities/shipment';
+import { ShipmentMethod } from './entities/shipment_method';
+import { ShipmentMethodVariation } from './entities/shipment_method_variation';
 import { DomainInvitation } from './entities/domain_invitation';
 import { EmailCounter } from './entities/email_counter';
 import { MenuItem } from './entities/menu_item';
@@ -91,6 +93,8 @@ export class Merchi {
   public ProductionComment: typeof ProductionComment;
   public DraftComment: typeof DraftComment;
   public Shipment: typeof Shipment;
+  public ShipmentMethod: typeof ShipmentMethod;
+  public ShipmentMethodVariation: typeof ShipmentMethodVariation;
   public Draft: typeof Draft;
   public VariationFieldsOption: typeof VariationFieldsOption;
   public Category: typeof Category;
@@ -149,6 +153,12 @@ export class Merchi {
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
     this.Notification = this.setupClass(Notification) as typeof Notification;
     this.Shipment = this.setupClass(Shipment) as typeof Shipment;
+    this.ShipmentMethod = this.setupClass(
+      ShipmentMethod
+    ) as typeof ShipmentMethod;
+    this.ShipmentMethodVariation = this.setupClass(
+      ShipmentMethodVariation
+    ) as typeof ShipmentMethodVariation;
     this.Domain = this.setupClass(Domain) as typeof Domain;
     this.Invoice = this.setupClass(Invoice) as typeof Invoice;
     this.Job = this.setupClass(Job) as typeof Job;
