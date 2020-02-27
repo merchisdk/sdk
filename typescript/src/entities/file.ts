@@ -25,6 +25,9 @@ export class MerchiFile extends Entity {
 
   public fromFormFile = (file: File) => {
     this.fileData = file;
+    this.mimetype = file.type || 'application/octet-stream';
+    this.name = file.name;
+    this.size = file.size;
   }
 
   @MerchiFile.property({type: Date})
