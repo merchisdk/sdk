@@ -101,7 +101,7 @@ interface ListOptions {
   exclude?: Array<number>;
 }
 
-interface ListMetadata {
+export interface ListMetadata {
   canCreate?: boolean;
   available: number;
   count: number;
