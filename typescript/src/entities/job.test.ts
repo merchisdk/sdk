@@ -44,8 +44,9 @@ test('add two files to job', () => {
   return job.save().then(job => {
     const data: any = Array.from(fetch.mock.calls[0][1]['body'].entries());
     expect(data[1][1]).toEqual('0');
-    expect(data[3][1]).toEqual('1');
-    expect(data[4][1]).toEqual('2');
+    expect(data[2][1]).toEqual('1');
+    expect(data[6][1]).toEqual('1');
+    expect(data[10][1]).toEqual('2');
   });
 });
 
