@@ -5,9 +5,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class JobComment extends Entity {
-  protected static resourceName: string = "job_comments";
-  protected static singularName: string = "jobComment";
-  protected static pluralName: string = "jobComments";
+  protected static resourceName: string = 'job_comments';
+  protected static singularName: string = 'jobComment';
+  protected static pluralName: string = 'jobComments';
 
   @JobComment.property({type: Date})
   public archived?: Date | null;
@@ -33,11 +33,11 @@ export class JobComment extends Entity {
   @JobComment.property({type: Date})
   public file?: MerchiFile | null;
 
-  @JobComment.property({arrayType: "User"})
-  public forwards?: Array<User>;
+  @JobComment.property({arrayType: 'User'})
+  public forwards?: User[];
 
-  @JobComment.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @JobComment.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
   @JobComment.property()
   public job?: Job;

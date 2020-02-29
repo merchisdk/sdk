@@ -31,7 +31,7 @@ interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
-interface fromJsonOptions {
+interface FromJsonOptions {
   makeDirty: boolean;
 }
 
@@ -70,12 +70,12 @@ interface ListOptions {
   state?: string;
   categoryId?: number;
   inDomain?: number;
-  inDomainRoles?: Array<number>;
+  inDomainRoles?: number[];
   asRole?: Role;
   publicOnly?: boolean; 
   managedOnly?: boolean;
   memberOnly?: boolean;
-  domainRoles?: Array<Role>;
+  domainRoles?: Role[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
   dateFrom?: Date;
@@ -96,9 +96,9 @@ interface ListOptions {
   section?: NotificationSection;
   senderRole?: Role;
   isOrder?: boolean;
-  tags?: Array<number>;
-  tagNames?: Array<string>;
-  exclude?: Array<number>;
+  tags?: number[];
+  tagNames?: string[];
+  exclude?: number[];
 }
 
 export interface ListMetadata {
@@ -110,8 +110,8 @@ export interface ListMetadata {
 }
 
 export interface ListResponse<T> {
-  items: Array<T>,
-  metadata: ListMetadata,
+  items: T[];
+  metadata: ListMetadata;
 }
 
 interface SerialiseOptions {
@@ -195,9 +195,9 @@ export class Entity {
         attributeName);
       const propertyType = Reflect.getMetadata('design:type', self,
         attributeName);
-      // the array type is needed because 'design:type' breaks down
-      // with recursive classes, and also, does not contain the type
-      // of an arrays elements, which we need
+        // the array type is needed because 'design:type' breaks down
+        // with recursive classes, and also, does not contain the type
+        // of an arrays elements, which we need
       const arrayType = Reflect.getMetadata(Entity.arrayTypeKey, self,
         attributeName);
       const realArrayType = self.getEntityClass(arrayType);
@@ -246,7 +246,7 @@ export class Entity {
     return map;
   }
 
-  constructor(merchi?: Merchi) {
+  public constructor(merchi?: Merchi) {
     /* istanbul ignore next */
     if (merchi !== undefined) {
       this.merchi = merchi;
@@ -296,7 +296,7 @@ export class Entity {
       const get = () => {
         return info.currentValue;
       };
-      const set = (newValue?: Array<Entity>) => {
+      const set = (newValue?: Entity[]) => {
         info.currentValue = newValue;
         this.checkSameSessionList(newValue);
         this.addBackObjectList(newValue);
@@ -319,7 +319,7 @@ export class Entity {
 
   public static get<T extends typeof Entity>(this: T, key: number | string,
     options?: GetOptions):
-     Promise<InstanceType<T>>{
+    Promise<InstanceType<T>>{
     const resource = `/${this.resourceName}/${String(key)}/`;
     const fetchOptions: RequestOptions = {};
     fetchOptions.query = [];
@@ -341,7 +341,7 @@ export class Entity {
   }
 
   public static list<T extends typeof Entity>(this: T, options?: ListOptions):
-      Promise<ListResponse<InstanceType<T>>> {
+  Promise<ListResponse<InstanceType<T>>> {
     const resource = `/${this.resourceName}/`;
     const fetchOptions: RequestOptions = {};
     fetchOptions.query = [];
@@ -497,9 +497,9 @@ export class Entity {
         offset: data.offset};
       const pluralName = this.pluralName;
       const singularName = this.singularName;
-      const items: Array<any> = data[pluralName];
+      const items: any[] = data[pluralName];
       const entities = [];
-      for (let item of items) {
+      for (const item of items) {
         const entity: InstanceType<T> = (new this()) as InstanceType<T>;
         entity.fromJson(item[singularName]);
         entities.push(entity);
@@ -512,7 +512,7 @@ export class Entity {
   public save = (options?: SaveOptions) => {
     const primaryKey: number | string = this.getPrimaryKeyValue();
     const constructor = this.constructor as typeof Entity;
-    const resourceName:string = constructor.resourceName;
+    const resourceName: string = constructor.resourceName;
     const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const data = this.toFormData();
@@ -560,14 +560,14 @@ export class Entity {
     }
   };
 
-  protected checkSameSessionList = (other?: Array<Entity>) =>  {
+  protected checkSameSessionList = (other?: Entity[]) =>  {
     if (other !== undefined) {
       other.map(this.checkSameSession);
     }
   };
 
 
-  public fromJson = (json: any, options?: fromJsonOptions) => {
+  public fromJson = (json: any, options?: FromJsonOptions) => {
     options = options || {makeDirty: false};
     for (const key in json) {
       const value: any = (json as any)[key];
@@ -665,7 +665,7 @@ export class Entity {
       appendData('fileDataIndex', fileIndex.value);
       fileIndex.value++;
     }
-    const processArrayProperty = (info: PropertyInfo, value: Array<Entity>) => {
+    const processArrayProperty = (info: PropertyInfo, value: Entity[]) => {
       const remoteCount = value.length;
       const initialLength = Array.from((result as any).entries()).length;
       if (remoteCount === 0 && info.dirty) {
@@ -759,7 +759,7 @@ export class Entity {
     }
   }
 
-  protected addBackObjectList = (remotes?: Array<Entity>) => {
+  protected addBackObjectList = (remotes?: Entity[]) => {
     if (remotes !== undefined) {
       remotes.forEach(this.addBackObject);
     }
@@ -774,7 +774,7 @@ export class Entity {
       return;
     } 
     (this.propertiesMap.get(property) as PropertyInfo).dirty = true;
-    const openSet: Array<Entity> = [];  /* Queue (BFS) */
+    const openSet: Entity[] = [];  /* Queue (BFS) */
     const closedSet = new Set();
     openSet.push(this);
     while (openSet.length > 0) {
@@ -789,7 +789,7 @@ export class Entity {
 
   public delete = (options?: DeleteOptions) => {
     const primaryKey: number = this.getPrimaryKeyValue();
-    const resourceName:string = (this.constructor as any).resourceName;
+    const resourceName: string = (this.constructor as any).resourceName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
     const fetchOptions: RequestOptions = {method: 'DELETE'};
     fetchOptions.query = [];

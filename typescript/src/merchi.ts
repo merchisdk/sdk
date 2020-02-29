@@ -136,7 +136,7 @@ export class Merchi {
     return result;
   }
 
-  constructor(sessionToken?: string) {
+  public constructor(sessionToken?: string) {
     if (sessionToken) {
       this.sessionToken = sessionToken;
     } else {
