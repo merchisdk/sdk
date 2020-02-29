@@ -7,6 +7,7 @@ import { Entity } from '../entity';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { User } from './user';
+import { ShipmentMethod } from './shipment_method';
 
 export class Shipment extends Entity {
   protected static resourceName: string = "shipments";
@@ -90,6 +91,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({type: Invoice})
   public invoice?: Invoice | null;
+
+  @Shipment.property({type: ShipmentMethod})
+  public shipmentMethod?: ShipmentMethod | null;
 
   @Shipment.property({arrayType: "DomainTag"})
   public tags?: Array<DomainTag>;
