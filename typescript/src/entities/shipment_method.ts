@@ -30,7 +30,7 @@ export class ShipmentMethod extends Entity {
   @ShipmentMethod.property({type: Number})
   public transportCompany?: number | null;
 
-  @ShipmentMethodVariation.property()
+  @ShipmentMethod.property()
   public currency?: string;
 
   @ShipmentMethod.property({type: CountryTax})
