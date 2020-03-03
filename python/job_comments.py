@@ -17,6 +17,7 @@ class JobComment(sdk.python.entities.Entity):
     subject = Property(str)
     send_sms = Property(bool)
     send_email = Property(bool)
+    open_to_client = Property(bool)
 
 
 class JobComments(sdk.python.entities.Resource):
