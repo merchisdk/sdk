@@ -14,6 +14,9 @@ export class Component extends Entity {
   public id?: number;
 
   @Component.property()
+  public isClassBased?: boolean;
+
+  @Component.property()
   public name?: string;
 
   @Component.property()

@@ -10,6 +10,7 @@ class Component(sdk.python.entities.Entity):
     json_name = 'component'
 
     id = Property(int)
+    is_class_based = Property(bool)
     name = Property(str)
     body = Property(str)
     description = Property(str)
