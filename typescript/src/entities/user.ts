@@ -25,8 +25,8 @@ import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
 import { Role,
-  DOMAIN_MANAGERS, 
-  MANAGEMENT_TEAM, 
+  DOMAIN_MANAGERS,
+  MANAGEMENT_TEAM,
   BUSINESS_ACCOUNTS
 } from '../constants/roles'
 
@@ -276,7 +276,7 @@ export class User extends Entity {
       }
       if (this.hasAuthority(domain, roles)) {
         result.push(domain);
-      }      
+      }
     }
     return result;
   }
@@ -296,5 +296,5 @@ export class User extends Entity {
       }
     }
     return false;
-  } 
+  }
 }
