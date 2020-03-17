@@ -3,7 +3,7 @@ import { setup, mockFetch } from '../test_util';
 import { Role } from '../constants/roles';
 import { NotificationSection } from '../constants/notification_sections';
 import { NotificationType } from '../constants/notification_types';
-import { SortOrder } from '../entity';
+import { SortOrder, SerialiseMethod } from '../entity';
 
 setup();
 
@@ -186,6 +186,22 @@ test('can list products from server', () => {
     expect(md.available).toBe(2);
     expect(d[0].categories).toBe(undefined);
   });
+});
+
+test('can list products with serialise method with only id', () => {
+  const merchi = new Merchi();
+  const options = {serialiseMethod: SerialiseMethod.ONLY_ID};
+  const correct = [
+      ['serialise_method', 'only_id'],
+      ['skip_rights', 'y'],
+  ];
+  const fetch = mockFetch(true, {'products': [{'product': {'id': 1}},
+                                {'product': {'id': 2}}],
+                   'available': 2,
+                   'count': 2}, 200);
+  merchi.Product.list(options);
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+
 });
 
 test('can list products with options set', () => {
