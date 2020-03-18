@@ -229,12 +229,12 @@ export class Merchi {
     return apiFetch(resource, options);
   };
 
-  public getCurrentUser = () => {
+  public getCurrentUser = (embed?: any) => {
     if (!this.sessionToken) {
       return Promise.resolve(null);
     }
     return this.Session.get(this.sessionToken, {
-      embed: { user: { enrolledDomains: {domain: {}} } }
+      embed: embed ? embed : { user: { enrolledDomains: {domain: {}} } }
     }).then((session: any) => session.user);
   };
 }
