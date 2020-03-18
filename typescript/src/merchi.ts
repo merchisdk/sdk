@@ -1,5 +1,6 @@
 import {
   Entity,
+  // eslint-disable-next-line no-unused-vars
   EmbedDescriptor,
 } from './entity';
 import { Session } from './entities/session';
