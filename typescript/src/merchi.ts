@@ -236,7 +236,8 @@ export class Merchi {
     return apiFetch(resource, options);
   };
 
-  public getCurrentUser = ({ embed = {}}: UserRequestOptions) => {
+  public getCurrentUser = (options?: UserRequestOptions) => {
+    const { embed = {} } = options || {};
     const defaultEmbed = { user: { enrolledDomains: {domain: {}} } };
     if (!this.sessionToken) {
       return Promise.resolve(null);
