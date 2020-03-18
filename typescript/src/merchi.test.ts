@@ -20,5 +20,5 @@ test('get current user return empty if there is no cookie', () => {
   });
   const merchi = new Merchi();
   mockFetch(true, { user: { name: 'currentUser' } }, 200);
-  return merchi.getCurrentUser().then(user => expect(user).toBe(null));
+  return merchi.getCurrentUser({}).then(user => expect(user).toBe(null));
 });
