@@ -54,7 +54,7 @@ export class Domain extends Entity {
   public enableSmsNotifications?: boolean;
 
   @Domain.property()
-  public mailgunRecords?: Array<any>;
+  public mailgunRecords?: any[];
 
   @Domain.property()
   public enableNotifications?: boolean;
