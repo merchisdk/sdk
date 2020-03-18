@@ -1,4 +1,7 @@
-import { Entity } from './entity';
+import {
+  EmbedDescriptor,
+  Entity,
+} from './entity';
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
 import { Domain } from './entities/domain';
@@ -229,12 +232,14 @@ export class Merchi {
     return apiFetch(resource, options);
   };
 
-  public getCurrentUser = (embed?: any) => {
+  public getCurrentUser = (embed?: EmbedDescriptor) => {
+    const defaultEmbed = { user: { enrolledDomains: {domain: {}} } };
     if (!this.sessionToken) {
       return Promise.resolve(null);
     }
-    return this.Session.get(this.sessionToken, {
-      embed: embed ? embed : { user: { enrolledDomains: {domain: {}} } }
-    }).then((session: any) => session.user);
+    return this.Session.get(
+      this.sessionToken,
+      { embed: embed ? embed : defaultEmbed },
+    ).then((session: any) => session.user);
   };
 }
