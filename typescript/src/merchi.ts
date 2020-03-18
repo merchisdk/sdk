@@ -1,6 +1,6 @@
 import {
-  EmbedDescriptor,
   Entity,
+  EmbedDescriptor,
 } from './entity';
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
@@ -73,6 +73,10 @@ function cloneClass<T, A extends []>(
   // pick up any static members (this is shallow, the members are not copied)
   Object.assign(copy, original);
   return copy;
+}
+
+interface UserRequestOptions {
+  embed?: EmbedDescriptor,
 }
 
 export class Merchi {
@@ -232,14 +236,14 @@ export class Merchi {
     return apiFetch(resource, options);
   };
 
-  public getCurrentUser = (embed?: EmbedDescriptor) => {
+  public getCurrentUser = ({ embed = {}}: UserRequestOptions) => {
     const defaultEmbed = { user: { enrolledDomains: {domain: {}} } };
     if (!this.sessionToken) {
       return Promise.resolve(null);
     }
     return this.Session.get(
       this.sessionToken,
-      { embed: embed ? {...defaultEmbed, ...embed } : defaultEmbed },
+      { embed: {...defaultEmbed, ...embed } },
     ).then((session: any) => session.user);
   };
 }
