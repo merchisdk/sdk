@@ -239,7 +239,7 @@ export class Merchi {
     }
     return this.Session.get(
       this.sessionToken,
-      { embed: embed ? embed : defaultEmbed },
+      { embed: embed ? {...defaultEmbed, ...embed } : defaultEmbed },
     ).then((session: any) => session.user);
   };
 }
