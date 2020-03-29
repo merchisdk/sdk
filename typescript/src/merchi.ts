@@ -1,4 +1,8 @@
-import { Entity } from './entity';
+import {
+  Entity,
+  // eslint-disable-next-line no-unused-vars
+  EmbedDescriptor,
+} from './entity';
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
 import { Domain } from './entities/domain';
@@ -70,6 +74,10 @@ function cloneClass<T, A extends []>(
   // pick up any static members (this is shallow, the members are not copied)
   Object.assign(copy, original);
   return copy;
+}
+
+interface UserRequestOptions {
+  embed?: EmbedDescriptor,
 }
 
 export class Merchi {
@@ -229,12 +237,15 @@ export class Merchi {
     return apiFetch(resource, options);
   };
 
-  public getCurrentUser = () => {
+  public getCurrentUser = (options?: UserRequestOptions) => {
+    const { embed = {} } = options || {};
+    const defaultEmbed = { user: { enrolledDomains: {domain: {}} } };
     if (!this.sessionToken) {
       return Promise.resolve(null);
     }
-    return this.Session.get(this.sessionToken, {
-      embed: { user: { enrolledDomains: {domain: {}} } }
-    }).then((session: any) => session.user);
+    return this.Session.get(
+      this.sessionToken,
+      { embed: {...defaultEmbed, ...embed } },
+    ).then((session: any) => session.user);
   };
 }
