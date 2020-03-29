@@ -3,8 +3,6 @@ import { RequestOptions } from './request';
 // eslint-disable-next-line no-unused-vars
 import { Merchi } from './merchi';
 // eslint-disable-next-line no-unused-vars
-import { Notification } from './entities/notification';
-// eslint-disable-next-line no-unused-vars
 import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { NotificationType } from './constants/notification_types';
@@ -17,7 +15,7 @@ interface RelatedObj {
 interface ToastOptions {
   entities: Array<RelatedObj>;
   sections: Array<NotificationSection>;
-  notificationTypes: Record<NotificationType, boolean>;
+  notificationTypes?: Record<NotificationType, boolean>;
 }
 
 
