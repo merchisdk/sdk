@@ -86,8 +86,6 @@ class Theme(sdk.python.entities.Entity):
     domain_invite_page_error = Property(str)
     reset_password_page_error = Property(str)
     password_change_page_error = Property(str)
-    sms_login_page_error = Property(str)
-    sms_token_page_error = Property(str)
     jobs_page_error = Property(str)
     job_drafting_page_error = Property(str)
     job_quote_requested_page_error = Property(str)
@@ -117,8 +115,6 @@ class Theme(sdk.python.entities.Entity):
             self.domain_invite_page_error is None and\
             self.reset_password_page_error is None and\
             self.password_change_page_error is None and\
-            self.sms_login_page_error is None and\
-            self.sms_token_page_error is None and\
             self.jobs_page_error is None and\
             self.job_drafting_page_error is None and\
             self.draft_preview_page_error is None and\
