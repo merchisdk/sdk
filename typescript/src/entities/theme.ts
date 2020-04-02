@@ -131,30 +131,6 @@ export class Theme extends Entity {
   public passwordChangeJs?: string;
 
   @Theme.property({type: String})
-  public smsLoginPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public smsLoginPageError?: string | null;
-
-  @Theme.property()
-  public smsLoginHtml?: string;
-
-  @Theme.property()
-  public smsLoginJs?: string;
-
-  @Theme.property({type: String})
-  public smsTokenPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public smsTokenPageError?: string | null;
-
-  @Theme.property()
-  public smsTokenHtml?: string;
-
-  @Theme.property()
-  public smsTokenJs?: string;
-
-  @Theme.property({type: String})
   public jobsPageTemplate?: string | null;
 
   @Theme.property({type: String})
