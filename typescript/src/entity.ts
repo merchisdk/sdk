@@ -27,7 +27,7 @@ interface PropertyOptions {
   arrayType?: string;
 }
 
-interface EmbedDescriptor {
+export interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
