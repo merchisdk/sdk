@@ -79,6 +79,12 @@ class Theme(sdk.python.entities.Entity):
     invoice_paid_page_template = Property(str)
     invoice_paid_html = Property(str)
     invoice_paid_js = Property(str)
+    login_page_template = Property(str)
+    login_page_html = Property(str)
+    login_page_js = Property(str)
+    error_page_template = Property(str)
+    error_page_html = Property(str)
+    error_page_js = Property(str)
 
     index_page_error = Property(str)
     invoices_page_error = Property(str)
@@ -95,6 +101,8 @@ class Theme(sdk.python.entities.Entity):
     company_profile_page_error = Property(str)
     product_page_error = Property(str)
     invoice_paid_page_error = Property(str)
+    login_page_error = Property(str)
+    error_page_error = Property(str)
     header_error = Property(str)
     footer_error = Property(str)
     last_updated = Property(datetime.datetime)
@@ -110,6 +118,8 @@ class Theme(sdk.python.entities.Entity):
         return self.main_css_status == VALID_AND_UPDATED and \
             self.email_css_status == VALID_AND_UPDATED and \
             self.index_page_error is None and\
+            self.login_page_error is None and\
+            self.error_page_error is None and\
             self.invoices_page_error is None and\
             self.products_page_error is None and\
             self.domain_invite_page_error is None and\
