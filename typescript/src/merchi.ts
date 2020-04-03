@@ -77,7 +77,7 @@ function cloneClass<T, A extends []>(
 }
 
 interface UserRequestOptions {
-  embed?: EmbedDescriptor,
+  embed?: EmbedDescriptor;
 }
 
 export class Merchi {
