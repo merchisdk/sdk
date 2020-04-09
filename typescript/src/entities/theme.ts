@@ -131,30 +131,6 @@ export class Theme extends Entity {
   public passwordChangeJs?: string;
 
   @Theme.property({type: String})
-  public smsLoginPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public smsLoginPageError?: string | null;
-
-  @Theme.property()
-  public smsLoginHtml?: string;
-
-  @Theme.property()
-  public smsLoginJs?: string;
-
-  @Theme.property({type: String})
-  public smsTokenPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public smsTokenPageError?: string | null;
-
-  @Theme.property()
-  public smsTokenHtml?: string;
-
-  @Theme.property()
-  public smsTokenJs?: string;
-
-  @Theme.property({type: String})
   public jobsPageTemplate?: string | null;
 
   @Theme.property({type: String})
@@ -213,6 +189,30 @@ export class Theme extends Entity {
 
   @Theme.property()
   public invoiceJs?: string;
+
+  @Theme.property({type: String})
+  public loginPageTemplate?: string | null;
+
+  @Theme.property({type: String})
+  public loginPageError?: string | null;
+
+  @Theme.property()
+  public loginPageHtml?: string;
+
+  @Theme.property()
+  public loginPageJs?: string;
+
+  @Theme.property({type: String})
+  public errorPageTemplate?: string | null;
+
+  @Theme.property({type: String})
+  public errorPageError?: string | null;
+
+  @Theme.property()
+  public errorPageHtml?: string;
+
+  @Theme.property()
+  public errorPageJs?: string;
 
   @Theme.property({type: String})
   public userProfilePageTemplate?: string | null;
