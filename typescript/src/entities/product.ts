@@ -101,8 +101,11 @@ export class Product extends Entity {
   @Product.property()
   public domain?: Domain;
 
+  @Product.property()
+  public originalProduct?: Product;
+
   @Product.property({arrayType: 'MerchiFile'})
-  public images?: MerchiFile[];
+  public images?: Array<MerchiFile>;
 
   @Product.property({arrayType: 'VariationField'})
   public groupVariationFields?: VariationField[];
