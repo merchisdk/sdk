@@ -101,6 +101,9 @@ export class Product extends Entity {
   @Product.property()
   public domain?: Domain;
 
+  @Product.property()
+  public originalProduct?: Product;
+
   @Product.property({arrayType: "MerchiFile"})
   public images?: Array<MerchiFile>;
 
