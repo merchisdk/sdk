@@ -192,13 +192,13 @@ test('can list products with serialise method with only id', () => {
   const merchi = new Merchi();
   const options = {serialiseMethod: SerialiseMethod.ONLY_ID};
   const correct = [
-      ['serialise_method', 'only_id'],
-      ['skip_rights', 'y'],
+    ['serialise_method', 'only_id'],
+    ['skip_rights', 'y'],
   ];
   const fetch = mockFetch(true, {'products': [{'product': {'id': 1}},
-                                {'product': {'id': 2}}],
-                   'available': 2,
-                   'count': 2}, 200);
+    {'product': {'id': 2}}],
+  'available': 2,
+  'count': 2}, 200);
   merchi.Product.list(options);
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
 

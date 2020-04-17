@@ -8,13 +8,13 @@ import { NotificationSection } from './constants/notification_sections';
 import { NotificationType } from './constants/notification_types';
 
 interface RelatedObj {
-  id: number,
-  type: string
+  id: number;
+  type: string;
 }
 
 interface ToastOptions {
-  entities: Array<RelatedObj>;
-  sections: Array<NotificationSection>;
+  entities: RelatedObj[];
+  sections: NotificationSection[];
   notificationTypes?: Record<NotificationType, boolean>;
 }
 
