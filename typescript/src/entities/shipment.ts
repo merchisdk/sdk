@@ -10,9 +10,9 @@ import { User } from './user';
 import { ShipmentMethod } from './shipment_method';
 
 export class Shipment extends Entity {
-  protected static resourceName: string = "shipments";
-  protected static singularName: string = "shipment";
-  protected static pluralName: string = "shipments";
+  protected static resourceName: string = 'shipments';
+  protected static singularName: string = 'shipment';
+  protected static pluralName: string = 'shipments';
 
   @Shipment.property({type: Date})
   public archived?: Date | null;
@@ -95,12 +95,12 @@ export class Shipment extends Entity {
   @Shipment.property({type: ShipmentMethod})
   public shipmentMethod?: ShipmentMethod | null;
 
-  @Shipment.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Shipment.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
-  @Shipment.property({arrayType: "Assignment"})
-  public assignments?: Array<Assignment>;
+  @Shipment.property({arrayType: 'Assignment'})
+  public assignments?: Assignment[];
 
-  @Shipment.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Shipment.property({arrayType: 'Job'})
+  public jobs?: Job[];
 }

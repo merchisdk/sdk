@@ -77,7 +77,7 @@ function cloneClass<T, A extends []>(
 }
 
 interface UserRequestOptions {
-  embed?: EmbedDescriptor,
+  embed?: EmbedDescriptor;
 }
 
 export class Merchi {
@@ -144,7 +144,7 @@ export class Merchi {
     return result;
   }
 
-  constructor(sessionToken?: string) {
+  public constructor(sessionToken?: string) {
     if (sessionToken) {
       this.sessionToken = sessionToken;
     } else {

@@ -13,7 +13,7 @@ test('fetch toast of jobs', () => {
     true, {'notifications': [{id: 1, message: 'test'}]}, 200);
   const entities = [{id: 1, type: 'job'}];
   const sections = [NotificationSection.JOB_NOTIFICATIONS];
-  let notificationTypes = {[NotificationType.JOB_PAID]: true};
+  const notificationTypes = {[NotificationType.JOB_PAID]: true};
 
   const options = {entities, sections, notificationTypes};
   const invocation = toastNotifications(merchi, options as any);

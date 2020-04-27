@@ -3,17 +3,17 @@ import { ErrorType, getErrorFromCode } from './constants/errors';
 
 /* this constant are expected to be defined in webpack (or provided as
    globals by some other means. */
-declare const BACKEND_URI: String;
+declare const BACKEND_URI: string;
 
 export interface RequestOptions extends RequestInit {
-  query?: Array<Array<string>>;
+  query?: string[][];
 }
 
 export class ApiError extends Error {
-  statusCode?: number;
-  errorCode?: ErrorType;
-  original: any;
-  constructor(err: any) {
+  public statusCode?: number;
+  public errorCode?: ErrorType;
+  public original: any;
+  public constructor(err: any) {
     const message = JSON.stringify(err);
     /* istanbul ignore next */
     super(message);
@@ -22,6 +22,19 @@ export class ApiError extends Error {
     this.name = 'ApiError';
     this.original = err;
   }
+}
+
+export function backendFetch(resource: string, options?: RequestOptions) {
+  const server = (window as any).merchiBackendUri ?
+    (window as any).merchiBackendUri : BACKEND_URI;
+  const version = 'v6';
+  const url = new URL(server + version + resource);
+  if (options && options.query) {
+    for (const entry of options.query) {
+      url.searchParams.append(entry[0], entry[1]);
+    }
+  }
+  return fetch(url.toString(), options);
 }
 
 export function apiFetch(resource: string, options?: RequestOptions) {
@@ -35,17 +48,4 @@ export function apiFetch(resource: string, options?: RequestOptions) {
       } else {
         return response.json();
       }});
-}
-
-export function backendFetch(resource: string, options?: RequestOptions) {
-  const server = (window as any).merchiBackendUri ?
-    (window as any).merchiBackendUri : BACKEND_URI;
-  const version = 'v6';
-  const url = new URL(server + version + resource);
-  if (options && options.query) {
-    for (let entry of options.query) {
-      url.searchParams.append(entry[0], entry[1]);
-    }
-  }
-  return fetch(url.toString(), options);
 }

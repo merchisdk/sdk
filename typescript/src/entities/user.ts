@@ -28,7 +28,7 @@ import { Role,
   DOMAIN_MANAGERS, 
   MANAGEMENT_TEAM, 
   BUSINESS_ACCOUNTS
-} from '../constants/roles'
+} from '../constants/roles';
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
@@ -102,126 +102,126 @@ export class User extends Entity {
   public enableInvoiceReminders?: boolean;
 
   @User.property({ arrayType: 'JobComment' })
-  public jobComments?: Array<JobComment>;
+  public jobComments?: JobComment[];
 
   @User.property({ arrayType: 'EmailAddress' })
-  public _emailAddresses?: Array<EmailAddress>;
+  public _emailAddresses?: EmailAddress[];
 
   @User.property({ arrayType: 'PhoneNumber' })
-  public _phoneNumbers?: Array<PhoneNumber>;
+  public _phoneNumbers?: PhoneNumber[];
 
   @User.property({ arrayType: 'Address' })
-  public _addresses?: Array<Address>;
+  public _addresses?: Address[];
 
   @User.property({ arrayType: 'UserCompany' })
-  public _companies?: Array<UserCompany>;
+  public _companies?: UserCompany[];
 
   @User.property({ arrayType: 'Category' })
-  public categories?: Array<Category>;
+  public categories?: Category[];
 
   @User.property({ arrayType: 'Product' })
-  public products?: Array<Product>;
+  public products?: Product[];
 
   @User.property({type: 'MerchiFile'})
   public profilePicture?: MerchiFile | null;
 
   @User.property({ arrayType: 'PhoneNumber' })
-  public phoneNumbers?: Array<PhoneNumber>;
+  public phoneNumbers?: PhoneNumber[];
 
   @User.property({ arrayType: 'Session' })
-  public sessions?: Array<Session>;
+  public sessions?: Session[];
 
   @User.property({ arrayType: 'Shipment' })
-  public shipmentsAsSender?: Array<Shipment>;
+  public shipmentsAsSender?: Shipment[];
 
   @User.property({ arrayType: 'Shipment' })
-  public shipmentsAsReceiver?: Array<Shipment>;
+  public shipmentsAsReceiver?: Shipment[];
 
   @User.property({ arrayType: 'DraftComment' })
-  public draftComments?: Array<DraftComment>;
+  public draftComments?: DraftComment[];
 
   @User.property({ arrayType: 'DraftComment' })
-  public forwardedDraftComments?: Array<DraftComment>;
+  public forwardedDraftComments?: DraftComment[];
 
   @User.property({ arrayType: 'SystemRole' })
-  public systemRoles?: Array<SystemRole>;
+  public systemRoles?: SystemRole[];
 
   @User.property({ arrayType: 'EmailAddress' })
-  public emailAddresses?: Array<EmailAddress>;
+  public emailAddresses?: EmailAddress[];
 
   @User.property({ arrayType: 'Notification' })
-  public notifications?: Array<Notification>;
+  public notifications?: Notification[];
 
   @User.property({ arrayType: 'Notification' })
-  public sentNotifications?: Array<Notification>;
+  public sentNotifications?: Notification[];
 
   @User.property({ arrayType: 'Assignment' })
-  public assignments?: Array<Assignment>;
+  public assignments?: Assignment[];
 
   @User.property({ arrayType: 'UserCompany' })
-  public userCompanies?: Array<UserCompany>;
+  public userCompanies?: UserCompany[];
 
   @User.property({ arrayType: 'Draft' })
-  public drafts?: Array<Draft>;
+  public drafts?: Draft[];
 
   @User.property({ arrayType: 'CompanyInvitation' })
-  public companyInvitations?: Array<CompanyInvitation>;
+  public companyInvitations?: CompanyInvitation[];
 
   @User.property({ arrayType: 'Address' })
-  public addresses?: Array<Address>;
+  public addresses?: Address[];
 
   @User.property({ arrayType: 'MerchiFile' })
-  public uploadFiles?: Array<MerchiFile>;
+  public uploadFiles?: MerchiFile[];
 
   @User.property({ arrayType: 'JobComment' })
-  public forwardedJobComments?: Array<JobComment>;
+  public forwardedJobComments?: JobComment[];
 
   @User.property({ arrayType: 'Job' })
-  public appliedJobs?: Array<Job>;
+  public appliedJobs?: Job[];
 
   @User.property({ arrayType: 'Job' })
-  public managedJobs?: Array<Job>;
+  public managedJobs?: Job[];
 
   @User.property({ arrayType: 'Job' })
-  public draftingJobs?: Array<Job>;
+  public draftingJobs?: Job[];
 
   @User.property({ arrayType: 'Product' })
-  public saved_products?: Array<Product>;
+  public saved_products?: Product[];
 
   @User.property({ arrayType: 'Cart' })
-  public carts?: Array<Cart>;
+  public carts?: Cart[];
 
   @User.property({ arrayType: 'Payment' })
-  public payments?: Array<Payment>;
+  public payments?: Payment[];
 
   @User.property({ arrayType: 'EnrolledDomain' })
-  public enrolledDomains?: Array<EnrolledDomain>;
+  public enrolledDomains?: EnrolledDomain[];
 
   @User.property({ arrayType: 'Invoice' })
-  public responsibleInvoices?: Array<Invoice>;
+  public responsibleInvoices?: Invoice[];
 
   @User.property({ arrayType: 'Invoice' })
-  public createdInvoices?: Array<Invoice>;
+  public createdInvoices?: Invoice[];
 
   @User.property({ arrayType: 'Invoice' })
-  public invoicesHas?: Array<Invoice>;
+  public invoicesHas?: Invoice[];
 
   @User.property({ arrayType: 'DomainInvitation' })
-  public sentDomainInvitations?: Array<DomainInvitation>;
+  public sentDomainInvitations?: DomainInvitation[];
 
   @User.property({ arrayType: 'DomainInvitation' })
-  public receivedDomainInvitations?: Array<DomainInvitation>;
+  public receivedDomainInvitations?: DomainInvitation[];
 
   @User.property({ arrayType: 'Theme' })
-  public themes?: Array<Theme>;
+  public themes?: Theme[];
 
   @User.property({ arrayType: 'ProductionComment' })
-  public forwardedProductionComments?: Array<ProductionComment>;
+  public forwardedProductionComments?: ProductionComment[];
 
   public publicCreate = this.createFactory(
     {resourceName: 'public-user-create'});
 
-  public roleInDomain = (domain: Domain) => {
+  public roleInDomain = (domain: Domain): Role => {
     if (this.enrolledDomains === undefined) {
       const err = 'enrolledDomains is undefined, did you forget to embed it?';
       throw new Error(err);
@@ -236,18 +236,19 @@ export class User extends Entity {
       throw new Error(err);
     }
     const matchingEnrolledDomains = this.enrolledDomains.filter(
-      enrolledDomain => enrolledDomain.domain!.id === domain.id
-    );
+      enrolledDomain => enrolledDomain.domain && enrolledDomain.domain.id === domain.id);
 
     if (matchingEnrolledDomains.length > 1) {
       const err =
         'Multiple enrolled domains are matching, seems like something is wrong';
       throw new Error(err);
     }
-    if (matchingEnrolledDomains.length === 0) {
-      return Role.PUBLIC;
+    if (matchingEnrolledDomains.length > 0) {
+      if (matchingEnrolledDomains[0].role !== undefined) {
+        return matchingEnrolledDomains[0].role;
+      }
     }
-    return matchingEnrolledDomains[0].role!;
+    return Role.PUBLIC;
   };
 
   public isDomainManager(domain: Domain) {
@@ -262,7 +263,7 @@ export class User extends Entity {
     return BUSINESS_ACCOUNTS.includes(this.roleInDomain(domain));
   }
 
-  public domainsByRoles(roles: Array<Role>) {
+  public domainsByRoles(roles: Role[]) {
     if (this.enrolledDomains === undefined) {
       const err = 'enrolledDomains is undefined, did you forget to embed it?';
       throw new Error(err);
@@ -281,7 +282,7 @@ export class User extends Entity {
     return result;
   }
 
-  public hasAuthority(domain: Domain, roles: Array<Role>) {
+  public hasAuthority(domain: Domain, roles: Role[]) {
     if (this.isSuperUser === undefined) {
       const err = 'isSuperUser is undefined, did you forget to embed it?';
       throw new Error(err);

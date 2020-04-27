@@ -28,6 +28,7 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned" />
         <exclude name="Squiz.Arrays.ArrayDeclaration.FirstIndexNoNewline" />
         <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.IndexNoNewline" />
         <exclude name="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterEquals" />
         <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact" />
         <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis" />

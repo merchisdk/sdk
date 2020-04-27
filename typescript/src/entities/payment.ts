@@ -3,9 +3,9 @@ import { Invoice } from './invoice';
 import { User } from './user';
 
 export class Payment extends Entity {
-  protected static resourceName: string = "payments";
-  protected static singularName: string = "payment";
-  protected static pluralName: string = "payments";
+  protected static resourceName: string = 'payments';
+  protected static singularName: string = 'payment';
+  protected static pluralName: string = 'payments';
 
   @Payment.property({type: Date})
   public archived?: Date | null;

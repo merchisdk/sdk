@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class UserCompany extends Entity {
-  protected static resourceName: string = "user_companies";
-  protected static singularName: string = "userCompany";
-  protected static pluralName: string = "userCompanies";
+  protected static resourceName: string = 'user_companies';
+  protected static singularName: string = 'userCompany';
+  protected static pluralName: string = 'userCompanies';
 
   @UserCompany.property({type: Date})
   public archived?: Date | null;
