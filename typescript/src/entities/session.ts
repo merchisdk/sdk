@@ -3,10 +3,10 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class Session extends Entity {
-  protected static resourceName: string = "sessions";
-  protected static singularName: string = "session";
-  protected static pluralName: string = "sessions";
-  protected static primaryKey: string = "token";
+  protected static resourceName: string = 'sessions';
+  protected static singularName: string = 'session';
+  protected static pluralName: string = 'sessions';
+  protected static primaryKey: string = 'token';
 
   @Session.property({type: Date})
   public archived?: Date | null;

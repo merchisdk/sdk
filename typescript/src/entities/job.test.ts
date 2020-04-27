@@ -36,12 +36,12 @@ test('add two files to job', () => {
   const merchi = new Merchi();
   const job = new merchi.Job();
   const f1 = new merchi.MerchiFile();
-  f1.fromFormFile(new File([""], "1"));
+  f1.fromFormFile(new File([''], '1'));
   const f2 = new merchi.MerchiFile();
-  f2.fromFormFile(new File([""], "2"));
+  f2.fromFormFile(new File([''], '2'));
   job.clientFiles = [f1, f2];
   const fetch = mockFetch(true, {'job': {}}, 200);
-  return job.save().then(job => {
+  return job.save().then(() => {
     const data: any = Array.from(fetch.mock.calls[0][1]['body'].entries());
     expect(data[1][1]).toEqual('0');
     expect(data[2][1]).toEqual('1');

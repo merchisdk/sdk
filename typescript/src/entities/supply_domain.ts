@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { Product } from './product';
 
 export class SupplyDomain extends Entity {
-  protected static resourceName: string = "supply_domains";
-  protected static singularName: string = "supplyDomain";
-  protected static pluralName: string = "supplyDomains";
+  protected static resourceName: string = 'supply_domains';
+  protected static singularName: string = 'supplyDomain';
+  protected static pluralName: string = 'supplyDomains';
 
   @SupplyDomain.property({type: Date})
   public archived?: Date | null;

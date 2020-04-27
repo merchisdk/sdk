@@ -2,9 +2,9 @@ import { Bid } from './bid';
 import { Entity } from '../entity';
 
 export class BidItem extends Entity {
-  protected static resourceName: string = "bid_items";
-  protected static singularName: string = "bidItem";
-  protected static pluralName: string = "bidItems";
+  protected static resourceName: string = 'bid_items';
+  protected static singularName: string = 'bidItem';
+  protected static pluralName: string = 'bidItems';
 
   @BidItem.property({type: Date})
   public archived?: Date | null;
