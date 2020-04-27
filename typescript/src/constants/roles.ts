@@ -23,8 +23,8 @@ export const MANAGEMENT_TEAM = [
 ];
 
 export const BUSINESS_ACCOUNTS = [
-    ...MANAGEMENT_TEAM,
-    Role.SUPPLIER,
+  ...MANAGEMENT_TEAM,
+  Role.SUPPLIER,
 ];
 
 export const MANAGEMENT_ROLES = [Role.ADMIN, Role.MANAGER];

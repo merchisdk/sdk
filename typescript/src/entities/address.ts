@@ -8,9 +8,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Address extends Entity {
-  protected static resourceName: string = "addresses";
-  protected static singularName: string = "address";
-  protected static pluralName: string = "addresses";
+  protected static resourceName: string = 'addresses';
+  protected static singularName: string = 'address';
+  protected static pluralName: string = 'addresses';
 
   @Address.property({type: Date})
   public archived?: Date | null;
@@ -36,30 +36,30 @@ export class Address extends Entity {
   @Address.property({type: String})
   public postcode?: string | null;
 
-  @Address.property({arrayType: "Shipment"})
-  public shipmentAsSenderAddress?: Array<Shipment>;
+  @Address.property({arrayType: 'Shipment'})
+  public shipmentAsSenderAddress?: Shipment[];
 
-  @Address.property({arrayType: "Shipment"})
-  public shipmentsAsReceiverAddress?: Array<Shipment>;
+  @Address.property({arrayType: 'Shipment'})
+  public shipmentsAsReceiverAddress?: Shipment[];
 
-  @Address.property({arrayType: "Bank"})
-  public banks?: Array<Bank>;
+  @Address.property({arrayType: 'Bank'})
+  public banks?: Bank[];
 
-  @Address.property({arrayType: "User"})
-  public users?: Array<User>;
+  @Address.property({arrayType: 'User'})
+  public users?: User[];
 
-  @Address.property({arrayType: "Inventory"})
-  public inventories?: Array<Inventory>;
+  @Address.property({arrayType: 'Inventory'})
+  public inventories?: Inventory[];
 
-  @Address.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Address.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @Address.property({arrayType: "Job"})
-  public productedJobs?: Array<Job>;
+  @Address.property({arrayType: 'Job'})
+  public productedJobs?: Job[];
 
-  @Address.property({arrayType: "Invoice"})
-  public shippingTo?: Array<Invoice>;
+  @Address.property({arrayType: 'Invoice'})
+  public shippingTo?: Invoice[];
 
-  @Address.property({arrayType: "Company"})
-  public companies?: Array<Company>;
+  @Address.property({arrayType: 'Company'})
+  public companies?: Company[];
 }

@@ -1,10 +1,10 @@
-import { Merchi } from "../merchi";
-import { Role } from "../constants/roles";
+import { Merchi } from '../merchi';
+import { Role } from '../constants/roles';
 import { setup, mockFetch } from '../test_util';
 
 setup();
 
-test("can make User", () => {
+test('can make User', () => {
   const merchi = new Merchi();
   const user = new merchi.User();
   expect(user).toBeTruthy();
@@ -16,14 +16,14 @@ test('can issue public create request to server', () => {
   user.name = 'Test User';
   const data = Array.from((user.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
-  user.publicCreate()
-  const fetchUrl = fetch.mock.calls[0][0]
+  user.publicCreate();
+  const fetchUrl = fetch.mock.calls[0][0];
   const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
   expect(sentToServer).toEqual(data);
   expect(fetchUrl).toMatch('public-user-create');
 });
 
-test("role helper function", () => {
+test('role helper function', () => {
   const merchi = new Merchi();
   const user = new merchi.User();
   const userSupplier = new merchi.User();
@@ -64,7 +64,7 @@ test("role helper function", () => {
 });
 
 
-test("domainsByRoles", () => {
+test('domainsByRoles', () => {
   const merchi = new Merchi();
   const user = new merchi.User();
   expect(() => user.domainsByRoles([])).toThrow();

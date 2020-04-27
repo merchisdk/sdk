@@ -2,9 +2,9 @@ import { Bid } from './bid';
 import { Entity } from '../entity';
 
 export class BidItem extends Entity {
-  protected static resourceName: string = "bid_items";
-  protected static singularName: string = "bidItem";
-  protected static pluralName: string = "bidItems";
+  protected static resourceName: string = 'bid_items';
+  protected static singularName: string = 'bidItem';
+  protected static pluralName: string = 'bidItems';
 
   @BidItem.property({type: Date})
   public archived?: Date | null;
@@ -29,10 +29,10 @@ export class BidItem extends Entity {
 
   public total = () => {
     if (this.quantity === undefined) {
-      throw new Error("quantity is undefined, did you forget to embed it?");
+      throw new Error('quantity is undefined, did you forget to embed it?');
     }
     if (this.unitPrice === undefined) {
-      throw new Error("unitPrice is undefined, did you forget to embed it?");
+      throw new Error('unitPrice is undefined, did you forget to embed it?');
     }
     const unitPrice = this.unitPrice === null ? 0 : this.unitPrice;
     return (this.quantity * unitPrice).toFixed(3);

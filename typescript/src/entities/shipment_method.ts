@@ -5,9 +5,9 @@ import { CountryTax } from './country_tax';
 import { ShipmentMethodVariation } from './shipment_method_variation';
 
 export class ShipmentMethod extends Entity {
-  protected static resourceName: string = "shipment_methods";
-  protected static singularName: string = "shipmentMethod";
-  protected static pluralName: string = "shipmentMethods";
+  protected static resourceName: string = 'shipment_methods';
+  protected static singularName: string = 'shipmentMethod';
+  protected static pluralName: string = 'shipmentMethods';
 
   @ShipmentMethod.property()
   public id?: number;
@@ -37,5 +37,5 @@ export class ShipmentMethod extends Entity {
   public taxType?: CountryTax | null;
 
   @ShipmentMethod.property({arrayType: 'ShipmentMethodVariation'})
-  public variations?: Array<ShipmentMethodVariation>;
+  public variations?: ShipmentMethodVariation[];
 }

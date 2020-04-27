@@ -15,9 +15,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Invoice extends Entity {
-  protected static resourceName: string = "invoices";
-  protected static singularName: string = "invoice";
-  protected static pluralName: string = "invoices";
+  protected static resourceName: string = 'invoices';
+  protected static singularName: string = 'invoice';
+  protected static pluralName: string = 'invoices';
 
   @Invoice.property({type: Date})
   public archived?: Date | null;
@@ -112,8 +112,8 @@ export class Invoice extends Entity {
   @Invoice.property()
   public domain?: Domain;
 
-  @Invoice.property({arrayType: "Item"})
-  public items?: Array<Item>;
+  @Invoice.property({arrayType: 'Item'})
+  public items?: Item[];
 
   @Invoice.property({type: MerchiFile})
   public pdf?: MerchiFile | null;
@@ -133,21 +133,21 @@ export class Invoice extends Entity {
   @Invoice.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Invoice.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Invoice.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
-  @Invoice.property({arrayType: "Shipment"})
-  public shipments?: Array<Shipment>;
+  @Invoice.property({arrayType: 'Shipment'})
+  public shipments?: Shipment[];
 
-  @Invoice.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @Invoice.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
-  @Invoice.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Invoice.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
   @Invoice.property()
   public cart?: Cart;
 
-  @Invoice.property({arrayType: "Payment"})
-  public payments?: Array<Payment>;
+  @Invoice.property({arrayType: 'Payment'})
+  public payments?: Payment[];
 }

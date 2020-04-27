@@ -6,9 +6,9 @@ import { Page } from './page';
 import { ThemeStatus } from '../constants/theme_status';
 
 export class Theme extends Entity {
-  protected static resourceName: string = "themes";
-  protected static singularName: string = "theme";
-  protected static pluralName: string = "themes";
+  protected static resourceName: string = 'themes';
+  protected static singularName: string = 'theme';
+  protected static pluralName: string = 'themes';
 
   @Theme.property({type: Date})
   public archived?: Date | null;
@@ -286,8 +286,8 @@ export class Theme extends Entity {
   @Theme.property({embeddedByDefault: false, type: String})
   public emailCssTemplateEditing?: string | null;
 
-  @Theme.property({arrayType: "MerchiFile"})
-  public cssImageFiles?: Array<MerchiFile>;
+  @Theme.property({arrayType: 'MerchiFile'})
+  public cssImageFiles?: MerchiFile[];
 
   @Theme.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
@@ -298,19 +298,19 @@ export class Theme extends Entity {
   @Theme.property({type: User})
   public author?: User | null;
 
-  @Theme.property({arrayType: "MerchiFile"})
-  public images?: Array<MerchiFile>;
+  @Theme.property({arrayType: 'MerchiFile'})
+  public images?: MerchiFile[];
 
-  @Theme.property({arrayType: "Domain"})
-  public domains?: Array<Domain>;
+  @Theme.property({arrayType: 'Domain'})
+  public domains?: Domain[];
 
-  @Theme.property({arrayType: "Page"})
-  public pages?: Array<Page>;
+  @Theme.property({arrayType: 'Page'})
+  public pages?: Page[];
 
   public canBeActivated = () => {
     const validStatus = ThemeStatus.VALID_BUT_NOT_UPDATED;
     if (this.mainCssStatus === undefined || this.emailCssStatus === undefined) {
-      throw new Error("status is unknown");
+      throw new Error('status is unknown');
     }
     return this.mainCssStatus >= validStatus &&
       this.emailCssStatus >= validStatus;
@@ -319,14 +319,14 @@ export class Theme extends Entity {
   public isActiveOnDomain = (domainId: number) => {
     const domain = this.domain;
     if (domain === undefined) {
-      throw new Error("domain is unknown");
+      throw new Error('domain is unknown');
     }
     if (domain === null) {
       return false;
     }
     const activeTheme = domain.activeTheme;
     if (activeTheme === undefined) {
-      throw new Error("activeTheme is unknown");
+      throw new Error('activeTheme is unknown');
     }
     return domain.id == domainId && activeTheme.id === this.id;
   }
