@@ -4,6 +4,7 @@ from sdk.python.bids import Bid
 from sdk.python.production_comments import ProductionComment
 from sdk.python.jobs import Job
 from sdk.python.shipments import Shipment
+from sdk.python.supply_domains import SupplyDomain
 from sdk.python.notifications import Notification
 from sdk.python.entities import Property
 
@@ -21,6 +22,7 @@ class Assignment(sdk.python.entities.Entity):
     assignment_deadline = Property(datetime.datetime)
     job = Property(Job, backref="assignments")
     supply_job = Property(Job, backref="supply_assignment")
+    supply_domain = Property(SupplyDomain, backref="supply_assignments")
     supplier = Property('sdk.python.users.User')
     bid = Property(Bid, backref="assignments")
     comments = Property(ProductionComment, backref="assignment")
