@@ -15,7 +15,7 @@ test('quoteTotal', () => {
   bid.bidItems[0].quantity = 2;
   bid.bidItems[1].unitPrice = 25;
   bid.bidItems[1].quantity = 2;
-  expect(bid.quoteTotal()).toBe("850.000");
+  expect(bid.quoteTotal()).toBe('850.000');
 });
 
 test('findBidItemIndex', () => {

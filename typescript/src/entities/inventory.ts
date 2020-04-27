@@ -6,9 +6,9 @@ import { Product } from './product';
 import { VariationsGroup } from './variations_group';
 
 export class Inventory extends Entity {
-  protected static resourceName: string = "inventories";
-  protected static singularName: string = "inventory";
-  protected static pluralName: string = "inventories";
+  protected static resourceName: string = 'inventories';
+  protected static singularName: string = 'inventory';
+  protected static pluralName: string = 'inventories';
 
   @Inventory.property({type: Date})
   public archived?: Date | null;
@@ -31,12 +31,12 @@ export class Inventory extends Entity {
   @Inventory.property({type: Address})
   public address?: Address | null;
 
-  @Inventory.property({arrayType: "VariationsGroup"})
-  public variationsGroups?: Array<VariationsGroup>;
+  @Inventory.property({arrayType: 'VariationsGroup'})
+  public variationsGroups?: VariationsGroup[];
 
-  @Inventory.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Inventory.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @Inventory.property({arrayType: "InventoryUnitVariation"})
-  public inventoryUnitVariations?: Array<InventoryUnitVariation>;
+  @Inventory.property({arrayType: 'InventoryUnitVariation'})
+  public inventoryUnitVariations?: InventoryUnitVariation[];
 }

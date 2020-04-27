@@ -2,9 +2,9 @@ import { Entity } from '../entity';
 import { Theme } from './theme';
 
 export class Page extends Entity {
-  protected static resourceName: string = "pages";
-  protected static singularName: string = "page";
-  protected static pluralName: string = "themes";
+  protected static resourceName: string = 'pages';
+  protected static singularName: string = 'page';
+  protected static pluralName: string = 'themes';
 
   @Page.property()
   public id?: number;

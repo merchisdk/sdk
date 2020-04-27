@@ -130,10 +130,10 @@ export class Job extends Entity {
   public unreadJobInvoicingNotificationsCount?: number;
 
   @Job.property({arrayType: 'Draft'})
-  public drafts?: Array<Draft>;
+  public drafts?: Draft[];
 
   @Job.property({arrayType: 'JobComment'})
-  public comments?: Array<JobComment>;
+  public comments?: JobComment[];
 
   @Job.property()
   public client?: User;
@@ -163,13 +163,13 @@ export class Job extends Entity {
   public product?: Product;
 
   @Job.property({arrayType: 'DraftComment'})
-  public draftComments?: Array<DraftComment>;
+  public draftComments?: DraftComment[];
 
   @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
   @Job.property({arrayType: 'DomainTag'})
-  public tags?: Array<DomainTag>;
+  public tags?: DomainTag[];
 
   @Job.property({type: Address})
   public shipping?: Address | null;
@@ -184,10 +184,10 @@ export class Job extends Entity {
   public invoice?: Invoice | null;
 
   @Job.property({arrayType: 'MerchiFile'})
-  public productionFiles?: Array<MerchiFile>;
+  public productionFiles?: MerchiFile[];
 
   @Job.property({arrayType: 'MerchiFile'})
-  public clientFiles?: Array<MerchiFile>;
+  public clientFiles?: MerchiFile[];
 
   @Job.property({type: Shipment})
   public shipment?: Shipment | null;
@@ -196,23 +196,23 @@ export class Job extends Entity {
   public inventory?: Inventory | null;
 
   @Job.property({arrayType: 'VariationsGroup'})
-  public variationsGroups?: Array<VariationsGroup>;
+  public variationsGroups?: VariationsGroup[];
 
   @Job.property({arrayType: 'Variation'})
-  public variations?: Array<Variation>;
+  public variations?: Variation[];
 
   @Job.property({arrayType: 'Notification'})
-  public notifications?: Array<Notification>;
+  public notifications?: Notification[];
 
   @Job.property({arrayType: 'Assignment'})
-  public assignments?: Array<Assignment>;
+  public assignments?: Assignment[];
 
   @Job.property()
   public supplyAssignment?: Assignment;
 
   @Job.property({arrayType: 'Inventory',
-                 type: 'Inventory',
-                 embeddedByDefault: false})
+    type: 'Inventory',
+    embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
 
   public getQuote = () => {

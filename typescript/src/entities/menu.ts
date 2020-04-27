@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { MenuItem } from './menu_item';
 
 export class Menu extends Entity {
-  protected static resourceName: string = "menus";
-  protected static singularName: string = "menu";
-  protected static pluralName: string = "menus";
+  protected static resourceName: string = 'menus';
+  protected static singularName: string = 'menu';
+  protected static pluralName: string = 'menus';
 
   @Menu.property({type: Date})
   public archived?: Date | null;
@@ -25,6 +25,6 @@ export class Menu extends Entity {
   @Menu.property()
   public domain?: Domain;
 
-  @Menu.property({arrayType: "MenuItem"})
-  public menuItems?: Array<MenuItem>;
+  @Menu.property({arrayType: 'MenuItem'})
+  public menuItems?: MenuItem[];
 }

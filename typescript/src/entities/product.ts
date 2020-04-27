@@ -13,9 +13,9 @@ import { User } from './user';
 import { VariationField } from './variation_field';
 
 export class Product extends Entity {
-  protected static resourceName: string = "products";
-  protected static singularName: string = "product";
-  protected static pluralName: string = "products";
+  protected static resourceName: string = 'products';
+  protected static singularName: string = 'product';
+  protected static pluralName: string = 'products';
 
   @Product.property({type: Date})
   public archived?: Date | null;
@@ -92,11 +92,11 @@ export class Product extends Entity {
   @Product.property()
   public unitVolume?: number;
 
-  @Product.property({arrayType: "Category"})
-  public categories?: Array<Category>;
+  @Product.property({arrayType: 'Category'})
+  public categories?: Category[];
 
-  @Product.property({arrayType: "Discount"})
-  public discounts?: Array<Discount>;
+  @Product.property({arrayType: 'Discount'})
+  public discounts?: Discount[];
 
   @Product.property()
   public domain?: Domain;
@@ -104,44 +104,44 @@ export class Product extends Entity {
   @Product.property()
   public originalProduct?: Product;
 
-  @Product.property({arrayType: "MerchiFile"})
-  public images?: Array<MerchiFile>;
+  @Product.property({arrayType: 'MerchiFile'})
+  public images?: MerchiFile[];
 
-  @Product.property({arrayType: "VariationField"})
-  public groupVariationFields?: Array<VariationField>;
+  @Product.property({arrayType: 'VariationField'})
+  public groupVariationFields?: VariationField[];
 
-  @Product.property({arrayType: "VariationField"})
-  public independentVariationFields?: Array<VariationField>;
+  @Product.property({arrayType: 'VariationField'})
+  public independentVariationFields?: VariationField[];
 
-  @Product.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Product.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
 
-  @Product.property({arrayType: "Company", jsonName: "saved_by_companies"})
-  public savedByCompanies?: Array<Company>;
+  @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
+  public savedByCompanies?: Company[];
 
-  @Product.property({arrayType: "SupplyDomain"})
-  public suppliedByDomains?: Array<SupplyDomain>;
+  @Product.property({arrayType: 'SupplyDomain'})
+  public suppliedByDomains?: SupplyDomain[];
 
-  @Product.property({arrayType: "SupplyDomain"})
-  public supplyDomains?: Array<SupplyDomain>;
+  @Product.property({arrayType: 'SupplyDomain'})
+  public supplyDomains?: SupplyDomain[];
 
-  @Product.property({arrayType: "Inventory"})
-  public inventories?: Array<Inventory>;
+  @Product.property({arrayType: 'Inventory'})
+  public inventories?: Inventory[];
 
-  @Product.property({arrayType: "CartItem"})
-  public cartItems?: Array<CartItem>;
+  @Product.property({arrayType: 'CartItem'})
+  public cartItems?: CartItem[];
 
-  @Product.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Product.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @Product.property({arrayType: "User", jsonName: "saved_by_users"})
-  public savedByUsers?: Array<User>;
+  @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
+  public savedByUsers?: User[];
 
-  @Product.property({arrayType: "User"})
-  public suppliers?: Array<User>;
+  @Product.property({arrayType: 'User'})
+  public suppliers?: User[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
@@ -160,10 +160,10 @@ export class Product extends Entity {
 
   public primaryImage = () => {
     if (this.featureImage === undefined) {
-      throw new Error("featureImage is undefined, did you forget to embed it?");
+      throw new Error('featureImage is undefined, did you forget to embed it?');
     }
     if (this.images === undefined) {
-      throw new Error("images is undefined, did you forget to embed it?");
+      throw new Error('images is undefined, did you forget to embed it?');
     }
     if (this.featureImage !== null) {
       return this.featureImage;
@@ -176,15 +176,15 @@ export class Product extends Entity {
 
   public currency = () => {
     if (this.domain === undefined) {
-      throw new Error("domain is undefined, did you forget to embed it?");
+      throw new Error('domain is undefined, did you forget to embed it?');
     }
     return this.domain.defaultCurrency();
   }
 
   public hasGroupVariationFields = () => {
     if (this.groupVariationFields === undefined) {
-      const err = "groupVariationFields is undefined, did you forget to embed" +
-        " it?";
+      const err = 'groupVariationFields is undefined, did you forget to embed' +
+        ' it?';
       throw new Error(err);
     }
     return this.groupVariationFields.length > 0;
@@ -192,8 +192,8 @@ export class Product extends Entity {
 
   public hasIndependentVariationFields = () => {
     if (this.independentVariationFields === undefined) {
-      const err = "independentVariationFields is undefined, did you forget to" +
-        " embed it?";
+      const err = 'independentVariationFields is undefined, did you forget to' +
+        ' embed it?';
       throw new Error(err);
     }
     return this.independentVariationFields.length > 0;
@@ -201,31 +201,31 @@ export class Product extends Entity {
 
   public taxType = () => {
     if (this.domain === undefined) {
-      throw new Error("domain is undefined, did you forget to embed it?");
+      throw new Error('domain is undefined, did you forget to embed it?');
     }
     return this.domain.defaultTaxType();
   }
 
   public allVariationFields = () => {
     if (this.groupVariationFields === undefined) {
-      const err = "groupVariationFields is undefined, did you forget to embed" +
-        " it?";
+      const err = 'groupVariationFields is undefined, did you forget to embed' +
+        ' it?';
       throw new Error(err);
     }
     if (this.independentVariationFields === undefined) {
-      const err = "independentVariationFields is undefined, did you forget to" +
-        " embed it?";
+      const err = 'independentVariationFields is undefined, did you forget to' +
+        ' embed it?';
       throw new Error(err);
     }
-    const result: Array<VariationField> = [];
+    const result: VariationField[] = [];
     return result.concat(this.groupVariationFields,
-                         this.independentVariationFields);
+      this.independentVariationFields);
   }
 
   public buildEmptyVariations = () => {
     if (this.independentVariationFields === undefined) {
-      const err = "independentVariationFields is undefined, did you forget to" +
-        " embed it?";
+      const err = 'independentVariationFields is undefined, did you forget to' +
+        ' embed it?';
       throw new Error(err);
     }
     return this.independentVariationFields.map(field =>
@@ -234,8 +234,8 @@ export class Product extends Entity {
 
   public buildEmptyVariationGroup = () => {
     if (this.groupVariationFields === undefined) {
-      const err = "groupVariationFields is undefined, did you forget to embed" +
-        " it?";
+      const err = 'groupVariationFields is undefined, did you forget to embed' +
+        ' it?';
       throw new Error(err);
     }
     const result = new this.merchi.VariationsGroup();
@@ -254,25 +254,25 @@ export class Product extends Entity {
 
   public removeVariationField = (variationField: VariationField) => {
     if (variationField.independent === undefined) {
-      throw new Error("variation.independent is undefined, did you " +
-                      "forget to embed it?"); 
+      throw new Error('variation.independent is undefined, did you ' +
+                      'forget to embed it?'); 
     }
     if (this.independentVariationFields === undefined) {
-      const err = "independentVariationFields is undefined, did you forget to" +
-        " embed it?";
+      const err = 'independentVariationFields is undefined, did you forget to' +
+        ' embed it?';
       throw new Error(err);
     }
     if (this.groupVariationFields === undefined) {
-      const err = "groupVariationFields is undefined, did you forget to embed" +
-        " it?";
+      const err = 'groupVariationFields is undefined, did you forget to embed' +
+        ' it?';
       throw new Error(err);
     }
     const variationFields = variationField.independent ?
       this.independentVariationFields : this.groupVariationFields;
     const index = variationFields.findIndex(v => {
       if (v.id === undefined) {
-        throw new Error("variation id is undefined, did you forget to " +
-          "embed it?");
+        throw new Error('variation id is undefined, did you forget to ' +
+          'embed it?');
       }
       return v.id === variationField.id;
     });

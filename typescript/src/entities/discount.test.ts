@@ -14,5 +14,5 @@ test('discountedUnitCost', () => {
   product.unitPrice = 200.8; 
   expect(() => discount.discountedUnitCost(product)).toThrow();
   discount.amount = 94.6;
-  expect(discount.discountedUnitCost(product)).toEqual("10.843");
+  expect(discount.discountedUnitCost(product)).toEqual('10.843');
 });

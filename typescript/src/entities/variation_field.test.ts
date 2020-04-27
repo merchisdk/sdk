@@ -20,7 +20,7 @@ test('buildEmptyVariation', () => {
   const merchi = new Merchi();
   const vf = new merchi.VariationField();
   expect(vf.buildEmptyVariation).toThrow();
-  vf.defaultValue = "a";
+  vf.defaultValue = 'a';
   vf.fieldType = 11; 
   expect(vf.buildEmptyVariation).toThrow();
   vf.variationCost = 2;

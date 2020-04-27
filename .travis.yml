@@ -21,7 +21,7 @@ matrix:
         - cd typescript
         - yarn
         - tsc
-        - ./node_modules/eslint/bin/eslint.js 'src/**.ts'
+        - ./node_modules/eslint/bin/eslint.js 'src/**/*.ts'
         - yarn test
     - language: python
       python: 3.5
