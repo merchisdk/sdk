@@ -4,6 +4,7 @@ import { Job } from './job';
 import { Notification } from './notification';
 import { ProductionComment } from './production_comment';
 import { Shipment } from './shipment';
+import { SupplyDomain } from './supply_domain';
 import { User } from './user';
 
 export class Assignment extends Entity {
@@ -46,6 +47,9 @@ export class Assignment extends Entity {
 
   @Assignment.property({type: Shipment})
   public shipment?: Shipment | null;
+
+  @Assignment.property({type: SupplyDomain})
+  public supplyDomain?: SupplyDomain | null;
 
   @Assignment.property({arrayType: 'Notification'})
   public notifications?: Notification[];
