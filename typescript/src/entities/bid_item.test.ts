@@ -14,4 +14,6 @@ test('total', () => {
   expect(bidItem.total()).toEqual('0.000');
   bidItem.unitPrice = 87.12;
   expect(bidItem.total()).toEqual('309.276');
+  bidItem.quantity = undefined;
+  expect(bidItem.total()).toEqual('0.000');
 });
