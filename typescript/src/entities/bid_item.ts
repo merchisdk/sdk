@@ -28,13 +28,8 @@ export class BidItem extends Entity {
   public bid?: Bid;
 
   public total = () => {
-    if (this.quantity === undefined) {
-      throw new Error('quantity is undefined, did you forget to embed it?');
-    }
-    if (this.unitPrice === undefined) {
-      throw new Error('unitPrice is undefined, did you forget to embed it?');
-    }
-    const unitPrice = this.unitPrice === null ? 0 : this.unitPrice;
-    return (this.quantity * unitPrice).toFixed(3);
+    const quant = this.quantity ? this.quantity : 0;
+    const unitPrice = this.unitPrice ? this.unitPrice : 0;
+    return (quant * unitPrice).toFixed(3);
   }
 }

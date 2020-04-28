@@ -87,6 +87,7 @@ interface ListOptions {
   businessDomainsOnly?: boolean;
   dateFrom?: Date;
   dateTo?: Date;
+  relatedAssignment?: number;
   relatedJob?: number;
   relatedProduct?: number;
   jobNotifiable?: number;
@@ -429,6 +430,10 @@ export class Entity {
       }
       if (options.dateTo !== undefined) {
         fetchOptions.query.push(['date_to', toUnixTimestamp(options.dateTo)]);
+      }
+      if (options.relatedAssignment !== undefined) {
+        fetchOptions.query.push(['related_assignment',
+          options.relatedAssignment.toString()]);
       }
       if (options.relatedJob !== undefined) {
         fetchOptions.query.push(['related_job', options.relatedJob.toString()]);
