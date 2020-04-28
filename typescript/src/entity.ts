@@ -433,7 +433,7 @@ export class Entity {
       }
       if (options.relatedAssignment !== undefined) {
         fetchOptions.query.push(['related_assignment',
-                                 options.relatedAssignment.toString()]);
+          options.relatedAssignment.toString()]);
       }
       if (options.relatedJob !== undefined) {
         fetchOptions.query.push(['related_job', options.relatedJob.toString()]);
