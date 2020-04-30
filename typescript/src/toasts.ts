@@ -25,7 +25,7 @@ export const toastNotifications = (merchi: Merchi, options: ToastOptions) => {
   const { entities, sections, notificationTypes } = options;
   data.set('entities', JSON.stringify(entities));
   data.set('sections', JSON.stringify(sections));
-  data.set('notification_types', JSON.stringify(notificationTypes));
+  data.set('notificationTypes', JSON.stringify(notificationTypes));
   const fetchOptions: RequestOptions = { method: 'POST', body: data };
   return merchi
     .authenticatedFetch(resource, fetchOptions)
