@@ -18,7 +18,6 @@ interface ToastOptions {
   notificationTypes?: Record<NotificationType, boolean>;
 }
 
-
 export const toastNotifications = (merchi: Merchi, options: ToastOptions) => {
   const resource = '/notifications-check-update/';
   const data = new FormData();
