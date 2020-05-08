@@ -145,3 +145,5 @@ BAD_SLUG = 112  # provided value that cannot be used in url
 NO_DOMAIN_MANAGER = 113  # domain does not have either admin or manager
 
 MISSING_DOMAIN_FOR_SELL = 114  # missing sell domain for supply product
+WRONG_DOMAIN_FOR_SELL = 114  # target for supply product does not exists
+NO_PERMISSION_TO_SELL = 114  # do not have permission to sell target product
