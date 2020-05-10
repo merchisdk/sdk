@@ -1,6 +1,6 @@
-import { ProductTypes } from './product_types';
+import { ProductType } from './product_types';
 
 test('product types exists', () => {
-  expect(ProductTypes.MOD).toBe(0);
+  expect(ProductType.MOD).toBe(0);
 
 });
