@@ -25,7 +25,7 @@ test('fetch toast of jobs', () => {
   expect(fetch.mock.calls[0][1].body.get('sections')).toEqual(
     `[${NotificationSection.JOB_NOTIFICATIONS}]`);
   expect(
-    JSON.parse(fetch.mock.calls[0][1].body.get('notification_types'))
+    JSON.parse(fetch.mock.calls[0][1].body.get('notificationTypes'))
   ).toEqual(
     {[NotificationType.JOB_PAID]: true}
   );
