@@ -210,8 +210,7 @@ export class Job extends Entity {
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property({arrayType: 'Inventory',
-    type: 'Inventory',
+  @Job.property({type: Inventory,
     embeddedByDefault: false})
   public matchingInventory?: Inventory | null;
 
