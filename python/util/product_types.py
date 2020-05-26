@@ -1,11 +1,11 @@
-MOO = 0
+MOD = 0
 MOQ = 1
 SELLER = 2
-SELLER_MOO = 3
+SELLER_MOD = 3
 
 ALL_TYPES = [
-    (MOO, "MOO"),
+    (MOD, "MOD"),
     (MOQ, "MOQ"),
     (SELLER, "SELLER"),
-    (SELLER_MOO, "SELLER_MOO"),
+    (SELLER_MOD, "SELLER_MOD"),
 ]
