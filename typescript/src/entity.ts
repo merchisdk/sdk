@@ -587,6 +587,7 @@ export class Entity {
     options = options || {makeDirty: false};
     for (const key in json) {
       const value: any = (json as any)[key];
+      if (value === undefined) continue;
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = options.makeDirty;
