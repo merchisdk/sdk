@@ -9,7 +9,7 @@ import { DraftComment } from './draft_comment';
 import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
-import { Inventory } from './inventory';
+import { MatchingInventory } from './matching_inventory';
 import { Invoice } from './invoice';
 import { JobComment } from './job_comment';
 import { Notification } from './notification';
@@ -20,6 +20,7 @@ import { Shipment } from './shipment';
 import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
+import { InventoryStatus } from '../constants/inventory_statuses'
 
 
 export class Job extends Entity {
@@ -109,7 +110,7 @@ export class Job extends Entity {
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
-  public canDeduct?: boolean;
+  public canDeduct?: InventoryStatus;
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
@@ -192,8 +193,8 @@ export class Job extends Entity {
   @Job.property({type: Shipment})
   public shipment?: Shipment | null;
 
-  @Job.property({type: Inventory})
-  public inventory?: Inventory | null;
+  @Job.property({arrayType: 'MatchingInventory'})
+  public matchingInventories?: MatchingInventory[];
 
   @Job.property({arrayType: 'VariationsGroup'})
   public variationsGroups?: VariationsGroup[];
@@ -209,10 +210,6 @@ export class Job extends Entity {
 
   @Job.property()
   public supplyAssignment?: Assignment;
-
-  @Job.property({type: Inventory,
-    embeddedByDefault: false})
-  public matchingInventory?: Inventory | null;
 
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';
