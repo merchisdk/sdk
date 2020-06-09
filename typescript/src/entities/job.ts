@@ -20,7 +20,7 @@ import { Shipment } from './shipment';
 import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
-import { InventoryStatus } from '../constants/inventory_statuses'
+import { InventoryStatus } from '../constants/inventory_statuses';
 
 
 export class Job extends Entity {

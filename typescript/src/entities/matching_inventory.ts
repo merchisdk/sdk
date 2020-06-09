@@ -2,7 +2,7 @@ import { Entity } from '../entity';
 import { Job } from './job';
 import { VariationsGroup } from './variations_group';
 import { Inventory } from './inventory';
-import { InventoryStatus } from '../constants/inventory_statuses'
+import { InventoryStatus } from '../constants/inventory_statuses';
 
 export class MatchingInventory extends Entity {
   protected static resourceName: string = 'matching_inventories';
