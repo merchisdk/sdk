@@ -156,7 +156,7 @@ def r_send_to_call(param):
     return r_conversion_call(send_to)
 
 
-r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9\-]+"
+r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9\-_]+"
 
 r_str_new_conversion = r_send_to_call(r"['\"]" + r_val(r_new_conversion_id) +
                                       r"['\"]")
