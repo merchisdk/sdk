@@ -381,6 +381,14 @@ test('can serialise product to form data understood by backend', () => {
   expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
 });
 
+test('undefined data will not be serialised', () => {
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.name = 'aaa';
+  p.fromJson({name: undefined});
+  expect(p.name).toEqual('aaa');
+});
+
 test('can convert product data json format', () => {
   const merchi = new Merchi();
   const p = new merchi.Product();
