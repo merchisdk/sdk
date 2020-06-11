@@ -70,7 +70,7 @@ class Job(sdk.python.entities.Entity):
     received = Property(datetime.datetime)
     deadline = Property(datetime.datetime)
     updated = Property(datetime.datetime)
-    can_deduct = Property(int)
+    can_deduct = Property(bool)
     cost_per_unit = Property(float)
     automatic_price_enabled = Property(bool)
     tax_amount = Property(float)
