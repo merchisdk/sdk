@@ -58,9 +58,14 @@ test('role helper function', () => {
   expect(userSupplier.isManagementTeam(domain1)).toBe(false);
   expect(userSupplier.isNotClient(domain1)).toBe(true);
 
-  // have two match enrolled domain is invalid data
-  user.enrolledDomains = [enrolledDomain, enrolledDomain];
-  expect(() => {user.roleInDomain(domain1);}).toThrow(Error);
+  // have two match enrolled domain is invalid data, but we should return
+  // the highest permission
+  const enrolledDomainClient = new merchi.EnrolledDomain();
+  enrolledDomainClient.role = Role.CLIENT;
+  enrolledDomainClient.domain = domain1;
+
+  user.enrolledDomains = [enrolledDomain, enrolledDomainClient];
+  expect(user.roleInDomain(domain1)).toBe(Role.ADMIN);
 });
 
 

@@ -25,9 +25,10 @@ import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
 import { Role,
-  DOMAIN_MANAGERS, 
-  MANAGEMENT_TEAM, 
-  BUSINESS_ACCOUNTS
+  DOMAIN_MANAGERS,
+  MANAGEMENT_TEAM,
+  BUSINESS_ACCOUNTS,
+  ROLES_RANK
 } from '../constants/roles';
 
 export class User extends Entity {
@@ -239,10 +240,14 @@ export class User extends Entity {
       enrolledDomain => enrolledDomain.domain && enrolledDomain.domain.id === domain.id);
 
     if (matchingEnrolledDomains.length > 1) {
-      const err =
-        'Multiple enrolled domains are matching, seems like something is wrong';
-      throw new Error(err);
+      const highestRoleRank = Math.max(
+        ...matchingEnrolledDomains.map(ed => ROLES_RANK.findIndex(e => e === ed.role)));
+      return ROLES_RANK[highestRoleRank];
     }
+
+    // due to some current system issues, user can have multiple enrolled domain
+    // of one domain, if that is the case either of them can be consider as
+    // valid, need to revisit it in the future related to #
     if (matchingEnrolledDomains.length > 0) {
       if (matchingEnrolledDomains[0].role !== undefined) {
         return matchingEnrolledDomains[0].role;
@@ -277,7 +282,7 @@ export class User extends Entity {
       }
       if (this.hasAuthority(domain, roles)) {
         result.push(domain);
-      }      
+      }
     }
     return result;
   }
@@ -297,5 +302,5 @@ export class User extends Entity {
       }
     }
     return false;
-  } 
+  }
 }
