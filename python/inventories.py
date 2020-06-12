@@ -32,7 +32,7 @@ class MatchingInventory(sdk.python.entities.Entity):
     resource = '/matching_inventories/'
     json_name = 'matching_inventory'
 
-    can_deduct = Property(int)
+    status = Property(int)
     deduction_date = Property(datetime.datetime)
     job = Property(Job, backref="matching_inventories")
     group = Property(VariationsGroup, backref="matching_inventory")
