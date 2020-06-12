@@ -59,6 +59,9 @@ export class Job extends Entity {
   public needsShipping?: boolean;
 
   @Job.property()
+  public needsInventory?: boolean;
+
+  @Job.property()
   public quoteSet?: boolean;
 
   @Job.property()
@@ -110,7 +113,7 @@ export class Job extends Entity {
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
-  public canDeduct?: InventoryStatus;
+  public inventoriesStatus?: InventoryStatus;
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;

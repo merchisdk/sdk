@@ -70,7 +70,7 @@ class Job(sdk.python.entities.Entity):
     received = Property(datetime.datetime)
     deadline = Property(datetime.datetime)
     updated = Property(datetime.datetime)
-    can_deduct = Property(int)
+    inventory_status = Property(int)
     cost_per_unit = Property(float)
     automatic_price_enabled = Property(bool)
     tax_amount = Property(float)
@@ -81,6 +81,7 @@ class Job(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
+    needs_inventory = Property(bool)
     deduction_date = Property(datetime.datetime)
     variations_groups = Property(VariationsGroup)
     variations = Property(Variation)
@@ -99,7 +100,6 @@ class Job(sdk.python.entities.Entity):
     unread_job_production_notifications_count = Property(int)
     unread_job_shipping_notifications_count = Property(int)
     unread_job_invoicing_notifications_count = Property(int)
-    matching_inventory = Property("sdk.python.inventories.Inventory")
 
     notifications = Property(Notification, backref="related_job")
 

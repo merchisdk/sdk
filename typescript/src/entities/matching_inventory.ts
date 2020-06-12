@@ -25,5 +25,5 @@ export class MatchingInventory extends Entity {
   public inventory?: Inventory | null;
 
   @Job.property()
-  public canDeduct?: InventoryStatus;
+  public status?: InventoryStatus;
 }
