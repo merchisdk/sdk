@@ -113,7 +113,7 @@ export class Job extends Entity {
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
-  public matchingInventoriesStatus?: InventoryStatus;
+  public inventoriesStatus?: InventoryStatus;
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
