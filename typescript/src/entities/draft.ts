@@ -25,8 +25,8 @@ export class Draft extends Entity {
   @Draft.property({type: Date})
   public resendDate?: Date | null;
 
-  @Draft.property({type: Date})
-  public viewed?: boolean | null;
+  @Draft.property()
+  public viewed?: boolean;
 
   @Draft.property()
   public sendSms?: boolean;
