@@ -87,3 +87,9 @@ test('test deduct job inventory', () => {
   job.bulkDeduct();
   expect(Array.from(fetch.mock.calls[1][1]['body'].entries())).toEqual(correct);
 });
+
+test('test bulk deduct job without inventories will cause error', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  expect(job.bulkDeduct).toThrow();
+});
