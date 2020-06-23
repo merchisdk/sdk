@@ -1,29 +1,29 @@
 import { Entity } from '../entity';
 import { Job } from './job';
-import { VariationsGroup } from './variations_group';
 import { Inventory } from './inventory';
+import { VariationsGroup } from './variations_group';
 import { InventoryStatus } from '../constants/inventory_statuses';
 
 export class MatchingInventory extends Entity {
   protected static resourceName: string = 'matching_inventories';
-  protected static singularName: string = 'matching_inventory';
-  protected static pluralName: string = 'matching_inventories';
+  protected static singularName: string = 'matchingInventory';
+  protected static pluralName: string = 'matchingInventories';
 
   @MatchingInventory.property({type: Date})
   public archived?: Date | null;
 
-  @Inventory.property({type: Date})
+  @MatchingInventory.property({type: Date})
   public deductionDate?: Date | null;
 
-  @Inventory.property()
+  @MatchingInventory.property()
   public job?: Job;
 
-  @Inventory.property({type: VariationsGroup})
+  @MatchingInventory.property({type: 'VariationsGroup'})
   public group?: VariationsGroup | null;
 
-  @Inventory.property({type: Inventory})
+  @MatchingInventory.property({type: Inventory})
   public inventory?: Inventory | null;
 
-  @Job.property()
+  @MatchingInventory.property()
   public status?: InventoryStatus;
 }
