@@ -77,6 +77,7 @@ interface ListOptions {
   state?: string;
   categoryId?: number;
   inDomain?: number;
+  inDomainName?: string;
   inDomainRoles?: number[];
   asRole?: Role;
   publicOnly?: boolean;
@@ -394,6 +395,9 @@ export class Entity {
       }
       if (options.inDomain !== undefined) {
         fetchOptions.query.push(['in_domain', options.inDomain.toString()]);
+      }
+      if (options.inDomainName !== undefined) {
+        fetchOptions.query.push(['in_domain_name', options.inDomainName.toString()]);
       }
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
