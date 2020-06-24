@@ -227,7 +227,7 @@ export class Job extends Entity {
   }
 
   public deduct = (matchingInventories: MatchingInventory[]) => {
-    const resource = `jobs/${this.id}/deduct/`;
+    const resource = `/jobs/${this.id}/deduct/`;
     const jobForPayload = new this.merchi.Job();
     jobForPayload.matchingInventories = matchingInventories;
     jobForPayload.id = 1;
