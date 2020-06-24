@@ -1,5 +1,6 @@
 import { Merchi } from '../merchi';
 import { setup, mockFetch } from '../test_util';
+import { InventoryStatus } from '../constants/inventory_statuses';
 
 setup();
 
@@ -58,4 +59,37 @@ test('Get quote update job cost', () => {
     expect(job.quantity).toEqual(10);
     expect(job.cost).toEqual(100);
   });
+});
+
+test('test deduct job inventory', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  const inventory = new merchi.Inventory();
+  inventory.id = 1;
+  job.id = 1;
+  const matchingInventoryOne = new merchi.MatchingInventory();
+  matchingInventoryOne.inventory = inventory;
+  matchingInventoryOne.status = InventoryStatus.CAN_DEDUCT;
+  matchingInventoryOne.deductionDate = null;
+  job.matchingInventories = [matchingInventoryOne];
+  const correct = [
+    ['id', '1'],
+    ['matchingInventories-0-deductionDate', 'null'],
+    ['matchingInventories-0-inventory-0-id', '1'],
+    ['matchingInventories-0-inventory-count', '1'],
+    ['matchingInventories-0-status', String(InventoryStatus.CAN_DEDUCT)],
+    ['matchingInventories-count', '1'],
+  ];
+  const fetch = mockFetch(true, {}, 200);
+  job.deduct([matchingInventoryOne]);
+  expect(Array.from(fetch.mock.calls[0][1]['body'].entries())).toEqual(correct);
+
+  job.bulkDeduct();
+  expect(Array.from(fetch.mock.calls[1][1]['body'].entries())).toEqual(correct);
+});
+
+test('test bulk deduct job without inventories will cause error', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  expect(job.bulkDeduct).toThrow();
 });

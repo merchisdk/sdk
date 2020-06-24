@@ -55,6 +55,7 @@ import { Variation } from './entities/variation';
 import { CartItem } from './entities/cart_item';
 import { Address } from './entities/address';
 import { Assignment } from './entities/assignment';
+import { MatchingInventory } from './entities/matching_inventory';
 import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
 import { RequestOptions, apiFetch } from './request';
@@ -137,6 +138,7 @@ export class Merchi {
   public Bid: typeof Bid;
   public Component: typeof Component;
   public BidItem: typeof BidItem;
+  public MatchingInventory: typeof MatchingInventory;
 
   public setupClass(cls: typeof Entity) {
     const result = cloneClass(cls, this) as typeof Entity;
@@ -223,6 +225,7 @@ export class Merchi {
     this.MerchiFile = this.setupClass(MerchiFile) as typeof MerchiFile;
     this.User = this.setupClass(User) as typeof User;
     this.JobComment = this.setupClass(JobComment) as typeof JobComment;
+    this.MatchingInventory = this.setupClass(MatchingInventory) as typeof MatchingInventory;
   }
 
   public authenticatedFetch = (resource: string, options: RequestOptions) => {

@@ -225,4 +225,29 @@ export class Job extends Entity {
       then((data: any) => { this.fromJson(data, {makeDirty: true});
         return this;});
   }
+
+  public deduct = (matchingInventories: MatchingInventory[]) => {
+    const resource = `/jobs/${this.id}/deduct/`;
+    const jobForPayload = new this.merchi.Job();
+    jobForPayload.matchingInventories = matchingInventories;
+    jobForPayload.id = 1;
+    const data = jobForPayload.toFormData({excludeOld: false});
+    const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const fetchOptions: RequestOptions = {
+      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        this.fromJson(data);
+        return this;});
+  }
+
+  public bulkDeduct = () => {
+    if (this.matchingInventories === undefined) {
+      const err = 'matchingInventories is undefined, did you forget to embed' +
+        ' it?';
+      throw new Error(err);
+    }
+    return this.deduct(this.matchingInventories);
+  }
 }
