@@ -143,3 +143,4 @@ STATE_WITHOUT_COUNTRY = 111
 BAD_SLUG = 112  # provided value that cannot be used in url
 
 NO_DOMAIN_MANAGER = 113  # domain does not have either admin or manager
+CONFLICT_PARAMETERS = 114  # query parameters are conflicting with each other
