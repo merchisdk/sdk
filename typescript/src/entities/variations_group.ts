@@ -1,8 +1,8 @@
 import { CartItem } from './cart_item';
 import { Entity } from '../entity';
-import { Inventory } from './inventory';
 import { Job } from './job';
 import { Variation } from './variation';
+import { MatchingInventory } from './matching_inventory';
 
 export class VariationsGroup extends Entity {
   protected static resourceName: string = 'variations_groups';
@@ -27,8 +27,8 @@ export class VariationsGroup extends Entity {
   @VariationsGroup.property({type: CartItem})
   public cartItem?: CartItem | null;
 
-  @VariationsGroup.property({type: Inventory})
-  public inventory?: Inventory | null;
+  @VariationsGroup.property({type: MatchingInventory})
+  public matchingInventory?: MatchingInventory | null;
 
   @VariationsGroup.property({arrayType: 'Variation'})
   public variations?: Variation[];

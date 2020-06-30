@@ -9,7 +9,7 @@ import { DraftComment } from './draft_comment';
 import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
-import { Inventory } from './inventory';
+import { MatchingInventory } from './matching_inventory';
 import { Invoice } from './invoice';
 import { JobComment } from './job_comment';
 import { Notification } from './notification';
@@ -20,6 +20,7 @@ import { Shipment } from './shipment';
 import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
+import { InventoryStatus } from '../constants/inventory_statuses';
 
 
 export class Job extends Entity {
@@ -56,6 +57,9 @@ export class Job extends Entity {
 
   @Job.property()
   public needsShipping?: boolean;
+
+  @Job.property()
+  public needsInventory?: boolean;
 
   @Job.property()
   public quoteSet?: boolean;
@@ -109,7 +113,7 @@ export class Job extends Entity {
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
-  public canDeduct?: boolean;
+  public inventoriesStatus?: InventoryStatus;
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
@@ -192,8 +196,8 @@ export class Job extends Entity {
   @Job.property({type: Shipment})
   public shipment?: Shipment | null;
 
-  @Job.property({type: Inventory})
-  public inventory?: Inventory | null;
+  @Job.property({arrayType: 'MatchingInventory'})
+  public matchingInventories?: MatchingInventory[];
 
   @Job.property({arrayType: 'VariationsGroup'})
   public variationsGroups?: VariationsGroup[];
@@ -210,10 +214,6 @@ export class Job extends Entity {
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property({type: Inventory,
-    embeddedByDefault: false})
-  public matchingInventory?: Inventory | null;
-
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';
     const data = this.toFormData({excludeOld: false});
@@ -224,5 +224,30 @@ export class Job extends Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
         return this;});
+  }
+
+  public deduct = (matchingInventories: MatchingInventory[]) => {
+    const resource = `/jobs/${this.id}/deduct/`;
+    const jobForPayload = new this.merchi.Job();
+    jobForPayload.matchingInventories = matchingInventories;
+    jobForPayload.id = 1;
+    const data = jobForPayload.toFormData({excludeOld: false});
+    const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const fetchOptions: RequestOptions = {
+      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        this.fromJson(data);
+        return this;});
+  }
+
+  public bulkDeduct = () => {
+    if (this.matchingInventories === undefined) {
+      const err = 'matchingInventories is undefined, did you forget to embed' +
+        ' it?';
+      throw new Error(err);
+    }
+    return this.deduct(this.matchingInventories);
   }
 }
