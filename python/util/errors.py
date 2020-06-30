@@ -149,4 +149,3 @@ CONFLICT_PARAMETERS = 114  # query parameters are conflicting with each other
 MISSING_DOMAIN_FOR_SELL = 115  # missing sell domain for supply product
 WRONG_DOMAIN_FOR_SELL = 116  # target for supply product does not exists
 NO_PERMISSION_TO_SELL = 117  # do not have permission to sell target product
-
