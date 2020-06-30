@@ -82,14 +82,11 @@ export class VariationField extends Entity {
   @VariationField.property()
   public variationUnitCost?: number;
 
+  @VariationField.property()
+  public product?: Product;
+
   @VariationField.property({arrayType: 'Variation'})
   public variations?: Variation[];
-
-  @VariationField.property({type: Product})
-  public productGroupBackref?: Product | null;
-
-  @VariationField.property({type: Product})
-  public productIndependentBackref?: Product | null;
 
   @VariationField.property({arrayType: 'VariationFieldsOption'})
   public options?: VariationFieldsOption[];
