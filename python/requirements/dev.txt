@@ -31,3 +31,4 @@ pyOpenSSL==17.5.0
 pytest==3.6.1
 lxml==3.8.0
 Babel==2.5.1
+envparse==0.2.0
