@@ -8,8 +8,7 @@ import logging
 
 def fetch_cert(email, cert_name, domain_names, log, config):
     """ Contact letsencrypt servers and ask them for a new certificate. """
-    cmd = ('certbot certonly --renew-by-default ' +
-           '--cert-name ' + cert_name + ' ' +
+    cmd = ('certbot certonly --cert-name ' + cert_name + ' ' +
            '--non-interactive --agree-tos --email {} ' +
            '--dns-route53 ' +
            '--server https://acme-v02.api.letsencrypt.org/directory ' +
