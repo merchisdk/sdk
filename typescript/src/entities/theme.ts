@@ -17,6 +17,9 @@ export class Theme extends Entity {
   public id?: number;
 
   @Theme.property()
+  public foundation?: number;
+
+  @Theme.property()
   public mainCssStatus?: number;
 
   @Theme.property({type: String})
