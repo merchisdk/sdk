@@ -61,4 +61,5 @@ export enum NotificationType {
   JOB_NOTIFICATION_COMMENT = 59,
   PRODUCTION_SHIPPED = 60,
   SELLER_STORE_CREATED = 61,
+  WEB_FORM = 62,
 }
