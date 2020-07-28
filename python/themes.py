@@ -15,6 +15,7 @@ class Theme(sdk.python.entities.Entity):
     id = Property(int)
     name = Property(str)
     description = Property(str)
+    foundation = Property(int)
     public = Property(bool)
     main_css_status = Property(int)
     main_css_error_message = Property(str)
