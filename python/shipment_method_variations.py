@@ -13,7 +13,7 @@ class ShipmentMethodVariation(sdk.python.entities.Entity):
     cost = Property(float)
     currency = Property(str)
     max_weight = Property(float)
-    tax_type = Property(sdk.python.country_taxes.CountryTax)
+    tax_type = Property('sdk.python.country_taxes.CountryTax')
 
 
 class ShipmentMethodVariations(sdk.python.entities.Resource):
