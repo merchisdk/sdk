@@ -16,7 +16,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
     default_cost = Property(float)
     currency = Property(str)
     transport_company = Property(str)
-    tax_type = Property(sdk.python.country_taxes.CountryTax)
+    tax_type = Property('sdk.python.country_taxes.CountryTax')
     variations = Property(ShipmentMethodVariation)
 
 
