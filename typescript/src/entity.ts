@@ -595,7 +595,7 @@ export class Entity {
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = options.makeDirty;
-        if (propertyInfo.arrayType) {
+        if (propertyInfo.arrayType && Array.isArray(value)) {
           const newValue: any = value.map((item: any, index: number) => {
             const currentValue: any = propertyInfo.currentValue;
             // if property already have an array of entities as relationship,
