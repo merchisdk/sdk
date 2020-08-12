@@ -32,6 +32,7 @@ export interface EmbedDescriptor {
 }
 
 interface FromJsonOptions {
+  arrayValueStrict?: boolean;
   makeDirty: boolean;
 }
 
@@ -588,26 +589,29 @@ export class Entity {
 
 
   public fromJson = (json: any, options?: FromJsonOptions) => {
-    options = options || {makeDirty: false};
+    options = options || {makeDirty: false, arrayValueStrict: true};
     for (const key in json) {
       const value: any = (json as any)[key];
       if (value === undefined) continue;
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
         propertyInfo.dirty = options.makeDirty;
-        if (propertyInfo.arrayType && Array.isArray(value)) {
-          const newValue: any = value.map((item: any, index: number) => {
-            const currentValue: any = propertyInfo.currentValue;
-            // if property already have an array of entities as relationship,
-            // try to merge with json one by one, this behavior may need to be
-            // configurable in the future.
-            if (currentValue && currentValue[index]) {
-              return currentValue[index].fromJson(item, options);
-            }
-            const nested = new (propertyInfo.arrayType as any)(this.merchi);
-            return nested.fromJson(item, options);
-          });
-          propertyInfo.currentValue = newValue;
+        if (propertyInfo.arrayType) {
+          const arrayValueStrict = options.arrayValueStrict;
+          if (arrayValueStrict || !arrayValueStrict && Array.isArray(value)) {
+            const newValue: any = value.map((item: any, index: number) => {
+              const currentValue: any = propertyInfo.currentValue;
+              // if property already have an array of entities as relationship,
+              // try to merge with json one by one, this behavior may need to be
+              // configurable in the future.
+              if (currentValue && currentValue[index]) {
+                return currentValue[index].fromJson(item, options);
+              }
+              const nested = new (propertyInfo.arrayType as any)(this.merchi);
+              return nested.fromJson(item, options);
+            });
+            propertyInfo.currentValue = newValue;
+          }
         } else if (this.isSingleEntityProperty(propertyInfo)) {
           // if property already have a entity as relationship, try to merge
           // with json first, this behavior may need to be configurable in the
