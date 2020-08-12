@@ -152,3 +152,6 @@ NO_PERMISSION_TO_SELL = 117  # do not have permission to sell target product
 
 DUPLICATE_VARIATION_FIELDS = 118  # product should not have duplicated field
 NO_MATCHED_VARIATION_FIELDS = 119  # product should not have duplicated field
+
+# cart shipment groups should select quote if there is any available
+NO_SELECTED_SHIPMENT_QUOTE = 120
