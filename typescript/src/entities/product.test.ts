@@ -452,6 +452,17 @@ test('use from json to merge json into entity', () => {
   }
 });
 
+test('use from json have options to ignore array type if it is wrong', () => {
+  const json = {
+    categories: '[Object]'  // wrong array type
+  };
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.fromJson(json, {arrayValueStrict: false});
+  // categories will be ignored
+  expect(p.categories).toBe(undefined);
+});
+
 test('cannot mix sessions with different token', () => {
   const m1 = new Merchi('token1');
   const p = new m1.Product();

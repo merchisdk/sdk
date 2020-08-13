@@ -32,7 +32,8 @@ export interface EmbedDescriptor {
 }
 
 interface FromJsonOptions {
-  makeDirty: boolean;
+  arrayValueStrict?: boolean;
+  makeDirty?: boolean;
 }
 
 interface SaveOptions {
@@ -588,14 +589,18 @@ export class Entity {
 
 
   public fromJson = (json: any, options?: FromJsonOptions) => {
-    options = options || {makeDirty: false};
+    options = options || {};
+    const { makeDirty = false, arrayValueStrict = true } = options;
+    options = { makeDirty, arrayValueStrict };
     for (const key in json) {
       const value: any = (json as any)[key];
       if (value === undefined) continue;
       const propertyInfo = this.propertiesMap.get(key);
       if (propertyInfo !== undefined) {
-        propertyInfo.dirty = options.makeDirty;
-        if (propertyInfo.arrayType && Array.isArray(value)) {
+        propertyInfo.dirty = makeDirty;
+        if (propertyInfo.arrayType) {
+          // ignore array value if it is not an array and we did expect it
+          if (!arrayValueStrict && !Array.isArray(value)) continue;
           const newValue: any = value.map((item: any, index: number) => {
             const currentValue: any = propertyInfo.currentValue;
             // if property already have an array of entities as relationship,
