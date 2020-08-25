@@ -97,6 +97,18 @@ test('can specify options in delete request', () => {
   return invocation;
 });
 
+test('can specify options in recover request', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
+  const options = {withRights: true};
+  const product = new merchi.Product();
+  const invocation = product.recover(options);
+  const correct: any[] = [];
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  return invocation;
+});
+
 test('can fetch product with category and domain', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';

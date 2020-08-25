@@ -836,4 +836,24 @@ export class Entity {
       }
     });
   };
+
+  public recover = (options?: SaveOptions) => {
+    const primaryKey: number | string = this.getPrimaryKeyValue();
+    const constructor = this.constructor as typeof Entity;
+    const resourceName: string = constructor.resourceName;
+    const singularName: string = constructor.singularName;
+    const resource = `/unarchive/${resourceName}/${String(primaryKey)}/`;
+    const fetchOptions: RequestOptions = {method: 'POST'};
+    fetchOptions.query = [];
+    if (options && options.embed) {
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
+    }
+    return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
+      this.fromJson(data[singularName]);
+      return this;
+    });
+  };
 }
