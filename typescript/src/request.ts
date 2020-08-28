@@ -25,8 +25,9 @@ export class ApiError extends Error {
 }
 
 export function backendFetch(resource: string, options?: RequestOptions) {
-  const server = (window as any).merchiBackendUri ?
-    (window as any).merchiBackendUri : BACKEND_URI;
+  const server = (window as any).merchiBackendUri
+    ? (window as any).merchiBackendUri
+    : BACKEND_URI;
   const version = 'v6';
   const url = new URL(server + version + resource);
   if (options && options.query) {
@@ -37,15 +38,21 @@ export function backendFetch(resource: string, options?: RequestOptions) {
   return fetch(url.toString(), options);
 }
 
-export function apiFetch(resource: string, options?: RequestOptions) {
-  return backendFetch(resource, options as RequestInit | undefined).
-    then(function (response) {
+export function apiFetch(
+  resource: string,
+  options?: RequestOptions,
+  expectEmptyResponse?: boolean
+) {
+  return backendFetch(resource, options as RequestInit | undefined).then(
+    function (response) {
       if (response.status < 200 || response.status > 299) {
         return response.json().then(function (json) {
           const err = new ApiError(json);
           return Promise.reject(err);
         });
       } else {
-        return response.json();
-      }});
+        return expectEmptyResponse ? '' : response.json();
+      }
+    }
+  );
 }

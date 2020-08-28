@@ -9,7 +9,6 @@ import { NotificationType } from './constants/notification_types';
 import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { Role } from './constants/roles';
-import { backendFetch, ApiError } from './request';
 import { generateUUID } from './uuid';
 
 function toUnixTimestamp(date: Date) {
@@ -825,16 +824,8 @@ export class Entity {
     if (this.merchi.sessionToken) {
       fetchOptions.query.push(['session_token', this.merchi.sessionToken]);
     }
-    return backendFetch(resource, fetchOptions).then((response) => {
-      if (response.status < 200 || response.status > 299) {
-        return response.json().then(json => {
-          const err = new ApiError(json);
-          return Promise.reject(err);
-        });
-      } else {
-        return Promise.resolve(null);
-      }
-    });
+    return this.merchi.authenticatedFetch(resource, fetchOptions, true).then(
+      () => {return this;});
   };
 
   public recover = (options?: SaveOptions) => {
