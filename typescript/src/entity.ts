@@ -824,9 +824,8 @@ export class Entity {
     if (this.merchi.sessionToken) {
       fetchOptions.query.push(['session_token', this.merchi.sessionToken]);
     }
-    return this.merchi.authenticatedFetch(resource, fetchOptions).then(() => {
-      return this;
-    });
+    return this.merchi.authenticatedFetch(resource, fetchOptions, true).then(
+      () => {return this;});
   };
 
   public recover = (options?: SaveOptions) => {

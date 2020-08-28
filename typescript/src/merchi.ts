@@ -213,7 +213,8 @@ export class Merchi {
     this.Address = this.setupClass(Address) as typeof Address;
     this.Item = this.setupClass(Item) as typeof Item;
     this.SupplyDomain = this.setupClass(SupplyDomain) as typeof SupplyDomain;
-    this.DomainInvitation = this.setupClass(DomainInvitation
+    this.DomainInvitation = this.setupClass(
+      DomainInvitation
     ) as typeof DomainInvitation;
     this.EmailCounter = this.setupClass(EmailCounter) as typeof EmailCounter;
     this.Session = this.setupClass(Session) as typeof Session;
@@ -225,10 +226,16 @@ export class Merchi {
     this.MerchiFile = this.setupClass(MerchiFile) as typeof MerchiFile;
     this.User = this.setupClass(User) as typeof User;
     this.JobComment = this.setupClass(JobComment) as typeof JobComment;
-    this.MatchingInventory = this.setupClass(MatchingInventory) as typeof MatchingInventory;
+    this.MatchingInventory = this.setupClass(
+      MatchingInventory
+    ) as typeof MatchingInventory;
   }
 
-  public authenticatedFetch = (resource: string, options: RequestOptions) => {
+  public authenticatedFetch = (
+    resource: string,
+    options: RequestOptions,
+    expectEmptyResponse?: boolean
+  ) => {
     if (this.sessionToken) {
       /* istanbul ignore next */
       if (!options.query) {
@@ -237,18 +244,17 @@ export class Merchi {
       }
       options.query.push(['session_token', this.sessionToken]);
     }
-    return apiFetch(resource, options);
+    return apiFetch(resource, options, expectEmptyResponse);
   };
 
   public getCurrentUser = (options?: UserRequestOptions) => {
     const { embed = {} } = options || {};
-    const defaultEmbed = { user: { enrolledDomains: {domain: {}} } };
+    const defaultEmbed = { user: { enrolledDomains: { domain: {} } } };
     if (!this.sessionToken) {
       return Promise.resolve(null);
     }
-    return this.Session.get(
-      this.sessionToken,
-      { embed: {...defaultEmbed, ...embed } },
-    ).then((session: any) => session.user);
+    return this.Session.get(this.sessionToken, {
+      embed: { ...defaultEmbed, ...embed },
+    }).then((session: any) => session.user);
   };
 }
