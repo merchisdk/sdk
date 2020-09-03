@@ -9,6 +9,7 @@ import { MerchiFile } from './file';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { Menu } from './menu';
+import { User } from './user';
 import { Notification } from './notification';
 import { Product } from './product';
 import { Session } from './session';
@@ -112,6 +113,9 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  @Domain.property({arrayType: 'User'})
+  public jobsAssignees?: User[];
 
   @Domain.property({arrayType: 'Cart'})
   public carts?: Cart[];
