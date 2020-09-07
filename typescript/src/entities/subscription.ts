@@ -57,3 +57,4 @@ export class Subscription extends Entity {
 
   @Subscription.property()
   public private?: boolean;
+}
