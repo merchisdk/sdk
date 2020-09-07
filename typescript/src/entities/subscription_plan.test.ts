@@ -1,7 +1,7 @@
 import { Merchi } from '../merchi';
 
-test('can make Subscription plan', () => {
+test('can make SubscriptionPlan', () => {
   const merchi = new Merchi();
-  const subscription = new merchi.SubscriptionPlan();
-  expect(subscription).toBeTruthy();
+  const subscriptionPlan = new merchi.SubscriptionPlan();
+  expect(subscriptionPlan).toBeTruthy();
 });
