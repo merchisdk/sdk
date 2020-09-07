@@ -6,10 +6,10 @@ import sdk.python.country_taxes
 from sdk.python.entities import Property
 
 
-class Subscription(sdk.python.entities.Entity):
+class SubscriptionPlan(sdk.python.entities.Entity):
 
-    resource = '/subscriptions/'
-    json_name = 'subscription'
+    resource = '/subscription_plans/'
+    json_name = 'subscriptionPlan'
 
     id = Property(int)
     name = Property(str)
@@ -30,10 +30,10 @@ class Subscription(sdk.python.entities.Entity):
     private = Property(bool)
 
 
-class Subscriptions(sdk.python.entities.Resource):
+class SubscriptionPlans(sdk.python.entities.Resource):
 
-    entity_class = Subscription
-    json_name = 'subscriptions'
+    entity_class = SubscriptionPlan
+    json_name = 'subscriptionPlans'
 
 
-subscriptions = Subscriptions()
+subscription_plans = SubscriptionPlans()
