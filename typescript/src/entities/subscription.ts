@@ -29,7 +29,7 @@ export class Subscription extends Entity {
   public currency?: string;
 
   @Subscription.property({type: CountryTax})
-  public defaultTaxType?: CountryTax | null;
+  public tax?: CountryTax | null;
 
   @Subscription.property()
   public baseCost?: number;
@@ -53,7 +53,7 @@ export class Subscription extends Entity {
   public baseDomainCount?: number;
 
   @Subscription.property()
-  public billingCycle?: number;
+  public billingCycleDays?: number;
 
   @Subscription.property()
   public private?: boolean;
