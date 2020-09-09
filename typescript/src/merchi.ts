@@ -56,7 +56,7 @@ import { CartItem } from './entities/cart_item';
 import { Address } from './entities/address';
 import { Assignment } from './entities/assignment';
 import { MatchingInventory } from './entities/matching_inventory';
-import { SuscriptionPlan } from './entities/subscription_plan';
+import { SubscriptionPlan } from './entities/subscription_plan';
 import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
 import { RequestOptions, apiFetch } from './request';
@@ -140,7 +140,7 @@ export class Merchi {
   public Component: typeof Component;
   public BidItem: typeof BidItem;
   public MatchingInventory: typeof MatchingInventory;
-  public SuscriptionPlan: typeof SuscriptionPlan;
+  public SubscriptionPlan: typeof SubscriptionPlan;
 
   public setupClass(cls: typeof Entity) {
     const result = cloneClass(cls, this) as typeof Entity;
@@ -231,9 +231,9 @@ export class Merchi {
     this.MatchingInventory = this.setupClass(
       MatchingInventory
     ) as typeof MatchingInventory;
-    this.SuscriptionPlan = this.setupClass(
-      SuscriptionPlan
-    ) as typeof SuscriptionPlan;
+    this.SubscriptionPlan = this.setupClass(
+      SubscriptionPlan
+    ) as typeof SubscriptionPlan;
   }
 
   public authenticatedFetch = (
