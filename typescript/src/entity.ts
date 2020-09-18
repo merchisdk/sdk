@@ -109,6 +109,7 @@ interface ListOptions {
   tags?: number[];
   tagNames?: string[];
   exclude?: number[];
+  includeOnly?: number[];
 }
 
 export interface ListMetadata {
@@ -504,6 +505,9 @@ export class Entity {
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
+      }
+      if (options.includeOnly !== undefined) {
+        fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
       }
     }
     if (!(options && options.withRights)) {
