@@ -27,7 +27,7 @@ class SubscriptionPlan(sdk.python.entities.Entity):
     base_user_count = Property(int)
     base_domain_count = Property(int)
     billing_cycle_days = Property(int)
-    private = Property(bool)
+    is_private = Property(bool)
 
 
 class SubscriptionPlans(sdk.python.entities.Resource):
