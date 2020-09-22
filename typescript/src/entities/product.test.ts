@@ -272,7 +272,8 @@ test('can list products with options set', () => {
     isOrder: true,
     tags: [2, 3, 5],
     tagNames: ['a'],
-    exclude: [8]};
+    exclude: [8],
+    includeOnly: [1]};
   const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
     {'product': {'name': 'p2'}}],
   'available': 2,
@@ -319,7 +320,8 @@ test('can list products with options set', () => {
     ['is_order', 'true'],
     ['tags', '2,3,5'],
     ['tags_name', 'a'],
-    ['exclude', '8']];
+    ['exclude', '8'],
+    ['include_only', '1']];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
 });
