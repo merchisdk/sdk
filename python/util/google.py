@@ -141,7 +141,7 @@ def r_config_call(param):
     return r_gtag_call(r"['\"]config['\"]\s*,\s*" + param)
 
 
-r_tag_fmt = r"[A-Z][A-Z]-[0-9]+"
+r_tag_fmt = r"[a-zA-Z0-9\-_]+"
 
 r_str_global = r_config_call(r"['\"]" + r_val(r_tag_fmt) + r"['\"]")
 
