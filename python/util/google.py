@@ -263,7 +263,7 @@ def extract_new_global_script_parameters(text):
     """
     gtag_id = get_group(r_global_gtag, text)
     if gtag_id is None:
-        raise ScriptError("could not find  gtag id")
+        raise ScriptError("could not find gtag id")
     return gtag_id
 
 
