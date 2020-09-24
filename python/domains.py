@@ -164,10 +164,8 @@ class Domains(sdk.python.entities.Resource):
     entity_class = Domain
     json_name = 'domains'
 
-    def get_by_name(self, name, types, api_secret):
-        domain_types = ','.join((str(t) for t in types))
-        result, _ = self.fetch(query={'name': name,
-                                      'domain_types': domain_types},
+    def get_by_name(self, name, api_secret):
+        result, _ = self.fetch(query={'name': name},
                                api_secret=api_secret)
         if len(result) == 1:
             return result[0]
