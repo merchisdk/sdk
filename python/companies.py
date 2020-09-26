@@ -6,6 +6,7 @@ from sdk.python.addresses import Address
 from sdk.python.files import File
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
+from sdk.python.subscription_plans import SubscriptionPlan
 import sdk.python.users
 import sdk.python.country_taxes
 from sdk.python.entities import Property
@@ -48,6 +49,8 @@ class Company(sdk.python.entities.Entity):
                               backref="saved_by_companies")
     banks = Property(Bank)
     default_tax_type = Property(sdk.python.country_taxes.CountryTax)
+    subscription_plan = Property(SubscriptionPlan,
+                                 backref="companies")
 
     @property
     def default_banks(self):

@@ -1,6 +1,7 @@
 import { Entity } from '../entity';
 import { CountryTax } from './country_tax';
 import { User } from './user';
+import { Company } from './company';
 
 export class SubscriptionPlan extends Entity {
   protected static resourceName: string = 'subscription_plans';
@@ -57,4 +58,7 @@ export class SubscriptionPlan extends Entity {
 
   @SubscriptionPlan.property()
   public is_private?: boolean;
+
+  @SubscriptionPlan.property({arrayType: 'Company'})
+  public companies?: Company[];
 }

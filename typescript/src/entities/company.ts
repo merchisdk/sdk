@@ -13,6 +13,7 @@ import { PhoneNumber } from './phone_number';
 import { Product } from './product';
 import { Shipment } from './shipment';
 import { UserCompany } from './user_company';
+import { SubscriptionPlan } from './subscription_plan';
 
 export class Company extends Entity {
   protected static resourceName: string = 'companies';
@@ -85,6 +86,9 @@ export class Company extends Entity {
   @Company.property({type: CountryTax})
   public defaultTaxType?: CountryTax | null;
 
+  @Company.property({type: SubscriptionPlan})
+  public subscriptionPlan?: SubscriptionPlan | null;
+
   @Company.property({arrayType: 'EmailAddress'})
   public _emailAddresses?: EmailAddress[];
 
@@ -138,6 +142,9 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Invoice'})
   public invoicesHas?: Invoice[];
+
+  @Company.property({arrayType: 'Invoice'})
+  public subscriptionInvoices?: Invoice[];
 
   @Company.property({arrayType: 'Address'})
   public addresses?: Address[];
