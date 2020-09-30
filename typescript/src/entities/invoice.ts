@@ -106,6 +106,9 @@ export class Invoice extends Entity {
   @Invoice.property({type: Company})
   public clientCompany?: Company | null;
 
+  @Company.property({arrayType: 'Company'})
+  public subscriptionCompanies?: Company[];
+
   @Invoice.property({type: Address})
   public shipping?: Address | null;
 
