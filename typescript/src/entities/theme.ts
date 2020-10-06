@@ -310,7 +310,7 @@ export class Theme extends Entity {
   @Theme.property({arrayType: 'Page'})
   public pages?: Page[];
 
-  @Theme.property()
+  @Theme.property({type: Number})
   public defaultForDomainType?: number | null;
 
   public canBeActivated = () => {
