@@ -310,6 +310,9 @@ export class Theme extends Entity {
   @Theme.property({arrayType: 'Page'})
   public pages?: Page[];
 
+  @Theme.property()
+  public defaultForDomainType?: number | null;
+
   public canBeActivated = () => {
     const validStatus = ThemeStatus.VALID_BUT_NOT_UPDATED;
     if (this.mainCssStatus === undefined || this.emailCssStatus === undefined) {

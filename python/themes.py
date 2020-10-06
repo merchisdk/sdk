@@ -111,6 +111,7 @@ class Theme(sdk.python.entities.Entity):
     images = Property(File)
     css_image_files = Property(File)
     pages = Property(Page)
+    default_for_domain_type = Property(int)
 
     def is_valid_and_updated(self):
         """ Check both main css template and email css template
