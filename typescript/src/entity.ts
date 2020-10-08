@@ -110,6 +110,8 @@ interface ListOptions {
   tagNames?: string[];
   exclude?: number[];
   includeOnly?: number[];
+  orClientId?: number;
+  orClientCompanyId?: number;
 }
 
 export interface ListMetadata {
@@ -508,6 +510,13 @@ export class Entity {
       }
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
+      }
+      if (options.orClientId !== undefined) {
+        fetchOptions.query.push(['or_client_id', options.orClientId.toString()]);
+      }
+      if (options.orClientCompanyId !== undefined) {
+        fetchOptions.query.push(
+          ['or_client_company_id', options.orClientCompanyId.toString()]);
       }
     }
     if (!(options && options.withRights)) {
