@@ -229,7 +229,7 @@ export class Product extends Entity {
         ' embed it?';
       throw new Error(err);
     }
-    const iVF: Array<VariationField> =
+    const iVF: VariationField[] =
       _.orderBy(this.independentVariationFields, ['position'], ['asc']);
     return iVF.map(field => field.buildEmptyVariation());
   }
