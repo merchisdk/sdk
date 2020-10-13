@@ -57,7 +57,10 @@ export class SubscriptionPlan extends Entity {
   public billingCycleDays?: number;
 
   @SubscriptionPlan.property()
-  public is_private?: boolean;
+  public isPrivate?: boolean;
+
+  @SubscriptionPlan.property()
+  public showPublic?: boolean;
 
   @SubscriptionPlan.property({arrayType: 'Company'})
   public companies?: Company[];
