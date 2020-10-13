@@ -157,3 +157,5 @@ NO_MATCHED_VARIATION_FIELDS = 119  # product should not have duplicated field
 NO_SELECTED_SHIPMENT_QUOTE = 120
 NO_JOB_FOUND = 121
 NO_ASSIGNMENT_FOUND = 122
+
+MISSING_PLAN = 123  # valid subscription plan id must be provided
