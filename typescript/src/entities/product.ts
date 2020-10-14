@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
@@ -228,8 +229,9 @@ export class Product extends Entity {
         ' embed it?';
       throw new Error(err);
     }
-    return this.independentVariationFields.map(field =>
-      field.buildEmptyVariation());
+    const iVF: VariationField[] =
+      _.orderBy(this.independentVariationFields, ['position'], ['asc']);
+    return iVF.map(field => field.buildEmptyVariation());
   }
 
   public buildEmptyVariationGroup = () => {
@@ -241,8 +243,10 @@ export class Product extends Entity {
     const result = new this.merchi.VariationsGroup();
     const variations = [];
     let cost = 0;
+    const sortedFields = _.orderBy(
+      this.groupVariationFields, ['position'], ['asc']);
     result.quantity = 0;
-    for (const variationField of this.groupVariationFields) {
+    for (const variationField of sortedFields) {
       const empty = variationField.buildEmptyVariation(); 
       variations.push(empty);
       cost += empty.cost as number;
