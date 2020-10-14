@@ -656,7 +656,11 @@ export class Entity {
           const array = propertyInfo.currentValue.map((v: any) => v.toJson());
           json[propertyName] = array;
         } else if (this.isSingleEntityProperty(propertyInfo)) {
-          json[propertyName] = propertyInfo.currentValue.toJson();
+          if (propertyInfo.currentValue === null) {
+            json[propertyName] = null;
+          } else {
+            json[propertyName] = propertyInfo.currentValue.toJson();
+          }
         } else {
           const value = propertyInfo.currentValue;
           json[propertyName] = value;
