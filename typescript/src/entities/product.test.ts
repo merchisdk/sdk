@@ -269,6 +269,8 @@ test('can list products with options set', () => {
     componentId: 37,
     section: NotificationSection.JOB_INFO,
     senderRole: Role.MANAGER,
+    orClientId: 123,
+    orClientCompanyId: 321,
     isOrder: true,
     tags: [2, 3, 5],
     tagNames: ['a'],
@@ -321,7 +323,10 @@ test('can list products with options set', () => {
     ['tags', '2,3,5'],
     ['tags_name', 'a'],
     ['exclude', '8'],
-    ['include_only', '1']];
+    ['include_only', '1'],
+    ['or_client_id', '123'],
+    ['or_client_company_id', '321'],
+  ];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
 });
@@ -433,6 +438,16 @@ test('can convert product data json format', () => {
     name: p.name,
     domain: {domain: d.domain},
     categories: [{name: c1.name}, {name: c2.name}]
+  };
+  expect(p.toJson()).toEqual(correct);
+});
+
+test('none relationship will be in data json', () => {
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  p.featureImage = null;
+  const correct = {
+    featureImage: null
   };
   expect(p.toJson()).toEqual(correct);
 });
