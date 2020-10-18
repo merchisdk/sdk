@@ -110,6 +110,8 @@ interface ListOptions {
   tagNames?: string[];
   exclude?: number[];
   includeOnly?: number[];
+  orClientId?: number;
+  orClientCompanyId?: number;
 }
 
 export interface ListMetadata {
@@ -509,6 +511,13 @@ export class Entity {
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
       }
+      if (options.orClientId !== undefined) {
+        fetchOptions.query.push(['or_client_id', options.orClientId.toString()]);
+      }
+      if (options.orClientCompanyId !== undefined) {
+        fetchOptions.query.push(
+          ['or_client_company_id', options.orClientCompanyId.toString()]);
+      }
     }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
@@ -647,7 +656,11 @@ export class Entity {
           const array = propertyInfo.currentValue.map((v: any) => v.toJson());
           json[propertyName] = array;
         } else if (this.isSingleEntityProperty(propertyInfo)) {
-          json[propertyName] = propertyInfo.currentValue.toJson();
+          if (propertyInfo.currentValue === null) {
+            json[propertyName] = null;
+          } else {
+            json[propertyName] = propertyInfo.currentValue.toJson();
+          }
         } else {
           const value = propertyInfo.currentValue;
           json[propertyName] = value;
