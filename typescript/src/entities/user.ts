@@ -87,6 +87,9 @@ export class User extends Entity {
   @User.property()
   public name?: string;
 
+  @User.property()
+  public callToActions?: string;
+
   @User.property({type: String})
   public comments?: string | null;
 
