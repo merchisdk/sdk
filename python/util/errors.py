@@ -159,3 +159,5 @@ NO_JOB_FOUND = 121
 NO_ASSIGNMENT_FOUND = 122
 
 MISSING_PLAN = 123  # valid subscription plan id must be provided
+
+STRIPE_NO_CUSTOMER_FOUND = 124

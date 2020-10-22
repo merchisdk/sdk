@@ -29,6 +29,7 @@ class Company(sdk.python.entities.Entity):
     paypal_password = Property(str)
     paypal_signature = Property(str)
     is_paypal_valid = Property(bool)
+    stripe_customer_id = Property(str)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
     is_stripe_valid = Property(bool)
