@@ -79,6 +79,7 @@ interface ListOptions {
   inDomain?: number;
   inDomainName?: string;
   inDomainRoles?: number[];
+  isPrivate?: boolean;
   asRole?: Role;
   publicOnly?: boolean;
   managedOnly?: boolean;
@@ -405,6 +406,9 @@ export class Entity {
       if (options.inDomainRoles !== undefined) {
         fetchOptions.query.push(['in_domain_roles',
           JSON.stringify(options.inDomainRoles)]);
+      }
+      if (options.isPrivate !== undefined) {
+        fetchOptions.query.push(['is_private', options.isPrivate.toString()]);
       }
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
