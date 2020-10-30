@@ -1,6 +1,7 @@
 import { Domain } from './domain';
 import { Entity } from '../entity';
 import { User } from './user';
+import { Role } from '../constants/roles';
 
 export class EnrolledDomain extends Entity {
   protected static resourceName: string = 'enrolled_domains';
@@ -14,7 +15,7 @@ export class EnrolledDomain extends Entity {
   public id?: number;
 
   @EnrolledDomain.property()
-  public role?: number;
+  public role?: Role;
 
   @EnrolledDomain.property()
   public user?: User;

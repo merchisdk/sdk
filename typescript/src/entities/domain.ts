@@ -138,7 +138,7 @@ export class Domain extends Entity {
     }
     if (this.company.defaultCurrency === undefined) {
       const err = 'company.defaultCurrency is undefined, did you forget to' +
-        ' embed it?'; 
+        ' embed it?';
       throw new Error(err);
     }
     return this.company.defaultCurrency;
@@ -150,9 +150,16 @@ export class Domain extends Entity {
     }
     if (this.company.defaultTaxType === undefined) {
       const err = 'company.defaultTaxType is undefined, did you forget to' +
-        ' embed it?'; 
+        ' embed it?';
       throw new Error(err);
     }
     return this.company.defaultTaxType;
+  }
+
+  public getActiveTheme = () => {
+    if (this.activeTheme === undefined) {
+      throw new Error('active Theme is undefined, did you forget to embed it?');
+    }
+    return this.activeTheme!;
   }
 }
