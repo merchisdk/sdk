@@ -345,8 +345,9 @@ export class User extends Entity {
     const allRoles = this.enrolledDomains.map(
       enrolledDomain => enrolledDomain.role ? enrolledDomain.role : Role.PUBLIC
     );
+    allRoles.push(Role.PUBLIC);
     return combinationMethod(
-      allRoles.map((role) => roles.indexOf(role) !== -1)
+      roles.map((role) => allRoles.indexOf(role) !== -1)
     );
 
   }
