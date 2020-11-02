@@ -156,9 +156,9 @@ export class Domain extends Entity {
     return this.company.defaultTaxType;
   }
 
-  public getActiveTheme = () => {
+  public getActiveTheme = (): Theme => {
     if (this.activeTheme === undefined) {
-      throw new Error('active Theme is undefined, did you forget to embed it?');
+      throw new Error('activeTheme is undefined, did you forget to embed it?');
     }
     return this.activeTheme!;
   }
