@@ -38,9 +38,21 @@ test('can delete domain', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
   domain.id = 1;
-  const fetch = mockFetch(true, {}, 204); 
+  const fetch = mockFetch(true, {}, 204);
   domain.delete();
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
+});
+
+test('can get domain active theme', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+
+  // throw error if active theme is undefined which seems to be an embed issue
+  expect(() => {domain.getActiveTheme();}).toThrow(Error);
+
+  const theme = new merchi.Theme();
+  domain.activeTheme = theme;
+  expect(domain.getActiveTheme()).toEqual(theme);
 });
 
 test('fail to delete non-existant domain', () => {

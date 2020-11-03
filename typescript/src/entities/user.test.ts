@@ -1,6 +1,8 @@
 import { Merchi } from '../merchi';
 import { Role } from '../constants/roles';
+import { SystemRole } from '../constants/system_roles';
 import { setup, mockFetch } from '../test_util';
+import { every } from 'lodash';
 
 setup();
 
@@ -68,6 +70,52 @@ test('role helper function', () => {
   expect(user.roleInDomain(domain1)).toBe(Role.ADMIN);
 });
 
+test('companies', () => {
+  const merchi = new Merchi();
+  const user = new merchi.User();
+  // user.userCompanies not embeded yet will throw a error as it suppose to
+  // be a embed issue
+  expect(() => user.companies()).toThrow();
+
+  const userCompany1 = new merchi.UserCompany();
+  const userCompany2 = new merchi.UserCompany();
+  user.userCompanies = [userCompany1, userCompany2];
+  expect(() => user.companies()).toThrow();
+
+  const company1 = new merchi.Company();
+  const company2 = new merchi.Company();
+  userCompany1.company = company1;
+  userCompany2.company = company2;
+  expect(user.companies()).toEqual([company1, company2]);
+});
+
+test('hasRoles', () => {
+  const merchi = new Merchi();
+  const user = new merchi.User();
+  // EnrolledDomains has not been specified yet likely to be a embed issue
+  expect(() => user.hasRoles([Role.ADMIN])).toThrow();
+  const enrollment = new merchi.EnrolledDomain();
+  user.enrolledDomains = [enrollment];
+  expect(user.hasRoles([Role.PUBLIC])).toBeTruthy();
+  enrollment.role = Role.ADMIN;
+  user.enrolledDomains = [enrollment];
+  expect(user.hasRoles([Role.ADMIN, Role.MANAGER])).toBeTruthy();
+  expect(user.hasRoles([Role.ADMIN, Role.MANAGER], every)).toBeFalsy();
+});
+
+test('testHasSystemRoles', () => {
+  const merchi = new Merchi();
+  const user = new merchi.User();
+  // SystemRole has not been specified yet likely to be a embed issue
+  expect(
+    () => user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toThrow();
+  user.systemRoles = [];
+  expect(user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toBeFalsy();
+  const systemRole = new merchi.SystemRole();
+  systemRole.role = SystemRole.SYSTEM_COMPONENT_BUILDER;
+  user.systemRoles = [systemRole];
+  expect(user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toBeTruthy();
+});
 
 test('domainsByRoles', () => {
   const merchi = new Merchi();
