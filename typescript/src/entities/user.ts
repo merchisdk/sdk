@@ -24,12 +24,16 @@ import { Shipment } from './shipment';
 import { SystemRole } from './system_role';
 import { Theme } from './theme';
 import { UserCompany } from './user_company';
+import { Company } from './company';
 import { Role,
   DOMAIN_MANAGERS,
   MANAGEMENT_TEAM,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles';
+import { SystemRole as SR } from '../constants/system_roles';
+
+import { some } from 'lodash';
 
 export class User extends Entity {
   protected static resourceName: string = 'users';
@@ -259,6 +263,28 @@ export class User extends Entity {
     return Role.PUBLIC;
   };
 
+  public isSuper(): boolean {
+    if (this.isSuperUser === undefined) {
+      const err = 'isSuperUser is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    return this.isSuperUser!;
+  }
+
+  public companies(): Company[] {
+    if (this.userCompanies === undefined) {
+      const err = 'userCompanies is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    return this.userCompanies.map((userCompany) => {
+      if (userCompany.company === undefined) {
+        const err = 'userCompany.company is undefined, did you forget to embed it?';
+        throw new Error(err);
+      }
+      return userCompany.company!;
+    });
+  }
+
   public isDomainManager(domain: Domain) {
     return DOMAIN_MANAGERS.includes(this.roleInDomain(domain));
   }
@@ -291,11 +317,7 @@ export class User extends Entity {
   }
 
   public hasAuthority(domain: Domain, roles: Role[]) {
-    if (this.isSuperUser === undefined) {
-      const err = 'isSuperUser is undefined, did you forget to embed it?';
-      throw new Error(err);
-    }
-    if (this.isSuperUser) {
+    if (this.isSuper()) {
       return true;
     }
     const role = this.roleInDomain(domain);
@@ -305,5 +327,28 @@ export class User extends Entity {
       }
     }
     return false;
+  }
+
+  public hasSystemRole(role: SR): boolean {
+    if (this.systemRoles === undefined) {
+      const err = 'systemRoles is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    return some(this.systemRoles.map(systemRole => systemRole.role === role));
+  }
+
+  public hasRoles(roles: Role[], combinationMethod = some) {
+    if (this.enrolledDomains === undefined) {
+      const err = 'enrolledDomains is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    const allRoles = this.enrolledDomains.map(
+      enrolledDomain => enrolledDomain.role ? enrolledDomain.role : Role.PUBLIC
+    );
+    allRoles.push(Role.PUBLIC);
+    return combinationMethod(
+      roles.map((role) => allRoles.indexOf(role) !== -1)
+    );
+
   }
 }

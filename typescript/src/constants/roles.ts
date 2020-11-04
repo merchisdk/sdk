@@ -24,7 +24,6 @@ export const BUSINESS_ACCOUNTS = [...MANAGEMENT_TEAM, Role.SUPPLIER];
 export const MANAGEMENT_ROLES = [Role.ADMIN, Role.MANAGER];
 
 export const THEME_ROLES = [...MANAGEMENT_ROLES, Role.THEME_EDITOR];
-
 export const ROLES_RANK = [
   Role.PUBLIC,
   Role.CLIENT,
@@ -35,3 +34,5 @@ export const ROLES_RANK = [
   Role.MANAGER,
   Role.ADMIN,
 ];
+
+export const ALL_ROLES = ROLES_RANK;
