@@ -2,6 +2,7 @@ import { Domain } from './domain';
 import { Entity } from '../entity';
 import { User } from './user';
 import { Role } from '../constants/roles';
+import { DomainType } from '../constants/domain_types';
 
 export class EnrolledDomain extends Entity {
   protected static resourceName: string = 'enrolled_domains';
@@ -22,4 +23,15 @@ export class EnrolledDomain extends Entity {
 
   @EnrolledDomain.property()
   public domain?: Domain;
+
+  public getRole() : Role {
+    if (this.domain === undefined) {
+      const err = 'domain is undefined, did you forget to embed it?';
+      throw new Error(err);
+    }
+    if (this.domain.domainType === DomainType.DOMAIN_SUPPLIER) {
+      return Role.SUPPLIER;
+    }
+    return this.role ? this.role : Role.PUBLIC;
+  }
 }

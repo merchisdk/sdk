@@ -15,6 +15,7 @@ import { Product } from './product';
 import { Session } from './session';
 import { SupplyDomain } from './supply_domain';
 import { Theme } from './theme';
+import { DomainType } from '../constants/domain_types';
 
 export class Domain extends Entity {
   protected static resourceName: string = 'domains';
@@ -34,7 +35,7 @@ export class Domain extends Entity {
   public isMaster?: boolean;
 
   @Domain.property()
-  public domainType?: number;
+  public domainType?: DomainType;
 
   @Domain.property()
   public subDomain?: string;

@@ -343,12 +343,11 @@ export class User extends Entity {
       throw new Error(err);
     }
     const allRoles = this.enrolledDomains.map(
-      enrolledDomain => enrolledDomain.role ? enrolledDomain.role : Role.PUBLIC
+      enrolledDomain => enrolledDomain.getRole()
     );
     allRoles.push(Role.PUBLIC);
     return combinationMethod(
       roles.map((role) => allRoles.indexOf(role) !== -1)
     );
-
   }
 }
