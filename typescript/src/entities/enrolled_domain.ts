@@ -24,7 +24,7 @@ export class EnrolledDomain extends Entity {
   @EnrolledDomain.property()
   public domain?: Domain;
 
-  public getRole() : Role {
+  public getRole(): Role {
     if (this.domain === undefined) {
       const err = 'domain is undefined, did you forget to embed it?';
       throw new Error(err);
