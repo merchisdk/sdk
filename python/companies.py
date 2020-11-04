@@ -32,6 +32,7 @@ class Company(sdk.python.entities.Entity):
     stripe_customer_id = Property(str)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
+    call_to_actions = Property(str)
     is_stripe_valid = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
