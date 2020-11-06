@@ -31,6 +31,9 @@ export class Domain extends Entity {
   @Domain.property()
   public domain?: string;
 
+  @User.property()
+  public callToActions?: string;
+
   @Domain.property()
   public isMaster?: boolean;
 
