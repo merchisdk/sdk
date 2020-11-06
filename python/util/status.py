@@ -16,7 +16,7 @@ PRODUCTION_STATUS = {
              "cssClass": "progress-bar-inverse"},
     "REJECTED": {"dbValue": 1, "text": "Suppliers Rejected",
                  "percentage": 0, "cssClass": "progress-bar-danger"},
-    "QUOTING": {"dbValue": 2, "text": "Bidding", "percentage": 30,
+    "QUOTING": {"dbValue": 2, "text": "Quoting", "percentage": 30,
                 "cssClass": ""},
     "ASSIGN_SENT": {"dbValue": 3, "text": "Waiting Reply", "percentage": 30,
                     "cssClass": "progress-bar-info"},
