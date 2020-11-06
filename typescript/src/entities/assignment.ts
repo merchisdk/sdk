@@ -1,4 +1,4 @@
-import { Bid } from './bid';
+import { Quote } from './quote';
 import { Entity } from '../entity';
 import { Job } from './job';
 import { Notification } from './notification';
@@ -39,8 +39,8 @@ export class Assignment extends Entity {
   @Assignment.property({type: User})
   public supplier?: User | null;
 
-  @Assignment.property({type: Bid})
-  public bid?: Bid | null;
+  @Assignment.property({type: Quote})
+  public quote?: Quote | null;
 
   @Assignment.property({arrayType: 'ProductionComment'})
   public comments?: ProductionComment[];

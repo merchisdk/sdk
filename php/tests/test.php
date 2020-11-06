@@ -10,7 +10,7 @@ require_once 'php/src/domain_invitations.php';
 require_once 'php/src/discounts.php';
 require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
-require_once 'php/src/bid_items.php';
+require_once 'php/src/quote_items.php';
 require_once 'php/src/util/address.php';
 require_once 'php/src/util/money_protocol.php';
 require_once 'php/src/categories.php';
@@ -23,9 +23,9 @@ final class PhpSuite extends TestCase
         $this->assertNotNull(new Product());
     }
 
-    public function testBidItem()
+    public function testQuoteItem()
     {
-        $item = new BidItem();
+        $item = new QuoteItem();
         $item->quantity = 222;
         $item->unit_price = 4;
         $item->type = 1;

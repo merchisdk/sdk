@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once 'entity.php';
-require_once 'bid_items.php';
+require_once 'quote_items.php';
 
 function addup_subtotal($prev_total, $b)
 {
@@ -10,10 +10,10 @@ function addup_subtotal($prev_total, $b)
     return $prev_total + ($b->quantity * $b->unit_price);
 }
 
-class Bid extends Entity
+class Quote extends Entity
 {
-    public static $resource = '/bids/';
-    public static $json_name = 'bid';
+    public static $resource = '/quotes/';
+    public static $json_name = 'quote';
 
     public function __construct()
     {
@@ -22,28 +22,28 @@ class Bid extends Entity
         $this->json_property('agreed_deadline', 'DateTime');
         $this->json_property('assignments', 'Assignment', $default = [],
                              True, $recursive = True);
-        $this->json_property('bid_items', 'BidItem', $default = [],
+        $this->json_property('quote_items', 'QuoteItem', $default = [],
                              True, $recursive = True);
     }
 
-    public function bid_total()
+    public function quote_total()
     {
         /*
-            Calculate the bid sub total by adding
-            all the bid_item totals together.
+            Calculate the quote sub total by adding
+            all the quote_item totals together.
         */
 
-        return round(array_reduce($this->bid_items, "addup_subtotal"), 2);
+        return round(array_reduce($this->quote_items, "addup_subtotal"), 2);
     }
 }
 
-class Bids extends Resource
+class Quotes extends Resource
 {
     public function __construct()
     {
-        $this->json_name = 'bids';
-        $this->entity_class = 'Bid';
+        $this->json_name = 'quotes';
+        $this->entity_class = 'Quote';
     }
 }
 
-$bids = new Bids();
+$quotes = new Quotes();
