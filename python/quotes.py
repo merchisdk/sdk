@@ -18,6 +18,7 @@ class Quote(sdk.python.entities.Entity):
 
     id = Property(int)
     agreed_deadline = Property(datetime.datetime)
+    currency = Property(str)
     quote_items = Property(QuoteItem)
 
     def quote_total(self):

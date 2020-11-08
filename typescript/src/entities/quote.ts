@@ -12,6 +12,9 @@ export class Quote extends Entity {
   public archived?: Date | null;
 
   @Quote.property()
+  public currency?: string;
+
+  @Quote.property()
   public id?: number;
 
   @Quote.property({type: Date})
