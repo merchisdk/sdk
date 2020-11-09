@@ -1,5 +1,6 @@
 import { Assignment } from './assignment';
 import { QuoteItem } from './quote_item';
+import { Shipment } from './shipment';
 import { Entity } from '../entity';
 import { kahanSum } from '../util/float';
 
@@ -17,6 +18,12 @@ export class Quote extends Entity {
   @Quote.property({type: Date})
   public agreedDeadline?: Date | null;
 
+  @Quote.property({type: Date})
+  public currency?: string;
+
+  @Quote.property({arrayType: 'Shipment'})
+  public shipments?: Shipment[];
+
   @Quote.property({arrayType: 'QuoteItem'})
   public quoteItems?: QuoteItem[];
 
@@ -28,9 +35,31 @@ export class Quote extends Entity {
       throw new Error('quoteItems is undefined, did you forget to embed it?');
     }
     function getTotal(quoteItem: QuoteItem) {
-      return parseFloat(quoteItem.total());
+      return parseFloat(quoteItem.calculateTotal());
     }
     return kahanSum(this.quoteItems.map(getTotal)).toFixed(3);
+  }
+
+  public calculateTotal = this.quoteTotal;
+
+  public calculateSubTotal = () => {
+    if (this.quoteItems === undefined) {
+      throw new Error('quoteItems is undefined, did you forget to embed it?');
+    }
+    function getSubTotal(quoteItem: QuoteItem) {
+      return parseFloat(quoteItem.calculateSubTotal());
+    }
+    return kahanSum(this.quoteItems.map(getSubTotal)).toFixed(3);
+  }
+
+  public calculateTaxAmount = () => {
+    if (this.quoteItems === undefined) {
+      throw new Error('quoteItems is undefined, did you forget to embed it?');
+    }
+    function getTaxAmount(quoteItem: QuoteItem) {
+      return parseFloat(quoteItem.calculateTaxAmount());
+    }
+    return kahanSum(this.quoteItems.map(getTaxAmount)).toFixed(3);
   }
 
   public findQuoteItemIndex = (quoteItemId: number) => {
@@ -40,7 +69,7 @@ export class Quote extends Entity {
     function checkEqualId(quoteItem: QuoteItem) {
       return quoteItem.id === quoteItemId;
     }
-    return this.quoteItems.findIndex(checkEqualId); 
+    return this.quoteItems.findIndex(checkEqualId);
   }
 
   public removeQuoteItem = (quoteItem: QuoteItem) => {

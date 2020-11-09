@@ -1,6 +1,7 @@
 import datetime
 import sdk.python.entities
 from sdk.python.quote_items import QuoteItem
+from sdk.python.shipment import Shipment
 from functools import reduce
 from sdk.python.entities import Property
 
@@ -19,6 +20,7 @@ class Quote(sdk.python.entities.Entity):
     id = Property(int)
     agreed_deadline = Property(datetime.datetime)
     quote_items = Property(QuoteItem)
+    shipments = Property(Shipment)
 
     def quote_total(self):
         """ Calculate the quote sub total by adding all

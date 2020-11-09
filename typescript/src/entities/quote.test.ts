@@ -6,16 +6,36 @@ test('can make Quote', () => {
   expect(quote).toBeTruthy();
 });
 
-test('quoteTotal', () => {
+test('calculation', () => {
   const merchi = new Merchi();
   const quote = new merchi.Quote();
+  const gst = new merchi.CountryTax();
+  gst.taxName = 'GST';
+  gst.taxPercent = 10;
+  const noTax = merchi.CountryTax.getNoTax();
+
+  // quote items did not filled before calculation seems like a embed issue
   expect(quote.quoteTotal).toThrow();
+  expect(quote.calculateSubTotal).toThrow();
+  expect(quote.calculateTaxAmount).toThrow();
+
   quote.quoteItems = [new merchi.QuoteItem(), new merchi.QuoteItem()];
   quote.quoteItems[0].unitPrice = 400;
   quote.quoteItems[0].quantity = 2;
+  quote.quoteItems[0].taxType = gst;
   quote.quoteItems[1].unitPrice = 25;
   quote.quoteItems[1].quantity = 2;
-  expect(quote.quoteTotal()).toBe('850.000');
+  quote.quoteItems[1].taxType = noTax;
+
+  // 800 * 1.1 + 25 * 2 = 930
+  expect(quote.quoteTotal()).toBe('930.000');
+  expect(quote.calculateTotal()).toBe('930.000');
+
+  // 800 + 25 * 2
+  expect(quote.calculateSubTotal()).toBe('850.000');
+
+  // 800 * 0.1
+  expect(quote.calculateTaxAmount()).toBe('80.000');
 });
 
 test('findQuoteItemIndex', () => {

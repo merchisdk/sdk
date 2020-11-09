@@ -1,4 +1,5 @@
 import { Quote } from './quote';
+import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
 
 export class QuoteItem extends Entity {
@@ -24,12 +25,31 @@ export class QuoteItem extends Entity {
   @QuoteItem.property({type: Number})
   public unitPrice?: number | null;
 
+  @QuoteItem.property({type: CountryTax})
+  public taxType?: CountryTax;
+
   @QuoteItem.property()
   public quote?: Quote;
 
-  public total = () => {
+  public calculateSubTotal = () => {
     const quant = this.quantity ? this.quantity : 0;
     const unitPrice = this.unitPrice ? this.unitPrice : 0;
     return (quant * unitPrice).toFixed(3);
   }
+
+  public calculateTaxAmount = () => {
+    if (this.taxType === undefined) {
+      throw new Error('taxType is undefined, did you forget to embed it?');
+    }
+    const taxRate = this.taxType.taxPercent! / 100;
+    return (parseFloat(this.calculateSubTotal()) * taxRate).toFixed(3);
+  }
+
+  public calculateTotal = () => {
+    return (
+      parseFloat(this.calculateSubTotal()) +
+      parseFloat(this.calculateTaxAmount())
+    ).toFixed(3);
+  }
+
 }

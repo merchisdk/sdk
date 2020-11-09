@@ -5,6 +5,7 @@ import { CountryTax } from './country_tax';
 import { DomainTag } from './domain_tag';
 import { Entity } from '../entity';
 import { Invoice } from './invoice';
+import { Quote } from './quote';
 import { Job } from './job';
 import { User } from './user';
 import { ShipmentMethod } from './shipment_method';
@@ -91,6 +92,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({type: Invoice})
   public invoice?: Invoice | null;
+
+  @Shipment.property({type: Quote})
+  public quote?: Quote | null;
 
   @Shipment.property({type: ShipmentMethod})
   public shipmentMethod?: ShipmentMethod | null;
