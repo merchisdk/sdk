@@ -1,7 +1,7 @@
 import datetime
 import sdk.python.entities
 from sdk.python.quote_items import QuoteItem
-from sdk.python.shipment import Shipment
+from sdk.python.shipments import Shipment
 from functools import reduce
 from sdk.python.entities import Property
 
