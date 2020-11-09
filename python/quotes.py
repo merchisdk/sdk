@@ -19,6 +19,7 @@ class Quote(sdk.python.entities.Entity):
 
     id = Property(int)
     agreed_deadline = Property(datetime.datetime)
+    currency = Property(str)
     quote_items = Property(QuoteItem)
     shipments = Property(Shipment)
 

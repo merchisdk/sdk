@@ -16,6 +16,8 @@ class QuoteItem(sdk.python.entities.Entity):
     unit_price = Property(float)  # unit cents in db
     tax_type = Property(CountryTax)
 
+    tax_type = Property(sdk.python.country_taxes.CountryTax)
+
     def item_total(self):
         """ Calculate the total of the item by
             multiplying the unit_price and quantity. It then

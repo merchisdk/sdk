@@ -1,6 +1,6 @@
-import { Quote } from './quote';
 import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
+import { Quote } from './quote';
 
 export class QuoteItem extends Entity {
   protected static resourceName: string = 'quote_items';
@@ -24,6 +24,9 @@ export class QuoteItem extends Entity {
 
   @QuoteItem.property({type: Number})
   public unitPrice?: number | null;
+
+  @QuoteItem.property({type: Number})
+  public taxAmount?: number | null;
 
   @QuoteItem.property({type: CountryTax})
   public taxType?: CountryTax;
