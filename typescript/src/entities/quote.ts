@@ -4,6 +4,10 @@ import { Shipment } from './shipment';
 import { Entity } from '../entity';
 import { kahanSum } from '../util/float';
 
+interface CalculateOptions {
+  strictEmbed?: boolean;
+}
+
 export class Quote extends Entity {
   protected static resourceName: string = 'quotes';
   protected static singularName: string = 'quote';
@@ -30,36 +34,42 @@ export class Quote extends Entity {
   @Quote.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];
 
-  public quoteTotal = () => {
-    if (this.quoteItems === undefined) {
+  public quoteTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.quoteItems === undefined) {
       throw new Error('quoteItems is undefined, did you forget to embed it?');
     }
     function getTotal(quoteItem: QuoteItem) {
-      return parseFloat(quoteItem.calculateTotal());
+      return parseFloat(quoteItem.calculateTotal(options));
     }
-    return kahanSum(this.quoteItems.map(getTotal)).toFixed(3);
+    const quoteItems = this.quoteItems ? this.quoteItems : [];
+    return kahanSum(quoteItems!.map(getTotal)).toFixed(3);
   }
 
   public calculateTotal = this.quoteTotal;
 
-  public calculateSubTotal = () => {
-    if (this.quoteItems === undefined) {
+  public calculateSubTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.quoteItems === undefined) {
       throw new Error('quoteItems is undefined, did you forget to embed it?');
     }
     function getSubTotal(quoteItem: QuoteItem) {
       return parseFloat(quoteItem.calculateSubTotal());
     }
-    return kahanSum(this.quoteItems.map(getSubTotal)).toFixed(3);
+    const quoteItems = this.quoteItems ? this.quoteItems : [];
+    return kahanSum(quoteItems.map(getSubTotal)).toFixed(3);
   }
 
-  public calculateTaxAmount = () => {
-    if (this.quoteItems === undefined) {
+  public calculateTaxAmount = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.quoteItems === undefined) {
       throw new Error('quoteItems is undefined, did you forget to embed it?');
     }
     function getTaxAmount(quoteItem: QuoteItem) {
-      return parseFloat(quoteItem.calculateTaxAmount());
+      return parseFloat(quoteItem.calculateTaxAmount(options));
     }
-    return kahanSum(this.quoteItems.map(getTaxAmount)).toFixed(3);
+    const quoteItems = this.quoteItems ? this.quoteItems : [];
+    return kahanSum(quoteItems.map(getTaxAmount)).toFixed(3);
   }
 
   public findQuoteItemIndex = (quoteItemId: number) => {
