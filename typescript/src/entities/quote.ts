@@ -47,7 +47,7 @@ export class Quote extends Entity {
       parseFloat(qI.calculateTotal(options)))).toFixed(3);
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       parseFloat(s.calculateTotal(options)))).toFixed(3);
-    return quoteItemsTotal + shipmentItemsTotal;
+    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
   }
 
   public calculateTotal = this.quoteTotal;
@@ -65,7 +65,7 @@ export class Quote extends Entity {
       parseFloat(qI.calculateSubTotal()))).toFixed(3);
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       s.calculateSubTotal())).toFixed(3);
-    return quoteItemsTotal + shipmentItemsTotal;
+    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
@@ -81,7 +81,7 @@ export class Quote extends Entity {
       parseFloat(qI.calculateTaxAmount(options)))).toFixed(3);
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       parseFloat(s.calculateTaxAmount(options)))).toFixed(3);
-    return quoteItemsTotal + shipmentItemsTotal;
+    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
   }
 
   public findQuoteItemIndex = (quoteItemId: number) => {
