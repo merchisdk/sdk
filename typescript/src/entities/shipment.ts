@@ -10,6 +10,10 @@ import { Job } from './job';
 import { User } from './user';
 import { ShipmentMethod } from './shipment_method';
 
+interface CalculateOptions {
+  strictEmbed?: boolean;
+}
+
 export class Shipment extends Entity {
   protected static resourceName: string = 'shipments';
   protected static singularName: string = 'shipment';
@@ -107,4 +111,25 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  public calculateSubTotal = () => {
+    const cost = this.cost ? this.cost : 0;
+    return cost.toFixed(3);
+  }
+
+  public calculateTaxAmount = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.taxType === undefined) {
+      throw new Error('taxType is undefined, did you forget to embed it?');
+    }
+    const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
+    return (parseFloat(this.calculateSubTotal()) * taxRate).toFixed(3);
+  }
+
+  public calculateTotal = (options?: CalculateOptions) => {
+    return (
+      parseFloat(this.calculateSubTotal()) +
+      parseFloat(this.calculateTaxAmount(options))
+    ).toFixed(3);
+  }
 }
