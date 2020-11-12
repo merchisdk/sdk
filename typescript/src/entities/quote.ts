@@ -64,7 +64,7 @@ export class Quote extends Entity {
     const quoteItemsTotal = kahanSum(quoteItems.map((qI: QuoteItem) =>
       parseFloat(qI.calculateSubTotal()))).toFixed(3);
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
-      parseFloat(s.calculateSubTotal()))).toFixed(3);
+      s.calculateSubTotal())).toFixed(3);
     return quoteItemsTotal + shipmentItemsTotal;
   }
 

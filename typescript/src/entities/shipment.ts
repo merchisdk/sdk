@@ -114,7 +114,7 @@ export class Shipment extends Entity {
 
   public calculateSubTotal = () => {
     const cost = this.cost ? this.cost : 0;
-    return cost.toFixed(3);
+    return parseFloat(cost.toString());
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
@@ -123,13 +123,12 @@ export class Shipment extends Entity {
       throw new Error('taxType is undefined, did you forget to embed it?');
     }
     const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
-    return (parseFloat(this.calculateSubTotal()) * taxRate).toFixed(3);
+    return (this.calculateSubTotal() * taxRate).toFixed(3);
   }
 
   public calculateTotal = (options?: CalculateOptions) => {
     return (
-      parseFloat(this.calculateSubTotal()) +
-      parseFloat(this.calculateTaxAmount(options))
-    ).toFixed(3);
+      this.calculateSubTotal() +
+      parseFloat(this.calculateTaxAmount(options))).toFixed(3);
   }
 }
