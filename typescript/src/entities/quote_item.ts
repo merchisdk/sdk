@@ -2,6 +2,10 @@ import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
 import { Quote } from './quote';
 
+interface CalculateOptions {
+  strictEmbed?: boolean;
+}
+
 export class QuoteItem extends Entity {
   protected static resourceName: string = 'quote_items';
   protected static singularName: string = 'quoteItem';
@@ -40,18 +44,19 @@ export class QuoteItem extends Entity {
     return (quant * unitPrice).toFixed(3);
   }
 
-  public calculateTaxAmount = () => {
-    if (this.taxType === undefined) {
+  public calculateTaxAmount = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.taxType === undefined) {
       throw new Error('taxType is undefined, did you forget to embed it?');
     }
-    const taxRate = this.taxType.taxPercent! / 100;
+    const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
     return (parseFloat(this.calculateSubTotal()) * taxRate).toFixed(3);
   }
 
-  public calculateTotal = () => {
+  public calculateTotal = (options?: CalculateOptions) => {
     return (
       parseFloat(this.calculateSubTotal()) +
-      parseFloat(this.calculateTaxAmount())
+      parseFloat(this.calculateTaxAmount(options))
     ).toFixed(3);
   }
 
