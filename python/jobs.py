@@ -276,7 +276,8 @@ class Job(sdk.python.entities.Entity):
         lowest_supplier = None
         for assignment in self.assignments:
             if assignment.quote:
-                if not lowest_quote or assignment.quote.quote_total() < lowest_quote:
+                if not lowest_quote or \
+                        assignment.quote.quote_total() < lowest_quote:
                     lowest_quote = assignment.quote.quote_total()
                     lowest_supplier = assignment
         return lowest_supplier
