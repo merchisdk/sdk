@@ -27,15 +27,24 @@ test('calculation', () => {
   quote.quoteItems[1].quantity = 2;
   quote.quoteItems[1].taxType = noTax;
 
-  // 800 * 1.1 + 25 * 2 = 930
-  expect(quote.quoteTotal()).toBe('930.000');
-  expect(quote.calculateTotal()).toBe('930.000');
+  // shipments did not filled before calculation seems like a embed issue
+  expect(quote.quoteTotal).toThrow();
+  expect(quote.calculateSubTotal).toThrow();
+  expect(quote.calculateTaxAmount).toThrow();
 
-  // 800 + 25 * 2
-  expect(quote.calculateSubTotal()).toBe('850.000');
+  quote.shipments = [new merchi.Shipment()];
+  quote.shipments[0].cost = 100;
+  quote.shipments[0].taxType = gst;
 
-  // 800 * 0.1
-  expect(quote.calculateTaxAmount()).toBe('80.000');
+  // 800 * 1.1 + 25 * 2 + 100 * 1.1 = 1040
+  expect(quote.quoteTotal()).toBe('1040.000');
+  expect(quote.calculateTotal()).toBe('1040.000');
+
+  // 800 + 25 * 2 + 100
+  expect(quote.calculateSubTotal()).toBe('950.000');
+
+  // 800 * 0.1 + 100 * 0.1
+  expect(quote.calculateTaxAmount()).toBe('90.000');
 });
 
 test('findQuoteItemIndex', () => {

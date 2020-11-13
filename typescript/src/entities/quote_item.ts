@@ -38,7 +38,16 @@ export class QuoteItem extends Entity {
   @QuoteItem.property()
   public quote?: Quote;
 
-  public calculateSubTotal = () => {
+  public calculateSubTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed){
+      if (this.unitPrice === undefined) {
+        throw new Error('unitPrice is undefined, did you forget to embed it?');
+      }
+      if (this.quantity === undefined) {
+        throw new Error('quantity is undefined, did you forget to embed it?');
+      }
+    }
     const quant = this.quantity ? this.quantity : 0;
     const unitPrice = this.unitPrice ? this.unitPrice : 0;
     return (quant * unitPrice).toFixed(3);
@@ -50,12 +59,12 @@ export class QuoteItem extends Entity {
       throw new Error('taxType is undefined, did you forget to embed it?');
     }
     const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
-    return (parseFloat(this.calculateSubTotal()) * taxRate).toFixed(3);
+    return (parseFloat(this.calculateSubTotal(options)) * taxRate).toFixed(3);
   }
 
   public calculateTotal = (options?: CalculateOptions) => {
     return (
-      parseFloat(this.calculateSubTotal()) +
+      parseFloat(this.calculateSubTotal(options)) +
       parseFloat(this.calculateTaxAmount(options))
     ).toFixed(3);
   }

@@ -20,6 +20,7 @@ test('total calculation', () => {
 
   // tax type not provided yet should be a embed issue
   expect(() => quoteItem.calculateTotal()).toThrow();
+  expect(quoteItem.calculateTotal({strictEmbed: false})).toEqual('10.000');
 
   // quote total include tax type properly
   quoteItem.taxType = gst;
@@ -27,13 +28,20 @@ test('total calculation', () => {
   quoteItem.taxType = noTax;
   expect(quoteItem.calculateTotal()).toEqual('10.000');
 
-  // null and undefined price and quantity will not throw error
+  // null and undefined price and quantity will throw error unless not strictly
+  // require embed
   quoteItem.unitPrice = null;
-  expect(quoteItem.calculateTotal()).toEqual('0.000');
+  expect(quoteItem.calculateTotal({strictEmbed: false})).toEqual('0.000');
 
   quoteItem.unitPrice = 1;
   quoteItem.quantity = undefined;
-  expect(quoteItem.calculateTotal()).toEqual('0.000');
+  expect(() => quoteItem.calculateTotal()).toThrow();
+  expect(quoteItem.calculateTotal({strictEmbed: false})).toEqual('0.000');
+
+  quoteItem.unitPrice = undefined;
+  quoteItem.quantity = 1;
+  expect(() => quoteItem.calculateTotal()).toThrow();
+  expect(quoteItem.calculateTotal({strictEmbed: false})).toEqual('0.000');
 
   // make sure float number recorded correctly
   quoteItem.quantity = 3.55;

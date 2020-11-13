@@ -47,7 +47,9 @@ export class Quote extends Entity {
       parseFloat(qI.calculateTotal(options)))).toFixed(3);
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       parseFloat(s.calculateTotal(options)))).toFixed(3);
-    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
+    return (
+      parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal)
+    ).toFixed(3);
   }
 
   public calculateTotal = this.quoteTotal;
@@ -62,10 +64,10 @@ export class Quote extends Entity {
       throw new Error('shipments is undefined, did you forget to embed it?');
     }
     const quoteItemsTotal = kahanSum(quoteItems.map((qI: QuoteItem) =>
-      parseFloat(qI.calculateSubTotal()))).toFixed(3);
+      parseFloat(qI.calculateSubTotal({strictEmbed}))));
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
-      s.calculateSubTotal())).toFixed(3);
-    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
+      parseFloat(s.calculateSubTotal({strictEmbed}))));
+    return (quoteItemsTotal + shipmentItemsTotal).toFixed(3);
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
@@ -78,10 +80,10 @@ export class Quote extends Entity {
       throw new Error('shipments is undefined, did you forget to embed it?');
     }
     const quoteItemsTotal = kahanSum(quoteItems.map((qI: QuoteItem) =>
-      parseFloat(qI.calculateTaxAmount(options)))).toFixed(3);
+      parseFloat(qI.calculateTaxAmount(options))));
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
-      parseFloat(s.calculateTaxAmount(options)))).toFixed(3);
-    return parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal);
+      parseFloat(s.calculateTaxAmount(options))));
+    return (quoteItemsTotal + shipmentItemsTotal).toFixed(3);
   }
 
   public findQuoteItemIndex = (quoteItemId: number) => {

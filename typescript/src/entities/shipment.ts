@@ -112,9 +112,12 @@ export class Shipment extends Entity {
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];
 
-  public calculateSubTotal = () => {
-    const cost = this.cost ? this.cost : 0;
-    return parseFloat(cost.toString());
+  public calculateSubTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.cost === undefined) {
+      throw new Error('cost is undefined, did you forget to embed it?');
+    }
+    return this.cost ? this.cost.toFixed(3) : '0.000';
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
@@ -123,12 +126,13 @@ export class Shipment extends Entity {
       throw new Error('taxType is undefined, did you forget to embed it?');
     }
     const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
-    return (this.calculateSubTotal() * taxRate).toFixed(3);
+    return (parseFloat(this.calculateSubTotal(options)) * taxRate).toFixed(3);
   }
 
   public calculateTotal = (options?: CalculateOptions) => {
     return (
-      this.calculateSubTotal() +
-      parseFloat(this.calculateTaxAmount(options))).toFixed(3);
+      parseFloat(this.calculateSubTotal(options)) +
+      parseFloat(this.calculateTaxAmount(options))
+    ).toFixed(3);
   }
 }
