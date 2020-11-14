@@ -104,7 +104,7 @@ export class Quote extends Entity {
       throw new Error('quoteItem.id is undefined, did you forget to embed it?');
     }
     const index = this.findQuoteItemIndex(quoteItem.id);
-    if (index > -1) { 
+    if (index > -1) {
       this.quoteItems.splice(index, 1);
     }
   }
