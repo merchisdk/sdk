@@ -117,7 +117,7 @@ export class Shipment extends Entity {
     if (strictEmbed && this.cost === undefined) {
       throw new Error('cost is undefined, did you forget to embed it?');
     }
-    return this.cost ? this.cost.toFixed(3) : '0.000';
+    return this.cost ? parseFloat(String(this.cost)).toFixed(3) : '0.000';
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {

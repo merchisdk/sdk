@@ -64,9 +64,9 @@ export class Quote extends Entity {
       throw new Error('shipments is undefined, did you forget to embed it?');
     }
     const quoteItemsTotal = kahanSum(quoteItems.map((qI: QuoteItem) =>
-      parseFloat(qI.calculateSubTotal({strictEmbed}))));
+      parseFloat(qI.calculateSubTotal(options))));
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
-      parseFloat(s.calculateSubTotal({strictEmbed}))));
+      parseFloat(s.calculateSubTotal(options))));
     return (quoteItemsTotal + shipmentItemsTotal).toFixed(3);
   }
 
