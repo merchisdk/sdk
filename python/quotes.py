@@ -2,6 +2,7 @@ import datetime
 import sdk.python.entities
 from sdk.python.quote_items import QuoteItem
 from sdk.python.shipments import Shipment
+from sdk.python.invoices import Invoice
 from functools import reduce
 from sdk.python.entities import Property
 
@@ -22,6 +23,7 @@ class Quote(sdk.python.entities.Entity):
     currency = Property(str)
     quote_items = Property(QuoteItem)
     shipments = Property(Shipment)
+    invoice = Property(Invoice)
 
     def quote_total(self):
         """ Calculate the quote sub total by adding all
