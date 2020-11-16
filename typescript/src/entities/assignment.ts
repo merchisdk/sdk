@@ -1,4 +1,4 @@
-import { Bid } from './bid';
+import { Quote } from './quote';
 import { Entity } from '../entity';
 import { Job } from './job';
 import { Notification } from './notification';
@@ -6,6 +6,11 @@ import { ProductionComment } from './production_comment';
 import { Shipment } from './shipment';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
+import { RequestOptions } from '../request';
+
+interface GenerateInvoiceProps {
+  addToInvoice? : number;
+}
 
 export class Assignment extends Entity {
   protected static resourceName: string = 'assignments';
@@ -39,8 +44,8 @@ export class Assignment extends Entity {
   @Assignment.property({type: User})
   public supplier?: User | null;
 
-  @Assignment.property({type: Bid})
-  public bid?: Bid | null;
+  @Assignment.property({type: Quote})
+  public quote?: Quote | null;
 
   @Assignment.property({arrayType: 'ProductionComment'})
   public comments?: ProductionComment[];
@@ -53,4 +58,22 @@ export class Assignment extends Entity {
 
   @Assignment.property({arrayType: 'Notification'})
   public notifications?: Notification[];
+
+  public generateInvoice = (props?: GenerateInvoiceProps) => {
+    const resource = `/generate-invoice-for-assignment/${this.id}/`;
+    const fetchOptions: RequestOptions = {method: 'POST'};
+    fetchOptions.query = [];
+
+    if (props && props.addToInvoice) {
+      fetchOptions.query.push(['add_to_invoice', String(props.addToInvoice!)]);
+    }
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        const invoice = new this.merchi.Invoice();
+        invoice.fromJson(data);
+        return invoice;
+      });
+  }
+
 }

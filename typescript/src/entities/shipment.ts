@@ -5,9 +5,14 @@ import { CountryTax } from './country_tax';
 import { DomainTag } from './domain_tag';
 import { Entity } from '../entity';
 import { Invoice } from './invoice';
+import { Quote } from './quote';
 import { Job } from './job';
 import { User } from './user';
 import { ShipmentMethod } from './shipment_method';
+
+interface CalculateOptions {
+  strictEmbed?: boolean;
+}
 
 export class Shipment extends Entity {
   protected static resourceName: string = 'shipments';
@@ -92,6 +97,9 @@ export class Shipment extends Entity {
   @Shipment.property({type: Invoice})
   public invoice?: Invoice | null;
 
+  @Shipment.property({type: Quote})
+  public quote?: Quote | null;
+
   @Shipment.property({type: ShipmentMethod})
   public shipmentMethod?: ShipmentMethod | null;
 
@@ -103,4 +111,28 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  public calculateSubTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.cost === undefined) {
+      throw new Error('cost is undefined, did you forget to embed it?');
+    }
+    return this.cost ? parseFloat(String(this.cost)).toFixed(3) : '0.000';
+  }
+
+  public calculateTaxAmount = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed && this.taxType === undefined) {
+      throw new Error('taxType is undefined, did you forget to embed it?');
+    }
+    const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
+    return (parseFloat(this.calculateSubTotal(options)) * taxRate).toFixed(3);
+  }
+
+  public calculateTotal = (options?: CalculateOptions) => {
+    return (
+      parseFloat(this.calculateSubTotal(options)) +
+      parseFloat(this.calculateTaxAmount(options))
+    ).toFixed(3);
+  }
 }
