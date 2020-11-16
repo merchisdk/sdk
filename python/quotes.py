@@ -23,7 +23,7 @@ class Quote(sdk.python.entities.Entity):
     currency = Property(str)
     quote_items = Property(QuoteItem)
     shipments = Property(Shipment)
-    invoice = Property(Invoice)
+    invoice = Property(Invoice, backref="quotes")
 
     def quote_total(self):
         """ Calculate the quote sub total by adding all

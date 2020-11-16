@@ -8,6 +8,7 @@ import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Item } from './item';
 import { Job } from './job';
+import { Quote } from './quote';
 import { Notification } from './notification';
 import { Payment } from './payment';
 import { PhoneNumber } from './phone_number';
@@ -147,6 +148,9 @@ export class Invoice extends Entity {
 
   @Invoice.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  @Invoice.property({arrayType: 'Quote'})
+  public quotes?: Quote[];
 
   @Invoice.property()
   public cart?: Cart;
