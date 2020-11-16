@@ -263,21 +263,22 @@ class Job(sdk.python.entities.Entity):
         earliest_deadline = None
         earliest_supplier = None
         for assignment in self.assignments:
-            if assignment.bid:
-                agreed_deadline = assignment.bid.agreed_deadline
+            if assignment.quote:
+                agreed_deadline = assignment.quote.agreed_deadline
                 if not earliest_deadline or agreed_deadline < earliest_deadline:
-                    earliest_deadline = assignment.bid.agreed_deadline
+                    earliest_deadline = assignment.quote.agreed_deadline
                     earliest_supplier = assignment
         return earliest_supplier
 
-    def assignment_lowest_bid(self):
-        """ Return the lowest bid out of all the assignments """
-        lowest_bid = None
+    def assignment_lowest_quote(self):
+        """ Return the lowest quote out of all the assignments """
+        lowest_quote = None
         lowest_supplier = None
         for assignment in self.assignments:
-            if assignment.bid:
-                if not lowest_bid or assignment.bid.bid_total() < lowest_bid:
-                    lowest_bid = assignment.bid.bid_total()
+            if assignment.quote:
+                if not lowest_quote or \
+                        assignment.quote.quote_total() < lowest_quote:
+                    lowest_quote = assignment.quote.quote_total()
                     lowest_supplier = assignment
         return lowest_supplier
 

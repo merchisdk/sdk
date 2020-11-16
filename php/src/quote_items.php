@@ -4,10 +4,10 @@ declare(strict_types=1);
 require_once 'entity.php';
 require_once 'util/item_types.php';
 
-class BidItem extends Entity
+class QuoteItem extends Entity
 {
-    public static $resource = '/bid_items/';
-    public static $json_name = 'bid_item';
+    public static $resource = '/quote_items/';
+    public static $json_name = 'quote_item';
 
 
     public function __construct()
@@ -33,18 +33,18 @@ class BidItem extends Entity
 
     public function item_type_name()
     {
-        // return name of the bid item type instead of type id
+        // return name of the quote item type instead of type id
         return ITEM_TYPE[$this->type];
     }
 }
 
-class BidItems extends resource
+class QuoteItems extends resource
 {
     public function __construct()
     {
-        $this->entity_class = 'BidItem';
-        $this->json_name = 'bidItem';
+        $this->entity_class = 'QuoteItem';
+        $this->json_name = 'quoteItem';
     }
 }
 
-$bid_items = new BidItems();
+$quote_items = new QuoteItems();

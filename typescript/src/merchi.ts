@@ -13,7 +13,7 @@ import { VariationField } from './entities/variation_field';
 import { ProductionComment } from './entities/production_comment';
 import { Product } from './entities/product';
 import { Inventory } from './entities/inventory';
-import { BidItem } from './entities/bid_item';
+import { QuoteItem } from './entities/quote_item';
 import { Category } from './entities/category';
 import { Invoice } from './entities/invoice';
 import { UserCompany } from './entities/user_company';
@@ -34,7 +34,7 @@ import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
 import { ShortUrl } from './entities/short_url';
 import { VariationsGroup } from './entities/variations_group';
-import { Bid } from './entities/bid';
+import { Quote } from './entities/quote';
 import { Draft } from './entities/draft';
 import { Discount } from './entities/discount';
 import { User } from './entities/user';
@@ -136,9 +136,9 @@ export class Merchi {
   public VariationsGroup: typeof VariationsGroup;
   public Menu: typeof Menu;
   public Cart: typeof Cart;
-  public Bid: typeof Bid;
+  public Quote: typeof Quote;
   public Component: typeof Component;
-  public BidItem: typeof BidItem;
+  public QuoteItem: typeof QuoteItem;
   public MatchingInventory: typeof MatchingInventory;
   public SubscriptionPlan: typeof SubscriptionPlan;
 
@@ -183,7 +183,7 @@ export class Merchi {
       InventoryUnitVariation
     ) as typeof InventoryUnitVariation;
     this.PhoneNumber = this.setupClass(PhoneNumber) as typeof PhoneNumber;
-    this.BidItem = this.setupClass(BidItem) as typeof BidItem;
+    this.QuoteItem = this.setupClass(QuoteItem) as typeof QuoteItem;
     this.Menu = this.setupClass(Menu) as typeof Menu;
     this.Assignment = this.setupClass(Assignment) as typeof Assignment;
     this.Draft = this.setupClass(Draft) as typeof Draft;
@@ -196,7 +196,7 @@ export class Merchi {
     this.CompanyInvitation = this.setupClass(
       CompanyInvitation
     ) as typeof CompanyInvitation;
-    this.Bid = this.setupClass(Bid) as typeof Bid;
+    this.Quote = this.setupClass(Quote) as typeof Quote;
     this.EmailAddress = this.setupClass(EmailAddress) as typeof EmailAddress;
     this.ProductionComment = this.setupClass(
       ProductionComment
