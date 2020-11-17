@@ -36,7 +36,7 @@ export class Assignment extends Entity {
   @Assignment.property()
   public assignmentDeadline?: Date;
 
-  @Job.property({type: String})
+  @Assignment.property({type: String})
   public notes?: string | null;
 
   @Assignment.property({type: 'Job'})
@@ -63,7 +63,7 @@ export class Assignment extends Entity {
   @Assignment.property({arrayType: 'Notification'})
   public notifications?: Notification[];
 
-  @Job.property({arrayType: 'MerchiFile'})
+  @Assignment.property({arrayType: 'MerchiFile'})
   public productionFiles?: MerchiFile[];
 
   public generateInvoice = (props?: GenerateInvoiceProps) => {
