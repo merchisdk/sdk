@@ -3,6 +3,7 @@ import sdk.python.entities
 from sdk.python.quotes import Quote
 from sdk.python.production_comments import ProductionComment
 from sdk.python.jobs import Job
+from sdk.python.files import File
 from sdk.python.shipments import Shipment
 from sdk.python.supply_domains import SupplyDomain
 from sdk.python.notifications import Notification
@@ -29,7 +30,7 @@ class Assignment(sdk.python.entities.Entity):
     comments = Property(ProductionComment, backref="assignment")
     shipment = Property(Shipment, backref="assignments")
     notifications = Property(Notification)
-    production_files = Property()k
+    production_files = Property(File)
 
 
 class Assignments(sdk.python.entities.Resource):
