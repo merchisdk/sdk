@@ -98,6 +98,7 @@ interface ListOptions {
   notificationJob?: number;
   relatedUser?: number;
   clientId?: number;
+  managerId?: number;
   clientCompanyId?: number;
   savedByUser?: number;
   serialiseMethod?: SerialiseMethod;
@@ -475,6 +476,9 @@ export class Entity {
       }
       if (options.clientId !== undefined) {
         fetchOptions.query.push(['client_id', options.clientId.toString()]);
+      }
+      if (options.managerId !== undefined) {
+        fetchOptions.query.push(['manager_id', options.managerId.toString()]);
       }
       if (options.clientCompanyId !== undefined) {
         fetchOptions.query.push(['client_company_id',
