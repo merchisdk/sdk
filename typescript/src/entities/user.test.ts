@@ -1,6 +1,7 @@
 import { Merchi } from '../merchi';
 import { Role } from '../constants/roles';
 import { SystemRole } from '../constants/system_roles';
+import { DomainType } from '../constants/domain_types';
 import { setup, mockFetch } from '../test_util';
 import { every } from 'lodash';
 
@@ -96,11 +97,23 @@ test('hasRoles', () => {
   expect(() => user.hasRoles([Role.ADMIN])).toThrow();
   const enrollment = new merchi.EnrolledDomain();
   user.enrolledDomains = [enrollment];
+  // EnrolledDomains.domain has not been specified yet likely to be
+  // a embed issue
+  expect(() => user.hasRoles([Role.PUBLIC])).toThrow();
+
+  enrollment.domain = new merchi.Domain();
   expect(user.hasRoles([Role.PUBLIC])).toBeTruthy();
+
   enrollment.role = Role.ADMIN;
   user.enrolledDomains = [enrollment];
   expect(user.hasRoles([Role.ADMIN, Role.MANAGER])).toBeTruthy();
   expect(user.hasRoles([Role.ADMIN, Role.MANAGER], every)).toBeFalsy();
+
+  // for internal supplier domain, role can be maximumly interpreted
+  // as supplier
+  enrollment.domain.domainType = DomainType.DOMAIN_SUPPLIER;
+  expect(user.hasRoles([Role.ADMIN])).toBeFalsy();
+  expect(user.hasRoles([Role.SUPPLIER])).toBeTruthy();
 });
 
 test('testHasSystemRoles', () => {
