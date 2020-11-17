@@ -1,5 +1,6 @@
-import { Quote } from './quote';
 import { Entity } from '../entity';
+import { Quote } from './quote';
+import { MerchiFile } from './file';
 import { Job } from './job';
 import { Notification } from './notification';
 import { ProductionComment } from './production_comment';
@@ -35,6 +36,9 @@ export class Assignment extends Entity {
   @Assignment.property()
   public assignmentDeadline?: Date;
 
+  @Job.property({type: String})
+  public notes?: string | null;
+
   @Assignment.property({type: 'Job'})
   public job?: Job | null;
 
@@ -58,6 +62,9 @@ export class Assignment extends Entity {
 
   @Assignment.property({arrayType: 'Notification'})
   public notifications?: Notification[];
+
+  @Job.property({arrayType: 'MerchiFile'})
+  public productionFiles?: MerchiFile[];
 
   public generateInvoice = (props?: GenerateInvoiceProps) => {
     const resource = `/generate-invoice-for-assignment/${this.id}/`;

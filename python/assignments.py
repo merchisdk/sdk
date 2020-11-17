@@ -20,6 +20,7 @@ class Assignment(sdk.python.entities.Entity):
     archived = Property(datetime.datetime)
     production_deadline = Property(datetime.datetime)
     assignment_deadline = Property(datetime.datetime)
+    notes = Property(str)
     job = Property(Job, backref="assignments")
     supply_job = Property(Job, backref="supply_assignment")
     supply_domain = Property(SupplyDomain, backref="supply_assignments")
@@ -28,6 +29,7 @@ class Assignment(sdk.python.entities.Entity):
     comments = Property(ProductionComment, backref="assignment")
     shipment = Property(Shipment, backref="assignments")
     notifications = Property(Notification)
+    production_files = Property()k
 
 
 class Assignments(sdk.python.entities.Resource):
