@@ -1,6 +1,7 @@
 import { Assignment } from './assignment';
 import { QuoteItem } from './quote_item';
 import { Shipment } from './shipment';
+import { Invoice } from './invoice';
 import { Entity } from '../entity';
 import { kahanSum } from '../util/float';
 
@@ -33,6 +34,9 @@ export class Quote extends Entity {
 
   @Quote.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];
+
+  @Quote.property({type: Invoice})
+  public invoice?: Invoice | null;
 
   public quoteTotal = (options?: CalculateOptions) => {
     const { strictEmbed = true } = options ? options : {};
