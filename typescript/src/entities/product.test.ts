@@ -302,7 +302,7 @@ test('can list products with options set', () => {
     ['public_only', 'false'],
     ['managed_only', 'false'],
     ['member_only', 'false'],
-    ['inbound', false],
+    ['inbound', 'false'],
     ['domain_roles', '1'],
     ['managed_domains_only', 'true'],
     ['business_domains_only', 'true'],
