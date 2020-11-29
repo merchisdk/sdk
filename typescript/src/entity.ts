@@ -85,6 +85,7 @@ interface ListOptions {
   publicOnly?: boolean;
   managedOnly?: boolean;
   memberOnly?: boolean;
+  inbound?: boolean;
   domainRoles?: Role[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
@@ -427,6 +428,9 @@ export class Entity {
       }
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
+      }
+      if (options.inbound !== undefined) {
+        fetchOptions.query.push(['inbound', options.inbound.toString()]);
       }
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
