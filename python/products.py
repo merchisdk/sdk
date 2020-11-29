@@ -33,6 +33,7 @@ class Product(sdk.python.entities.Entity):
     show_public = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
+    accept_utrust = Property(bool)
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
     allow_payment_upfront = Property(bool)

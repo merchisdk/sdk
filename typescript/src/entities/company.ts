@@ -75,6 +75,15 @@ export class Company extends Entity {
   public acceptPaypal?: boolean;
 
   @Company.property()
+  public acceptUtrust?: boolean;
+
+  @Company.property()
+  public utrustApiKey?: string | null;
+
+  @Company.property()
+  public utrustWebhookKey?: string | null;
+
+  @Company.property()
   public acceptBankTransfer?: boolean;
 
   @Company.property()
