@@ -84,6 +84,9 @@ export class Company extends Entity {
   public utrustWebhookKey?: string | null;
 
   @Company.property()
+  public isUtrustValid?: boolean;
+
+  @Company.property()
   public acceptBankTransfer?: boolean;
 
   @Company.property()

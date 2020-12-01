@@ -35,6 +35,7 @@ class Company(sdk.python.entities.Entity):
     accept_utrust = Property(bool)
     utrust_api_key = Property(str)
     utrust_webhook_key = Property(str)
+    is_utrust_valid = Property(bool)
     call_to_actions = Property(str)
     is_stripe_valid = Property(bool)
     accept_stripe = Property(bool)
