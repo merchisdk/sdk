@@ -77,10 +77,10 @@ export class Company extends Entity {
   @Company.property()
   public acceptUtrust?: boolean;
 
-  @Company.property()
+  @Company.property({type: String})
   public utrustApiKey?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public utrustWebhookKey?: string | null;
 
   @Company.property()
