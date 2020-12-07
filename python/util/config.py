@@ -1,7 +1,7 @@
 from envparse import env
 
-PLATFORM_NAME = 'merchi'
-PLATFORM_COPYRIGHT = 2019
+PLATFORM_NAME = 'Merchi'
+PLATFORM_COPYRIGHT = 2020
 
 
 def load_configuration(app, config_keys):
