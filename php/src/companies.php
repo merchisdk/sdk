@@ -18,6 +18,8 @@ class Company extends Entity
         $this->json_property('paypal_account', 'string');
         $this->json_property('paypal_password', 'string');
         $this->json_property('paypal_signature', 'string');
+        $this->json_property('utrust_api_key', 'string');
+        $this->json_property('utrust_webhook_key', 'string');
         $this->json_property('stripe_publishable_key', 'string');
         $this->json_property('stripe_api_key', 'string');
         $this->json_property('emailAddresses', 'EmailAddress', $many = True,

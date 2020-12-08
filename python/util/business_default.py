@@ -31,6 +31,7 @@ CASH = 4
 CHEQUE = 5
 PHONE_PAYMENT = 6
 CREDIT_CARD = 7
+UTRUST_PAYMENT = 8
 
 PAYMENT_TYPES = {
     ONLINE_PAYMENT: "Online Payment",
@@ -39,7 +40,8 @@ PAYMENT_TYPES = {
     CASH: "Cash",
     CHEQUE: "Cheque",
     PHONE_PAYMENT: "Phone Payment",
-    CREDIT_CARD: "Credit Card"
+    CREDIT_CARD: "Credit Card",
+    UTRUST_PAYMENT: "Utrust Payment"
 }
 
 PAYMENT_TYPES_OPTIONS = \

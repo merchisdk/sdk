@@ -76,6 +76,9 @@ export class Product extends Entity {
   public acceptPaypal?: boolean;
 
   @Product.property()
+  public acceptUtrust?: boolean;
+
+  @Product.property()
   public acceptBankTransfer?: boolean;
 
   @Product.property()
