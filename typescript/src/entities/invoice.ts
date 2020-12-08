@@ -75,6 +75,9 @@ export class Invoice extends Entity {
   public acceptPaypal?: boolean;
 
   @Invoice.property()
+  public acceptUtrust?: boolean;
+
+  @Invoice.property()
   public acceptBankTransfer?: boolean;
 
   @Invoice.property()
