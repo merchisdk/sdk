@@ -37,7 +37,7 @@ export class Bank extends Entity {
   @Bank.property({type: String})
   public bankCode?: string | null;
 
-  @Bank.property({type: String})
+  @Bank.property({type: 'Address'})
   public bankAddress?: Address | null;
 
   @Bank.property()
