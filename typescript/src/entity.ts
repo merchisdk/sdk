@@ -576,6 +576,7 @@ export class Entity {
     }
     return this.merchi.authenticatedFetch(resource, fetchOptions).then((data: any) => {
       this.fromJson(data[singularName]);
+      this.cleanDirty();
       return this;
     });
   };
@@ -591,6 +592,7 @@ export class Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         this.fromJson(data[singularName]);
+        this.cleanDirty();
         return this;});
   }
 
@@ -612,6 +614,25 @@ export class Entity {
   protected checkSameSessionList = (other?: Entity[]) =>  {
     if (other !== undefined) {
       other.map(this.checkSameSession);
+    }
+  };
+
+  public cleanDirty = () => {
+    // remove all dirty records of this entity, makes it untouched
+    // entity
+    this.isDirty = false;
+    for (const entry of this.propertiesMap.entries()) {
+      const propertyInfo = entry[1];
+      propertyInfo.dirty = false;
+      if (propertyInfo.currentValue !== undefined) {
+        if (propertyInfo.arrayType) {
+          propertyInfo.currentValue.map((v: any) => v.cleanDirty());
+        } else if (this.isSingleEntityProperty(propertyInfo)) {
+          if (propertyInfo.currentValue) {
+            propertyInfo.currentValue.cleanDirty();
+          }
+        }
+      }
     }
   };
 

@@ -455,6 +455,25 @@ test('can convert product data json format', () => {
   expect(p.toJson()).toEqual(correct);
 });
 
+test('can clean dirty on purpose', () => {
+  const merchi = new Merchi();
+  const p = new merchi.Product();
+  const d = new merchi.Domain();
+  const c1 = new merchi.Category();
+  c1.name = 'category 1';
+  const c2 = new merchi.Category();
+  c2.name = 'category 2';
+  p.name = 'product name';
+  d.domain = 'domain name';
+  p.domain = d;
+  p.categories = [c1, c2];
+  p.featureImage = null;
+  p.id = 1;
+  const correct = [['id', '1']];
+  p.cleanDirty();
+  expect(Array.from((p.toFormData() as any).entries())).toEqual(correct);
+});
+
 test('none relationship will be in data json', () => {
   const merchi = new Merchi();
   const p = new merchi.Product();
