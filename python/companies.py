@@ -30,6 +30,8 @@ class Company(sdk.python.entities.Entity):
     paypal_signature = Property(str)
     is_paypal_valid = Property(bool)
     stripe_customer_id = Property(str)
+    is_new = Property(bool)
+    subscription_outstanding = Property(bool)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
     accept_utrust = Property(bool)
