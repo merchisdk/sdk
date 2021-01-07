@@ -59,6 +59,12 @@ export class Company extends Entity {
   @Company.property({type: String})
   public stripeCustomerId?: string;
 
+  @Company.property()
+  public isNew?: boolean;
+
+  @Company.property()
+  public subscriptionOutstanding?: boolean;
+
   @Company.property({type: String})
   public stripePublishableKey?: string | null;
 
