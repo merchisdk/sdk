@@ -111,7 +111,7 @@ export class Company extends Entity {
   public defaultTaxType?: CountryTax | null;
 
   @Company.property({arrayType: 'CountryTax'})
-  public countryTaxes?: CountryTax[];
+  public taxTypes?: CountryTax[];
 
   @Company.property({type: SubscriptionPlan})
   public subscriptionPlan?: SubscriptionPlan | null;
