@@ -1,0 +1,2 @@
+NORMAL = 0
+RESELL = 1
