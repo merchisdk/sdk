@@ -30,6 +30,7 @@ class Product(sdk.python.entities.Entity):
     needs_drafting = Property(bool)
     needs_production = Property(bool)
     needs_shipping = Property(bool)
+    needs_invoicing = Property(bool)
     show_public = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
