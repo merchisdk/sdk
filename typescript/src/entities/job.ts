@@ -80,6 +80,9 @@ export class Job extends Entity {
   public completed?: boolean;
 
   @Job.property()
+  public callToActions?: string;
+
+  @Job.property()
   public priority?: number;
 
   @Job.property({type: Number})
