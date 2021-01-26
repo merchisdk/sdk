@@ -67,6 +67,9 @@ export class Product extends Entity {
   public needsShipping?: boolean;
 
   @Product.property()
+  public needsInvoicing?: boolean;
+
+  @Product.property()
   public showPublic?: boolean;
 
   @Product.property()
