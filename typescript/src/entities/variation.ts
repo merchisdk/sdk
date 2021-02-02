@@ -3,7 +3,7 @@ import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Job } from './job';
 import { VariationField } from './variation_field';
-import { VariationFieldsOption } from './variation_fields_option';
+import { VariationOption } from './variation_option';
 import { VariationsGroup } from './variations_group';
 
 export class Variation extends Entity {
@@ -53,6 +53,6 @@ export class Variation extends Entity {
   @Variation.property({arrayType: 'MerchiFile'})
   public variationFiles?: MerchiFile[];
 
-  @Variation.property({arrayType: 'VariationFieldsOption'})
-  public selectedOptions?: VariationFieldsOption[];
+  @Variation.property({arrayType: 'VariationOption'})
+  public selectedOptions?: VariationOption[];
 }
