@@ -120,6 +120,7 @@ interface ListOptions {
   tags?: number[];
   tagNames?: string[];
   exclude?: number[];
+  excludeDomains?: number[];
   includeOnly?: number[];
   orClientId?: number;
   orClientCompanyId?: number;
@@ -542,6 +543,10 @@ export class Entity {
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
+      }
+      if (options.excludeDomains !== undefined) {
+        fetchOptions.query.push(
+          ['exclude_domains', options.excludeDomains.join(',')]);
       }
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
