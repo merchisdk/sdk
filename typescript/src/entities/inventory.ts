@@ -4,6 +4,8 @@ import { InventoryUnitVariation } from './inventory_unit_variation';
 import { Job } from './job';
 import { Product } from './product';
 import { VariationsGroup } from './variations_group';
+import { VariationFieldsOption } from './variation_fields_option';
+import { some } from 'lodash';
 
 export class Inventory extends Entity {
   protected static resourceName: string = 'inventories';
@@ -39,4 +41,13 @@ export class Inventory extends Entity {
 
   @Inventory.property({arrayType: 'InventoryUnitVariation'})
   public inventoryUnitVariations?: InventoryUnitVariation[];
+
+  public isVariationFieldOptionSelected = (option: VariationFieldsOption) => {
+    if (this.inventoryUnitVariations === undefined) {
+      throw new Error(
+        'inventoryUnitVariations is undefined, did you forget to embed it?');
+    }
+    return some(this.inventoryUnitVariations.map(
+      (v: InventoryUnitVariation) => v.optionId() === option.id));
+  }
 }
