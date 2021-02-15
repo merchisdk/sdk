@@ -18,4 +18,12 @@ export class InventoryUnitVariation extends Entity {
 
   @InventoryUnitVariation.property()
   public variationFieldsOption?: VariationFieldsOption;
+
+  public optionId = () => {
+    if (this.variationFieldsOption === undefined) {
+      throw new Error(
+        'variationFieldsOption is undefined, did you forget to embed it?');
+    }
+    return this.variationFieldsOption.id;
+  }
 }
