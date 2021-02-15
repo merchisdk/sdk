@@ -9,6 +9,10 @@ import { NotificationType } from './constants/notification_types';
 import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { Role } from './constants/roles';
+// eslint-disable-next-line no-unused-vars
+import { DomainType } from './constants/domain_types';
+// eslint-disable-next-line no-unused-vars
+import { ProductType } from './constants/product_types';
 import { generateUUID } from './uuid';
 
 function toUnixTimestamp(date: Date) {
@@ -88,6 +92,8 @@ interface ListOptions {
   memberOnly?: boolean;
   inbound?: boolean;
   domainRoles?: Role[];
+  domainTypes?: DomainType[];
+  productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
   dateFrom?: Date;
@@ -114,6 +120,7 @@ interface ListOptions {
   tags?: number[];
   tagNames?: string[];
   exclude?: number[];
+  excludeDomains?: number[];
   includeOnly?: number[];
   orClientId?: number;
   orClientCompanyId?: number;
@@ -441,6 +448,14 @@ export class Entity {
         fetchOptions.query.push(['domain_roles',
           options.domainRoles.join(',')]);
       }
+      if (options.domainTypes !== undefined) {
+        fetchOptions.query.push(['domain_types',
+          options.domainTypes.join(',')]);
+      }
+      if (options.productTypes !== undefined) {
+        fetchOptions.query.push(['product_types',
+          options.productTypes.join(',')]);
+      }
       if (options.managedDomainsOnly !== undefined) {
         fetchOptions.query.push(['managed_domains_only',
           options.managedDomainsOnly.toString()]);
@@ -528,6 +543,10 @@ export class Entity {
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
+      }
+      if (options.excludeDomains !== undefined) {
+        fetchOptions.query.push(
+          ['exclude_domains', options.excludeDomains.join(',')]);
       }
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
