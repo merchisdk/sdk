@@ -10,9 +10,9 @@ test('isSelectable', () => {
   const merchi = new Merchi();
   const vf = new merchi.VariationField();
   expect(vf.isSelectable).toThrow();
-  vf.fieldType = 1; 
+  vf.fieldType = 1;
   expect(vf.isSelectable()).toBe(false);
-  vf.fieldType = 11; 
+  vf.fieldType = 11;
   expect(vf.isSelectable()).toBe(true);
 });
 
@@ -21,7 +21,7 @@ test('buildEmptyVariation', () => {
   const vf = new merchi.VariationField();
   expect(vf.buildEmptyVariation).toThrow();
   vf.defaultValue = 'a';
-  vf.fieldType = 11; 
+  vf.fieldType = 11;
   expect(vf.buildEmptyVariation).toThrow();
   vf.variationCost = 2;
   expect(vf.buildEmptyVariation).toThrow();
@@ -32,6 +32,6 @@ test('buildEmptyVariation', () => {
   expect(vf.buildEmptyVariation).toThrow();
   o1.variationCost = 3;
   expect(vf.buildEmptyVariation().onceOffCost).toEqual(3);
-  vf.fieldType = 1; 
+  vf.fieldType = 1;
   expect(vf.buildEmptyVariation().onceOffCost).toEqual(2);
 });
