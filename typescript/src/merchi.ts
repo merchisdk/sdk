@@ -10,6 +10,7 @@ import { Job } from './entities/job';
 import { Menu } from './entities/menu';
 import { Backup } from './entities/backup';
 import { VariationField } from './entities/variation_field';
+import { VariationOption } from './entities/variation_option';
 import { ProductionComment } from './entities/production_comment';
 import { Product } from './entities/product';
 import { Inventory } from './entities/inventory';
@@ -99,6 +100,7 @@ export class Merchi {
   public Assignment: typeof Assignment;
   public Inventory: typeof Inventory;
   public JobComment: typeof JobComment;
+  public VariationOption: typeof VariationOption;
   public SupplyDomain: typeof SupplyDomain;
   public ProductionComment: typeof ProductionComment;
   public DraftComment: typeof DraftComment;
@@ -228,6 +230,9 @@ export class Merchi {
     this.MerchiFile = this.setupClass(MerchiFile) as typeof MerchiFile;
     this.User = this.setupClass(User) as typeof User;
     this.JobComment = this.setupClass(JobComment) as typeof JobComment;
+    this.VariationOption = this.setupClass(
+      VariationOption
+    ) as typeof VariationOption;
     this.MatchingInventory = this.setupClass(
       MatchingInventory
     ) as typeof MatchingInventory;
