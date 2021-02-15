@@ -32,3 +32,12 @@ test('commentsYoungestToEldest', () => {
   draft.comments[1].id = 1;
   expect(draft.commentsYoungestToEldest()[0].id).toEqual(1);
 });
+
+test('draft accepted serialised to milliseconds', () => {
+  const merchi = new Merchi();
+  const draft = new merchi.Draft();
+  draft.accepted = new Date('Feb 28 2013 19:00:00 GMT-0500');
+  const correct = [['accepted', '1362096000']];
+  const backData = Array.from((draft.toFormData() as any).entries());
+  expect(backData).toEqual(correct);
+});

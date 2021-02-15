@@ -8,6 +8,7 @@ import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Item } from './item';
 import { Job } from './job';
+import { Quote } from './quote';
 import { Notification } from './notification';
 import { Payment } from './payment';
 import { PhoneNumber } from './phone_number';
@@ -15,23 +16,23 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Invoice extends Entity {
-  protected static resourceName: string = "invoices";
-  protected static singularName: string = "invoice";
-  protected static pluralName: string = "invoices";
+  protected static resourceName: string = 'invoices';
+  protected static singularName: string = 'invoice';
+  protected static pluralName: string = 'invoices';
 
-  @Invoice.property()
+  @Invoice.property({type: Date})
   public archived?: Date | null;
 
   @Invoice.property()
   public id?: number;
 
-  @Invoice.property()
+  @Invoice.property({type: Date})
   public creationDate?: Date | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Date})
   public paymentDeadline?: Date | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Date})
   public reminded?: Date | null;
 
   @Invoice.property()
@@ -40,28 +41,28 @@ export class Invoice extends Entity {
   @Invoice.property()
   public forceReminders?: boolean;
 
-  @Invoice.property()
+  @Invoice.property({type: String})
   public note?: string | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Date})
   public terms?: Date | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Number})
   public subtotalCost?: number | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Number})
   public taxAmount?: number | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Number})
   public totalCost?: number | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Boolean})
   public sendSms?: boolean | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Boolean})
   public sendEmail?: boolean | null;
 
-  @Invoice.property()
+  @Invoice.property({type: Boolean})
   public unpaid?: boolean | null;
 
   @Invoice.property()
@@ -74,12 +75,15 @@ export class Invoice extends Entity {
   public acceptPaypal?: boolean;
 
   @Invoice.property()
+  public acceptUtrust?: boolean;
+
+  @Invoice.property()
   public acceptBankTransfer?: boolean;
 
   @Invoice.property()
   public acceptPhonePayment?: boolean;
 
-  @Invoice.property()
+  @Invoice.property({type: String})
   public invoiceToken?: string | null;
 
   @Invoice.property()
@@ -94,60 +98,66 @@ export class Invoice extends Entity {
   @Invoice.property({embeddedByDefault: false})
   public isCompletelyPaid?: boolean;
 
-  @Invoice.property()
+  @Invoice.property({type: User})
   public responsibleManager?: User | null;
 
-  @Invoice.property()
+  @Invoice.property({type: User})
   public creator?: User | null;
 
   @Invoice.property()
   public client?: User;
 
-  @Invoice.property()
+  @Invoice.property({type: Company})
   public clientCompany?: Company | null;
 
-  @Invoice.property()
+  @Company.property({arrayType: 'Company'})
+  public subscriptionCompanies?: Company[];
+
+  @Invoice.property({type: Address})
   public shipping?: Address | null;
 
   @Invoice.property()
   public domain?: Domain;
 
-  @Invoice.property({arrayType: "Item"})
-  public items?: Array<Item>;
+  @Invoice.property({arrayType: 'Item'})
+  public items?: Item[];
 
-  @Invoice.property()
+  @Invoice.property({type: MerchiFile})
   public pdf?: MerchiFile | null;
 
-  @Invoice.property()
+  @Invoice.property({type: MerchiFile})
   public receipt?: MerchiFile | null;
 
-  @Invoice.property()
+  @Invoice.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;
 
-  @Invoice.property()
+  @Invoice.property({type: EmailAddress})
   public clientEmail?: EmailAddress | null;
 
-  @Invoice.property()
+  @Invoice.property({type: PhoneNumber})
   public clientCompanyPhone?: PhoneNumber | null;
 
-  @Invoice.property()
+  @Invoice.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Invoice.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Invoice.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
-  @Invoice.property({arrayType: "Shipment"})
-  public shipments?: Array<Shipment>;
+  @Invoice.property({arrayType: 'Shipment'})
+  public shipments?: Shipment[];
 
-  @Invoice.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @Invoice.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
-  @Invoice.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Invoice.property({arrayType: 'Job'})
+  public jobs?: Job[];
+
+  @Invoice.property({arrayType: 'Quote'})
+  public quotes?: Quote[];
 
   @Invoice.property()
   public cart?: Cart;
 
-  @Invoice.property({arrayType: "Payment"})
-  public payments?: Array<Payment>;
+  @Invoice.property({arrayType: 'Payment'})
+  public payments?: Payment[];
 }

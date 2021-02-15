@@ -6,6 +6,7 @@ from sdk.python.addresses import Address
 from sdk.python.files import File
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.banks import Bank
+from sdk.python.subscription_plans import SubscriptionPlan
 import sdk.python.users
 import sdk.python.country_taxes
 from sdk.python.entities import Property
@@ -28,8 +29,16 @@ class Company(sdk.python.entities.Entity):
     paypal_password = Property(str)
     paypal_signature = Property(str)
     is_paypal_valid = Property(bool)
+    stripe_customer_id = Property(str)
+    is_new = Property(bool)
+    subscription_outstanding = Property(bool)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
+    accept_utrust = Property(bool)
+    utrust_api_key = Property(str)
+    utrust_webhook_key = Property(str)
+    is_utrust_valid = Property(bool)
+    call_to_actions = Property(str)
     is_stripe_valid = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
@@ -48,6 +57,8 @@ class Company(sdk.python.entities.Entity):
                               backref="saved_by_companies")
     banks = Property(Bank)
     default_tax_type = Property(sdk.python.country_taxes.CountryTax)
+    subscription_plan = Property(SubscriptionPlan,
+                                 backref="companies")
 
     @property
     def default_banks(self):

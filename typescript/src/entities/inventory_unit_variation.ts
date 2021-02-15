@@ -3,11 +3,11 @@ import { Inventory } from './inventory';
 import { VariationFieldsOption } from './variation_fields_option';
 
 export class InventoryUnitVariation extends Entity {
-  protected static resourceName: string = "inventory_unit_variations";
-  protected static singularName: string = "inventoryUnitVariation";
-  protected static pluralName: string = "inventoryUnitVariations";
+  protected static resourceName: string = 'inventory_unit_variations';
+  protected static singularName: string = 'inventoryUnitVariation';
+  protected static pluralName: string = 'inventoryUnitVariations';
 
-  @InventoryUnitVariation.property()
+  @InventoryUnitVariation.property({type: Date})
   public archived?: Date | null;
 
   @InventoryUnitVariation.property()
@@ -18,4 +18,12 @@ export class InventoryUnitVariation extends Entity {
 
   @InventoryUnitVariation.property()
   public variationFieldsOption?: VariationFieldsOption;
+
+  public optionId = () => {
+    if (this.variationFieldsOption === undefined) {
+      throw new Error(
+        'variationFieldsOption is undefined, did you forget to embed it?');
+    }
+    return this.variationFieldsOption.id;
+  }
 }

@@ -3,11 +3,11 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class DomainInvitation extends Entity {
-  protected static resourceName: string = "domain_invitations";
-  protected static singularName: string = "domainInvitation";
-  protected static pluralName: string = "domainInvitations";
+  protected static resourceName: string = 'domain_invitations';
+  protected static singularName: string = 'domainInvitation';
+  protected static pluralName: string = 'domainInvitations';
 
-  @DomainInvitation.property()
+  @DomainInvitation.property({type: Date})
   public archived?: Date | null;
 
   @DomainInvitation.property()
@@ -31,6 +31,6 @@ export class DomainInvitation extends Entity {
   @DomainInvitation.property()
   public sender?: User;
 
-  @DomainInvitation.property()
+  @DomainInvitation.property({type: Date})
   public user?: User | null;
 }

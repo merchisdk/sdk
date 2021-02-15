@@ -5,17 +5,17 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class ProductionComment extends Entity {
-  protected static resourceName: string = "production_comments";
-  protected static singularName: string = "productionComment";
-  protected static pluralName: string = "productionComments";
+  protected static resourceName: string = 'production_comments';
+  protected static singularName: string = 'productionComment';
+  protected static pluralName: string = 'productionComments';
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: Date})
   public archived?: Date | null;
 
   @ProductionComment.property()
   public id?: number;
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: Date})
   public date?: Date | null;
 
   @ProductionComment.property()
@@ -33,17 +33,17 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public sendEmail?: boolean;
 
-  @ProductionComment.property()
+  @ProductionComment.property({type: MerchiFile})
   public file?: MerchiFile | null;
 
   @ProductionComment.property()
   public user?: User;
 
-  @ProductionComment.property({arrayType: "User"})
-  public forwards?: Array<User>;
+  @ProductionComment.property({arrayType: 'User'})
+  public forwards?: User[];
 
-  @ProductionComment.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @ProductionComment.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
   @ProductionComment.property()
   public assignment?: Assignment;

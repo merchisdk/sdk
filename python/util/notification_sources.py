@@ -10,6 +10,7 @@ JOB_SHIPPING = 6
 INVOICE = 7
 JOB_NOTIFICATIONS = 8
 REMINDER = 9
+WEB_FORM = 10
 
 SECTION_ICON_CLASS = {SYSTEM: "fa fa-server",
                       USER: "icon_m_single_user",

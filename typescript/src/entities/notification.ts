@@ -12,11 +12,11 @@ import { ShortUrl } from './short_url';
 import { User } from './user';
 
 export class Notification extends Entity {
-  protected static resourceName: string = "notifications";
-  protected static singularName: string = "notification";
-  protected static pluralName: string = "notifications";
+  protected static resourceName: string = 'notifications';
+  protected static singularName: string = 'notification';
+  protected static pluralName: string = 'notifications';
 
-  @Notification.property()
+  @Notification.property({type: Date})
   public archived?: Date | null;
 
   @Notification.property()
@@ -40,10 +40,10 @@ export class Notification extends Entity {
   @Notification.property()
   public urgency?: number;
 
-  @Notification.property()
+  @Notification.property({type: String})
   public description?: string | null;
 
-  @Notification.property()
+  @Notification.property({type: String})
   public subject?: string | null;
 
   @Notification.property()
@@ -52,45 +52,45 @@ export class Notification extends Entity {
   @Notification.property()
   public htmlMessage?: string;
 
-  @Notification.property()
+  @Notification.property({type: String})
   public link?: string | null;
 
   @Notification.property()
   public section?: number;
 
-  @Notification.property()
+  @Notification.property({type: ShortUrl})
   public shortUrl?: ShortUrl | null;
 
   @Notification.property()
   public recipient?: User;
 
-  @Notification.property()
+  @Notification.property({type: User})
   public sender?: User | null;
 
-  @Notification.property()
+  @Notification.property({type: Job})
   public relatedJob?: Job | null;
 
-  @Notification.property()
+  @Notification.property({type: Draft})
   public relatedDraft?: Draft | null;
 
-  @Notification.property()
+  @Notification.property({type: Assignment})
   public relatedAssignment?: Assignment | null;
 
-  @Notification.property()
+  @Notification.property({type: Invoice})
   public relatedInvoice?: Invoice | null;
 
-  @Notification.property()
+  @Notification.property({type: JobComment})
   public relatedJobComment?: JobComment | null;
 
-  @Notification.property()
+  @Notification.property({type: DraftComment})
   public relatedDraftComment?: DraftComment | null;
 
-  @Notification.property()
+  @Notification.property({type: ProductionComment})
   public relatedProductionComment?: ProductionComment | null;
 
   @Notification.property()
   public domain?: Domain;
 
-  @Notification.property()
+  @Notification.property({type: MerchiFile})
   public attachment?: MerchiFile | null;
 }

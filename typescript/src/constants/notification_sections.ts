@@ -9,4 +9,5 @@ export enum NotificationSection {
   INVOICE = 7,
   JOB_NOTIFICATIONS = 8,
   REMINDER = 9,
+  WEB_FORM = 10,
 }

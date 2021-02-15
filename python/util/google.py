@@ -141,7 +141,7 @@ def r_config_call(param):
     return r_gtag_call(r"['\"]config['\"]\s*,\s*" + param)
 
 
-r_tag_fmt = r"[A-Z][A-Z]-[0-9]+"
+r_tag_fmt = r"[a-zA-Z0-9\-_]+"
 
 r_str_global = r_config_call(r"['\"]" + r_val(r_tag_fmt) + r"['\"]")
 
@@ -156,7 +156,7 @@ def r_send_to_call(param):
     return r_conversion_call(send_to)
 
 
-r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9\-]+"
+r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9\-_]+"
 
 r_str_new_conversion = r_send_to_call(r"['\"]" + r_val(r_new_conversion_id) +
                                       r"['\"]")
@@ -263,7 +263,7 @@ def extract_new_global_script_parameters(text):
     """
     gtag_id = get_group(r_global_gtag, text)
     if gtag_id is None:
-        raise ScriptError("could not find  gtag id")
+        raise ScriptError("could not find gtag id")
     return gtag_id
 
 

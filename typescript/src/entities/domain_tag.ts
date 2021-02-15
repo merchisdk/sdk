@@ -6,9 +6,9 @@ import { Product } from './product';
 import { Shipment } from './shipment';
 
 export class DomainTag extends Entity {
-  protected static resourceName: string = "domain_tags";
-  protected static singularName: string = "domainTag";
-  protected static pluralName: string = "domainTags";
+  protected static resourceName: string = 'domain_tags';
+  protected static singularName: string = 'domainTag';
+  protected static pluralName: string = 'domainTags';
 
   @DomainTag.property()
   public id?: number;
@@ -25,15 +25,15 @@ export class DomainTag extends Entity {
   @DomainTag.property()
   public domain?: Domain;
 
-  @DomainTag.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @DomainTag.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @DomainTag.property({arrayType: "Product"})
-  public products?: Array<Product>;
+  @DomainTag.property({arrayType: 'Product'})
+  public products?: Product[];
 
-  @DomainTag.property({arrayType: "Invoice"})
-  public invoices?: Array<Invoice>;
+  @DomainTag.property({arrayType: 'Invoice'})
+  public invoices?: Invoice[];
 
-  @DomainTag.property({arrayType: "Shipment"})
-  public shipments?: Array<Shipment>;
+  @DomainTag.property({arrayType: 'Shipment'})
+  public shipments?: Shipment[];
 }

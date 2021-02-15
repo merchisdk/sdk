@@ -8,7 +8,8 @@ export enum ShipmentCompany {
   TOLL = 6,
   TNT = 7,
   CUSTOM_TRACK_LINK = 8,
-  FASTWAY = 9,
+  ARAMEX = 9,
   REALTIME_EXPRESS = 10,
-  UBER = 11, 
+  UBER = 11,
+  CIVIC_TRANSPORT_COURIERS = 12,
 }

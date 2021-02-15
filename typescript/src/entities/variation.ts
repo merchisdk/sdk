@@ -3,22 +3,25 @@ import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Job } from './job';
 import { VariationField } from './variation_field';
-import { VariationFieldsOption } from './variation_fields_option';
+import { VariationOption } from './variation_option';
 import { VariationsGroup } from './variations_group';
 
 export class Variation extends Entity {
-  protected static resourceName: string = "variations";
-  protected static singularName: string = "variation";
-  protected static pluralName: string = "variations";
+  protected static resourceName: string = 'variations';
+  protected static singularName: string = 'variation';
+  protected static pluralName: string = 'variations';
 
-  @Variation.property()
+  @Variation.property({type: Date})
   public archived?: Date | null;
 
   @Variation.property()
   public id?: number;
 
-  @Variation.property()
+  @Variation.property({type: String})
   public value?: string | null;
+
+  @Variation.property()
+  public currency?: string;
 
   @Variation.property()
   public cost?: number;
@@ -38,18 +41,18 @@ export class Variation extends Entity {
   @Variation.property()
   public variationField?: VariationField;
 
-  @Variation.property()
+  @Variation.property({type: VariationsGroup})
   public variationsGroup?: VariationsGroup | null;
 
-  @Variation.property()
+  @Variation.property({type: Job})
   public job?: Job | null;
 
-  @Variation.property()
+  @Variation.property({type: CartItem})
   public cartItem?: CartItem | null;
 
-  @Variation.property({arrayType: "MerchiFile"})
-  public variationFiles?: Array<MerchiFile>;
+  @Variation.property({arrayType: 'MerchiFile'})
+  public variationFiles?: MerchiFile[];
 
-  @Variation.property({arrayType: "VariationFieldsOption"})
-  public selectedOptions?: Array<VariationFieldsOption>;
+  @Variation.property({arrayType: 'VariationOption'})
+  public selectedOptions?: VariationOption[];
 }

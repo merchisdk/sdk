@@ -4,13 +4,15 @@ import { InventoryUnitVariation } from './inventory_unit_variation';
 import { Job } from './job';
 import { Product } from './product';
 import { VariationsGroup } from './variations_group';
+import { VariationFieldsOption } from './variation_fields_option';
+import { some } from 'lodash';
 
 export class Inventory extends Entity {
-  protected static resourceName: string = "inventories";
-  protected static singularName: string = "inventory";
-  protected static pluralName: string = "inventories";
+  protected static resourceName: string = 'inventories';
+  protected static singularName: string = 'inventory';
+  protected static pluralName: string = 'inventories';
 
-  @Inventory.property()
+  @Inventory.property({type: Date})
   public archived?: Date | null;
 
   @Inventory.property()
@@ -28,15 +30,24 @@ export class Inventory extends Entity {
   @Inventory.property()
   public product?: Product;
 
-  @Inventory.property()
+  @Inventory.property({type: Address})
   public address?: Address | null;
 
-  @Inventory.property({arrayType: "VariationsGroup"})
-  public variationsGroups?: Array<VariationsGroup>;
+  @Inventory.property({arrayType: 'VariationsGroup'})
+  public variationsGroups?: VariationsGroup[];
 
-  @Inventory.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Inventory.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @Inventory.property({arrayType: "InventoryUnitVariation"})
-  public inventoryUnitVariations?: Array<InventoryUnitVariation>;
+  @Inventory.property({arrayType: 'InventoryUnitVariation'})
+  public inventoryUnitVariations?: InventoryUnitVariation[];
+
+  public isVariationFieldOptionSelected = (option: VariationFieldsOption) => {
+    if (this.inventoryUnitVariations === undefined) {
+      throw new Error(
+        'inventoryUnitVariations is undefined, did you forget to embed it?');
+    }
+    return some(this.inventoryUnitVariations.map(
+      (v: InventoryUnitVariation) => v.optionId() === option.id));
+  }
 }

@@ -6,11 +6,11 @@ import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
 export class CartItem extends Entity {
-  protected static resourceName: string = "cart_items";
-  protected static singularName: string = "cartItem";
-  protected static pluralName: string = "cartItems";
+  protected static resourceName: string = 'cart_items';
+  protected static singularName: string = 'cartItem';
+  protected static pluralName: string = 'cartItems';
 
-  @CartItem.property()
+  @CartItem.property({type: Date})
   public archived?: Date | null;
 
   @CartItem.property()
@@ -19,7 +19,7 @@ export class CartItem extends Entity {
   @CartItem.property()
   public quantity?: number;
 
-  @CartItem.property()
+  @CartItem.property({type: String})
   public notes?: string | null;
 
   @CartItem.property()
@@ -46,18 +46,18 @@ export class CartItem extends Entity {
   @CartItem.property({embeddedByDefault: false})
   public taxType?: CountryTax;
 
-  @CartItem.property({arrayType: "VariationsGroup"})
-  public variationsGroups?: Array<VariationsGroup>;
+  @CartItem.property({arrayType: 'VariationsGroup'})
+  public variationsGroups?: VariationsGroup[];
 
-  @CartItem.property({arrayType: "Variation"})
-  public variations?: Array<Variation>;
+  @CartItem.property({arrayType: 'Variation'})
+  public variations?: Variation[];
 
   public requiresShipment = () => {
     if (this.product === undefined) {
-      throw "product is undefined, did you forget to embed it?";
+      throw 'product is undefined, did you forget to embed it?';
     }
     if (this.product.needsShipping === undefined) {
-      throw "needsShipping is undefined, did you forget to embed it?";
+      throw 'needsShipping is undefined, did you forget to embed it?';
     }
     return this.product.needsShipping;
   }

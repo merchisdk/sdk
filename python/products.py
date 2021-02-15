@@ -30,9 +30,11 @@ class Product(sdk.python.entities.Entity):
     needs_drafting = Property(bool)
     needs_production = Property(bool)
     needs_shipping = Property(bool)
+    needs_invoicing = Property(bool)
     show_public = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
+    accept_utrust = Property(bool)
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
     allow_payment_upfront = Property(bool)
@@ -48,6 +50,7 @@ class Product(sdk.python.entities.Entity):
     origin_address = Property(Address)
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
+    original_product = Property("sdk.python.products.Product")
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

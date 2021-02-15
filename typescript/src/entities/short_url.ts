@@ -3,11 +3,11 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class ShortUrl extends Entity {
-  protected static resourceName: string = "short_urls";
-  protected static singularName: string = "shortUrl";
-  protected static pluralName: string = "shortUrls";
+  protected static resourceName: string = 'short_urls';
+  protected static singularName: string = 'shortUrl';
+  protected static pluralName: string = 'shortUrls';
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: Date})
   public archived?: Date | null;
 
   @ShortUrl.property()
@@ -25,12 +25,12 @@ export class ShortUrl extends Entity {
   @ShortUrl.property()
   public triedTimes?: number;
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: Date})
   public lastLookup?: Date | null;
 
-  @ShortUrl.property()
+  @ShortUrl.property({type: User})
   public user?: User | null;
 
-  @ShortUrl.property({arrayType: "Notification"})
-  public notification?: Array<Notification>;
+  @ShortUrl.property({arrayType: 'Notification'})
+  public notification?: Notification[];
 }

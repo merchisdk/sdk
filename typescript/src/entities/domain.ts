@@ -9,18 +9,20 @@ import { MerchiFile } from './file';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { Menu } from './menu';
+import { User } from './user';
 import { Notification } from './notification';
 import { Product } from './product';
 import { Session } from './session';
 import { SupplyDomain } from './supply_domain';
 import { Theme } from './theme';
+import { DomainType } from '../constants/domain_types';
 
 export class Domain extends Entity {
-  protected static resourceName: string = "domains";
-  protected static singularName: string = "domain";
-  protected static pluralName: string = "domains";
+  protected static resourceName: string = 'domains';
+  protected static singularName: string = 'domain';
+  protected static pluralName: string = 'domains';
 
-  @Domain.property()
+  @Domain.property({type: Date})
   public archived?: Date | null;
 
   @Domain.property()
@@ -29,11 +31,14 @@ export class Domain extends Entity {
   @Domain.property()
   public domain?: string;
 
+  @User.property()
+  public callToActions?: string;
+
   @Domain.property()
   public isMaster?: boolean;
 
   @Domain.property()
-  public domainType?: number;
+  public domainType?: DomainType;
 
   @Domain.property()
   public subDomain?: string;
@@ -54,74 +59,111 @@ export class Domain extends Entity {
   public enableSmsNotifications?: boolean;
 
   @Domain.property()
+  public mailgunRecords?: any[];
+
+  @Domain.property()
   public enableNotifications?: boolean;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public conversionTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public newConversionTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public newGlobalTrackingCode?: string | null;
 
-  @Domain.property()
+  @Domain.property({type: String})
   public apiSecret?: string | null;
 
   @Domain.property()
   public company?: Company;
 
-  @Domain.property()
+  @Domain.property({type: MerchiFile})
   public logo?: MerchiFile | null;
 
-  @Domain.property()
+  @Domain.property({type: MerchiFile})
   public favicon?: MerchiFile | null;
 
   @Domain.property()
   public activeTheme?: Theme;
 
-  @Domain.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Domain.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
-  @Domain.property({arrayType: "Domain"})
-  public canSupply?: Array<Domain>;
+  @Domain.property({arrayType: 'Domain'})
+  public canSupply?: Domain[];
 
-  @Domain.property({arrayType: "Domain"})
-  public suppliedBy?: Array<Domain>;
+  @Domain.property({arrayType: 'Domain'})
+  public suppliedBy?: Domain[];
 
-  @Domain.property({arrayType: "Menu"})
-  public menus?: Array<Menu>;
+  @Domain.property({arrayType: 'Menu'})
+  public menus?: Menu[];
 
-  @Domain.property({arrayType: "Session"})
-  public sessions?: Array<Session>;
+  @Domain.property({arrayType: 'Session'})
+  public sessions?: Session[];
 
-  @Domain.property({arrayType: "Category"})
-  public categories?: Array<Category>;
+  @Domain.property({arrayType: 'Category'})
+  public categories?: Category[];
 
-  @Domain.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @Domain.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
-  @Domain.property({arrayType: "Product"})
-  public products?: Array<Product>;
+  @Domain.property({arrayType: 'Product'})
+  public products?: Product[];
 
-  @Domain.property({arrayType: "SupplyDomain"})
-  public supplyProducts?: Array<SupplyDomain>;
+  @Domain.property({arrayType: 'SupplyDomain'})
+  public supplyProducts?: SupplyDomain[];
 
-  @Domain.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @Domain.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @Domain.property({arrayType: "Cart"})
-  public carts?: Array<Cart>;
+  @Domain.property({arrayType: 'User'})
+  public jobsAssignees?: User[];
 
-  @Domain.property({arrayType: "EnrolledDomain"})
-  public enrollments?: Array<EnrolledDomain>;
+  @Domain.property({arrayType: 'Cart'})
+  public carts?: Cart[];
 
-  @Domain.property({arrayType: "Invoice"})
-  public invoices?: Array<Invoice>;
+  @Domain.property({arrayType: 'EnrolledDomain'})
+  public enrollments?: EnrolledDomain[];
 
-  @Domain.property({arrayType: "DomainInvitation"})
-  public domainInvitations?: Array<DomainInvitation>;
+  @Domain.property({arrayType: 'Invoice'})
+  public invoices?: Invoice[];
 
-  @Domain.property({arrayType: "Theme"})
-  public themes?: Array<Theme>;
+  @Domain.property({arrayType: 'DomainInvitation'})
+  public domainInvitations?: DomainInvitation[];
+
+  @Domain.property({arrayType: 'Theme'})
+  public themes?: Theme[];
+
+  public defaultCurrency = () => {
+    if (this.company === undefined) {
+      throw new Error('company is undefined, did you forget to embed it?');
+    }
+    if (this.company.defaultCurrency === undefined) {
+      const err = 'company.defaultCurrency is undefined, did you forget to' +
+        ' embed it?';
+      throw new Error(err);
+    }
+    return this.company.defaultCurrency;
+  }
+
+  public defaultTaxType = () => {
+    if (this.company === undefined) {
+      throw new Error('company is undefined, did you forget to embed it?');
+    }
+    if (this.company.defaultTaxType === undefined) {
+      const err = 'company.defaultTaxType is undefined, did you forget to' +
+        ' embed it?';
+      throw new Error(err);
+    }
+    return this.company.defaultTaxType;
+  }
+
+  public getActiveTheme = (): Theme => {
+    if (this.activeTheme === undefined) {
+      throw new Error('activeTheme is undefined, did you forget to embed it?');
+    }
+    return this.activeTheme!;
+  }
 }

@@ -5,36 +5,36 @@ import { Job } from './job';
 import { Shipment } from './shipment';
 
 export class CountryTax extends Entity {
-  protected static resourceName: string = "country_taxes";
-  protected static singularName: string = "countryTax";
-  protected static pluralName: string = "countryTaxes";
+  protected static resourceName: string = 'country_taxes';
+  protected static singularName: string = 'countryTax';
+  protected static pluralName: string = 'countryTaxes';
 
-  @CountryTax.property()
+  @CountryTax.property({type: Date})
   public archived?: Date | null;
 
   @CountryTax.property()
   public id?: number;
 
-  @CountryTax.property()
+  @CountryTax.property({type: String})
   public country?: string | null;
 
   @CountryTax.property()
   public taxName?: string;
 
-  @CountryTax.property()
+  @CountryTax.property({type: Number})
   public taxPercent?: number | null;
 
-  @CountryTax.property({arrayType: "Shipment"})
-  public shipments?: Array<Shipment>;
+  @CountryTax.property({arrayType: 'Shipment'})
+  public shipments?: Shipment[];
 
-  @CountryTax.property({arrayType: "Company"})
-  public companies?: Array<Company>;
+  @CountryTax.property({arrayType: 'Company'})
+  public companies?: Company[];
 
-  @CountryTax.property({arrayType: "Job"})
-  public jobs?: Array<Job>;
+  @CountryTax.property({arrayType: 'Job'})
+  public jobs?: Job[];
 
-  @CountryTax.property({arrayType: "Item"})
-  public items?: Array<Item>;
+  @CountryTax.property({arrayType: 'Item'})
+  public items?: Item[];
 
   public static getNoTax() {
     const result = new this.merchi.CountryTax();

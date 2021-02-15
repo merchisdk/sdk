@@ -31,6 +31,7 @@ class Invoice(sdk.python.entities.Entity):
     unpaid = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
+    accept_utrust = Property(bool)
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
     is_remindable = Property(bool)
@@ -59,6 +60,7 @@ class Invoice(sdk.python.entities.Entity):
     receipt = Property(File)
     payments = Property(Payment, backref="invoice")
     tags = Property(DomainTag, backref="invoices")
+    subscription_companies = Property(Company, backref="subscription_invoices")
 
     def process_for_transfer(self):
         # can not update product by updating invoice

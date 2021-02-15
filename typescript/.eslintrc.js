@@ -6,7 +6,9 @@ module.exports = {
         "es6": true,
         "jest": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended",
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
@@ -17,10 +19,11 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
+        "indent": "off",
+        "@typescript-eslint/indent": ["error", 2],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         "linebreak-style": [
             "error",
             "unix"

@@ -53,6 +53,7 @@ class User(sdk.python.entities.Entity):
     production_quoting_count = Property(int)
     comments = Property(str)
     preferred_language = Property(str)
+    call_to_actions = Property(str)
     enable_crash_reports = Property(bool)
     enable_client_emails = Property(bool)
     enable_invoice_reminders = Property(bool)

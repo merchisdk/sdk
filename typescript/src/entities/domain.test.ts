@@ -29,7 +29,7 @@ test('can create domain on server', () => {
   domain.domain = 'example.com';
   const data = Array.from((domain.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
-  domain.create()
+  domain.create();
   const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
   expect(sentToServer).toEqual(data);
 });
@@ -38,7 +38,29 @@ test('can delete domain', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
   domain.id = 1;
-  const fetch = mockFetch(true, {}, 204); 
+  const fetch = mockFetch(true, {}, 204);
   domain.delete();
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
+});
+
+test('can get domain active theme', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+
+  // throw error if active theme is undefined which seems to be an embed issue
+  expect(() => {domain.getActiveTheme();}).toThrow(Error);
+
+  const theme = new merchi.Theme();
+  domain.activeTheme = theme;
+  expect(domain.getActiveTheme()).toEqual(theme);
+});
+
+test('fail to delete non-existant domain', () => {
+  const merchi = new Merchi('YrDwzmh8&QGtAfg9quh(4QfSlE^RPXWl');
+  const domain = new merchi.Domain();
+  domain.id = -1;
+  const fetch = mockFetch(true, {statusCode: 404}, 404);
+  const invocation = domain.delete();
+  expect(fetch.mock.calls[0][1].method).toBe('DELETE');
+  return invocation.catch(e => expect(e.statusCode).toEqual(404));
 });

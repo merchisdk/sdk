@@ -139,3 +139,33 @@ BAD_TOKEN = 109
 BAD_CART_TOKEN = 110
 
 STATE_WITHOUT_COUNTRY = 111
+
+BAD_SLUG = 112  # provided value that cannot be used in url
+
+NO_DOMAIN_MANAGER = 113  # domain does not have either admin or manager
+
+CONFLICT_PARAMETERS = 114  # query parameters are conflicting with each other
+
+MISSING_DOMAIN_FOR_SELL = 115  # missing sell domain for supply product
+WRONG_DOMAIN_FOR_SELL = 116  # target for supply product does not exists
+NO_PERMISSION_TO_SELL = 117  # do not have permission to sell target product
+
+DUPLICATE_VARIATION_FIELDS = 118  # product should not have duplicated field
+NO_MATCHED_VARIATION_FIELDS = 119  # product should not have duplicated field
+
+# cart shipment groups should select quote if there is any available
+NO_SELECTED_SHIPMENT_QUOTE = 120
+NO_JOB_FOUND = 121
+NO_ASSIGNMENT_FOUND = 122
+
+MISSING_PLAN = 123  # valid subscription plan id must be provided
+
+STRIPE_NO_CUSTOMER_FOUND = 124
+
+ASSIGNMENT_NOT_ACCEPTED = 125
+ASSIGNMENT_SUPPLY_DOMAIN_CANT_FOUND = 126
+REQUESTS_LIMIT_REACHED = 127
+
+BAD_SIGNATURE = 128
+
+COMPANY_BLOCKED = 129

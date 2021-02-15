@@ -34,6 +34,7 @@ const CASH = 4;
 const CHEQUE = 5;
 const PHONE_PAYMENT = 6;
 const CREDIT_CARD = 7;
+const UTRUST_PAYMENT = 8;
 
 const PAYMENT_TYPES = [
     ONLINE_PAYMENT => "Online Payment",
@@ -42,7 +43,8 @@ const PAYMENT_TYPES = [
     CASH => "Cash",
     CHEQUE => "Cheque",
     PHONE_PAYMENT => "Phone Payment",
-    CREDIT_CARD => "Credit Card"];
+    CREDIT_CARD => "Credit Card",
+    UTRUST_PAYMENT => "Utrust Payment"];
 
 $PAYMENT_TYPES_OPTIONS = [];
 foreach (PAYMENT_TYPES as $key => $value){

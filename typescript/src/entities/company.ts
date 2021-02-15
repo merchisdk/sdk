@@ -13,13 +13,14 @@ import { PhoneNumber } from './phone_number';
 import { Product } from './product';
 import { Shipment } from './shipment';
 import { UserCompany } from './user_company';
+import { SubscriptionPlan } from './subscription_plan';
 
 export class Company extends Entity {
-  protected static resourceName: string = "companies";
-  protected static singularName: string = "company";
-  protected static pluralName: string = "companies";
+  protected static resourceName: string = 'companies';
+  protected static singularName: string = 'company';
+  protected static pluralName: string = 'companies';
 
-  @Company.property()
+  @Company.property({type: Date})
   public archived?: Date | null;
 
   @Company.property()
@@ -29,33 +30,45 @@ export class Company extends Entity {
   public name?: string;
 
   @Company.property()
+  public callToActions?: string;
+
+  @Company.property({type: String})
   public website?: string | null;
 
   @Company.property()
   public temporaryCreated?: boolean;
 
-  @Company.property()
+  @Company.property({type: String})
   public taxNumber?: string | null;
 
-  @Company.property()
+  @Company.property({type: Number})
   public taxNumberType?: number | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalAccount?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalPassword?: string | null;
 
-  @Company.property()
+  @Company.property({type: String})
   public paypalSignature?: string | null;
 
   @Company.property()
   public isPaypalValid?: boolean;
 
-  @Company.property()
-  public stripePublishableKey?: string | null;
+  @Company.property({type: String})
+  public stripeCustomerId?: string;
 
   @Company.property()
+  public isNew?: boolean;
+
+  @Company.property()
+  public subscriptionOutstanding?: boolean;
+
+  @Company.property({type: String})
+  public stripePublishableKey?: string | null;
+
+  @Company.property({type: String})
   public stripeApiKey?: string | null;
 
   @Company.property()
@@ -66,6 +79,18 @@ export class Company extends Entity {
 
   @Company.property()
   public acceptPaypal?: boolean;
+
+  @Company.property()
+  public acceptUtrust?: boolean;
+
+  @Company.property({type: String})
+  public utrustApiKey?: string | null;
+
+  @Company.property({type: String})
+  public utrustWebhookKey?: string | null;
+
+  @Company.property()
+  public isUtrustValid?: boolean;
 
   @Company.property()
   public acceptBankTransfer?: boolean;
@@ -79,66 +104,72 @@ export class Company extends Entity {
   @Company.property()
   public country?: string;
 
-  @Company.property()
+  @Company.property({type: MerchiFile})
   public logo?: MerchiFile | null;
 
-  @Company.property()
+  @Company.property({type: CountryTax})
   public defaultTaxType?: CountryTax | null;
 
-  @Company.property({arrayType: "EmailAddress"})
-  public _emailAddresses?: Array<EmailAddress>;
+  @Company.property({type: SubscriptionPlan})
+  public subscriptionPlan?: SubscriptionPlan | null;
 
-  @Company.property({arrayType: "PhoneNumber"})
-  public _paymentPhoneNumbers?: Array<PhoneNumber>;
+  @Company.property({arrayType: 'EmailAddress'})
+  public _emailAddresses?: EmailAddress[];
 
-  @Company.property({arrayType: "PhoneNumber"})
-  public _phoneNumbers?: Array<PhoneNumber>;
+  @Company.property({arrayType: 'PhoneNumber'})
+  public _paymentPhoneNumbers?: PhoneNumber[];
 
-  @Company.property({arrayType: "Address"})
-  public _addresses?: Array<Address>;
+  @Company.property({arrayType: 'PhoneNumber'})
+  public _phoneNumbers?: PhoneNumber[];
 
-  @Company.property({arrayType: "UserCompany"})
-  public _users?: Array<UserCompany>;
+  @Company.property({arrayType: 'Address'})
+  public _addresses?: Address[];
 
-  @Company.property({arrayType: "Shipment"})
-  public shipmentsAsSender?: Array<Shipment>;
+  @Company.property({arrayType: 'UserCompany'})
+  public _users?: UserCompany[];
 
-  @Company.property({arrayType: "Shipment"})
-  public shipmentsAsReceiver?: Array<Shipment>;
+  @Company.property({arrayType: 'Shipment'})
+  public shipmentsAsSender?: Shipment[];
 
-  @Company.property({arrayType: "Product"})
-  public saved_products?: Array<Product>;
+  @Company.property({arrayType: 'Shipment'})
+  public shipmentsAsReceiver?: Shipment[];
 
-  @Company.property({arrayType: "Bank"})
-  public banks?: Array<Bank>;
+  @Company.property({arrayType: 'Product'})
+  public saved_products?: Product[];
 
-  @Company.property({arrayType: "UserCompany"})
-  public userCompanies?: Array<UserCompany>;
+  @Company.property({arrayType: 'Bank'})
+  public banks?: Bank[];
 
-  @Company.property({arrayType: "CompanyInvitation"})
-  public companyInvitations?: Array<CompanyInvitation>;
+  @Company.property({arrayType: 'UserCompany'})
+  public userCompanies?: UserCompany[];
 
-  @Company.property({arrayType: "Job"})
-  public appliedJobs?: Array<Job>;
+  @Company.property({arrayType: 'CompanyInvitation'})
+  public companyInvitations?: CompanyInvitation[];
 
-  @Company.property({arrayType: "Cart"})
-  public carts?: Array<Cart>;
+  @Company.property({arrayType: 'Job'})
+  public appliedJobs?: Job[];
 
-  @Company.property({arrayType: "Domain"})
-  public domains?: Array<Domain>;
+  @Company.property({arrayType: 'Cart'})
+  public carts?: Cart[];
 
-  @Company.property({arrayType: "EmailAddress"})
-  public emailAddresses?: Array<EmailAddress>;
+  @Company.property({arrayType: 'Domain'})
+  public domains?: Domain[];
 
-  @Company.property({arrayType: "PhoneNumber"})
-  public phoneNumbers?: Array<PhoneNumber>;
+  @Company.property({arrayType: 'EmailAddress'})
+  public emailAddresses?: EmailAddress[];
 
-  @Company.property({arrayType: "PhoneNumber"})
-  public paymentPhoneNumbers?: Array<PhoneNumber>;
+  @Company.property({arrayType: 'PhoneNumber'})
+  public phoneNumbers?: PhoneNumber[];
 
-  @Company.property({arrayType: "Invoice"})
-  public invoicesHas?: Array<Invoice>;
+  @Company.property({arrayType: 'PhoneNumber'})
+  public paymentPhoneNumbers?: PhoneNumber[];
 
-  @Company.property({arrayType: "Address"})
-  public addresses?: Array<Address>;
+  @Company.property({arrayType: 'Invoice'})
+  public invoicesHas?: Invoice[];
+
+  @Company.property({arrayType: 'Invoice'})
+  public subscriptionInvoices?: Invoice[];
+
+  @Company.property({arrayType: 'Address'})
+  public addresses?: Address[];
 }

@@ -1,18 +1,20 @@
 import sdk.python.entities
 from sdk.python.util.item_types import item_type
 from sdk.python.entities import Property
+from sdk.python.country_taxes import CountryTax
 
 
-class BidItem(sdk.python.entities.Entity):
+class QuoteItem(sdk.python.entities.Entity):
 
-    resource = '/bid_items'
-    json_name = 'bid_item'
+    resource = '/quote_items'
+    json_name = 'quote_item'
 
     id = Property(int)
     type = Property(int)
     quantity = Property(int)
     description = Property(str)
     unit_price = Property(float)  # unit cents in db
+    tax_type = Property(CountryTax)
 
     def item_total(self):
         """ Calculate the total of the item by
@@ -22,14 +24,14 @@ class BidItem(sdk.python.entities.Entity):
         return self.quantity * self.unit_price
 
     def item_type_name(self):
-        """ Return name of the bid_item type instead of type id """
+        """ Return name of the quote_item type instead of type id """
         return item_type[self.type]
 
 
-class BidItems(sdk.python.entities.Resource):
+class QuoteItems(sdk.python.entities.Resource):
 
-    entity_class = BidItem
-    json_name = 'bidItem'
+    entity_class = QuoteItem
+    json_name = 'quoteItem'
 
 
-bid_items = BidItems()
+quote_items = QuoteItems()

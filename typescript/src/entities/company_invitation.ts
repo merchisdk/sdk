@@ -3,11 +3,11 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class CompanyInvitation extends Entity {
-  protected static resourceName: string = "company_invitations";
-  protected static singularName: string = "companyInvitation";
-  protected static pluralName: string = "companyInvitations";
+  protected static resourceName: string = 'company_invitations';
+  protected static singularName: string = 'companyInvitation';
+  protected static pluralName: string = 'companyInvitations';
 
-  @CompanyInvitation.property()
+  @CompanyInvitation.property({type: Date})
   public archived?: Date | null;
 
   @CompanyInvitation.property()

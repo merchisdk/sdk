@@ -6,17 +6,17 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class DraftComment extends Entity {
-  protected static resourceName: string = "draft_comments";
-  protected static singularName: string = "draftComment";
-  protected static pluralName: string = "draftComments";
+  protected static resourceName: string = 'draft_comments';
+  protected static singularName: string = 'draftComment';
+  protected static pluralName: string = 'draftComments';
 
-  @DraftComment.property()
+  @DraftComment.property({type: Date})
   public archived?: Date | null;
 
   @DraftComment.property()
   public id?: number;
 
-  @DraftComment.property()
+  @DraftComment.property({type: Date})
   public date?: Date | null;
 
   @DraftComment.property()
@@ -37,18 +37,18 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public user?: User;
 
-  @DraftComment.property()
+  @DraftComment.property({type: MerchiFile})
   public file?: MerchiFile | null;
 
-  @DraftComment.property({arrayType: "User"})
-  public forwards?: Array<User>;
+  @DraftComment.property({arrayType: 'User'})
+  public forwards?: User[];
 
-  @DraftComment.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @DraftComment.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
-  @DraftComment.property()
+  @DraftComment.property({type: Draft})
   public draft?: Draft | null;
 
-  @DraftComment.property()
+  @DraftComment.property({type: Job})
   public job?: Job | null;
 }

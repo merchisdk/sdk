@@ -9,23 +9,26 @@ import { DraftComment } from './draft_comment';
 import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
-import { Inventory } from './inventory';
+import { MatchingInventory } from './matching_inventory';
 import { Invoice } from './invoice';
 import { JobComment } from './job_comment';
 import { Notification } from './notification';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
+import { RequestOptions } from '../request';
 import { Shipment } from './shipment';
 import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
+import { InventoryStatus } from '../constants/inventory_statuses';
+
 
 export class Job extends Entity {
-  protected static resourceName: string = "jobs";
-  protected static singularName: string = "job";
-  protected static pluralName: string = "jobs";
+  protected static resourceName: string = 'jobs';
+  protected static singularName: string = 'job';
+  protected static pluralName: string = 'jobs';
 
-  @Job.property()
+  @Job.property({type: Date})
   public archived?: Date | null;
 
   @Job.property()
@@ -34,16 +37,16 @@ export class Job extends Entity {
   @Job.property()
   public quantity?: number;
 
-  @Job.property()
+  @Job.property({type: String})
   public notes?: string | null;
 
-  @Job.property()
+  @Job.property({type: String})
   public productionNotes?: string | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public productionStatus?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public designStatus?: number | null;
 
   @Job.property()
@@ -56,18 +59,24 @@ export class Job extends Entity {
   public needsShipping?: boolean;
 
   @Job.property()
+  public needsInvoicing?: boolean;
+
+  @Job.property()
+  public needsInventory?: boolean;
+
+  @Job.property()
   public quoteSet?: boolean;
 
   @Job.property()
   public jobInfoApprovedByClient?: boolean;
 
-  @Job.property()
+  @Job.property({type: Number})
   public paymentStatus?: number | null;
 
-  @Job.property()
+  @Job.property({type: Date})
   public deductionDate?: Date | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public shippingStatus?: number | null;
 
   @Job.property()
@@ -76,10 +85,10 @@ export class Job extends Entity {
   @Job.property()
   public priority?: number;
 
-  @Job.property()
+  @Job.property({type: Number})
   public jobWeight?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public jobVolume?: number | null;
 
   @Job.property()
@@ -94,17 +103,20 @@ export class Job extends Entity {
   @Job.property()
   public automaticPriceEnabled?: boolean;
 
-  @Job.property()
+  @Job.property({type: Number})
   public costPerUnit?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public cost?: number | null;
 
-  @Job.property()
+  @Job.property({type: Number})
   public taxAmount?: number | null;
 
+  @Job.property({type: Number})
+  public totalCost?: number | null;
+
   @Job.property({embeddedByDefault: false})
-  public canDeduct?: boolean;
+  public inventoriesStatus?: InventoryStatus;
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
@@ -124,88 +136,121 @@ export class Job extends Entity {
   @Job.property({embeddedByDefault: false})
   public unreadJobInvoicingNotificationsCount?: number;
 
-  @Job.property({arrayType: "Draft"})
-  public drafts?: Array<Draft>;
+  @Job.property({arrayType: 'Draft'})
+  public drafts?: Draft[];
 
-  @Job.property({arrayType: "JobComment"})
-  public comments?: Array<JobComment>;
+  @Job.property({arrayType: 'JobComment'})
+  public comments?: JobComment[];
 
   @Job.property()
   public client?: User;
 
-  @Job.property()
+  @Job.property({type: User})
   public manager?: User | null;
 
-  @Job.property()
+  @Job.property({type: User})
   public designer?: User | null;
 
-  @Job.property()
+  @Job.property({type: Company})
   public clientCompany?: Company | null;
 
-  @Job.property()
+  @Job.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;
 
-  @Job.property()
+  @Job.property({type: EmailAddress})
   public clientEmail?: EmailAddress | null;
 
-  @Job.property()
+  @Job.property({type: PhoneNumber})
   public clientCompanyPhone?: PhoneNumber | null;
 
-  @Job.property()
+  @Job.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
 
   @Job.property()
   public product?: Product;
 
-  @Job.property({arrayType: "DraftComment"})
-  public draftComments?: Array<DraftComment>;
+  @Job.property({arrayType: 'DraftComment'})
+  public draftComments?: DraftComment[];
 
-  @Job.property()
+  @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
-  @Job.property({arrayType: "DomainTag"})
-  public tags?: Array<DomainTag>;
+  @Job.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
-  @Job.property()
+  @Job.property({type: Address})
   public shipping?: Address | null;
 
-  @Job.property()
+  @Job.property({type: Address})
   public productionShippingAddress?: Address | null;
 
   @Job.property()
   public domain?: Domain;
 
-  @Job.property()
+  @Job.property({type: Invoice})
   public invoice?: Invoice | null;
 
-  @Job.property({arrayType: "MerchiFile"})
-  public productionFiles?: Array<MerchiFile>;
+  @Job.property({arrayType: 'MerchiFile'})
+  public productionFiles?: MerchiFile[];
 
-  @Job.property({arrayType: "MerchiFile"})
-  public clientFiles?: Array<MerchiFile>;
+  @Job.property({arrayType: 'MerchiFile'})
+  public clientFiles?: MerchiFile[];
 
-  @Job.property()
+  @Job.property({type: Shipment})
   public shipment?: Shipment | null;
 
-  @Job.property()
-  public inventory?: Inventory | null;
+  @Job.property({arrayType: 'MatchingInventory'})
+  public matchingInventories?: MatchingInventory[];
 
-  @Job.property({arrayType: "VariationsGroup"})
-  public variationsGroups?: Array<VariationsGroup>;
+  @Job.property({arrayType: 'VariationsGroup'})
+  public variationsGroups?: VariationsGroup[];
 
-  @Job.property({arrayType: "Variation"})
-  public variations?: Array<Variation>;
+  @Job.property({arrayType: 'Variation'})
+  public variations?: Variation[];
 
-  @Job.property({arrayType: "Notification"})
-  public notifications?: Array<Notification>;
+  @Job.property({arrayType: 'Notification'})
+  public notifications?: Notification[];
 
-  @Job.property({arrayType: "Assignment"})
-  public assignments?: Array<Assignment>;
+  @Job.property({arrayType: 'Assignment'})
+  public assignments?: Assignment[];
 
   @Job.property()
   public supplyAssignment?: Assignment;
 
-  @Job.property({arrayType: "Inventory",
-                 embeddedByDefault: false})
-  public matchingInventory?: Inventory | null;
+  public getQuote = () => {
+    const resource = '/specialised-order-estimate/';
+    const data = this.toFormData({excludeOld: false});
+    const fetchOptions: RequestOptions = {method: 'POST', body: data};
+    fetchOptions.query = [];
+    fetchOptions.query.push(['skip_rights', 'y']);
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => { this.fromJson(data, {makeDirty: true});
+        return this;});
+  }
+
+  public deduct = (matchingInventories: MatchingInventory[]) => {
+    const resource = `/jobs/${this.id}/deduct/`;
+    const jobForPayload = new this.merchi.Job();
+    jobForPayload.matchingInventories = matchingInventories;
+    jobForPayload.id = 1;
+    const data = jobForPayload.toFormData({excludeOld: false});
+    const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const fetchOptions: RequestOptions = {
+      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => {
+        this.fromJson(data);
+        return this;});
+  }
+
+  public bulkDeduct = () => {
+    if (this.matchingInventories === undefined) {
+      const err = 'matchingInventories is undefined, did you forget to embed' +
+        ' it?';
+      throw new Error(err);
+    }
+    return this.deduct(this.matchingInventories);
+  }
 }

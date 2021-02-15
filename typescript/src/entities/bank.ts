@@ -3,11 +3,11 @@ import { Company } from './company';
 import { Entity } from '../entity';
 
 export class Bank extends Entity {
-  protected static resourceName: string = "banks";
-  protected static singularName: string = "bank";
-  protected static pluralName: string = "banks";
+  protected static resourceName: string = 'banks';
+  protected static singularName: string = 'bank';
+  protected static pluralName: string = 'banks';
 
-  @Bank.property()
+  @Bank.property({type: Date})
   public archived?: Date | null;
 
   @Bank.property()
@@ -25,19 +25,19 @@ export class Bank extends Entity {
   @Bank.property()
   public accountName?: string;
 
-  @Bank.property()
+  @Bank.property({type: String})
   public bsb?: string | null;
 
-  @Bank.property()
+  @Bank.property({type: String})
   public swiftCode?: string | null;
 
-  @Bank.property()
+  @Bank.property({type: String})
   public iban?: string | null;
 
-  @Bank.property()
+  @Bank.property({type: String})
   public bankCode?: string | null;
 
-  @Bank.property()
+  @Bank.property({type: 'Address'})
   public bankAddress?: Address | null;
 
   @Bank.property()

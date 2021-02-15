@@ -19,7 +19,7 @@ test('can get and set id', () => {
 test('can upload file', () => {
   const merchi = new Merchi();
   const file = new merchi.MerchiFile();
-  const jsFile = new File([""], "name");
+  const jsFile = new File([''], 'name');
   file.fromFormFile(jsFile);
   const fetch = mockFetch(true, {}, 200);
   file.create();
@@ -28,4 +28,16 @@ test('can upload file', () => {
   const data: any = Array.from(sentToServer.body.entries());
   expect(data[0][1]).toBe(jsFile);
   expect(data[1]).toEqual(['fileDataIndex', '0']);
+});
+
+test('isImage', () => {
+  const merchi = new Merchi();
+  const file = new merchi.MerchiFile();
+  expect(file.isImage).toThrow();
+  file.mimetype = null;
+  expect(file.isImage()).toEqual(false);
+  file.mimetype = 'application/pdf';
+  expect(file.isImage()).toEqual(false);
+  file.mimetype = 'image/png';
+  expect(file.isImage()).toEqual(true);
 });
