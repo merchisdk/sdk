@@ -56,6 +56,7 @@ class Job(sdk.python.entities.Entity):
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
     notes = Property(str)
+    purpose = Property(int)
     call_to_actions = Property(str)
     production_notes = Property(str)
     production_status = Property(int)
