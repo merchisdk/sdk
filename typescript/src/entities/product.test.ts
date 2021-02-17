@@ -79,6 +79,19 @@ test('can specify options in request', () => {
   return invocation;
 });
 
+test('can specify options in create request', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
+  const options = {embed: {}, withRights: true};
+  const product = new merchi.Product();
+  const invocation = product.create(options).then(
+    product => expect(product.name).toBe(testName));
+  const correct: any[] = [['embed', '{}']];
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  return invocation;
+});
+
 test('can specify options in save request', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';

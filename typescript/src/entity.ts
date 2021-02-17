@@ -39,6 +39,11 @@ interface FromJsonOptions {
   makeDirty?: boolean;
 }
 
+interface CreateOptions {
+  withRights?: boolean;
+  embed?: EmbedDescriptor;
+}
+
 interface SaveOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
@@ -607,12 +612,20 @@ export class Entity {
 
   public createFactory = (
     {resourceName = (this.constructor as typeof Entity).resourceName}
-  ) => () => {
+  ) => (options?: CreateOptions) => {
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
     const singularName = (this.constructor as typeof Entity).singularName;
     const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
+
+    fetchOptions.query = [];
+    if (options && options.embed) {
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
+    }
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         this.fromJson(data[singularName]);
