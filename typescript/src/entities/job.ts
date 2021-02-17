@@ -59,6 +59,9 @@ export class Job extends Entity {
   public needsShipping?: boolean;
 
   @Job.property()
+  public needsInvoicing?: boolean;
+
+  @Job.property()
   public needsInventory?: boolean;
 
   @Job.property()
