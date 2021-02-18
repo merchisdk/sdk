@@ -79,6 +79,19 @@ test('can specify options in request', () => {
   return invocation;
 });
 
+test('can specify options in create request', () => {
+  const merchi = new Merchi();
+  const testName = 'S7qHUfV_dr5l';
+  const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
+  const options = {embed: {}, withRights: true};
+  const product = new merchi.Product();
+  const invocation = product.create(options).then(
+    product => expect(product.name).toBe(testName));
+  const correct: any[] = [['embed', '{}']];
+  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  return invocation;
+});
+
 test('can specify options in save request', () => {
   const merchi = new Merchi();
   const testName = 'S7qHUfV_dr5l';
@@ -273,6 +286,9 @@ test('can list products with options set', () => {
     relatedAssignment: 1,
     clientId: 349,
     managerId: 355,
+    domainTypes: [0, 1],
+    productTypes: [0, 1],
+    excludeDomains: [0, 1],
     clientCompanyId: 124,
     savedByUser: 24,
     receiverId: 86,
@@ -313,6 +329,8 @@ test('can list products with options set', () => {
     ['member_only', 'false'],
     ['inbound', 'false'],
     ['domain_roles', '1'],
+    ['domain_types', '0,1'],
+    ['product_types', '0,1'],
     ['managed_domains_only', 'true'],
     ['business_domains_only', 'true'],
     ['date_from', '0'],
@@ -338,6 +356,7 @@ test('can list products with options set', () => {
     ['tags', '2,3,5'],
     ['tags_name', 'a'],
     ['exclude', '8'],
+    ['exclude_domains', '0,1'],
     ['include_only', '1'],
     ['or_client_id', '123'],
     ['or_client_company_id', '321'],
