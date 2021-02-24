@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { Address } from './address';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
@@ -67,6 +68,9 @@ export class Product extends Entity {
   public needsShipping?: boolean;
 
   @Product.property()
+  public needsInvoicing?: boolean;
+
+  @Product.property()
   public showPublic?: boolean;
 
   @Product.property()
@@ -101,6 +105,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'Discount'})
   public discounts?: Discount[];
+
+  @Product.property()
+  public originAddress?: Address;
 
   @Product.property()
   public domain?: Domain;

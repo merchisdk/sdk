@@ -9,6 +9,10 @@ import { NotificationType } from './constants/notification_types';
 import { NotificationSection } from './constants/notification_sections';
 // eslint-disable-next-line no-unused-vars
 import { Role } from './constants/roles';
+// eslint-disable-next-line no-unused-vars
+import { DomainType } from './constants/domain_types';
+// eslint-disable-next-line no-unused-vars
+import { ProductType } from './constants/product_types';
 import { generateUUID } from './uuid';
 
 function toUnixTimestamp(date: Date) {
@@ -33,6 +37,11 @@ export interface EmbedDescriptor {
 interface FromJsonOptions {
   arrayValueStrict?: boolean;
   makeDirty?: boolean;
+}
+
+interface CreateOptions {
+  withRights?: boolean;
+  embed?: EmbedDescriptor;
 }
 
 interface SaveOptions {
@@ -84,9 +93,12 @@ interface ListOptions {
   asRole?: Role;
   publicOnly?: boolean;
   managedOnly?: boolean;
+  teamOnly?: boolean;
   memberOnly?: boolean;
   inbound?: boolean;
   domainRoles?: Role[];
+  domainTypes?: DomainType[];
+  productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
   dateFrom?: Date;
@@ -113,6 +125,7 @@ interface ListOptions {
   tags?: number[];
   tagNames?: string[];
   exclude?: number[];
+  excludeDomains?: number[];
   includeOnly?: number[];
   orClientId?: number;
   orClientCompanyId?: number;
@@ -426,6 +439,10 @@ export class Entity {
         fetchOptions.query.push(['managed_only',
           options.managedOnly.toString()]);
       }
+      if (options.teamOnly !== undefined) {
+        fetchOptions.query.push(['team_only',
+          options.teamOnly.toString()]);
+      }
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
       }
@@ -435,6 +452,14 @@ export class Entity {
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
           options.domainRoles.join(',')]);
+      }
+      if (options.domainTypes !== undefined) {
+        fetchOptions.query.push(['domain_types',
+          options.domainTypes.join(',')]);
+      }
+      if (options.productTypes !== undefined) {
+        fetchOptions.query.push(['product_types',
+          options.productTypes.join(',')]);
       }
       if (options.managedDomainsOnly !== undefined) {
         fetchOptions.query.push(['managed_domains_only',
@@ -524,6 +549,10 @@ export class Entity {
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
       }
+      if (options.excludeDomains !== undefined) {
+        fetchOptions.query.push(
+          ['exclude_domains', options.excludeDomains.join(',')]);
+      }
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
       }
@@ -583,12 +612,20 @@ export class Entity {
 
   public createFactory = (
     {resourceName = (this.constructor as typeof Entity).resourceName}
-  ) => () => {
+  ) => (options?: CreateOptions) => {
     const resource = `/${resourceName}/`;
     const data = this.toFormData();
     const singularName = (this.constructor as typeof Entity).singularName;
     const fetchOptions: RequestOptions = {method: 'POST',
       body: data};
+
+    fetchOptions.query = [];
+    if (options && options.embed) {
+      fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
+    }
+    if (!(options && options.withRights)) {
+      fetchOptions.query.push(['skip_rights', 'y']);
+    }
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
         this.fromJson(data[singularName]);

@@ -45,7 +45,7 @@ class Company(sdk.python.entities.Entity):
     accept_paypal = Property(bool)
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
-    temporary_created = Property(bool)
+    ownership_unconfirmed = Property(bool)
     logo = Property(File)
     email_addresses = Property(EmailAddress)
     addresses = Property(Address)
