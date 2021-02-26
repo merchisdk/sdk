@@ -36,7 +36,7 @@ export class Company extends Entity {
   public website?: string | null;
 
   @Company.property()
-  public temporaryCreated?: boolean;
+  public ownershipUnconfirmed?: boolean;
 
   @Company.property({type: String})
   public taxNumber?: string | null;
@@ -58,6 +58,12 @@ export class Company extends Entity {
 
   @Company.property({type: String})
   public stripeCustomerId?: string;
+
+  @Company.property()
+  public isNew?: boolean;
+
+  @Company.property()
+  public subscriptionOutstanding?: boolean;
 
   @Company.property({type: String})
   public stripePublishableKey?: string | null;
