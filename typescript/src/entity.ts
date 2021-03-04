@@ -825,7 +825,7 @@ export class Entity {
       }
       if (value === null) {
         if (info.dirty || !excludeOld) {
-          appendData(innerPrefix + '-' + primaryKey, '-1');
+          appendData(info.property + '-0-' + primaryKey, '-1');
           appendData(info.property + '-count', 1);
         }
         return;
