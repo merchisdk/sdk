@@ -58,8 +58,11 @@ export class QuoteItem extends Entity {
     if (strictEmbed && this.taxType === undefined) {
       throw new Error('taxType is undefined, did you forget to embed it?');
     }
-    const taxRate = this.taxType ? this.taxType.taxPercent! / 100 : 0;
-    return (parseFloat(this.calculateSubTotal(options)) * taxRate).toFixed(3);
+    const taxPercent = this.taxType && this.taxType.taxPercent ?
+      this.taxType.taxPercent : 0;
+    const taxRate = taxPercent ? Number(taxPercent) / 100 : 0;
+    return (parseFloat(
+      this.calculateSubTotal(options)) * taxRate).toFixed(3);
   }
 
   public calculateTotal = (options?: CalculateOptions) => {
