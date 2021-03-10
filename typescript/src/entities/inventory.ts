@@ -28,6 +28,9 @@ export class Inventory extends Entity {
   public notes?: string;
 
   @Inventory.property()
+  public isOrphan?: boolean;
+
+  @Inventory.property()
   public product?: Product;
 
   @Inventory.property({type: Address})
