@@ -25,6 +25,7 @@ class Notification(sdk.python.entities.Entity):
                                           ProductionComment,
                                           backref="notifications")
     attachment = Property(sdk.python.files.File)
+    avatar = Property(sdk.python.files.File)
     seen = Property(bool)
     send_email = Property(bool)
     send_sms = Property(bool)

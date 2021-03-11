@@ -92,5 +92,8 @@ export class Notification extends Entity {
   public domain?: Domain;
 
   @Notification.property({type: MerchiFile})
+  public avatar?: MerchiFile | null;
+
+  @Notification.property({type: MerchiFile})
   public attachment?: MerchiFile | null;
 }
