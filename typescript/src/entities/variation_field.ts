@@ -40,6 +40,9 @@ export class VariationField extends Entity {
   @VariationField.property()
   public fieldType?: FieldType;
 
+  @VariationField.property({type: Number})
+  public margin?: number | null;
+
   @VariationField.property()
   public variationCost?: number;
 
