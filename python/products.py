@@ -51,6 +51,7 @@ class Product(sdk.python.entities.Entity):
     origin_address = Property(Address)
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
+    created_by_job = Property("sdk.python.jobs.Job")
     original_product = Property("sdk.python.products.Product")
 
     def create(self, embed=None, email=None, password=None, query=None,
