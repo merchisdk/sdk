@@ -362,7 +362,8 @@ export class Entity {
       fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
     }
     if (options && options.includeArchived) {
-      fetchOptions.query.push(['include_archived', 'true']);
+      fetchOptions.query.push(['include_archived',
+                               JSON.stringify(options.includeArchived)]);
     }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
