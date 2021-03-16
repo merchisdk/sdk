@@ -37,8 +37,8 @@ export class Product extends Entity {
   @Product.property()
   public unitPrice?: number;
 
-  @Product.property({type: Number})
-  public margin?: number | null;
+  @Product.property()
+  public margin?: number;
 
   @Product.property({type: Number})
   public unitWeight?: number | null;
