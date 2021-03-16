@@ -15,6 +15,7 @@ class Inventory(sdk.python.entities.Entity):
     quantity = Property(int)
     name = Property(str)
     notes = Property(str)
+    is_orphan = Property(bool)
     product = Property(Product, backref="inventory")
 
 
