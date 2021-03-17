@@ -363,7 +363,7 @@ export class Entity {
     }
     if (options && options.includeArchived) {
       fetchOptions.query.push(['include_archived',
-                               JSON.stringify(options.includeArchived)]);
+        JSON.stringify(options.includeArchived)]);
     }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
