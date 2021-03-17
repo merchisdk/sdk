@@ -66,15 +66,11 @@ test('can specify options in request', () => {
   const fetch = mockFetch(true, {'product': {'name': testName}}, 200);
   const options = {
     includeArchived: true,
-    includeTopArchived: true,
     withRights: true
   };
   const invocation = merchi.Product.get(1, options).then(
     product => expect(product.name).toBe(testName));
-  const correct = [
-    ['include_archived', 'true'],
-    ['include_top_archived', 'true']
-  ];
+  const correct = [ ['include_archived', 'true'] ];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
 });
