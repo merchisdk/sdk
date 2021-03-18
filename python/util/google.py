@@ -76,8 +76,10 @@ r_currency = r_upper * 3
 
 r_bool = r"false|true"
 
+
 def r_or(a, b):
     return r"(({a})|({b}))".format(a=a, b=b)
+
 
 r_float = r_or(r_int, r_int + r_dot + r_int)
 
@@ -88,6 +90,7 @@ r_simple_str = r"['\"]" + r_safe_str_contents + r"['\"]"
 r_value = r_or(r_or(r_or(r_bool, r_int), r_float), r_simple_str)
 
 r_obj_key = r_or(r_safe_str_contents, r_simple_str)
+
 
 def r_val(content):
     return "(?P<value>" + content + ")"
@@ -153,12 +156,16 @@ def r_conversion_call(param):
     conversion = r"['\"]event['\"]\s*,\s*['\"]conversion['\"]\s*,\s*" + param
     return r_gtag_call(conversion)
 
+
 r_obj_key_pair = r_obj_key + r"\s*:\s*" + r_value
+
 
 r_obj_rest = r"(\s*,\s*" + r_obj_key_pair + r"\s*)*"
 
+
 def r_send_to_call(param):
-    send_to = r"{(?P<conv_args>\s*['\"]send_to['\"]\s*:\s*" + param + r_obj_rest + r"\s*)}"
+    send_to = r"{(?P<conv_args>\s*['\"]send_to['\"]\s*:\s*" + param +
+        r_obj_rest + r"\s*)}"
     return r_conversion_call(send_to)
 
 
