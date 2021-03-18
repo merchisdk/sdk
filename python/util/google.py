@@ -83,11 +83,11 @@ r_float = r_or(r_int, r_int + r_dot + r_int)
 
 r_bool_or_str_bool = r_or(r_bool, r"'(true|false)'|\"(true|false)\"")
 
-r_str = r"['\"]" + r_safe_str_contents + r"['\"]"
+r_simple_str = r"['\"]" + r_safe_str_contents + r"['\"]"
 
-r_value = r_or(r_or(r_or(r_bool, r_int), r_float), r_str)
+r_value = r_or(r_or(r_or(r_bool, r_int), r_float), r_simple_str)
 
-r_obj_key = r_or(r_safe_str_contents, r_str)
+r_obj_key = r_or(r_safe_str_contents, r_simple_str)
 
 def r_val(content):
     return "(?P<value>" + content + ")"
