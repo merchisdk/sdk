@@ -133,7 +133,7 @@ export class Product extends Entity {
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
 
-  @Product.property({type: Job})
+  @Product.property({type: 'Job'})
   public createdByJob?: Job | null;
 
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
