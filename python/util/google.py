@@ -164,7 +164,7 @@ r_obj_rest = r"(\s*,\s*" + r_obj_key_pair + r"\s*)*"
 
 
 def r_send_to_call(param):
-    send_to = r"{(?P<conv_args>\s*['\"]send_to['\"]\s*:\s*" + param +
+    send_to = r"{(?P<conv_args>\s*['\"]send_to['\"]\s*:\s*" + param +\
         r_obj_rest + r"\s*)}"
     return r_conversion_call(send_to)
 
