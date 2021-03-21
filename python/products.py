@@ -52,6 +52,8 @@ class Product(sdk.python.entities.Entity):
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
     original_product = Property("sdk.python.products.Product")
+    chained_supplier_product = Property(
+        "sdk.python.products.Product", backref='chained_seller_product')
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
