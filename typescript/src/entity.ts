@@ -34,6 +34,12 @@ export interface EmbedDescriptor {
   [property: string]: {} | EmbedDescriptor;
 }
 
+export interface NestedIncludeArchivedDescriptor {
+  [property: string]: {} | boolean | NestedIncludeArchivedDescriptor;
+}
+
+export type IncludeArchivedDescriptor = boolean | NestedIncludeArchivedDescriptor;
+
 interface FromJsonOptions {
   arrayValueStrict?: boolean;
   makeDirty?: boolean;
@@ -55,8 +61,7 @@ interface DeleteOptions {
 
 interface GetOptions {
   embed?: EmbedDescriptor;
-  includeArchived?: boolean;
-  includeTopArchived?: boolean;
+  includeArchived?: IncludeArchivedDescriptor;
   withRights?: boolean;
 }
 
@@ -357,10 +362,8 @@ export class Entity {
       fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
     }
     if (options && options.includeArchived) {
-      fetchOptions.query.push(['include_archived', 'true']);
-    }
-    if (options && options.includeTopArchived) {
-      fetchOptions.query.push(['include_top_archived', 'true']);
+      fetchOptions.query.push(['include_archived',
+        JSON.stringify(options.includeArchived)]);
     }
     if (!(options && options.withRights)) {
       fetchOptions.query.push(['skip_rights', 'y']);
