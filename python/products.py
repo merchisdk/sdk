@@ -54,7 +54,7 @@ class Product(sdk.python.entities.Entity):
     created_by_job = Property("sdk.python.jobs.Job")
     original_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property(
-        "sdk.python.products.Product", backref='chained_seller_product')
+        "sdk.python.products.Product", backref='chained_seller_products')
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

@@ -121,8 +121,8 @@ export class Product extends Entity {
   @Product.property({type: Product})
   public chainedSupplierProduct?: Product | null;
 
-  @Product.property({type: Product})
-  public chainedSellerProduct?: Product | null;
+  @Product.property({arrayType: 'Product'})
+  public chainedSellerProducts?: Product[];
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];

@@ -26,7 +26,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     linked_file = Property(File)
     chained_supplier_product_field_option = Property(
         "sdk.python.variations.VariationFieldOption",
-        backref='chained_seller_product_field_option'
+        backref='chained_seller_product_field_options'
     )
 
     def apply_cost_per_unit(self):
@@ -77,7 +77,7 @@ class VariationField(sdk.python.entities.Entity):
 
     chained_supplier_product_field = Property(
         "sdk.python.variations.VariationField",
-        backref='chained_seller_product_field'
+        backref='chained_seller_product_fields'
     )
 
     def is_select(self):

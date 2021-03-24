@@ -45,8 +45,8 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property({type: 'VariationFieldsOption'})
   public chainedSupplierProductFieldOption?: VariationField | null;
 
-  @VariationFieldsOption.property({type: 'VariationFieldsOption'})
-  public chainedSellerProductFieldOption?: VariationField | null;
+  @VariationFieldsOption.property({arrayType: 'VariationFieldsOption'})
+  public chainedSellerProductFieldOptions?: VariationFieldsOption[];
 
   @VariationFieldsOption.property({arrayType: 'Variation'})
   public selectedByVariations?: Variation[];

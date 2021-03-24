@@ -95,10 +95,10 @@ export class VariationField extends Entity {
   public options?: VariationFieldsOption[];
 
   @VariationField.property({type: 'VariationField'})
-  public chainedSupplierProductFieldOption?: VariationField | null;
+  public chainedSupplierProductField?: VariationField | null;
 
-  @VariationField.property({type: 'VariationField'})
-  public chainedSellerProductFieldOption?: VariationField | null;
+  @VariationField.property({arrayType: 'VariationField'})
+  public chainedSellerProductFields?: VariationField[];
 
   public isSelectable = () => {
     if (this.fieldType === undefined) {
