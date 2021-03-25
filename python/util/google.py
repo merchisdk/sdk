@@ -40,9 +40,9 @@ global_script = """
 
 conversion_script = """
 <script>
-  gtag('event', 'conversion', {{'send_to': '{}',
-                                'currency': {},
-                                'value': {}}});
+  gtag('event', 'conversion', {{'currency': {},
+                                'value': {},
+                                {}}});
 </script>
 """
 
@@ -64,7 +64,7 @@ r_int = r_digit + "+"
 
 r_lower = r"[a-z]"
 
-r_safe_str_char = r"[a-zA-Z0-9_\-!@#$%^&*(){};:/=+?><,.\]\[\\|]"
+r_safe_str_char = r"[a-zA-Z0-9_\-!@#$%^&*(){};:/=+?><,.\]\[\\|\s]"
 
 r_safe_str_contents = r_safe_str_char + "*"
 
@@ -84,6 +84,12 @@ def r_or(a, b):
 r_float = r_or(r_int, r_int + r_dot + r_int)
 
 r_bool_or_str_bool = r_or(r_bool, r"'(true|false)'|\"(true|false)\"")
+
+r_simple_str = r"['\"]" + r_safe_str_contents + r"['\"]"
+
+r_value = r_or(r_or(r_or(r_bool, r_int), r_float), r_simple_str)
+
+r_obj_key = r_or(r_safe_str_contents, r_simple_str)
 
 
 def r_val(content):
@@ -151,8 +157,15 @@ def r_conversion_call(param):
     return r_gtag_call(conversion)
 
 
+r_obj_key_pair = r_obj_key + r"\s*:\s*" + r_value
+
+
+r_obj_rest = r"(\s*,\s*" + r_obj_key_pair + r"\s*)*"
+
+
 def r_send_to_call(param):
-    send_to = r"{\s*['\"]send_to['\"]\s*:\s*" + param + r"\s*}"
+    send_to = r"{(?P<conv_args>\s*['\"]send_to['\"]\s*:\s*" + param +\
+        r_obj_rest + r"\s*)}"
     return r_conversion_call(send_to)
 
 
@@ -284,10 +297,13 @@ def extract_new_conversion_script_parameters(text):
         context (strings should be quoted, as in the pattern, but need not be
         escaped).
     """
-    gtag_id = get_group(r_new_conversion, text)
-    if gtag_id is None:
-        raise ScriptError("could not find gtag id")
-    return gtag_id
+    match = r_new_conversion.search(text)
+    if match is None:
+        raise ScriptError("could not find conversation arguments")
+    try:
+        return match.group("conv_args")
+    except IndexError:
+        raise ScriptError("could not find conversion arguments")
 
 
 def reconstitute_conversion_script(parameters, invoice=None):
@@ -321,7 +337,7 @@ def reconstitute_global_script(gtag_id):
     return global_script.format(gtag_id, gtag_id)
 
 
-def reconstitute_new_conversion_script(conversion_id, invoice=None):
+def reconstitute_new_conversion_script(extra_args, invoice=None):
     """ Render a tag id into a google convesion tracking script string.
 
         Performs no escaping or validation -- dangerous or incorrect parameters
@@ -332,5 +348,5 @@ def reconstitute_new_conversion_script(conversion_id, invoice=None):
     if invoice:
         conversion_currency = invoice.currency
         conversion_value = invoice.total_cost
-    return conversion_script.format(conversion_id, conversion_currency,
-                                    conversion_value)
+    return conversion_script.format(conversion_currency, conversion_value,
+                                    extra_args)
