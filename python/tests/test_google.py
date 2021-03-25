@@ -3,7 +3,7 @@ from sdk.python.util.google import reconstitute_conversion_script
 from sdk.python.util.google import reconstitute_new_conversion_script
 
 
-def test_can_extract_google_conversion_parameters(self):
+def test_can_extract_google_conversion_parameters():
     script_format = """
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -28,6 +28,6 @@ var google_remarketing_only = true;
     reconstitute_conversion_script(extract_script_parameters(script_format))
 
 
-def test_reconstitute_new_conversion_script(self):
+def test_reconstitute_new_conversion_script():
     result = reconstitute_new_conversion_script(1)
     assert "'send_to': '1'," in result
