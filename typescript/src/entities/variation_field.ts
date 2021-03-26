@@ -94,12 +94,6 @@ export class VariationField extends Entity {
   @VariationField.property({arrayType: 'VariationFieldsOption'})
   public options?: VariationFieldsOption[];
 
-  @VariationField.property({type: 'VariationField'})
-  public chainedSupplierProductFieldOption?: VariationField | null;
-
-  @VariationField.property({type: 'VariationField'})
-  public chainedSellerProductFieldOption?: VariationField | null;
-
   public isSelectable = () => {
     if (this.fieldType === undefined) {
       throw new Error('fieldType is undefined, did you forget to embed it?');
