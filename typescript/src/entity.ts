@@ -245,10 +245,6 @@ export class Entity {
           throw new Error('array type can only be given for arrays');
         }
       }
-      const normallyEmbeddedByDefault = !(realArrayType ||
-        propertyType.prototype instanceof Entity);
-      const embeddedByDefault = options.embeddedByDefault !== undefined ?
-        options.embeddedByDefault : normallyEmbeddedByDefault;
       let type;
       if (options.type === undefined) {
         type = propertyType;
@@ -261,6 +257,10 @@ export class Entity {
           type = self.merchi.setupClass(type);
         }
       }
+      const normallyEmbeddedByDefault = !(realArrayType ||
+        type.prototype instanceof Entity);
+      const embeddedByDefault = options.embeddedByDefault !== undefined ?
+        options.embeddedByDefault : normallyEmbeddedByDefault;
       /* istanbul ignore next */
       if (type === Object) {
         /* istanbul ignore next */
@@ -828,7 +828,7 @@ export class Entity {
       }
       if (value === null) {
         if (info.dirty || !excludeOld) {
-          appendData(innerPrefix + '-' + primaryKey, '-1');
+          appendData(info.property + '-0-' + primaryKey, '-1');
           appendData(info.property + '-count', 1);
         }
         return;

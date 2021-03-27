@@ -24,6 +24,7 @@ class Company(sdk.python.entities.Entity):
     tax_number = Property(str)
     tax_number_type = Property(int)
     default_tax_type = Property(CountryTax)
+    tax_types = Property(CountryTax, backref="company")
     default_currency = Property(str)
     paypal_account = Property(str)
     paypal_password = Property(str)
