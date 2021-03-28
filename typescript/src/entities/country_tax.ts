@@ -27,8 +27,8 @@ export class CountryTax extends Entity {
   @CountryTax.property({arrayType: 'Shipment'})
   public shipments?: Shipment[];
 
-  @CountryTax.property({arrayType: 'Company'})
-  public companies?: Company[];
+  @CountryTax.property({type: 'Company'})
+  public company?: Company;
 
   @CountryTax.property({arrayType: 'Job'})
   public jobs?: Job[];
