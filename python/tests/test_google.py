@@ -29,5 +29,5 @@ var google_remarketing_only = true;
 
 
 def test_reconstitute_new_conversion_script():
-    result = reconstitute_new_conversion_script(1)
-    assert "'send_to': '1'," in result
+    result = reconstitute_new_conversion_script("'send_to': '1'")
+    assert "'send_to': '1'" in result
