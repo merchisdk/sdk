@@ -1,7 +1,7 @@
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.categories import Category
-from sdk.python.discount import Discount
+from sdk.python.discount_groups import DiscountGroup
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
@@ -43,7 +43,7 @@ class Product(sdk.python.entities.Entity):
     delivery_days_normal = Property(int)
     best_price = Property(float)
     categories = Property(Category)
-    discounts = Property(Discount, backref="product")
+    discountGroups = Property(DiscountGroups, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
     independent_variation_fields = Property(VariationField)
