@@ -1,6 +1,6 @@
 import copy
 import sdk.python.entities
-from sdk.python.discount_group import DiscountGroup
+from sdk.python.discount_groups import DiscountGroup
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
