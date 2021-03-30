@@ -2,7 +2,6 @@ import sdk.python.entities
 from sdk.python.entities import Property
 
 
-
 class DiscountGroup(sdk.python.entities.Entity):
 
     resource = '/discount_group/'
