@@ -1,6 +1,6 @@
 import sdk.python.entities
 from sdk.python.entities import Property
-from sdk.python.discount_group import DiscountGroup
+from sdk.python.discount_groups import DiscountGroup
 
 
 class Discount(sdk.python.entities.Entity):

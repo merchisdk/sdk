@@ -74,7 +74,7 @@ class VariationField(sdk.python.entities.Entity):
     variation_cost = Property(float)
     variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
-    variation__unit_cost_discount_group = Property(DiscountGroup)
+    variation_unit_cost_discount_group = Property(DiscountGroup)
     cost = Property(float)
     margin = Property(float)
     options = Property(VariationFieldOption)
