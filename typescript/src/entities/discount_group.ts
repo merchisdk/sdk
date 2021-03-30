@@ -22,7 +22,7 @@ export class DiscountGroup extends Entity {
   @DiscountGroup.property()
   public name?: string;
 
-  @DiscountGroup.property({type: Product})
+  @DiscountGroup.property({type: 'Product'})
   public product?: Product | null;
 
 }
