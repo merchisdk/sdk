@@ -3,7 +3,7 @@ import { Address } from './address';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
-import { Discount } from './discount';
+import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
 import { Entity } from '../entity';
@@ -36,6 +36,9 @@ export class Product extends Entity {
 
   @Product.property()
   public unitPrice?: number;
+
+  @Product.property({type: 'DiscountGroup'})
+  public unitPriceDiscountGroup?: DiscountGroup;
 
   @Product.property()
   public margin?: number;
@@ -106,8 +109,8 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Category'})
   public categories?: Category[];
 
-  @Product.property({arrayType: 'Discount'})
-  public discounts?: Discount[];
+  @Product.property({arrayType: 'DiscountGroup'})
+  public discountGroupss?: DiscountGroup[];
 
   @Product.property()
   public originAddress?: Address;
