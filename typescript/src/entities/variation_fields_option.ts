@@ -1,3 +1,4 @@
+import { DiscountGroup } from './discount_group';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { InventoryUnitVariation } from './inventory_unit_variation';
@@ -33,8 +34,14 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property()
   public variationCost?: number;
 
+  @VariationFieldsOption.property({type: 'DiscountGroup'})
+  public variationCostDiscountGroup?: DiscountGroup;
+
   @VariationFieldsOption.property()
   public variationUnitCost?: number;
+
+  @VariationFieldsOption.property({type: 'DiscountGroup'})
+  public variationUnitCostDiscountGroup?: DiscountGroup;
 
   @VariationFieldsOption.property({type: VariationField})
   public variationField?: VariationField | null;
