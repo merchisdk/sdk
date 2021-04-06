@@ -12,6 +12,6 @@ test('can calculation undefined handling', () => {
   expect(() => shipment.calculateSubTotal()).toThrow();
   expect(shipment.calculateSubTotal({strictEmbed: false})).toEqual('0.000');
 
-  expect(() => shipment.calculateTaxAmount()).toThrow();
+  expect(shipment.calculateTaxAmount()).toEqual('0.000');
   expect(shipment.calculateTaxAmount({strictEmbed: false})).toEqual('0.000');
 });
