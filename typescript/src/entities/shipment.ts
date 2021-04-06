@@ -56,7 +56,7 @@ export class Shipment extends Entity {
   public trackingNumber?: string | null;
 
   @Shipment.property({type: Number})
-  public cost: number;
+  public cost?: number | null;
 
   @Shipment.property({type: Number})
   public taxAmount?: number | null;
@@ -112,8 +112,14 @@ export class Shipment extends Entity {
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];
 
-  public calculateSubTotal = () => {
-    cost = this.cost ? this.cost : 0;
+  public calculateSubTotal = (options?: CalculateOptions) => {
+    const { strictEmbed = true } = options ? options : {};
+    if (strictEmbed){
+      if (this.cost === undefined) {
+        throw new Error('cost is undefined, did you forget to embed it?');
+      }
+    }
+    const cost = this.cost ? this.cost : 0;
     return parseFloat(String(cost)).toFixed(3);
   }
 
