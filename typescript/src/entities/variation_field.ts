@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { DiscountGroup } from './discount_group';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -47,15 +46,6 @@ export class VariationField extends Entity {
   @VariationField.property()
   public variationCost?: number;
 
-  @VariationField.property({type: 'DiscountGroup'})
-  public variationCostDiscountGroup?: DiscountGroup;
-
-  @VariationField.property()
-  public variationUnitCost?: number;
-
-  @VariationField.property({type: 'DiscountGroup'})
-  public variationUnitCostDiscountGroup?: DiscountGroup;
-
   @VariationField.property()
   public rows?: number;
 
@@ -93,6 +83,9 @@ export class VariationField extends Entity {
   public allowFileAi?: boolean;
 
   @VariationField.property()
+  public variationUnitCost?: number;
+
+  @VariationField.property()
   public product?: Product;
 
   @VariationField.property({arrayType: 'Variation'})
@@ -100,12 +93,6 @@ export class VariationField extends Entity {
 
   @VariationField.property({arrayType: 'VariationFieldsOption'})
   public options?: VariationFieldsOption[];
-
-  @VariationField.property({type: 'VariationField'})
-  public chainedSupplierProductFieldOption?: VariationField | null;
-
-  @VariationField.property({type: 'VariationField'})
-  public chainedSellerProductFieldOption?: VariationField | null;
 
   public isSelectable = () => {
     if (this.fieldType === undefined) {

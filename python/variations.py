@@ -1,6 +1,5 @@
 import copy
 import sdk.python.entities
-from sdk.python.discount_groups import DiscountGroup
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
@@ -22,15 +21,9 @@ class VariationFieldOption(sdk.python.entities.Entity):
     currency = Property(str)
     position = Property(int)
     variation_cost = Property(float)
-    variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
-    variation_unit_cost_discount_group = Property(DiscountGroup)
     default = Property(float)
     linked_file = Property(File)
-    chained_supplier_product_field_option = Property(
-        "sdk.python.variations.VariationFieldOption",
-        backref='chained_seller_product_field_option'
-    )
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
@@ -72,18 +65,11 @@ class VariationField(sdk.python.entities.Entity):
     default_value = Property(str)
     placeholder = Property(str)
     variation_cost = Property(float)
-    variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
-    variation_unit_cost_discount_group = Property(DiscountGroup)
     cost = Property(float)
     margin = Property(float)
     options = Property(VariationFieldOption)
     default_options = Property(VariationFieldOption)
-
-    chained_supplier_product_field = Property(
-        "sdk.python.variations.VariationField",
-        backref='chained_seller_product_field'
-    )
 
     def is_select(self):
         return self.field_type == SELECT
