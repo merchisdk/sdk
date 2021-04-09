@@ -38,7 +38,7 @@ export class Product extends Entity {
   public unitPrice?: number;
 
   @Product.property({type: 'DiscountGroup'})
-  public unitPriceDiscountGroup?: DiscountGroup;
+  public unitPriceDiscountGroup?: DiscountGroup | null;
 
   @Product.property()
   public margin?: number;
@@ -110,7 +110,7 @@ export class Product extends Entity {
   public categories?: Category[];
 
   @Product.property({arrayType: 'DiscountGroup'})
-  public discountGroupss?: DiscountGroup[];
+  public discountGroups?: DiscountGroup[];
 
   @Product.property()
   public originAddress?: Address;

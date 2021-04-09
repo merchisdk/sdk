@@ -35,13 +35,13 @@ export class VariationFieldsOption extends Entity {
   public variationCost?: number;
 
   @VariationFieldsOption.property({type: 'DiscountGroup'})
-  public variationCostDiscountGroup?: DiscountGroup;
+  public variationCostDiscountGroup?: DiscountGroup | null;
 
   @VariationFieldsOption.property()
   public variationUnitCost?: number;
 
   @VariationFieldsOption.property({type: 'DiscountGroup'})
-  public variationUnitCostDiscountGroup?: DiscountGroup;
+  public variationUnitCostDiscountGroup?: DiscountGroup | null;
 
   @VariationFieldsOption.property({type: VariationField})
   public variationField?: VariationField | null;
