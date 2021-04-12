@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { DiscountGroup } from './discount_group';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -46,6 +47,15 @@ export class VariationField extends Entity {
   @VariationField.property()
   public variationCost?: number;
 
+  @VariationField.property({type: 'DiscountGroup'})
+  public variationCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public variationUnitCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public variationUnitCostDiscountGroup?: DiscountGroup | null;
+
   @VariationField.property()
   public rows?: number;
 
@@ -81,9 +91,6 @@ export class VariationField extends Entity {
 
   @VariationField.property()
   public allowFileAi?: boolean;
-
-  @VariationField.property()
-  public variationUnitCost?: number;
 
   @VariationField.property()
   public product?: Product;
