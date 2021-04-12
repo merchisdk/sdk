@@ -42,12 +42,6 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property({type: MerchiFile})
   public linkedFile?: MerchiFile | null;
 
-  @VariationFieldsOption.property({type: 'VariationFieldsOption'})
-  public chainedSupplierProductFieldOption?: VariationField | null;
-
-  @VariationFieldsOption.property({type: 'VariationFieldsOption'})
-  public chainedSellerProductFieldOption?: VariationField | null;
-
   @VariationFieldsOption.property({arrayType: 'Variation'})
   public selectedByVariations?: Variation[];
 
