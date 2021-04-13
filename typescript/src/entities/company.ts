@@ -41,8 +41,8 @@ export class Company extends Entity {
   @Company.property({type: String})
   public taxNumber?: string | null;
 
-  @Company.property({type: Number})
-  public taxNumberType?: number | null;
+  @Company.property({type: String})
+  public taxNumberType?: string | null;
 
   @Company.property({type: String})
   public paypalAccount?: string | null;
