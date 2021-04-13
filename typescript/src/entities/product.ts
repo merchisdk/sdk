@@ -130,6 +130,12 @@ export class Product extends Entity {
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
 
+  @Product.property({arrayType: 'MerchiFile'})
+  public publicFiles?: MerchiFile[];
+
+  @Product.property({arrayType: 'MerchiFile'})
+  public productionFiles?: MerchiFile[];
+
   @Product.property({arrayType: 'VariationField'})
   public groupVariationFields?: VariationField[];
 
