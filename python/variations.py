@@ -138,6 +138,9 @@ class VariationOption(sdk.python.entities.Entity):
     unit_cost = Property(float)
     unit_cost_total = Property(float)
     total_cost = Property(float)
+    position = Property(int)
+    default = Property(bool)
+    linked_file = Property(File)
 
 
 class Variation(sdk.python.entities.Entity):
