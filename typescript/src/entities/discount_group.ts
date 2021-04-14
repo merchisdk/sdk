@@ -3,7 +3,7 @@ import { Product } from './product';
 import { Discount } from './discount';
 
 export class DiscountGroup extends Entity {
-  protected static resourceName: string = 'discountGroups';
+  protected static resourceName: string = 'discount_groups';
   protected static singularName: string = 'discountGroup';
   protected static pluralName: string = 'discountGroups';
 

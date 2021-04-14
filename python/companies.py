@@ -22,7 +22,7 @@ class Company(sdk.python.entities.Entity):
     website = Property(str)
     country = Property(str)
     tax_number = Property(str)
-    tax_number_type = Property(int)
+    tax_number_type = Property(str)
     default_tax_type = Property(CountryTax)
     tax_types = Property(CountryTax, backref="company")
     default_currency = Property(str)

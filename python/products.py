@@ -47,6 +47,8 @@ class Product(sdk.python.entities.Entity):
     discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
+    public_files = Property(File)
+    production_files = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     origin_address = Property(Address)
