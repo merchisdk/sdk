@@ -154,6 +154,7 @@ class Variation(sdk.python.entities.Entity):
     unit_cost = Property(float)
     unit_cost_total = Property(float)
     selected_options = Property(VariationOption)
+    selectable_options = Property(VariationOption)
     variation_files = Property(File)
     variation_field = Property(VariationField)
 
