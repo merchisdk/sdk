@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { cloneDeepWith } from 'lodash';
 import { DiscountGroup } from './discount_group';
 import { Entity } from '../entity';
 import { Product } from './product';
@@ -125,6 +125,7 @@ export class VariationField extends Entity {
       throw new Error('options is undefined, did you forget to embed it?');
     }
     const result = new this.merchi.Variation(this.merchi);
+    result.selectableOptions = [];
     if (this.isSelectable()) {
       let onceOffCost = 0;
       const value = [];
@@ -137,7 +138,8 @@ export class VariationField extends Entity {
           value.push(option.id);
           onceOffCost += option.variationCost;
         }
-      } 
+        result.selectableOptions.push(option.buildVariationOption());
+      }
       result.value = value.join();
       result.onceOffCost = onceOffCost;
     } else {
@@ -151,7 +153,7 @@ export class VariationField extends Entity {
         return value;
       }
     }
-    result.variationField = _.cloneDeepWith(this, customiser);
+    result.variationField = cloneDeepWith(this, customiser);
     return result;
   }
 }
