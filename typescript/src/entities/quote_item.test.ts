@@ -19,7 +19,7 @@ test('total calculation', () => {
   quoteItem.quantity = 1;
 
   // tax type not provided yet should be a embed issue
-  expect(() => quoteItem.calculateTotal()).toThrow();
+  expect(quoteItem.calculateTotal()).toEqual('10.000');
   expect(quoteItem.calculateTotal({strictEmbed: false})).toEqual('10.000');
 
   // quote total include tax type properly

@@ -54,10 +54,6 @@ export class QuoteItem extends Entity {
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
-    const { strictEmbed = true } = options ? options : {};
-    if (strictEmbed && this.taxType === undefined) {
-      throw new Error('taxType is undefined, did you forget to embed it?');
-    }
     const taxPercent = this.taxType && this.taxType.taxPercent ?
       this.taxType.taxPercent : 0;
     const taxRate = taxPercent ? Number(taxPercent) / 100 : 0;
