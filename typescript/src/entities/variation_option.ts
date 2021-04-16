@@ -27,6 +27,12 @@ export class VariationOption extends Entity {
   public fieldName?: string;
 
   @VariationOption.property()
+  public quantity?: number;
+
+  @VariationOption.property()
+  public currency?: string;
+
+  @VariationOption.property()
   public onceOffCost?: number;
 
   @VariationOption.property()
