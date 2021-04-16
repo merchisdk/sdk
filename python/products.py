@@ -1,7 +1,7 @@
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.categories import Category
-from sdk.python.discount import Discount
+from sdk.python.discount_groups import DiscountGroup
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
@@ -21,6 +21,7 @@ class Product(sdk.python.entities.Entity):
     notes = Property(str)
     description = Property(str)
     unit_price = Property(float)
+    unit_price_discount_group = Property(DiscountGroup)
     margin = Property(float)
     minimum = Property(float)
     unit_weight = Property(float)
@@ -43,9 +44,11 @@ class Product(sdk.python.entities.Entity):
     delivery_days_normal = Property(int)
     best_price = Property(float)
     categories = Property(Category)
-    discounts = Property(Discount, backref="product")
+    discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
+    public_files = Property(File)
+    production_files = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     origin_address = Property(Address)
@@ -53,8 +56,8 @@ class Product(sdk.python.entities.Entity):
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job")
     original_product = Property("sdk.python.products.Product")
-    chained_supplier_product = Property(
-        "sdk.python.products.Product", backref='chained_seller_product')
+    chained_supplier_product = Property("sdk.python.products.Product")
+    chained_seller_product = Property("sdk.python.products.Product")
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

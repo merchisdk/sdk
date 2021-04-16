@@ -1,5 +1,6 @@
 import sdk.python.entities
 from sdk.python.entities import Property
+from sdk.python.discount_groups import DiscountGroup
 
 
 class Discount(sdk.python.entities.Entity):
@@ -10,6 +11,7 @@ class Discount(sdk.python.entities.Entity):
     id = Property(int)
     lower_limit = Property(float)
     amount = Property(float)
+    discount_group = Property(DiscountGroup)
 
 
 class Discounts(sdk.python.entities.Resource):
