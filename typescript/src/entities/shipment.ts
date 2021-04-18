@@ -114,17 +114,16 @@ export class Shipment extends Entity {
 
   public calculateSubTotal = (options?: CalculateOptions) => {
     const { strictEmbed = true } = options ? options : {};
-    if (strictEmbed && this.cost === undefined) {
-      throw new Error('cost is undefined, did you forget to embed it?');
+    if (strictEmbed){
+      if (this.cost === undefined) {
+        throw new Error('cost is undefined, did you forget to embed it?');
+      }
     }
-    return this.cost ? parseFloat(String(this.cost)).toFixed(3) : '0.000';
+    const cost = this.cost ? this.cost : 0;
+    return parseFloat(String(cost)).toFixed(3);
   }
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
-    const { strictEmbed = true } = options ? options : {};
-    if (strictEmbed && this.taxType === undefined) {
-      throw new Error('taxType is undefined, did you forget to embed it?');
-    }
     const taxPercent = this.taxType && this.taxType.taxPercent ?
       this.taxType.taxPercent : 0;
     const taxRate = taxPercent ? Number(taxPercent) / 100 : 0;

@@ -1,4 +1,5 @@
 import { Entity } from '../entity';
+import { MerchiFile } from './file';
 
 export class VariationOption extends Entity {
   protected static singularName: string = 'variationOption';
@@ -14,7 +15,22 @@ export class VariationOption extends Entity {
   public colour?: string | null;
 
   @VariationOption.property()
+  public position?: number;
+
+  @VariationOption.property()
+  public default?: boolean;
+
+  @VariationOption.property({type: MerchiFile})
+  public linkedFile?: MerchiFile | null;
+
+  @VariationOption.property()
   public fieldName?: string;
+
+  @VariationOption.property()
+  public quantity?: number;
+
+  @VariationOption.property()
+  public currency?: string;
 
   @VariationOption.property()
   public onceOffCost?: number;

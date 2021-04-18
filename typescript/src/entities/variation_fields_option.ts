@@ -64,4 +64,22 @@ export class VariationFieldsOption extends Entity {
     }
     return this.variationCost + this.variationUnitCost * quantity;
   }
+
+  public buildVariationOption = () => {
+    const result = new this.merchi.VariationOption(this.merchi);
+    result.optionId = this.id;
+    result.value = this.value;
+    result.position = this.position;
+    result.default = this.default;
+    result.colour = this.colour;
+    result.linkedFile = this.linkedFile;
+    result.quantity = 0;
+
+    result.currency = this.currency;
+    result.unitCost = this.variationUnitCost;
+    result.unitCostTotal = 0;
+    result.onceOffCost = this.variationCost;
+    result.totalCost = this.variationCost;
+    return result;
+  }
 }
