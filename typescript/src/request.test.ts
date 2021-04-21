@@ -32,8 +32,8 @@ test('404 creates ApiError', () => {
 test('will get default errorCode', () => {
   mockFetch(false,
     {'statusCode': 404,
-     'errorCode': -1,
-     'message': 'just a test'}, 404);
+      'errorCode': -1,
+      'message': 'just a test'}, 404);
   apiFetch('/test').catch(e => {
     expect(e.statusCode).toBe(404);
     expect(e.name).toBe('ApiError');
