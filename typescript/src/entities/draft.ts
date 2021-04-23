@@ -40,8 +40,8 @@ export class Draft extends Entity {
   @Draft.property()
   public designer?: User;
 
-  @Draft.property()
-  public file?: MerchiFile;
+  @Draft.property({arrayType: 'MerchiFile'})
+  public images?: MerchiFile[];
 
   @Draft.property({arrayType: 'Notification'})
   public notification?: Notification[];
