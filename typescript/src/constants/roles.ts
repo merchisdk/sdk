@@ -28,6 +28,7 @@ export const ROLES_RANK = [
   Role.PUBLIC,
   Role.CLIENT,
   Role.ACCOUNTANT,
+  Role.THEME_EDITOR,
   Role.SALES,
   Role.DESIGNER,
   Role.SUPPLIER,

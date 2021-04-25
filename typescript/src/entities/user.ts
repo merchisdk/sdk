@@ -256,7 +256,7 @@ export class User extends Entity {
     // of one domain, if that is the case either of them can be consider as
     // valid, need to revisit it in the future related to #
     if (matchingEnrolledDomains.length > 0) {
-      if (matchingEnrolledDomains[0].role !== undefined) {
+      if (!matchingEnrolledDomains[0].archived && matchingEnrolledDomains[0].role !== undefined) {
         return matchingEnrolledDomains[0].role;
       }
     }
