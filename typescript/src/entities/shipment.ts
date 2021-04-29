@@ -76,6 +76,9 @@ export class Shipment extends Entity {
   @Shipment.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
+  @Shipment.property()
+  public isOnBehalfOf?: boolean;
+
   @Shipment.property({type: User})
   public onBehalfOf?: User | null;
 
