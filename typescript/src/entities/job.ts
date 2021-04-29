@@ -107,6 +107,9 @@ export class Job extends Entity {
   @Job.property()
   public automaticPriceEnabled?: boolean;
 
+  @Job.property()
+  public dropShip?: boolean;
+
   @Job.property({type: Number})
   public costPerUnit?: number | null;
 
