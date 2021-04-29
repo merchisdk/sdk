@@ -1,5 +1,6 @@
 import copy
 import sdk.python.entities
+from sdk.python.discount_groups import DiscountGroup
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
@@ -21,13 +22,32 @@ class VariationFieldOption(sdk.python.entities.Entity):
     currency = Property(str)
     position = Property(int)
     variation_cost = Property(float)
+    variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
+    variation_unit_cost_discount_group = Property(DiscountGroup)
     default = Property(float)
     linked_file = Property(File)
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
         return self.variation_unit_cost is not None
+
+    def build_variation_option(self):
+        result = VariationOption()
+        result.optionId = self.id
+        result.value = self.value
+        result.position = self.position
+        result.default = self.default
+        result.colour = self.colour
+        result.linked_file = self.linked_file
+        result.quantity = 0
+
+        result.currency = self.currency
+        result.unit_cost = self.variation_unit_cost
+        result.unit_cost_total = 0
+        result.once_off_cost = self.variation_cost
+        result.total_cost = self.variation_cost
+        return result
 
 
 class VariationField(sdk.python.entities.Entity):
@@ -65,7 +85,9 @@ class VariationField(sdk.python.entities.Entity):
     default_value = Property(str)
     placeholder = Property(str)
     variation_cost = Property(float)
+    variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
+    variation_unit_cost_discount_group = Property(DiscountGroup)
     cost = Property(float)
     margin = Property(float)
     options = Property(VariationFieldOption)
@@ -96,6 +118,7 @@ class VariationField(sdk.python.entities.Entity):
         variation_built = Variation()
         variation_built.once_off_cost = 0
         variation_built.value = ""
+        variation_built.selectable_options = []
         if self.field_type == CHECKBOX:
             variation_built.value = []
             for option in self.options:
@@ -103,9 +126,13 @@ class VariationField(sdk.python.entities.Entity):
                     variation_built.value.append(option.id)
                     variation_built.once_off_cost +=\
                         option.variation_cost
+                variation_built.selectable_options.append(
+                    option.build_variation_option)
             variation_built.value = \
                 ",".join(str(value) for value in variation_built.value)
         elif self.field_type in (SELECT, RADIO):
+            variation_built.selectable_options.append(
+                option.build_variation_option)
             for option in self.options:
                 if option.default:
                     variation_built.value = str(option.id)
@@ -129,10 +156,14 @@ class VariationOption(sdk.python.entities.Entity):
     value = Property(str)
     colour = Property(str)
     field_name = Property(str)
+    currency = property(str)
     once_off_cost = Property(float)
     unit_cost = Property(float)
     unit_cost_total = Property(float)
     total_cost = Property(float)
+    position = Property(int)
+    default = Property(bool)
+    linked_file = Property(File)
 
 
 class Variation(sdk.python.entities.Entity):
@@ -149,6 +180,7 @@ class Variation(sdk.python.entities.Entity):
     unit_cost = Property(float)
     unit_cost_total = Property(float)
     selected_options = Property(VariationOption)
+    selectable_options = Property(VariationOption)
     variation_files = Property(File)
     variation_field = Property(VariationField)
 

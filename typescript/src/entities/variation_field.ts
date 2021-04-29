@@ -1,4 +1,5 @@
-import * as _ from 'lodash';
+import { cloneDeepWith } from 'lodash';
+import { DiscountGroup } from './discount_group';
 import { Entity } from '../entity';
 import { Product } from './product';
 import { Variation } from './variation';
@@ -40,11 +41,20 @@ export class VariationField extends Entity {
   @VariationField.property()
   public fieldType?: FieldType;
 
-  @VariationField.property({type: Number})
-  public margin?: number | null;
+  @VariationField.property()
+  public margin?: number;
 
   @VariationField.property()
   public variationCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public variationCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public variationUnitCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public variationUnitCostDiscountGroup?: DiscountGroup | null;
 
   @VariationField.property()
   public rows?: number;
@@ -83,9 +93,6 @@ export class VariationField extends Entity {
   public allowFileAi?: boolean;
 
   @VariationField.property()
-  public variationUnitCost?: number;
-
-  @VariationField.property()
   public product?: Product;
 
   @VariationField.property({arrayType: 'Variation'})
@@ -118,6 +125,7 @@ export class VariationField extends Entity {
       throw new Error('options is undefined, did you forget to embed it?');
     }
     const result = new this.merchi.Variation(this.merchi);
+    result.selectableOptions = [];
     if (this.isSelectable()) {
       let onceOffCost = 0;
       const value = [];
@@ -130,7 +138,8 @@ export class VariationField extends Entity {
           value.push(option.id);
           onceOffCost += option.variationCost;
         }
-      } 
+        result.selectableOptions.push(option.buildVariationOption());
+      }
       result.value = value.join();
       result.onceOffCost = onceOffCost;
     } else {
@@ -144,7 +153,7 @@ export class VariationField extends Entity {
         return value;
       }
     }
-    result.variationField = _.cloneDeepWith(this, customiser);
+    result.variationField = cloneDeepWith(this, customiser);
     return result;
   }
 }

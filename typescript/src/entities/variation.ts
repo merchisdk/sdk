@@ -55,4 +55,7 @@ export class Variation extends Entity {
 
   @Variation.property({arrayType: 'VariationOption'})
   public selectedOptions?: VariationOption[];
+
+  @Variation.property({arrayType: 'VariationOption'})
+  public selectableOptions?: VariationOption[];
 }

@@ -41,8 +41,8 @@ export class Company extends Entity {
   @Company.property({type: String})
   public taxNumber?: string | null;
 
-  @Company.property({type: Number})
-  public taxNumberType?: number | null;
+  @Company.property({type: String})
+  public taxNumberType?: string | null;
 
   @Company.property({type: String})
   public paypalAccount?: string | null;
@@ -107,8 +107,11 @@ export class Company extends Entity {
   @Company.property({type: MerchiFile})
   public logo?: MerchiFile | null;
 
-  @Company.property({type: CountryTax})
+  @Company.property({type: 'CountryTax'})
   public defaultTaxType?: CountryTax | null;
+
+  @Company.property({arrayType: 'CountryTax'})
+  public taxTypes?: CountryTax[];
 
   @Company.property({type: SubscriptionPlan})
   public subscriptionPlan?: SubscriptionPlan | null;

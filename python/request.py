@@ -32,7 +32,7 @@ class Request(object):
         self.password = None
         self.api_secret = None
         self.as_domain = None  # only be meaningful if using be master domain
-        self.include_archived = False
+        self.include_archived = None
         self.skip_rights = False
         self.data = {}  # type: ignore  # set to dict to send form encoded
         self.files = {}  # type: ignore
@@ -63,7 +63,7 @@ class Request(object):
         self.api_secret = api_secret
         self.embed = embed
         self.as_domain = as_domain
-        if include_archived:
+        if include_archived is not None:
             self.include_archived = include_archived
         if skip_rights:
             self.skip_rights = skip_rights
@@ -89,8 +89,12 @@ class Request(object):
         if self.as_domain:
             self.query["as_domain"] = self.as_domain
 
-        if self.include_archived:
-            self.query["include_archived"] = self.include_archived
+        if self.include_archived is not None:
+            if isinstance(self.include_archived, (dict, list)):
+                include_archived = json.dumps(self.include_archived)
+            else:
+                include_archived = self.include_archived
+            self.query["include_archived"] = include_archived
 
         if self.skip_rights:
             self.query["skip_rights"] = self.skip_rights

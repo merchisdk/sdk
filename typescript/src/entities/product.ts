@@ -3,7 +3,7 @@ import { Address } from './address';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
-import { Discount } from './discount';
+import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
 import { Entity } from '../entity';
@@ -37,8 +37,11 @@ export class Product extends Entity {
   @Product.property()
   public unitPrice?: number;
 
-  @Product.property({type: Number})
-  public margin?: number | null;
+  @Product.property({type: 'DiscountGroup'})
+  public unitPriceDiscountGroup?: DiscountGroup | null;
+
+  @Product.property()
+  public margin?: number;
 
   @Product.property({type: Number})
   public unitWeight?: number | null;
@@ -106,8 +109,8 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Category'})
   public categories?: Category[];
 
-  @Product.property({arrayType: 'Discount'})
-  public discounts?: Discount[];
+  @Product.property({arrayType: 'DiscountGroup'})
+  public discountGroups?: DiscountGroup[];
 
   @Product.property()
   public originAddress?: Address;
@@ -115,11 +118,23 @@ export class Product extends Entity {
   @Product.property()
   public domain?: Domain;
 
-  @Product.property()
-  public originalProduct?: Product;
+  @Product.property({type: Product})
+  public originalProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedSupplierProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedSellerProduct?: Product | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
+
+  @Product.property({arrayType: 'MerchiFile'})
+  public publicFiles?: MerchiFile[];
+
+  @Product.property({arrayType: 'MerchiFile'})
+  public productionFiles?: MerchiFile[];
 
   @Product.property({arrayType: 'VariationField'})
   public groupVariationFields?: VariationField[];
@@ -132,6 +147,9 @@ export class Product extends Entity {
 
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
+
+  @Product.property({type: 'Job'})
+  public createdByJob?: Job | null;
 
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
   public savedByCompanies?: Company[];

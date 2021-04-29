@@ -25,14 +25,19 @@ test('404 creates ApiError', () => {
     expect(e.statusCode).toBe(404);
     expect(e.name).toBe('ApiError');
     expect(e.errorCode).toBe(ErrorType.RESOURCE_NOT_FOUND);
+    expect(e.errorMessage).toBe('No error message');
   });
 });
 
 test('will get default errorCode', () => {
-  mockFetch(false, {'statusCode': 404, 'errorCode': -1}, 404);
+  mockFetch(false,
+    {'statusCode': 404,
+      'errorCode': -1,
+      'message': 'just a test'}, 404);
   apiFetch('/test').catch(e => {
     expect(e.statusCode).toBe(404);
     expect(e.name).toBe('ApiError');
     expect(e.errorCode).toBe(ErrorType.UNKNOWN_ERROR);
+    expect(e.errorMessage).toBe('just a test');
   });
 });

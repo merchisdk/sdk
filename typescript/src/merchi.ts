@@ -38,6 +38,7 @@ import { VariationsGroup } from './entities/variations_group';
 import { Quote } from './entities/quote';
 import { Draft } from './entities/draft';
 import { Discount } from './entities/discount';
+import { DiscountGroup } from './entities/discount_group';
 import { User } from './entities/user';
 import { Company } from './entities/company';
 import { ComponentTag } from './entities/component_tag';
@@ -124,6 +125,7 @@ export class Merchi {
   public Address: typeof Address;
   public ComponentTag: typeof ComponentTag;
   public Discount: typeof Discount;
+  public DiscountGroup: typeof DiscountGroup;
   public User: typeof User;
   public Session: typeof Session;
   public Theme: typeof Theme;
@@ -224,6 +226,7 @@ export class Merchi {
     this.Session = this.setupClass(Session) as typeof Session;
     this.Bank = this.setupClass(Bank) as typeof Bank;
     this.Discount = this.setupClass(Discount) as typeof Discount;
+    this.DiscountGroup = this.setupClass(DiscountGroup) as typeof DiscountGroup;
     this.Payment = this.setupClass(Payment) as typeof Payment;
     this.Page = this.setupClass(Page) as typeof Page;
     this.Cart = this.setupClass(Cart) as typeof Cart;

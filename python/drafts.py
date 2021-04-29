@@ -11,7 +11,7 @@ class Draft(sdk.python.entities.Entity):
     json_name = 'draft'
 
     id = Property(int)
-    file = Property(File)
+    images = Property(File)
     date = Property(datetime.datetime)
     accepted = Property(datetime.datetime)
     resend_date = Property(datetime.datetime)
