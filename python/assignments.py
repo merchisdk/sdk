@@ -22,6 +22,7 @@ class Assignment(sdk.python.entities.Entity):
     production_deadline = Property(datetime.datetime)
     assignment_deadline = Property(datetime.datetime)
     notes = Property(str)
+    needs_shipping = Property(bool)
     job = Property(Job, backref="assignments")
     supply_job = Property(Job, backref="supply_assignment")
     supply_domain = Property(SupplyDomain, backref="supply_assignments")
