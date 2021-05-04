@@ -25,7 +25,11 @@ class Shipment(sdk.python.entities.Entity):
     expected_receive_date = Property(datetime.datetime)
     received_date = Property(datetime.datetime)
 
-    # Sender attributed
+    # on behalf of attributes
+    on_behalf_of = Property(User)
+    on_behalf_of_company = Property(Company)
+
+    # Sender attributes
     sender = Property(User)
     sender_company = Property(Company)
     sender_address = Property(Address)
