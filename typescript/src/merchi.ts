@@ -88,6 +88,8 @@ export class Merchi {
   public id: string = generateUUID();
 
   public sessionToken?: string;
+  public invoiceToken?: string;
+  public clientToken?: string;
 
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
@@ -152,11 +154,24 @@ export class Merchi {
     return result;
   }
 
-  public constructor(sessionToken?: string) {
+  public constructor(
+    sessionToken?: string, clientToken?: string, invoiceToken?: string) {
     if (sessionToken) {
       this.sessionToken = sessionToken;
     } else {
       this.sessionToken = getCookie('session_token');
+    }
+
+    if (clientToken) {
+      this.clientToken = clientToken;
+    } else {
+      this.clientToken = getCookie('client_token');
+    }
+
+    if (invoiceToken) {
+      this.invoiceToken = invoiceToken;
+    } else {
+      this.invoiceToken = getCookie('invoice_token');
     }
 
     // re-export configured versions of all classes
@@ -249,13 +264,21 @@ export class Merchi {
     options: RequestOptions,
     expectEmptyResponse?: boolean
   ) => {
+    if (!options.query) {
+      /* istanbul ignore next */
+      options.query = [];
+    }
     if (this.sessionToken) {
       /* istanbul ignore next */
-      if (!options.query) {
-        /* istanbul ignore next */
-        options.query = [];
-      }
       options.query.push(['session_token', this.sessionToken]);
+    }
+    if (this.clientToken) {
+      /* istanbul ignore next */
+      options.query.push(['client_token', this.clientToken]);
+    }
+    if (this.invoiceToken) {
+      /* istanbul ignore next */
+      options.query.push(['invoice_token', this.invoiceToken]);
     }
     return apiFetch(resource, options, expectEmptyResponse);
   };
