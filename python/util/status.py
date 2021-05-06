@@ -36,7 +36,10 @@ PRODUCTION_STATUS = {
                  "cssClass": "progress-bar-success"},
     "SHIPPED": {"dbValue": 9,
                 "text": "Production Shipped", "percentage": 100,
-                "cssClass": "progress-bar-success"}
+                "cssClass": "progress-bar-success"},
+    "COMPLETED": {"dbValue": 10,
+                  "text": "Production Completed", "percentage": 100,
+                  "cssClass": "progress-bar-success"},
 }
 
 DESIGN_STATUS = {
