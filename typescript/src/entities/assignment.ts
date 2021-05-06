@@ -31,6 +31,9 @@ export class Assignment extends Entity {
   public supplierRefused?: Date | null;
 
   @Assignment.property()
+  public needsShipping?: boolean;
+
+  @Assignment.property()
   public productionDeadline?: Date;
 
   @Assignment.property()
