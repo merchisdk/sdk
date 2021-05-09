@@ -3,4 +3,5 @@ SHIPPING_COMPANIES = ['DHL', 'UPS', 'EMS', 'FedEx',
                       'Australia Post', 'StarTrack', 'Toll', 'TNT',
                       'Custom Track Link', 'Aramex',
                       'realtime express', 'Uber',
-                      'Civic Transport Couriers']
+                      'Civic Transport Couriers',
+                      'NZ Post']
