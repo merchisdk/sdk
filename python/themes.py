@@ -2,6 +2,7 @@ import sdk.python.entities
 from sdk.python.entities import Property
 import datetime
 from sdk.python.files import File
+from sdk.python.menus import Menu
 from sdk.python.pages import Page
 from sdk.python.util.theme_status import VALID_AND_UPDATED, \
     VALID_BUT_NOT_UPDATED
@@ -110,6 +111,7 @@ class Theme(sdk.python.entities.Entity):
     feature_image = Property(File)
     images = Property(File)
     css_image_files = Property(File)
+    menus = Property(Menu)
     pages = Property(Page)
     default_for_domain_type = Property(int)
 
