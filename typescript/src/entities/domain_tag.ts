@@ -23,7 +23,7 @@ export class DomainTag extends Entity {
   public description?: string;
 
   @DomainTag.property()
-  public showPubllic?: boolean;
+  public showPublic?: boolean;
 
   @DomainTag.property()
   public domain?: Domain;
