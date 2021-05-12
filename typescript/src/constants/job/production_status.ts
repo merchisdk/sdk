@@ -8,4 +8,5 @@ export enum ProductionStatus {
   COMMENCED = 7,
   FINISHED = 8,
   SHIPPED = 9,
+  COMPLETED = 10,
 }
