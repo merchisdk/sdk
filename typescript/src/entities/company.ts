@@ -65,6 +65,9 @@ export class Company extends Entity {
   @Company.property()
   public subscriptionOutstanding?: boolean;
 
+  @Company.property()
+  public isBlocked?: boolean;
+
   @Company.property({type: String})
   public stripePublishableKey?: string | null;
 
@@ -138,7 +141,7 @@ export class Company extends Entity {
   public shipmentsAsReceiver?: Shipment[];
 
   @Company.property({arrayType: 'Product'})
-  public saved_products?: Product[];
+  public savedProducts?: Product[];
 
   @Company.property({arrayType: 'Bank'})
   public banks?: Bank[];
