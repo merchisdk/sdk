@@ -23,6 +23,9 @@ export class DomainTag extends Entity {
   public description?: string;
 
   @DomainTag.property()
+  public showPublic?: boolean;
+
+  @DomainTag.property()
   public domain?: Domain;
 
   @DomainTag.property({arrayType: 'Job'})
