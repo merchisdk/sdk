@@ -2,6 +2,7 @@ import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { User } from './user';
+import { Menu } from './menu';
 import { Page } from './page';
 import { ThemeStatus } from '../constants/theme_status';
 
@@ -84,6 +85,9 @@ export class Theme extends Entity {
 
   @Theme.property()
   public invoicesJs?: string;
+
+  @Theme.property({arrayType: 'Menu'})
+  public menus?: Menu[];
 
   @Theme.property()
   public productsPageTemplate?: string;
