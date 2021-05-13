@@ -32,6 +32,7 @@ class Company(sdk.python.entities.Entity):
     is_paypal_valid = Property(bool)
     stripe_customer_id = Property(str)
     is_new = Property(bool)
+    is_blocked = Property(bool)
     subscription_outstanding = Property(bool)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
