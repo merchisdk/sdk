@@ -1,5 +1,5 @@
-import { Domain } from './domain';
 import { Entity } from '../entity';
+import { Theme } from './theme';
 import { MenuItem } from './menu_item';
 
 export class Menu extends Entity {
@@ -23,7 +23,7 @@ export class Menu extends Entity {
   public menuType?: number;
 
   @Menu.property()
-  public domain?: Domain;
+  public theme?: Theme;
 
   @Menu.property({arrayType: 'MenuItem'})
   public menuItems?: MenuItem[];

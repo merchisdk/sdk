@@ -13,6 +13,7 @@ class DomainTag(sdk.python.entities.Entity):
     # colour is in RRGGBB format.
     colour = Property(int)
     description = Property(str)
+    show_public = Property(bool)
 
     domain = Property(Domain, backref="tags")
 
