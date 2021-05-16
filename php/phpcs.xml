@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <description>merchi conventions</description>
+
+    <file>autoload.php</file>
+    <file>bin</file>
+    <file>src</file>
+    <file>tests</file>
+
+    <exclude-pattern>*/Standards/*/Tests/*\.(inc|css|js)</exclude-pattern>
+
+    <arg name="colors" />
+    <arg value="np"/>
+
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- Include the whole PEAR standard -->
+    <rule ref="PEAR">
+        <exclude name="PEAR.Commenting.FileComment.Missing" />
+        <exclude name="PEAR.Commenting.FileComment.MissingAuthorTag" />
+        <exclude name="PEAR.Commenting.FileComment.MissingLicenseTag" />
+        <exclude name="PEAR.ControlStructures.ControlSignature" />
+        <exclude name="PEAR.Functions.FunctionDeclaration.NewlineBeforeOpenBrace" />
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.Incorrect" />
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.LineAfterClose" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.FirstIndexNoNewline" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.IndexNoNewline" />
+        <exclude name="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterEquals" />
+        <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact" />
+        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis" />
+        <exclude name="PEAR.Functions.FunctionDeclaration.Indent" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.Alignment" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.Indent" />
+        <exclude name="quiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
+        <exclude name="Squiz.Commenting.VariableComment.Missing" />
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing" />
+        <exclude name="PEAR.Commenting.FunctionComment.Missing" />
+        <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing" />
+        <exclude name="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps" />
+        <exclude name="PEAR.NamingConventions.ValidFunctionName" />
+        <exclude name="PEAR.NamingConventions.ValidVariableName" />
+        <exclude name="PEAR.Commenting.ClassComment" />
+        <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag" />
+        <exclude name="PEAR.Commenting.FileComment.MissingPackageTag" />
+        <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
+        <exclude name="PEAR.Commenting.FileComment.MissingVersion" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.After" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst" />
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceAfterDefault" />
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceBeforeEquals" />
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.CloseBracketNewLine" />
+        <exclude name="Generic.PHP.LowerCaseConstant.Found" />
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.NoLineAfterClose" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean" />
+        <exclude name="Squiz.NamingConventions.ValidVariableName.StringNotCamelCaps" />
+        <exclude name="Squiz.PHP.DisallowInlineIf.Found" />
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed" />
+        <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound" />
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue" />
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed" />
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.NewlineBeforeOpenBrace" />
+        <exclude name="PEAR.ControlStructures.ControlSignature.Found" />
+        <exclude name="PEAR.ControlStructures.MultiLineCondition.NewlineBeforeOpenBrace" />
+        <exclude name="PEAR.Functions.FunctionDeclaration.CloseBracketLine" />
+        <exclude name="Squiz.Formatting.OperatorBracket.MissingBrackets" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments" />
+        <exclude name="PEAR.Formatting.MultiLineAssignment.EqualSignLine" />
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+        <exclude name="Squiz.Commenting.InlineComment.NotCapital" />
+        <exclude name="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceBeforeEquals" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine" />
+        <exclude name="Squiz.Commenting.PostStatementComment.Found" />
+        <exclude name="PEAR.NamingConventions.ValidClassName.Invalid" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket" />
+    </rule>
+
+    <!-- Include some sniffs from other standards that don't conflict with PEAR -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing" />
+    <rule ref="Squiz.Arrays.ArrayDeclaration" />
+    <rule ref="Squiz.Commenting.ClosingDeclarationComment" />
+    <rule ref="Squiz.ControlStructures.ControlSignature" />
+    <rule ref="Squiz.ControlStructures.ElseIfDeclaration" />
+    <rule ref="Squiz.Commenting.BlockComment" />
+    <rule ref="Squiz.Commenting.DocCommentAlignment" />
+    <rule ref="Squiz.Commenting.EmptyCatchComment" />
+    <rule ref="Squiz.Commenting.InlineComment" />
+    <rule ref="Squiz.Commenting.LongConditionClosingComment" />
+    <rule ref="Squiz.Commenting.PostStatementComment" />
+    <rule ref="Squiz.Commenting.VariableComment" />
+    <rule ref="Squiz.Formatting.OperatorBracket" />
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing" />
+    <rule ref="Squiz.Operators.ComparisonOperatorUsage" />
+    <rule ref="Squiz.PHP.DisallowInlineIf" />
+    <rule ref="Squiz.Strings.ConcatenationSpacing" />
+    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing" />
+    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace" />
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing" />
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing" />
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+    <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+    <rule ref="Generic.NamingConventions.ConstructorName"/>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+    <rule ref="PSR2.Classes.PropertyDeclaration"/>
+    <rule ref="PSR2.Methods.MethodDeclaration"/>
+    <rule ref="PSR2.Files.EndFileNewline"/>
+    <rule ref="Zend.Files.ClosingTag"/>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.KeyNotAligned">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.ValueNotAligned">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNewLine">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Check var names, but we don't want leading underscores for private vars -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName" />
+    <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Only one argument per line in multi-line function calls -->
+    <rule ref="PEAR.Functions.FunctionCallSignature">
+        <properties>
+            <property name="allowMultipleArguments" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- Have 12 chars padding maximum and always show as errors -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="maxPadding" value="12"/>
+            <property name="error" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- Private methods MUST not be prefixed with an underscore -->
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+
+    <!-- Private properties MUST not be prefixed with an underscore -->
+    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+
+    <!-- The testing bootstrap file uses string concats to stop IDEs seeing the class aliases -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat">
+        <exclude-pattern>tests/bootstrap.php</exclude-pattern>
+    </rule>
+
+</ruleset>
