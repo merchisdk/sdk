@@ -17,15 +17,18 @@ collections:
   overview:
     title: Overview
     position: 1
+  typescript:
+    title: Typescript SDK
+    position: 2
+  javascript:
+    title: Javascript SDK
+    position: 3
   protocol:
     title: Protocol
-    position: 2
-  typescript:
-    title: TypeScript SDK
-    position: 3
+    position: 4
   endpoints:
     title: Endpoint Reference
-    position: 4
+    position: 5
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
