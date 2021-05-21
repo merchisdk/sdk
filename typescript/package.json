@@ -14,7 +14,7 @@
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.9.9"
   },
   "dependencies": {
     "@types/lodash": "^4.14.141",
@@ -23,6 +23,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typedoc": "^0.20.36"
   }
 }

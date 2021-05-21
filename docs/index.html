@@ -38,13 +38,6 @@ title: API Docs
 								{% endfor %}
 						{% endif %}
 			</section>
-			{% if doc.right_code_blocks and doc.right_code_blocks[0].code_block %}
-					<section class="right-code">
-						{% for block in doc.right_code_blocks %}
-								{% include syntax-highlight.html block=block %}
-						{% endfor %}
-				</section>
-			{% endif %}
 		</section>
 	{% endfor %}
 {% endfor %}

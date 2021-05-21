@@ -37,29 +37,4 @@ left_code_blocks:
       curl http://sampleapi.readme.com/orders?key=YOUR_APP_KEY
     title: Curl
     language: bash
-right_code_blocks:
-  - code_block: |2-
-      [
-        {
-          "id": 1,
-          "title": "The Hunger Games",
-          "score": 4.5,
-          "dateAdded": "12/12/2013"
-        },
-        {
-          "id": 1,
-          "title": "The Hunger Games",
-          "score": 4.7,
-          "dateAdded": "15/12/2013"
-        },
-      ]
-    title: Response
-    language: json
-  - code_block: |2-
-      {
-        "error": true,
-        "message": "Invalid offset"
-      }
-    title: Error
-    language: json
 ---

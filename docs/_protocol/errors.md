@@ -21,8 +21,4 @@ left_code_blocks:
       }
     title: Response
     language: json
-right_code_blocks:
-  - code_block:
-    title:
-    language:
 ---

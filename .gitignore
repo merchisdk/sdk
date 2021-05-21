@@ -29,3 +29,5 @@ php/clover.xml
 .hypothesis/
 node_modules/
 coverage/
+docs/.sass-cache/
+docs/_site/
