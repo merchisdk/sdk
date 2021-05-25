@@ -69,6 +69,9 @@ export class VariationField extends Entity {
   public allowDecimal?: boolean;
 
   @VariationField.property()
+  public sellerProductEditable?: boolean;
+
+  @VariationField.property()
   public multipleSelect?: boolean;
 
   @VariationField.property()
