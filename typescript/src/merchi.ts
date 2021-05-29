@@ -6,6 +6,7 @@ import {
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
 import { Domain } from './entities/domain';
+import { ExchangeRate } from './entities/exchange_rate';
 import { Job } from './entities/job';
 import { Menu } from './entities/menu';
 import { Backup } from './entities/backup';
@@ -134,6 +135,7 @@ export class Merchi {
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
   public Domain: typeof Domain;
+  public ExchangeRate: typeof ExchangeRate;
   public Payment: typeof Payment;
   public Page: typeof Page;
   public ShortUrl: typeof ShortUrl;
@@ -191,6 +193,7 @@ export class Merchi {
       ShipmentMethodVariation
     ) as typeof ShipmentMethodVariation;
     this.Domain = this.setupClass(Domain) as typeof Domain;
+    this.ExchangeRate = this.setupClass(ExchangeRate) as typeof ExchangeRate;
     this.Invoice = this.setupClass(Invoice) as typeof Invoice;
     this.Job = this.setupClass(Job) as typeof Job;
     this.ComponentTag = this.setupClass(ComponentTag) as typeof ComponentTag;
