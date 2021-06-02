@@ -266,6 +266,7 @@ test('can list products with options set', () => {
     managedOnly: false,
     teamOnly: false,
     memberOnly: false,
+    merchiOnly: false,
     inbound: false,
     domainRoles: [Role.ADMIN],
     managedDomainsOnly: true,
