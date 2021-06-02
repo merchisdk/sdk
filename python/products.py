@@ -5,6 +5,7 @@ from sdk.python.discount_groups import DiscountGroup
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
+from sdk.python.shipment_methods import ShipmentMethod
 from sdk.python.addresses import Address
 from sdk.python.variations import VariationField,\
     VariationsGroup
@@ -47,6 +48,7 @@ class Product(sdk.python.entities.Entity):
     discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
+    shipment_methods = Property(ShipmentMethod)
     public_files = Property(File)
     production_files = Property(File)
     independent_variation_fields = Property(VariationField)
