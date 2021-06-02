@@ -6,7 +6,6 @@ from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
 from sdk.python.shipment_methods import ShipmentMethod
-from sdk.python.addresses import Address
 from sdk.python.variations import VariationField,\
     VariationsGroup
 
@@ -30,6 +29,7 @@ class Product(sdk.python.entities.Entity):
     unit_width = Property(float)
     unit_depth = Property(float)
     unit_volume = Property(float)
+    use_company_shihpment_methods = Property(bool)
     needs_drafting = Property(bool)
     needs_production = Property(bool)
     needs_shipping = Property(bool)

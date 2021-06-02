@@ -69,6 +69,9 @@ export class Product extends Entity {
   public notes?: string | null;
 
   @Product.property()
+  public useCompanyShipmentMethods?: boolean;
+
+  @Product.property()
   public needsDrafting?: boolean;
 
   @Product.property()
