@@ -117,9 +117,6 @@ export class Product extends Entity {
   public discountGroups?: DiscountGroup[];
 
   @Product.property()
-  public originAddress?: Address;
-
-  @Product.property()
   public domain?: Domain;
 
   @Product.property({type: Product})

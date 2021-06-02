@@ -9,7 +9,6 @@ class CartShipmentGroup(sdk.python.entities.Entity):
 
     id = Property(int)
     items = Property("sdk.python.cart_items.CartItem")
-    originAddress = Property("sdk.python.addresses.Address")
     quotes = Property("sdk.python.cart_shipment_quotes.CartShipmentQuote")
     selectedQuote = Property(
         "sdk.python.cart_shipment_quotes.CartShipmentQuote"

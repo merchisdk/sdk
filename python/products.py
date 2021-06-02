@@ -53,7 +53,6 @@ class Product(sdk.python.entities.Entity):
     production_files = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
-    origin_address = Property(Address)
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job")
