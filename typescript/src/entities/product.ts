@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { Address } from './address';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
