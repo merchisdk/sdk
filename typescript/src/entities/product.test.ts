@@ -324,6 +324,7 @@ test('can list products with options set', () => {
     ['managed_only', 'false'],
     ['team_only', 'false'],
     ['member_only', 'false'],
+    ['merchi_only', 'false'],
     ['inbound', 'false'],
     ['domain_roles', '1'],
     ['domain_types', '0,1'],
