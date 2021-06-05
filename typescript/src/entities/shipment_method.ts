@@ -2,6 +2,7 @@ import { Entity } from '../entity';
 import { Address } from './address';
 import { Company } from './company';
 import { CountryTax } from './country_tax';
+import { Product } from './product';
 import { ShipmentMethodVariation } from './shipment_method_variation';
 
 export class ShipmentMethod extends Entity {
@@ -38,4 +39,7 @@ export class ShipmentMethod extends Entity {
 
   @ShipmentMethod.property({arrayType: 'ShipmentMethodVariation'})
   public variations?: ShipmentMethodVariation[];
+
+  @ShipmentMethod.property({arrayType: 'Product'})
+  public products?: Product[];
 }
