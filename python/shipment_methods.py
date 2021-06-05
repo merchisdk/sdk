@@ -1,6 +1,5 @@
 import sdk.python.entities
 from sdk.python.addresses import Address
-from sdk.python.products import Product
 from sdk.python.entities import Property
 from sdk.python.shipment_method_variations import ShipmentMethodVariation
 
@@ -17,7 +16,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
     default_cost = Property(float)
     company_default = Property(bool)
     currency = Property(str)
-    products = Property(Product)
+    products = Property('sdk.python.products.Product')
     transport_company = Property(str)
     tax_type = Property('sdk.python.country_taxes.CountryTax')
     variations = Property(ShipmentMethodVariation)
