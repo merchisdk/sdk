@@ -44,6 +44,7 @@ class Product(sdk.python.entities.Entity):
     delivery_days_normal = Property(int)
     best_price = Property(float)
     categories = Property(Category)
+    platform_categories = Property(Category)
     discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
