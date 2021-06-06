@@ -115,6 +115,9 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Category'})
   public categories?: Category[];
 
+  @Product.property({arrayType: 'Category'})
+  public platformCategories?: Category[];
+
   @Product.property({arrayType: 'DiscountGroup'})
   public discountGroups?: DiscountGroup[];
 
