@@ -80,6 +80,9 @@ export class User extends Entity {
   public smsLoginThreshold?: number;
 
   @User.property()
+  public hasStore?: boolean;
+
+  @User.property()
   public enableCrashReports?: boolean;
 
   @User.property()

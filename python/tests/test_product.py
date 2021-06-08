@@ -1,6 +1,6 @@
 from sdk.python.products import Product
 
 
-def test_product_has_origin_address_attribute():
+def test_product_not_has_origin_address_attribute():
     product = Product()
-    assert not product.origin_address
+    assert not hasattr(product, 'origin_address')

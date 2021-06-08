@@ -73,6 +73,7 @@ class VariationField(sdk.python.entities.Entity):
     field_min = Property(int)
     field_max = Property(int)
     required = Property(bool)
+    seller_product_editable = Property(bool)
     independent = Property(bool)
     show_file_preview = Property(bool)
     allow_decimal = Property(bool)

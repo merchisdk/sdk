@@ -100,6 +100,7 @@ interface ListOptions {
   managedOnly?: boolean;
   teamOnly?: boolean;
   memberOnly?: boolean;
+  merchiOnly?: boolean;
   inbound?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
@@ -448,6 +449,9 @@ export class Entity {
       }
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
+      }
+      if (options.merchiOnly !== undefined) {
+        fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
       }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
