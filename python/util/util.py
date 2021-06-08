@@ -8,15 +8,6 @@ def powerset(iterable):
     return chain.from_iterable(combinations(s, r) for r in range(len(s) + 1))
 
 
-# def powerset(s):
-    # """ Genereate all the subset of give iterable"""
-    # # powerset([1,2,3]) --> () (1) (2) (3) (1,2) (1,3) (2,3) (1,2,3)
-    # x = len(s)
-    # masks = [1 << i for i in range(x)]
-    # for i in range(1 << x):
-        # yield [ss for mask, ss in zip(masks, s) if i & mask]
-
-
 def merge(a, b, path=None):
     """ Merge dict b into dict a recursively, modifying and returning a. """
     if path is None:
