@@ -30,6 +30,7 @@ class Product(sdk.python.entities.Entity):
     unit_depth = Property(float)
     unit_volume = Property(float)
     use_company_shihpment_methods = Property(bool)
+    drop_shipment = Property(bool)
     needs_drafting = Property(bool)
     needs_production = Property(bool)
     needs_shipping = Property(bool)

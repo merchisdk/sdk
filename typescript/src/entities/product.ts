@@ -71,6 +71,9 @@ export class Product extends Entity {
   public useCompanyShipmentMethods?: boolean;
 
   @Product.property()
+  public dropShipment?: boolean;
+
+  @Product.property()
   public needsDrafting?: boolean;
 
   @Product.property()
