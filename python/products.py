@@ -5,7 +5,7 @@ from sdk.python.discount_groups import DiscountGroup
 from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
-from sdk.python.addresses import Address
+from sdk.python.shipment_methods import ShipmentMethod
 from sdk.python.variations import VariationField,\
     VariationsGroup
 
@@ -29,6 +29,8 @@ class Product(sdk.python.entities.Entity):
     unit_width = Property(float)
     unit_depth = Property(float)
     unit_volume = Property(float)
+    use_company_shihpment_methods = Property(bool)
+    drop_shipment = Property(bool)
     needs_drafting = Property(bool)
     needs_production = Property(bool)
     needs_shipping = Property(bool)
@@ -48,11 +50,11 @@ class Product(sdk.python.entities.Entity):
     discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
     images = Property(File)
+    shipment_methods = Property(ShipmentMethod, backref="products")
     public_files = Property(File)
     production_files = Property(File)
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
-    origin_address = Property(Address)
     tags = Property(DomainTag, backref="products")
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job")

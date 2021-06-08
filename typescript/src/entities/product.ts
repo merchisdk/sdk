@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import { Address } from './address';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
@@ -13,6 +12,7 @@ import { Job } from './job';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
 import { VariationField } from './variation_field';
+import { ShipmentMethod } from './shipment_method';
 
 export class Product extends Entity {
   protected static resourceName: string = 'products';
@@ -40,6 +40,9 @@ export class Product extends Entity {
   @Product.property({type: 'DiscountGroup'})
   public unitPriceDiscountGroup?: DiscountGroup | null;
 
+  @Product.property({arrayType: 'ShipmentMethod'})
+  public shipmentMethods?: ShipmentMethod[];
+
   @Product.property()
   public margin?: number;
 
@@ -63,6 +66,12 @@ export class Product extends Entity {
 
   @Product.property({type: String})
   public notes?: string | null;
+
+  @Product.property()
+  public useCompanyShipmentMethods?: boolean;
+
+  @Product.property()
+  public dropShipment?: boolean;
 
   @Product.property()
   public needsDrafting?: boolean;
@@ -114,9 +123,6 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'DiscountGroup'})
   public discountGroups?: DiscountGroup[];
-
-  @Product.property()
-  public originAddress?: Address;
 
   @Product.property()
   public domain?: Domain;
