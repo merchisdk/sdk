@@ -56,6 +56,7 @@ class Product(sdk.python.entities.Entity):
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     tags = Property(DomainTag, backref="products")
+    tax_type = Property('sdk.python.country_taxes.CountryTax')
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job")
     original_product = Property("sdk.python.products.Product")

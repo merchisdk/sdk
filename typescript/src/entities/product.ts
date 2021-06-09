@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
+import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
@@ -168,6 +169,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'SupplyDomain'})
   public supplyDomains?: SupplyDomain[];
+
+  @Product.property({type: CountryTax})
+  public taxType?: CountryTax | null;
 
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
