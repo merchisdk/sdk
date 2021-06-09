@@ -128,6 +128,9 @@ export class Product extends Entity {
   @Product.property()
   public domain?: Domain;
 
+  @Product.property({type: CountryTax})
+  public taxType?: CountryTax | null;
+
   @Product.property({type: Product})
   public originalProduct?: Product | null;
 
@@ -169,9 +172,6 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'SupplyDomain'})
   public supplyDomains?: SupplyDomain[];
-
-  @Product.property({type: CountryTax})
-  public taxType?: CountryTax | null;
 
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
@@ -242,13 +242,6 @@ export class Product extends Entity {
       throw new Error(err);
     }
     return this.independentVariationFields.length > 0;
-  }
-
-  public taxType = () => {
-    if (this.domain === undefined) {
-      throw new Error('domain is undefined, did you forget to embed it?');
-    }
-    return this.domain.defaultTaxType();
   }
 
   public allVariationFields = () => {
