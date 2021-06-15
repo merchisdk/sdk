@@ -15,7 +15,9 @@ left_code_blocks:
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const merchi = new Merchi();
       const categories = merchi.Categories.list();
-      console.log(categories);
+      for const (category of categories) {
+        console.log(category.id, category.name);
+      }
     title: list categories
     language: typescript
 ---

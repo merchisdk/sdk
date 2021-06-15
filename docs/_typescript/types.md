@@ -1,6 +1,6 @@
 ---
 title: Types vs Constructors
-position: 7
+position: 70
 parameters:
   - name:
     content:
@@ -11,12 +11,12 @@ content_markdown: |-
   the constructor attached to the merchi object. The types, however, are
   imported from the 'entities' directory. The following example demonstrates:
 
-  Never try to directly instansiated the imported types, always go through the merchi object.
+  Never try to directly instanciate the imported types, always go through the merchi object.
   {: .error }
 left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';
-      import { Category } from 'merchisdk/typescript/src/entities/category''
+      import { Category } from 'merchisdk/typescript/src/entities/category';
       const merchi = new Merchi();
       const category: Category = new merchi.Category();
     title: import category type
