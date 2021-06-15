@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: The merchi object
 position: 3
 parameters:
   - name:
@@ -17,7 +17,7 @@ left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const sessionToken = "rk1fGoPW7cyxa8cCLR45CigUtjkO1iCWWuLrK08CDaYD2gHoPHYtF7KsfTgmFcwl8tOyQssaIchgzbTSarjk8A";
-      const merchi = new Merchi();
+      const merchi = new Merchi(sessionToken);
     title: setup merchi object
     language: typescript
 ---
