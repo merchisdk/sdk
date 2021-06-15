@@ -14,10 +14,11 @@ left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const merchi = new Merchi();
-      const categories = merchi.Categories.list();
-      for const (category of categories) {
-        console.log(category.id, category.name);
-      }
+      const categories = merchi.Categories.list().then(() => {
+        for const (category of categories) {
+          console.log(category.id, category.name);
+        }
+      });
     title: list categories
     language: typescript
 ---

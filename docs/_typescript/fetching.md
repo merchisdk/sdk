@@ -14,8 +14,10 @@ left_code_blocks:
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const merchi = new Merchi();
       const categoryId = 42;
-      const myCategory = merchi.Categories.get(categoryId);
-      console.log(myCategory.name);
+      const myCategory = merchi.Categories.get(categoryId)i
+        .then(() => {
+          console.log(myCategory.name);
+        });
     title: fetch a category
     language: typescript
 ---
