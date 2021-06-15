@@ -27,6 +27,8 @@ class VariationFieldOption(sdk.python.entities.Entity):
     variation_unit_cost_discount_group = Property(DiscountGroup)
     default = Property(float)
     linked_file = Property(File)
+    buy_unit_cost = Property(float)
+    buy_cost = Property(float)
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
@@ -93,6 +95,8 @@ class VariationField(sdk.python.entities.Entity):
     margin = Property(float)
     options = Property(VariationFieldOption)
     default_options = Property(VariationFieldOption)
+    buy_unit_cost = Property(float)
+    buy_cost = Property(float)
 
     def is_select(self):
         return self.field_type == SELECT
