@@ -23,12 +23,15 @@ collections:
   javascript:
     title: Javascript SDK
     position: 3
+  python:
+    title: Python
+    position: 4
   protocol:
     title: Protocol
-    position: 4
+    position: 5
   endpoints:
     title: Endpoint Reference
-    position: 5
+    position: 6
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
