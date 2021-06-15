@@ -14,8 +14,8 @@ left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const merchi = new Merchi();
-      const categories = merchi.Categories.list().then(() => {
-        for const (category of categories) {
+      merchi.Categories.list().then((result) => {
+        for const (category of result.items) {
           console.log(category.id, category.name);
         }
       });

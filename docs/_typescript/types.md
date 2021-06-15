@@ -1,6 +1,6 @@
 ---
 title: Types vs Constructors
-position: 70
+position: 11
 parameters:
   - name:
     content:
@@ -11,7 +11,7 @@ content_markdown: |-
   the constructor attached to the merchi object. The types, however, are
   imported from the 'entities' directory. The following example demonstrates:
 
-  Never try to directly instanciate the imported types, always go through the merchi object.
+  Never try to directly instantiate the imported types, always go through the merchi object.
   {: .error }
 left_code_blocks:
   - code_block: |-
