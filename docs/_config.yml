@@ -29,8 +29,8 @@ collections:
   protocol:
     title: Protocol
     position: 5
-  endpoints:
-    title: Endpoint Reference
+  entities:
+    title: Entity Reference
     position: 6
 plugins:
   - jekyll-sitemap

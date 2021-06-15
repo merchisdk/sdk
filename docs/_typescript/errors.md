@@ -20,9 +20,9 @@ left_code_blocks:
           console.log("ok, got a category");
         })
         .catch((err: ApiError) => {
-          console.error($`error: ${err.errorCode} ${err.statusCode} ${err.errorMessage}`)
+          console.error(`error: ${err.errorCode} ${err.statusCode} ${err.errorMessage}`)
         });
       });
-    title: pagination
+    title: error handling
     language: typescript
 ---
