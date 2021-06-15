@@ -1,11 +1,11 @@
 ---
-title: Todo
+title: JavasScript
 position: 4
 parameters:
   - name:
     content:
 content_markdown: |-
-  todo
+  An SDK is available for JavaScript.
 
 left_code_blocks:
   - code_block: |-
