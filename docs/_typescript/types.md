@@ -1,6 +1,6 @@
 ---
 title: Types vs Constructors
-position: 11
+position: 13
 parameters:
   - name:
     content:

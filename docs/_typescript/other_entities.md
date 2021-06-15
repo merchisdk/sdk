@@ -1,6 +1,6 @@
 ---
 title: Other Entities
-position: 60
+position: 15
 parameters:
   - name:
     content:
