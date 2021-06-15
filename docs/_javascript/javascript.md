@@ -1,6 +1,6 @@
 ---
-title: JavasScript
-position: 4
+title: JavaScript
+position: 1
 parameters:
   - name:
     content:
