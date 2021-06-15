@@ -1,6 +1,6 @@
 ---
-title: The merchi object
-position: 3
+title: Compiling
+position: 4
 parameters:
   - name:
     content:
