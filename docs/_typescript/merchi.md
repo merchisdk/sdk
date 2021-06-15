@@ -12,7 +12,8 @@ content_markdown: |-
   If your code will be running in a web browser environment, the merchi
   object will automatically fetch the sessiont token of the currently
   logged in user from the merchi cookie. Alternatively you can provide
-  the optional `sessionToken` argument to the `Merchi` constructor:
+  the optional `sessionToken` argument to the `Merchi` constructor. For
+  example, you could put something like this into a file named `index.ts`.
 left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';
