@@ -15,9 +15,4 @@ left_code_blocks:
       yarn
     title: Install Dependencies
     language: bash
-left_code_blocks:
-  - code_block: |-
-      todo
-    title: Install Depenencies
-    language: bash
 ---
