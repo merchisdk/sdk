@@ -41,7 +41,7 @@ class Shipment(sdk.python.entities.Entity):
     receiver_address = Property(Address)
     receiver_notes = Property(str)
 
-    invoice = Property(Invoice, backref="shipments")
+    invoices = Property(Invoice, backref="shipments")
 
     tracking_number = Property(str)
     transport_company = Property(str)

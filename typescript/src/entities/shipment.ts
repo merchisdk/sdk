@@ -103,8 +103,8 @@ export class Shipment extends Entity {
   @Shipment.property({type: Address})
   public receiverAddress?: Address | null;
 
-  @Shipment.property({type: Invoice})
-  public invoice?: Invoice | null;
+  @Shipment.property({arrayType: 'Invoice'})
+  public invoices?: Invoice[] | null;
 
   @Shipment.property({type: Quote})
   public quote?: Quote | null;
