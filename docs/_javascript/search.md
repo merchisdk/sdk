@@ -18,7 +18,7 @@ left_code_blocks:
          }
      }
      const onError = console.error.bind(console);
-     merchi.products.get(onScuccess, onError, {q: "egg"});
+     merchi.products.get(onSuccess, onError, {q: "egg"});
     title: Searching for egg products
     language: javascript
 ---
