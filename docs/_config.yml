@@ -26,15 +26,17 @@ collections:
   python:
     title: Python
     position: 4
+  php:
+    title: PHP
+    position: 5
   protocol:
     title: Protocol
-    position: 5
+    position: 6
   entities:
     title: Entity Reference
-    position: 6
+    position: 7
 plugins:
   - jekyll-sitemap
-  - jekyll-seo-tag
 
 exclude:
   - readme.md
