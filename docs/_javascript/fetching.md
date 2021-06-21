@@ -18,7 +18,7 @@ left_code_blocks:
      product.id(42);   // we want the product with id 42.
      function onSuccess() {
          // at this point, `product` has been updated from the merchi server.
-         console.log(`the product name is: ${product.name{}`);
+         console.log(`the product name is: ${product.name()}`);
      }
      const onError = console.error.bind(console);
      product.get(onSuccess, onError);  // this call makes the network request
