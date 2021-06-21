@@ -13,7 +13,6 @@ jobs:
       - run: yarn add --dev typescript
       - run: yarn add --dev typedoc
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
-      - run: git checkout gh-pages
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
