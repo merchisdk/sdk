@@ -11,6 +11,7 @@ content_markdown: |-
     list results to only those with a specific Tag added. The exact list
     of supported filters varies by entity. For a complete list, see the
     [API reference]({{ site.baseurl }}{% link reference/index.html %}).
+    {% link ../reference/index.html  %}
 
 left_code_blocks:
   - code_block: |-
