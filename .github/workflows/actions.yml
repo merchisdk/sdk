@@ -13,6 +13,8 @@ jobs:
       - run: yarn
       - run: yarn add --dev typescript
       - run: yarn add --dev typedoc
+      - run: pwd
+      - run: ls
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals typescript/src/ --out ../reference
       - uses: actions/checkout@v2
         with:
