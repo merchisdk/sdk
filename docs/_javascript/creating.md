@@ -1,5 +1,5 @@
 ---
-title: Creating a new entity.
+title: Creating a new entity
 position: 6
 parameters:
   - name:
