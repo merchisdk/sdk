@@ -23,8 +23,6 @@ jobs:
           ref: gh-pages
           clean: false
       - run: rm -r ../docs/reference
-      - run: ls .
-      - run: ls ..
       - run: mv ../reference ../docs/
       - uses: EndBug/add-and-commit@v7
         with:
