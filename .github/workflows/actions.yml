@@ -16,11 +16,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
-      - run: mv ../reference ../docs/
+      - run: mv ../reference docs/
       - run: ls .
       - run: ls ..
       - run: pwd
-      - run: git add ../docs/reference
+      - run: git add docs/reference
       - run: git commit -m "add docs"
       - uses: EndBug/add-and-commit@v7
         with:
