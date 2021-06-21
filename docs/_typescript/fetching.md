@@ -14,7 +14,7 @@ left_code_blocks:
       import { Merchi } from 'merchisdk/typescript/src/merchi';
       const merchi = new Merchi();
       const categoryId = 42;
-      const myCategory = merchi.Categories.get(categoryId)i
+      const myCategory = merchi.Categories.get(categoryId);
         .then(() => {
           console.log(myCategory.name);
         });
