@@ -11,7 +11,7 @@ jobs:
       - run: cd ${{ github.workspace }}/typescript
       - run: npm install typedoc --save-dev
       - run: yarn
-      - run: npm install -g typescript.
+      - run: npm install -g typescript
       - run: npm link typescript
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - run: git checkout gh-pages
