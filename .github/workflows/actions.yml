@@ -8,8 +8,9 @@ jobs:
         uses: actions/checkout@v2
       - run: sudo apt update
       - run: sudo apt install nodejs
-      - run: npm install typedoc --save-dev
       - run: cd ${{ github.workspace }}/typescript
+      - run: npm install typedoc --save-dev
+      - run: yarn
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - run: git checkout gh-pages
       - run: mv ../reference ../docs/
