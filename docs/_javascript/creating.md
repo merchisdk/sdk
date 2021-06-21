@@ -15,13 +15,13 @@ left_code_blocks:
   - code_block: |-
      const newProduct = new merchi.Product()
      newProduct.name("Beans");  // we want to create a new prodcut for beans
-     neProduct.description("beans are a delicious legume");
+     newProduct.description("beans are a delicious legume");
      function onSuccess() {
          // at this point, the new product exists on the merchi server
-         console.log(`the product has been created with id ${product.id()}`);
+         console.log(`the product has been created with id ${newProduct.id()}`);
      }
      const onError = console.error.bind(console);
-     product.create(onSuccess, onError);  // this call makes the network request
+     newProduct.create(onSuccess, onError);  // this call makes the network request
     title: Creating Products
     language: javascript
 ---
