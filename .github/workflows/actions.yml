@@ -22,10 +22,9 @@ jobs:
       - run: ls ..
       - run: pwd
       - run: git add docs/reference
-      - run: git commit -m "add docs"
       - uses: EndBug/add-and-commit@v7
         with:
           add: '../docs/reference'
           branch: gh-pages
-          default_author: github_actor
+          default_author: github_actions
           message: 'Updating docs'
