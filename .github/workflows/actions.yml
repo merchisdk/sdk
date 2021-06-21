@@ -14,13 +14,13 @@ jobs:
       - run: yarn
       - run: yarn add --dev typescript
       - run: yarn add --dev typedoc
-      - run: pwd
-      - run: ls
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
       - run: rm -r ../docs/reference
+      - run: ls .
+      - run: ls ..
       - run: mv ../reference ../docs/
       - run: git add ../docs/reference
       - uses: EndBug/add-and-commit@v7
