@@ -9,7 +9,7 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install nodejs
       - run: npm install typedoc --save-dev
-      - run: cd ${{ github.workspace }}/sdk/typescript
+      - run: cd ${{ github.workspace }}/typescript
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - run: git checkout gh-pages
       - run: mv ../reference ../docs/
