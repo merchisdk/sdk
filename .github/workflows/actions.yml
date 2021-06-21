@@ -1,5 +1,8 @@
 name: build docs
 on: [push]
+defaults:
+  run:
+    working-directory: typescript
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -8,14 +11,12 @@ jobs:
         uses: actions/checkout@v2
       - run: sudo apt update
       - run: sudo apt install nodejs
-      - run: cd ${{ github.workspace }}
-      - run: cd typescript
       - run: yarn
       - run: yarn add --dev typescript
       - run: yarn add --dev typedoc
       - run: pwd
       - run: ls
-      - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals typescript/src/ --out ../reference
+      - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
