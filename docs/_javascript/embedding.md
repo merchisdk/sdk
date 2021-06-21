@@ -4,6 +4,7 @@ position: 12
 parameters:
   - name:
     content:
+content_markdown: |-
    As the nested entities example showed, entities don't just have scalar
    attributes like numbers and strings, but also, they can be attached to
    other entity objects.
