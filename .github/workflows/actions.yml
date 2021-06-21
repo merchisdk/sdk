@@ -14,6 +14,9 @@ jobs:
       - run: yarn add --dev typedoc
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
       - run: git checkout gh-pages
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
       - run: mv ../reference ../docs/
       - run: git add ../docs/reference
       - run: git commit -m "add docs"
