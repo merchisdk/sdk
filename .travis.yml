@@ -1,6 +1,3 @@
-branches:
-  only:
-    - master
 matrix:
   include:
     - language: php
@@ -31,7 +28,6 @@ matrix:
         - python/lint.sh
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
         - coverage report -m --fail-under 55
-
 
 notifications:
   email:
