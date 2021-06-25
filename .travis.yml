@@ -32,6 +32,7 @@ matrix:
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
         - coverage report -m --fail-under 55
 
+
 notifications:
   email:
     - mail@dcollins.info
