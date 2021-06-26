@@ -104,7 +104,7 @@ export class Shipment extends Entity {
   public receiverAddress?: Address | null;
 
   @Shipment.property({arrayType: 'Invoice'})
-  public invoices?: Invoice[] | null;
+  public invoices?: Invoice[];
 
   @Shipment.property({type: Quote})
   public quote?: Quote | null;
