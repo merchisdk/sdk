@@ -101,6 +101,7 @@ interface ListOptions {
   teamOnly?: boolean;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  platformCategoryId?: number;
   inbound?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
@@ -419,6 +420,9 @@ export class Entity {
       }
       if (options.categoryId !== undefined) {
         fetchOptions.query.push(['category_id', options.categoryId.toString()]);
+      }
+      if (options.platformCategoryId !== undefined) {
+        fetchOptions.query.push(['platform_category_id', options.platformCategoryId.toString()]);
       }
       if (options.inDomain !== undefined) {
         fetchOptions.query.push(['in_domain', options.inDomain.toString()]);
