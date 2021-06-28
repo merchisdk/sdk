@@ -40,6 +40,12 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property()
   public variationUnitCost?: number;
 
+  @VariationFieldsOption.property({embeddedByDefault: false})
+  public buyUnitCost?: number;
+
+  @VariationFieldsOption.property({embeddedByDefault: false})
+  public buyCost?: number;
+
   @VariationFieldsOption.property({type: 'DiscountGroup'})
   public variationUnitCostDiscountGroup?: DiscountGroup | null;
 

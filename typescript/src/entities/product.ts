@@ -38,6 +38,9 @@ export class Product extends Entity {
   @Product.property()
   public unitPrice?: number;
 
+  @Product.property({embeddedByDefault: false})
+  public buyUnitPrice?: number;
+
   @Product.property({type: 'DiscountGroup'})
   public unitPriceDiscountGroup?: DiscountGroup | null;
 

@@ -53,6 +53,12 @@ export class VariationField extends Entity {
   @VariationField.property()
   public variationUnitCost?: number;
 
+  @VariationField.property({embeddedByDefault: false})
+  public buyUnitCost?: number;
+
+  @VariationField.property({embeddedByDefault: false})
+  public buyCost?: number;
+
   @VariationField.property({type: 'DiscountGroup'})
   public variationUnitCostDiscountGroup?: DiscountGroup | null;
 
