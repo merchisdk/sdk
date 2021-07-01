@@ -15,7 +15,7 @@ content_markdown: |-
 
   The `offset` option controls how many entities to skip over. For example,
   if the limit is set to 10, setting offset to 20 will give you the third
-  page. Defaults to zero not not supplied.
+  page. Defaults to zero if not not specified.
 
   Additionally, the `ListMetadata` type is available on the response of
   a call to `list`, which contains information about how many entities where

@@ -12,8 +12,8 @@ content_markdown: |-
 left_code_blocks:
   - code_block: |-
         import sdk.python.categories
-        users, _ = sdk.python.categories.categories.fetch()
-        print(users)
+        categories, _ = sdk.python.categories.categories.fetch()
+        print(categories)
     title: list categories
     language: python
 ---
