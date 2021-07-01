@@ -19,8 +19,8 @@ left_code_blocks:
   - code_block: |-
         from sdk.python.categories import Category
         new_category = Category()
-        category.name = "canned food"
-        category.create()
+        new_category.name = "canned food"
+        new_category.create()
         print(f"The new category id is: {category.id}")
     title: create a category
     language: python
