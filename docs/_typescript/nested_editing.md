@@ -8,8 +8,7 @@ content_markdown: |-
   Calling `save` on an entity will also automatically save any local changes to
   attached nested entities.
 
-  In this example, we adjust edit the name of a store "through" the category
-  object:
+  In this example, we edit the name of a store "through" the category object:
 
 left_code_blocks:
   - code_block: |-

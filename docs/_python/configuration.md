@@ -7,6 +7,9 @@ parameters:
 content_markdown: |-
     The python SDK requires some configuration before use.
 
+    The rest of this documentation assumes that you have already configured
+    the SDK according to the instructions in this section.
+
     The request class must be subclassed. In the subclass, set up the `server` and `host` values. You can optionally also provide a `session_token` cookie, if the request should be authenticated as a specific user. The entity class's request class must then be set to the new subclass. The following example demonstrates: 
 left_code_blocks:
   - code_block: |-
