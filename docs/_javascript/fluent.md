@@ -20,16 +20,19 @@ left_code_blocks:
       // getting and setting
       const domain = new merchi.Domain()
       console.assert(domain.domain() === undefined, "attribute not yet set");
-      const domain2 = domain.domain("new-value.example.com");
+      const name = "new-value.example.com";
+      const domain2 = domain.domain(name);
       console.assert(domain2 === domain, "the original domain is returned");
-      console.assert(domain.domain() === "new-value.example.com", "attribute has now been set");
+      console.assert(domain.domain() === name, "attribute has now been set");
 
       // example of chaining multiple sets and a single get into one line
       const logoUrl = domain.domain("even-newer-value.example.com")
             .smsName("sms.example.com")
             .enableSmsNotifications(true)
-            .enableFalseNotifications(false)
+            .enableEmailNotifications(false)
             .logoUrl()
+      console.assert(domain.enableSmsNotifications(), "was set to true");
+      console.assert(!domain.enableEmailNotifications(), "was set to false");
     title: Getting and selecting attributes
     language: javascript
 ---
