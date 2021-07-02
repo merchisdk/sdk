@@ -5,13 +5,13 @@ parameters:
   - name:
     content:
 content_markdown: |-
-    As there may be tens or hundreds of thousands of some types of entities, list will not return them all at once, but rather it will return one “page” of results.
+    As there may be tens or hundreds of thousands of some types of entities, listing them will not return them all at once, but rather it will return one “page” of results.
 
-    The limit option controls how many results will be returned per page (further limited by backend-enforced limits, and how many entities are actually available. Defaults to 25 if not specified.
+    The limit option controls how many results will be returned per page (further limited by backend-enforced limits, and how many entities are actually available). It defaults to 25 if not specified.
 
-    The offset option controls how many entities to skip over. For example, if the limit is set to 10, setting offset to 20 will give you the third page. Defaults to zero not not supplied.
+    The offset option controls how many entities to skip over. For example, if the limit is set to 10, setting offset to 20 will give you the third page. It defaults to zero not not supplied.
 
-    Attached to the result array sent to the success callback is a `meta`
+    Attached to the result array sent to the success callback is also a `meta`
     object containing information about how many results in total are available.
 left_code_blocks:
   - code_block: |-

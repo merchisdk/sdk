@@ -6,7 +6,7 @@ parameters:
     content:
 content_markdown: |-
      As with the typescript SDK, nested entities can be created at once.
-     For example, you might try to create a product and its category in the
+     For example, you might create a product and its category in the
      same request. 
 left_code_blocks:
   - code_block: |-

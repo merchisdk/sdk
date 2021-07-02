@@ -9,7 +9,7 @@ content_markdown: |-
     allows you to filter by search terms. The following example shows how
     to search for products related to eggs (the returned products might have
     the word egg in their names, or descriptions, or might be in a category
-    named egg, or so one).
+    named egg, or so on).
 left_code_blocks:
   - code_block: |-
      function onSuccess(products) {

@@ -5,23 +5,17 @@ parameters:
   - name:
     content:
 content_markdown: |-
-   As the nested entities example showed, entities don't just have scalar
-   attributes like numbers and strings, but also, they can be attached to
-   other entity objects.
+  Because entities can be nested arbitrarily deeply (and indeed, cyclic references are possible), the fetching and listing methods do not, by default, fetch nested entities from the server. Only scalar properties (strings, numbers, dates, ...) are included.
 
-   Since the graph of related entities may be arbitrarily deep, the nested
-   entities are not included by default when fetching or listing. For example,
-   `product.categories()` will be `undefined` by default, even if the product
-   has categories.
+  It is possible however to request that the server also include specific
+  nested entities, to a specific depth using the `embed` parameter, as in the following example.
 
-   In the situation where they are really no values associated with the
-   attribute, it would not be undefined, but either null, or the empty list.
+  On a newly fetched category `category.domain()` will be `undefined`, even if the category has a domain on the server. `undefined` means that the domain has not been included, or updated locally. If the category did not have a domain at all, `category.domain()` would instead be `null`. 'null` and `undefined` thus have seperate meanins in the merchi sdk library.
+  {: .warning }
 
-   It is possible however to request specific entities be included, which is
-   useful for avoiding having to make a seperate request to fetch them. This is
-   done with the "embed" parameter, which is available while either listing
-   entities, or fetching a single entity.
-content_markdown: |-
+  The following example shows only fetching a single entity, but the embed parameter can also be used when listing entities.
+  {: .success }
+
 left_code_blocks:
   - code_block: |-
      const category = new merchi.Category()

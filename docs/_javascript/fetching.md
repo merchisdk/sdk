@@ -5,7 +5,7 @@ parameters:
   - name:
     content:
 content_markdown: |-
-    The API for fetching a single entity is different to that in the typesctipt
+    The API for fetching a single entity is different to that in the typescript
     API. You must first create an entity object locally, and then set the id
     value, and call `get` on it.
 

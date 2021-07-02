@@ -5,17 +5,17 @@ parameters:
   - name:
     content:
 content_markdown: |-
-    As there may be tens or hundreds of thousnads of some types of entities,
+    As there may be tens or hundreds of thousands of some types of entities,
     listing them will not return them all at once, but rather it will return
     one "page" of results.
 
     The `limit` option controls how many results will be returned per page
     (further limited by backend-enforced limits, and how many entities are
-    actually available. Defaults to 25 if not specified.
+    actually available). It defaults to 25 if not specified.
 
     The `offset` option controls how many entities to skip over. For example,
     if the limit is set to 10, setting offset to 20 will give you the third
-    page. Defaults to zero if not specified.
+    page. It defaults to zero if not specified.
 
     Additionally the `PageSpecification` is available as the second return
     value from a listing call to `fetch`, which contains information about
