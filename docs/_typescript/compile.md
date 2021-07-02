@@ -14,7 +14,6 @@ left_code_blocks:
       tsc index.ts
     title: compile
     language: typescript
----
   - code_block: |-
       <script type="application/javascript" src="index.js"></script>
     title: include the compiled output
