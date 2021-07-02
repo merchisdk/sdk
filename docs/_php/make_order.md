@@ -13,9 +13,10 @@ content_markdown: |-
     which are distributed with the SDK. You should change the value of
     `$domain` to reflect the `id` of the merchi store that the order should
     be placed with.
+
 left_code_blocks:
   - code_block: |-
-      <?php
+    <?php
     require_once 'products.php';
     require_once 'order_helper.php';
 
@@ -200,71 +201,71 @@ left_code_blocks:
         }
     }
 
-?>
+    ?>
 
-<html>
-    <head>
+    <html>
+      <head>
         <title>
-            Example Merchi Order Form
+          Example Merchi Order Form
         </title>
         <style>
-            div { margin: 10px; }
+          div { margin: 10px; }
         </style>
     </head>
     </body>
+      <div>
+        <?php echo $resultMsg ?>
+      </div>
+      <div>
+        <h1>Example Merchi Order Form</h1>
+      </div>
+      <form method="post"
+            action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
+            enctype="multipart/form-data">
         <div>
-            <?php echo $resultMsg ?>
-        </div>
-        <div>
-            <h1>Example Merchi Order Form</h1>
-        </div>
-        <form method="post"
-              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-              enctype="multipart/form-data">
-            <div>
-                <?php text_input("name", "name", $name, $nameErr) ?>
-                <?php text_input("email address", "emailAddress", $emailAddress,
-                                 $emailAddressErr) ?>
-                <?php text_input("area code", "phoneCode", $phoneCode,
-                                 $phoneCodeErr) ?>
-                <?php text_input("phone number", "phoneNumber", $phoneNumber,
-                                 $phoneNumberErr) ?>
-                <?php text_input("line one", "lineOne", $lineOne,
-                                 $lineOneErr) ?>
-                <?php text_input("line two", "lineTwo", $lineTwo,
-                                 $lineTwoErr) ?>
-                <?php text_input("city", "city", $city, $cityErr) ?>
-                <?php text_input("state", "state", $state, $stateErr) ?>
-                <?php text_input("country", "country", $country, $countryErr) ?>
-                <?php text_input("postcode", "postcode", $postcode,
-                                 $postcodeErr) ?>
-                <?php product_select() ?>
-                <?php text_input("quantity", "quantity", $quantity,
-                                 $quantityErr) ?>
-                <?php text_input("notes", "notes", $notes, $notesErr) ?>
-                <?php text_input("company", "company", $company, $companyErr) ?>
-                <label>Upload logo or design files:</label><br />
-                <div id="file-container">
-                </div>
-                <a href="#" id="file-add">Upload another</a>
+          <?php text_input("name", "name", $name, $nameErr) ?>
+            <?php text_input("email address", "emailAddress", $emailAddress,
+                             $emailAddressErr) ?>
+            <?php text_input("area code", "phoneCode", $phoneCode,
+                             $phoneCodeErr) ?>
+            <?php text_input("phone number", "phoneNumber", $phoneNumber,
+                             $phoneNumberErr) ?>
+            <?php text_input("line one", "lineOne", $lineOne,
+                             $lineOneErr) ?>
+            <?php text_input("line two", "lineTwo", $lineTwo,
+                             $lineTwoErr) ?>
+            <?php text_input("city", "city", $city, $cityErr) ?>
+            <?php text_input("state", "state", $state, $stateErr) ?>
+            <?php text_input("country", "country", $country, $countryErr) ?>
+            <?php text_input("postcode", "postcode", $postcode,
+                             $postcodeErr) ?>
+            <?php product_select() ?>
+            <?php text_input("quantity", "quantity", $quantity,
+                             $quantityErr) ?>
+            <?php text_input("notes", "notes", $notes, $notesErr) ?>
+            <?php text_input("company", "company", $company, $companyErr) ?>
+            <label>Upload logo or design files:</label><br />
+            <div id="file-container">
             </div>
-            <div>
-                <input type="submit" value="place order">
-            </div>
+            <a href="#" id="file-add">Upload another</a>
+          </div>
+          <div>
+            <input type="submit" value="place order">
+          </div>
         </form>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-    </script>
-    <script>
-        function add() {
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        </script>
+        <script>
+          function add() {
             $('#file-container').append('<input name="files[]" type="file"><br />');
-        }
-        $('#file-add').on('click', function (e) {
+          }
+          $('#file-add').on('click', function (e) {
             add();
             e.preventDefault();
-        });
-        add();
-    </script>
-    </body>
+          });
+          add();
+        </script>
+      </body>
     </html>
     title: Merchi order placement form
     language: php
