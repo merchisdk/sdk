@@ -5,9 +5,7 @@ parameters:
   - name:
     content:
 content_markdown: |-
-   todo
+  An SDK is available for PHP
+
 left_code_blocks:
-  - code_block:
-    title:
-    language:
 ---
