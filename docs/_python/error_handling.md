@@ -5,7 +5,7 @@ parameters:
   - name:
     content:
 content_markdown: |-
-    The python SDK raises `python/util/api_error.ApiError` in case of failure.
+    The python SDK raises `python.util.api_error.ApiError` in case of failure.
 left_code_blocks:
   - code_block: |-
         import sdk.python.products
