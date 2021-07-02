@@ -9,7 +9,7 @@ content_markdown: |-
   REST resources. For each type, there is normally many specific entities
   available. Once you have set up the `merchi` object, you can get an array
   of entities with the `list` method. For example, here is how to get 
-  an array of product categories in the system:
+  an array of 'categories' in the system (categories are groupings of products):
 left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';

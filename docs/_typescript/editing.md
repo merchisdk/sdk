@@ -7,9 +7,10 @@ parameters:
 content_markdown: |-
   Existing entities can be edited using the `save` method.
 
-  First edit the attributes of the object locally, and then call `save`. 
+  First edit the attributes of the object locally, ensure that the `id`
+  attribute is set, and then call `save`. 
 
-  You can use the objects returned by `list` or `get` for editing, but if you already know the `id` of the entity that you wish to edit, there is no need to first fetch the entity from the server before editing, you can specify the `id` directly.
+  You can use the objects returned by `list` or `get` for editing as those objects will have their `id` filled in. But if you already know the `id` of the entity that you wish to edit, there is no need to first fetch the entity from the server before editing, you can specify the `id` directly.
   {: .info }
 
 left_code_blocks:
@@ -18,8 +19,8 @@ left_code_blocks:
       const merchi = new Merchi();
       const categoryToEdit = new merchi.Categories();
       categoryToEdit.id = 42;
-      newCategory.name = "dry food"; // make a correction to the name
-      newCategory.save().then(() => {
+      categoryToEdit.name = "dry food"; // make a correction to the name
+      categoryToEdit.save().then(() => {
         console.log("ok, the category name was edited.");
       });
     title: edit a category

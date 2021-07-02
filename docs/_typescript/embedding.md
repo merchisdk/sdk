@@ -5,12 +5,10 @@ parameters:
   - name:
     content:
 content_markdown: |-
-  Because entities can be nested arbitrarily deeply `get` and `list` do not,
-  by default, fetch nested entities from the server. Only scalar properties
-  (strings, numbers, dates, ...) are included.
+  Because entities can be nested arbitrarily deeply (and indeed, cyclic references are possible), the `get` and `list` methods do not, by default, fetch nested entities from the server. Only scalar properties (strings, numbers, dates, ...) are included.
 
   It is possible however to request that the server also include specific
-  nested entities using the `embed` parameter, as in the following example.
+  nested entities, to a specific depth using the `embed` parameter, as in the following example.
 
   On a newly fetched category `category.domain` will be `undefined`, even if the category has a domain on the server. `undefined` means that the domain has not been included, or updated locally. If the category did not have a domain at all, `category.domain` would instead be `null`. 'null` and `undefined` thus have seperate meanins in the merchi sdk library.
   {: .warning }

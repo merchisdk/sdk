@@ -14,6 +14,9 @@ content_markdown: |-
   logged in user from the merchi cookie. Alternatively you can provide
   the optional `sessionToken` argument to the `Merchi` constructor. For
   example, you could put something like this into a file named `index.ts`.
+
+  You may need to adjust the import path in the examples, if you have not
+  placed the typescript SDK into "merchisdk/typescript/".
 left_code_blocks:
   - code_block: |-
       import { Merchi } from 'merchisdk/typescript/src/merchi';

@@ -7,8 +7,8 @@ parameters:
 content_markdown: |-
    Entities can be deleted via the `delete` method.
 
-   If you know the id of the object, you do not have to fetch it before
-   deleting.
+   As with editing, if you know the id of the object, you do not have to fetch it before deleting.
+   {: .info }
 
 left_code_blocks:
   - code_block: |-
@@ -17,7 +17,7 @@ left_code_blocks:
       const categoryToDelete = new merchi.Categories();
       categoryToDelete.id = 42;
       categoryToDelete.delete().then(() => {
-        console.log("ok, the category was deleted.");
+        console.log("ok, the category with id 42 was deleted.");
       });
     title: delete a category
     language: typescript

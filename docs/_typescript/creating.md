@@ -10,7 +10,7 @@ content_markdown: |-
   First create a new SDK object using the constructor given by the merchi
   object, then set up some values on the new object, and then call `create`.
 
-  Creating and editing objects locally has no effect on the server. Only after you call `create` will the object actually be stored with merchi.
+  Creating and editing javascript/typescript objects locally has no effect on the server. Only after you call `create` will the object actually be stored with merchi via network request.
   {: .info }
 
   You do not need to assign an `id` when setting up the object, merchi will create one for the new object automatically.

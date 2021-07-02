@@ -11,11 +11,11 @@ content_markdown: |-
 
   The `limit` option controls how many results will be returned per page
   (further limited by backend-enforced limits, and how many entities are
-  actually available. Defaults to 25 if not specified.
+  actually available). It defaults to 25 if not specified.
 
   The `offset` option controls how many entities to skip over. For example,
   if the limit is set to 10, setting offset to 20 will give you the third
-  page. Defaults to zero if not not specified.
+  page. It defaults to zero if not not specified.
 
   Additionally, the `ListMetadata` type is available on the response of
   a call to `list`, which contains information about how many entities where
