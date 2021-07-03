@@ -56,6 +56,12 @@ export class Shipment extends Entity {
   public trackingNumber?: string | null;
 
   @Shipment.property({type: Number})
+  public buyCost?: number | null;
+
+  @Shipment.property({type: String})
+  public buyCurrency?: string | null;
+
+  @Shipment.property({type: Number})
   public cost?: number | null;
 
   @Shipment.property({type: Number})

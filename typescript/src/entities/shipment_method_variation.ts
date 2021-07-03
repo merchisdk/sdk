@@ -23,6 +23,12 @@ export class ShipmentMethodVariation extends Entity {
   public currency?: string;
 
   @ShipmentMethodVariation.property({type: Number})
+  public buyCost?: number | null;
+
+  @ShipmentMethodVariation.property()
+  public buyCurrency?: string;
+
+  @ShipmentMethodVariation.property({type: Number})
   public maxWeight?: number | null;
 
   @ShipmentMethodVariation.property({type: 'CountryTax'})

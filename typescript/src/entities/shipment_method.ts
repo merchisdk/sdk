@@ -25,17 +25,20 @@ export class ShipmentMethod extends Entity {
   @ShipmentMethod.property()
   public companyDefault?: boolean;
 
-  @ShipmentMethod.property({type: Number})
-  public defaultCost?: number | null;
-
-  @ShipmentMethod.property({type: Number})
-  public maxCost?: number | null;
-
-  @ShipmentMethod.property({type: Number})
-  public transportCompany?: number | null;
+  @ShipmentMethod.property()
+  public defaultCost?: number;
 
   @ShipmentMethod.property()
   public currency?: string;
+
+  @ShipmentMethod.property()
+  public buyCost?: number;
+
+  @ShipmentMethod.property()
+  public buyCurrency?: string;
+
+  @ShipmentMethod.property({type: Number})
+  public transportCompany?: number | null;
 
   @ShipmentMethod.property({type: CountryTax})
   public taxType?: CountryTax | null;

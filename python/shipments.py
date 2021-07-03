@@ -54,6 +54,8 @@ class Shipment(sdk.python.entities.Entity):
 
     cost = Property(float)
     tax_amount = Property(float)
+    buy_cost = Property(float)
+    buy_currency = Property(str)
     tax_type = Property(sdk.python.country_taxes.CountryTax)
     tags = Property(DomainTag, backref="shipments")
     shipment_method = Property(ShipmentMethod)
