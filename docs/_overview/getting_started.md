@@ -5,7 +5,7 @@ parameters:
   - name:
     content:
 content_markdown: |-
-  Welcome to the official merchi CRM API documentation page. This API document is designed for those interested in developing for the merchi CRM platform.
+  Welcome to the official Merchi API documentation page. This API document is designed for those interested in developing for Merchi.
 
   In most cases, we recomend using one of our prebuilt SDK libraries, which
   are discussed first. They are available for TypeScript, JavasScript, and
