@@ -7,7 +7,7 @@ parameters:
 content_markdown: |-
   New entities can be added to the system with the `create` method.
 
-  First create a new SDK object using the constructor given by the merchi
+  First create a new SDK object using the constructor given by the Merchi
   object, then set up some values on the new object, and then call `create`.
 
   Creating and editing javascript/typescript objects locally has no effect on the server. Only after you call `create` will the object actually be stored with merchi via network request.

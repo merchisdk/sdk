@@ -17,7 +17,7 @@ left_code_blocks:
      const product = new merchi.Product()
      product.id(42);   // we want the product with id 42.
      function onSuccess() {
-         // at this point, `product` has been updated from the merchi server.
+         // at this point, `product` has been updated from the Merchi server.
          console.log(`the product name is: ${product.name()}`);
      }
      const onError = console.error.bind(console);

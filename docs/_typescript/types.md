@@ -8,10 +8,10 @@ content_markdown: |-
   To work around a small limitation in typescript, the entitiy types are
   seperated from their constructors.
   If you want to list or create entities, it must always be done through
-  the constructor attached to the merchi object. The types, however, are
+  the constructor attached to the Merchi object. The types, however, are
   imported from the 'entities' directory. The following example demonstrates:
 
-  Never try to directly instantiate the imported types, always go through the merchi object.
+  Never try to directly instantiate the imported types, always go through the Merchi object.
   {: .error }
 left_code_blocks:
   - code_block: |-

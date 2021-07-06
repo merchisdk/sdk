@@ -7,10 +7,10 @@ parameters:
 content_markdown: |-
   Entities can have relationships to other entities.
 
-  For example, categories are always linked to a `domain`, which is the merchi
+  For example, categories are always linked to a `domain`, which is the Merchi
   name for a store.
 
-  When creating an entity, you can attach a merchi `Domain` object to the
+  When creating an entity, you can attach a Merchi `Domain` object to the
   category object, in order to specify when domain it should be attached to.
 left_code_blocks:
   - code_block: |-

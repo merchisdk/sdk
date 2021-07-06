@@ -7,11 +7,11 @@ parameters:
 content_markdown: |-
     The following example shows how to make a web form using the PHP SDK which
     accepts information from a user about quantity, shipping address, and so
-    on, and which when places an order for a product with merchi.
+    on, and which when places an order for a product with Merchi.
 
     The example code requires 'products.php' and 'order_helper.php', both of
     which are distributed with the SDK. You should change the value of
-    `$domain` to reflect the `id` of the merchi store that the order should
+    `$domain` to reflect the `id` of the Merchi store that the order should
     be placed with.
 
 left_code_blocks:

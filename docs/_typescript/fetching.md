@@ -5,7 +5,7 @@ parameters:
   - name:
     content:
 content_markdown: |-
-  Almost every entity in merchi is referenced by its `id`.
+  Almost every entity in Merchi is referenced by its `id`.
 
   Once you have the id of an object, you can fetch that entity specifically
   using the `get` static method:
