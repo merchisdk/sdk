@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
+import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
@@ -130,6 +131,9 @@ export class Product extends Entity {
   @Product.property()
   public domain?: Domain;
 
+  @Product.property({type: CountryTax})
+  public taxType?: CountryTax | null;
+
   @Product.property({type: Product})
   public originalProduct?: Product | null;
 
@@ -241,13 +245,6 @@ export class Product extends Entity {
       throw new Error(err);
     }
     return this.independentVariationFields.length > 0;
-  }
-
-  public taxType = () => {
-    if (this.domain === undefined) {
-      throw new Error('domain is undefined, did you forget to embed it?');
-    }
-    return this.domain.defaultTaxType();
   }
 
   public allVariationFields = () => {

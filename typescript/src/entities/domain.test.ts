@@ -43,6 +43,19 @@ test('can delete domain', () => {
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
 });
 
+test('taxType', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  expect(domain.defaultTaxType).toThrow();
+  domain.company = new merchi.Company();
+  expect(domain.defaultTaxType).toThrow();
+  const tax = new merchi.CountryTax();
+  domain.company.defaultTaxType = tax;
+  expect(domain.defaultTaxType()).toBe(tax);
+  domain.company.defaultTaxType = null;
+  expect(domain.defaultTaxType()).toBe(null);
+});
+
 test('can get domain active theme', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();

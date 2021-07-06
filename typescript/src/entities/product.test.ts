@@ -658,21 +658,6 @@ test('hasIndependentVariationFields', () => {
   expect(product.hasIndependentVariationFields()).toBe(true);
 });
 
-test('taxType', () => {
-  const merchi = new Merchi();
-  const product = new merchi.Product();
-  expect(product.taxType).toThrow();
-  product.domain = new merchi.Domain();
-  expect(product.taxType).toThrow();
-  product.domain.company = new merchi.Company();
-  expect(product.taxType).toThrow();
-  const tax = new merchi.CountryTax();
-  product.domain.company.defaultTaxType = tax;
-  expect(product.taxType()).toBe(tax);
-  product.domain.company.defaultTaxType = null;
-  expect(product.taxType()).toBe(null);
-});
-
 test('allVariationFields', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();
