@@ -12,6 +12,8 @@ class ShipmentMethodVariation(sdk.python.entities.Entity):
     destination_state = Property(str)
     cost = Property(float)
     currency = Property(str)
+    buy_cost = Property(float)
+    buy_currency = Property(str)
     max_weight = Property(float)
     tax_type = Property('sdk.python.country_taxes.CountryTax')
 

@@ -41,6 +41,9 @@ export class Invoice extends Entity {
   @Invoice.property()
   public forceReminders?: boolean;
 
+  @Invoice.property()
+  public buySide?: boolean;
+
   @Invoice.property({type: String})
   public note?: string | null;
 
