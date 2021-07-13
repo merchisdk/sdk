@@ -65,13 +65,6 @@ interface GetOptions {
   withRights?: boolean;
 }
 
-export enum SortOrder {
-  // eslint-disable-next-line no-unused-vars
-  ASCENDING,
-  // eslint-disable-next-line no-unused-vars
-  DESCENDING
-}
-
 export enum SerialiseMethod {
   // eslint-disable-next-line no-unused-vars
   TO_DICT = 'to_dict',
@@ -85,7 +78,7 @@ interface ListOptions {
   limit?: number;
   q?: string;
   sort?: string;
-  order?: SortOrder;
+  order?: string;
   tab?: string;
   as?: string;
   withRights?: boolean;
@@ -400,11 +393,7 @@ export class Entity {
         fetchOptions.query.push(['sort', options.sort]);
       }
       if (options.order !== undefined) {
-        if (options.order === SortOrder.ASCENDING) {
-          fetchOptions.query.push(['order', 'asc']);
-        } else {
-          fetchOptions.query.push(['order', 'desc']);
-        }
+        fetchOptions.query.push(['order', options.order]);
       }
       if (options.serialiseMethod !== undefined) {
         fetchOptions.query.push(['serialise_method', options.serialiseMethod]);
