@@ -1860,7 +1860,11 @@ export function merchi(backendUri, websocketUri) {
         }
         if (parameters.teamOnly) {
             request.query().add('team_only',
-                                JSON.stringify(parameters.managedOnly));
+                                JSON.stringify(parameters.teamOnly));
+        }
+        if (parameters.clientOnly) {
+            request.query().add('client_only',
+                                JSON.stringify(parameters.clientOnly));
         }
         if (parameters.memberOnly) {
             request.query().add('member_only',

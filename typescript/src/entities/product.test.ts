@@ -265,6 +265,7 @@ test('can list products with options set', () => {
     asRole: 2,
     publicOnly: false,
     managedOnly: false,
+    clientOnly: false,
     teamOnly: false,
     memberOnly: false,
     merchiOnly: false,
