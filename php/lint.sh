@@ -5,7 +5,7 @@ out=$(find php/ -name \*.php -print0 | xargs -I{} -0 php -l {} | \
 
 
 phpmd php/ text php/ruleset.xml && \
-phpcs --standard=php/phpcs.xml -s -q . && \
+phpcs --standard=php/phpcs.xml -s -q php && \
 if [ -n "$out" ]; then
    echo $out
    exit 1
