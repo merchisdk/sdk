@@ -3,7 +3,7 @@ import { setup, mockFetch } from '../test_util';
 import { Role } from '../constants/roles';
 import { NotificationSection } from '../constants/notification_sections';
 import { NotificationType } from '../constants/notification_types';
-import { SortOrder, SerialiseMethod } from '../entity';
+import { SerialiseMethod } from '../entity';
 
 setup();
 
@@ -251,7 +251,7 @@ test('can list products with options set', () => {
     limit: 20,
     q: 'example',
     sort: 'name',
-    order: SortOrder.ASCENDING,
+    order: 'asc',
     tab: 'job',
     as: 'a',
     withRights: true,
@@ -372,7 +372,7 @@ test('can list products from server with explicit session token', () => {
     {'product': {'name': 'p2'}}],
   'available': 2,
   'count': 2}, 200);
-  const options = {order: SortOrder.DESCENDING};
+  const options = {order: 'desc'};
   return merchi.Product.list(options).then(({items: d, metadata: md}) => {
     expect(d.length).toBe(2);
     expect(d[0].name).toBe('p1');
@@ -587,7 +587,7 @@ test('primary key always serialised', () => {
 test('orderable attribute request', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();
-  const f = new merchi.MerchiFile(); 
+  const f = new merchi.MerchiFile();
   f.id = 24;
   product.id = 42;
   product.images = [f];
