@@ -12,7 +12,10 @@ content_markdown: |-
     You can download it and include it in your website or other project, but
     you are also welcome to hotlink it directly.
 
-    Unlike the Typescript SDK, non-minified source code is currently not available.
+    Unminified source code is also available here:
+
+        https://github.com/merchisdk/sdk/tree/master/javascript
+
 left_code_blocks:
   - code_block: |-
       <script type="javascript" src="https://merchi.co/static/js/dist/merchi.js">
