@@ -10,7 +10,7 @@ content_markdown: |-
     to only those from a specific domain, and the `tags` filter restricts
     list results to only those with a specific Tag added. The exact list
     of supported filters varies by entity. For a complete list, see the
-    [API reference](reference/index.html).
+    [Filtering Reference](#filtersfilter).
 
 left_code_blocks:
   - code_block: |-
