@@ -29,12 +29,15 @@ collections:
   php:
     title: PHP
     position: 5
+  filters:
+    title: Filter Reference
+    position: 6
   protocol:
     title: Protocol
-    position: 6
+    position: 7
   entities:
     title: Entity Reference
-    position: 7
+    position: 8
 plugins:
   - jekyll-sitemap
 
