@@ -127,6 +127,9 @@ export class User extends Entity {
   @User.property({ arrayType: 'UserCompany' })
   public _companies?: UserCompany[];
 
+  @User.property({ arrayType: 'Company' })
+  public companiesNeedStripe?: Company[];
+
   @User.property({ arrayType: 'Category' })
   public categories?: Category[];
 

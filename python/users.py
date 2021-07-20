@@ -61,6 +61,7 @@ class User(sdk.python.entities.Entity):
     is_super_user = Property(bool)
     system_roles = Property(SystemRole)
     user_companies = Property(UserCompany, backref="user")
+    companies_need_stripe = Property('sdk.python.companies.Company')
     addresses = Property(Address)
     phone_numbers = Property(PhoneNumber)
     categories = Property('sdk.python.categories.Category')
