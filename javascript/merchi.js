@@ -3916,7 +3916,15 @@ export function merchi(backendUri, websocketUri) {
                 total += (quantity * this.variationUnitCost());
             }
             return total;
-        }
+        };
+
+        this.onceOffCost = function () {
+            return this.variationCost();
+        };
+
+        this.unitCost = function () {
+            return this.variationUnitCost();
+        };
     }
 
     function VariationField() {
