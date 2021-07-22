@@ -2,6 +2,7 @@ import { Cart } from './cart';
 import { CountryTax } from './country_tax';
 import { Entity } from '../entity';
 import { Product } from './product';
+import { RequestOptions } from '../request';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
@@ -60,5 +61,17 @@ export class CartItem extends Entity {
       throw 'needsShipping is undefined, did you forget to embed it?';
     }
     return this.product.needsShipping;
+  }
+
+  public calculate = () => {
+    const resource = '/cart-item-cost-estimate/';
+    const data = this.toFormData({excludeOld: false});
+    const fetchOptions: RequestOptions = {method: 'POST', body: data};
+    fetchOptions.query = [];
+    fetchOptions.query.push(['skip_rights', 'y']);
+
+    return this.merchi.authenticatedFetch(resource, fetchOptions).
+      then((data: any) => { this.fromJson(data, {makeDirty: true});
+        return this;});
   }
 }
