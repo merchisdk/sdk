@@ -30,6 +30,8 @@ import { EmailCounter } from './entities/email_counter';
 import { MenuItem } from './entities/menu_item';
 import { SupplyDomain } from './entities/supply_domain';
 import { Cart } from './entities/cart';
+import { CartShipmentGroup } from './entities/cart_shipment_group';
+import { CartShipmentQuote } from './entities/cart_shipment_quote';
 import { Theme } from './entities/theme';
 import { Component } from './entities/component';
 import { MerchiFile } from './entities/file';
@@ -144,6 +146,8 @@ export class Merchi {
   public VariationsGroup: typeof VariationsGroup;
   public Menu: typeof Menu;
   public Cart: typeof Cart;
+  public CartShipmentGroup: typeof CartShipmentGroup;
+  public CartShipmentQuote: typeof CartShipmentQuote;
   public Quote: typeof Quote;
   public Component: typeof Component;
   public QuoteItem: typeof QuoteItem;
@@ -248,6 +252,12 @@ export class Merchi {
     this.Payment = this.setupClass(Payment) as typeof Payment;
     this.Page = this.setupClass(Page) as typeof Page;
     this.Cart = this.setupClass(Cart) as typeof Cart;
+    this.CartShipmentGroup = this.setupClass(
+      CartShipmentGroup
+    ) as typeof CartShipmentGroup;
+    this.CartShipmentQuote = this.setupClass(
+      CartShipmentQuote
+    ) as typeof CartShipmentQuote;
     this.MerchiFile = this.setupClass(MerchiFile) as typeof MerchiFile;
     this.User = this.setupClass(User) as typeof User;
     this.JobComment = this.setupClass(JobComment) as typeof JobComment;
