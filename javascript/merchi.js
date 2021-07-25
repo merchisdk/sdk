@@ -2311,6 +2311,7 @@ export function merchi(backendUri, websocketUri) {
 
         addPropertyTo(this, 'id');
         addPropertyTo(this, 'apiSecret');
+        addPropertyTo(this, 'webflowApiKey');
         addPropertyTo(this, 'domain');
         addPropertyTo(this, 'domainType');
         addPropertyTo(this, 'activeThemeId');
