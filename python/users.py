@@ -54,7 +54,7 @@ class User(sdk.python.entities.Entity):
     comments = Property(str)
     preferred_language = Property(str)
     call_to_actions = Property(str)
-    call_to_action_details = Property(dict)
+    call_to_action_details = Property(list)
     has_store = Property(bool)
     enable_crash_reports = Property(bool)
     enable_client_emails = Property(bool)

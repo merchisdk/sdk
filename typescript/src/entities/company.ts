@@ -33,7 +33,7 @@ export class Company extends Entity {
   public callToActions?: string;
 
   @Company.property()
-  public callToActionDetails?: any;
+  public callToActionDetails?: any[];
 
   @Company.property({type: String})
   public website?: string | null;
