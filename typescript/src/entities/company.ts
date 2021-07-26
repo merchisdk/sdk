@@ -32,6 +32,9 @@ export class Company extends Entity {
   @Company.property()
   public callToActions?: string;
 
+  @Company.property()
+  public callToActionDetails?: any;
+
   @Company.property({type: String})
   public website?: string | null;
 
