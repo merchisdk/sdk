@@ -93,6 +93,7 @@ export class Merchi {
   public sessionToken?: string;
   public invoiceToken?: string;
   public clientToken?: string;
+  public cartToken?: string;
 
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
@@ -161,7 +162,11 @@ export class Merchi {
   }
 
   public constructor(
-    sessionToken?: string, clientToken?: string, invoiceToken?: string) {
+    sessionToken?: string,
+    clientToken?: string,
+    invoiceToken?: string,
+    cartToken?: string
+  ) {
     if (sessionToken) {
       this.sessionToken = sessionToken;
     } else {
@@ -178,6 +183,12 @@ export class Merchi {
       this.invoiceToken = invoiceToken;
     } else {
       this.invoiceToken = getCookie('invoice_token');
+    }
+
+    if (cartToken) {
+      this.cartToken = cartToken;
+    } else {
+      this.cartToken = getCookie('cart_token');
     }
 
     // re-export configured versions of all classes
@@ -292,6 +303,10 @@ export class Merchi {
     if (this.invoiceToken) {
       /* istanbul ignore next */
       options.query.push(['invoice_token', this.invoiceToken]);
+    }
+    if (this.cartToken) {
+      /* istanbul ignore next */
+      options.query.push(['cart_token', this.cartToken]);
     }
     return apiFetch(resource, options, expectEmptyResponse);
   };
