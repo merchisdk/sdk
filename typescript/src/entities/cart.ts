@@ -1,5 +1,6 @@
 import { Address } from './address';
 import { CartItem } from './cart_item';
+import { CartShipmentGroup } from './cart_shipment_group';
 import { Company } from './company';
 import { Domain } from './domain';
 import { Entity } from '../entity';
@@ -67,6 +68,9 @@ export class Cart extends Entity {
 
   @Cart.property({arrayType: 'CartItem'})
   public cartItems?: CartItem[];
+
+  @Cart.property({arrayType: 'CartShipmentGroup'})
+  public shipmentGroups?: CartShipmentGroup[];
 
   public requiresShipment = () => {
     if (this.cartItems === undefined) {
