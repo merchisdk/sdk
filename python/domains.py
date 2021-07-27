@@ -57,6 +57,8 @@ class Domain(sdk.python.entities.Entity):
     enable_email_notifications = Property(bool)
     enable_sms_notifications = Property(bool)
     mailgun_records = Property(list)
+    webflow_api_key = Property(str)
+
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")
