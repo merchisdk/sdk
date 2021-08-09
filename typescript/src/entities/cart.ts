@@ -43,6 +43,9 @@ export class Cart extends Entity {
   public cartItemsTotalCost?: number;
 
   @Cart.property()
+  public shipmentTotalCost?: number;
+
+  @Cart.property()
   public subtotalCost?: number;
 
   @Cart.property()
