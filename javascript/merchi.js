@@ -7952,10 +7952,7 @@ export function merchi(backendUri, websocketUri) {
         request.send();
     }
 
-    if (!window.currentUser) {
-        console.log('got in here somehow');
-        getCurrentUser(id, id, currentUserEmbed);
-    }
+    if (!window.currentUser) getCurrentUser(id, id, currentUserEmbed);
 
     return {'roles': roles,
             'roleStrings': roleStrings,
