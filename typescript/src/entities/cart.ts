@@ -54,7 +54,7 @@ export class Cart extends Entity {
   @Cart.property()
   public totalCost?: number;
 
-  @Cart.property({type: User})
+  @Cart.property({type: 'User'})
   public client?: User | null;
 
   @Cart.property({type: Company})
