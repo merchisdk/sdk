@@ -48,6 +48,12 @@ export class SubscriptionPlan extends Entity {
   public perDomainCost?: number;
 
   @SubscriptionPlan.property()
+  public transactionCost?: number;
+
+  @SubscriptionPlan.property()
+  public commissionRate?: number;
+
+  @SubscriptionPlan.property()
   public baseUserCount?: number;
 
   @SubscriptionPlan.property()
