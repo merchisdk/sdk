@@ -16,6 +16,6 @@ export class CartShipmentGroup extends Entity {
   @CartShipmentGroup.property({arrayType: 'CartShipmentQuote'})
   public quotes?: CartShipmentQuote[];
 
-  @CartShipmentGroup.property({arrayType: 'CartShipmentQuote'})
-  public selectedQuote?: CartShipmentQuote[];
+  @CartShipmentGroup.property({type: 'CartShipmentQuote'})
+  public selectedQuote?: CartShipmentQuote;
 }
