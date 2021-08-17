@@ -27,7 +27,7 @@ matrix:
       script:
         - python/lint.sh
         - env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
-        - coverage report -m --fail-under 55
+        - coverage report -m --fail-under 40
 
 notifications:
   email:

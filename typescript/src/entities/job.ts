@@ -86,6 +86,9 @@ export class Job extends Entity {
   public callToActions?: string;
 
   @Job.property()
+  public callToActionDetails?: any[];
+
+  @Job.property()
   public priority?: number;
 
   @Job.property({type: Number})
