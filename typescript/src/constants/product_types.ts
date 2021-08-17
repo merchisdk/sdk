@@ -6,4 +6,6 @@ export enum ProductType {
   CHAINED_MOD = 4,
   CHAINED_SELLER_MOD = 5,
   PRODUCTION_MOD = 6,
+  CHAINED_MOQ = 7,
+  IN_STOCK_RESELL = 8,
 }
