@@ -1,11 +1,19 @@
-import {md5} from './md5.js';
 import moment from 'moment-timezone';
+import { md5 } from './md5.js';
+import { generateUUID } from './uuid.js';
+import { isUndefined, notEmpty, id } from './helpers.js';
+import { addPropertyTo, serialise, getList, fromJsonList, forEachProperty,
+   fromJson, patchOne, Request } from './model.js';
+import { Dictionary } from './dictionary.js';
+import { Set } from './set.js';
+import { PhoneNumber, PhoneNumbers } from './phone_number.js';
+import { EmailAddress, EmailAddresses } from './email_address.js';
+import { EmailCounter, EmailCounters } from './email_counter.js';
 
 export function merchi(backendUri, websocketUri) {
-
-    function isUndefined(x) {
-        return x === undefined;
-    }
+    window.merchiJsonpHandlers = {};
+    window.merchiBackendUri = backendUri;
+    window.merchiSubscriptionManager = new SubscriptionManager();
 
     function isNull(x) {
         return x === null;
@@ -13,10 +21,6 @@ export function merchi(backendUri, websocketUri) {
 
     function isUndefinedOrNull(x) {
         return isUndefined(x) || isNull(x);
-    }
-
-    function notEmpty(value) {
-        return !(isUndefined(value) || value === null || value === "");
     }
 
     function isArray(x) {
@@ -68,14 +72,6 @@ export function merchi(backendUri, websocketUri) {
         return sortArray(array, objectKey, true);
     }
 
-    function sortArrayByObjectKey(array, objectKey) {
-        return sortArray(array, objectKey);
-    }
-
-    function sortArrayByObjectKeyDescending(array, objectKey) {
-        return sortArray(array, objectKey, true);
-    }
-
     function removeObjectFromArrayBasedOnCondition(array, condition) {
         array.splice(array.findIndex(condition), 1);
     }
@@ -86,10 +82,6 @@ export function merchi(backendUri, websocketUri) {
         removeObjectFromArrayBasedOnCondition(array, function (obj) {
             return obj[key]() === intValue;
         });
-    }
-
-    function id(x) {
-        return x;
     }
 
     function displayMoney(amount) {
@@ -109,187 +101,6 @@ export function merchi(backendUri, websocketUri) {
             }
         }
         return false;
-    }
-
-    function all(iterable) {
-        for (var index = 0; index < iterable.length; ++index) {
-            if (!iterable[index]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /** Basic Data Structure **/
-    function Dictionary() {
-
-        var store = {},
-            count = 0;
-
-        function noSuchKey(name) {
-            throw 'No such key "' + String(name) + '" in dictionary';
-        }
-
-        this.clone = function () {
-            return new Dictionary(store, count);
-        };
-
-        this.add = function (name, value) {
-            if (!this.has(name)) {
-                ++count;
-            }
-            store[name] = value;
-            return this;
-        };
-
-        this.getArray = function (names) {
-        /** passing a array of keys return the values array
-         * corresponding to the keys **/
-            var i, returnArray = [];
-            for (i = 0; i < names.length; i++) {
-                if (this.has(names[i])) {
-                    returnArray.push(store[names[i]]);
-                } else {
-                    noSuchKey(names[i]);
-                }
-            }
-            return returnArray;
-        };
-
-        this.get = function (name, default_) {
-            if (this.has(name)) {
-                return store[name];
-            }
-            if (default_ !== undefined) {
-                return default_;
-            }
-            return noSuchKey(name);
-        };
-
-        this.has = function (name) {
-            return Object.prototype.hasOwnProperty.call(store, name) &&
-                Object.prototype.propertyIsEnumerable.call(store, name);
-        };
-
-        this.remove = function (name) {
-            if (this.has(name)) {
-                delete store[name];
-                --count;
-                return this;
-            }
-            return noSuchKey(name);
-        };
-
-        this.merge = function (other) {
-            var _this = this;
-            if (other.__proto__.constructor === Dictionary) {
-                other.each(function (name, value) {
-                    _this.add(name, value);
-                });
-            } else {
-                for (var property in other) {
-                    if (other.hasOwnProperty(property)) {
-                        _this.add(property, other[property]);
-                    }
-                }
-            }
-            return this;
-        };
-
-        this.each = function (procedure) {
-            var name;
-            for (name in store) {
-                if (Object.prototype.hasOwnProperty.call(store, name)) {
-                    procedure(name, store[name]);
-                }
-            }
-            return this;
-        };
-
-        this.keys = function () {
-            var result = [];
-            this.each(function (name) { result.push(name); });
-            return result;
-        };
-
-        this.values = function () {
-            var result = [];
-            this.each(function (ignore, value) { result.push(value); });
-            return result;
-        };
-
-        this.count = function () {
-            return count;
-        };
-
-        this.toFormData = function () {
-            var result = new FormData();
-            this.each(function (key, value) {
-                result.append(key, value);
-            });
-            return result;
-        };
-
-        this.toUriEncoding = function () {
-            var result = '';
-            this.each(function (key, value) {
-                if (typeof key === "object") {
-                    throw "cannot URI encode object key";
-                }
-                if (typeof value === "object") {
-                    throw "cannot URI encode object name";
-                }
-                result += encodeURIComponent(key);
-                result += '=';
-                result += encodeURIComponent(value);
-                result += '&';
-            });
-            return result.slice(0, -1);
-        };
-
-    }
-
-    function Set() {
-
-        var store = new Dictionary();
-
-        this.add = function (value) {
-            store.add(value, value);
-        };
-
-        this.has = function (value) {
-            return store.has(value);
-        };
-
-        this.each = function (procedure) {
-            store.each(function (name, value) { procedure(value); });
-            return this;
-        };
-
-        this.values = function () {
-            return store.values();
-        };
-
-        this.remove = function (value) {
-            store.remove(value);
-            return this;
-        };
-
-    }
-
-    function generateUUID() {
-        var d = new Date().getTime(),
-            uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-        if (window.performance &&
-                typeof window.performance.now === "function") {
-            d += performance.now();
-        }
-        uuid = uuid.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);
-        });
-        return uuid;
     }
 
     function enumerateFiles(files) {
@@ -392,15 +203,12 @@ export function merchi(backendUri, websocketUri) {
                             'enrolledDomains': {'domain': {}}},
         platformName = 'merchi',
         platformCopyright = 2021,
-        platfromDomain = 'merchi.co',
         platfromSellerDomain = 'merchi.me',
         platfromSellerDomainPlus = 'merchi.store',
         backendImgUri = backendUri + 'static/img/',
-        platformIconWhite = backendImgUri + 'merchi-monster-white.png',
         platformIcon = backendImgUri + 'merchi-monster-blue.png',
         platformLogo = backendImgUri + 'merchi-master-colour-with-monster.png',
         defaultUserAvatar = backendImgUri + 'default-user-32px.jpg',
-        jsonpHandlers = {},
         STATUS = {
             PROD: ['Init', 'Rejected', 'Quoteding', 'Waiting Quote',
                    'Close Deadline', 'Assigned', 'Questioning', 'Commenced',
@@ -411,7 +219,6 @@ export function merchi(backendUri, websocketUri) {
         },
         GSTrate = 0.1,
         DEFAULT_RIGHTS = [],
-        subscriptionManager = new SubscriptionManager(),
         showUserAvatarArray =
             ['DRAFT_SENT', 'DRAFT_CHANGE_REQUEST', 'DRAFT_APPROVED',
              'DRAFT_COMMENT', 'JOB_COMMENT', 'PRODUCTION_COMMENT',
@@ -682,7 +489,7 @@ export function merchi(backendUri, websocketUri) {
                                showDomainOrUserAvatarArray));
 
     function isAvatarTypeInNotificationAvatar(avatarTypeString, noteType) {
-        var i, avatarType = notificationAvatar.get(avatarTypeString);
+        var avatarType = notificationAvatar.get(avatarTypeString);
         return any(avatarType, function (type) { return type === noteType; });
     }
 
@@ -845,94 +652,6 @@ export function merchi(backendUri, websocketUri) {
         domainTypesInts.add(value, parseInt(key, 10));
     });
 
-    /** Key functions, fromJson, Request **/
-    function forEachProperty(obj, procedure) {
-        obj._properties.each(function (property) {
-            // elem in _propertiesSet is array
-            // 0 is name, 1 is type
-            procedure(property[0], property[1]);
-        });
-    }
-
-    function fromJson(model, json, options) {
-        var defaults = {makesDirty: true};
-        options = Object.assign({}, defaults, options);
-        forEachProperty(model, function (propName, Type) {
-            try {
-                var received = json[propName],
-                    parsed;
-
-                if (!Type || typeof received === 'number') {
-                    // Prop is untyped or only id received
-                    model[propName](received, {makesDirty: options.makesDirty});
-                } else {
-                    // Prop is typed and other thing rather than
-                    // single id received
-                    if (received instanceof Array) {
-                        if (received.length > 0 &&
-                            received[0] instanceof Object) {
-                            // response has embed obj
-                            parsed = fromJsonList(new Type(), received,
-                                                  options);
-                        } else {
-                            // response is id array
-                            parsed = received;
-                        }
-                    } else {
-                        // Embed Object received
-                        parsed = fromJson(new Type(), received, options);
-                    }
-                    model[propName](parsed, {makesDirty: options.makesDirty});
-                }
-            } catch (ignore) {
-            }
-        });
-        model.rights = json.rights;
-        return model;
-    }
-
-    function fromJsonList(obj, json, options) {
-        var result = [],
-            list,
-            i,
-            single;
-
-        var defaults = {makesDirty: true};
-        options = Object.assign({}, defaults, options);
-
-        // When request plural eg /users, it gives typed json list
-        // But when request embed data, annonymous json list returned
-        if (json.constructor === Array) {
-            // Embed data process
-            list = json;
-            for (i = 0; i < list.length; ++i) {
-                single = new obj.constructor();
-                result.push(fromJson(single, list[i], options));
-            }
-            return result;
-        }
-
-        // Plural request eg /users
-        list = json[obj.json];
-
-        for (i = 0; i < list.length; ++i) {
-            single = new obj.single();
-            result.push(fromJson(single, list[i][single.json], options));
-        }
-
-        // Append meta data for pagination,
-        // workaroundbackward compatibility
-        result.meta = {
-            available: json.available,
-            count: json.count,
-            canCreate: json.canCreate,
-            limit: json.limit,
-            offset: json.offset
-        };
-
-        return result;
-    }
-
     function toJsonList(objs) {
         var result = [],
             i,
@@ -1062,8 +781,7 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function updateEntAttributes(ent, newEnt, attrs) {
-        var newAttributesValues = {},
-            updatedEnt = updateEntNonEmbeddableAttrbibutes(ent, newEnt),
+        var updatedEnt = updateEntNonEmbeddableAttrbibutes(ent, newEnt),
             i;
         for (i = 0; i < attrs.length; i++) {
             var attributeName = attrs[i];
@@ -1076,440 +794,13 @@ export function merchi(backendUri, websocketUri) {
         /* Update an entity with new values from an updated entity
            but ignore specified attributes
         */
-        var newAttributesValues = {},
-            updatedEnt = newEnt,
+        var updatedEnt = newEnt,
             i;
         for (i = 0; i < ignoredAttrs.length; i++) {
             var attributeName = ignoredAttrs[i];
             updatedEnt[attributeName](ent[attributeName]());
         }
        return updatedEnt;
-    }
-
-    function serialise(obj, existing, prefix, files, options) {
-        var result = new Dictionary(),
-            index,
-            excludeOld;
-        options = options ? options : {};
-        excludeOld = !!options.excludeOld;
-        if (Boolean(existing)) {
-            result = existing;
-        }
-        if (!files) {
-            files = [];
-        }
-        function appendData(name, value) {
-            if (!isUndefined(value) && value !== null) {
-                if (Boolean(prefix)) {
-                    result.add(prefix + '-' + name, value);
-                }
-                else
-                {
-                   result.add(name, value);
-                }
-            }
-        }
-        if (Boolean(obj.fileData)) {
-            index = files.length;
-            files.push(obj.fileData);
-            appendData('fileDataIndex', index);
-        }
-        forEachProperty(obj, function (property, Type) {
-            var value = obj[property](),
-                i,
-                innerPrefix,
-                nested,
-                amountAdded;
-            if (!isUndefined(Type) && Boolean(Type)) {
-                // serialise relationship
-                var updatingOrder = obj._updatingOrder[property];
-                if (updatingOrder) {
-                    appendData(property + '-*updateOrder', 'true');
-                }
-                if (value instanceof Array) {
-                    var isDirty = false;
-                    for (i = 0; i < value.length; i++) {
-                      if (!!value[i]._isDirty) {
-                        isDirty = true;
-                        break; 
-                      }
-                    }
-                    if (excludeOld && !(obj._wantsUpdate[property] ||
-                        isDirty)) {
-                        return;
-                    }
-                    if (value && value.length === 0) {
-                        appendData(property + '-count', 0);
-                    }
-                    // multiple remove entities
-                    var childrenSerialised = 0;
-                    for (i = 0; i < value.length; ++i) {
-                        innerPrefix = property + '-' + i;
-                        if (Boolean(prefix)) {
-                            innerPrefix = prefix + '-' + innerPrefix;
-                        }
-                        var initialCount = result.count();
-                        nested = serialise(value[i], result, innerPrefix,
-                                           files, options);
-                        if (result.count() > initialCount) {
-                          childrenSerialised += 1;
-                        }
-                        result = nested[0];
-                        files = nested[1];
-                        if (childrenSerialised > 0) {
-                          appendData(property + '-count', childrenSerialised);
-                        }
-                    }
-                } else if (Boolean(value)) {
-                    // one remote entity
-                    if (excludeOld && !(obj._wantsUpdate[property] ||
-                        value._isDirty)) {
-                        return;
-                    }
-                    innerPrefix = property + '-0';
-                    if (Boolean(prefix)) {
-                        innerPrefix = prefix + '-' + innerPrefix;
-                    }
-                    var initialCount = result.count();
-                    nested = serialise(value, result, innerPrefix, files,
-                                       options);
-                    if (result.count() > initialCount) {
-                      appendData(property + '-count', 1);
-                    }
-                    result = nested[0];
-                    files = nested[1];
-                }
-            } else {
-                // serialise scalar
-                if (excludeOld && !obj._wantsUpdate[property] &&
-                    property !== 'id') {
-                    return;
-                }
-                appendData(property, value);
-            }
-        });
-        return [result, files];
-    }
-
-    function markDirty(obj) {
-      /* mark this object, and recursively all objects that have refered to it,
-         as changed compared to the backend. */
-      var openSet = [];  /* Queue (BFS) */
-      var closedSet = new Set();
-      openSet.push(obj);
-      while (openSet.length > 0) {
-        var current = openSet.shift();
-        if (!closedSet.has(current)) {
-          current._isDirty = true;
-          closedSet.add(current);
-          current._backObjects.each(function (child) {
-            openSet.push(child); 
-          });
-        } 
-      }
-    }
-
-    function addPropertyTo(obj, propertyName, Type) {
-        obj._isMerchiEntity = true;
-        if (!Object.prototype.hasOwnProperty.call(obj, '_wantsUpdate')) {
-            obj._wantsUpdate = {};
-        }
-        obj._wantsUpdate[propertyName] = false;
-        if (!Object.prototype.hasOwnProperty.call(obj, '_isDirty')) {
-            obj._isDirty = false;
-        }
-        if (!Object.prototype.hasOwnProperty.call(obj, '_backObjects')) {
-            obj._backObjects = new Set();
-        }
-        if (!Object.prototype.hasOwnProperty.call(obj, '_properties')) {
-            obj._properties = new Set();
-        }
-        if (!Object.prototype.hasOwnProperty.call(obj, '_updatingOrder')) {
-            obj._updatingOrder = {};
-        }
-        var hiddenProperty = '_' + propertyName;
-        if (isUndefined(Type)) {
-            Type = null;
-        }
-
-        // So Unitix Model has inbult _properties which is a Set
-        // _properties indicate the key(propertyName) and type()
-        // But a real property is in  Model._+propertyName
-        // and its accessor is Model.propertyName(value)
-        obj._properties.add([propertyName, Type]);
-        obj[propertyName] = function (value, options) {
-            if (isUndefined(options)) {
-              options = {};
-            }
-            if (isUndefined(options.makesDirty)) {
-              options.makesDirty = true;
-            }
-            if (isUndefined(options.updatingOrder)) {
-              options.updatingOrder = false;
-            }
-            if (isUndefined(value)) {
-                return obj[hiddenProperty];
-            }
-            obj[hiddenProperty] = value;
-            if (options.makesDirty) {
-              obj._wantsUpdate[propertyName] = true;
-              markDirty(obj);
-            }
-            obj._updatingOrder[propertyName] = options.updatingOrder;
-            if (!!value && !!value._isMerchiEntity) {
-              value._backObjects.add(obj);
-            } else if (Array.isArray(value)) {
-              for (var i = 0; i < value.length; i++) {
-                var item = value[i];
-                if (!!item._isMerchiEntity) {
-                  item._backObjects.add(obj); 
-                }
-              }
-            }
-            return obj;
-        };
-    }
-
-    function Request() {
-
-        var server = window.merchiBackendUri ? window.merchiBackendUri :
-                                               backendUri,
-            version = 'v6',
-            method = 'GET',
-            resource = '/',
-            query = new Dictionary(),
-            data = new Dictionary(),
-            files = new Dictionary(),
-            responseHandler = id,
-            errorHandler = id,
-            contentType = null,
-            username = null,
-            password = null;
-
-        this.server = function (value) {
-            if (isUndefined(value)) {
-                return server;
-            }
-            server = value;
-            return this;
-        };
-
-        this.version = function (value) {
-            if (isUndefined(value)) {
-                return version;
-            }
-            version = value;
-            return this;
-        };
-
-        this.method = function (value) {
-            if (isUndefined(value)) {
-                return method;
-            }
-            method = value;
-            return this;
-        };
-
-        this.resource = function (value) {
-            if (isUndefined(value)) {
-                return resource;
-            }
-            resource = value;
-            return this;
-        };
-
-        this.query = function () {
-            return query;
-        };
-
-        this.data = function () {
-            return data;
-        };
-
-        this.files = function (value) {
-            if (isUndefined(value)) {
-                return files;
-            }
-            files = value;
-            return this;
-        };
-
-        this.responseHandler = function (value) {
-            if (isUndefined(value)) {
-                return responseHandler;
-            }
-            responseHandler = value;
-            return this;
-        };
-
-        this.errorHandler = function (value) {
-            if (isUndefined(value)) {
-                return errorHandler;
-            }
-            errorHandler = value;
-            return this;
-        };
-
-        this.contentType = function (value) {
-            if (isUndefined(value)) {
-                return contentType;
-            }
-            contentType = value;
-            return this;
-        };
-
-        this.username = function (value) {
-            if (isUndefined(value)) {
-                return username;
-            }
-            username = value;
-            return this;
-        };
-
-        this.password = function (value) {
-            if (isUndefined(value)) {
-                return password;
-            }
-            password = value;
-            return this;
-        };
-
-
-        this.ajaxSupported = function () {
-            return this.crossDomainAjaxSupported() ||
-                Boolean(window.XMLHttpRequest);
-        };
-
-        this.crossDomainAjaxSupported = function () {
-            if (Boolean(window.XMLHttpRequest)) {
-                var xhr = new XMLHttpRequest();
-                if (!isUndefined(xhr)) {
-                    return true;
-                }
-            }
-            return false;
-        };
-
-        this.p2pSupported = function () {
-            return false;
-        };
-
-        this.usableMethod = function () {
-            var methodName = this.method().toUpperCase();
-            if (this.crossDomainAjaxSupported()) {
-                return methodName;
-            }
-
-            if (methodName === 'GET') {
-                return 'GET';
-            }
-            return 'POST';
-        };
-
-        this.url = function () {
-            return this.server() + this.path();
-        };
-
-        this.path = function () {
-            var url = this.version();
-            url += this.resource();
-            if (!this.crossDomainAjaxSupported() &&
-                    this.method().toUpperCase() !== 'GET' &&
-                    this.method().toUpperCase() !== 'POST') {
-                this.query().add('method', this.method());
-            }
-            if (Boolean(window.currentSession) &&
-                Boolean(window.currentSession.token())) {
-                this.query().add('session_token',
-                                 window.currentSession.token());
-            }
-            if (this.query().count() > 0) {
-                url += '?' + this.query().toUriEncoding();
-            }
-            return url;
-        };
-
-        this.jsonpUrl = function (handlerName) {
-            var url = '';
-            url += this.server();
-            url += '/';
-            url += this.version();
-            url += '/jsonp/?method=' + encodeURIComponent(this.method());
-            url += '&resource=' + encodeURIComponent(this.resource().
-                substring(1));
-            url += '&jsonp=' + encodeURIComponent(handlerName);
-            if (Boolean(window.currentSession) &&
-                Boolean(window.currentSession.token())) {
-                this.query().add('session_token',
-                                 window.currentSession.token());
-            }
-            this.query().each(function (name, value) {
-                url += '&' + name + '=' + encodeURIComponent(value);
-            });
-            url += this.data().toUriEncoding();
-            return url;
-        };
-
-        this.send = function () {
-            if (this.crossDomainAjaxSupported()) {
-                this.sendXMLHttpRequest();
-            } else {
-                this.sendJSONP();
-            }
-            return this;
-        };
-
-        this.sendJSONP = function () {
-            var scriptTag = document.createElement('SCRIPT'),
-                rand = 'h' + (Math.random() + 1).toString(36).substr(2, 8),
-                handlerName = 'MERCHI.jsonpHandlers.' + rand,
-                self = this,
-                handler;
-            jsonpHandlers[rand] = function (status, response) {
-                delete jsonpHandlers[handlerName];
-                document.body.removeChild(scriptTag);
-                status = parseInt(status, 10);
-                if (isNaN(status) || status === 0 || status > 399) {
-                    handler = self.errorHandler();
-                } else {
-                    handler = self.responseHandler();
-                }
-                handler(status, JSON.stringify(response));
-            };
-            scriptTag.setAttribute('type', 'text/javascript');
-            scriptTag.setAttribute('src', this.jsonpUrl(handlerName));
-            document.body.appendChild(scriptTag);
-        };
-
-        this.sendXMLHttpRequest = function () {
-            var self = this,
-                transport = new XMLHttpRequest(),
-                allData;
-            function handleDone() {
-                if (transport.status === 0 || transport.status > 399) {
-                    self.errorHandler()(transport.status,
-                            transport.responseText);
-                } else {
-                  self.responseHandler()(transport.status,
-                          transport.responseText);
-                }
-            }
-            transport.addEventListener('load', handleDone);
-            transport.addEventListener('error', handleDone);
-            transport.open(this.usableMethod(), this.url(), true);
-            if (this.username() !== null) {
-                transport.setRequestHeader('Authorization', 'Basic ' +
-                    btoa(this.username() + ':' + this.password()));
-            }
-            transport.withCredentials = true;
-            if (this.contentType() !== null) {
-                transport.setRequestHeader('Content-type', this.contentType());
-            }
-            allData = this.data();
-            allData.merge(this.files());
-            transport.send(allData.toFormData());
-        };
-
     }
 
     function recoverOne(model, id, success, error) {
@@ -1693,352 +984,6 @@ export function merchi(backendUri, websocketUri) {
         }
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
-    }
-
-    function patchOne(options) {
-        var request = new Request(),
-            id = options.id;
-        options.resource = options.resource || '';
-        options.id = options.id || '';
-        options.data = options.data || {};
-        options.success = options.success || id;
-        options.error = options.error || id;
-        options.files = options.files || new Dictionary();
-
-        request.resource(options.resource + '/' + options.id + '/').method('PATCH');
-        request.files(options.files);
-        request.data().merge(options.data);
-
-        if (options.embed && options.embed.constructor === Object) {
-            request.query().add('embed', JSON.stringify(options.embed));
-        }
-        if (notEmpty(options.as_domain)) {
-            request.query().add('as_domain', options.as_domain);
-        }
-        if (options.cartToken) {
-            request.query().add('cart_token', options.cartToken);
-        }
-        if (!options.withRights) {
-            request.query().add('skip_rights', 'y');
-        }
-        function handleResponse(status, body) {
-            var result = '';
-            if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    var message = 'problem getting response from server';
-                    options.error(status, {message: message,
-                                           errorCode: 0});
-                    return;
-                }
-                options.success(result);
-            } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (err) {
-                    result = {message: 'could not edit the entity',
-                              errorCode: 0};
-                }
-                options.error(status, result);
-            }
-        }
-        function handleError(status, data) {
-            var result = '';
-            try {
-                result = JSON.parse(data);
-            } catch (err) {
-                result = {message: 'could not connect to server',
-                          errorCode: 0};
-            }
-            options.error(status, result);
-        }
-        request.responseHandler(handleResponse).errorHandler(handleError);
-        request.send();
-    }
-
-
-    function getList(resource, success, error, parameters, withUpdates) {
-
-        var request = new Request();
-
-        function getListResponseHandler(status, body) {
-            var result = '';
-            if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    error({message: 'problem getting response from server',
-                           errorCode: 0});
-                    return;
-                }
-                success(result);
-            } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (err) {
-                    result = {message: 'could not get the list',
-                              errorCode: 0};
-                }
-                error(result);
-            }
-        }
-
-        function handleError() {
-            error({message: 'could not connect to server',
-                   errorCode: 0});
-        }
-
-        request.resource(resource + '/').method('GET');
-        request.responseHandler(getListResponseHandler)
-            .errorHandler(handleError);
-
-        if (notEmpty(parameters.cartToken)) {
-            request.query().add('cart_token', parameters.cartToken);
-        }
-        if (notEmpty(parameters.offset)) {
-            request.query().add('offset', parameters.offset);
-        }
-        if (notEmpty(parameters.limit)) {
-            request.query().add('limit', parameters.limit);
-        }
-        if (notEmpty(parameters.q)) {
-            request.query().add('q', parameters.q);
-        }
-        if (notEmpty(parameters.sort)) {
-            request.query().add('sort', parameters.sort);
-        }
-        if (notEmpty(parameters.order)) {
-            request.query().add('order', parameters.order);
-        }
-        if (notEmpty(parameters.tab)) {
-            request.query().add('tab', parameters.tab);
-        }
-        if (notEmpty(parameters.as)) {
-            request.query().add('as', parameters.as);
-        }
-        if (!parameters.withRights) {
-            request.query().add('skip_rights', 'y');
-        }
-        if (parameters.embed && parameters.embed.constructor === Object) {
-            request.query().add('embed', JSON.stringify(parameters.embed));
-        }
-        if (notEmpty(parameters.state)) {
-            request.query().add('state', parameters.state);
-        }
-        if (notEmpty(parameters.categoryId)) {
-            request.query().add('category_id', parameters.categoryId);
-        }
-        if (notEmpty(parameters.platformCategoryId)) {
-            request.query().add(
-                'platform_category_id', parameters.platformCategoryId);
-        }
-        if (notEmpty(parameters.inDomain)) {
-            request.query().add('in_domain', parameters.inDomain);
-        }
-        if (notEmpty(parameters.inDomainName)) {
-            request.query().add('in_domain_name', parameters.inDomainName);
-        }
-        if (parameters.inDomainRoles) {
-            request.query().add('in_domain_roles',
-                                JSON.stringify(parameters.inDomainRoles));
-        }
-        if (parameters.asRole) {
-            request.query().add('as_role', JSON.stringify(parameters.asRole));
-        }
-        if (parameters.publicOnly) {
-            request.query().add('public_only',
-                                JSON.stringify(parameters.publicOnly));
-        }
-        if (parameters.isPrivate) {
-            request.query().add('is_private',
-                                JSON.stringify(parameters.isPrivate));
-        }
-        if (parameters.managedOnly) {
-            request.query().add('managed_only',
-                                JSON.stringify(parameters.managedOnly));
-        }
-        if (parameters.teamOnly) {
-            request.query().add('team_only',
-                                JSON.stringify(parameters.teamOnly));
-        }
-        if (parameters.clientOnly) {
-            request.query().add('client_only',
-                                JSON.stringify(parameters.clientOnly));
-        }
-        if (parameters.memberOnly) {
-            request.query().add('member_only',
-                                JSON.stringify(parameters.memberOnly));
-        }
-        if (parameters.merchiOnly) {
-            request.query().add('merchi_only',
-                                JSON.stringify(parameters.merchiOnly));
-        }
-        if (parameters.inbound) {
-            request.query().add('inbound',
-                                JSON.stringify(parameters.inbound));
-        }
-        if (parameters.domainRoles) {
-            request.query().add('domain_roles', parameters.domainRoles);
-        }
-        if (parameters.domainTypes) {
-            request.query().add('domain_types', parameters.domainTypes);
-        }
-        if (parameters.productTypes) {
-            request.query().add('product_types', parameters.productTypes);
-        }
-        if (parameters.managedDomainsOnly) {
-            request.query().add('managed_domains_only',
-                                JSON.stringify(parameters.managedDomainsOnly));
-        }
-        if (parameters.businessDomainsOnly) {
-            request.query().add('business_domains_only',
-                                JSON.stringify(parameters.businessDomainsOnly));
-        }
-        if (notEmpty(parameters.dateFrom)) {
-            request.query().add('date_from', parameters.dateFrom);
-        }
-        if (notEmpty(parameters.dateTo)) {
-            request.query().add('date_to', parameters.dateTo);
-        }
-        if (notEmpty(parameters.relatedAssignment)) {
-            request.query().add('related_assignment', parameters.relatedAssignment);
-        }
-        if (notEmpty(parameters.relatedJob)) {
-            request.query().add('related_job', parameters.relatedJob);
-        }
-        if (notEmpty(parameters.relatedProduct)) {
-            request.query().add('related_product', parameters.relatedProduct);
-        }
-        if (notEmpty(parameters.jobNotifiable)) {
-            request.query().add('job_notifiable',
-                parameters.jobNotifiable);
-        }
-        if (notEmpty(parameters.notificationType)) {
-            request.query().add('notification_type',
-                parameters.notificationType);
-        }
-        if (notEmpty(parameters.notificationRecipient)) {
-            request.query().add('notification_recipient',
-                parameters.notificationRecipient);
-        }
-        if (notEmpty(parameters.notificationJob)) {
-            request.query().add('notification_job',
-                parameters.notificationJob);
-        }
-        if (notEmpty(parameters.relatedUser)) {
-            request.query().add('related_user', parameters.relatedUser);
-        }
-        if (notEmpty(parameters.clientId)) {
-            request.query().add('client_id', parameters.clientId);
-        }
-        if (notEmpty(parameters.clientCompanyId)) {
-            request.query().add('client_company_id',
-                                parameters.clientCompanyId);
-        }
-        if (parameters.savedByUser) {
-            request.query().add('saved_by_user',
-                                JSON.stringify(parameters.savedByUser));
-        }
-        if (parameters.receiverId) {
-            request.query().add('receiver_id',
-                                JSON.stringify(parameters.receiverId));
-        }
-        if (notEmpty(parameters.queryString)) {
-            request.query().add('query_string',
-                                parameters.queryString);
-        }
-        if (notEmpty(parameters.companyId)) {
-            request.query().add('company_id', parameters.companyId);
-        }
-        if (notEmpty(parameters.componentId)) {
-            request.query().add('component_id', parameters.componentId);
-        }
-        if (notEmpty(parameters.section)) {
-            request.query().add('section', parameters.section);
-        }
-        if (notEmpty(parameters.senderRole)) {
-            request.query().add('senderRole', parameters.section);
-        }
-        if (notEmpty(parameters.isOrder)) {
-            request.query().add('is_order', parameters.isOrder);
-        }
-        if (notEmpty(parameters.tags)) {
-            request.query().add('tags', parameters.tags);
-        }
-        if (parameters.tagNames) {
-            request.query().add('tag_names', parameters.tagNames);
-        }
-        if (notEmpty(parameters.exclude)) {
-            request.query().add('exclude', parameters.exclude);
-        }
-        if (notEmpty(parameters.excludeDomains)) {
-            request.query().add('excludeDomains',
-                                parameters.excludeDomains);
-        }
-        if (notEmpty(parameters.includeOnly)) {
-            request.query().add('include_only', parameters.includeOnly);
-        }
-        if (notEmpty(parameters.orClientId)) {
-            request.query().add('include_only', parameters.includeOnly);
-        }
-        request.send();
-
-        if (withUpdates) {
-            return subscriptionManager.subscribe(withUpdates,
-                                                 request.path(),
-                                                 "GET",
-                getListResponseHandler);
-        }
-        return null;
-    }
-
-    /** User **/
-    function PhoneNumber() {
-        this.resource = '/phone_numbers';
-        this.json = 'phoneNumber';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'number');
-        addPropertyTo(this, 'code');
-        addPropertyTo(this, 'localFormatNumber');
-        addPropertyTo(this, 'internationalFormatNumber');
-
-    }
-
-    function EmailAddress() {
-        this.resource = '/email_addresses';
-        this.json = 'emailAddress';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'emailAddress');
-    }
-
-    function EmailCounter() {
-        this.resource = '/email_counters';
-        this.json = 'emailCounter';
-
-        addPropertyTo(this, 'emailAddress');
-        addPropertyTo(this, 'unsubscribed');
-        addPropertyTo(this, 'silenced');
-        addPropertyTo(this, 'tokens');
-
-        this.patch = function (success, error, embed) {
-            var self = this,
-                data = serialise(this, undefined, undefined, undefined,
-                                 {excludeOld: true})[0];
-            function handleResponse(result) {
-                success(fromJson(self, result[self.json]));
-            }
-            patchOne({resource: this.resource,
-                      id: this.emailAddress(),
-                      success: handleResponse,
-                      error: error,
-                      data: data,
-                      embed: embed});
-        };
     }
 
     function Address() {
@@ -2370,8 +1315,8 @@ export function merchi(backendUri, websocketUri) {
         this.invite = function (invitationData, success, error, embed) {
             var request = new Request(),
                 data = new Dictionary(),
-                self = this;
-                id = self.id();
+                self = this,
+                _id = self.id();
 
             function handleResponse(status, result) {
                 var newInvitation = new DomainInvitation(),
@@ -2389,7 +1334,7 @@ export function merchi(backendUri, websocketUri) {
 
             data.add("inviteUserEmail", invitationData.emailAddress);
             data.add("inviteUserName", invitationData.userName);
-            data.add("domainId", id);
+            data.add("domainId", _id);
             data.add("domainRole", invitationData.role);
             request.resource('/domain_invite/').method('POST');
             request.data().merge(data);
@@ -3324,8 +2269,7 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function getCartCookie(storeId) {
-        var cart = new Cart(),
-            idAndToken = getCookie('cart-' + String(storeId), null);
+        var idAndToken = getCookie('cart-' + String(storeId), null);
         return idAndToken ? idAndToken.split(',') : null;
     }
 
@@ -3541,8 +2485,8 @@ export function merchi(backendUri, websocketUri) {
         this.invite = function (companyMemberData, success, error, embed) {
             var request = new Request(),
                 data = new Dictionary(),
-                self = this;
-                id = self.id();
+                self = this,
+                _id = self.id();
 
             function handleResponse(status, result) {
                 var newInvitation = new CompanyInvitation(),
@@ -3561,7 +2505,7 @@ export function merchi(backendUri, websocketUri) {
             data = new Dictionary();
             data.add("inviteUserEmail", companyMemberData.emailAddress);
             data.add("inviteUserName", companyMemberData.name);
-            data.add("company-id", id);
+            data.add("company-id", _id);
             data.add("asAdmin", companyMemberData.isAdmin);
             request.resource('/company_invite/').method('POST');
             request.data().merge(data);
@@ -4135,7 +3079,6 @@ export function merchi(backendUri, websocketUri) {
             var variationBuilt = new Variation(),
                 value, options, i,
                 onceOffCost = 0,
-                variationCost,
                 selectableOptions = [];
             if (this.isSelectable()) {
                 options = this.options();
@@ -4215,8 +3158,7 @@ export function merchi(backendUri, websocketUri) {
             var variationConverted = new Variation(),
                 unitCost = this.unitCost(),
                 fieldName = this.fieldName(),
-                optionValue = this.value(),
-                totalCost = this.totalCost();
+                optionValue = this.value();
             variationConverted.value(this.optionId());
             variationConverted.quantity(this.quantity());
             variationConverted.onceOffCost(this.onceOffCost());
@@ -4346,7 +3288,7 @@ export function merchi(backendUri, websocketUri) {
 
         this.textValue = function () {
             var field = this.variationField(),
-                text = "", option, i;
+                text = "", i;
             if (field) {
                 if (this.isTextField() || this.isNumberField() ||
                     this.isTextAreaField()) {
@@ -4490,7 +3432,7 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function removeUnstoredFiles(files, removeAll) {
-        var unUploadedFiles, count = 1, i;
+        var count = 1, i;
 
         if (Boolean(removeAll)) {
             count = files.filter(function (file) {
@@ -4923,7 +3865,7 @@ export function merchi(backendUri, websocketUri) {
         this.quoteTotal = function () {
             var self = this,
                 items = Boolean(self.quoteItems()) ? self.quoteItems() : [],
-                total = parseFloat(0.000), item, i;
+                total = parseFloat(0.000), i;
             for (i = 0; i < items.length; i++) {
                 total += parseFloat(items[i].total());
             }
@@ -5100,7 +4042,7 @@ export function merchi(backendUri, websocketUri) {
             var self = this;
             function handleResponse(result) {
                 success(fromJson(self, result[self.json],
-                                 {makesDirty: False}));
+                                 {makesDirty: false}));
             }
             getOne({resource: this.resource,
                     id: this.id(),
@@ -6626,7 +5568,7 @@ export function merchi(backendUri, websocketUri) {
 
         this.tryDeduct = function (success, error) {
             var request = new Request(),
-                data = serialise(job)[0],
+                data = serialise(this)[0],
                 query = new Dictionary(),
                 self = this;
             query.add('embed', JSON.stringify({inventory: {}}));
@@ -6704,8 +5646,7 @@ export function merchi(backendUri, websocketUri) {
         };
 
         this.calculate = function (success, error, embed) {
-            var self = this,
-                request = new Request(),
+            var request = new Request(),
                 data = serialise(this)[0];
             request.resource('/cart-item-cost-estimate/');
             request.method('POST');
@@ -6881,54 +5822,6 @@ export function merchi(backendUri, websocketUri) {
     }
 
     /** Collections **/
-
-    function PhoneNumbers() {
-        this.resource = '/phone_numbers';
-        this.json = 'phoneNumbers';
-        this.single = PhoneNumber;
-
-        this.get = function (success, error, offset, limit, q) {
-            var self = this;
-            function handleResponse(result) {
-                success(fromJsonList(self, result,
-                                     {makesDirty: false}));
-            }
-            getList(this.resource, handleResponse, error,
-                    {offset: offset, limit: limit, q: q});
-        };
-    }
-
-    function EmailAddresses() {
-        this.resource = '/email_addresses';
-        this.json = 'emailAddresses';
-        this.single = EmailAddress;
-
-        this.get = function (success, error, offset, limit, q) {
-            var self = this;
-            function handleResponse(result) {
-                success(fromJsonList(self, result,
-                                     {makesDirty: false}));
-            }
-            getList(this.resource, handleResponse, error,
-                    {offset: offset, limit: limit, q: q});
-        };
-    }
-
-    function EmailCounters() {
-        this.resource = '/email_counters';
-        this.json = 'emailCounters';
-        this.single = EmailCounter;
-
-        this.get = function (success, error, parameters) {
-            var self = this;
-            function handleResponse(result) {
-                success(fromJsonList(self, result,
-                                     {makesDirty: false}));
-            }
-            getList(this.resource, handleResponse, error,
-                    parameters);
-        };
-    }
 
     function Addresses() {
         this.resource = '/addresses';
@@ -7701,8 +6594,6 @@ export function merchi(backendUri, websocketUri) {
             var entitiesArray = checkDictKeyForArray(optionsDict, key),
                 arrayWithObjects = [],
                 entityObject,
-                entityObjectName,
-                newDict,
                 i;
             for (i = 0; i < entitiesArray.length; i++) {
                 entityObject = entitiesArray[i];
@@ -7796,7 +6687,7 @@ export function merchi(backendUri, websocketUri) {
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
 
-        subscriptionManager.subscribe([eventTypes.get('POST')], request.path(),
+        window.merchiSubscriptionManager.subscribe([eventTypes.get('POST')], request.path(),
                                       "POST", handleResponse);
     }
 
@@ -7966,7 +6857,6 @@ export function merchi(backendUri, websocketUri) {
             'getRights': getRights,
             'forquoteDelete': forquoteDelete,
             'DEFAULT_RIGHTS': DEFAULT_RIGHTS,
-            'jsonpHandlers': jsonpHandlers,
             'priorityLevels': priorityLevels,
             'URGENT_JOB_PRIORITY': priorityLevels.get('URGENT_JOB_PRIORITY'),
             'HIGH_JOB_PRIORITY': priorityLevels.get('HIGH_JOB_PRIORITY'),
@@ -8117,7 +7007,6 @@ export function merchi(backendUri, websocketUri) {
             'platformIcon': platformIcon,
             'defaultUserAvatar': defaultUserAvatar,
             'platformLogo': platformLogo,
-            'subscriptionManager': subscriptionManager,
             'menuItemType': menuItemType,
             'menuItemTypeCodes': menuItemTypeCodes,
             'menuType': menuType,
