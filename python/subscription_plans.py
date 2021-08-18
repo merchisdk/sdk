@@ -21,6 +21,8 @@ class SubscriptionPlan(sdk.python.entities.Entity):
     tax = Property(CountryTax)
     base_cost = Property(float)
     white_label_domain_cost = Property(float)
+    transaction_cost = Property(float)
+    commission_rate = Property(float)
     per_sms_cost = Property(float)
     per_user_cost = Property(float)
     per_domain_cost = Property(float)

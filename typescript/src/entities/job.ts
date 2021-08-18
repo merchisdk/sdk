@@ -21,7 +21,6 @@ import { User } from './user';
 import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 import { InventoryStatus } from '../constants/inventory_statuses';
-import { JobPurpose } from '../constants/job_purposes';
 
 
 export class Job extends Entity {
@@ -87,6 +86,9 @@ export class Job extends Entity {
   public callToActions?: string;
 
   @Job.property()
+  public callToActionDetails?: any[];
+
+  @Job.property()
   public priority?: number;
 
   @Job.property({type: Number})
@@ -121,9 +123,6 @@ export class Job extends Entity {
 
   @Job.property({type: Number})
   public totalCost?: number | null;
-
-  @Job.property()
-  public purpose?: JobPurpose;
 
   @Job.property({embeddedByDefault: false})
   public inventoriesStatus?: InventoryStatus;
