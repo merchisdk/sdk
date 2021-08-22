@@ -800,3 +800,166 @@ export function patchOne(options) {
     request.responseHandler(handleResponse).errorHandler(handleError);
     request.send();
 }
+
+export function getOne(options) {
+    var request = new Request(),
+        error = options.error,
+        embed = options.embed;
+
+    request.resource(
+        options.resource + '/' + options.id + '/').method('GET');
+
+    if (embed && embed.constructor === Object) {
+        embed = JSON.stringify(embed);
+        request.query().add('embed', embed);
+    }
+
+    if (options.includeArchived) {
+        request.query().add("include_archived", true);
+    }
+
+    if (options.cartToken) {
+        request.query().add('cart_token', options.cartToken);
+    }
+
+    if (!options.withRights) {
+        request.query().add('skip_rights', 'y');
+    }
+   function handleResponse(status, body) {
+        var result = '';
+        if (status === 200) {
+            try {
+                result = JSON.parse(body);
+            } catch (e) {
+                error({message: 'problem getting response from server'});
+                return;
+            }
+            options.success(result);
+        } else {
+            try {
+               result = JSON.parse(body);
+            } catch (err) {
+                result = {message: 'could not get the entity'};
+            }
+            error(result);
+        }
+    }
+    function handleError(status, data) {
+        var result = '';
+        try {
+            result = JSON.parse(data);
+        } catch (err) {
+            result = {message: 'could not connect to server',
+                      errorCode: 0};
+        }
+        error(status, result);
+    }
+    request.responseHandler(handleResponse).errorHandler(handleError);
+
+    request.send();
+}
+
+export function deleteOne(resource, success, error) {
+    var request = new Request();
+    request.resource(resource + '/').method('DELETE');
+    function handleResponse(status, body) {
+        var result = '';
+        if (status === 204) {
+            success();
+        } else {
+            try {
+                result = JSON.parse(body);
+            } catch (e) {
+                result = {message: 'could not delete the entity',
+                          errorCode: 0};
+            }
+            error(result);
+        }
+    }
+    function handleError(status, data) {
+        var result = '';
+        try {
+            result = JSON.parse(data);
+        } catch (err) {
+            result = {message: 'could not connect to server',
+                      errorCode: 0};
+        }
+        error(status, result);
+    }
+    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.send();
+}
+
+export function create(options) {
+    var request = new Request(),
+        embed,
+        message;
+    options.resource = options.resource || '';
+    options.parameters = options.parameters || new Dictionary();
+    options.success = options.success || id;
+    options.error = options.error || id;
+    options.files = options.files || new Dictionary();
+    request.resource(options.resource + '/').method('POST');
+    request.data().merge(options.parameters);
+    request.files(options.files);
+    if (!isUndefined(options.username)) {
+        request.username(options.username);
+        request.password(options.password);
+    }
+    if (options.embed && options.embed.constructor === Object) {
+        embed = JSON.stringify(options.embed);
+        request.query().add('embed', embed);
+    }
+    if (notEmpty(options.as_domain)) {
+        request.query().add('as_domain', options.as_domain);
+    }
+    if (!options.withRights) {
+        request.query().add('skip_rights', 'y');
+    }
+    function handleResponse(status, body) {
+        var result = '';
+        if (status === 201) {
+            try {
+                result = JSON.parse(body);
+            } catch (e) {
+                message = 'problem getting response from server';
+                options.error({message: message,
+                               errorCode: 0});
+                return;
+            }
+            options.success(result);
+        } else {
+            try {
+                result = JSON.parse(body);
+            } catch (err) {
+                result = {message: 'could not create the resource',
+                          errorCode: 0};
+            }
+            options.error(status, result);
+        }
+    }
+    function handleError(status, data) {
+        var result = '';
+        try {
+            result = JSON.parse(data);
+        } catch (err) {
+            result = {message: 'could not connect to server',
+                      errorCode: 0}
+        }
+        options.error(status, result);
+    }
+    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.send();
+}
+
+export function enumerateFiles(files) {
+    /* Convert a list to a Dictionary where the keys where the indices
+       and the values where the values at those indices.
+     */
+    var i,
+        result = new Dictionary();
+    for (i = 0; i < files.length; ++i) {
+        result.add(i, files[i]);
+    }
+    return result;
+}
