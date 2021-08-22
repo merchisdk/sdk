@@ -36,6 +36,7 @@ export function Domain() {
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);
+    addPropertyTo(this, 'ownedBy', Company);
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'enableNotifications');
