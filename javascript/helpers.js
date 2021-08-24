@@ -52,3 +52,21 @@ export function any(iterable, condition) {
     }
     return false;
 }
+
+export function sortArray(array, objectKey, desc) {
+    return array ? array.sort(function (a, b) {
+        if (desc) {
+            return b[objectKey]() - a[objectKey]();
+        } else {
+            return a[objectKey]() - b[objectKey]();
+        }
+    }) : [];
+}
+
+export function sortArrayByObjectKey(array, objectKey) {
+    return sortArray(array, objectKey);
+}
+
+export function sortArrayByObjectKeyDescending(array, objectKey) {
+    return sortArray(array, objectKey, true);
+}
