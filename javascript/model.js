@@ -963,3 +963,34 @@ export function enumerateFiles(files) {
     }
     return result;
 }
+
+export function recoverOne(model, id, success, error) {
+    var request = new Request();
+    request.resource("/unarchive/" + model + '/' + id + '/').method('POST');
+    function handleResponse(status, body) {
+        var result = '';
+        if (status === 200) {
+            success();
+        } else {
+            try {
+                result = JSON.parse(body);
+            } catch (e) {
+                result = {message: 'could not recover the entity',
+                          errorCode: 0};
+            }
+            error(result);
+        }
+    }
+   function handleError(status, data) {
+        var result = '';
+        try {
+            result = JSON.parse(data);
+        } catch (err) {
+            result = {message: 'could not connect to server',
+                      errorCode: 0};
+        }
+        error(status, result);
+    }
+    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.send();
+}
