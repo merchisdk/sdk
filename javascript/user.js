@@ -26,6 +26,7 @@ export function User() {
     addPropertyTo(this, 'timezone');
     addPropertyTo(this, 'preferredLanguage');
     addPropertyTo(this, 'isSuperUser');
+    addPropertyTo(this, 'isAdminOfSubscribedCompany');
     addPropertyTo(this, 'systemRoles', SystemRole);
     addPropertyTo(this, 'enableCrashReports');
     addPropertyTo(this, 'enableClientEmails');
@@ -181,7 +182,7 @@ export function User() {
             themeRole = roles.get('theme editor');
         return this.hasAuthority(
             domainId, [managerRole, adminRole, themeRole]);
-     }
+    };
 
     this.allRoles = function () {
         var rolesSet = new Set(), i,
@@ -195,6 +196,7 @@ export function User() {
         rolesSet.add(roles.get("public"));
         return rolesSet;
     };
+
     this.hasRole = function (roles, combineFunction) {
        var userRoles = this.allRoles(), i,
             isRoleInJudgementResult = [];
@@ -209,7 +211,7 @@ export function User() {
 
     this.hasRoleInAnyDomain = function (rolesArray) {
         var i, hasRole = false;
-        this.allRoles().each(function(roleInt) {
+        this.allRoles().forEach(function(roleInt) {
             for (i = 0; i < rolesArray.length; i++) {
                 if (roleInt === rolesArray[i]) {
                     hasRole = true;
