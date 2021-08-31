@@ -425,6 +425,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('managed_only',
                             JSON.stringify(parameters.managedOnly));
     }
+    if (parameters.doesNotHaveAdminDomain) {
+        request.query().add('does_not_have_admin_domain',
+                            JSON.stringify(parameters.doesNotHaveAdminDomain));
+    }
     if (parameters.teamOnly) {
        request.query().add('team_only',
                             JSON.stringify(parameters.teamOnly));

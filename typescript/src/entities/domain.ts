@@ -83,6 +83,9 @@ export class Domain extends Entity {
   public webflowApiKey?: string | null;
 
   @Domain.property()
+  public ownedBy?: Company;
+
+  @Domain.property()
   public company?: Company;
 
   @Domain.property({type: MerchiFile})

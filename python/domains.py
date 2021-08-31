@@ -64,6 +64,7 @@ class Domain(sdk.python.entities.Entity):
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")
+    owned_by = company = Property("sdk.python.companies.Company")
     jobs_assignees = Property("sdk.python.users.User")
     logo = Property(File)
     favicon = Property(File)
