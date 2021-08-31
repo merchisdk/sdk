@@ -61,6 +61,8 @@ export function Product() {
     addPropertyTo(this, 'acceptPhonePayment');
     addPropertyTo(this, 'allowPaymentUpfront');
     addPropertyTo(this, 'allowQuotation');
+    addPropertyTo(this, 'allowChainedInventoryCreation');
+    addPropertyTo(this, 'chainedInventoryHandlingUnitPrice');
     addPropertyTo(this, 'savedByUsers', User);
     addPropertyTo(this, 'savedByCompanies', Company);
     addPropertyTo(this, 'tags', DomainTag);

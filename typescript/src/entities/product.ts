@@ -114,6 +114,12 @@ export class Product extends Entity {
   public allowQuotation?: boolean;
 
   @Product.property()
+  public allowChainedInventoryCreation?: boolean;
+
+  @Product.property()
+  public chainedInventoryHandlingUnitPrice?: number;
+
+  @Product.property()
   public bestPrice?: number;
 
   @Product.property()
