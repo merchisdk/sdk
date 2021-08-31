@@ -115,6 +115,9 @@ export class User extends Entity {
   @User.property()
   public enableInvoiceReminders?: boolean;
 
+  @User.property()
+  public isAdminOfSubscribedCompany?: boolean;
+
   @User.property({ arrayType: 'JobComment' })
   public jobComments?: JobComment[];
 
