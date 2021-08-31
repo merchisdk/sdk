@@ -91,6 +91,7 @@ interface ListOptions {
   asRole?: Role;
   publicOnly?: boolean;
   managedOnly?: boolean;
+  doesNotHaveAdminDomain?: boolean;
   clientOnly?: boolean;
   teamOnly?: boolean;
   memberOnly?: boolean;
@@ -436,6 +437,10 @@ export class Entity {
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',
           options.managedOnly.toString()]);
+      }
+      if (options.doesNotHaveAdminDomain !== undefined) {
+        fetchOptions.query.push(['does_not_have_admin_domain',
+          options.doesNotHaveAdminDomain.toString()]);
       }
       if (options.clientOnly !== undefined) {
         fetchOptions.query.push(['client_only',
