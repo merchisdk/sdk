@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import { generateUUID } from './uuid';
 import { addPropertyTo, create, serialise, enumerateFiles, getOne, getList,
-    fromJson, deleteOne, fromJsonList, patchOne } from './model';
+    fromJson, deleteOne, fromJsonList, patchOne, Request } from './model';
 import { isUndefinedOrNull } from './helpers';
 import { Address } from './address';
 import { EmailAddress } from './email_address'

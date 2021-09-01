@@ -1,5 +1,6 @@
 import { generateUUID } from './uuid.js';
-import { addPropertyTo, fromJson, getOne, fromJsonList } from './model.js'
+import { addPropertyTo, fromJson, getOne, fromJsonList,
+    Request } from './model.js'
 import { isUndefinedOrNull } from './helpers.js';
 import { Dictionary } from './dictionary.js';
 

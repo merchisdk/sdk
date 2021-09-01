@@ -2,7 +2,7 @@ import { generateUUID } from './uuid';
 import { notEmptyArray, isUndefinedOrNull,
     removeObjectFromArrayWithIntegerValue } from './helpers';
 import { addPropertyTo, getList, fromJsonList, deleteOne, patchOne, fromJson,
-    serialise, getOne, create, enumerateFiles } from './model';
+    serialise, getOne, create, enumerateFiles, Request } from './model';
 import { productTypesInts } from './product_types';
 import { Category } from './category';
 import { Company } from './company';
