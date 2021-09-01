@@ -26,7 +26,6 @@ export function User() {
     addPropertyTo(this, 'timezone');
     addPropertyTo(this, 'preferredLanguage');
     addPropertyTo(this, 'isSuperUser');
-    addPropertyTo(this, 'isAdminOfSubscribedCompany');
     addPropertyTo(this, 'systemRoles', SystemRole);
     addPropertyTo(this, 'enableCrashReports');
     addPropertyTo(this, 'enableClientEmails');
@@ -124,7 +123,7 @@ export function User() {
     }
 
     this.enrolledDomainByDomainId = function (domainId) {
-        var i, enrolledDomains = this._enrolledDomains();
+        var i, enrolledDomains = this.enrolledDomains();
         for (i = 0; i < enrolledDomains.length; i++) {
             var domain = enrolledDomains[i].domain();
             if (domain && domain.id() === domainId) {
@@ -182,11 +181,11 @@ export function User() {
             themeRole = roles.get('theme editor');
         return this.hasAuthority(
             domainId, [managerRole, adminRole, themeRole]);
-    };
+     }
 
     this.allRoles = function () {
         var rolesSet = new Set(), i,
-            enrolledDomains = this._enrolledDomains();
+            enrolledDomains = this.enrolledDomains();
         if (this.isSuperUser()) {
             return allRoles;
         }
@@ -196,7 +195,6 @@ export function User() {
         rolesSet.add(roles.get("public"));
         return rolesSet;
     };
-
     this.hasRole = function (roles, combineFunction) {
        var userRoles = this.allRoles(), i,
             isRoleInJudgementResult = [];
@@ -211,7 +209,7 @@ export function User() {
 
     this.hasRoleInAnyDomain = function (rolesArray) {
         var i, hasRole = false;
-        this.allRoles().forEach(function(roleInt) {
+        this.allRoles().each(function(roleInt) {
             for (i = 0; i < rolesArray.length; i++) {
                 if (roleInt === rolesArray[i]) {
                     hasRole = true;
@@ -221,15 +219,12 @@ export function User() {
         return hasRole;
     }
 
-    this._enrolledDomains = function () {
-        return this.enrolledDomains() ? this.enrolledDomains() : [];
-    };
-
     this.domainsByRoles = function (rolesArray) {
         /* takes an array of roles and returns an array of domains where
            the user has one of the provided roles.
         */
-        var enrolledDomains = this._enrolledDomains(),
+        var enrolledDomains = this.enrolledDomains() ?
+                this.enrolledDomains() : [],
             domains = [],
             domain,
             i;
@@ -266,7 +261,7 @@ export function User() {
     this.inDomain = function (domainId) {
         var i,
             domain,
-            userDomains = this._enrolledDomains();
+            userDomains = this.enrolledDomains();
         for (i = 0; i < userDomains.length; i += 1) {
             domain = userDomains[i].domain();
             if (domain && domain.id() === parseInt(domainId, 10)) {
@@ -280,7 +275,7 @@ export function User() {
         var domains = [],
             i,
             enrolment,
-            userDomains = this._enrolledDomains();
+            userDomains = this.enrolledDomains();
         for (i = 0; i < userDomains.length; i += 1) {
             enrolment = userDomains[i];
             if (enrolment.role() === roles.get('admin') ||
@@ -295,7 +290,7 @@ export function User() {
         var domains = [],
             i,
             enrolment,
-            userDomains = this._enrolledDomains();
+            userDomains = this.enrolledDomains();
         for (i = 0; i < userDomains.length; i += 1) {
             enrolment = userDomains[i];
             if (enrolment.role() === roles.get('designer') ||
