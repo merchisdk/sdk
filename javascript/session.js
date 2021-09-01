@@ -1,6 +1,6 @@
 import { Dictionary } from './dictionary';
 import { addPropertyTo, create, fromJson, getOne, deleteOne, fromJsonList,
-    getList } from './model';
+    getList, Request } from './model';
 import { User } from './user';
 import { Domain } from './domain';
 

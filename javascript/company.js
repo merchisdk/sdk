@@ -1,5 +1,6 @@
 import { addPropertyTo, getList, fromJson, getOne, serialise,
-    patchOne, deleteOne, create, fromJsonList, enumerateFiles } from './model';
+    patchOne, deleteOne, create, fromJsonList, enumerateFiles,
+    Request } from './model';
 import { Dictionary } from './dictionary';
 import { Address } from './address';
 import { Bank } from './bank';

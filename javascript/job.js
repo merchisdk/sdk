@@ -1,7 +1,8 @@
 import { generateUUID } from './uuid';
 import { Dictionary } from './dictionary';
 import { addPropertyTo, getOne, create, serialise, recoverOne, deleteOne,
-    fromJson, patchOne, getList, fromJsonList, enumerateFiles } from './model';
+    fromJson, patchOne, getList, fromJsonList, enumerateFiles,
+    Request } from './model';
 import { isUndefinedOrNull, sortArrayByObjectKeyDescending,
     sortArrayByObjectKey } from './helpers';
 import { jobStatusProduction, jobStatusDrafting, jobStatusPayment,

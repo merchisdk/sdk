@@ -1,9 +1,10 @@
 import { generateUUID } from './uuid';
+import { Set } from './set';
 import { md5 } from './md5';
 import {  COMPONENT_BUILDER, roles, systemRoles, allRoles } from './roles';
 import { any, isUndefinedOrNull } from './helpers';
 import { addPropertyTo, getList, fromJsonList, serialise, getOne, fromJson,
-    create, enumerateFiles, patchOne } from './model';
+    create, enumerateFiles, patchOne, Request } from './model';
 import { Address } from './address';
 import { EmailAddress } from './email_address';
 import { EnrolledDomain } from './enrolled_domain';
