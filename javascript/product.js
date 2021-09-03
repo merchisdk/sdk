@@ -46,6 +46,10 @@ export function Product() {
     addPropertyTo(this, "groupVariationFields", VariationField);
     addPropertyTo(this, "independentVariationFields", VariationField);
     addPropertyTo(this, "originalProduct", Product);
+    addPropertyTo(this, 'chainedSupplierProduct', Product);
+    addPropertyTo(this, 'chainedSellerProduct', Product);
+    addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
+    addPropertyTo(this, 'chainedInventorySellerProduct', Product);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'suppliedByDomains', SupplyDomain);
     addPropertyTo(this, 'supplyDomains', SupplyDomain);
