@@ -1,4 +1,5 @@
 import { Dictionary } from './dictionary';
+import { Set } from './set';
 
 export const roles = new Dictionary();
 roles.add('public', 0);

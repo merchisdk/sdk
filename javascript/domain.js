@@ -1,7 +1,7 @@
 import { generateUUID } from './uuid';
 import { Dictionary } from './dictionary';
 import { addPropertyTo, serialise, fromJson, getList, fromJsonList, patchOne,
-    getOne, create, enumerateFiles } from './model';
+    getOne, create, enumerateFiles, Request } from './model';
 import { SELLER, SELLER_PLUS, SUPPLIER, RESTRICTED_SUPPLIER } from './roles';
 import { domainTypesInts } from './domain_types';
 import { Company } from './company';
