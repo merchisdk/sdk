@@ -21,6 +21,8 @@ export function Company() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'website');
     addPropertyTo(this, 'country');
+    addPropertyTo(this, 'stripeAccountId');
+    addPropertyTo(this, 'isStripeAccountEnabled');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'defaultCurrency');
     addPropertyTo(this, 'taxNumber');
