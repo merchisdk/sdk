@@ -40,7 +40,7 @@ import { Item } from './item';
 import { Inventory, Inventories } from './inventory';
 import { InventoryUnitVariation } from './inventory_unit_variation';
 import { MatchingInventory } from './matching_inventory';
-import { Notifications } from './notification';
+import { Notification, Notifications } from './notification';
 import { Invoice, Invoices } from './invoice';
 import { Job, Jobs } from './job';
 import { JobComment } from './job_comment';
