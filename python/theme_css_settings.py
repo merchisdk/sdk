@@ -1,8 +1,6 @@
 import datetime
 import sdk.python.entities
-from sdk.python.country_taxes import CountryTax
 import sdk.python.users
-import sdk.python.country_taxes
 from sdk.python.entities import Property
 
 
