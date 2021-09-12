@@ -5,6 +5,7 @@ import { notificationTypes, notificationRecieverIsCurrentUserFilter,
    notificationsFilter } from './notification_types';
 import { Job } from './job';
 import { User } from './user';
+import { Notification } from './notification';
 import { Quote } from './quote';
 import { Shipment } from './shipment';
 import { SupplyDomain } from './supply_domain';
