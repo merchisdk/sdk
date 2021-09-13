@@ -3,6 +3,7 @@ import { addPropertyTo, enumerateFiles, create, serialise,
 import { Assignment } from './assignment';
 import { User } from './user';
 import { MerchiFile } from './merchi_file';
+import { Notification } from './notification';
 
 export function ProductionComment() {
     this.resource = '/production_comments';
