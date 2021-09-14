@@ -33,6 +33,7 @@ import { Cart } from './entities/cart';
 import { CartShipmentGroup } from './entities/cart_shipment_group';
 import { CartShipmentQuote } from './entities/cart_shipment_quote';
 import { Theme } from './entities/theme';
+import { ThemeCssSetting } from './entities/theme_css_setting';
 import { Component } from './entities/component';
 import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
@@ -135,6 +136,7 @@ export class Merchi {
   public User: typeof User;
   public Session: typeof Session;
   public Theme: typeof Theme;
+  public ThemeCssSetting: typeof ThemeCssSetting;
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
   public Domain: typeof Domain;
@@ -196,6 +198,7 @@ export class Merchi {
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
     this.Component = this.setupClass(Component) as typeof Component;
     this.Theme = this.setupClass(Theme) as typeof Theme;
+    this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;
     this.MenuItem = this.setupClass(MenuItem) as typeof MenuItem;
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
