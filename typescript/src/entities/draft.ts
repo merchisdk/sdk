@@ -38,6 +38,12 @@ export class Draft extends Entity {
   public comments?: DraftComment[];
 
   @Draft.property()
+  public commentsCount?: number;
+
+  @Draft.property()
+  public changesRequested?: boolean;
+
+  @Draft.property()
   public designer?: User;
 
   @Draft.property({arrayType: 'MerchiFile'})
