@@ -181,6 +181,9 @@ export class Job extends Entity {
   @Job.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
 
+  @Job.property()
+  public preDraftCommentsCount?: number;
+
   @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
