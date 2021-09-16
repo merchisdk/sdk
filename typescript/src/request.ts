@@ -27,11 +27,12 @@ export class ApiError extends Error {
   }
 }
 
+export const version = 'v6';
+
 export function backendFetch(resource: string, options?: RequestOptions) {
   const server = (window as any).merchiBackendUri
     ? (window as any).merchiBackendUri
     : BACKEND_URI;
-  const version = 'v6';
   const url = new URL(server + version + resource);
   if (options && options.query) {
     for (const entry of options.query) {
