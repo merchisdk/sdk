@@ -30,8 +30,8 @@ export class Inventory extends Entity {
   @Inventory.property()
   public isOrphan?: boolean;
 
-  @Inventory.property()
-  public product?: Product;
+  @Inventory.property({arrayType: 'Product'})
+  public products?: Product[];
 
   @Inventory.property({type: Address})
   public address?: Address | null;
