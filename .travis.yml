@@ -20,6 +20,13 @@ matrix:
         - tsc
         - ./node_modules/eslint/bin/eslint.js 'src/**/*.ts'
         - yarn test
+    - language: node_js
+      node_js:
+        - "10"
+      script:
+        - cd javascript
+        - yarn
+        - yarn run eslint .
     - language: python
       python: 3.5
       install:
