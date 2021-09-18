@@ -5,6 +5,7 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.24.0"
+    "eslint-plugin-import": "^2.24.0",
+    "moment-timezone": "^0.5.33"
   }
 }
