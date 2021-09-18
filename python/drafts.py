@@ -19,7 +19,9 @@ class Draft(sdk.python.entities.Entity):
     just_viewed = Property(bool)
     send_sms = Property(bool)
     send_email = Property(bool)
+    changes_requested = Property(bool)
     comments = Property(DraftComment, backref="draft")
+    comments_count = Property(int)
 
     def changes_have_been_requested(self):
         """ Return true if any changes to this draft have been requested
