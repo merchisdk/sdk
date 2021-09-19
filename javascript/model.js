@@ -475,6 +475,9 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (notEmpty(parameters.relatedAssignment)) {
         request.query().add('related_assignment', parameters.relatedAssignment);
     }
+    if (notEmpty(parameters.relatedDraft)) {
+        request.query().add('related_draft', parameters.relatedDraft);
+    }
     if (notEmpty(parameters.relatedJob)) {
         request.query().add('related_job', parameters.relatedJob);
     }

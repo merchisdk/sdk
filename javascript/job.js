@@ -20,6 +20,7 @@ import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
 import { EmailAddress } from './email_address';
 import { Invoice } from './invoice';
+import { Notification } from './notification';
 import { Shipment } from './shipment';
 import { PhoneNumber } from './phone_number';
 import { MatchingInventory } from './matching_inventory';
@@ -43,6 +44,7 @@ export function Job() {
     addPropertyTo(this, 'deadline');
     addPropertyTo(this, 'updated');
     addPropertyTo(this, 'deductionDate');
+    addPropertyTo(this, 'preDraftCommentsCount');
     addPropertyTo(this, 'clientFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'drafts', Draft);
