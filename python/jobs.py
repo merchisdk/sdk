@@ -42,6 +42,7 @@ class Job(sdk.python.entities.Entity):
     designer = Property('sdk.python.users.User')
     product = Property('sdk.python.products.Product')
     comments = Property(JobComment)
+    pre_draft_comments_count = Property(int)
     draft_comments = Property(DraftComment)
     drafts = Property(Draft)
     invoice = Property(Invoice, backref="jobs")
