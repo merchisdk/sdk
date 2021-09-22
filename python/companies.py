@@ -42,6 +42,7 @@ class Company(sdk.python.entities.Entity):
     is_utrust_valid = Property(bool)
     call_to_actions = Property(str)
     call_to_action_details = Property(list)
+    is_paying_company = Property(bool)
     is_stripe_valid = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
