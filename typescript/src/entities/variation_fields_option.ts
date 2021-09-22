@@ -29,6 +29,9 @@ export class VariationFieldsOption extends Entity {
   public default?: boolean;
 
   @VariationFieldsOption.property()
+  public include?: boolean;
+
+  @VariationFieldsOption.property()
   public position?: number;
 
   @VariationFieldsOption.property()
