@@ -753,7 +753,7 @@ export function merchi(backendUri, websocketUri) {
 
     function forquoteEdit(rights) {
         var forbitEdit = false;
-        if (rights.indexOf(MERCHI.rights.get("canEdit")) === -1) {
+        if (rights.indexOf(rights.get("canEdit")) === -1) {
             forbitEdit = true;
         }
         return forbitEdit;
@@ -761,7 +761,7 @@ export function merchi(backendUri, websocketUri) {
 
     function forquoteDelete(rights) {
         var forbitDelete = false;
-        if (rights.indexOf(MERCHI.rights.get("canDelete")) === -1) {
+        if (rights.indexOf(rights.get("canDelete")) === -1) {
             forbitDelete = true;
         }
         return forbitDelete;
@@ -779,7 +779,7 @@ export function merchi(backendUri, websocketUri) {
 
     function canEditAttributes(rights) {
         var canEdit = false;
-        if (rights.indexOf(MERCHI.rights.get("canEdit")) !== -1) {
+        if (rights.indexOf(rights.get("canEdit")) !== -1) {
             canEdit = true;
         }
         return canEdit;

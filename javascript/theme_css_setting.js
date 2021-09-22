@@ -39,10 +39,10 @@ export function ThemeCssSetting() {
     };
 }
 
-export function ThemeCssSetting() {
+export function ThemeCssSettings() {
     this.resource = '/theme_css_settings';
     this.json = 'themeCssSettings';
-    this.single = SubscriptionPlan;
+    this.single = ThemeCssSetting;
 
     this.get = function (success, error, parameters) {
         var self = this;
