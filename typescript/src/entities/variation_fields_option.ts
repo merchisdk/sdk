@@ -77,6 +77,7 @@ export class VariationFieldsOption extends Entity {
   public buildVariationOption = () => {
     const result = new this.merchi.VariationOption(this.merchi);
     result.optionId = this.id;
+    result.include = this.include;
     result.value = this.value;
     result.position = this.position;
     result.default = this.default;
