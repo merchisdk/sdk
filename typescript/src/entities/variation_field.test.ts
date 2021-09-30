@@ -36,6 +36,27 @@ test('buildEmptyVariation cost', () => {
   expect(vf.buildEmptyVariation().onceOffCost).toEqual(2);
 });
 
+test('buildEmptyVariation seller editable options', () => {
+  const merchi = new Merchi();
+  const vf = new merchi.VariationField();
+  expect(vf.buildEmptyVariation).toThrow();
+  vf.defaultValue = 'a';
+  vf.fieldType = 11;
+  vf.sellerProductEditable = true;
+  vf.variationCost = 2;
+  expect(vf.buildEmptyVariation).toThrow();
+  const o1 = new merchi.VariationFieldsOption();
+  const o2 = new merchi.VariationFieldsOption();
+  o1.include = true;
+  o1.id = 1;
+  o1.variationCost = 1
+  o2.default = true;
+  o2.id = 2;
+  o2.variationCost = 1
+  vf.options = [o1, o2];
+  expect(vf.buildEmptyVariation().value).toEqual('1');
+});
+
 test('buildEmptyVariation selectable options', () => {
   const merchi = new Merchi();
   const vf = new merchi.VariationField();
