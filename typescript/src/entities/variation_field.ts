@@ -139,7 +139,7 @@ export class VariationField extends Entity {
       let onceOffCost = 0;
       const value = [];
       for (const option of this.options) {
-        if (option.default) {
+        if (this.sellerProductEditable && option.include || option.default) {
           if (option.variationCost === undefined) {
             throw new Error('option.variationCost is undefined, did you ' +
                             'forget to embed it?');
