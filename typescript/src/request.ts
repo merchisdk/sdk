@@ -60,3 +60,40 @@ export function apiFetch(
     }
   );
 }
+
+export function apiFetchWithProgress(
+  resource: string,
+  options?: RequestOptions,
+  progressCallback?: (progress: number) => void
+) {
+  return backendFetch(resource, options as RequestInit | undefined).then(
+    function (response) {
+      if (!response.body) {
+        const err = new ApiError("empty response");
+        return Promise.reject(err);
+      }
+      const reader = response.body.getReader();
+      let bodyText = "";
+      function readChunk(): any {
+        return reader.read().then(({done, value}) => {
+          if (done) {
+            if (response.status < 200 || response.status > 299) {
+              const err = new ApiError("Unknown error")
+              return Promise.reject(err);
+            } else {
+              return bodyText;
+            }
+          } else {
+            bodyText += new TextDecoder().decode(value);
+            const progress = Math.min(Math.max(0, bodyText.length - 16), 100);
+            if (progressCallback) {
+              progressCallback(progress);
+            }
+            return readChunk();
+          }
+        });    
+      }
+      return readChunk();
+   }
+  );
+}

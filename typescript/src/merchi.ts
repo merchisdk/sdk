@@ -65,7 +65,7 @@ import { MatchingInventory } from './entities/matching_inventory';
 import { SubscriptionPlan } from './entities/subscription_plan';
 import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
-import { RequestOptions, apiFetch } from './request';
+import { RequestOptions, apiFetch, apiFetchWithProgress } from './request';
 import { getCookie } from './cookie';
 
 // the type of classes
@@ -313,6 +313,36 @@ export class Merchi {
     }
     return apiFetch(resource, options, expectEmptyResponse);
   };
+
+  public authenticatedFetchWithProgress = (
+    resource: string,
+    options: RequestOptions,
+    progressCallback?: (progress: number) => void
+  ) => {
+    if (!options.query) {
+      /* istanbul ignore next */
+      options.query = [];
+    }
+    if (this.sessionToken) {
+      /* istanbul ignore next */
+      options.query.push(['session_token', this.sessionToken]);
+    }
+    if (this.clientToken) {
+      /* istanbul ignore next */
+      options.query.push(['client_token', this.clientToken]);
+    }
+    if (this.invoiceToken) {
+      /* istanbul ignore next */
+      options.query.push(['invoice_token', this.invoiceToken]);
+    }
+    if (this.cartToken) {
+      /* istanbul ignore next */
+      options.query.push(['cart_token', this.cartToken]);
+    }
+    return apiFetchWithProgress(resource, options, progressCallback);
+  };
+
+
 
   public getCurrentUser = (options?: UserRequestOptions) => {
     const { embed = {} } = options || {};
