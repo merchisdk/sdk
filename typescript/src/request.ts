@@ -69,16 +69,16 @@ export function apiFetchWithProgress(
   return backendFetch(resource, options as RequestInit | undefined).then(
     function (response) {
       if (!response.body) {
-        const err = new ApiError("empty response");
+        const err = new ApiError('empty response');
         return Promise.reject(err);
       }
       const reader = response.body.getReader();
-      let bodyText = "";
+      let bodyText = '';
       function readChunk(): any {
         return reader.read().then(({done, value}) => {
           if (done) {
             if (response.status < 200 || response.status > 299) {
-              const err = new ApiError("Unknown error")
+              const err = new ApiError('Unknown error');
               return Promise.reject(err);
             } else {
               return bodyText;
@@ -94,6 +94,6 @@ export function apiFetchWithProgress(
         });    
       }
       return readChunk();
-   }
+    }
   );
 }
