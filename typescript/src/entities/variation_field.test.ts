@@ -49,10 +49,10 @@ test('buildEmptyVariation seller editable options', () => {
   const o2 = new merchi.VariationFieldsOption();
   o1.include = true;
   o1.id = 1;
-  o1.variationCost = 1
+  o1.variationCost = 1;
   o2.default = true;
   o2.id = 2;
-  o2.variationCost = 1
+  o2.variationCost = 1;
   vf.options = [o1, o2];
   expect(vf.buildEmptyVariation().value).toEqual('1');
 });
