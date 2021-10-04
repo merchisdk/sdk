@@ -222,7 +222,7 @@ export function VariationField() {
                 selectableOption.copyFieldOption(options[i]);
                 selectableOptions.push(selectableOption);
                 if (!sellerProductEditable && options[i].default() ||
-                    sellerProductEditable && optionsp[i].include()) {
+                    sellerProductEditable && options[i].include()) {
                     value.push(options[i].id());
                     onceOffCost += options[i].variationCost();
                 }
