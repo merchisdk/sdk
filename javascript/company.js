@@ -36,6 +36,7 @@ export function Company() {
     addPropertyTo(this, 'utrustApiKey');
     addPropertyTo(this, 'utrustWebhookKey');
     addPropertyTo(this, 'acceptUtrust');
+    addPropertyTo(this, 'isPayingCompany');
     addPropertyTo(this, 'isUtrustValid');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
