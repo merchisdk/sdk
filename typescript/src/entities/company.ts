@@ -59,6 +59,12 @@ export class Company extends Entity {
   @Company.property()
   public isPaypalValid?: boolean;
 
+  @Company.property({embeddedByDefault: false})
+  public isStripeAccountEnabled?: boolean;
+
+  @Company.property()
+  public stripeAccountId?: string;
+
   @Company.property({type: String})
   public stripeCustomerId?: string;
 
