@@ -38,6 +38,7 @@ export function VariationField() {
     addPropertyTo(this, 'allowFilePdf');
     addPropertyTo(this, 'allowFilePng');
     addPropertyTo(this, 'allowFileAi');
+    addPropertyTo(this, 'sellerProductEditable');
 
     this.isType = function (typeString) {
         return parseInt(this.fieldType(), 10) ===
@@ -211,7 +212,8 @@ export function VariationField() {
         var variationBuilt = new Variation(),
             value, options, i,
             onceOffCost = 0,
-            selectableOptions = [];
+            selectableOptions = [],
+            sellerProductEditable = this.sellerProductEditable;
         if (this.isSelectable()) {
             options = this.options();
             value = [];
@@ -219,7 +221,8 @@ export function VariationField() {
                 const selectableOption = new VariationOption();
                 selectableOption.copyFieldOption(options[i]);
                 selectableOptions.push(selectableOption);
-                if (options[i].default()) {
+                if (!sellerProductEditable && options[i].default() ||
+                    sellerProductEditable && options[i].include()) {
                     value.push(options[i].id());
                     onceOffCost += options[i].variationCost();
                 }

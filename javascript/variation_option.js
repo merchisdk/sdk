@@ -11,6 +11,7 @@ export function VariationOption() {
     addPropertyTo(this, 'value');
     addPropertyTo(this, 'position');
     addPropertyTo(this, 'default');
+    addPropertyTo(this, 'include');
     addPropertyTo(this, 'colour');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'onceOffCost');
