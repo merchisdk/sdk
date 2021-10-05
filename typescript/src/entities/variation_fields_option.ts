@@ -29,6 +29,9 @@ export class VariationFieldsOption extends Entity {
   public default?: boolean;
 
   @VariationFieldsOption.property()
+  public include?: boolean;
+
+  @VariationFieldsOption.property()
   public position?: number;
 
   @VariationFieldsOption.property()
@@ -74,6 +77,7 @@ export class VariationFieldsOption extends Entity {
   public buildVariationOption = () => {
     const result = new this.merchi.VariationOption(this.merchi);
     result.optionId = this.id;
+    result.include = this.include;
     result.value = this.value;
     result.position = this.position;
     result.default = this.default;
