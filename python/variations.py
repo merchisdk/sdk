@@ -25,7 +25,8 @@ class VariationFieldOption(sdk.python.entities.Entity):
     variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
     variation_unit_cost_discount_group = Property(DiscountGroup)
-    default = Property(float)
+    default = Property(bool)
+    include = Property(bool)
     linked_file = Property(File)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
@@ -168,6 +169,7 @@ class VariationOption(sdk.python.entities.Entity):
     total_cost = Property(float)
     position = Property(int)
     default = Property(bool)
+    include = Property(bool)
     linked_file = Property(File)
 
 

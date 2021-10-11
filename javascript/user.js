@@ -32,6 +32,7 @@ export function User() {
     addPropertyTo(this, 'enableCrashReports');
     addPropertyTo(this, 'enableClientEmails');
     addPropertyTo(this, 'enableInvoiceReminders');
+    addPropertyTo(this, 'enableStoreNotifications');
     addPropertyTo(this, 'phoneNumbers', PhoneNumber);
     addPropertyTo(this, 'emailAddresses', EmailAddress);
     addPropertyTo(this, 'addresses', Address);

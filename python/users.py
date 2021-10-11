@@ -59,6 +59,7 @@ class User(sdk.python.entities.Entity):
     enable_crash_reports = Property(bool)
     enable_client_emails = Property(bool)
     enable_invoice_reminders = Property(bool)
+    enable_store_notifications = Property(bool)
     is_super_user = Property(bool)
     is_admin_of_subscribed_company = Property(bool)
     system_roles = Property(SystemRole)
