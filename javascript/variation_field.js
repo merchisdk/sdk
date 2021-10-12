@@ -213,7 +213,7 @@ export function VariationField() {
             value, options, i,
             onceOffCost = 0,
             selectableOptions = [],
-            sellerProductEditable = this.sellerProductEditable;
+            sellerProductEditable = this.sellerProductEditable();
         if (this.isSelectable()) {
             options = this.options();
             value = [];
@@ -221,8 +221,8 @@ export function VariationField() {
                 const selectableOption = new VariationOption();
                 selectableOption.copyFieldOption(options[i]);
                 selectableOptions.push(selectableOption);
-                if (!sellerProductEditable && options[i].default() ||
-                    sellerProductEditable && options[i].include()) {
+                if ((!sellerProductEditable && options[i].default()) ||
+                    (sellerProductEditable && options[i].include())) {
                     value.push(options[i].id());
                     onceOffCost += options[i].variationCost();
                 }
