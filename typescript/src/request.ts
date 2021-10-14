@@ -61,6 +61,7 @@ export function apiFetch(
   );
 }
 
+/* istanbul ignore next */
 export function apiFetchWithProgress(
   resource: string,
   options?: RequestOptions,
