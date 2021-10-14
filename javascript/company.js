@@ -21,6 +21,8 @@ export function Company() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'website');
     addPropertyTo(this, 'country');
+    addPropertyTo(this, 'stripeAccountId');
+    addPropertyTo(this, 'isStripeAccountEnabled');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'defaultCurrency');
     addPropertyTo(this, 'taxNumber');
@@ -34,6 +36,7 @@ export function Company() {
     addPropertyTo(this, 'utrustApiKey');
     addPropertyTo(this, 'utrustWebhookKey');
     addPropertyTo(this, 'acceptUtrust');
+    addPropertyTo(this, 'isPayingCompany');
     addPropertyTo(this, 'isUtrustValid');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');

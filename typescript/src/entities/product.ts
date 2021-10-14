@@ -114,6 +114,12 @@ export class Product extends Entity {
   public allowQuotation?: boolean;
 
   @Product.property()
+  public allowChainedInventoryCreation?: boolean;
+
+  @Product.property()
+  public chainedInventoryHandlingUnitPrice?: number;
+
+  @Product.property()
   public bestPrice?: number;
 
   @Product.property()
@@ -142,6 +148,12 @@ export class Product extends Entity {
 
   @Product.property({type: Product})
   public chainedSellerProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedInventorySupplierProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedInventorySellerProduct?: Product | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];

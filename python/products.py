@@ -43,6 +43,8 @@ class Product(sdk.python.entities.Entity):
     accept_phone_payment = Property(bool)
     allow_payment_upfront = Property(bool)
     allow_quotation = Property(bool)
+    allow_chained_inventory_creation = Property(bool)
+    chained_inventory_handling_unit_price = Property(float)
     delivery_days_normal = Property(int)
     best_price = Property(float)
     categories = Property(Category)
@@ -62,6 +64,8 @@ class Product(sdk.python.entities.Entity):
     original_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property("sdk.python.products.Product")
     chained_seller_product = Property("sdk.python.products.Product")
+    chained_inventory_supplier_product = Property("sdk.python.products.Product")
+    chained_inventory_seller_product = Property("sdk.python.products.Product")
     buy_unit_price = Property(float)
 
     def create(self, embed=None, email=None, password=None, query=None,

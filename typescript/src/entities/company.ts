@@ -59,6 +59,12 @@ export class Company extends Entity {
   @Company.property()
   public isPaypalValid?: boolean;
 
+  @Company.property({embeddedByDefault: false})
+  public isStripeAccountEnabled?: boolean;
+
+  @Company.property()
+  public stripeAccountId?: string;
+
   @Company.property({type: String})
   public stripeCustomerId?: string;
 
@@ -76,6 +82,9 @@ export class Company extends Entity {
 
   @Company.property({type: String})
   public stripeApiKey?: string | null;
+
+  @Company.property()
+  public isPayingCompany?: boolean;
 
   @Company.property()
   public isStripeValid?: boolean;
