@@ -314,29 +314,25 @@ export class Merchi {
     return apiFetch(resource, options, expectEmptyResponse);
   };
 
+  /* istanbul ignore next */
   public authenticatedFetchWithProgress = (
     resource: string,
     options: RequestOptions,
     progressCallback?: (progress: number) => void
   ) => {
     if (!options.query) {
-      /* istanbul ignore next */
       options.query = [];
     }
     if (this.sessionToken) {
-      /* istanbul ignore next */
       options.query.push(['session_token', this.sessionToken]);
     }
     if (this.clientToken) {
-      /* istanbul ignore next */
       options.query.push(['client_token', this.clientToken]);
     }
     if (this.invoiceToken) {
-      /* istanbul ignore next */
       options.query.push(['invoice_token', this.invoiceToken]);
     }
     if (this.cartToken) {
-      /* istanbul ignore next */
       options.query.push(['cart_token', this.cartToken]);
     }
     return apiFetchWithProgress(resource, options, progressCallback);
