@@ -75,7 +75,7 @@ export function apiFetchWithProgress(
       }
       const reader = response.body.getReader();
       let bodyText = '';
-      let errorText = ''
+      let errorText = '';
       let haveError = false;
       const expected = '{"loadingBar": "' + '.'.repeat(100) + '"}';
       function readChunk(): any {
