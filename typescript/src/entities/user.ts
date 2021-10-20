@@ -31,7 +31,7 @@ import { Role,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles';
-import { SystemRole as SR } from '../constants/system_roles';
+import { SystemRoles as SR } from '../constants/system_roles';
 
 import { some } from 'lodash';
 
