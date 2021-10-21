@@ -146,6 +146,9 @@ export class Job extends Entity {
   public unreadJobInvoicingNotificationsCount?: number;
 
   @Job.property({embeddedByDefault: false})
+  public limitedStock?: boolean;
+
+  @Job.property({embeddedByDefault: false})
   public inStock?: number;
 
   @Job.property({arrayType: 'Draft'})
