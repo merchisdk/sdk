@@ -80,6 +80,7 @@ export function Job() {
     addPropertyTo(this, 'unreadJobShippingNotificationsCount');
     addPropertyTo(this, 'unreadJobInvoicingNotificationsCount');
     addPropertyTo(this, 'matchingInventories', MatchingInventory);
+    addPropertyTo(this, 'inStock');
     addPropertyTo(this, 'canDeduct');
 
     addPropertyTo(this, 'productionNotes');
