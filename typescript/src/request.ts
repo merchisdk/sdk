@@ -60,3 +60,65 @@ export function apiFetch(
     }
   );
 }
+
+/* istanbul ignore next */
+export function apiFetchWithProgress(
+  resource: string,
+  options?: RequestOptions,
+  progressCallback?: (progress: number) => void
+) {
+  return backendFetch(resource, options as RequestInit | undefined).then(
+    function (response) {
+      if (!response.body) {
+        const err = new ApiError('empty response');
+        return Promise.reject(err);
+      }
+      const reader = response.body.getReader();
+      let bodyText = '';
+      let errorText = '';
+      let haveError = false;
+      const expected = '{"loadingBar": "' + '.'.repeat(100) + '"}';
+      function readChunk(): any {
+        return reader.read().then(({done, value}) => {
+          if (done) {
+            if (response.status < 200 || response.status > 299) {
+              const err = new ApiError('Unknown error');
+              return Promise.reject(err);
+            } else if(haveError) {
+              try {
+                const jsonText = JSON.parse(errorText);
+                return Promise.reject(new ApiError(jsonText));
+              } catch (e) {
+                return Promise.reject(new ApiError(errorText));
+              }
+            } else {
+              return bodyText;
+            }
+          } else {
+            const chunk = new TextDecoder().decode(value);
+            if (haveError) {
+              errorText += chunk;
+            } else {
+              for (let i = 0; i < chunk.length; ++i) {
+                const char = chunk[i];
+                const expectedChar = expected[bodyText.length]; 
+                if (expectedChar == char && !haveError) {
+                  bodyText += char; 
+                } else {
+                  haveError = true;
+                  errorText += char; 
+                }
+              }
+            }
+            if (!haveError && progressCallback) { 
+              const progress = Math.min(Math.max(0, bodyText.length - 16), 100);
+              progressCallback(progress);
+            }
+            return readChunk();
+          }
+        });    
+      }
+      return readChunk();
+    }
+  );
+}
