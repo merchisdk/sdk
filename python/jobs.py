@@ -100,6 +100,8 @@ class Job(sdk.python.entities.Entity):
     draft_comments = Property(DraftComment, backref="job")
 
     # not embedded by default, must be requested
+    in_stock = Property(int)
+    limited_stock = Property(bool)
     unread_notifications_count = Property(int)
     unread_job_info_notifications_count = Property(int)
     unread_job_drafting_notifications_count = Property(int)
