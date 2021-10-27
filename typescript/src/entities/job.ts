@@ -37,6 +37,9 @@ export class Job extends Entity {
   @Job.property()
   public quantity?: number;
 
+  @Cart.property()
+  public currency?: number;
+
   @Job.property({type: String})
   public notes?: string | null;
 
