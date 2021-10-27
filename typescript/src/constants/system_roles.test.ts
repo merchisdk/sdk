@@ -1,5 +1,5 @@
-import { SystemRole } from './system_roles';
+import { SystemRoles } from './system_roles';
 
 test('system component builder role exists', () => {
-  expect(SystemRole.SYSTEM_COMPONENT_BUILDER).toBe(1);
+  expect(SystemRoles.SYSTEM_COMPONENT_BUILDER).toBe(1);
 });

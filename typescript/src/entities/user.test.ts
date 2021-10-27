@@ -1,6 +1,6 @@
 import { Merchi } from '../merchi';
 import { Role } from '../constants/roles';
-import { SystemRole } from '../constants/system_roles';
+import { SystemRoles } from '../constants/system_roles';
 import { DomainType } from '../constants/domain_types';
 import { setup, mockFetch } from '../test_util';
 import { every } from 'lodash';
@@ -121,13 +121,13 @@ test('testHasSystemRoles', () => {
   const user = new merchi.User();
   // SystemRole has not been specified yet likely to be a embed issue
   expect(
-    () => user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toThrow();
+    () => user.hasSystemRole(SystemRoles.SYSTEM_COMPONENT_BUILDER)).toThrow();
   user.systemRoles = [];
-  expect(user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toBeFalsy();
+  expect(user.hasSystemRole(SystemRoles.SYSTEM_COMPONENT_BUILDER)).toBeFalsy();
   const systemRole = new merchi.SystemRole();
-  systemRole.role = SystemRole.SYSTEM_COMPONENT_BUILDER;
+  systemRole.role = SystemRoles.SYSTEM_COMPONENT_BUILDER;
   user.systemRoles = [systemRole];
-  expect(user.hasSystemRole(SystemRole.SYSTEM_COMPONENT_BUILDER)).toBeTruthy();
+  expect(user.hasSystemRole(SystemRoles.SYSTEM_COMPONENT_BUILDER)).toBeTruthy();
 });
 
 test('domainsByRoles', () => {
