@@ -3,6 +3,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   EmbedDescriptor,
 } from './entity';
+import { AutomaticPaymentRelationship } from './entities/automatic_payment_relationship';
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
 import { Domain } from './entities/domain';
@@ -96,6 +97,7 @@ export class Merchi {
   public clientToken?: string;
   public cartToken?: string;
 
+  public AutomaticPaymentRelationship?: typeof AutomaticPaymentRelationship;
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
   public Backup: typeof Backup;
@@ -194,6 +196,9 @@ export class Merchi {
     }
 
     // re-export configured versions of all classes
+    this.AutomaticPaymentRelationship = this.setupClass(
+      AutomaticPaymentRelationship
+    ) as typeof AutomaticPaymentRelationship;
     this.Variation = this.setupClass(Variation) as typeof Variation;
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
     this.Component = this.setupClass(Component) as typeof Component;
