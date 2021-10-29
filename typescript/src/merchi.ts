@@ -97,7 +97,7 @@ export class Merchi {
   public clientToken?: string;
   public cartToken?: string;
 
-  public AutomaticPaymentRelationship?: typeof AutomaticPaymentRelationship;
+  public AutomaticPaymentRelationship: typeof AutomaticPaymentRelationship;
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
   public Backup: typeof Backup;
