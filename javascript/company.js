@@ -2,6 +2,7 @@ import { addPropertyTo, getList, fromJson, getOne, serialise,
     patchOne, deleteOne, create, fromJsonList, enumerateFiles,
     Request } from './model';
 import { Dictionary } from './dictionary';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
 import { Address } from './address';
 import { Bank } from './bank';
 import { CountryTax, NoTaxEntity } from './country_tax';
@@ -56,6 +57,11 @@ export function Company() {
     addPropertyTo(this, 'savedProducts', Product);
     addPropertyTo(this, 'companyInvitations', CompanyInvitation);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
+    addPropertyTo(
+        this,
+        'automaticPaymentRelationships',
+        AutomaticPaymentRelationship,
+    );
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),
