@@ -17,6 +17,10 @@ import { notificationTypes, notificationSectionCodes, notificationSection,
     notificationSectionIconClass } from './notification_types';
 import { Address, Addresses } from './address';
 import { Assignment, Assignments } from './assignment';
+import {
+    AutomaticPaymentRelationship,
+    AutomaticPaymentRelationships,
+} from './automatic_payment_relationship';
 import { Backup, Backups } from './backup';
 import { Bank } from './bank.js';
 import { Category, Categories } from './category';
@@ -1269,6 +1273,8 @@ export function merchi(backendUri, websocketUri) {
             'themes': new Themes(),
             'EnrolledDomain': EnrolledDomain,
             'enrolledDomains': new EnrolledDomains(),
+            'AutomaticPaymentRelationship': AutomaticPaymentRelationship,
+            'automaticPaymentRelationships': new AutomaticPaymentRelationships(),
             'Company': Company,
             'companies': new Companies(),
             'CompanyInvitation': CompanyInvitation,

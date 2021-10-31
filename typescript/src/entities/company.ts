@@ -1,4 +1,5 @@
 import { Address } from './address';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
 import { Bank } from './bank';
 import { Cart } from './cart';
 import { CompanyInvitation } from './company_invitation';
@@ -124,6 +125,9 @@ export class Company extends Entity {
 
   @Company.property({type: 'CountryTax'})
   public defaultTaxType?: CountryTax | null;
+
+  @Company.property({arrayType: 'AutomaticPaymentRelationship'})
+  public automaticPaymentRelationships?: AutomaticPaymentRelationship[];
 
   @Company.property({arrayType: 'CountryTax'})
   public taxTypes?: CountryTax[];
