@@ -17,7 +17,7 @@ export const showDomainAvatarArray =
              'READY_FOR_SHIPPING', 'SIGN_UP_CONFIRMATION', 'CRASH_EVENT',
              'MANAGER_SUMMARY', 'PASSWORD_RESET', 'MANAGER_REASSIGNED',
              'EMAIL_RESPONSE', 'SHIPMENT_EXPECTED_DATE_PAST',
-             'DOMAIN_INVITATION'];
+             'DOMAIN_INVITATION', 'MOD_SELLER_SUMMARY', 'MOD_SUPPLIER_SUMMARY'];
 
 export const showUserOrDomainAvatarArray =
             ['JOB_PAID', 'INVOICE_PAID', 'PAYMENT_ACCEPTED',
@@ -96,6 +96,17 @@ notificationTypes.add("JOB_NOTIFICATION_COMMENT", 59);
 notificationTypes.add("PRODUCTION_SHIPPED", 60);
 notificationTypes.add("SELLER_STORE_CREATED", 61);
 notificationTypes.add("WEB_FORM", 62);
+notificationTypes.add("CREATE_DOMAIN_FOR_MOD_PRODUCT", 63);
+notificationTypes.add("RESELL_REQUEST_SUBMITTED", 64);
+notificationTypes.add("RESELL_REQUEST_RECEIVED", 65);
+notificationTypes.add("MOD_PRODUCT_READY_FOR_SALE", 66);
+notificationTypes.add("ADDED_TO_COMPANY", 67);
+notificationTypes.add("PRODUCTION_COMPLETED", 68);
+notificationTypes.add("MOQ_PRODUCT_READY_FOR_SALE", 69);
+notificationTypes.add("STORE_ASSIGNED_TO_YOU", 70);
+notificationTypes.add("CLIENT_STORE_CREATED", 71);
+notificationTypes.add("MOD_SELLER_SUMMARY", 72);
+notificationTypes.add("MOD_SUPPLIER_SUMMARY", 73);
 
 export const notificationTypesKeys = new Dictionary();
 
