@@ -5,6 +5,7 @@ import { addPropertyTo, getList, fromJsonList, deleteOne, patchOne, fromJson,
     serialise, getOne, create, enumerateFiles, Request } from './model';
 import { productTypesInts } from './product_types';
 import { Category } from './category';
+import { Component } from './component';
 import { Company } from './company';
 import { CountryTax } from './country_tax';
 import { DomainTag } from './domain_tag';
@@ -50,6 +51,7 @@ export function Product() {
     addPropertyTo(this, 'chainedSellerProduct', Product);
     addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
     addPropertyTo(this, 'chainedInventorySellerProduct', Product);
+    addPropertyTo(this, 'component', Component);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'suppliedByDomains', SupplyDomain);
     addPropertyTo(this, 'supplyDomains', SupplyDomain);

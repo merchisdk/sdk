@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
+import { Component } from './component';
 import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
@@ -154,6 +155,9 @@ export class Product extends Entity {
 
   @Product.property({type: Product})
   public chainedInventorySellerProduct?: Product | null;
+
+  @Product.property({type: Component})
+  public component?: Component | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
