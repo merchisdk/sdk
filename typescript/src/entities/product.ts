@@ -303,19 +303,19 @@ export class Product extends Entity {
       this.groupVariationFields, ['position'], ['asc']);
     result.quantity = 0;
     for (const variationField of sortedFields) {
-      const empty = variationField.buildEmptyVariation(); 
+      const empty = variationField.buildEmptyVariation();
       variations.push(empty);
       cost += empty.cost as number;
     }
     result.groupCost = cost;
     result.variations = variations;
-    return result; 
+    return result;
   }
 
   public removeVariationField = (variationField: VariationField) => {
     if (variationField.independent === undefined) {
       throw new Error('variation.independent is undefined, did you ' +
-                      'forget to embed it?'); 
+                      'forget to embed it?');
     }
     if (this.independentVariationFields === undefined) {
       const err = 'independentVariationFields is undefined, did you forget to' +
