@@ -36,6 +36,7 @@ export function Job() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'currency');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'product', Product);
@@ -548,12 +549,6 @@ export function Job() {
         var domain = this.domain();
         return domain && domain.company() ?
             domain.company().defaultTaxType() : null;
-    }
-
-    this.currency = function () {
-        var domain = this.domain();
-        return domain && domain.company() ?
-            domain.company().defaultCurrency() : null;
     }
 
     this.isUserClient = function (user) {
