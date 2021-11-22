@@ -13,6 +13,7 @@ export function Component() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'body');
     addPropertyTo(this, 'description');
+    addPropertyTo(this, 'compiled');
     addPropertyTo(this, 'featureImage', MerchiFile);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'tags', ComponentTag);
@@ -59,6 +60,14 @@ export function Component() {
                   data: data,
                   embed: embed});
     };
+
+  this.toReact = function (context) {
+    const componentCode = 'with (this) { ' + this.compiled() + ' return ' +
+      this.name() + ';}';
+    const proxy = new Proxy(context, {});
+    const callable = new Function(componentCode);
+    return callable.call(proxy);
+  }
 }
 
 export function Components() {

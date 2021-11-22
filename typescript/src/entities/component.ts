@@ -36,4 +36,13 @@ export class Component extends Entity {
 
   @Component.property({arrayType: 'ComponentTag'})
   public tags?: ComponentTag[];
+
+  public toReact = (context: any) => {
+    const componentCode = 'with (this) { ' + this.compiled + ' return ' +
+      this.name + ';}';
+    const proxy = new Proxy(context, {});
+    const callable = new Function(componentCode);
+    return callable.call(proxy);
+  }
+
 }
