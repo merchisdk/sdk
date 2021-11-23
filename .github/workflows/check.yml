@@ -79,4 +79,6 @@ jobs:
         with:
           php-version: '7.2'
           tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
+      - run: pwd
+      - run: ls -la
       - run: ./php/lint.sh
