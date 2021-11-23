@@ -3,8 +3,6 @@ on: push
 jobs:
   check-python:
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     strategy:
       matrix:
         python-version: ['3.5']
@@ -16,16 +14,24 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
-      - run: pip install -r python/requirements/dev.txt
-      - run: python/lint.sh
-      - run: coverage run --source python --branch --omit python/tests -m pytest
-      - run: coverage report -m --fail-under 40
+      - name: pip
+        working-directory: python
+        run: pip install -r requirements/dev.txt
+      - name: lint
+        working-directory: python
+        run: lint.sh
+      - name: coverage
+        working-directory: python
+        run: coverage run --branch --omit tests -m pytest
+      - name: coverage report
+        working-directory: python
+        run: coverage report -m --fail-under 40
   check-js:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node: [ '12' ]
-    name: Check Node ${{ matrix.node }}
+    name: Check Javascript ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
@@ -43,7 +49,7 @@ jobs:
     strategy:
       matrix:
         node: [ '12' ]
-    name: Check Node ${{ matrix.node }}
+    name: Check Typescript
     steps:
       - uses: actions/checkout@v2
       - name: Setup node
@@ -65,3 +71,11 @@ jobs:
       - name: test
         working-directory: typescript
         run: yarn test
+  check-php:
+    - name: Check PHP
+    uses: shivammathur/setup-php@v2
+    with:
+      php-version: '7.2'
+      tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
+    steps:
+      - run: php/lint.sh
