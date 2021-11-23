@@ -223,7 +223,7 @@ class Variation(sdk.python.entities.Entity):
         if self.value:
             if new_values_array:
                 self.value = ','.join(new_values_array)  # type: ignore
-            return [n for n in self.value.split(',')]
+            return self.value.split(',')
         return []
 
     def get_selected_option(self, option_id):
