@@ -26,8 +26,7 @@ class File(sdk.python.entities.Entity):
     def from_flask_file(self, flask_file):
         self.name = secure_filename(flask_file.filename)
         self.mimetype = flask_file.mimetype
-        self.file_data = (self.name, flask_file,
-                          flask_file.mimetype)  # type: ignore
+        self.file_data = (self.name, flask_file, flask_file.mimetype)
 
     @property
     def is_image(self):
