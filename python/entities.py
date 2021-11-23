@@ -43,6 +43,7 @@ if TYPE_CHECKING:
 else:
     Base = object
 
+
 class Property(Base):
     def __init__(self, remote_type, backref=None):
         self.remote_type = remote_type

@@ -1,5 +1,6 @@
 import datetime
 from werkzeug.utils import secure_filename
+from typing import Any  # noqa #pylint: disable=unused-import
 import sdk.python.entities
 from sdk.python.entities import Property
 
@@ -21,12 +22,12 @@ class File(sdk.python.entities.Entity):
     def __init__(self):
         super(File, self).__init__()
         self.url_fields = ['view_url', 'download_url']
-        self.file_data = []
+        self.file_data = []  # type: Any
 
     def from_flask_file(self, flask_file):
         self.name = secure_filename(flask_file.filename)
         self.mimetype = flask_file.mimetype
-        self.file_data = (self.name, flask_file, flask_file.mimetype)  # type: ignore
+        self.file_data = (self.name, flask_file, flask_file.mimetype)
 
     @property
     def is_image(self):
