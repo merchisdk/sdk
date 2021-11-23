@@ -14,6 +14,7 @@ class Component(sdk.python.entities.Entity):
     name = Property(str)
     body = Property(str)
     description = Property(str)
+    compiled = Property(str)
     tags = Property(ComponentTag)
     images = Property(File)
     feature_image = Property(File)

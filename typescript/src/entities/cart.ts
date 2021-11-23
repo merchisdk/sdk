@@ -31,7 +31,7 @@ export class Cart extends Entity {
   public receiverNotes?: string | null;
 
   @Cart.property()
-  public currency?: number;
+  public currency?: string;
 
   @Cart.property()
   public cartItemsSubtotalCost?: number;

@@ -67,6 +67,7 @@ class Product(sdk.python.entities.Entity):
     chained_seller_product = Property("sdk.python.products.Product")
     chained_inventory_supplier_product = Property("sdk.python.products.Product")
     chained_inventory_seller_product = Property("sdk.python.products.Product")
+    component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
 
     def create(self, embed=None, email=None, password=None, query=None,

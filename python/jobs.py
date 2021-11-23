@@ -37,6 +37,7 @@ class Job(sdk.python.entities.Entity):
         self.escape_fields = ['product', 'quantity', 'tax_type']
 
     id = Property(int)
+    currency = Property(str)
     client = Property('sdk.python.users.User')
     manager = Property('sdk.python.users.User')
     designer = Property('sdk.python.users.User')
