@@ -18,8 +18,7 @@ jobs:
         working-directory: python
         run: pip install -r requirements/dev.txt
       - name: lint
-        working-directory: python
-        run: ./lint.sh
+        run: ./python/lint.sh
       - name: coverage
         working-directory: python
         run: coverage run --branch --omit tests -m pytest
