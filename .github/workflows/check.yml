@@ -79,4 +79,4 @@ jobs:
           tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
       - run: ./php/lint.sh
       - run: ./php/test.sh
-      - run: php/check.php php/clover.xml 10
+      - run: php php/check.php php/clover.xml 10
