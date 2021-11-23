@@ -135,7 +135,7 @@ class VariationField(sdk.python.entities.Entity):
                 variation_built.selectable_options.append(
                     option.build_variation_option)
             values = (str(value) for value in variation_built.value)
-            variation_built.value = ",".join(values) # type: ignore
+            variation_built.value = ",".join(values)  # type: ignore
         elif self.field_type in (SELECT, RADIO):
             variation_built.selectable_options.append(
                 option.build_variation_option)
