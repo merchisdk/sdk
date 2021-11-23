@@ -37,7 +37,20 @@ disable =
         anomalous-unicode-escape-in-string,
         bad-mcs-classmethod-argument,
         unsubscriptable-object,
-        not-an-iterable
+        not-an-iterable,
+        implicit-str-concat,
+        no-else-return,
+        raise-missing-from,
+        consider-using-f-string,
+        super-init-not-called,
+        useless-object-inheritance,
+        super-with-arguments,
+        self-cls-assignment,
+        not-callable,
+        consider-using-from-import,
+        c-extension-no-member,
+        inconsistent-return-statements,
+        unspecified-encoding
 
 [REPORTS]
 reports=no

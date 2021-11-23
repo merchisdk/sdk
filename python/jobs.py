@@ -119,7 +119,7 @@ class Job(sdk.python.entities.Entity):
         return self.quantity * self.cost_per_unit
 
     def process_for_transfer(self):
-        self.updated = None
+        self.updated = None  # type: ignore
 
     def is_draft_accepted(self):
         """ Return True if the current draft for this job has been accepted,
@@ -199,11 +199,10 @@ class Job(sdk.python.entities.Entity):
             the user provided and return None if no assignment can
             be found with the user.
         """
-        assignment = None
         for assignment in self.assignments:
             if assignment.supplier.id == user_id:
-                assignment = assignment
-        return assignment
+                return assignment
+        return None
 
     def production_shipment(self):
         """ Return the shipment object which has been created for production

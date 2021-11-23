@@ -25,7 +25,7 @@ def fetch_cert(email, cert_name, domain_names, log, config):
     env["AWS_SECRET_ACCESS_KEY"] = config['AWS_SECRET_ACCESS_KEY']
     output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT,
                                      env=env)
-    log_msg = "certbot output: '{}'".format(output)
+    log_msg = "certbot output: '{!r}'".format(output)
     log(logging.INFO, log_msg)
 
 

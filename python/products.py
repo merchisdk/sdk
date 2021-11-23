@@ -72,7 +72,7 @@ class Product(sdk.python.entities.Entity):
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
-        self.unit_price = float(self.unit_price)
+        self.unit_price = float(self.unit_price)  # type: ignore
         super(Product, self).\
             create(embed=embed, email=email, password=password, query=query,
                    api_secret=api_secret, as_domain=as_domain)
@@ -98,9 +98,9 @@ class Product(sdk.python.entities.Entity):
 
     def build_empty_variations_group(self):
         variations_group_built = VariationsGroup()
-        variations_group_built.quantity = 0
-        variations_group_built.variations = []
-        variations_group_built.group_cost = 0
+        variations_group_built.quantity = 0  # type: ignore
+        variations_group_built.variations = []  # type: ignore
+        variations_group_built.group_cost = 0  # type: ignore
         for variation_field in self.group_variation_fields:
             empty_variation = \
                 variation_field.build_empty_variation()
