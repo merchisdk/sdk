@@ -16,10 +16,12 @@ export function Draft() {
     addPropertyTo(this, 'file', MerchiFile);
     addPropertyTo(this, 'date');
     addPropertyTo(this, 'accepted');
+    addPropertyTo(this, 'changesRequested');
     addPropertyTo(this, 'resendDate');
     addPropertyTo(this, 'viewed');
     addPropertyTo(this, 'justViewed');
     addPropertyTo(this, 'comments', DraftComment);
+    addPropertyTo(this, 'commentsCount');
     addPropertyTo(this, 'sendSms');
     addPropertyTo(this, 'sendEmail');
 

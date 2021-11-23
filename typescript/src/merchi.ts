@@ -3,6 +3,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   EmbedDescriptor,
 } from './entity';
+import { AutomaticPaymentRelationship } from './entities/automatic_payment_relationship';
 import { Session } from './entities/session';
 import { JobComment } from './entities/job_comment';
 import { Domain } from './entities/domain';
@@ -33,6 +34,7 @@ import { Cart } from './entities/cart';
 import { CartShipmentGroup } from './entities/cart_shipment_group';
 import { CartShipmentQuote } from './entities/cart_shipment_quote';
 import { Theme } from './entities/theme';
+import { ThemeCssSetting } from './entities/theme_css_setting';
 import { Component } from './entities/component';
 import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
@@ -64,7 +66,7 @@ import { MatchingInventory } from './entities/matching_inventory';
 import { SubscriptionPlan } from './entities/subscription_plan';
 import { generateUUID } from './uuid';
 // eslint-disable-next-line no-unused-vars
-import { RequestOptions, apiFetch } from './request';
+import { RequestOptions, apiFetch, apiFetchWithProgress } from './request';
 import { getCookie } from './cookie';
 
 // the type of classes
@@ -95,6 +97,7 @@ export class Merchi {
   public clientToken?: string;
   public cartToken?: string;
 
+  public AutomaticPaymentRelationship: typeof AutomaticPaymentRelationship;
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
   public Backup: typeof Backup;
@@ -135,6 +138,7 @@ export class Merchi {
   public User: typeof User;
   public Session: typeof Session;
   public Theme: typeof Theme;
+  public ThemeCssSetting: typeof ThemeCssSetting;
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
   public Domain: typeof Domain;
@@ -192,10 +196,14 @@ export class Merchi {
     }
 
     // re-export configured versions of all classes
+    this.AutomaticPaymentRelationship = this.setupClass(
+      AutomaticPaymentRelationship
+    ) as typeof AutomaticPaymentRelationship;
     this.Variation = this.setupClass(Variation) as typeof Variation;
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
     this.Component = this.setupClass(Component) as typeof Component;
     this.Theme = this.setupClass(Theme) as typeof Theme;
+    this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;
     this.MenuItem = this.setupClass(MenuItem) as typeof MenuItem;
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
@@ -310,6 +318,32 @@ export class Merchi {
     }
     return apiFetch(resource, options, expectEmptyResponse);
   };
+
+  /* istanbul ignore next */
+  public authenticatedFetchWithProgress = (
+    resource: string,
+    options: RequestOptions,
+    progressCallback?: (progress: number) => void
+  ) => {
+    if (!options.query) {
+      options.query = [];
+    }
+    if (this.sessionToken) {
+      options.query.push(['session_token', this.sessionToken]);
+    }
+    if (this.clientToken) {
+      options.query.push(['client_token', this.clientToken]);
+    }
+    if (this.invoiceToken) {
+      options.query.push(['invoice_token', this.invoiceToken]);
+    }
+    if (this.cartToken) {
+      options.query.push(['cart_token', this.cartToken]);
+    }
+    return apiFetchWithProgress(resource, options, progressCallback);
+  };
+
+
 
   public getCurrentUser = (options?: UserRequestOptions) => {
     const { embed = {} } = options || {};

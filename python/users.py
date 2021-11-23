@@ -59,6 +59,7 @@ class User(sdk.python.entities.Entity):
     enable_crash_reports = Property(bool)
     enable_client_emails = Property(bool)
     enable_invoice_reminders = Property(bool)
+    enable_store_notifications = Property(bool)
     is_super_user = Property(bool)
     is_admin_of_subscribed_company = Property(bool)
     system_roles = Property(SystemRole)
@@ -212,7 +213,7 @@ class User(sdk.python.entities.Entity):
     @classmethod
     def empty_user(cls):
         empty_user = User()
-        empty_user.id = -1
+        empty_user.id = -1  # type: ignore
         empty_user.timezone = sdk.python.util.timezones.DEFAULT_TIMEZONE
         return empty_user
 

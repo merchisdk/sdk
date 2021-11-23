@@ -37,6 +37,9 @@ export class Job extends Entity {
   @Job.property()
   public quantity?: number;
 
+  @Job.property()
+  public currency?: string;
+
   @Job.property({type: String})
   public notes?: string | null;
 
@@ -145,6 +148,12 @@ export class Job extends Entity {
   @Job.property({embeddedByDefault: false})
   public unreadJobInvoicingNotificationsCount?: number;
 
+  @Job.property({embeddedByDefault: false})
+  public limitedStock?: boolean;
+
+  @Job.property({embeddedByDefault: false})
+  public inStock?: number;
+
   @Job.property({arrayType: 'Draft'})
   public drafts?: Draft[];
 
@@ -180,6 +189,9 @@ export class Job extends Entity {
 
   @Job.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
+
+  @Job.property()
+  public preDraftCommentsCount?: number;
 
   @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;

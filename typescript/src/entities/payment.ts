@@ -1,6 +1,7 @@
 import { Entity } from '../entity';
 import { Invoice } from './invoice';
 import { User } from './user';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
 
 export class Payment extends Entity {
   protected static resourceName: string = 'payments';
@@ -36,4 +37,7 @@ export class Payment extends Entity {
 
   @Payment.property({type: User})
   public paymentRecorder?: User | null;
+
+  @Payment.property({type: AutomaticPaymentRelationship})
+  public chargedByPaymentRelationship?: AutomaticPaymentRelationship | null;
 }

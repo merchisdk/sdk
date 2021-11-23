@@ -16,6 +16,10 @@ import { notificationTypes, notificationSectionCodes, notificationSection,
     notificationSectionIconClass } from './notification_types';
 import { Address, Addresses } from './address';
 import { Assignment, Assignments } from './assignment';
+import {
+    AutomaticPaymentRelationship,
+    AutomaticPaymentRelationships,
+} from './automatic_payment_relationship';
 import { Backup, Backups } from './backup';
 import { Bank } from './bank.js';
 import { Category, Categories } from './category';
@@ -41,7 +45,7 @@ import { Item } from './item';
 import { Inventory, Inventories } from './inventory';
 import { InventoryUnitVariation } from './inventory_unit_variation';
 import { MatchingInventory } from './matching_inventory';
-import { Notifications } from './notification';
+import { Notification, Notifications } from './notification';
 import { Invoice, Invoices } from './invoice';
 import { Job, Jobs } from './job';
 import { JobComment } from './job_comment';
@@ -507,7 +511,7 @@ export function merchi(backendUri, websocketUri) {
 
     function forquoteEdit(rights) {
         var forbitEdit = false;
-        if (rights.indexOf(MERCHI.rights.get("canEdit")) === -1) {
+        if (rights.indexOf(rights.get("canEdit")) === -1) {
             forbitEdit = true;
         }
         return forbitEdit;
@@ -515,7 +519,7 @@ export function merchi(backendUri, websocketUri) {
 
     function forquoteDelete(rights) {
         var forbitDelete = false;
-        if (rights.indexOf(MERCHI.rights.get("canDelete")) === -1) {
+        if (rights.indexOf(rights.get("canDelete")) === -1) {
             forbitDelete = true;
         }
         return forbitDelete;
@@ -533,7 +537,7 @@ export function merchi(backendUri, websocketUri) {
 
     function canEditAttributes(rights) {
         var canEdit = false;
-        if (rights.indexOf(MERCHI.rights.get("canEdit")) !== -1) {
+        if (rights.indexOf(rights.get("canEdit")) !== -1) {
             canEdit = true;
         }
         return canEdit;
@@ -1023,6 +1027,8 @@ export function merchi(backendUri, websocketUri) {
             'themes': new Themes(),
             'EnrolledDomain': EnrolledDomain,
             'enrolledDomains': new EnrolledDomains(),
+            'AutomaticPaymentRelationship': AutomaticPaymentRelationship,
+            'automaticPaymentRelationships': new AutomaticPaymentRelationships(),
             'Company': Company,
             'companies': new Companies(),
             'CompanyInvitation': CompanyInvitation,

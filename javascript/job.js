@@ -1,7 +1,8 @@
 import { generateUUID } from './uuid';
 import { Dictionary } from './dictionary';
 import { addPropertyTo, getOne, create, serialise, recoverOne, deleteOne,
-    fromJson, patchOne, getList, fromJsonList, enumerateFiles } from './model';
+    fromJson, patchOne, getList, fromJsonList, enumerateFiles,
+    Request } from './model';
 import { isUndefinedOrNull, sortArrayByObjectKeyDescending,
     sortArrayByObjectKey } from './helpers';
 import { jobStatusProduction, jobStatusDrafting, jobStatusPayment,
@@ -19,6 +20,7 @@ import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
 import { EmailAddress } from './email_address';
 import { Invoice } from './invoice';
+import { Notification } from './notification';
 import { Shipment } from './shipment';
 import { PhoneNumber } from './phone_number';
 import { MatchingInventory } from './matching_inventory';
@@ -34,6 +36,7 @@ export function Job() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'currency');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'product', Product);
@@ -42,6 +45,7 @@ export function Job() {
     addPropertyTo(this, 'deadline');
     addPropertyTo(this, 'updated');
     addPropertyTo(this, 'deductionDate');
+    addPropertyTo(this, 'preDraftCommentsCount');
     addPropertyTo(this, 'clientFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'drafts', Draft);
@@ -77,6 +81,8 @@ export function Job() {
     addPropertyTo(this, 'unreadJobShippingNotificationsCount');
     addPropertyTo(this, 'unreadJobInvoicingNotificationsCount');
     addPropertyTo(this, 'matchingInventories', MatchingInventory);
+    addPropertyTo(this, 'inStock');
+    addPropertyTo(this, 'limitedStock');
     addPropertyTo(this, 'canDeduct');
 
     addPropertyTo(this, 'productionNotes');
@@ -543,12 +549,6 @@ export function Job() {
         var domain = this.domain();
         return domain && domain.company() ?
             domain.company().defaultTaxType() : null;
-    }
-
-    this.currency = function () {
-        var domain = this.domain();
-        return domain && domain.company() ?
-            domain.company().defaultCurrency() : null;
     }
 
     this.isUserClient = function (user) {

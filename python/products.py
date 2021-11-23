@@ -29,6 +29,7 @@ class Product(sdk.python.entities.Entity):
     unit_width = Property(float)
     unit_depth = Property(float)
     unit_volume = Property(float)
+    limited_inventory = Property(bool)
     use_company_shihpment_methods = Property(bool)
     drop_shipment = Property(bool)
     needs_drafting = Property(bool)
@@ -43,6 +44,8 @@ class Product(sdk.python.entities.Entity):
     accept_phone_payment = Property(bool)
     allow_payment_upfront = Property(bool)
     allow_quotation = Property(bool)
+    allow_chained_inventory_creation = Property(bool)
+    chained_inventory_handling_unit_price = Property(float)
     delivery_days_normal = Property(int)
     best_price = Property(float)
     categories = Property(Category)
@@ -62,11 +65,14 @@ class Product(sdk.python.entities.Entity):
     original_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property("sdk.python.products.Product")
     chained_seller_product = Property("sdk.python.products.Product")
+    chained_inventory_supplier_product = Property("sdk.python.products.Product")
+    chained_inventory_seller_product = Property("sdk.python.products.Product")
+    component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
-        self.unit_price = float(self.unit_price)
+        self.unit_price = float(self.unit_price)  # type: ignore
         super(Product, self).\
             create(embed=embed, email=email, password=password, query=query,
                    api_secret=api_secret, as_domain=as_domain)
@@ -92,9 +98,9 @@ class Product(sdk.python.entities.Entity):
 
     def build_empty_variations_group(self):
         variations_group_built = VariationsGroup()
-        variations_group_built.quantity = 0
-        variations_group_built.variations = []
-        variations_group_built.group_cost = 0
+        variations_group_built.quantity = 0  # type: ignore
+        variations_group_built.variations = []  # type: ignore
+        variations_group_built.group_cost = 0  # type: ignore
         for variation_field in self.group_variation_fields:
             empty_variation = \
                 variation_field.build_empty_variation()

@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item';
 import { Category } from './category';
 import { Company } from './company';
+import { Component } from './component';
 import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
@@ -114,6 +115,12 @@ export class Product extends Entity {
   public allowQuotation?: boolean;
 
   @Product.property()
+  public allowChainedInventoryCreation?: boolean;
+
+  @Product.property()
+  public chainedInventoryHandlingUnitPrice?: number;
+
+  @Product.property()
   public bestPrice?: number;
 
   @Product.property()
@@ -142,6 +149,15 @@ export class Product extends Entity {
 
   @Product.property({type: Product})
   public chainedSellerProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedInventorySupplierProduct?: Product | null;
+
+  @Product.property({type: Product})
+  public chainedInventorySellerProduct?: Product | null;
+
+  @Product.property({type: Component})
+  public component?: Component | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
@@ -287,19 +303,19 @@ export class Product extends Entity {
       this.groupVariationFields, ['position'], ['asc']);
     result.quantity = 0;
     for (const variationField of sortedFields) {
-      const empty = variationField.buildEmptyVariation(); 
+      const empty = variationField.buildEmptyVariation();
       variations.push(empty);
       cost += empty.cost as number;
     }
     result.groupCost = cost;
     result.variations = variations;
-    return result; 
+    return result;
   }
 
   public removeVariationField = (variationField: VariationField) => {
     if (variationField.independent === undefined) {
       throw new Error('variation.independent is undefined, did you ' +
-                      'forget to embed it?'); 
+                      'forget to embed it?');
     }
     if (this.independentVariationFields === undefined) {
       const err = 'independentVariationFields is undefined, did you forget to' +

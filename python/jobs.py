@@ -37,11 +37,13 @@ class Job(sdk.python.entities.Entity):
         self.escape_fields = ['product', 'quantity', 'tax_type']
 
     id = Property(int)
+    currency = Property(str)
     client = Property('sdk.python.users.User')
     manager = Property('sdk.python.users.User')
     designer = Property('sdk.python.users.User')
     product = Property('sdk.python.products.Product')
     comments = Property(JobComment)
+    pre_draft_comments_count = Property(int)
     draft_comments = Property(DraftComment)
     drafts = Property(Draft)
     invoice = Property(Invoice, backref="jobs")
@@ -99,6 +101,8 @@ class Job(sdk.python.entities.Entity):
     draft_comments = Property(DraftComment, backref="job")
 
     # not embedded by default, must be requested
+    in_stock = Property(int)
+    limited_stock = Property(bool)
     unread_notifications_count = Property(int)
     unread_job_info_notifications_count = Property(int)
     unread_job_drafting_notifications_count = Property(int)
@@ -115,7 +119,7 @@ class Job(sdk.python.entities.Entity):
         return self.quantity * self.cost_per_unit
 
     def process_for_transfer(self):
-        self.updated = None
+        self.updated = None  # type: ignore
 
     def is_draft_accepted(self):
         """ Return True if the current draft for this job has been accepted,
@@ -195,11 +199,10 @@ class Job(sdk.python.entities.Entity):
             the user provided and return None if no assignment can
             be found with the user.
         """
-        assignment = None
         for assignment in self.assignments:
             if assignment.supplier.id == user_id:
-                assignment = assignment
-        return assignment
+                return assignment
+        return None
 
     def production_shipment(self):
         """ Return the shipment object which has been created for production

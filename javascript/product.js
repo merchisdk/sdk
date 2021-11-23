@@ -2,9 +2,10 @@ import { generateUUID } from './uuid';
 import { notEmptyArray, isUndefinedOrNull,
     removeObjectFromArrayWithIntegerValue } from './helpers';
 import { addPropertyTo, getList, fromJsonList, deleteOne, patchOne, fromJson,
-    serialise, getOne, create, enumerateFiles } from './model';
+    serialise, getOne, create, enumerateFiles, Request } from './model';
 import { productTypesInts } from './product_types';
 import { Category } from './category';
+import { Component } from './component';
 import { Company } from './company';
 import { CountryTax } from './country_tax';
 import { DomainTag } from './domain_tag';
@@ -46,6 +47,11 @@ export function Product() {
     addPropertyTo(this, "groupVariationFields", VariationField);
     addPropertyTo(this, "independentVariationFields", VariationField);
     addPropertyTo(this, "originalProduct", Product);
+    addPropertyTo(this, 'chainedSupplierProduct', Product);
+    addPropertyTo(this, 'chainedSellerProduct', Product);
+    addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
+    addPropertyTo(this, 'chainedInventorySellerProduct', Product);
+    addPropertyTo(this, 'component', Component);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'suppliedByDomains', SupplyDomain);
     addPropertyTo(this, 'supplyDomains', SupplyDomain);
@@ -61,6 +67,8 @@ export function Product() {
     addPropertyTo(this, 'acceptPhonePayment');
     addPropertyTo(this, 'allowPaymentUpfront');
     addPropertyTo(this, 'allowQuotation');
+    addPropertyTo(this, 'allowChainedInventoryCreation');
+    addPropertyTo(this, 'chainedInventoryHandlingUnitPrice');
     addPropertyTo(this, 'savedByUsers', User);
     addPropertyTo(this, 'savedByCompanies', Company);
     addPropertyTo(this, 'tags', DomainTag);
