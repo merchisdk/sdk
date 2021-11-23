@@ -30,6 +30,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - cd javascript
+      - run: cd javascript
       - run: yarn
       - run: yarn run eslint --ignore-pattern '.eslintrc.js' .
