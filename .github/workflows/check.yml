@@ -19,6 +19,8 @@ jobs:
         run: pip install -r requirements/dev.txt
       - name: lint
         run: ./python/lint.sh
+      - run: ls python
+      - run: PYTHONPATH=. pytest python
       - name: coverage
         run: PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
       - name: coverage report
@@ -75,7 +77,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          php-version: '7.3'
           tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
       - run: ./php/lint.sh
       - run: ./php/test.sh
