@@ -19,7 +19,7 @@ jobs:
         run: pip install -r requirements/dev.txt
       - name: lint
         working-directory: python
-        run: lint.sh
+        run: ./lint.sh
       - name: coverage
         working-directory: python
         run: coverage run --branch --omit tests -m pytest
@@ -79,4 +79,4 @@ jobs:
         with:
           php-version: '7.2'
           tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
-      - run: php/lint.sh
+      - run: ./php/lint.sh
