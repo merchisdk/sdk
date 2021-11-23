@@ -29,7 +29,7 @@ class Address(sdk.python.entities.Entity):
         for json_name in self.json_properties:
             setattr(clone_address, json_name,
                     (getattr(self, json_name)))
-        clone_address.id = None
+        clone_address.id = None  # type: ignore
         return clone_address
 
     def country_name(self):

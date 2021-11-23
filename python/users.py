@@ -213,7 +213,7 @@ class User(sdk.python.entities.Entity):
     @classmethod
     def empty_user(cls):
         empty_user = User()
-        empty_user.id = -1
+        empty_user.id = -1  # type: ignore
         empty_user.timezone = sdk.python.util.timezones.DEFAULT_TIMEZONE
         return empty_user
 
