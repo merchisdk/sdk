@@ -75,10 +75,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Check PHP
     steps:
+      - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '7.2'
           tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
-      - run: pwd
-      - run: ls -la
       - run: ./php/lint.sh
