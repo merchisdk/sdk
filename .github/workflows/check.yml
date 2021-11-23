@@ -72,7 +72,7 @@ jobs:
         working-directory: typescript
         run: yarn test
   check-php:
-    - name: Check PHP
+    name: Check PHP
     uses: shivammathur/setup-php@v2
     with:
       php-version: '7.2'
