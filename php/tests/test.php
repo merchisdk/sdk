@@ -16,7 +16,7 @@ require_once 'php/src/util/money_protocol.php';
 require_once 'php/src/categories.php';
 require_once 'php/src/util/country_code.php';
 
-final class PhpSuite extends TestCase
+final class test extends TestCase
 {
     public function testCanCreateProduct()
     {

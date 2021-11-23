@@ -20,7 +20,7 @@ jobs:
       - name: lint
         run: ./python/lint.sh
       - run: ls python
-      - run: PYTHONPATH=. pytest python
+      - run: pytest python
       - name: coverage
         run: PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
       - name: coverage report
