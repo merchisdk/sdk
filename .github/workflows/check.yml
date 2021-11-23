@@ -71,11 +71,3 @@ jobs:
       - name: test
         working-directory: typescript
         run: yarn test
-  check-php:
-    name: Check PHP
-    uses: shivammathur/setup-php@v2
-    with:
-      php-version: '7.2'
-      tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
-    steps:
-      - run: php/lint.sh
