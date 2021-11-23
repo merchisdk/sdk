@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 PYFILES=`find . -type f -name "*.py"`
+echo $PYFILES
 mypy --ignore-missing-imports --check-untyped-defs --strict-optional\
       --follow-imports=skip \
       --config-file mypy.ini \
