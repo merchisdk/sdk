@@ -43,7 +43,13 @@ disable =
         raise-missing-from,
         consider-using-f-string,
         super-init-not-called,
-        useless-object-inheritance
+        useless-object-inheritance,
+        super-with-arguments,
+        self-cls-assignment,
+        not-callable,
+        consider-using-from-import,
+        c-extension-no-member,
+        inconsistent-return-statements
 
 [REPORTS]
 reports=no
