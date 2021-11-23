@@ -7,6 +7,7 @@ import simplejson
 import arrow
 import flask
 import importlib
+from typing import TYPE_CHECKING
 from typing import Dict, Any, Set  # noqa #pylint: disable=unused-import
 from sdk.python.util.rights import Rights, ALL_RIGHTS
 from sdk.python.util.name_protocol import camelize, parse_json_key_camel
@@ -37,7 +38,12 @@ def full_class_path(obj):
     return obj.__module__ + "." + obj.__class__.__qualname__
 
 
-class Property(object):
+if TYPE_CHECKING:
+    Base = Any
+else:
+    Base = object
+
+class Property(Base):
     def __init__(self, remote_type, backref=None):
         self.remote_type = remote_type
         self.backref = backref
@@ -164,11 +170,15 @@ class Entity(object, metaclass=Meta):
     primary_key = 'id'
     file_data = []  # type: ignore
     request_class = Request
+    resource = ""
+    json_name = ""
+    json_properties = {}  # type: Any
+    recursive_properties = {}  # type: Any
 
     def __init__(self, values=None):
-        self.escape_fields = []  # type: ignore
+        self.escape_fields = []
         # should not apply html safe to url fields
-        self.url_fields = []  # type: ignore
+        self.url_fields = []
         self.rights = Rights(ALL_RIGHTS)
         # if it is set to True the entity should
         # only be treat as a reference to the backend
@@ -176,6 +186,7 @@ class Entity(object, metaclass=Meta):
         self.only_for_reference = False
         self._is_dirty = False
         self._back_objects = set()  # type: Set[Entity]
+        self.wants_update = {}
 
     def _set_hidden(self, hidden_property, value):
         """ Set an attribute of this entity.
@@ -321,7 +332,7 @@ class Entity(object, metaclass=Meta):
             if isinstance(data, str) and html_safe and property_name \
                     not in self.url_fields:
                 escaped = utils.escape(data)
-                result[camelize(property_name)] = escaped  # type: ignore
+                result[camelize(property_name)] = escaped
             else:
                 result[camelize(property_name)] = data
 
@@ -553,12 +564,15 @@ class Entity(object, metaclass=Meta):
 
 class Resource(object):
 
+    entity_class = None
+    json_name = ""
+
     def __init__(self):
-        self.resource = self.entity_class.resource
+        self.resource = self.entity_class.resource  # type: ignore
         self.can_create = True
 
     def get(self, forbid_auto_update=False, **kwargs):
-        req = Entity.request_class(forbid_auto_update)
+        req = Entity.request_class(forbid_auto_update)  # type: ignore
         req.wraps_request(**kwargs)
         req.resource = self.resource
         resp = req.send()
@@ -568,7 +582,7 @@ class Resource(object):
         result = []
         o = json_object[self.json_name]
         for item in o:
-            entity = self.entity_class()
+            entity = self.entity_class()  # type: ignore
             entity.from_json(item[entity.json_name], makes_dirty=makes_dirty)
             result.append(entity)
         return result

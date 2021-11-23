@@ -21,12 +21,13 @@ class File(sdk.python.entities.Entity):
     def __init__(self):
         super(File, self).__init__()
         self.url_fields = ['view_url', 'download_url']
-        self.file_data = []  # type: ignore
+        self.file_data = []
 
     def from_flask_file(self, flask_file):
         self.name = secure_filename(flask_file.filename)
         self.mimetype = flask_file.mimetype
-        self.file_data = (self.name, flask_file, flask_file.mimetype)
+        self.file_data = (self.name, flask_file,
+                          flask_file.mimetype)  # type: ignore
 
     @property
     def is_image(self):

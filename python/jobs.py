@@ -118,7 +118,7 @@ class Job(sdk.python.entities.Entity):
         return self.quantity * self.cost_per_unit
 
     def process_for_transfer(self):
-        self.updated = None
+        self.updated = None  # type: ignore
 
     def is_draft_accepted(self):
         """ Return True if the current draft for this job has been accepted,

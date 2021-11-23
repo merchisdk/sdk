@@ -9,7 +9,7 @@ DAY_IN_HOURS = HOUR * 24
 
 
 def get_tzinfo_from_timezone_name(timezone):
-    return tz.gettz(timezone)  # type: ignore
+    return tz.gettz(timezone)
 
 
 def parse_time(time, tzinfo=None):

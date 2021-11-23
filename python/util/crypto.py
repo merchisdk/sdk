@@ -98,6 +98,6 @@ def get_https_expiry(host):
         host on port 443 as a datetime.datetime object.
     """
     cert = ssl.get_server_certificate((host, 443))
-    x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
+    x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)  # type: ignore
     expires = x509.get_notAfter().decode('UTF-8')
     return datetime.datetime.strptime(expires, "%Y%m%d%H%M%SZ")

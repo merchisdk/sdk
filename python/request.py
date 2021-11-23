@@ -35,8 +35,8 @@ class Request(object):
         self.include_archived = None
         self.skip_rights = False
         self.data = {}  # set to dict to send form encoded
-        self.files = {}  # type: ignore
-        self.cookies = {}  # type: ignore
+        self.files = {}
+        self.cookies = {}
 
     def path(self):
         return self.version + self.resource
