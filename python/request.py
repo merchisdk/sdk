@@ -25,8 +25,8 @@ class Request(object):
         self.version = 'v' + str(PROTOCOL_VERSION)
         self.method = 'GET'
         self.resource = '/'
-        self.query = {}  # type: ignore
-        self.headers = {}  # type: ignore
+        self.query = {}
+        self.headers = {}
         self.username = None
         self.embed = None
         self.password = None
@@ -34,9 +34,9 @@ class Request(object):
         self.as_domain = None  # only be meaningful if using be master domain
         self.include_archived = None
         self.skip_rights = False
-        self.data = {}  # type: ignore  # set to dict to send form encoded
-        self.files = {}  # type: ignore
-        self.cookies = {}  # type: ignore
+        self.data = {}  # set to dict to send form encoded
+        self.files = {}
+        self.cookies = {}
 
     def path(self):
         return self.version + self.resource

@@ -1,0 +1,82 @@
+name: check
+on: push
+jobs:
+  check-python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.6']
+    name: Check Python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - name: pip
+        working-directory: python
+        run: pip install -r requirements/dev.txt
+      - name: lint
+        run: ./python/lint.sh
+      - name: coverage
+        run: PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
+      - name: coverage report
+        run: coverage report -m --fail-under 40
+  check-js:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '12' ]
+    name: Check Javascript ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: yarn
+        working-directory: javascript
+        run: yarn
+      - name: eslint
+        working-directory: javascript
+        run: yarn run eslint --ignore-pattern '.eslintrc.js' .
+  check-ts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '12' ]
+    name: Check Typescript
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: ts
+        working-directory: typescript
+        run: yarn global add typescript
+      - name: yarn
+        working-directory: typescript
+        run: yarn
+      - name: tsc
+        working-directory: typescript
+        run: tsc
+      - name: eslint
+        working-directory: typescript
+        run: ./node_modules/eslint/bin/eslint.js 'src/**/*.ts'
+      - name: test
+        working-directory: typescript
+        run: yarn test
+  check-php:
+    runs-on: ubuntu-latest
+    name: Check PHP
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+          tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
+      - run: ./php/lint.sh
+      - run: ./php/test.sh
+      - run: php php/check.php php/clover.xml 10
