@@ -1,0 +1,20 @@
+name: check
+on: push
+jobs:
+  check-python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.5']
+    name: Check Python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - run: pip install -r python/requirements/dev.txt
+      - run: python/lint.sh
+      - run: env PYTHONPATH=. coverage run --source python --branch --omit python/tests -m pytest
+      - run: coverage report -m --fail-under 40
