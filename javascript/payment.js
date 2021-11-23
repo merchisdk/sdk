@@ -1,7 +1,7 @@
 import { generateUUID } from './uuid';
 import { addPropertyTo } from './model';
 import { paymentTypes } from './payment_types';
-import { automaticPaymentRelationship } from './automatic_payment_relationship';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
 import { User } from './user';
 
 export function Payment() {
@@ -18,7 +18,9 @@ export function Payment() {
     addPropertyTo(this, 'sendEmail');
     addPropertyTo(this, 'paymentRecorder', User);
     addPropertyTo(
-      this, 'chargedByPaymentRelationship', automaticPaymentRelationship);
+      this,
+      'chargedByPaymentRelationship',
+      AutomaticPaymentRelationship);
 
     this.paymentTypeText = function () {
         var paymentType = this.paymentType();

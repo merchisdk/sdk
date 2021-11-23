@@ -9,6 +9,6 @@ test('can make Component', () => {
 test('can convert to react component', () => {
   const merchi = new Merchi();
   const component = new merchi.Component();
-  component.compiled = 'return 1;'
-  component.toReact({})
+  component.compiled = 'return 1;';
+  component.toReact({});
 });
