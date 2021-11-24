@@ -522,8 +522,16 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('query_string',
                             parameters.queryString);
     }
+    if (notEmpty(parameters.companyCustomerId)) {
+        request.query().add('company_customer_id',
+                            parameters.companyCustomerId);
+    }
     if (notEmpty(parameters.companyId)) {
         request.query().add('company_id', parameters.companyId);
+    }
+    if (notEmpty(parameters.companySupplierId)) {
+        request.query().add('company_supplier_id',
+                            parameters.companySupplierId);
     }
     if (notEmpty(parameters.componentId)) {
         request.query().add('component_id', parameters.componentId);

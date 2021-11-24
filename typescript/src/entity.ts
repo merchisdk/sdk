@@ -120,7 +120,9 @@ interface ListOptions {
   savedByUser?: number;
   serialiseMethod?: SerialiseMethod;
   receiverId?: number;
+  companyCustomerId?: number;
   companyId?: number;
+  companySupplierId?: number;
   componentId?: number;
   section?: NotificationSection;
   senderRole?: Role;
@@ -539,8 +541,16 @@ export class Entity {
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
       }
+      if (options.companyCustomerId !== undefined) {
+        fetchOptions.query.push(['company_customer_id', options.companyCustomerId.toString()]);
+      }
       if (options.companyId !== undefined) {
         fetchOptions.query.push(['company_id', options.companyId.toString()]);
+      }
+      if (options.companySupplierId !== undefined) {
+        fetchOptions.query.push(
+          ['company_supplier_id',
+          options.companySupplierId.toString()]);
       }
       if (options.componentId !== undefined) {
         fetchOptions.query.push(['component_id',
