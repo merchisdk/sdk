@@ -548,8 +548,7 @@ export class Entity {
         fetchOptions.query.push(['company_id', options.companyId.toString()]);
       }
       if (options.companySupplierId !== undefined) {
-        fetchOptions.query.push(
-          ['company_supplier_id', options.companySupplierId.toString()]);
+        fetchOptions.query.push(['company_supplier_id', options.companySupplierId.toString()]);
       }
       if (options.componentId !== undefined) {
         fetchOptions.query.push(['component_id',
