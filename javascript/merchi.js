@@ -169,7 +169,7 @@ export function merchi(backendUri, websocketUri) {
                             'profilePicture': {},
                             'userCompanies': {"company": {}},
                             'enrolledDomains': {'domain': {}}},
-        platformName = 'merchi',
+        platformName = 'Merchi',
         platformCopyright = 2021,
         platfromSellerDomain = 'merchi.me',
         platfromSellerDomainPlus = 'merchi.store',
