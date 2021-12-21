@@ -74,7 +74,14 @@ class Request(object):
         if query is not None:
             self.query.update(query)
 
+    def get_data_post(self):
+        if not is_empty_dict(self.data):
+            data_json = parse_json_key_camel(self.data)
+            return unpack_recursive_json(data_json, self.version_number())
+        return None
+
     def send(self):
+        data_post = self.get_data_post()
         if not is_empty_dict(self.data):
             data_json = parse_json_key_camel(self.data)
             data_post = unpack_recursive_json(data_json, self.version_number())
