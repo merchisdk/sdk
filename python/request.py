@@ -2,6 +2,7 @@ import requests
 import json
 from sdk.python.util.name_protocol import parse_json_key_camel, \
     unpack_recursive_json
+from sdk.python.util.util import is_empty_dict
 
 PROTOCOL_VERSION = 6
 
@@ -74,7 +75,7 @@ class Request(object):
             self.query.update(query)
 
     def send(self):
-        if self.data:
+        if not is_empty_dict(self.data):
             data_json = parse_json_key_camel(self.data)
             data_post = unpack_recursive_json(data_json, self.version_number())
         else:
