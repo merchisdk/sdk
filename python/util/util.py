@@ -26,5 +26,5 @@ def merge(a, b, path=None):
 
 
 def is_empty_dict(dictionary):
-    """ check if dict have some content """
+    """ Check if dict have some content """
     return not dictionary or all(i is None for i in dictionary.values())
