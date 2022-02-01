@@ -54,6 +54,7 @@ export function Product() {
     addPropertyTo(this, 'component', Component);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'suppliedByDomains', SupplyDomain);
+    addPropertyTo(this, 'autoAssignProductionOnAction');
     addPropertyTo(this, 'supplyDomains', SupplyDomain);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'featureImage', MerchiFile);

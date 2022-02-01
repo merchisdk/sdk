@@ -52,7 +52,7 @@ class Product(sdk.python.entities.Entity):
     platform_categories = Property(Category)
     discountGroups = Property(DiscountGroup, backref="product")
     domain = Property(Domain, backref="products")
-    images = Property(File)
+    images = Property(File)=
     shipment_methods = Property(ShipmentMethod, backref="products")
     public_files = Property(File)
     production_files = Property(File)
@@ -69,6 +69,7 @@ class Product(sdk.python.entities.Entity):
     chained_inventory_seller_product = Property("sdk.python.products.Product")
     component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
+    auto_assign_production_on_action = Property(int)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
