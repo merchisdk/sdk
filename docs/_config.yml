@@ -38,6 +38,9 @@ collections:
   entities:
     title: Entity Reference
     position: 8
+  entities:
+    title: Constants
+    position: 9
 plugins:
   - jekyll-sitemap
 
