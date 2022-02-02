@@ -11,6 +11,13 @@ jQuery(function() {
 		$('body').removeClass('nav-open');
 	});
 
+	$('.sidebar h6').each(function () {
+		var $this = $(this);
+		$this.click(function() {
+		  $(this).find('ul').toggleClass('hide');
+		});
+	});
+
 	$("section > div.highlighter-rouge:first-of-type").each(function(i) {
 
 		var $this = $(this).before("<ul class=\"languages\"></ul>"),

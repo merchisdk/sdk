@@ -22,3 +22,6 @@ p.error {
 p.success {
 	border-color: #6c0;
 }
+.hide {
+    display: none;
+}

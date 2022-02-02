@@ -4,7 +4,7 @@
 		{% if collection.label != "posts" %}
 			<section>
 				<h6>{{ collection.title }}</h6>
-				<ul>
+				<ul class='hide'>
 					{% assign sorted_docs = collection.docs | sort: "position" %}
 					{% for doc in sorted_docs %}
 						<li>
