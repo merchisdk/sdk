@@ -16,9 +16,9 @@ jQuery(function() {
 		$this.find('.nav-section-title').click(function() {
 		  var isHidden = $this.find('ul').hasClass('hide');
 		  if (isHidden) {
-		  	$this.removeClass('arrow-right').addClass('arrow-down');
+		  	$this.find('i').removeClass('arrow-right').addClass('arrow-down');
 		  } else {
-		  	$this.removeClass('arrow-down').addClass('arrow-right');
+		  	$this.find('i').removeClass('arrow-down').addClass('arrow-right');
 		  }
 		  $this.find('ul').toggleClass('hide');
 		});

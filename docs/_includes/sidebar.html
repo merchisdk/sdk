@@ -4,7 +4,7 @@
 		{% if collection.label != "posts" %}
 			<section class='nav-section'>
 				<h6 class='nav-section-title arrow-right'>
-				    {{ collection.title }}
+				    {{ collection.title }} <i class="arrow-right"></i>
 				</h6>
 				<ul class='nav-section-list hide'>
 					{% assign sorted_docs = collection.docs | sort: "position" %}
