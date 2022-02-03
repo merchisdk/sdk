@@ -197,7 +197,7 @@ dl dd:after {
 		padding: 2px 0;
 
 		&.active {
-			color: #2196F3;
+			color: #303dbf;
 			text-decoration: none;
 		}
 	}
@@ -574,4 +574,8 @@ header {
   padding: 3px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.nav-section-title {
+	cursor: pointer;
 }
