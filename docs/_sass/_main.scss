@@ -538,15 +538,15 @@ header {
 }
 
 .arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
+  border: solid #888;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
 }
 
 .arrow-right {
-  border: solid black;
-  border-width: 0 3px 3px 0;
+  border: solid #888;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(-45deg);
@@ -559,8 +559,8 @@ header {
 }
 
 .arrow-up {
-  border: solid black;
-  border-width: 0 3px 3px 0;
+  border: solid #888;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(-135deg);
@@ -568,8 +568,8 @@ header {
 }
 
 .arrow-down {
-  border: solid black;
-  border-width: 0 3px 3px 0;
+  border: solid #888;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   transform: rotate(45deg);
