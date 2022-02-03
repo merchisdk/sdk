@@ -11,10 +11,10 @@ jQuery(function() {
 		$('body').removeClass('nav-open');
 	});
 
-	$('.sidebar h6').each(function () {
+	$('.nav-section').each(function () {
 		var $this = $(this);
-		$this.click(function() {
-		  $(this).find('ul').toggleClass('hide');
+		$this.find('.nav-section-title').click(function() {
+		  $this.find('ul').toggleClass('hide');
 		});
 	});
 
