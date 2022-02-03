@@ -14,6 +14,12 @@ jQuery(function() {
 	$('.nav-section').each(function () {
 		var $this = $(this);
 		$this.find('.nav-section-title').click(function() {
+		  var isHidden = $this.find('ul').hasClass('hide');
+		  if (isHidden) {
+		  	$this.removeClass('arrow-right').addClass('arrow-down');
+		  } else {
+		  	$this.removeClass('arrow-down').addClass('arrow-right');
+		  }
 		  $this.find('ul').toggleClass('hide');
 		});
 	});
