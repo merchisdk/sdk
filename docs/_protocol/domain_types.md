@@ -1,6 +1,6 @@
 ---
-title: domainTypes
-position: 2
+title: Domain Types
+position: 3
 parameters:
   - name:
     content:
