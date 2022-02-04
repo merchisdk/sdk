@@ -17,29 +17,29 @@ collections:
   overview:
     title: Overview
     position: 1
-  typescript:
-    title: Typescript SDK
-    position: 2
-  javascript:
-    title: Javascript SDK
-    position: 3
-  python:
-    title: Python
-    position: 4
-  php:
-    title: PHP
-    position: 5
   filters:
     title: Filter Reference
-    position: 6
+    position: 2
   protocol:
     title: Protocol
-    position: 7
+    position: 3
   entities:
     title: Entity Reference
-    position: 8
+    position: 4
   entities:
     title: Constants
+    position: 5
+  typescript:
+    title: Typescript
+    position: 6
+  javascript:
+    title: Javascript
+    position: 7
+  python:
+    title: Python
+    position: 8
+  php:
+    title: PHP
     position: 9
 plugins:
   - jekyll-sitemap
