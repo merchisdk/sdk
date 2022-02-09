@@ -15,7 +15,9 @@ import { SupplyDomain } from './supply_domain';
 import { User } from './user';
 import { VariationField } from './variation_field';
 import { ShipmentMethod } from './shipment_method';
-import { AutoAssignProductionOnAction } from '../constants/auto_assign_production_on_action';
+import {
+  AutoAssignProductionOnAction
+} from '../constants/auto_assign_production_on_actions';
 
 export class Product extends Entity {
   protected static resourceName: string = 'products';
