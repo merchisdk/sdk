@@ -39,6 +39,7 @@ export function Product() {
     addPropertyTo(this, 'unitWidth');
     addPropertyTo(this, 'unitDepth');
     addPropertyTo(this, 'unitVolume');
+    addPropertyTo(this, 'showGroupBuyStatus');
     addPropertyTo(this, 'groupBuyStatus');
     addPropertyTo(this, 'needsDrafting');
     addPropertyTo(this, 'needsProduction');

@@ -99,6 +99,9 @@ export class Product extends Entity {
   @Product.property()
   public showPublic?: boolean;
 
+  @Product.property()
+  public showGroupBuyStatus?: boolean;
+
   @Product.property({type: Number})
   public groupBuyStatus?: number | null;
 
