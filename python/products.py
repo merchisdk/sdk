@@ -71,6 +71,7 @@ class Product(sdk.python.entities.Entity):
     component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
     auto_assign_production_on_action = Property(int)
+    group_buy_status = Property(int)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

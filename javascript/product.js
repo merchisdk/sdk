@@ -39,14 +39,15 @@ export function Product() {
     addPropertyTo(this, 'unitWidth');
     addPropertyTo(this, 'unitDepth');
     addPropertyTo(this, 'unitVolume');
-    addPropertyTo(this, "needsDrafting");
-    addPropertyTo(this, "needsProduction");
-    addPropertyTo(this, "needsShipping");
-    addPropertyTo(this, "needsInvoicing");
-    addPropertyTo(this, "suppliers", User);
-    addPropertyTo(this, "groupVariationFields", VariationField);
-    addPropertyTo(this, "independentVariationFields", VariationField);
-    addPropertyTo(this, "originalProduct", Product);
+    addPropertyTo(this, 'groupBuyStatus');
+    addPropertyTo(this, 'needsDrafting');
+    addPropertyTo(this, 'needsProduction');
+    addPropertyTo(this, 'needsShipping');
+    addPropertyTo(this, 'needsInvoicing');
+    addPropertyTo(this, 'suppliers', User);
+    addPropertyTo(this, 'groupVariationFields', VariationField);
+    addPropertyTo(this, 'independentVariationFields', VariationField);
+    addPropertyTo(this, 'originalProduct', Product);
     addPropertyTo(this, 'chainedSupplierProduct', Product);
     addPropertyTo(this, 'chainedSellerProduct', Product);
     addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
@@ -125,7 +126,7 @@ export function Product() {
     };
 
     this.destroy = function (success, error) {
-        deleteOne(this.resource + "/" + this.id(), success, error);
+        deleteOne(this.resource + '/' + this.id(), success, error);
     };
 
     this.duplicate = function (success, error) {
