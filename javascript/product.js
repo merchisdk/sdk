@@ -44,6 +44,7 @@ export function Product() {
     addPropertyTo(this, 'needsProduction');
     addPropertyTo(this, 'needsShipping');
     addPropertyTo(this, 'needsInvoicing');
+    addPropertyTo(this, 'featureDeadline');
     addPropertyTo(this, 'suppliers', User);
     addPropertyTo(this, 'groupVariationFields', VariationField);
     addPropertyTo(this, 'independentVariationFields', VariationField);

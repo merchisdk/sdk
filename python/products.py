@@ -1,3 +1,4 @@
+import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.categories import Category
@@ -36,6 +37,7 @@ class Product(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_shipping = Property(bool)
     needs_invoicing = Property(bool)
+    feature_deadline = Property(datetime.datetime)
     show_public = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
