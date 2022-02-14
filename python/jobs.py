@@ -62,6 +62,7 @@ class Job(sdk.python.entities.Entity):
     call_to_actions = Property(str)
     call_to_action_details = Property(list)
     production_notes = Property(str)
+    group_buy_status = Property(int)
     production_status = Property(int)
     design_status = Property(int)
     payment_status = Property(int)
