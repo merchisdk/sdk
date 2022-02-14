@@ -112,6 +112,9 @@ export class Product extends Entity {
   public acceptPhonePayment?: boolean;
 
   @Product.property()
+  public allowGroupBuy?: boolean;
+
+  @Product.property()
   public allowPaymentUpfront?: boolean;
 
   @Product.property()
