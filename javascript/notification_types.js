@@ -102,7 +102,7 @@ notificationTypes.add("RESELL_REQUEST_RECEIVED", 65);
 notificationTypes.add("MOD_PRODUCT_READY_FOR_SALE", 66);
 notificationTypes.add("ADDED_TO_COMPANY", 67);
 notificationTypes.add("PRODUCTION_COMPLETED", 68);
-notificationTypes.add("MOQ_PRODUCT_READY_FOR_SALE", 69);
+notificationTypes.add("SUPPLIER_PRODUCT_READY_FOR_SALE", 69);
 notificationTypes.add("STORE_ASSIGNED_TO_YOU", 70);
 notificationTypes.add("CLIENT_STORE_CREATED", 71);
 notificationTypes.add("MOD_SELLER_SUMMARY", 72);

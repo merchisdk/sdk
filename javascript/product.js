@@ -268,13 +268,13 @@ export function Product() {
             company.acceptStripe();
     };
 
-    this.isMOD = function () {
+    this.isSupplierMOD = function () {
         return this.productType() ===
-            productTypesInts.get('MOD (made on demand)');
+            productTypesInts.get('Supplier MOD (made on demand)');
     };
 
     this.isResell = function () {
-        return this.isMOD();
+        return this.isSupplierMOD();
     };
 }
 

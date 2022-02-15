@@ -19,6 +19,6 @@ COMPANY_NEEDS_TO_ADD_PAYMENT_METHOD = 8
 # details: companies of user need to provide stripe in order to collect payments
 YOUR_COMPANIES_NEED_STRIPE_TO_COLLECT_PAYMENT = 9
 # details: not needed
-MOQ_PRODUCT_READY_FOR_SALE = 10
+SUPPLIER_PRODUCT_READY_FOR_SALE = 10
 # details: not needed
 SET_PASSWORD = 11
