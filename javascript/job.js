@@ -90,6 +90,7 @@ export function Job() {
     addPropertyTo(this, "needsProduction");
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
+    addPropertyTo(this, 'groupBuyStatus');
     addPropertyTo(this, 'shippingStatus');
     addPropertyTo(this, 'designStatus');
     addPropertyTo(this, 'paymentStatus');
