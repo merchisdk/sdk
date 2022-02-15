@@ -74,6 +74,9 @@ export class Job extends Entity {
   public jobInfoApprovedByClient?: boolean;
 
   @Job.property({type: Number})
+  public groupBuyStatus?: number | null;
+
+  @Job.property({type: Number})
   public paymentStatus?: number | null;
 
   @Job.property({type: Date})
