@@ -27,6 +27,12 @@ export class Payment extends Entity {
   public amount?: number;
 
   @Payment.property()
+  public autoRefundable?: boolean;
+
+  @Payment.property()
+  public refunded?: boolean;
+
+  @Payment.property()
   public sendSms?: boolean;
 
   @Payment.property()
