@@ -9,4 +9,5 @@ export enum ProductType {
   CHAINED_SUPPLIER = 7,
   INVENTORY_SELLER = 8,
   INVENTORY_SUPPLIER = 9,
+  SELLER_GROUP_BUY = 10,
 }
