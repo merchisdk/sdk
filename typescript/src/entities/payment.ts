@@ -27,6 +27,12 @@ export class Payment extends Entity {
   public amount?: number;
 
   @Payment.property()
+  public autoRefundable?: boolean;
+
+  @Payment.property({type: Date})
+  public refunded?: Date | null;
+
+  @Payment.property()
   public sendSms?: boolean;
 
   @Payment.property()
@@ -37,6 +43,9 @@ export class Payment extends Entity {
 
   @Payment.property({type: User})
   public paymentRecorder?: User | null;
+
+  @Payment.property({type: User})
+  public refundIssuer?: User | null;
 
   @Payment.property({type: AutomaticPaymentRelationship})
   public chargedByPaymentRelationship?: AutomaticPaymentRelationship | null;
