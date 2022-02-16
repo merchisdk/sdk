@@ -29,7 +29,7 @@ export class Payment extends Entity {
   @Payment.property()
   public autoRefundable?: boolean;
 
-  @Payment.property()
+  @Payment.property({type: Date})
   public refunded?: Date | null;
 
   @Payment.property()
