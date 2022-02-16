@@ -14,8 +14,8 @@ content_markdown: |-
 
    | Type                | Value | User     | Description                 |
    | ------------------- | ----- | -------- | --------------------------- |
-   | SUPPLIER_MOD        | 0     | supplier |  |
-   | SUPPLIER            | 1     | supplier |  |
+   | SUPPLIER_MOD        | 0     | supplier | Used by suppliers to create a customisable MOD (made on demand) product profile. Sellers can select and customise this product to create their own "SELLER_MOD" product profile, which they can then sell on their store. |
+   | SUPPLIER            | 1     | supplier | Used by suppliers to create a customisable product profile. Sellers can select and customise this product to create their own chained product profile, which they can then sell on their store. |
    | SELLER              | 2     | seller   |  |
    | SELLER_MOD          | 3     | seller   |  |
    | CHAINED_MOD         | 4     | api      |  |
