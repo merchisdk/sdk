@@ -97,6 +97,9 @@ export class Product extends Entity {
   public featureDeadline?: Date;
 
   @Product.property()
+  public showFeatureDeadline?: boolean;
+
+  @Product.property()
   public showPublic?: boolean;
 
   @Product.property()
