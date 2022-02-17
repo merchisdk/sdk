@@ -56,6 +56,9 @@ export class Job extends Entity {
   public needsDrafting?: boolean;
 
   @Job.property()
+  public needsGroupBuy?: boolean;
+
+  @Job.property()
   public needsProduction?: boolean;
 
   @Job.property()
