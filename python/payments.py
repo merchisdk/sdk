@@ -24,7 +24,8 @@ class Payment(sdk.python.entities.Entity):
     payment_recorder = Property(sdk.python.users.Users)
     send_sms = Property(bool)
     send_email = Property(bool)
-    refunded = Property(bool)
+    refunded = Property(datetime.datetime)
+    refund_issuer = Property(sdk.python.users.Users)
     auto_refundable = Property(bool)
     charged_by_payment_relationship = Property(AutomaticPaymentRelationship)
 
