@@ -1,13 +1,13 @@
-import { Entity } from "../entity";
-import { Invoice } from "./invoice";
-import { User } from "./user";
-import { AutomaticPaymentRelationship } from "./automatic_payment_relationship";
-import { RequestOptions } from "../request";
+import { Entity } from '../entity';
+import { Invoice } from './invoice';
+import { User } from './user';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
+import { RequestOptions } from '../request';
 
 export class Payment extends Entity {
-  protected static resourceName: string = "payments";
-  protected static singularName: string = "payment";
-  protected static pluralName: string = "payments";
+  protected static resourceName: string = 'payments';
+  protected static singularName: string = 'payment';
+  protected static pluralName: string = 'payments';
 
   @Payment.property({ type: Date })
   public archived?: Date | null;
@@ -53,7 +53,7 @@ export class Payment extends Entity {
 
   public refund = () => {
     const resource = `/payments/${this.id}/refund/`;
-    const fetchOptions: RequestOptions = { method: "POST" };
+    const fetchOptions: RequestOptions = { method: 'POST' };
 
     return this.merchi
       .authenticatedFetch(resource, fetchOptions)
