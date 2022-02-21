@@ -1,3 +1,4 @@
+import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.categories import Category
@@ -36,12 +37,15 @@ class Product(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_shipping = Property(bool)
     needs_invoicing = Property(bool)
+    feature_deadline = Property(datetime.datetime)
+    show_feature_deadline = Property(bool)
     show_public = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_utrust = Property(bool)
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
+    allow_group_buy = Property(bool)
     allow_payment_upfront = Property(bool)
     allow_quotation = Property(bool)
     allow_chained_inventory_creation = Property(bool)
@@ -70,6 +74,8 @@ class Product(sdk.python.entities.Entity):
     component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
     auto_assign_production_on_action = Property(int)
+    show_group_buy_status = Property(bool)
+    group_buy_status = Property(int)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

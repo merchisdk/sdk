@@ -56,6 +56,9 @@ export class Job extends Entity {
   public needsDrafting?: boolean;
 
   @Job.property()
+  public needsGroupBuy?: boolean;
+
+  @Job.property()
   public needsProduction?: boolean;
 
   @Job.property()
@@ -72,6 +75,9 @@ export class Job extends Entity {
 
   @Job.property()
   public jobInfoApprovedByClient?: boolean;
+
+  @Job.property({type: Number})
+  public groupBuyStatus?: number | null;
 
   @Job.property({type: Number})
   public paymentStatus?: number | null;

@@ -93,8 +93,20 @@ export class Product extends Entity {
   @Product.property()
   public needsInvoicing?: boolean;
 
+  @Product.property({type: Date})
+  public featureDeadline?: Date;
+
+  @Product.property()
+  public showFeatureDeadline?: boolean;
+
   @Product.property()
   public showPublic?: boolean;
+
+  @Product.property()
+  public showGroupBuyStatus?: boolean;
+
+  @Product.property({type: Number})
+  public groupBuyStatus?: number | null;
 
   @Product.property()
   public acceptStripe?: boolean;
@@ -110,6 +122,9 @@ export class Product extends Entity {
 
   @Product.property()
   public acceptPhonePayment?: boolean;
+
+  @Product.property()
+  public allowGroupBuy?: boolean;
 
   @Product.property()
   public allowPaymentUpfront?: boolean;
