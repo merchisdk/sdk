@@ -84,6 +84,7 @@ class Job(sdk.python.entities.Entity):
     total_cost = Property(float)
     job_weight = Property(float)
     job_volume = Property(float)
+    needs_group_buy = Property(bool)
     needs_production = Property(bool)
     needs_invoicing = Property(bool)
     needs_drafting = Property(bool)

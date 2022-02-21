@@ -18,6 +18,7 @@ export function Payment() {
     addPropertyTo(this, 'sendEmail');
     addPropertyTo(this, 'autoRefundable');
     addPropertyTo(this, 'refunded');
+    addPropertyTo(this, 'refundIssuer', User);
     addPropertyTo(this, 'paymentRecorder', User);
     addPropertyTo(
       this,
