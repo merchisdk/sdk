@@ -40,6 +40,7 @@ export function Job() {
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'product', Product);
+    addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
     addPropertyTo(this, 'received');
     addPropertyTo(this, 'deadline');

@@ -205,6 +205,9 @@ export class Job extends Entity {
   @Job.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
 
+  @Job.property({arrayType: 'Product'})
+  public createdProducts?: Product[];
+
   @Job.property({type: Address})
   public shipping?: Address | null;
 
