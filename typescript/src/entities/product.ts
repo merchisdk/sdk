@@ -96,6 +96,9 @@ export class Product extends Entity {
   @Product.property()
   public needsInvoicing?: boolean;
 
+  @Product.property()
+  public needsInventory?: boolean;
+
   @Product.property({type: Date})
   public featureDeadline?: Date;
 

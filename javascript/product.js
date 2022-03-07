@@ -46,6 +46,7 @@ export function Product() {
     addPropertyTo(this, 'needsProduction');
     addPropertyTo(this, 'needsShipping');
     addPropertyTo(this, 'needsInvoicing');
+    addPropertyTo(this, 'needsInventory');
     addPropertyTo(this, 'showFeatureDeadline');
     addPropertyTo(this, 'featureDeadline');
     addPropertyTo(this, 'suppliers', User);
