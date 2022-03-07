@@ -30,6 +30,7 @@ export function Product() {
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'minimum');
+    addPropertyTo(this, 'minimumPerGroup');
     addPropertyTo(this, 'deliveryDaysNormal');
     addPropertyTo(this, 'unitPrice');
     addPropertyTo(this, 'unitPriceDiscountGroup', DiscountGroup);
@@ -79,6 +80,7 @@ export function Product() {
     addPropertyTo(this, 'savedByCompanies', Company);
     addPropertyTo(this, 'tags', DomainTag);
     addPropertyTo(this, 'inventories', Inventory);
+    addPropertyTo(this, 'inventoriesOpen');
     addPropertyTo(this, 'discountGroups', DiscountGroup);
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
