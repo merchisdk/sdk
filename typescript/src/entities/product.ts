@@ -37,6 +37,9 @@ export class Product extends Entity {
   public minimum?: number;
 
   @Product.property()
+  public minimumPerGroup?: boolean;
+
+  @Product.property()
   public deliveryDaysNormal?: number;
 
   @Product.property()
@@ -212,6 +215,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'SupplyDomain'})
   public supplyDomains?: SupplyDomain[];
+
+  @Product.property()
+  public inventoriesOpen?: boolean;
 
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
