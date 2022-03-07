@@ -124,6 +124,7 @@ interface ListOptions {
   companyId?: number;
   companySupplierId?: number;
   componentId?: number;
+  groupBuyForJobId?: number;
   section?: NotificationSection;
   senderRole?: Role;
   isOrder?: boolean;
@@ -553,6 +554,10 @@ export class Entity {
       if (options.componentId !== undefined) {
         fetchOptions.query.push(['component_id',
           options.componentId.toString()]);
+      }
+      if (options.groupBuyForJobId !== undefined) {
+        fetchOptions.query.push(['group_buy_for_job_id',
+          options.groupBuyForJobId.toString()]);
       }
       if (options.section !== undefined) {
         fetchOptions.query.push(['section', options.section.toString()]);
