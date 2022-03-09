@@ -39,6 +39,7 @@ class Product(sdk.python.entities.Entity):
     needs_production = Property(bool)
     needs_shipping = Property(bool)
     needs_invoicing = Property(bool)
+    needs_inventory = Property(bool)
     feature_deadline = Property(datetime.datetime)
     show_feature_deadline = Property(bool)
     show_public = Property(bool)
