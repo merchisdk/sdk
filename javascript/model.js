@@ -400,6 +400,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add(
             'platform_category_id', parameters.platformCategoryId);
     }
+    if (notEmpty(parameters.groupBuyForJobId)) {
+        request.query().add(
+            'group_buy_for_job_id', parameters.groupBuyForJobId);
+    }
     if (notEmpty(parameters.inDomain)) {
         request.query().add('in_domain', parameters.inDomain);
     }
