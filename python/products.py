@@ -68,7 +68,7 @@ class Product(sdk.python.entities.Entity):
     tags = Property(DomainTag, backref="products")
     tax_type = Property('sdk.python.country_taxes.CountryTax')
     feature_image = Property(File, backref="featured_products")
-    created_by_job = Property("sdk.python.jobs.Job")
+    created_by_job = Property("sdk.python.jobs.Job", backref="created_products")
     original_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property("sdk.python.products.Product")
     chained_seller_product = Property("sdk.python.products.Product")
