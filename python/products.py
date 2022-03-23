@@ -71,7 +71,7 @@ class Product(sdk.python.entities.Entity):
     created_by_job = Property("sdk.python.jobs.Job", backref="created_products")
     original_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property("sdk.python.products.Product")
-    chained_seller_product = Property("sdk.python.products.Product")
+    chained_seller_products = Property("sdk.python.products.Product")
     chained_inventory_supplier_product = Property("sdk.python.products.Product")
     chained_inventory_seller_product = Property("sdk.python.products.Product")
     component = Property("sdk.python.components.Component")
