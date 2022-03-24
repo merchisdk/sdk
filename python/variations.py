@@ -159,6 +159,7 @@ class VariationOption(sdk.python.entities.Entity):
 
     option_id = Property(int)
     quantity = Property(int)
+    available = Property(bool)
     value = Property(str)
     colour = Property(str)
     field_name = Property(str)

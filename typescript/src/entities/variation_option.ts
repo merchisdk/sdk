@@ -18,6 +18,9 @@ export class VariationOption extends Entity {
   public position?: number;
 
   @VariationOption.property()
+  public available?: boolean;
+
+  @VariationOption.property()
   public default?: boolean;
 
   @VariationOption.property()
