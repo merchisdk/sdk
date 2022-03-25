@@ -279,6 +279,9 @@ class VariationsGroup(sdk.python.entities.Entity):
     group_cost = Property(float)
     variations = Property(Variation)
 
+    # not embedded by default, must be requested
+    in_stock = Property(int)
+
     def link_to_fields(self, fields):
         for variation in self.variations:
             variation.link_to_field(fields)

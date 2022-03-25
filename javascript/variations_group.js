@@ -8,6 +8,7 @@ export function VariationsGroup() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'inStock');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'groupCost');
     addPropertyTo(this, 'variations', Variation);

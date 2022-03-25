@@ -16,6 +16,9 @@ export class VariationsGroup extends Entity {
   public id?: number;
 
   @VariationsGroup.property()
+  public inStock?: number;
+
+  @VariationsGroup.property()
   public quantity?: number;
 
   @VariationsGroup.property({type: Number})
