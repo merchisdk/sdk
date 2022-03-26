@@ -158,7 +158,7 @@ export class Job extends Entity {
   public limitedStock?: boolean;
 
   @Job.property({embeddedByDefault: false})
-  public inStock?: number;
+  public inStock?: boolean;
 
   @Job.property({arrayType: 'Draft'})
   public drafts?: Draft[];
