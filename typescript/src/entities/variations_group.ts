@@ -34,5 +34,8 @@ export class VariationsGroup extends Entity {
   public variations?: Variation[];
 
   @VariationsGroup.property({embeddedByDefault: false})
-  public inStock?: number;
+  public inventoryCount?: number;
+
+  @VariationsGroup.property({embeddedByDefault: false})
+  public inventorySufficient?: boolean;
 }
