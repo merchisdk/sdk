@@ -32,4 +32,10 @@ export class VariationsGroup extends Entity {
 
   @VariationsGroup.property({arrayType: 'Variation'})
   public variations?: Variation[];
+
+  @VariationsGroup.property({embeddedByDefault: false})
+  public inventoryCount?: number;
+
+  @VariationsGroup.property({embeddedByDefault: false})
+  public inventorySufficient?: boolean;
 }
