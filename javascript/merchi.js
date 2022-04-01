@@ -469,6 +469,8 @@ export function merchi(backendUri, websocketUri) {
             n = domain.indexOf('/');
             domain = domain.substring(0, n != -1 ? n : domain.length);
             cookie += '; Domain=' + domain;
+        } else {
+            cookie += '; Domain=' + '.' + location.hostname;
         }
         cookie += '; path=/';
         document.cookie = cookie;
