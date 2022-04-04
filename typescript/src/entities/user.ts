@@ -53,6 +53,12 @@ export class User extends Entity {
   @User.property()
   public userType?: UserType;
 
+  @User.property()
+  public registeredAsGuest?: boolean;
+
+  @User.property()
+  public registeredUnderDomain?: number;
+
   @User.property({type: String})
   public password?: string | null;
 

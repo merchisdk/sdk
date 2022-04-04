@@ -23,6 +23,8 @@ export function User() {
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'userType');
+    addPropertyTo(this, 'registeredAsGuest');
+    addPropertyTo(this, 'registeredUnderDomain');
     addPropertyTo(this, 'password');
     addPropertyTo(this, 'resetToken');
     addPropertyTo(this, 'created');
