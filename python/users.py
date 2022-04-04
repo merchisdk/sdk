@@ -41,6 +41,7 @@ class User(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    user_type = Property(int)
     password = Property(str)
     reset_token = Property(str)
     created = Property(datetime.datetime)
@@ -156,12 +157,6 @@ class User(sdk.python.entities.Entity):
         """
         return self.has_authority(job.domain.id,
                                   sdk.python.util.roles.SHIPPING_SECTION)
-
-    def user_type(self):
-        """ Return a user friendly string indicating what type the user is """
-        if self.is_super_user:
-            return "System Admin"
-        return "Normal User"
 
     def has_system_role(self, role):
         """ Return whether current user has a system role """
