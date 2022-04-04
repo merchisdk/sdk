@@ -49,6 +49,9 @@ export class User extends Entity {
   @User.property()
   public isSuperUser?: boolean;
 
+  @User.property()
+  public userType?: number;
+
   @User.property({type: String})
   public password?: string | null;
 

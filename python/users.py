@@ -41,6 +41,7 @@ class User(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    user_type = Property(int)
     password = Property(str)
     reset_token = Property(str)
     created = Property(datetime.datetime)
