@@ -31,6 +31,7 @@ import { Role,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles';
+import { UserType } from '../constants/user_types'; 
 import { SystemRoles as SR } from '../constants/system_roles';
 
 import { some } from 'lodash';
@@ -50,7 +51,7 @@ export class User extends Entity {
   public isSuperUser?: boolean;
 
   @User.property()
-  public userType?: number;
+  public userType?: UserType;
 
   @User.property({type: String})
   public password?: string | null;
