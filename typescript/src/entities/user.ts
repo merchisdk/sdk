@@ -31,7 +31,7 @@ import { Role,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles';
-import { UserType } from '../constants/user_types'; 
+import { UserType } from '../constants/user_types';
 import { SystemRoles as SR } from '../constants/system_roles';
 
 import { some } from 'lodash';
@@ -56,8 +56,8 @@ export class User extends Entity {
   @User.property()
   public registeredAsGuest?: boolean;
 
-  @User.property()
-  public registeredUnderDomain?: number | null;
+  @User.property({type: 'Domain'})
+  public registeredUnderDomain?: Domain | null;
 
   @User.property({type: String})
   public password?: string | null;

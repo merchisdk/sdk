@@ -11,6 +11,7 @@ import { EmailAddress } from './email_address';
 import { EnrolledDomain } from './enrolled_domain';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
+import { Domain } from './domain';
 import { MerchiFile } from './merchi_file';
 import { SystemRole } from './system_role';
 import { UserCompany } from './user_company';
@@ -24,7 +25,7 @@ export function User() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'userType');
     addPropertyTo(this, 'registeredAsGuest');
-    addPropertyTo(this, 'registeredUnderDomain');
+    addPropertyTo(this, 'registeredUnderDomain', Domain);
     addPropertyTo(this, 'password');
     addPropertyTo(this, 'resetToken');
     addPropertyTo(this, 'created');
