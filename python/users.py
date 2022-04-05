@@ -63,6 +63,8 @@ class User(sdk.python.entities.Entity):
     enable_store_notifications = Property(bool)
     is_super_user = Property(bool)
     is_admin_of_subscribed_company = Property(bool)
+    registered_as_guest = Property(bool)
+    registered_under_domain = Property('sdk.python.domains.Domain')
     system_roles = Property(SystemRole)
     user_companies = Property(UserCompany, backref="user")
     companies_need_stripe = Property('sdk.python.companies.Company')
