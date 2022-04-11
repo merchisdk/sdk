@@ -1,3 +1,4 @@
+import datetime
 import sdk.python.util.address_util as address_util
 import sdk.python.entities
 from sdk.python.country_taxes import CountryTax
@@ -49,6 +50,7 @@ class Company(sdk.python.entities.Entity):
     is_paying_company = Property(bool)
     is_stripe_valid = Property(bool)
     is_testing = Property(bool)
+    trial_end_date = Property(datetime.datetime)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_bank_transfer = Property(bool)

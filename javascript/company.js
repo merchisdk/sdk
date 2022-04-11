@@ -40,6 +40,8 @@ export function Company() {
     addPropertyTo(this, 'isPayingCompany');
     addPropertyTo(this, 'isUtrustValid');
     addPropertyTo(this, 'isTesting');
+    addPropertyTo(this, 'isBlocked');
+    addPropertyTo(this, 'trialEndDate');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
     addPropertyTo(this, 'stripePublishableTestKey');

@@ -76,6 +76,9 @@ export class Company extends Entity {
   public subscriptionOutstanding?: boolean;
 
   @Company.property()
+  public trialEndDate?: Date | null;
+
+  @Company.property()
   public isBlocked?: boolean;
 
   @Company.property()
