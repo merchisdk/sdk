@@ -82,7 +82,7 @@ export class Company extends Entity {
   @Company.property()
   public trialEndDateUpdated?: Date | null;
 
-  @Company.property()
+  @Company.property({type: 'User'})
   public trialEndDateSetBy?: User;
 
   @Company.property()
