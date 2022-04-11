@@ -12,6 +12,7 @@ import { MerchiFile } from './merchi_file';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
 import { ShipmentMethod } from './shipment_method';
+import { User } from './user';
 import { UserCompany } from './user_company';
 
 export function Company() {
@@ -42,6 +43,8 @@ export function Company() {
     addPropertyTo(this, 'isTesting');
     addPropertyTo(this, 'isBlocked');
     addPropertyTo(this, 'trialEndDate');
+    addPropertyTo(this, 'trialEndDateUpdated');
+    addPropertyTo(this, 'trialEndDateSetBy', User);
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
     addPropertyTo(this, 'stripePublishableTestKey');

@@ -51,6 +51,8 @@ class Company(sdk.python.entities.Entity):
     is_stripe_valid = Property(bool)
     is_testing = Property(bool)
     trial_end_date = Property(datetime.datetime)
+    trial_end_date_updated = Property(datetime.datetime)
+    trial_end_date_set_by = Property(sdk.python.users.User)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_bank_transfer = Property(bool)
