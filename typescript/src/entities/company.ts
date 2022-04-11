@@ -76,10 +76,10 @@ export class Company extends Entity {
   @Company.property()
   public subscriptionOutstanding?: boolean;
 
-  @Company.property()
+  @Company.property({type: Date})
   public trialEndDate?: Date | null;
 
-  @Company.property()
+  @Company.property({type: Date})
   public trialEndDateUpdated?: Date | null;
 
   @Company.property({type: 'User'})
