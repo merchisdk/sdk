@@ -39,8 +39,11 @@ export function Company() {
     addPropertyTo(this, 'acceptUtrust');
     addPropertyTo(this, 'isPayingCompany');
     addPropertyTo(this, 'isUtrustValid');
+    addPropertyTo(this, 'isTesting');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
+    addPropertyTo(this, 'stripePublishableTestKey');
+    addPropertyTo(this, 'stripeApiTestKey');
     addPropertyTo(this, 'isStripeValid');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');

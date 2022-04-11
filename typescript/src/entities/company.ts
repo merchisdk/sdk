@@ -78,6 +78,15 @@ export class Company extends Entity {
   @Company.property()
   public isBlocked?: boolean;
 
+  @Company.property()
+  public isTesting?: boolean;
+
+  @Company.property({type: String})
+  public stripePublishableTestKey?: string | null;
+
+  @Company.property({type: String})
+  public stripeApiTestKey?: string | null;
+
   @Company.property({type: String})
   public stripePublishableKey?: string | null;
 
