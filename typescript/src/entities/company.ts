@@ -13,6 +13,7 @@ import { Job } from './job';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
 import { Shipment } from './shipment';
+import { User } from './user';
 import { UserCompany } from './user_company';
 import { SubscriptionPlan } from './subscription_plan';
 
@@ -74,6 +75,15 @@ export class Company extends Entity {
 
   @Company.property()
   public subscriptionOutstanding?: boolean;
+
+  @Company.property({type: Date})
+  public trialEndDate?: Date | null;
+
+  @Company.property({type: Date})
+  public trialEndDateUpdated?: Date | null;
+
+  @Company.property({type: 'User'})
+  public trialEndDateSetBy?: User;
 
   @Company.property()
   public isBlocked?: boolean;
