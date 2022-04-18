@@ -116,6 +116,9 @@ export class Job extends Entity {
   public updated?: Date;
 
   @Job.property()
+  public groupBuyProductionStarted?: Date;
+
+  @Job.property()
   public automaticPriceEnabled?: boolean;
 
   @Job.property()
