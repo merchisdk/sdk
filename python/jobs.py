@@ -47,6 +47,7 @@ class Job(sdk.python.entities.Entity):
     draft_comments = Property(DraftComment)
     drafts = Property(Draft)
     invoice = Property(Invoice, backref="jobs")
+    supplyJob = Property(Job)
     domain = Property(Domain)
     shipping = Property(Address)
     production_shipping_address = Property(Address)
