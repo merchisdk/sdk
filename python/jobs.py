@@ -107,6 +107,7 @@ class Job(sdk.python.entities.Entity):
     inventoryCount = Property(int)
     inventory_sufficient = Property(bool)
     limited_stock = Property(bool)
+    supplyJob = Property("sdk.python.jobs.Job")
     unread_notifications_count = Property(int)
     unread_job_info_notifications_count = Property(int)
     unread_job_drafting_notifications_count = Property(int)
