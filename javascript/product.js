@@ -17,7 +17,7 @@ import { VariationsGroup } from './variations_group';
 import { MerchiFile } from './merchi_file';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
-import { Job } from './Job';
+import { Job } from './job';
 
 export function Product() {
     this.resource = '/products';
