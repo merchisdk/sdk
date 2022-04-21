@@ -17,6 +17,7 @@ import { VariationsGroup } from './variations_group';
 import { MerchiFile } from './merchi_file';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
+import { Job } from './job';
 
 export function Product() {
     this.resource = '/products';
@@ -85,6 +86,7 @@ export function Product() {
     addPropertyTo(this, 'discountGroups', DiscountGroup);
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
+    addPropertyTo(this, 'defaultJob', Job)
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
