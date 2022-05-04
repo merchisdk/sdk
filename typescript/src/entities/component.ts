@@ -1,6 +1,7 @@
 import { ComponentTag } from './component_tag';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { User } from './user';
 
 export class Component extends Entity {
   protected static resourceName: string = 'components';
@@ -9,6 +10,12 @@ export class Component extends Entity {
 
   @Component.property({type: Date})
   public archived?: Date | null;
+
+  @Component.property({type: Date})
+  public created?: Date;
+
+  @Component.property({type: Date})
+  public updated?: Date;
 
   @Component.property()
   public id?: number;
@@ -36,6 +43,12 @@ export class Component extends Entity {
 
   @Component.property({arrayType: 'ComponentTag'})
   public tags?: ComponentTag[];
+
+  @Component.property({type: 'User'})
+  public createdBy?: User | null;
+
+  @Component.property({type: 'User'})
+  public updatedBy?: User | null;
 
   public toReact = (context: any) => {
     const componentCode = 'with (this) { ' + this.compiled + ' return ' +
