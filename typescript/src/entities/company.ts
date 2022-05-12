@@ -104,6 +104,9 @@ export class Company extends Entity {
   public stripeApiKey?: string | null;
 
   @Company.property()
+  public stripeConnectDisabled?: boolean;
+
+  @Company.property()
   public isPayingCompany?: boolean;
 
   @Company.property()

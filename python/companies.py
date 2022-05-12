@@ -41,6 +41,7 @@ class Company(sdk.python.entities.Entity):
     stripe_api_key = Property(str)
     stripe_publishable_test_key = Property(str)
     stripe_api_test_key = Property(str)
+    stripe_connect_disabled = Property(bool)
     accept_utrust = Property(bool)
     utrust_api_key = Property(str)
     utrust_webhook_key = Property(str)

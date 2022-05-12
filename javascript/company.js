@@ -49,6 +49,7 @@ export function Company() {
     addPropertyTo(this, 'stripeApiKey');
     addPropertyTo(this, 'stripePublishableTestKey');
     addPropertyTo(this, 'stripeApiTestKey');
+    addPropertyTo(this, 'stripeConnectDisabled');
     addPropertyTo(this, 'isStripeValid');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
