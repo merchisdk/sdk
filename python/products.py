@@ -7,7 +7,6 @@ from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
 from sdk.python.shipment_methods import ShipmentMethod
-from sdk.python.users import User
 from sdk.python.variations import VariationField,\
     VariationsGroup
 
@@ -21,8 +20,8 @@ class Product(sdk.python.entities.Entity):
     name = Property(str)
     created = Property(datetime.datetime)
     updated = Property(datetime.datetime)
-    created_by = Property(User)
-    updated_by = Property(User)
+    created_by = Property("sdk.python.users.User")
+    updated_by = Property("sdk.python.users.User")
     product_type = Property(str)
     notes = Property(str)
     description = Property(str)
