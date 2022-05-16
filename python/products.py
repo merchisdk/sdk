@@ -7,7 +7,7 @@ from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.files import File
 from sdk.python.shipment_methods import ShipmentMethod
-from sdk.python.user import User
+from sdk.python.users import User
 from sdk.python.variations import VariationField,\
     VariationsGroup
 
