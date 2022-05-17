@@ -5,4 +5,5 @@ export enum DomainType {
   SUPPLIER = 3,
   RESTRICTED_SUPPLIER = 4,
   DOMAIN_SUPPLIER = 5,
+  DOMAIN_CLIENT_CATALOGUE = 6,
 }
