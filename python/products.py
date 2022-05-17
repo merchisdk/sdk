@@ -18,6 +18,10 @@ class Product(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    created = Property(datetime.datetime)
+    updated = Property(datetime.datetime)
+    created_by = Property("sdk.python.users.User")
+    updated_by = Property("sdk.python.users.User")
     product_type = Property(str)
     notes = Property(str)
     description = Property(str)

@@ -26,6 +26,10 @@ export function Product() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'created');
+    addPropertyTo(this, 'updated');
+    addPropertyTo(this, 'createdBy', User);
+    addPropertyTo(this, 'updatedBy', User);
     addPropertyTo(this, 'independent');
     addPropertyTo(this, 'productType');
     addPropertyTo(this, 'description');

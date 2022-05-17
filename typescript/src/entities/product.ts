@@ -30,6 +30,18 @@ export class Product extends Entity {
   @Product.property()
   public id?: number;
 
+  @Component.property({type: Date})
+  public created?: Date;
+
+  @Component.property({type: Date})
+  public updated?: Date;
+
+  @Component.property({type: 'User'})
+  public createdBy?: User | null;
+
+  @Component.property({type: 'User'})
+  public updatedBy?: User | null;
+
   @Product.property()
   public productType?: number;
 
