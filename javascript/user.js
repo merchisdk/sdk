@@ -25,7 +25,7 @@ export function User() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'userType');
     addPropertyTo(this, 'registeredAsGuest');
-    addPropertyTo(this, 'registeredUnderDomain', Domain);
+    addPropertyTo(this, 'registeredUnderDomains', Domain);
     addPropertyTo(this, 'password');
     addPropertyTo(this, 'resetToken');
     addPropertyTo(this, 'created');

@@ -56,8 +56,8 @@ export class User extends Entity {
   @User.property()
   public registeredAsGuest?: boolean;
 
-  @User.property({type: 'Domain'})
-  public registeredUnderDomain?: Domain | null;
+  @User.property({arrayType: 'Domain'})
+  public registeredUnderDomains?: Domain[] | null;
 
   @User.property({type: String})
   public password?: string | null;
