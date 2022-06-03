@@ -72,6 +72,9 @@ export class MerchiFile extends Entity {
   @MerchiFile.property()
   public downloadUrl?: string;
 
+  @MerchiFile.property()
+  public serverUrl?: string;
+
   @MerchiFile.property({arrayType: 'Component'})
   public components?: Component[];
 

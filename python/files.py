@@ -12,12 +12,13 @@ class File(sdk.python.entities.Entity):
     url_fields = ['view_url', 'download_url']
 
     id = Property(int)
+    creation_date = Property(datetime.datetime)
     name = Property(str)
     size = Property(int)
     mimetype = Property(str)
     view_url = Property(str)
     download_url = Property(str)
-    creation_date = Property(datetime.datetime)
+    server_url = Property(str)
 
     def __init__(self):
         super(File, self).__init__()

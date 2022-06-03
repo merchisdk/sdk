@@ -9,12 +9,13 @@ export function MerchiFile() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'creationDate');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'size');
     addPropertyTo(this, 'mimetype');
-    addPropertyTo(this, 'viewUrl');
     addPropertyTo(this, 'downloadUrl');
-    addPropertyTo(this, 'creationDate');
+    addPropertyTo(this, 'viewUrl');
+    addPropertyTo(this, 'server_url');
 
     this.get = function (success, error, embed) {
         var self = this;
