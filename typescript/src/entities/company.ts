@@ -199,6 +199,9 @@ export class Company extends Entity {
   @Company.property({arrayType: 'Domain'})
   public domains?: Domain[];
 
+  @Company.property({arrayType: 'Domain'})
+  public accessibleDomainsAsClientCompany?: Domain[];
+
   @Company.property({arrayType: 'EmailAddress'})
   public emailAddresses?: EmailAddress[];
 
