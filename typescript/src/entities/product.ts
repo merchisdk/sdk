@@ -7,6 +7,7 @@ import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
+import { DraftTemplate } from './draft_template';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Inventory } from './inventory';
