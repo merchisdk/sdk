@@ -154,6 +154,9 @@ export class Product extends Entity {
   public allowChainedInventoryCreation?: boolean;
 
   @Product.property()
+  public allowClientDraftContribution?: boolean;
+
+  @Product.property()
   public chainedInventoryHandlingUnitPrice?: number;
 
   @Product.property()
