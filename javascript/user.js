@@ -47,6 +47,7 @@ export function User() {
     addPropertyTo(this, 'products', Product);
     /* products that a user has saved for future reference */
     addPropertyTo(this, 'savedProducts', Product);
+    addPropertyTo(this, 'accessibleDomainsAsClient', Domain);
 
     this.create = function (success, error, embed, as_domain) {
         var self = this,

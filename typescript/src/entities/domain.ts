@@ -56,6 +56,9 @@ export class Domain extends Entity {
   public showDomainPublicly?: boolean;
 
   @Domain.property()
+  public showDomainToAccessibleEntitiesOnly?: boolean;
+
+  @Domain.property()
   public enableEmailNotifications?: boolean;
 
   @Domain.property()
@@ -105,6 +108,12 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'Domain'})
   public suppliedBy?: Domain[];
+
+  @Domain.property({arrayType: 'User'})
+  public accessibleClients?: User[];
+
+  @Domain.property({arrayType: 'Company'})
+  public accessibleClientCompanies?: Company[];
 
   @Domain.property({arrayType: 'Menu'})
   public menus?: Menu[];

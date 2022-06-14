@@ -37,8 +37,11 @@ export function Domain() {
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);
     addPropertyTo(this, 'ownedBy', Company);
+    addPropertyTo(this, 'accessibleClients', User);
+    addPropertyTo(this, 'accessibleClientCompanies', Company);
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
+    addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
     addPropertyTo(this, 'enableNotifications');
     addPropertyTo(this, 'enableEmailNotifications');
     addPropertyTo(this, 'enableSmsNotifications');

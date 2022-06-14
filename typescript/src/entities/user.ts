@@ -251,6 +251,9 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: ProductionComment[];
 
+  @User.property({ arrayType: 'Domain' })
+  public accessibleDomainsAsClient?: Domain[];
+
   public publicCreate = this.createFactory(
     {resourceName: 'public-user-create'});
 

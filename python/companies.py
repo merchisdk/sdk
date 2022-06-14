@@ -73,6 +73,9 @@ class Company(sdk.python.entities.Entity):
     default_tax_type = Property(sdk.python.country_taxes.CountryTax)
     subscription_plan = Property(SubscriptionPlan,
                                  backref="companies")
+    accessible_domains_as_client_company = Property(
+        sdk.python.domains.Domain
+    )
 
     @property
     def default_banks(self):

@@ -7,6 +7,7 @@ import { Address } from './address';
 import { Bank } from './bank';
 import { CountryTax, NoTaxEntity } from './country_tax';
 import { CompanyInvitation } from './company_invitation';
+import { Domain } from './domain';
 import { EmailAddress } from './email_address';
 import { MerchiFile } from './merchi_file';
 import { PhoneNumber } from './phone_number';
@@ -70,6 +71,11 @@ export function Company() {
         this,
         'automaticPaymentRelationships',
         AutomaticPaymentRelationship,
+    );
+    addPropertyTo(
+        this,
+        'accessibleDomainsAsClientCompany',
+        Domain,
     );
 
     this.create = function (success, error, embed, as_domain) {
