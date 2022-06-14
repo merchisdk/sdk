@@ -255,6 +255,9 @@ export class Product extends Entity {
   @Product.property({arrayType: 'User'})
   public suppliers?: User[];
 
+  @Product.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
+
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
     const constructor = this.constructor as typeof Product;

@@ -8,6 +8,7 @@ import { Category } from './category';
 import { Component } from './component';
 import { Company } from './company';
 import { CountryTax } from './country_tax';
+import { DraftTemplate } from './draft_template';
 import { DomainTag } from './domain_tag';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
@@ -91,7 +92,8 @@ export function Product() {
     addPropertyTo(this, 'discountGroups', DiscountGroup);
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
-    addPropertyTo(this, 'defaultJob', Job)
+    addPropertyTo(this, 'defaultJob', Job);
+    addPropertyTo(this, 'draftTemplates', DraftTemplate);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),

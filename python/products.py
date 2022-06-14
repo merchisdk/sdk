@@ -85,6 +85,7 @@ class Product(sdk.python.entities.Entity):
     show_group_buy_status = Property(bool)
     group_buy_status = Property(int)
     allow_client_draft_contribution = Property(bool)
+    draft_templates = Property("sdk.python.draft_templates.DraftTemplate")
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
