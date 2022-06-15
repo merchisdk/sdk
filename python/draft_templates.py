@@ -16,6 +16,7 @@ class DraftTemplate(sdk.python.entities.Entity):
     product = Property(Product)
     job = Property(Job)
     description = Property(str)
+    name = Property(str)
     date = Property(datetime.datetime)
     height = Property(int)
     width = Property(int)

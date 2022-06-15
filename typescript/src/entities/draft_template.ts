@@ -21,6 +21,9 @@ export class DraftTemplate extends Entity {
   public description?: string;
 
   @DraftTemplate.property()
+  public name?: string;
+
+  @DraftTemplate.property()
   public height?: number;
 
   @DraftTemplate.property()

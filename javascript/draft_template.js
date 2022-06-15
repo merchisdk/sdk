@@ -13,6 +13,7 @@ export function DraftTemplate() {
     addPropertyTo(this, 'file', MerchiFile);
     addPropertyTo(this, 'job', Job);
     addPropertyTo(this, 'date');
+    addPropertyTo(this, 'name');
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'height');
     addPropertyTo(this, 'width');
