@@ -7,6 +7,7 @@ import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
+import { DraftTemplate } from './draft_template';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Inventory } from './inventory';
@@ -154,6 +155,9 @@ export class Product extends Entity {
   public allowChainedInventoryCreation?: boolean;
 
   @Product.property()
+  public allowClientDraftContribution?: boolean;
+
+  @Product.property()
   public chainedInventoryHandlingUnitPrice?: number;
 
   @Product.property()
@@ -251,6 +255,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'User'})
   public suppliers?: User[];
+
+  @Product.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */

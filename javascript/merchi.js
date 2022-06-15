@@ -35,6 +35,7 @@ import { Domain, Domains } from './domain';
 import { DomainTag, DomainTags } from './domain_tag';
 import { DomainInvitation } from './domain_invitation';
 import { Draft, Drafts } from './draft';
+import { DraftTemplate } from './draft_template';
 import { DraftComment } from './draft_comment';
 import { EnrolledDomain, EnrolledDomains } from './enrolled_domain';
 import { EmailAddress, EmailAddresses } from './email_address.js';
@@ -1269,6 +1270,7 @@ export function merchi(backendUri, websocketUri) {
             'Draft': Draft,
             'drafts': new Drafts(),
             'DraftComment': DraftComment,
+            'DraftTemplate': DraftTemplate,
             'ExchangeRate': ExchangeRate,
             'exchangeRates': new ExchangeRates(),
             'Theme': Theme,
