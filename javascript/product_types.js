@@ -17,6 +17,10 @@ productTypes.add(12, 'supplier resell');
 productTypes.add(14, 'supplier group buy inventory');
 productTypes.add(14, 'seller inventory chained');
 productTypes.add(15, 'seller group buy inventory chained');
+productTypes.add(16, 'clone of supplier resell MOD (made on demand)');
+productTypes.add(17, 'supplier to supplier resell MOD (made on demand)');
+productTypes.add(18, 'clone of supplier resell');
+productTypes.add(19, 'reference of supply domain');
 
 export const productTypesInts = new Dictionary();
 productTypes.each(function (key, value) {
