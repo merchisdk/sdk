@@ -21,6 +21,8 @@ export function Assignment() {
     addPropertyTo(this, 'supplierRefused');
     addPropertyTo(this, 'productionDeadline');
     addPropertyTo(this, 'assignmentDeadline');
+    addPropertyTo(this, 'needsDrafting');
+    addPropertyTo(this, 'needsShipping');
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'job', Job);
     addPropertyTo(this, 'supplyJob', Job);

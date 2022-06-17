@@ -14,6 +14,9 @@ export class SupplyDomain extends Entity {
   public id?: number;
 
   @SupplyDomain.property()
+  public needsDrafting?: boolean;
+
+  @SupplyDomain.property()
   public product?: Product;
 
   @SupplyDomain.property({type: Product})
