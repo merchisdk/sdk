@@ -71,6 +71,9 @@ export class Job extends Entity {
   public needsInventory?: boolean;
 
   @Job.property()
+  public allowClientDraftContribution?: boolean;
+
+  @Job.property()
   public quoteSet?: boolean;
 
   @Job.property()

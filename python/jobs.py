@@ -89,6 +89,7 @@ class Job(sdk.python.entities.Entity):
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
     needs_inventory = Property(bool)
+    allow_client_draft_contribution = Property(bool)
     group_buy_status = Property(int)
     group_buy_production_started = Property(datetime.datetime)
     deduction_date = Property(datetime.datetime)
