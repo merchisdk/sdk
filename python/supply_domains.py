@@ -8,6 +8,7 @@ class SupplyDomain(sdk.python.entities.Entity):
     json_name = 'supplyDomain'
 
     id = Property(int)
+    needs_drafting = Property(bool)
     product = Property('sdk.python.products.Product',
                        backref='supply_domains')
     supply_product = Property('sdk.python.products.Product',
