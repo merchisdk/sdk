@@ -61,6 +61,8 @@ class Domain(sdk.python.entities.Entity):
     enable_sms_notifications = Property(bool)
     mailgun_records = Property(list)
     webflow_api_key = Property(str)
+    shopify_shop_url = Property(str)
+    shopify_is_active = Property(bool)
 
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')

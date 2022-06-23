@@ -85,6 +85,12 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public webflowApiKey?: string | null;
 
+  @Domain.property({type: String})
+  public shopifyShopUrl?: string | null;
+
+  @Domain.property()
+  public shopifyIsActive?: boolean;
+
   @Domain.property()
   public ownedBy?: Company;
 
