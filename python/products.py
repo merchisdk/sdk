@@ -25,6 +25,7 @@ class Product(sdk.python.entities.Entity):
     product_type = Property(str)
     notes = Property(str)
     description = Property(str)
+    shopify_product_id = Property(str)
     unit_price = Property(float)
     unit_price_discount_group = Property(DiscountGroup)
     margin = Property(float)
