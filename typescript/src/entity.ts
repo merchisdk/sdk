@@ -458,11 +458,11 @@ export class Entity {
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
       }
-      if (options.shopifyOnly !== undefined) {
-        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
-      }
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
+      }
+      if (options.shopifyOnly !== undefined) {
+        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
       }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
