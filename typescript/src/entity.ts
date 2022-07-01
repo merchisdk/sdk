@@ -458,6 +458,9 @@ export class Entity {
       if (options.memberOnly !== undefined) {
         fetchOptions.query.push(['member_only', options.memberOnly.toString()]);
       }
+      if (options.shopifyOnly !== undefined) {
+        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
+      }
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
       }
@@ -591,9 +594,6 @@ export class Entity {
       if (options.orClientCompanyId !== undefined) {
         fetchOptions.query.push(
           ['or_client_company_id', options.orClientCompanyId.toString()]);
-      }
-      if (options.shopifyOnly !== undefined) {
-        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
       }
     }
     if (!(options && options.withRights)) {
