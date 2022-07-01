@@ -568,6 +568,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (notEmpty(parameters.orClientId)) {
         request.query().add('include_only', parameters.includeOnly);
     }
+    if (notEmpty(parameters.shopifyOnly)) {
+        request.query().add('shopify_only',
+                            parameters.shopifyOnly);
+    }
     request.send();
     if (withUpdates) {
         return window.merchiSusubscriptionManager.subscribe(withUpdates,
