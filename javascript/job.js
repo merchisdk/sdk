@@ -50,6 +50,8 @@ export function Job() {
     addPropertyTo(this, 'clientFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'drafts', Draft);
+    addPropertyTo(this, 'ownDrafts', Draft);
+    addPropertyTo(this, 'sharedDrafts', Draft);
     addPropertyTo(this, 'draftComments', DraftComment);
     addPropertyTo(this, 'comments', JobComment);
     addPropertyTo(this, 'invoice', Invoice);

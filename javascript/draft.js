@@ -12,6 +12,7 @@ export function Draft() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'job', Job);
+    addPropertyTo(this, 'sharedWithJob', Job);
     addPropertyTo(this, 'designer', User);
     addPropertyTo(this, 'file', MerchiFile);
     addPropertyTo(this, 'date');

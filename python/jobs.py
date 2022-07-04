@@ -101,7 +101,8 @@ class Job(sdk.python.entities.Entity):
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")
-    drafts = Property(Draft, backref="job")
+    own_drafts = Property(Draft, backref="job")
+    shared_drafts = Property(Draft, backref="shared_with_job")
     draft_comments = Property(DraftComment, backref="job")
 
     # not embedded by default, must be requested

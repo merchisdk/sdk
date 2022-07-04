@@ -55,6 +55,9 @@ export class Draft extends Entity {
   @Draft.property()
   public job?: Job;
 
+  @Draft.property()
+  public sharedWithJob?: Job;
+
   public wereChangesRequested = () => {
     /* true if any comment is/was a change request comment. */
     if (this.comments === undefined) {

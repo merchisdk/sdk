@@ -172,6 +172,12 @@ export class Job extends Entity {
   @Job.property({arrayType: 'Draft'})
   public drafts?: Draft[];
 
+  @Job.property({arrayType: 'Draft'})
+  public sharedDrafts?: Draft[];
+
+  @Job.property({arrayType: 'Draft'})
+  public ownDrafts?: Draft[];
+
   @Job.property({arrayType: 'JobComment'})
   public comments?: JobComment[];
 
