@@ -135,6 +135,7 @@ interface ListOptions {
   includeOnly?: number[];
   orClientId?: number;
   orClientCompanyId?: number;
+  shopifyOnly?: boolean;
 }
 
 export interface ListMetadata {
@@ -459,6 +460,9 @@ export class Entity {
       }
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
+      }
+      if (options.shopifyOnly !== undefined) {
+        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
       }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
