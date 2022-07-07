@@ -2,6 +2,7 @@
   "name": "merchisdk",
   "version": "1.0.0",
   "main": "src/index.js",
+  "type": "module",
   "repository": "git@github.com:merchisdk/sdk.git",
   "author": "Daniel Collins <mail@dcollins.info>",
   "license": "GPL-3.0",
