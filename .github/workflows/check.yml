@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '12' ]
+        node: [ '16' ]
     name: Check Javascript ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '12' ]
+        node: [ '16' ]
     name: Check Typescript
     steps:
       - uses: actions/checkout@v2
