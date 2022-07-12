@@ -7,9 +7,9 @@ import { Variation } from './variation';
 import { VariationsGroup } from './variations_group';
 
 export class CartItem extends Entity {
-  protected static resourceName: string = 'cart_items';
-  protected static singularName: string = 'cartItem';
-  protected static pluralName: string = 'cartItems';
+  protected static resourceName = 'cart_items';
+  protected static singularName = 'cartItem';
+  protected static pluralName = 'cartItems';
 
   @CartItem.property({type: Date})
   public archived?: Date | null;
@@ -61,7 +61,7 @@ export class CartItem extends Entity {
       throw 'needsShipping is undefined, did you forget to embed it?';
     }
     return this.product.needsShipping;
-  }
+  };
 
   public calculate = () => {
     const resource = '/cart-item-cost-estimate/';
@@ -73,5 +73,5 @@ export class CartItem extends Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
         return this;});
-  }
+  };
 }

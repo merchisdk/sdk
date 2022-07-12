@@ -8,9 +8,9 @@ import { Invoice } from './invoice';
 import { User } from './user';
 
 export class Cart extends Entity {
-  protected static resourceName: string = 'carts';
-  protected static singularName: string = 'cart';
-  protected static pluralName: string = 'carts';
+  protected static resourceName = 'carts';
+  protected static singularName = 'cart';
+  protected static pluralName = 'carts';
 
   @Cart.property({type: Date})
   public archived?: Date | null;
@@ -85,5 +85,5 @@ export class Cart extends Entity {
       }
     }
     return false;
-  }
+  };
 }

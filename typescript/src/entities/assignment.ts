@@ -14,9 +14,9 @@ interface GenerateInvoiceProps {
 }
 
 export class Assignment extends Entity {
-  protected static resourceName: string = 'assignments';
-  protected static singularName: string = 'assignment';
-  protected static pluralName: string = 'assignments';
+  protected static resourceName = 'assignments';
+  protected static singularName = 'assignment';
+  protected static pluralName = 'assignments';
 
   @Assignment.property({type: Date})
   public archived?: Date | null;
@@ -87,6 +87,6 @@ export class Assignment extends Entity {
         invoice.fromJson(data);
         return invoice;
       });
-  }
+  };
 
 }

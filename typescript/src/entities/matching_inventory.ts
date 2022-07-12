@@ -5,9 +5,9 @@ import { VariationsGroup } from './variations_group';
 import { InventoryStatus } from '../constants/inventory_statuses';
 
 export class MatchingInventory extends Entity {
-  protected static resourceName: string = 'matching_inventories';
-  protected static singularName: string = 'matchingInventory';
-  protected static pluralName: string = 'matchingInventories';
+  protected static resourceName = 'matching_inventories';
+  protected static singularName = 'matchingInventory';
+  protected static pluralName = 'matchingInventories';
 
   @MatchingInventory.property({type: Date})
   public archived?: Date | null;

@@ -6,9 +6,9 @@ import { Product } from './product';
 import { ShipmentMethodVariation } from './shipment_method_variation';
 
 export class ShipmentMethod extends Entity {
-  protected static resourceName: string = 'shipment_methods';
-  protected static singularName: string = 'shipmentMethod';
-  protected static pluralName: string = 'shipmentMethods';
+  protected static resourceName = 'shipment_methods';
+  protected static singularName = 'shipmentMethod';
+  protected static pluralName = 'shipmentMethods';
 
   @ShipmentMethod.property()
   public id?: number;

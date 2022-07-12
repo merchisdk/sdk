@@ -3,9 +3,9 @@ import { Entity } from '../entity';
 import { Invoice } from './invoice';
 
 export class Item extends Entity {
-  protected static resourceName: string = 'items';
-  protected static singularName: string = 'item';
-  protected static pluralName: string = 'items';
+  protected static resourceName = 'items';
+  protected static singularName = 'item';
+  protected static pluralName = 'items';
 
   @Item.property({type: Date})
   public archived?: Date | null;
@@ -40,5 +40,5 @@ export class Item extends Entity {
     }
     const quantity = this.quantity === null ? 0 : this.quantity;
     return quantity * this.cost;
-  }
+  };
 }

@@ -5,9 +5,9 @@ import { Variation } from './variation';
 import { MatchingInventory } from './matching_inventory';
 
 export class VariationsGroup extends Entity {
-  protected static resourceName: string = 'variations_groups';
-  protected static singularName: string = 'variationsGroup';
-  protected static pluralName: string = 'variationsGroups';
+  protected static resourceName = 'variations_groups';
+  protected static singularName = 'variationsGroup';
+  protected static pluralName = 'variationsGroups';
 
   @VariationsGroup.property({type: Date})
   public archived?: Date | null;

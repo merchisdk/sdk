@@ -21,9 +21,9 @@ import {
 } from '../constants/auto_assign_production_on_actions';
 
 export class Product extends Entity {
-  protected static resourceName: string = 'products';
-  protected static singularName: string = 'product';
-  protected static pluralName: string = 'products';
+  protected static resourceName = 'products';
+  protected static singularName = 'product';
+  protected static pluralName = 'products';
 
   @Product.property({type: Date})
   public archived?: Date | null;
@@ -275,7 +275,7 @@ export class Product extends Entity {
         product.fromJson(data[singularName]);
         return product;
       });
-  }
+  };
 
   public primaryImage = () => {
     if (this.featureImage === undefined) {
@@ -291,14 +291,14 @@ export class Product extends Entity {
       return this.images[0];
     }
     return null;
-  }
+  };
 
   public currency = () => {
     if (this.domain === undefined) {
       throw new Error('domain is undefined, did you forget to embed it?');
     }
     return this.domain.defaultCurrency();
-  }
+  };
 
   public hasGroupVariationFields = () => {
     if (this.groupVariationFields === undefined) {
@@ -307,7 +307,7 @@ export class Product extends Entity {
       throw new Error(err);
     }
     return this.groupVariationFields.length > 0;
-  }
+  };
 
   public hasIndependentVariationFields = () => {
     if (this.independentVariationFields === undefined) {
@@ -316,7 +316,7 @@ export class Product extends Entity {
       throw new Error(err);
     }
     return this.independentVariationFields.length > 0;
-  }
+  };
 
   public allVariationFields = () => {
     if (this.groupVariationFields === undefined) {
@@ -332,7 +332,7 @@ export class Product extends Entity {
     const result: VariationField[] = [];
     return result.concat(this.groupVariationFields,
       this.independentVariationFields);
-  }
+  };
 
   public buildEmptyVariations = () => {
     if (this.independentVariationFields === undefined) {
@@ -343,7 +343,7 @@ export class Product extends Entity {
     const iVF: VariationField[] =
       _.orderBy(this.independentVariationFields, ['position'], ['asc']);
     return iVF.map(field => field.buildEmptyVariation());
-  }
+  };
 
   public buildEmptyVariationGroup = () => {
     if (this.groupVariationFields === undefined) {
@@ -365,7 +365,7 @@ export class Product extends Entity {
     result.groupCost = cost;
     result.variations = variations;
     return result;
-  }
+  };
 
   public removeVariationField = (variationField: VariationField) => {
     if (variationField.independent === undefined) {
@@ -392,5 +392,5 @@ export class Product extends Entity {
       return v.id === variationField.id;
     });
     return variationFields.splice(index, 1);
-  }
+  };
 }

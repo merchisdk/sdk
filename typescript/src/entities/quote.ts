@@ -10,9 +10,9 @@ interface CalculateOptions {
 }
 
 export class Quote extends Entity {
-  protected static resourceName: string = 'quotes';
-  protected static singularName: string = 'quote';
-  protected static pluralName: string = 'quotes';
+  protected static resourceName = 'quotes';
+  protected static singularName = 'quote';
+  protected static pluralName = 'quotes';
 
   @Quote.property({type: Date})
   public archived?: Date | null;
@@ -54,7 +54,7 @@ export class Quote extends Entity {
     return (
       parseFloat(quoteItemsTotal) + parseFloat(shipmentItemsTotal)
     ).toFixed(3);
-  }
+  };
 
   public calculateTotal = this.quoteTotal;
 
@@ -72,7 +72,7 @@ export class Quote extends Entity {
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       parseFloat(s.calculateSubTotal(options))));
     return (quoteItemsTotal + shipmentItemsTotal).toFixed(3);
-  }
+  };
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
     const { strictEmbed = true } = options ? options : {};
@@ -88,7 +88,7 @@ export class Quote extends Entity {
     const shipmentItemsTotal = kahanSum(shipments.map((s: Shipment) =>
       parseFloat(s.calculateTaxAmount(options))));
     return (quoteItemsTotal + shipmentItemsTotal).toFixed(3);
-  }
+  };
 
   public findQuoteItemIndex = (quoteItemId: number) => {
     if (this.quoteItems === undefined) {
@@ -98,7 +98,7 @@ export class Quote extends Entity {
       return quoteItem.id === quoteItemId;
     }
     return this.quoteItems.findIndex(checkEqualId);
-  }
+  };
 
   public removeQuoteItem = (quoteItem: QuoteItem) => {
     if (this.quoteItems === undefined) {
@@ -111,7 +111,7 @@ export class Quote extends Entity {
     if (index > -1) {
       this.quoteItems.splice(index, 1);
     }
-  }
+  };
 
   public deadlineTimeDifference = () => {
     if (this.agreedDeadline === undefined) {
@@ -136,5 +136,5 @@ export class Quote extends Entity {
     }
     const productionDeadline = assignment.productionDeadline;
     return productionDeadline.valueOf() - this.agreedDeadline.valueOf();
-  }
+  };
 }

@@ -6,9 +6,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class DraftComment extends Entity {
-  protected static resourceName: string = 'draft_comments';
-  protected static singularName: string = 'draftComment';
-  protected static pluralName: string = 'draftComments';
+  protected static resourceName = 'draft_comments';
+  protected static singularName = 'draftComment';
+  protected static pluralName = 'draftComments';
 
   @DraftComment.property({type: Date})
   public archived?: Date | null;

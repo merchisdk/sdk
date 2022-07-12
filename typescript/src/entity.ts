@@ -172,18 +172,18 @@ export class Entity {
   private static jsonNameKey = Symbol('jsonName');
   private static arrayTypeKey = Symbol('arrayType');
   private static extraOptionsKey = Symbol('extraOptions');
-  private static propertiesSetKey = Symbol('propertiesSet')
+  private static propertiesSetKey = Symbol('propertiesSet');
 
   protected static resourceName: string;
   protected static singularName: string;
   protected static pluralName: string;
-  protected static primaryKey: string = 'id';
+  protected static primaryKey = 'id';
 
   // these will be set by the parent Merchi object
   public merchi!: Merchi;
   public static merchi: Merchi;
 
-  public isDirty: boolean = false;
+  public isDirty = false;
   // maps json names like 'id' to information about that property
   public propertiesMap: Map<string, PropertyInfo>;
   public readonly backObjects: Set<Entity> = new Set();
@@ -301,7 +301,7 @@ export class Entity {
     }
     /* istanbul ignore next */
     return undefined;
-  }
+  };
 
   private setupProperties = () => {
     const properties: any = {};
@@ -352,7 +352,7 @@ export class Entity {
       }
     }
     Object.defineProperties(this, properties);
-  }
+  };
 
   public static get<T extends typeof Entity>(this: T, key: number | string,
     options?: GetOptions):
@@ -663,7 +663,7 @@ export class Entity {
         this.fromJson(data[singularName]);
         this.cleanDirty();
         return this;});
-  }
+  };
 
   public create = this.createFactory({});
 
@@ -672,7 +672,7 @@ export class Entity {
       return undefined;
     }
     return (this.merchi as any)[name];
-  }
+  };
 
   protected checkSameSession = (other?: Entity) => {
     if (other !== undefined && other.merchi.sessionToken !== this.merchi.sessionToken) {
@@ -750,7 +750,7 @@ export class Entity {
       }
     }
     return this;
-  }
+  };
 
   public toJson = () => {
     const json: any = {};
@@ -777,13 +777,13 @@ export class Entity {
       }
     }
     return json;
-  }
+  };
 
   protected forEachProperty = (fn: (i: PropertyInfo) => void) => {
     for (const info of this.propertiesMap.values()) {
       fn(info);
     }
-  }
+  };
 
   public toFormData = (options?: SerialiseOptions,
     fileIndex?: Counter): FormData => {
@@ -899,19 +899,19 @@ export class Entity {
     };
     this.forEachProperty(processProperty);
     return result;
-  }
+  };
 
   protected addBackObject = (remote?: Entity) => {
     if (remote !== undefined) {
       remote.backObjects.add(this);
     }
-  }
+  };
 
   protected addBackObjectList = (remotes?: Entity[]) => {
     if (remotes !== undefined) {
       remotes.forEach(this.addBackObject);
     }
-  }
+  };
 
   public updateOrder = (property: string) => {
     (this.propertiesMap.get(property) as PropertyInfo).updatingOrder = true;
@@ -933,7 +933,7 @@ export class Entity {
         for (const child of current.backObjects) openSet.push(child);
       }
     }
-  }
+  };
 
   public delete = (options?: DeleteOptions) => {
     const primaryKey: number = this.getPrimaryKeyValue();

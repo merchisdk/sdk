@@ -2,9 +2,9 @@ import { Company } from './company';
 import { Entity } from '../entity';
 
 export class AutomaticPaymentRelationship extends Entity {
-  protected static resourceName: string = 'automatic_payment_relationships';
-  protected static singularName: string = 'automaticPaymentRelationship';
-  protected static pluralName: string = 'automaticPaymentRelationships';
+  protected static resourceName = 'automatic_payment_relationships';
+  protected static singularName = 'automaticPaymentRelationship';
+  protected static pluralName = 'automaticPaymentRelationships';
 
   @AutomaticPaymentRelationship.property({type: Date})
   public archived?: Date | null;

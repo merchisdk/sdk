@@ -2,9 +2,9 @@ import { Entity } from '../entity';
 import { Menu } from './menu';
 
 export class MenuItem extends Entity {
-  protected static resourceName: string = 'menu_items';
-  protected static singularName: string = 'menuItem';
-  protected static pluralName: string = 'menuItems';
+  protected static resourceName = 'menu_items';
+  protected static singularName = 'menuItem';
+  protected static pluralName = 'menuItems';
 
   @MenuItem.property({type: Date})
   public archived?: Date | null;

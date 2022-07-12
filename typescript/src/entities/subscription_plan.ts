@@ -4,9 +4,9 @@ import { User } from './user';
 import { Company } from './company';
 
 export class SubscriptionPlan extends Entity {
-  protected static resourceName: string = 'subscription_plans';
-  protected static singularName: string = 'subscriptionPlan';
-  protected static pluralName: string = 'subscriptionPlans';
+  protected static resourceName = 'subscription_plans';
+  protected static singularName = 'subscriptionPlan';
+  protected static pluralName = 'subscriptionPlans';
 
   @SubscriptionPlan.property()
   public id?: number;

@@ -5,9 +5,9 @@ import { Role } from '../constants/roles';
 import { DomainType } from '../constants/domain_types';
 
 export class EnrolledDomain extends Entity {
-  protected static resourceName: string = 'enrolled_domains';
-  protected static singularName: string = 'enrolledDomain';
-  protected static pluralName: string = 'enrolledDomains';
+  protected static resourceName = 'enrolled_domains';
+  protected static singularName = 'enrolledDomain';
+  protected static pluralName = 'enrolledDomains';
 
   @EnrolledDomain.property({type: Date})
   public archived?: Date | null;

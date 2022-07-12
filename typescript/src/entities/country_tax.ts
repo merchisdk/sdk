@@ -5,9 +5,9 @@ import { Job } from './job';
 import { Shipment } from './shipment';
 
 export class CountryTax extends Entity {
-  protected static resourceName: string = 'country_taxes';
-  protected static singularName: string = 'countryTax';
-  protected static pluralName: string = 'countryTaxes';
+  protected static resourceName = 'country_taxes';
+  protected static singularName = 'countryTax';
+  protected static pluralName = 'countryTaxes';
 
   @CountryTax.property({type: Date})
   public archived?: Date | null;

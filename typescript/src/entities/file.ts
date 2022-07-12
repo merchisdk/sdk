@@ -17,9 +17,9 @@ import { Variation } from './variation';
 import { VariationFieldsOption } from './variation_fields_option';
 
 export class MerchiFile extends Entity {
-  protected static resourceName: string = 'files';
-  protected static singularName: string = 'file';
-  protected static pluralName: string = 'files';
+  protected static resourceName = 'files';
+  protected static singularName = 'file';
+  protected static pluralName = 'files';
 
   public fileData?: File;
 
@@ -28,7 +28,7 @@ export class MerchiFile extends Entity {
     this.mimetype = file.type || 'application/octet-stream';
     this.name = file.name;
     this.size = file.size;
-  }
+  };
 
   @MerchiFile.property({type: Date})
   public archived?: Date | null;
@@ -168,5 +168,5 @@ export class MerchiFile extends Entity {
       return false;
     }
     return this.mimetype.split('/')[0] === 'image';
-  }
+  };
 }
