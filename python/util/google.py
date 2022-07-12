@@ -1,7 +1,5 @@
 """ Provide Utilities for checking the safety of google analytics scripts.  """
-import io
 import re
-import lxml.html as lh
 
 script = """
 <script type="text/javascript">
