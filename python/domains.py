@@ -5,9 +5,12 @@ from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
 import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_tracking_global_google_script
-from sdk.python.util.google import extract_tracking_global_google_script_parameters
-from sdk.python.util.google import reconstitute_tracking_conversion_google_script
-from sdk.python.util.google import extract_tracking_conversion_google_script_parameters
+from sdk.python.util.google import \
+    extract_tracking_global_google_script_parameters
+from sdk.python.util.google import \
+    reconstitute_tracking_conversion_google_script
+from sdk.python.util.google import \
+    extract_tracking_conversion_google_script_parameters
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
 from sdk.python.entities import Property
 
@@ -128,7 +131,8 @@ class Domain(sdk.python.entities.Entity):
         code = self.tracking_code_google_global
         if code is None or code == '':
             return ''
-        script_parameters = extract_tracking_global_google_script_parameters(code)
+        script_parameters = \
+            extract_tracking_global_google_script_parameters(code)
         return reconstitute_tracking_global_google_script(script_parameters)
 
     def logo_url(self):
