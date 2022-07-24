@@ -13,6 +13,7 @@ import { DomainTag } from './domain_tag';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { Inventory } from './inventory';
+import { ShipmentMethod } from './shipment_method';
 import { VariationField } from './variation_field';
 import { VariationsGroup } from './variations_group';
 import { MerchiFile } from './merchi_file';
@@ -95,6 +96,7 @@ export function Product() {
     addPropertyTo(this, 'taxType', CountryTax);
     addPropertyTo(this, 'defaultJob', Job);
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
+    addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
