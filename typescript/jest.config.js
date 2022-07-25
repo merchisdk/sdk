@@ -3,6 +3,7 @@ export default {
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
+  "testEnvironment": 'jsdom',
   "collectCoverage": true,
   "collectCoverageFrom": ["src/**"],
   "coverageThreshold": {
