@@ -101,22 +101,22 @@ export function apiFetchWithProgress(
             } else {
               for (let i = 0; i < chunk.length; ++i) {
                 const char = chunk[i];
-                const expectedChar = expected[bodyText.length]; 
+                const expectedChar = expected[bodyText.length];
                 if (expectedChar == char && !haveError) {
-                  bodyText += char; 
+                  bodyText += char;
                 } else {
                   haveError = true;
-                  errorText += char; 
+                  errorText += char;
                 }
               }
             }
-            if (!haveError && progressCallback) { 
+            if (!haveError && progressCallback) {
               const progress = Math.min(Math.max(0, bodyText.length - 16), 100);
               progressCallback(progress);
             }
             return readChunk();
           }
-        });    
+        });
       }
       return readChunk();
     }

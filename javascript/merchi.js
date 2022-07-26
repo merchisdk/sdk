@@ -1,9 +1,9 @@
 import { generateUUID } from './uuid.js';
 import { isNull, isUndefined, isUndefinedOrNull, id,
     notEmptyArray, isArray, removeObjectFromArrayWithIntegerValue,
-    sortArrayByObjectKey } from './helpers.js';
+    sortArrayByObjectKey, getGlobal } from './helpers.js';
 import { addPropertyTo, serialise, fromJsonList, forEachProperty,
-   fromJson, patchOne, Request, getOne, create, 
+   fromJson, patchOne, Request, getOne, create,
    enumerateFiles } from './model.js';
 import { jobStatusProduction, jobPriority } from './job_status';
 import { roles, systemRoles } from './roles';
@@ -76,9 +76,9 @@ import { QuoteItem, QuoteItems } from './quote_item';
 import { Quotes, Quote } from './quote';
 
 export function merchi(backendUri, websocketUri) {
-    window.merchiJsonpHandlers = {};
-    window.merchiBackendUri = backendUri;
-    window.merchiSubscriptionManager = new SubscriptionManager();
+    getGlobal().merchiJsonpHandlers = {};
+    getGlobal().merchiBackendUri = backendUri;
+    getGlobal().merchiSubscriptionManager = new SubscriptionManager();
 
     function isJSON(x) {
         return typeof x === 'object' && x !== null &&
@@ -483,10 +483,10 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function logout() {
-        if (Boolean(window.currentSession)) {
-            window.currentSession.remove(id, id);
-            window.loggedInUser = null;
-            window.currentSession = null;
+        if (Boolean(getGlobal().currentSession)) {
+            getGlobal().currentSession.remove(id, id);
+            getGlobal().loggedInUser = null;
+            getGlobal().currentSession = null;
         }
     }
 
@@ -878,28 +878,28 @@ export function merchi(backendUri, websocketUri) {
 
     function getCurrentUser(success, error, embed) {
         var tokenStringForUser;
-        if (!!window.loggedInUser && !embed) {
-            success(window.loggedInUser);
+        if (!!getGlobal().loggedInUser && !embed) {
+            success(getGlobal().loggedInUser);
             return;
         }
         function haveToken(token) {
-            window.loggedInUser = token.user();
-            success(window.loggedInUser);
+            getGlobal().loggedInUser = token.user();
+            success(getGlobal().loggedInUser);
         }
         try {
             tokenStringForUser = getCookie('session_token');
         } catch (e) {
             error(e);
         }
-        if (!window.currentSession) {
-            window.currentSession = new Session();
+        if (!getGlobal().currentSession) {
+            getGlobal().currentSession = new Session();
         }
         if (!embed) {
             embed = {};
         }
         if (Boolean(tokenStringForUser)) {
-            window.currentSession.token(tokenStringForUser);
-            window.currentSession.get(haveToken, error,
+            getGlobal().currentSession.token(tokenStringForUser);
+            getGlobal().currentSession.get(haveToken, error,
                                {'user': embed});
         }
     }
@@ -1077,7 +1077,7 @@ export function merchi(backendUri, websocketUri) {
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
 
-        window.merchiSubscriptionManager.subscribe([eventTypes.get('POST')], request.path(),
+        getGlobal().merchiSubscriptionManager.subscribe([eventTypes.get('POST')], request.path(),
                                       "POST", handleResponse);
     }
 
@@ -1096,7 +1096,7 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function getQueryStringValue(name) {
-        var query = window.location.search.substring(1),
+        var query = getGlobal().location.search.substring(1),
             vars = query.split("&"),
             pair,
             i;
@@ -1233,7 +1233,7 @@ export function merchi(backendUri, websocketUri) {
         request.send();
     }
 
-    if (!window.currentUser) getCurrentUser(id, id, currentUserEmbed);
+    if (!getGlobal().currentUser) getCurrentUser(id, id, currentUserEmbed);
 
     return {'roles': roles,
             'roleStrings': roleStrings,

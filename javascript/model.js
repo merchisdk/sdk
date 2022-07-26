@@ -1,10 +1,12 @@
-import { id, isUndefined, notEmpty } from './helpers.js';
+import { id, isUndefined, notEmpty, getGlobal } from './helpers.js';
 import { Dictionary } from './dictionary.js';
 import { Set } from './set.js';
+import axios from 'axios';
+
 
 export function Request() {
 
-    var server = window.merchiBackendUri,
+    var server = getGlobal().merchiBackendUri,
         version = 'v6',
         method = 'GET',
         resource = '/',
@@ -32,6 +34,7 @@ export function Request() {
         version = value;
         return this;
     };
+
     this.method = function (value) {
         if (isUndefined(value)) {
             return method;
@@ -103,35 +106,23 @@ export function Request() {
         return this;
     };
 
-    this.ajaxSupported = function () {
-        return this.crossDomainAjaxSupported() ||
-            Boolean(window.XMLHttpRequest);
-    };
+    //this.ajaxSupported = function () {
+        //return this.crossDomainAjaxSupported() ||
+            //Boolean(getGlobal().XMLHttpRequest);
+    //};
 
-    this.crossDomainAjaxSupported = function () {
-        if (Boolean(window.XMLHttpRequest)) {
-            var xhr = new XMLHttpRequest();
-            if (!isUndefined(xhr)) {
-                return true;
-            }
-        }
-        return false;
-    };
+    //this.crossDomainAjaxSupported = function () {
+        //if (Boolean(getGlobal().XMLHttpRequest)) {
+            //var xhr = new XMLHttpRequest();
+            //if (!isUndefined(xhr)) {
+                //return true;
+            //}
+        //}
+        //return false;
+    //};
 
     this.p2pSupported = function () {
         return false;
-    };
-
-    this.usableMethod = function () {
-        var methodName = this.method().toUpperCase();
-        if (this.crossDomainAjaxSupported()) {
-            return methodName;
-        }
-
-        if (methodName === 'GET') {
-            return 'GET';
-        }
-        return 'POST';
     };
 
     this.url = function () {
@@ -141,15 +132,10 @@ export function Request() {
     this.path = function () {
         var url = this.version();
         url += this.resource();
-        if (!this.crossDomainAjaxSupported() &&
-                this.method().toUpperCase() !== 'GET' &&
-                this.method().toUpperCase() !== 'POST') {
-            this.query().add('method', this.method());
-        }
-        if (Boolean(window.currentSession) &&
-            Boolean(window.currentSession.token())) {
+        if (Boolean(getGlobal().currentSession) &&
+            Boolean(getGlobal().currentSession.token())) {
             this.query().add('session_token',
-                             window.currentSession.token());
+                             getGlobal().currentSession.token());
         }
         if (this.query().count() > 0) {
             url += '?' + this.query().toUriEncoding();
@@ -157,86 +143,67 @@ export function Request() {
         return url;
     };
 
-    this.jsonpUrl = function (handlerName) {
-        var url = '';
-        url += this.server();
-        url += '/';
-        url += this.version();
-        url += '/jsonp/?method=' + encodeURIComponent(this.method());
-        url += '&resource=' + encodeURIComponent(this.resource().
-            substring(1));
-        url += '&jsonp=' + encodeURIComponent(handlerName);
-        if (Boolean(window.currentSession) &&
-            Boolean(window.currentSession.token())) {
-            this.query().add('session_token',
-                             window.currentSession.token());
-        }
-        this.query().each(function (name, value) {
-            url += '&' + name + '=' + encodeURIComponent(value);
-        });
-        url += this.data().toUriEncoding();
-        return url;
-    };
-
     this.send = function () {
-        if (this.crossDomainAjaxSupported()) {
-            this.sendXMLHttpRequest();
-        } else {
-            this.sendJSONP();
+        var self = this, allData, params;
+        allData = self.data();
+        allData.merge(self.files());
+        params = {
+            'url': self.url(),
+            'data': allData.toFormData(),
+            'method': self.method()
         }
-        return this;
-    };
-
-    this.sendJSONP = function () {
-        var scriptTag = document.createElement('SCRIPT'),
-            rand = 'h' + (Math.random() + 1).toString(36).substr(2, 8),
-            handlerName = 'window.merchiJsonpHandlers.' + rand,
-            self = this,
-            handler;
-        window.merchJsonpHandlers[rand] = function (status, response) {
-            delete window.merchiJsonpHandlers[handlerName];
-            document.body.removeChild(scriptTag);
-            status = parseInt(status, 10);
-            if (isNaN(status) || status === 0 || status > 399) {
-                handler = self.errorHandler();
-            } else {
-                handler = self.responseHandler();
-            }
-            handler(status, JSON.stringify(response));
-        };
-       scriptTag.setAttribute('type', 'text/javascript');
-        scriptTag.setAttribute('src', this.jsonpUrl(handlerName));
-        document.body.appendChild(scriptTag);
-    };
-
-    this.sendXMLHttpRequest = function () {
-        var self = this,
-            transport = new XMLHttpRequest(),
-            allData;
-        function handleDone() {
-            if (transport.status === 0 || transport.status > 399) {
-                self.errorHandler()(transport.status,
-                        transport.responseText);
-            } else {
-              self.responseHandler()(transport.status,
-                      transport.responseText);
+      console.log('debug here params', params);
+        if (self.username() !== null) {
+            params.auth = {
+                username: self.username(),
+                password: self.password()
             }
         }
-        transport.addEventListener('load', handleDone);
-        transport.addEventListener('error', handleDone);
-        transport.open(this.usableMethod(), this.url(), true);
-        if (this.username() !== null) {
-            transport.setRequestHeader('Authorization', 'Basic ' +
-                btoa(this.username() + ':' + this.password()));
+        if (self.contentType() !== null) {
+            params.headers = {
+                'Content-Type': self.contentType()
+            }
         }
-        transport.withCredentials = true;
-        if (this.contentType() !== null) {
-            transport.setRequestHeader('Content-type', this.contentType());
-        }
-        allData = this.data();
-        allData.merge(this.files());
-        transport.send(allData.toFormData());
+        axios(params).then(
+            response => self.responseHandler()(
+                response.status, JSON.stringify(response.data)
+            )
+        ).catch(
+          response => {
+            self.errorHandler()(
+                response.status, JSON.stringify(response.data)
+            )}
+        )
     };
+
+    //this.sendXMLHttpRequest = function () {
+        //var self = this,
+            //transport = new XMLHttpRequest(),
+            //allData;
+        //function handleDone() {
+            //if (transport.status === 0 || transport.status > 399) {
+                //self.errorHandler()(transport.status,
+                        //transport.responseText);
+            //} else {
+              //self.responseHandler()(transport.status,
+                      //transport.responseText);
+            //}
+        //}
+        //transport.addEventListener('load', handleDone);
+        //transport.addEventListener('error', handleDone);
+        //transport.open(this.usableMethod(), this.url(), true);
+        //if (this.username() !== null) {
+            //transport.setRequestHeader('Authorization', 'Basic ' +
+                //btoa(this.username() + ':' + this.password()));
+        //}
+        //transport.withCredentials = true;
+        //if (this.contentType() !== null) {
+            //transport.setRequestHeader('Content-type', this.contentType());
+        //}
+        //allData = this.data();
+        //allData.merge(this.files());
+        //transport.send(allData.toFormData());
+    //};
 }
 
 export function forEachProperty(obj, procedure) {
@@ -341,13 +308,13 @@ export function getList(resource, success, error, parameters, withUpdates) {
             }
             success(result);
         } else {
-           try {
+            try {
                 result = JSON.parse(body);
             } catch (err) {
                 result = {message: 'could not get the list',
                           errorCode: 0};
             }
-             error(result);
+            error(result);
         }
     }
 
@@ -574,7 +541,7 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     request.send();
     if (withUpdates) {
-        return window.merchiSusubscriptionManager.subscribe(withUpdates,
+        return getGlobal().merchiSusubscriptionManager.subscribe(withUpdates,
                                                  request.path(),
                                                  "GET",
             getListResponseHandler);
