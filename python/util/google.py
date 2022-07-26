@@ -1,7 +1,5 @@
 """ Provide Utilities for checking the safety of google analytics scripts.  """
-import io
 import re
-import lxml.html as lh
 
 script = """
 <script type="text/javascript">
@@ -205,59 +203,7 @@ def get_group(regex, string):
         return None
 
 
-def extract_script_parameters(text):
-    """ Extract the variable parameters from a google analytics script.
-
-        If the provided text appears to be of the correct format (see
-        `format` above), return a ScriptParameters, holding all the parameters
-        of that pattern.
-
-        If the pattern is not matched, raise ScriptError with a message
-        describing the problem.
-
-        Dangerous or uncheckable constructs are not allowed. Whitespace is
-        mostly ignored where reasonable, but full parsing is not done. E.G.
-        javascript string escaping is not supported.
-
-        The resulting values are safe to render directly into a javascript
-        context (strings should be quoted, as in the pattern, but need not be
-        escaped).
-    """
-    conversion_id = get_group(r_conversion_id, text)
-    if conversion_id is None:
-        raise ScriptError("could not find conversion_id")
-    conversion_language = get_group(r_conversion_language, text)
-    if conversion_language is None:
-        raise ScriptError("could not find conversion_language")
-    conversion_format = get_group(r_conversion_format, text)
-    if conversion_format is None:
-        raise ScriptError("could not find conversion_format")
-    conversion_label = get_group(r_conversion_label, text)
-    if conversion_label is None:
-        raise ScriptError("could not find conversion_label")
-    conversion_colour = get_group(r_conversion_colour, text)
-    if conversion_colour is None:
-        raise ScriptError("could not find conversion_colour")
-    conversion_value = get_group(r_conversion_value, text)
-    conversion_currency = get_group(r_conversion_currency, text)
-    remarketing_only = get_group(r_remarketing_only, text)
-    if remarketing_only is None:
-        raise ScriptError("could not find remarketing_only")
-    img = lh.parse(io.BytesIO(text.encode('utf-8'))).find('//img')
-    if img is None:
-        raise ScriptError("could not find pixel image element")
-    pixel_url = img.get('src')
-    if pixel_url is None:
-        raise ScriptError("could not find pixel image element")
-    if not pixel_url.startswith("//www.googleadservices.com/pagead/"):
-        raise ScriptError("could not find pixel image element")
-    return ScriptParameters(conversion_id, conversion_language,
-                            conversion_format, conversion_colour,
-                            conversion_label, conversion_value,
-                            conversion_currency, remarketing_only, pixel_url)
-
-
-def extract_new_global_script_parameters(text):
+def extract_tracking_global_google_script_parameters(text):
     """ Extract the variable parameters from a global google analytics script.
 
         If the provided text appears to be of the correct format (see
@@ -280,7 +226,7 @@ def extract_new_global_script_parameters(text):
     return gtag_id
 
 
-def extract_new_conversion_script_parameters(text):
+def extract_tracking_conversion_google_script_parameters(text):
     """ Extract the variable parameters from a new style conversion script.
 
         If the provided text appears to be of the correct format (see
@@ -306,29 +252,7 @@ def extract_new_conversion_script_parameters(text):
         raise ScriptError("could not find conversion arguments")
 
 
-def reconstitute_conversion_script(parameters, invoice=None):
-    """ Render a ScriptParameters into a google analytics script string.
-
-        Performs no escaping or validation -- dangerous or incorrect parameters
-        should all already have been rejected at input time.
-    """
-    if invoice:
-        if not parameters.conversion_currency:
-            parameters.conversion_currency = invoice.currency
-        if not parameters.conversion_value:
-            parameters.conversion_value = invoice.total_cost
-    return script.format(conversion_id=parameters.conversion_id,
-                         conversion_language=parameters.conversion_language,
-                         conversion_format=parameters.conversion_format,
-                         conversion_colour=parameters.conversion_colour,
-                         conversion_label=parameters.conversion_label,
-                         conversion_currency=parameters.conversion_currency,
-                         remarketing_only=parameters.remarketing_only,
-                         conversion_value=parameters.conversion_value,
-                         pixel_url=parameters.pixel_url)
-
-
-def reconstitute_global_script(gtag_id):
+def reconstitute_tracking_global_google_script(gtag_id):
     """ Render a tag id into a google tracking script string.
 
         Performs no escaping or validation -- dangerous or incorrect parameters
@@ -337,7 +261,7 @@ def reconstitute_global_script(gtag_id):
     return global_script.format(gtag_id, gtag_id)
 
 
-def reconstitute_new_conversion_script(extra_args, invoice=None):
+def reconstitute_tracking_conversion_google_script(extra_args, invoice=None):
     """ Render a tag id into a google convesion tracking script string.
 
         Performs no escaping or validation -- dangerous or incorrect parameters

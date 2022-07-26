@@ -32,9 +32,8 @@ export function Domain() {
     addPropertyTo(this, 'logoUrl');
     addPropertyTo(this, 'smsName');
     addPropertyTo(this, 'emailDomain');
-    addPropertyTo(this, 'conversionTrackingCode');
-    addPropertyTo(this, 'newConversionTrackingCode');
-    addPropertyTo(this, 'newGlobalTrackingCode');
+    addPropertyTo(this, 'trackingCodeGoogleConversion');
+    addPropertyTo(this, 'trackingCodeGoogleGlobal');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);

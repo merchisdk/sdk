@@ -71,13 +71,10 @@ export class Domain extends Entity {
   public enableNotifications?: boolean;
 
   @Domain.property({type: String})
-  public conversionTrackingCode?: string | null;
+  public trackingCodeGoogleConversion?: string | null;
 
   @Domain.property({type: String})
-  public newConversionTrackingCode?: string | null;
-
-  @Domain.property({type: String})
-  public newGlobalTrackingCode?: string | null;
+  public trackingCodeGoogleGlobal?: string | null;
 
   @Domain.property({type: String})
   public apiSecret?: string | null;
