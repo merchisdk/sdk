@@ -106,21 +106,6 @@ export function Request() {
         return this;
     };
 
-    //this.ajaxSupported = function () {
-        //return this.crossDomainAjaxSupported() ||
-            //Boolean(getGlobal().XMLHttpRequest);
-    //};
-
-    //this.crossDomainAjaxSupported = function () {
-        //if (Boolean(getGlobal().XMLHttpRequest)) {
-            //var xhr = new XMLHttpRequest();
-            //if (!isUndefined(xhr)) {
-                //return true;
-            //}
-        //}
-        //return false;
-    //};
-
     this.p2pSupported = function () {
         return false;
     };
@@ -175,35 +160,6 @@ export function Request() {
             )}
         )
     };
-
-    //this.sendXMLHttpRequest = function () {
-        //var self = this,
-            //transport = new XMLHttpRequest(),
-            //allData;
-        //function handleDone() {
-            //if (transport.status === 0 || transport.status > 399) {
-                //self.errorHandler()(transport.status,
-                        //transport.responseText);
-            //} else {
-              //self.responseHandler()(transport.status,
-                      //transport.responseText);
-            //}
-        //}
-        //transport.addEventListener('load', handleDone);
-        //transport.addEventListener('error', handleDone);
-        //transport.open(this.usableMethod(), this.url(), true);
-        //if (this.username() !== null) {
-            //transport.setRequestHeader('Authorization', 'Basic ' +
-                //btoa(this.username() + ':' + this.password()));
-        //}
-        //transport.withCredentials = true;
-        //if (this.contentType() !== null) {
-            //transport.setRequestHeader('Content-type', this.contentType());
-        //}
-        //allData = this.data();
-        //allData.merge(this.files());
-        //transport.send(allData.toFormData());
-    //};
 }
 
 export function forEachProperty(obj, procedure) {
