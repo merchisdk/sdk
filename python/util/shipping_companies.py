@@ -6,5 +6,4 @@ SHIPPING_COMPANIES = ['DHL', 'UPS', 'EMS', 'FedEx',
                       'Civic Transport Couriers',
                       'NZ Post']
 
-SHIPPING_TRANSPORT_COMPANIES = \
-    {index: value for index, value in enumerate(SHIPPING_COMPANIES)}
+SHIPPING_TRANSPORT_COMPANIES = {enumerate(SHIPPING_COMPANIES)}
