@@ -394,7 +394,7 @@ export function merchi(backendUri, websocketUri) {
         if (entCopy) {
             entCopy.id(null);
         }
-        return entCopy; 
+        return entCopy;
     }
 
     function updateEntNonEmbeddableAttrbibutes(ent, newEnt) {

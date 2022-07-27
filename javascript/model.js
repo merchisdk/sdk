@@ -137,7 +137,6 @@ export function Request() {
             'data': allData.toFormData(),
             'method': self.method()
         }
-      console.log('debug here params', params);
         if (self.username() !== null) {
             params.auth = {
                 username: self.username(),
@@ -150,14 +149,9 @@ export function Request() {
             }
         }
         axios(params).then(
-            response => self.responseHandler()(
-                response.status, JSON.stringify(response.data)
-            )
+            response => self.responseHandler()(response.data)
         ).catch(
-          response => {
-            self.errorHandler()(
-                response.status, JSON.stringify(response.data)
-            )}
+          response => self.errorHandler()(response.data)
         )
     };
 }
@@ -252,36 +246,8 @@ export function getList(resource, success, error, parameters, withUpdates) {
 
     var request = new Request();
 
-    function getListResponseHandler(status, body) {
-        var result = '';
-        if (status === 200) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                error({message: 'problem getting response from server',
-                       errorCode: 0});
-                return;
-            }
-            success(result);
-        } else {
-            try {
-                result = JSON.parse(body);
-            } catch (err) {
-                result = {message: 'could not get the list',
-                          errorCode: 0};
-            }
-            error(result);
-        }
-    }
-
-    function handleError() {
-        error({message: 'could not connect to server',
-               errorCode: 0});
-    }
-
     request.resource(resource + '/').method('GET');
-    request.responseHandler(getListResponseHandler)
-        .errorHandler(handleError);
+    request.responseHandler(success).errorHandler(error);
 
     if (notEmpty(parameters.cartToken)) {
         request.query().add('cart_token', parameters.cartToken);
@@ -711,39 +677,7 @@ export function patchOne(options) {
     if (!options.withRights) {
         request.query().add('skip_rights', 'y');
     }
-    function handleResponse(status, body) {
-        var result = '';
-        if (status === 200) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                var message = 'problem getting response from server';
-                options.error(status, {message: message,
-                                       errorCode: 0});
-                return;
-            }
-            options.success(result);
-        } else {
-            try {
-                result = JSON.parse(body);
-            } catch (err) {
-                result = {message: 'could not edit the entity',
-                          errorCode: 0};
-            }
-            options.error(status, result);
-        }
-    }
-    function handleError(status, data) {
-        var result = '';
-        try {
-            result = JSON.parse(data);
-        } catch (err) {
-            result = {message: 'could not connect to server',
-                      errorCode: 0};
-        }
-        options.error(status, result);
-    }
-    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.responseHandler(options.success).errorHandler(options.error);
     request.send();
 }
 
@@ -771,75 +705,19 @@ export function getOne(options) {
     if (!options.withRights) {
         request.query().add('skip_rights', 'y');
     }
-   function handleResponse(status, body) {
-        var result = '';
-        if (status === 200) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                error({message: 'problem getting response from server'});
-                return;
-            }
-            options.success(result);
-        } else {
-            try {
-               result = JSON.parse(body);
-            } catch (err) {
-                result = {message: 'could not get the entity'};
-            }
-            error(result);
-        }
-    }
-    function handleError(status, data) {
-        var result = '';
-        try {
-            result = JSON.parse(data);
-        } catch (err) {
-            result = {message: 'could not connect to server',
-                      errorCode: 0};
-        }
-        error(status, result);
-    }
-    request.responseHandler(handleResponse).errorHandler(handleError);
-
+    request.responseHandler(options.success).errorHandler(error);
     request.send();
 }
 
 export function deleteOne(resource, success, error) {
     var request = new Request();
     request.resource(resource + '/').method('DELETE');
-    function handleResponse(status, body) {
-        var result = '';
-        if (status === 204) {
-            success();
-        } else {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'could not delete the entity',
-                          errorCode: 0};
-            }
-            error(result);
-        }
-    }
-    function handleError(status, data) {
-        var result = '';
-        try {
-            result = JSON.parse(data);
-        } catch (err) {
-            result = {message: 'could not connect to server',
-                      errorCode: 0};
-        }
-        error(status, result);
-    }
-    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.responseHandler(success).errorHandler(error);
     request.send();
 }
 
 export function create(options) {
-    var request = new Request(),
-        embed,
-        message;
+    var request = new Request(), embed;
     options.resource = options.resource || '';
     options.parameters = options.parameters || new Dictionary();
     options.success = options.success || id;
@@ -862,39 +740,7 @@ export function create(options) {
     if (!options.withRights) {
         request.query().add('skip_rights', 'y');
     }
-    function handleResponse(status, body) {
-        var result = '';
-        if (status === 201) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                message = 'problem getting response from server';
-                options.error({message: message,
-                               errorCode: 0});
-                return;
-            }
-            options.success(result);
-        } else {
-            try {
-                result = JSON.parse(body);
-            } catch (err) {
-                result = {message: 'could not create the resource',
-                          errorCode: 0};
-            }
-            options.error(status, result);
-        }
-    }
-    function handleError(status, data) {
-        var result = '';
-        try {
-            result = JSON.parse(data);
-        } catch (err) {
-            result = {message: 'could not connect to server',
-                      errorCode: 0}
-        }
-        options.error(status, result);
-    }
-    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.responseHandler(options.success).errorHandler(options.error);
     request.send();
 }
 
@@ -913,30 +759,6 @@ export function enumerateFiles(files) {
 export function recoverOne(model, id, success, error) {
     var request = new Request();
     request.resource("/unarchive/" + model + '/' + id + '/').method('POST');
-    function handleResponse(status, body) {
-        var result = '';
-        if (status === 200) {
-            success();
-        } else {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'could not recover the entity',
-                          errorCode: 0};
-            }
-            error(result);
-        }
-    }
-   function handleError(status, data) {
-        var result = '';
-        try {
-            result = JSON.parse(data);
-        } catch (err) {
-            result = {message: 'could not connect to server',
-                      errorCode: 0};
-        }
-        error(status, result);
-    }
-    request.responseHandler(handleResponse).errorHandler(handleError);
+    request.responseHandler(success).errorHandler(error);
     request.send();
 }
