@@ -463,10 +463,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     request.send();
     if (withUpdates) {
-        return getGlobal().merchiSusubscriptionManager.subscribe(withUpdates,
-                                                 request.path(),
-                                                 "GET",
-            getListResponseHandler);
+        return getGlobal().merchiSusubscriptionManager.subscribe(
+            withUpdates, request.path(), "GET",
+            function(statusCode, data) {return success(JSON.parse(data))}
+        );
     }
     return null;
 }

@@ -1077,8 +1077,8 @@ export function merchi(backendUri, websocketUri) {
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
 
-        getGlobal().merchiSubscriptionManager.subscribe([eventTypes.get('POST')], request.path(),
-                                      "POST", handleResponse);
+      getGlobal().merchiSubscriptionManager.subscribe(
+        [eventTypes.get('POST')], request.path(), "POST", handleResponse);
     }
 
     function escapeHtml(dangerousString) {
