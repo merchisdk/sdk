@@ -44,6 +44,9 @@ export class Invoice extends Entity {
   @Invoice.property()
   public buySide?: boolean;
 
+  @Invoice.property()
+  public canAutoPay?: boolean;
+
   @Invoice.property({type: String})
   public note?: string | null;
 
