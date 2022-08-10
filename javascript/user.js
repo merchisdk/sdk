@@ -70,7 +70,7 @@ export function User() {
             result = '',
             jsonBody;
         request.data().merge(data[0]);
-        request.resource('/public-user-create/');
+        request.resource('/public_user_create/');
         request.method('POST');
         function handleResponse(status, body) {
             if (status === 201) {
