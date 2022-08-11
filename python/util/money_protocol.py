@@ -7,6 +7,20 @@ import babel.numbers
 
 MAX_CENTS = 9999999999999
 
+SUPPORTED_CURRENCY_ARRAY = [
+    {'code': 'AUD', 'icon': '$', 'text': 'AUD $ - Australian Dollar'},
+    {'code': 'CAD', 'icon': '$', 'text': 'CAD $ - Canadian Dollar'},
+    {'code': 'CNY', 'icon': '¥', 'text': 'CNY ¥ - Chinese Yuan Renminbi'},
+    {'code': 'EUR', 'icon': '€', 'text': 'EUR € - European Euro'},
+    {'code': 'GBP', 'icon': '£', 'text': 'GBP £ - British Pound'},
+    {'code': 'HKD', 'icon': '$', 'text': 'HKD $ - Hong Kong Dollar'},
+    {'code': 'INR', 'icon': '₹', 'text': 'INR ₹ - India Rupee'},
+    {'code': 'JPY', 'icon': '¥', 'text': 'JPY ¥ - Japanese Yen'},
+    {'code': 'SGD', 'icon': '$', 'text': 'SGD $ - Singapore Dollar'},
+    {'code': 'USD', 'icon': '$', 'text': 'USD $ - United States Dollar'},
+    {'code': 'NZD', 'icon': '$', 'text': 'NZD $ - New Zealand Dollar'},
+]
+
 currency_map = {"ALL": "L",
                 "AFN": "؋",
                 "ARS": "$",
