@@ -65,6 +65,7 @@ export function Invoice() {
     addPropertyTo(this, 'paidMoney');
     addPropertyTo(this, 'isCompletelyPaid');
     addPropertyTo(this, 'shipments', Shipment);
+    addPropertyTo(this, 'shopifyOrderId');
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
