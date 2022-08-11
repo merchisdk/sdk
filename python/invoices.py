@@ -47,6 +47,7 @@ class Invoice(sdk.python.entities.Entity):
     currency = Property(str)
     invoice_token = Property(str)
     reminder_message = Property(str)
+    shopify_order_id = Property(str)
     responsible_manager = Property(User)
     creator = Property(User)
     client = Property(User)
