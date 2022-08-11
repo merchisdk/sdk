@@ -39,6 +39,9 @@ export class Invoice extends Entity {
   public reminderMessage?: string;
 
   @Invoice.property()
+  public shopifyOrderId?: string;
+
+  @Invoice.property()
   public forceReminders?: boolean;
 
   @Invoice.property()
