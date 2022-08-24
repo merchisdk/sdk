@@ -36,6 +36,7 @@ import { Domain, Domains } from './domain';
 import { DomainTag, DomainTags } from './domain_tag';
 import { DomainInvitation } from './domain_invitation';
 import { Draft, Drafts } from './draft';
+import { DraftTemplate } from './draft_template';
 import { DraftComment } from './draft_comment';
 import { EnrolledDomain, EnrolledDomains } from './enrolled_domain';
 import { EmailAddress, EmailAddresses } from './email_address.js';
@@ -170,7 +171,7 @@ export function merchi(backendUri, websocketUri) {
                             'profilePicture': {},
                             'userCompanies': {"company": {}},
                             'enrolledDomains': {'domain': {}}},
-        platformName = 'merchi',
+        platformName = 'Merchi',
         platformCopyright = 2021,
         platfromSellerDomain = 'merchi.me',
         platfromSellerDomainPlus = 'merchi.store',
@@ -470,6 +471,8 @@ export function merchi(backendUri, websocketUri) {
             n = domain.indexOf('/');
             domain = domain.substring(0, n != -1 ? n : domain.length);
             cookie += '; Domain=' + domain;
+        } else {
+            cookie += '; Domain=' + '.' + location.hostname;
         }
         cookie += '; path=/';
         document.cookie = cookie;
@@ -1021,6 +1024,7 @@ export function merchi(backendUri, websocketUri) {
             'Draft': Draft,
             'drafts': new Drafts(),
             'DraftComment': DraftComment,
+            'DraftTemplate': DraftTemplate,
             'ExchangeRate': ExchangeRate,
             'exchangeRates': new ExchangeRates(),
             'Theme': Theme,

@@ -7,7 +7,7 @@ import {
 } from './platform';
 
 test('platform variables all there', () => {
-  expect(platformName).toBe('merchi');
+  expect(platformName).toBe('Merchi');
   expect(platformCopyright).toBe(2021);
   expect(platformDomain).toBe('merchi.co');
   expect(platfromSellerDomain).toBe('merchi.me');

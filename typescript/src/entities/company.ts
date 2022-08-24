@@ -13,6 +13,7 @@ import { Job } from './job';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
 import { Shipment } from './shipment';
+import { User } from './user';
 import { UserCompany } from './user_company';
 import { SubscriptionPlan } from './subscription_plan';
 
@@ -75,14 +76,35 @@ export class Company extends Entity {
   @Company.property()
   public subscriptionOutstanding?: boolean;
 
+  @Company.property({type: Date})
+  public trialEndDate?: Date | null;
+
+  @Company.property({type: Date})
+  public trialEndDateUpdated?: Date | null;
+
+  @Company.property({type: 'User'})
+  public trialEndDateSetBy?: User;
+
   @Company.property()
   public isBlocked?: boolean;
+
+  @Company.property()
+  public isTesting?: boolean;
+
+  @Company.property({type: String})
+  public stripePublishableTestKey?: string | null;
+
+  @Company.property({type: String})
+  public stripeApiTestKey?: string | null;
 
   @Company.property({type: String})
   public stripePublishableKey?: string | null;
 
   @Company.property({type: String})
   public stripeApiKey?: string | null;
+
+  @Company.property()
+  public stripeConnectDisabled?: boolean;
 
   @Company.property()
   public isPayingCompany?: boolean;
@@ -176,6 +198,9 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Domain'})
   public domains?: Domain[];
+
+  @Company.property({arrayType: 'Domain'})
+  public accessibleDomainsAsClientCompany?: Domain[];
 
   @Company.property({arrayType: 'EmailAddress'})
   public emailAddresses?: EmailAddress[];

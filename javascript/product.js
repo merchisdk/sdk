@@ -8,15 +8,18 @@ import { Category } from './category';
 import { Component } from './component';
 import { Company } from './company';
 import { CountryTax } from './country_tax';
+import { DraftTemplate } from './draft_template';
 import { DomainTag } from './domain_tag';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { Inventory } from './inventory';
+import { ShipmentMethod } from './shipment_method';
 import { VariationField } from './variation_field';
 import { VariationsGroup } from './variations_group';
 import { MerchiFile } from './merchi_file';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
+import { Job } from './job';
 
 export function Product() {
     this.resource = '/products';
@@ -25,11 +28,17 @@ export function Product() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'created');
+    addPropertyTo(this, 'updated');
+    addPropertyTo(this, 'createdBy', User);
+    addPropertyTo(this, 'updatedBy', User);
     addPropertyTo(this, 'independent');
     addPropertyTo(this, 'productType');
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'notes');
+    addPropertyTo(this, 'shopifyProductId');
     addPropertyTo(this, 'minimum');
+    addPropertyTo(this, 'minimumPerGroup');
     addPropertyTo(this, 'deliveryDaysNormal');
     addPropertyTo(this, 'unitPrice');
     addPropertyTo(this, 'unitPriceDiscountGroup', DiscountGroup);
@@ -39,21 +48,27 @@ export function Product() {
     addPropertyTo(this, 'unitWidth');
     addPropertyTo(this, 'unitDepth');
     addPropertyTo(this, 'unitVolume');
-    addPropertyTo(this, "needsDrafting");
-    addPropertyTo(this, "needsProduction");
-    addPropertyTo(this, "needsShipping");
-    addPropertyTo(this, "needsInvoicing");
-    addPropertyTo(this, "suppliers", User);
-    addPropertyTo(this, "groupVariationFields", VariationField);
-    addPropertyTo(this, "independentVariationFields", VariationField);
-    addPropertyTo(this, "originalProduct", Product);
+    addPropertyTo(this, 'showGroupBuyStatus');
+    addPropertyTo(this, 'groupBuyStatus');
+    addPropertyTo(this, 'needsDrafting');
+    addPropertyTo(this, 'needsProduction');
+    addPropertyTo(this, 'needsShipping');
+    addPropertyTo(this, 'needsInvoicing');
+    addPropertyTo(this, 'needsInventory');
+    addPropertyTo(this, 'showFeatureDeadline');
+    addPropertyTo(this, 'featureDeadline');
+    addPropertyTo(this, 'suppliers', User);
+    addPropertyTo(this, 'groupVariationFields', VariationField);
+    addPropertyTo(this, 'independentVariationFields', VariationField);
+    addPropertyTo(this, 'originalProduct', Product);
     addPropertyTo(this, 'chainedSupplierProduct', Product);
-    addPropertyTo(this, 'chainedSellerProduct', Product);
+    addPropertyTo(this, 'chainedSellerProducts', Product);
     addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
-    addPropertyTo(this, 'chainedInventorySellerProduct', Product);
+    addPropertyTo(this, 'chainedInventorySellerProducts', Product);
     addPropertyTo(this, 'component', Component);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'suppliedByDomains', SupplyDomain);
+    addPropertyTo(this, 'autoAssignProductionOnAction');
     addPropertyTo(this, 'supplyDomains', SupplyDomain);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'featureImage', MerchiFile);
@@ -65,17 +80,23 @@ export function Product() {
     addPropertyTo(this, 'acceptUtrust');
     addPropertyTo(this, 'acceptBankTransfer');
     addPropertyTo(this, 'acceptPhonePayment');
+    addPropertyTo(this, 'allowGroupBuy');
     addPropertyTo(this, 'allowPaymentUpfront');
     addPropertyTo(this, 'allowQuotation');
     addPropertyTo(this, 'allowChainedInventoryCreation');
+    addPropertyTo(this, 'allowClientDraftContribution');
     addPropertyTo(this, 'chainedInventoryHandlingUnitPrice');
     addPropertyTo(this, 'savedByUsers', User);
     addPropertyTo(this, 'savedByCompanies', Company);
     addPropertyTo(this, 'tags', DomainTag);
     addPropertyTo(this, 'inventories', Inventory);
+    addPropertyTo(this, 'inventoriesOpen');
     addPropertyTo(this, 'discountGroups', DiscountGroup);
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
+    addPropertyTo(this, 'defaultJob', Job);
+    addPropertyTo(this, 'draftTemplates', DraftTemplate);
+    addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
@@ -123,7 +144,7 @@ export function Product() {
     };
 
     this.destroy = function (success, error) {
-        deleteOne(this.resource + "/" + this.id(), success, error);
+        deleteOne(this.resource + '/' + this.id(), success, error);
     };
 
     this.duplicate = function (success, error) {
@@ -263,13 +284,13 @@ export function Product() {
             company.acceptStripe();
     };
 
-    this.isMOD = function () {
+    this.isSupplierMOD = function () {
         return this.productType() ===
-            productTypesInts.get('MOD (made on demand)');
+            productTypesInts.get('Supplier MOD (made on demand)');
     };
 
     this.isResell = function () {
-        return this.isMOD();
+        return this.isSupplierMOD();
     };
 }
 

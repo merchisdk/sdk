@@ -41,6 +41,7 @@ class User(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    user_type = Property(int)
     password = Property(str)
     reset_token = Property(str)
     created = Property(datetime.datetime)
@@ -62,6 +63,8 @@ class User(sdk.python.entities.Entity):
     enable_store_notifications = Property(bool)
     is_super_user = Property(bool)
     is_admin_of_subscribed_company = Property(bool)
+    registered_as_guest = Property(bool)
+    registered_under_domains = Property('sdk.python.domains.Domain')
     system_roles = Property(SystemRole)
     user_companies = Property(UserCompany, backref="user")
     companies_need_stripe = Property('sdk.python.companies.Company')
@@ -89,6 +92,7 @@ class User(sdk.python.entities.Entity):
                                              backref="forwards")
     notifications = Property(Notification, backref="recipient")
     sent_notifications = Property(Notification, backref="sender")
+    accessible_domains_as_client = Property("sdk.python.domains.Domain")
 
     def role_in_domain(self, domain_id):
         """ The role of this user of specific domain id """
@@ -156,12 +160,6 @@ class User(sdk.python.entities.Entity):
         """
         return self.has_authority(job.domain.id,
                                   sdk.python.util.roles.SHIPPING_SECTION)
-
-    def user_type(self):
-        """ Return a user friendly string indicating what type the user is """
-        if self.is_super_user:
-            return "System Admin"
-        return "Normal User"
 
     def has_system_role(self, role):
         """ Return whether current user has a system role """

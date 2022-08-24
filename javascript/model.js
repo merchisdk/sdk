@@ -400,6 +400,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add(
             'platform_category_id', parameters.platformCategoryId);
     }
+    if (notEmpty(parameters.groupBuyForJobId)) {
+        request.query().add(
+            'group_buy_for_job_id', parameters.groupBuyForJobId);
+    }
     if (notEmpty(parameters.inDomain)) {
         request.query().add('in_domain', parameters.inDomain);
     }
@@ -522,8 +526,16 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('query_string',
                             parameters.queryString);
     }
+    if (notEmpty(parameters.companyCustomerId)) {
+        request.query().add('company_customer_id',
+                            parameters.companyCustomerId);
+    }
     if (notEmpty(parameters.companyId)) {
         request.query().add('company_id', parameters.companyId);
+    }
+    if (notEmpty(parameters.companySupplierId)) {
+        request.query().add('company_supplier_id',
+                            parameters.companySupplierId);
     }
     if (notEmpty(parameters.componentId)) {
         request.query().add('component_id', parameters.componentId);
@@ -555,6 +567,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (notEmpty(parameters.orClientId)) {
         request.query().add('include_only', parameters.includeOnly);
+    }
+    if (notEmpty(parameters.shopifyOnly)) {
+        request.query().add('shopify_only',
+                            parameters.shopifyOnly);
     }
     request.send();
     if (withUpdates) {

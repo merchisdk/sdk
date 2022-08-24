@@ -21,6 +21,8 @@ export function Domain() {
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'apiSecret');
     addPropertyTo(this, 'webflowApiKey');
+    addPropertyTo(this, 'shopifyShopUrl');
+    addPropertyTo(this, 'shopifyIsActive');
     addPropertyTo(this, 'domain');
     addPropertyTo(this, 'domainType');
     addPropertyTo(this, 'activeThemeId');
@@ -30,15 +32,17 @@ export function Domain() {
     addPropertyTo(this, 'logoUrl');
     addPropertyTo(this, 'smsName');
     addPropertyTo(this, 'emailDomain');
-    addPropertyTo(this, 'conversionTrackingCode');
-    addPropertyTo(this, 'newConversionTrackingCode');
-    addPropertyTo(this, 'newGlobalTrackingCode');
+    addPropertyTo(this, 'trackingCodeGoogleConversion');
+    addPropertyTo(this, 'trackingCodeGoogleGlobal');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);
     addPropertyTo(this, 'ownedBy', Company);
+    addPropertyTo(this, 'accessibleClients', User);
+    addPropertyTo(this, 'accessibleClientCompanies', Company);
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
+    addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
     addPropertyTo(this, 'enableNotifications');
     addPropertyTo(this, 'enableEmailNotifications');
     addPropertyTo(this, 'enableSmsNotifications');

@@ -31,6 +31,7 @@ import { Role,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles';
+import { UserType } from '../constants/user_types';
 import { SystemRoles as SR } from '../constants/system_roles';
 
 import { some } from 'lodash';
@@ -48,6 +49,15 @@ export class User extends Entity {
 
   @User.property()
   public isSuperUser?: boolean;
+
+  @User.property()
+  public userType?: UserType;
+
+  @User.property()
+  public registeredAsGuest?: boolean;
+
+  @User.property({arrayType: 'Domain'})
+  public registeredUnderDomains?: Domain[];
 
   @User.property({type: String})
   public password?: string | null;
@@ -241,8 +251,11 @@ export class User extends Entity {
   @User.property({ arrayType: 'ProductionComment' })
   public forwardedProductionComments?: ProductionComment[];
 
+  @User.property({ arrayType: 'Domain' })
+  public accessibleDomainsAsClient?: Domain[];
+
   public publicCreate = this.createFactory(
-    {resourceName: 'public-user-create'});
+    {resourceName: 'public_user_create'});
 
   public roleInDomain = (domain: Domain): Role => {
     if (this.enrolledDomains === undefined) {

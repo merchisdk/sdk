@@ -120,8 +120,11 @@ interface ListOptions {
   savedByUser?: number;
   serialiseMethod?: SerialiseMethod;
   receiverId?: number;
+  companyCustomerId?: number;
   companyId?: number;
+  companySupplierId?: number;
   componentId?: number;
+  groupBuyForJobId?: number;
   section?: NotificationSection;
   senderRole?: Role;
   isOrder?: boolean;
@@ -132,6 +135,7 @@ interface ListOptions {
   includeOnly?: number[];
   orClientId?: number;
   orClientCompanyId?: number;
+  shopifyOnly?: boolean;
 }
 
 export interface ListMetadata {
@@ -457,6 +461,9 @@ export class Entity {
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
       }
+      if (options.shopifyOnly !== undefined) {
+        fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
+      }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
       }
@@ -539,12 +546,22 @@ export class Entity {
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
       }
+      if (options.companyCustomerId !== undefined) {
+        fetchOptions.query.push(['company_customer_id', options.companyCustomerId.toString()]);
+      }
       if (options.companyId !== undefined) {
         fetchOptions.query.push(['company_id', options.companyId.toString()]);
+      }
+      if (options.companySupplierId !== undefined) {
+        fetchOptions.query.push(['company_supplier_id', options.companySupplierId.toString()]);
       }
       if (options.componentId !== undefined) {
         fetchOptions.query.push(['component_id',
           options.componentId.toString()]);
+      }
+      if (options.groupBuyForJobId !== undefined) {
+        fetchOptions.query.push(['group_buy_for_job_id',
+          options.groupBuyForJobId.toString()]);
       }
       if (options.section !== undefined) {
         fetchOptions.query.push(['section', options.section.toString()]);

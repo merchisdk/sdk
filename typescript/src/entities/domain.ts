@@ -56,6 +56,9 @@ export class Domain extends Entity {
   public showDomainPublicly?: boolean;
 
   @Domain.property()
+  public showDomainToAccessibleEntitiesOnly?: boolean;
+
+  @Domain.property()
   public enableEmailNotifications?: boolean;
 
   @Domain.property()
@@ -68,19 +71,22 @@ export class Domain extends Entity {
   public enableNotifications?: boolean;
 
   @Domain.property({type: String})
-  public conversionTrackingCode?: string | null;
+  public trackingCodeGoogleConversion?: string | null;
 
   @Domain.property({type: String})
-  public newConversionTrackingCode?: string | null;
-
-  @Domain.property({type: String})
-  public newGlobalTrackingCode?: string | null;
+  public trackingCodeGoogleGlobal?: string | null;
 
   @Domain.property({type: String})
   public apiSecret?: string | null;
 
   @Domain.property({type: String})
   public webflowApiKey?: string | null;
+
+  @Domain.property({type: String})
+  public shopifyShopUrl?: string | null;
+
+  @Domain.property()
+  public shopifyIsActive?: boolean;
 
   @Domain.property()
   public ownedBy?: Company;
@@ -105,6 +111,12 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'Domain'})
   public suppliedBy?: Domain[];
+
+  @Domain.property({arrayType: 'User'})
+  public accessibleClients?: User[];
+
+  @Domain.property({arrayType: 'Company'})
+  public accessibleClientCompanies?: Company[];
 
   @Domain.property({arrayType: 'Menu'})
   public menus?: Menu[];

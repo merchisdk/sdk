@@ -9,6 +9,7 @@ export function VariationOption() {
 
     addPropertyTo(this, 'optionId');
     addPropertyTo(this, 'value');
+    addPropertyTo(this, 'available');
     addPropertyTo(this, 'position');
     addPropertyTo(this, 'default');
     addPropertyTo(this, 'include');

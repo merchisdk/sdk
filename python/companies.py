@@ -1,3 +1,4 @@
+import datetime
 import sdk.python.util.address_util as address_util
 import sdk.python.entities
 from sdk.python.country_taxes import CountryTax
@@ -38,6 +39,9 @@ class Company(sdk.python.entities.Entity):
     subscription_outstanding = Property(bool)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
+    stripe_publishable_test_key = Property(str)
+    stripe_api_test_key = Property(str)
+    stripe_connect_disabled = Property(bool)
     accept_utrust = Property(bool)
     utrust_api_key = Property(str)
     utrust_webhook_key = Property(str)
@@ -46,6 +50,10 @@ class Company(sdk.python.entities.Entity):
     call_to_action_details = Property(list)
     is_paying_company = Property(bool)
     is_stripe_valid = Property(bool)
+    is_testing = Property(bool)
+    trial_end_date = Property(datetime.datetime)
+    trial_end_date_updated = Property(datetime.datetime)
+    trial_end_date_set_by = Property(sdk.python.users.User)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_bank_transfer = Property(bool)
@@ -65,6 +73,9 @@ class Company(sdk.python.entities.Entity):
     default_tax_type = Property(sdk.python.country_taxes.CountryTax)
     subscription_plan = Property(SubscriptionPlan,
                                  backref="companies")
+    accessible_domains_as_client_company = Property(
+        sdk.python.domains.Domain
+    )
 
     @property
     def default_banks(self):

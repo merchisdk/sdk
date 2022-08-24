@@ -7,6 +7,7 @@ import { CountryTax } from './country_tax';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { DomainTag } from './domain_tag';
+import { DraftTemplate } from './draft_template';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { Inventory } from './inventory';
@@ -15,6 +16,9 @@ import { SupplyDomain } from './supply_domain';
 import { User } from './user';
 import { VariationField } from './variation_field';
 import { ShipmentMethod } from './shipment_method';
+import {
+  AutoAssignProductionOnAction
+} from '../constants/auto_assign_production_on_actions';
 
 export class Product extends Entity {
   protected static resourceName: string = 'products';
@@ -27,11 +31,26 @@ export class Product extends Entity {
   @Product.property()
   public id?: number;
 
+  @Component.property({type: Date})
+  public created?: Date;
+
+  @Component.property({type: Date})
+  public updated?: Date;
+
+  @Component.property({type: 'User'})
+  public createdBy?: User | null;
+
+  @Component.property({type: 'User'})
+  public updatedBy?: User | null;
+
   @Product.property()
   public productType?: number;
 
   @Product.property()
   public minimum?: number;
+
+  @Product.property()
+  public minimumPerGroup?: boolean;
 
   @Product.property()
   public deliveryDaysNormal?: number;
@@ -72,6 +91,9 @@ export class Product extends Entity {
   @Product.property({type: String})
   public notes?: string | null;
 
+  @Product.property({type: String})
+  public shopifyProductId?: string | null;
+
   @Product.property()
   public useCompanyShipmentMethods?: boolean;
 
@@ -91,7 +113,22 @@ export class Product extends Entity {
   public needsInvoicing?: boolean;
 
   @Product.property()
+  public needsInventory?: boolean;
+
+  @Product.property({type: Date})
+  public featureDeadline?: Date;
+
+  @Product.property()
+  public showFeatureDeadline?: boolean;
+
+  @Product.property()
   public showPublic?: boolean;
+
+  @Product.property()
+  public showGroupBuyStatus?: boolean;
+
+  @Product.property({type: Number})
+  public groupBuyStatus?: number | null;
 
   @Product.property()
   public acceptStripe?: boolean;
@@ -109,6 +146,9 @@ export class Product extends Entity {
   public acceptPhonePayment?: boolean;
 
   @Product.property()
+  public allowGroupBuy?: boolean;
+
+  @Product.property()
   public allowPaymentUpfront?: boolean;
 
   @Product.property()
@@ -116,6 +156,9 @@ export class Product extends Entity {
 
   @Product.property()
   public allowChainedInventoryCreation?: boolean;
+
+  @Product.property()
+  public allowClientDraftContribution?: boolean;
 
   @Product.property()
   public chainedInventoryHandlingUnitPrice?: number;
@@ -147,14 +190,14 @@ export class Product extends Entity {
   @Product.property({type: Product})
   public chainedSupplierProduct?: Product | null;
 
-  @Product.property({type: Product})
-  public chainedSellerProduct?: Product | null;
+  @Product.property({arrayType: 'Product'})
+  public chainedSellerProducts?: Product[];
 
   @Product.property({type: Product})
   public chainedInventorySupplierProduct?: Product | null;
 
-  @Product.property({type: Product})
-  public chainedInventorySellerProduct?: Product | null;
+  @Product.property({arrayType: 'Product'})
+  public chainedInventorySellerProducts?: Product[];
 
   @Product.property({type: Component})
   public component?: Component | null;
@@ -183,14 +226,23 @@ export class Product extends Entity {
   @Product.property({type: 'Job'})
   public createdByJob?: Job | null;
 
+  @Product.property({type: 'Job'})
+  public defaultJob?: Job;
+
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
   public savedByCompanies?: Company[];
 
   @Product.property({arrayType: 'SupplyDomain'})
   public suppliedByDomains?: SupplyDomain[];
 
+  @Product.property()
+  public autoAssignProductionOnAction?: AutoAssignProductionOnAction;
+
   @Product.property({arrayType: 'SupplyDomain'})
   public supplyDomains?: SupplyDomain[];
+
+  @Product.property()
+  public inventoriesOpen?: boolean;
 
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
@@ -206,6 +258,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'User'})
   public suppliers?: User[];
+
+  @Product.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */

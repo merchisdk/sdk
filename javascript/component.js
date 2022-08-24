@@ -3,6 +3,7 @@ import { addPropertyTo, fromJson, getOne, serialise, enumerateFiles, patchOne,
     fromJsonList, getList, create } from './model';
 import { MerchiFile } from './merchi_file';
 import { ComponentTag } from './component_tag';
+import { User } from './user';
 
 export function Component() {
     this.resource = '/components';
@@ -10,10 +11,15 @@ export function Component() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'archived');
+    addPropertyTo(this, 'created');
+    addPropertyTo(this, 'updated');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'body');
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'compiled');
+    addPropertyTo(this, 'createdBy', User);
+    addPropertyTo(this, 'updatedBy', User);
     addPropertyTo(this, 'featureImage', MerchiFile);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'tags', ComponentTag);

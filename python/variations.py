@@ -159,6 +159,7 @@ class VariationOption(sdk.python.entities.Entity):
 
     option_id = Property(int)
     quantity = Property(int)
+    available = Property(bool)
     value = Property(str)
     colour = Property(str)
     field_name = Property(str)
@@ -277,6 +278,10 @@ class VariationsGroup(sdk.python.entities.Entity):
     quantity = Property(int)
     group_cost = Property(float)
     variations = Property(Variation)
+
+    # not embedded by default, must be requested
+    inventoryCount = Property(int)
+    inventory_sufficient = Property(bool)
 
     def link_to_fields(self, fields):
         for variation in self.variations:

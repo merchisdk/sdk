@@ -46,6 +46,9 @@ export class Job extends Entity {
   @Job.property({type: String})
   public productionNotes?: string | null;
 
+  @Job.property()
+  public shopifyOrderId?: string;
+
   @Job.property({type: Number})
   public productionStatus?: number | null;
 
@@ -54,6 +57,9 @@ export class Job extends Entity {
 
   @Job.property()
   public needsDrafting?: boolean;
+
+  @Job.property()
+  public needsGroupBuy?: boolean;
 
   @Job.property()
   public needsProduction?: boolean;
@@ -68,10 +74,16 @@ export class Job extends Entity {
   public needsInventory?: boolean;
 
   @Job.property()
+  public allowClientDraftContribution?: boolean;
+
+  @Job.property()
   public quoteSet?: boolean;
 
   @Job.property()
   public jobInfoApprovedByClient?: boolean;
+
+  @Job.property({type: Number})
+  public groupBuyStatus?: number | null;
 
   @Job.property({type: Number})
   public paymentStatus?: number | null;
@@ -108,6 +120,9 @@ export class Job extends Entity {
 
   @Job.property()
   public updated?: Date;
+
+  @Job.property()
+  public groupBuyProductionStarted?: Date;
 
   @Job.property()
   public automaticPriceEnabled?: boolean;
@@ -152,10 +167,19 @@ export class Job extends Entity {
   public limitedStock?: boolean;
 
   @Job.property({embeddedByDefault: false})
-  public inStock?: number;
+  public inventoryCount?: number;
+
+  @Job.property({embeddedByDefault: false})
+  public inventorySufficient?: boolean;
 
   @Job.property({arrayType: 'Draft'})
   public drafts?: Draft[];
+
+  @Job.property({arrayType: 'Draft'})
+  public sharedDrafts?: Draft[];
+
+  @Job.property({arrayType: 'Draft'})
+  public ownDrafts?: Draft[];
 
   @Job.property({arrayType: 'JobComment'})
   public comments?: JobComment[];
@@ -199,6 +223,9 @@ export class Job extends Entity {
   @Job.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
 
+  @Job.property({arrayType: 'Product'})
+  public createdProducts?: Product[];
+
   @Job.property({type: Address})
   public shipping?: Address | null;
 
@@ -237,6 +264,9 @@ export class Job extends Entity {
 
   @Job.property()
   public supplyAssignment?: Assignment;
+
+  @Job.property()
+  public supplyJob?: Job;
 
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';

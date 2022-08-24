@@ -40,6 +40,7 @@ export function Job() {
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'product', Product);
+    addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
     addPropertyTo(this, 'received');
     addPropertyTo(this, 'deadline');
@@ -49,6 +50,8 @@ export function Job() {
     addPropertyTo(this, 'clientFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'drafts', Draft);
+    addPropertyTo(this, 'ownDrafts', Draft);
+    addPropertyTo(this, 'sharedDrafts', Draft);
     addPropertyTo(this, 'draftComments', DraftComment);
     addPropertyTo(this, 'comments', JobComment);
     addPropertyTo(this, 'invoice', Invoice);
@@ -64,6 +67,7 @@ export function Job() {
     addPropertyTo(this, 'shipping', Address);
     addPropertyTo(this, 'productionShippingAddress', Address);
     addPropertyTo(this, 'supplyAssignment', Assignment);
+    addPropertyTo(this, 'supplyJob', Job);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'cost');
     addPropertyTo(this, 'taxAmount');
@@ -81,15 +85,20 @@ export function Job() {
     addPropertyTo(this, 'unreadJobShippingNotificationsCount');
     addPropertyTo(this, 'unreadJobInvoicingNotificationsCount');
     addPropertyTo(this, 'matchingInventories', MatchingInventory);
-    addPropertyTo(this, 'inStock');
+    addPropertyTo(this, 'inventoryCount');
+    addPropertyTo(this, 'inventorySufficient');
     addPropertyTo(this, 'limitedStock');
     addPropertyTo(this, 'canDeduct');
 
     addPropertyTo(this, 'productionNotes');
     addPropertyTo(this, "needsDrafting");
+    addPropertyTo(this, "needsGroupBuy");
     addPropertyTo(this, "needsProduction");
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
+    addPropertyTo(this, "allowClientDraftContribution");
+    addPropertyTo(this, 'groupBuyStatus');
+    addPropertyTo(this, 'groupBuyProductionStarted');
     addPropertyTo(this, 'shippingStatus');
     addPropertyTo(this, 'designStatus');
     addPropertyTo(this, 'paymentStatus');
@@ -104,6 +113,7 @@ export function Job() {
     addPropertyTo(this, 'completed');
     addPropertyTo(this, 'jobInfoApprovedByClient');
     addPropertyTo(this, 'quoteSet');
+    addPropertyTo(this, 'shopifyOrderId');
 
     this.create = function (
         success, error, embed, asDomain, withRights) {

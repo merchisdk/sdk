@@ -11,6 +11,7 @@ import { EmailAddress } from './email_address';
 import { EnrolledDomain } from './enrolled_domain';
 import { PhoneNumber } from './phone_number';
 import { Product } from './product';
+import { Domain } from './domain';
 import { MerchiFile } from './merchi_file';
 import { SystemRole } from './system_role';
 import { UserCompany } from './user_company';
@@ -22,6 +23,9 @@ export function User() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'userType');
+    addPropertyTo(this, 'registeredAsGuest');
+    addPropertyTo(this, 'registeredUnderDomains', Domain);
     addPropertyTo(this, 'password');
     addPropertyTo(this, 'resetToken');
     addPropertyTo(this, 'created');
@@ -43,6 +47,7 @@ export function User() {
     addPropertyTo(this, 'products', Product);
     /* products that a user has saved for future reference */
     addPropertyTo(this, 'savedProducts', Product);
+    addPropertyTo(this, 'accessibleDomainsAsClient', Domain);
 
     this.create = function (success, error, embed, as_domain) {
         var self = this,
@@ -65,7 +70,7 @@ export function User() {
             result = '',
             jsonBody;
         request.data().merge(data[0]);
-        request.resource('/public-user-create/');
+        request.resource('/public_user_create/');
         request.method('POST');
         function handleResponse(status, body) {
             if (status === 201) {

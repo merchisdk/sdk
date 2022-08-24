@@ -10,6 +10,7 @@ export function SupplyDomain() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'needsDrafting');
     addPropertyTo(this, 'product', Product);
     addPropertyTo(this, 'supplyProduct', Product);
     addPropertyTo(this, 'domain', Domain);
