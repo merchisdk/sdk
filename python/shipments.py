@@ -36,6 +36,7 @@ class Shipment(sdk.python.entities.Entity):
     sender_notes = Property(str)
 
     # Receiver attributes
+    blind_ship_to = Property(str)
     receiver = Property(User)
     receiver_company = Property(Company)
     receiver_address = Property(Address)
