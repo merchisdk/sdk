@@ -27,6 +27,7 @@ export function Shipment() {
     addPropertyTo(this, 'senderCompany', Company);
     addPropertyTo(this, 'senderAddress', Address);
     addPropertyTo(this, 'senderNotes');
+    addPropertyTo(this, 'blindShipTo');
     addPropertyTo(this, 'receiver', User);
     addPropertyTo(this, 'receiverCompany', Company);
     addPropertyTo(this, 'receiverAddress', Address);

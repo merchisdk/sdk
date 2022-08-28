@@ -100,6 +100,9 @@ export class Shipment extends Entity {
   @Shipment.property({type: Address})
   public senderAddress?: Address | null;
 
+  @Shipment.property({type: String})
+  public blindShipTo?: string | null;
+
   @Shipment.property({type: User})
   public receiver?: User | null;
 
