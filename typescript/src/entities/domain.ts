@@ -56,6 +56,9 @@ export class Domain extends Entity {
   public showDomainPublicly?: boolean;
 
   @Domain.property()
+  public publicAccessRestricted?: boolean;
+
+  @Domain.property()
   public showDomainToAccessibleEntitiesOnly?: boolean;
 
   @Domain.property()
