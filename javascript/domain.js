@@ -42,6 +42,7 @@ export function Domain() {
     addPropertyTo(this, 'accessibleClientCompanies', Company);
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
+    addPropertyTo(this, 'publicAccessRestricted');
     addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
     addPropertyTo(this, 'enableNotifications');
     addPropertyTo(this, 'enableEmailNotifications');

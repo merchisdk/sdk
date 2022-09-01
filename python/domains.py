@@ -63,6 +63,7 @@ class Domain(sdk.python.entities.Entity):
     webflow_api_key = Property(str)
     shopify_shop_url = Property(str)
     shopify_is_active = Property(bool)
+    public_access_restricted = Property(bool)
 
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
