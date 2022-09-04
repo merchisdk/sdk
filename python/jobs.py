@@ -58,6 +58,7 @@ class Job(sdk.python.entities.Entity):
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
     notes = Property(str)
+    shopify_order_id = Property(str)
     shopify_order_line_item_id = Property(str)
     purpose = Property(int)
     call_to_actions = Property(str)
