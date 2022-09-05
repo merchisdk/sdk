@@ -113,6 +113,7 @@ export function Job() {
     addPropertyTo(this, 'completed');
     addPropertyTo(this, 'jobInfoApprovedByClient');
     addPropertyTo(this, 'quoteSet');
+    addPropertyTo(this, 'shopifyShopUrl');
     addPropertyTo(this, 'shopifyOrderId');
     addPropertyTo(this, 'shopifyOrderLineItemId');
 
