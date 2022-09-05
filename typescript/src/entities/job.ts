@@ -46,6 +46,9 @@ export class Job extends Entity {
   @Job.property({type: String})
   public productionNotes?: string | null;
 
+  @Job.property({type: String})
+  public shopifyShopUrl?: string | null;
+
   @Job.property()
   public shopifyOrderId?: string;
 
