@@ -2,7 +2,7 @@
 
 PYFILES=`find python/ -type f -name "*.py" -not -path "*/tests/*"`
 mypy --ignore-missing-imports --check-untyped-defs --strict-optional\
-      --follow-imports=skip --non-interactive --install-types --no-incremental\
+      --follow-imports=skip --non-interactive --install-types \
       --cache-dir mypy_cache\
       --config-file python/mypy.ini \
       --warn-no-return --warn-redundant-casts --warn-unused-ignores\
