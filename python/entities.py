@@ -324,8 +324,9 @@ class Entity(object, metaclass=Meta):
                 continue
             if type_ == datetime:
                 if not isinstance(data, (datetime, arrow.Arrow)):
-                    raise ValueError(str(property_name) + " " + str(data) +
-                                     " should be a datetime attribute")
+                    msg = "{0} {1} should be a datetime attribute". \
+                        format(property_name, data)
+                    raise ValueError(msg)
                 if not time_format:
                     data = to_unix_timestamp(data)
                 else:
@@ -342,9 +343,10 @@ class Entity(object, metaclass=Meta):
             if recursive_property is None:
                 pass
             elif isinstance(recursive_property, list):
-                if exclude_old and not (self.wants_update[property_name] or
-                                        any(getattr(r, '_is_dirty', False) for
-                                            r in recursive_property)):
+                wants = self.wants_update[property_name]
+                dirty = any(
+                    getattr(r, '_is_dirty', False) for r in recursive_property)
+                if exclude_old and not (wants or dirty):
                     continue
                 result[property_name] = []  # type: ignore
                 recursive_properties = recursive_property
@@ -364,8 +366,9 @@ class Entity(object, metaclass=Meta):
                 result[property_name + '-{0}-id'.format(count)] = \
                     recursive_property
             else:
-                if exclude_old and not (self.wants_update[property_name] or
-                                        recursive_property._is_dirty):
+                wants_update = self.wants_update[property_name]
+                dirty = recursive_property._is_dirty
+                if exclude_old and not (wants_update or dirty):
                     continue
                 result[property_name], files = recursive_property.\
                     serialise(force_primary, files,
