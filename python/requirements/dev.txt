@@ -3,8 +3,8 @@ codecov==2.0.15
 coverage==5.0a3
 hypothesis==3.82.1
 mypy==0.910
-pycodestyle==2.3.1
-pydocstyle==2.1.1
+pycodestyle==2.9.0
+pydocstyle==6.1.1
 flake8==5.0.4
 pylint==2.11.1
 pylint-celery==0.3
