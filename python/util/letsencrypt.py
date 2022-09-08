@@ -8,13 +8,14 @@ import logging
 
 def fetch_cert(email, cert_name, domain_names, log, config):
     """ Contact letsencrypt servers and ask them for a new certificate. """
-    cmd = ('certbot certonly --cert-name ' + cert_name + ' '
-           + '--non-interactive --agree-tos --email {} '
-           + '--dns-route53 '
-           + '--server https://acme-v02.api.letsencrypt.org/directory '
-           + '--config-dir /etc/letsencrypt/config '
-           + '--logs-dir /etc/letsencrypt/logs '
-           + '--work-dir /etc/letsencrypt/work')
+    msg = 'certbot certonly --cert-name ' + cert_name + ' ' +
+        '--non-interactive --agree-tos --email {} ' +
+        '--dns-route53 ' +
+        '--server https://acme-v02.api.letsencrypt.org/directory ' +
+        '--config-dir /etc/letsencrypt/config ' +
+        '--logs-dir /etc/letsencrypt/logs ' +
+        '--work-dir /etc/letsencrypt/work'
+    cmd = (msg)
     cmd = cmd.format(shlex.quote(email))
     for domain_name in domain_names:
         cmd += ' -d' + shlex.quote(domain_name)
