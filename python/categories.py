@@ -12,6 +12,7 @@ class Category(sdk.python.entities.Entity):
     name = Property(str)
     show_dashboard = Property(bool)
     show_public = Property(bool)
+    show_public_supplier_resell = Property(bool)
 
     domain = Property(Domain, backref="categories")
 
