@@ -49,6 +49,6 @@ class Rights(object):
                 current_rights will be [ACCESS]
         """
         for _, name in right_names.items():
-            setattr(self, name,
-                    (getattr(self, name, False) and
-                     getattr(rights, name, False)))
+            name_bool = getattr(self, name, False)
+            rights_bool = getattr(rights, name, False)
+            setattr(self, name, (name_bool and rights_bool))

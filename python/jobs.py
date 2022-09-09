@@ -246,8 +246,8 @@ class Job(sdk.python.entities.Entity):
         return status_info(self.payment_status, PAYMENT_STATUS, "payment ")
 
     def shipment_display_info(self):
-        """ Return the SHIPPING_STATUS dict from sdk.python.util.status with the values
-            based on the job.shipping_status
+        """ Return the SHIPPING_STATUS dict from sdk.python.util.status with
+            the values based on the job.shipping_status
         """
         return status_info(self.shipping_status, SHIPPING_STATUS, "shipment ")
 
@@ -350,10 +350,10 @@ class Job(sdk.python.entities.Entity):
 
     def production_finished(self):
         """ Return whether the production has been finished """
-        return (self.production_status is not None and
-                self.production_status >=
-                PRODUCTION_STATUS["SHIPPED"]["dbValue"]) or \
-            not self.needs_production
+        status = self.production_status
+        needs = self.needs_production
+        value = PRODUCTION_STATUS["SHIPPED"]["dbValue"]
+        return (status is not None and status >= value) or not needs
 
     def payment_finished(self):
         """ Return whether the payment has been finished """

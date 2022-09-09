@@ -169,8 +169,8 @@ def r_send_to_call(param):
 
 r_new_conversion_id = r_tag_fmt + r"/[a-zA-Z0-9\-_]+"
 
-r_str_new_conversion = r_send_to_call(r"['\"]" + r_val(r_new_conversion_id) +
-                                      r"['\"]")
+r_str_new_conversion = r_send_to_call(
+    r"['\"]" + r_val(r_new_conversion_id) + r"['\"]")
 
 r_global_gtag = re.compile(r_str_global)
 
