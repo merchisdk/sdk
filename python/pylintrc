@@ -50,7 +50,9 @@ disable =
         consider-using-from-import,
         c-extension-no-member,
         inconsistent-return-statements,
-        unspecified-encoding
+        unspecified-encoding,
+        missing-timeout
+        consider-using-generator
 
 [REPORTS]
 reports=no
