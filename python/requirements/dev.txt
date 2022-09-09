@@ -1,6 +1,6 @@
 attrs==17.4.0
 codecov==2.0.15
-coverage==5.0a3
+coverage==6.4.4
 hypothesis==3.82.1
 mypy==0.971
 pycodestyle==2.9.0
