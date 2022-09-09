@@ -353,7 +353,7 @@ class Job(sdk.python.entities.Entity):
         status = self.production_status
         needs = self.needs_production
         value = PRODUCTION_STATUS["SHIPPED"]["dbValue"]
-        return (sstatus is not None and status >= value) or not needs
+        return (status is not None and status >= value) or not needs
 
     def payment_finished(self):
         """ Return whether the payment has been finished """
