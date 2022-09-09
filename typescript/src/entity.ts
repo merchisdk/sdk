@@ -96,6 +96,7 @@ interface ListOptions {
   teamOnly?: boolean;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  supplierResellOnly?: boolean;
   platformCategoryId?: number;
   inbound?: boolean;
   domainRoles?: Role[];
@@ -460,6 +461,11 @@ export class Entity {
       }
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
+      }
+      if (options.supplierResellOnly !== undefined) {
+        fetchOptions.query.push(
+          ['supplier_resell_only', options.supplierResellOnly.toString()]
+        );
       }
       if (options.shopifyOnly !== undefined) {
         fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);

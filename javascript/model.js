@@ -449,6 +449,11 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('merchi_only',
                             JSON.stringify(parameters.merchiOnly));
     }
+    if (parameters.supplierResellOnly) {
+        request.query().add(
+            'supplier_resell_only',
+            JSON.stringify(parameters.supplierResellOnly));
+    }
     if (parameters.inbound) {
         request.query().add('inbound',
                             JSON.stringify(parameters.inbound));
