@@ -9,4 +9,4 @@ mypy --ignore-missing-imports --check-untyped-defs --strict-optional\
       $PYFILES || exit 1
 pycodestyle $PYFILES || exit 1
 pydocstyle $PYFILES || exit 1
-flake8 $PYFILES || exit 1
+flake8 --max-line-length 80 $PYFILES || exit 1
