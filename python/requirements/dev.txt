@@ -1,4 +1,4 @@
-attrs==17.4.0
+attrs==22.1.0
 codecov==2.0.15
 coverage==6.4.4
 hypothesis==6.54.5
