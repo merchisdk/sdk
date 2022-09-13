@@ -96,7 +96,8 @@ export function Job() {
     addPropertyTo(this, "needsProduction");
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
-    addPropertyTo(this, "allowClientDraftContribution");
+    addPropertyTo(this, 'showProductionFilesToClient');
+    addPropertyTo(this, 'allowClientDraftContribution');
     addPropertyTo(this, 'groupBuyStatus');
     addPropertyTo(this, 'groupBuyProductionStarted');
     addPropertyTo(this, 'shippingStatus');
