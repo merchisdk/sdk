@@ -37,5 +37,5 @@ export enum ShipmentStatus {
   DISPATCHED = 5,
   EXPECTED_RECEIVE_DATE_WARNING = 6,
   EXPECTED_RECEIVE_DATE_PAST = 7,
-  REEIVED = 8,
+  RECEIVED = 8,
 }
