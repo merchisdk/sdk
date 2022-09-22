@@ -117,6 +117,7 @@ interface ListOptions {
   relatedUser?: number;
   clientId?: number;
   managerId?: number;
+  masterProduct?: number;
   clientCompanyId?: number;
   savedByUser?: number;
   serialiseMethod?: SerialiseMethod;
@@ -540,6 +541,9 @@ export class Entity {
       }
       if (options.managerId !== undefined) {
         fetchOptions.query.push(['manager_id', options.managerId.toString()]);
+      }
+      if (options.masterProduct !== undefined) {
+        fetchOptions.query.push(['master_product', options.masterProduct.toString()]);
       }
       if (options.clientCompanyId !== undefined) {
         fetchOptions.query.push(['client_company_id',
