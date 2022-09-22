@@ -467,6 +467,9 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (parameters.productTypes) {
         request.query().add('product_types', parameters.productTypes);
     }
+    if (parameters.masterProduct) {
+        request.query().add('master_product', parameters.masterProduct);
+    }
     if (parameters.managedDomainsOnly) {
         request.query().add('managed_domains_only',
                             JSON.stringify(parameters.managedDomainsOnly));
