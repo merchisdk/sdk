@@ -244,6 +244,9 @@ export class Product extends Entity {
   @Product.property()
   public inventoriesOpen?: boolean;
 
+  @Product.property()
+  public supplyChainDisabled?: boolean;
+
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
 
