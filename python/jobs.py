@@ -101,6 +101,7 @@ class Job(sdk.python.entities.Entity):
     variations = Property(Variation)
     quote_set = Property(bool)
     drop_ship = Property(bool)
+    shopify_shipment_delivery_notified = Property(bool)
     shipment = Property(Shipment, backref="jobs")
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")

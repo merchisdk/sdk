@@ -80,6 +80,9 @@ export class Job extends Entity {
   public needsInventory?: boolean;
 
   @Job.property()
+  public shopifyShipmentDeliveryNotified?: boolean;
+
+  @Job.property()
   public showProductionFilesToClient?: boolean;
 
   @Job.property()
