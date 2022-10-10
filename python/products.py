@@ -76,6 +76,7 @@ class Product(sdk.python.entities.Entity):
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job", backref="created_products")
     original_product = Property("sdk.python.products.Product")
+    cloned_from_product = Property("sdk.python.products.Product")
     chained_supplier_product = Property("sdk.python.products.Product")
     chained_seller_products = Property("sdk.python.products.Product")
     chained_inventory_supplier_product = Property("sdk.python.products.Product")

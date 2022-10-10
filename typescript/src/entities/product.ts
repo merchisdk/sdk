@@ -188,6 +188,9 @@ export class Product extends Entity {
   public originalProduct?: Product | null;
 
   @Product.property({type: Product})
+  public clonedFromProduct?: Product | null;
+
+  @Product.property({type: Product})
   public chainedSupplierProduct?: Product | null;
 
   @Product.property({arrayType: 'Product'})
