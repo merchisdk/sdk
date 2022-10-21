@@ -254,7 +254,7 @@ class Entity(object, metaclass=Meta):
         data_json, files = self.serialise(consider_rights=False)
         resp = self.post(data=data_json, files=enumerate_files(files), **kwargs)
         check_response(resp, 201)
-        self.from_json(resp.json())
+        self.from_json(resp.json)
 
     def patch(self, **kwargs):
         request = generate_request(**kwargs)
@@ -281,7 +281,7 @@ class Entity(object, metaclass=Meta):
                           **kwargs)
         check_response(resp, 200)
         if refresh:
-            self.from_json(resp.json())
+            self.from_json(resp.json)
 
     def serialise(self, force_primary=True, files=None,
                   time_format=None, consider_rights=True,
@@ -594,7 +594,7 @@ class Resource(object):
     def fetch(self, **kwargs):
         resp = self.get(**kwargs)
         check_response(resp, 200)
-        response_json = resp.json()
+        response_json = resp.json
 
         return (self.from_json(response_json, makes_dirty=False),
                 PageSpecification(response_json['count'],
@@ -647,7 +647,7 @@ def check_response(response, expected):
     """
     if response.status_code != expected:
         try:
-            message_data = response.json()
+            message_data = response.json
             try:
                 error_code = message_data['error_code']
             except KeyError:
