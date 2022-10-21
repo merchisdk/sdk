@@ -45,7 +45,8 @@ class Shipment(sdk.python.entities.Entity):
     invoices = Property(Invoice, backref="shipments")
 
     tracking_number = Property(str)
-    transport_company = Property(str)
+    transport_company = Property(int)
+    transport_company_name = Property(str)
 
     max_weight = Property(float)
     max_volume = Property(float)

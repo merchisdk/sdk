@@ -37,6 +37,7 @@ export function Shipment() {
     addPropertyTo(this, 'assignments', Assignment);
     addPropertyTo(this, 'trackingNumber');
     addPropertyTo(this, 'transportCompany');
+    addPropertyTo(this, 'transportCompanyName');
     addPropertyTo(this, 'sendSms');
     addPropertyTo(this, 'sendEmail');
     addPropertyTo(this, 'cost');

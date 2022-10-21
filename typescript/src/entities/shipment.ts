@@ -53,6 +53,9 @@ export class Shipment extends Entity {
   public transportCompany?: number | null;
 
   @Shipment.property({type: String})
+  public transportCompanyName?: string | null;
+
+  @Shipment.property({type: String})
   public trackingNumber?: string | null;
 
   @Shipment.property({type: Number})
