@@ -561,7 +561,7 @@ class Entity(object, metaclass=Meta):
         request = generate_request(**kwargs)
         response = entity.send_to_entity(request, identifier)
         check_response(response, 200)
-        json_response = response.json()
+        json_response = response.json
         entity.from_json(json_response, makes_dirty=False)
         return entity
 
