@@ -464,6 +464,9 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (parameters.domainTypes) {
         request.query().add('domain_types', parameters.domainTypes);
     }
+    if (parameters.entityTypes) {
+        request.query().add('entity_types', parameters.entityTypes);
+    }
     if (parameters.productTypes) {
         request.query().add('product_types', parameters.productTypes);
     }
