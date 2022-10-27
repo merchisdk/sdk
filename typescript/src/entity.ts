@@ -101,6 +101,7 @@ interface ListOptions {
   inbound?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
+  entityTypes?: Array<number>;
   productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
