@@ -101,6 +101,7 @@ interface ListOptions {
   inbound?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
+  entityTypes?: number[];
   productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
@@ -481,6 +482,10 @@ export class Entity {
       if (options.domainTypes !== undefined) {
         fetchOptions.query.push(['domain_types',
           options.domainTypes.join(',')]);
+      }
+      if (options.entityTypes !== undefined) {
+        fetchOptions.query.push(['entity_types',
+          options.entityTypes.join(',')]);
       }
       if (options.productTypes !== undefined) {
         fetchOptions.query.push(['product_types',
