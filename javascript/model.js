@@ -455,8 +455,14 @@ export function getList(resource, success, error, parameters, withUpdates) {
             JSON.stringify(parameters.supplierResellOnly));
     }
     if (parameters.inbound) {
-        request.query().add('inbound',
-                            JSON.stringify(parameters.inbound));
+        request.query().add(
+            'inbound',
+            JSON.stringify(parameters.inbound));
+    }
+    if (parameters.isMaster) {
+        request.query().add(
+            'is_master',
+            JSON.stringify(parameters.isMaster));
     }
     if (parameters.domainRoles) {
         request.query().add('domain_roles', parameters.domainRoles);
