@@ -99,6 +99,7 @@ interface ListOptions {
   supplierResellOnly?: boolean;
   platformCategoryId?: number;
   inbound?: boolean;
+  isMaster?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
   entityTypes?: number[];
@@ -474,6 +475,9 @@ export class Entity {
       }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
+      }
+      if (options.isMaster !== undefined) {
+        fetchOptions.query.push(['is_master', options.isMaster.toString()]);
       }
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
