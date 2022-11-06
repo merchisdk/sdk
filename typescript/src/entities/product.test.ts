@@ -587,14 +587,6 @@ test('cannot mix sessions with different token', () => {
   expect(() => p.domain = d).toThrow();
 });
 
-test('can mix sessions with same token', () => {
-  const m1 = new Merchi('token');
-  const p = new m1.Product();
-  const m2 = new Merchi('token');
-  const d = new m2.Domain();
-  expect(() => p.domain = d).not.toThrow();
-});
-
 test('primary key always serialised', () => {
   const merchi = new Merchi();
   const testId = 42;
