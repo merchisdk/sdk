@@ -314,7 +314,6 @@ export class Entity {
         return info.currentValue;
       };
       const set = (newValue?: Entity) => {
-        this.checkSameSession(newValue);
         info.currentValue = newValue;
         this.addBackObject(newValue);
         this.markDirty(info.property, newValue);
@@ -339,7 +338,6 @@ export class Entity {
       };
       const set = (newValue?: Entity[]) => {
         info.currentValue = newValue;
-        this.checkSameSessionList(newValue);
         this.addBackObjectList(newValue);
         this.markDirty(info.property, newValue);
       };
@@ -692,18 +690,6 @@ export class Entity {
     }
     return (this.merchi as any)[name];
   }
-
-  protected checkSameSession = (other?: Entity) => {
-    if (other !== undefined && other.merchi.sessionToken !== this.merchi.sessionToken) {
-      throw new Error('cannot mix objects from different sessions');
-    }
-  };
-
-  protected checkSameSessionList = (other?: Entity[]) =>  {
-    if (other !== undefined) {
-      other.map(this.checkSameSession);
-    }
-  };
 
   public cleanDirty = () => {
     // remove all dirty records of this entity, makes it untouched
