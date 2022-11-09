@@ -6,15 +6,21 @@ import shlex
 import logging
 
 
-def fetch_cert(email, cert_name, domain_names, log, config):
+def fetch_cert(email, cert_name, domain_names, log, config, dns_plugins=None):
     """ Contact letsencrypt servers and ask them for a new certificate. """
     msg = 'certbot certonly --cert-name ' + cert_name + ' ' +\
         '--non-interactive --agree-tos --email {} ' +\
-        '--dns-route53 ' +\
         '--server https://acme-v02.api.letsencrypt.org/directory ' +\
         '--config-dir /etc/letsencrypt/config ' +\
         '--logs-dir /etc/letsencrypt/logs ' +\
         '--work-dir /etc/letsencrypt/work'
+
+    # '--dns-route53 ' +\ debug here
+    # https://eff-certbot.readthedocs.io/en/stable/using.html
+    if not dns_plugins:
+        dns_plugins = []
+    for dns_plugin in dns_plugins:
+        msg += ' --dns-{dns_plugin}'
     cmd = (msg)
     cmd = cmd.format(shlex.quote(email))
     for domain_name in domain_names:
@@ -22,8 +28,9 @@ def fetch_cert(email, cert_name, domain_names, log, config):
     log_msg = "renew cmd: '{}'".format(cmd)
     log(logging.INFO, log_msg)
     env = os.environ.copy()
-    env["AWS_ACCESS_KEY_ID"] = config['AWS_ACCESS_KEY_ID']
-    env["AWS_SECRET_ACCESS_KEY"] = config['AWS_SECRET_ACCESS_KEY']
+    if 'route53' in dns_plugins:
+        env["AWS_ACCESS_KEY_ID"] = config['AWS_ACCESS_KEY_ID']
+        env["AWS_SECRET_ACCESS_KEY"] = config['AWS_SECRET_ACCESS_KEY']
     output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT,
                                      env=env)
     log_msg = "certbot output: '{!r}'".format(output)
@@ -54,5 +61,12 @@ def renew_certs(email, cert_name, domain_names, log, config):
         the exisiting certificate (an operation which is less heavily rate
         limited by letsencrypt).
     """
-    fetch_cert(email, cert_name, domain_names, log, config)
+    fetch_cert(
+        email,
+        cert_name,
+        domain_names,
+        log,
+        config,
+        dns_plugins=['route53']
+    )
     load_cert(log)
