@@ -1,4 +1,4 @@
-import skd.python.util.job_types as job
+import sdk.python.util.job_types as job
 
 SUPPLIER_MOD = 0
 SUPPLIER = 1
