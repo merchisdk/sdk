@@ -39,6 +39,7 @@ export function Job() {
     addPropertyTo(this, 'currency');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
+    addPropertyTo(this, 'jobType');
     addPropertyTo(this, 'product', Product);
     addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
