@@ -35,6 +35,9 @@ export class Job extends Entity {
   public id?: number;
 
   @Job.property()
+  public jobType?: number;
+
+  @Job.property()
   public quantity?: number;
 
   @Job.property()
