@@ -274,6 +274,7 @@ test('can list products with options set', () => {
     supplierResellOnly: false,
     shopifyOnly: false,
     inbound: false,
+    isMaster: false,
     domainRoles: [Role.ADMIN],
     managedDomainsOnly: true,
     businessDomainsOnly: true,
@@ -292,6 +293,7 @@ test('can list products with options set', () => {
     managerId: 355,
     masterProduct: 1,
     domainTypes: [0, 1],
+    entityTypes: [0, 1],
     productTypes: [0, 1],
     excludeDomains: [0, 1],
     clientCompanyId: 124,
@@ -341,8 +343,10 @@ test('can list products with options set', () => {
     ['supplier_resell_only', 'false'],
     ['shopify_only', 'false'],
     ['inbound', 'false'],
+    ['is_master', 'false'],
     ['domain_roles', '1'],
     ['domain_types', '0,1'],
+    ['entity_types', '0,1'],
     ['product_types', '0,1'],
     ['managed_domains_only', 'true'],
     ['business_domains_only', 'true'],
@@ -573,22 +577,6 @@ test('use from json have options to ignore array type if it is wrong', () => {
   p.fromJson(json, {arrayValueStrict: false});
   // categories will be ignored
   expect(p.categories).toBe(undefined);
-});
-
-test('cannot mix sessions with different token', () => {
-  const m1 = new Merchi('token1');
-  const p = new m1.Product();
-  const m2 = new Merchi('token2');
-  const d = new m2.Domain();
-  expect(() => p.domain = d).toThrow();
-});
-
-test('can mix sessions with same token', () => {
-  const m1 = new Merchi('token');
-  const p = new m1.Product();
-  const m2 = new Merchi('token');
-  const d = new m2.Domain();
-  expect(() => p.domain = d).not.toThrow();
 });
 
 test('primary key always serialised', () => {

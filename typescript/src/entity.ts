@@ -99,8 +99,10 @@ interface ListOptions {
   supplierResellOnly?: boolean;
   platformCategoryId?: number;
   inbound?: boolean;
+  isMaster?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
+  entityTypes?: number[];
   productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
@@ -312,7 +314,6 @@ export class Entity {
         return info.currentValue;
       };
       const set = (newValue?: Entity) => {
-        this.checkSameSession(newValue);
         info.currentValue = newValue;
         this.addBackObject(newValue);
         this.markDirty(info.property, newValue);
@@ -337,7 +338,6 @@ export class Entity {
       };
       const set = (newValue?: Entity[]) => {
         info.currentValue = newValue;
-        this.checkSameSessionList(newValue);
         this.addBackObjectList(newValue);
         this.markDirty(info.property, newValue);
       };
@@ -474,6 +474,9 @@ export class Entity {
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
       }
+      if (options.isMaster !== undefined) {
+        fetchOptions.query.push(['is_master', options.isMaster.toString()]);
+      }
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
           options.domainRoles.join(',')]);
@@ -481,6 +484,10 @@ export class Entity {
       if (options.domainTypes !== undefined) {
         fetchOptions.query.push(['domain_types',
           options.domainTypes.join(',')]);
+      }
+      if (options.entityTypes !== undefined) {
+        fetchOptions.query.push(['entity_types',
+          options.entityTypes.join(',')]);
       }
       if (options.productTypes !== undefined) {
         fetchOptions.query.push(['product_types',
@@ -683,18 +690,6 @@ export class Entity {
     }
     return (this.merchi as any)[name];
   }
-
-  protected checkSameSession = (other?: Entity) => {
-    if (other !== undefined && other.merchi.sessionToken !== this.merchi.sessionToken) {
-      throw new Error('cannot mix objects from different sessions');
-    }
-  };
-
-  protected checkSameSessionList = (other?: Entity[]) =>  {
-    if (other !== undefined) {
-      other.map(this.checkSameSession);
-    }
-  };
 
   public cleanDirty = () => {
     // remove all dirty records of this entity, makes it untouched
