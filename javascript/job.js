@@ -88,6 +88,7 @@ export function Job() {
     addPropertyTo(this, 'matchingInventories', MatchingInventory);
     addPropertyTo(this, 'inventoryCount');
     addPropertyTo(this, 'inventorySufficient');
+    addPropertyTo(this, 'shopifyShipmentDeliveryNotified');
     addPropertyTo(this, 'limitedStock');
     addPropertyTo(this, 'canDeduct');
 
