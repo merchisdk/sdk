@@ -417,6 +417,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (parameters.asRole) {
         request.query().add('as_role', JSON.stringify(parameters.asRole));
     }
+    if (parameters.groupBuyOnly) {
+        request.query().add('group_buy_only',
+                            JSON.stringify(parameters.groupBuyOnly));
+    }
     if (parameters.publicOnly) {
         request.query().add('public_only',
                             JSON.stringify(parameters.publicOnly));
