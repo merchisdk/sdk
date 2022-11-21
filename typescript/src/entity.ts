@@ -89,6 +89,7 @@ interface ListOptions {
   inDomainRoles?: number[];
   isPrivate?: boolean;
   asRole?: Role;
+  groupBuyOnly?: boolean;
   publicOnly?: boolean;
   managedOnly?: boolean;
   doesNotHaveAdminDomain?: boolean;
@@ -437,6 +438,10 @@ export class Entity {
       }
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
+      }
+      if (options.groupBuyOnly !== undefined) {
+        fetchOptions.query.push(
+          ['group_buy_only', options.groupBuyOnly.toString()]);
       }
       if (options.publicOnly !== undefined) {
         fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
