@@ -38,6 +38,7 @@ import { ThemeCssSetting } from './entities/theme_css_setting';
 import { Component } from './entities/component';
 import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
+import { SeoDomainPage } from './entities/seo_domain_page';
 import { ShortUrl } from './entities/short_url';
 import { VariationsGroup } from './entities/variations_group';
 import { Quote } from './entities/quote';
@@ -143,6 +144,7 @@ export class Merchi {
   public ThemeCssSetting: typeof ThemeCssSetting;
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
+  public SeoDomainPage: typeof SeoDomainPage;
   public Domain: typeof Domain;
   public ExchangeRate: typeof ExchangeRate;
   public Payment: typeof Payment;
@@ -246,6 +248,7 @@ export class Merchi {
     ) as typeof CompanyInvitation;
     this.Quote = this.setupClass(Quote) as typeof Quote;
     this.EmailAddress = this.setupClass(EmailAddress) as typeof EmailAddress;
+    this.SeoDomainPage = this.setupClass(SeoDomainPage) as typeof SeoDomainPage;
     this.ProductionComment = this.setupClass(
       ProductionComment
     ) as typeof ProductionComment;

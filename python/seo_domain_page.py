@@ -1,5 +1,6 @@
 import datetime
 import sdk.python.entities
+from sdk.python.entities import Property
 from sdk.python.domains import Domain
 
 
