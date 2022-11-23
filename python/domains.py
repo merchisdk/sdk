@@ -74,7 +74,7 @@ class Domain(sdk.python.entities.Entity):
     accessible_client_companies = Property("sdk.python.companies.Company")
     logo = Property(File)
     favicon = Property(File)
-    seo_domain_pages = Property("sdk.python.companies.SeoDomainPage")
+    seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     themes = Property(Theme)
     menus = Property(Menu)
 
