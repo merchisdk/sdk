@@ -16,9 +16,6 @@ export class SeoDomainPage extends Entity {
   public domain?: Domain;
 
   @SeoDomainPage.property()
-  public h1Title?: string;
-
-  @SeoDomainPage.property()
   public metaDescription?: string;
 
   @SeoDomainPage.property()
