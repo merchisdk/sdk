@@ -11,6 +11,7 @@ import { Theme } from './theme';
 import { MerchiFile } from './merchi_file';
 import { Menu } from './menu';
 import { SupplyDomain } from './supply_domain';
+import { SeoDomainPage } from './seo_domain_page';
 import { User, Users } from './user';
 
 export function Domain() {
@@ -47,6 +48,7 @@ export function Domain() {
     addPropertyTo(this, 'enableNotifications');
     addPropertyTo(this, 'enableEmailNotifications');
     addPropertyTo(this, 'enableSmsNotifications');
+    addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
     addPropertyTo(this, 'themes', Theme);
     addPropertyTo(this, 'supplyProducts', SupplyDomain);
     addPropertyTo(this, 'domainInvitations', DomainInvitation);
