@@ -9,7 +9,6 @@ export function SeoDomainPage() {
 
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'id');
-    addPropertyTo(this, 'h1Title');
     addPropertyTo(this, 'metaDescription');
     addPropertyTo(this, 'metaTitle');
     addPropertyTo(this, 'pageKey');
