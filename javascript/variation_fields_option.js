@@ -2,6 +2,7 @@ import { generateUUID } from './uuid';
 import { addPropertyTo } from './model';
 import { DiscountGroup } from './discount_group';
 import { MerchiFile } from './merchi_file';
+import { variationField } from './variation_field';
 
 export function VariationFieldsOption() {
     this.resource = '/variationFieldOptions';
@@ -19,6 +20,7 @@ export function VariationFieldsOption() {
     addPropertyTo(this, 'variationUnitCost');
     addPropertyTo(this, 'variationUnitCostDiscountGroup', DiscountGroup);
     addPropertyTo(this, 'linkedFile', MerchiFile);
+    addPropertyTo(this, 'variationField', variationField)
 
     this.totalCost = function (quantity) {
         var total = this.variationCost() ?
