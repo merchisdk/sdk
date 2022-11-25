@@ -14,6 +14,7 @@ import { Notification } from './notification';
 import { Product } from './product';
 import { Session } from './session';
 import { SupplyDomain } from './supply_domain';
+import { SeoDomainPage } from './seo_domain_page';
 import { Theme } from './theme';
 import { DomainType } from '../constants/domain_types';
 
@@ -156,6 +157,9 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'DomainInvitation'})
   public domainInvitations?: DomainInvitation[];
+
+  @Domain.property({arrayType: 'SeoDomainPage'})
+  public seoDomainPages?: SeoDomainPage[];
 
   @Domain.property({arrayType: 'Theme'})
   public themes?: Theme[];
