@@ -1,4 +1,4 @@
-export const ROBOTS_META_DIRECTIVES = [
+export const robotsMetaDirectives = [
   'noindex',
   'index',
   'follow',
