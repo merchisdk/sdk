@@ -13,6 +13,7 @@ class SeoDomainPage(sdk.python.entities.Entity):
     archived = Property(datetime.datetime)
     domain = Property(Domain)
     meta_description = Property(str)
+    meta_robots = Property(str)
     meta_title = Property(str)
     page_key = Property(str)
 
