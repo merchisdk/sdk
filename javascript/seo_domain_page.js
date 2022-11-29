@@ -10,6 +10,7 @@ export function SeoDomainPage() {
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'metaDescription');
+    addPropertyTo(this, 'metaRobots');
     addPropertyTo(this, 'metaTitle');
     addPropertyTo(this, 'pageKey');
     addPropertyTo(this, 'domain', Domain);
