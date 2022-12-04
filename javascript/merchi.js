@@ -395,7 +395,7 @@ export function merchi(backendUri, websocketUri) {
         if (entCopy) {
             entCopy.id(null);
         }
-        return entCopy; 
+        return entCopy;
     }
 
     function updateEntNonEmbeddableAttrbibutes(ent, newEnt) {
@@ -630,6 +630,17 @@ export function merchi(backendUri, websocketUri) {
         request.send();
     }
 
+    function initSessionByToken(tokenStringForUser, success, error, embed) {
+        if (!window.currentSession) {
+            window.currentSession = new Session();
+        }
+        if (!embed) {
+            embed = {};
+        }
+        window.currentSession.token(tokenStringForUser);
+        window.currentSession.get(success, error, {'user': embed});
+    }
+
     function getCurrentUser(success, error, embed) {
         var tokenStringForUser;
         if (!!window.loggedInUser && !embed) {
@@ -645,18 +656,11 @@ export function merchi(backendUri, websocketUri) {
         } catch (e) {
             error(e);
         }
-        if (!window.currentSession) {
-            window.currentSession = new Session();
-        }
-        if (!embed) {
-            embed = {};
-        }
         if (Boolean(tokenStringForUser)) {
-            window.currentSession.token(tokenStringForUser);
-            window.currentSession.get(haveToken, error,
-                               {'user': embed});
+            initSessionByToken(tokenStringForUser, haveToken, error, embed);
         }
     }
+
 
     function checkUserInfo(args) {
         var request = new Request(),
@@ -1084,6 +1088,7 @@ export function merchi(backendUri, websocketUri) {
             'DiscountGroups': DiscountGroup,
             'SupplyDomain': SupplyDomain,
             'SupplyDomains': new SupplyDomains(),
+            'initSessionByToken': initSessionByToken,
             'getCurrentUser': getCurrentUser,
             'Payment': Payment,
             'Item': Item,
