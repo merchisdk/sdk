@@ -154,6 +154,7 @@ class EnrolledDomain(sdk.python.entities.Entity):
     id = Property(int)
     role = Property(str)
     domain = Property(Domain)
+    is_jobs_assignee = Property(bool)
 
 
 class Domains(sdk.python.entities.Resource):
