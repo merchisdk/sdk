@@ -6,6 +6,7 @@ from sdk.python.domain_tags import DomainTag
 from sdk.python.users import User
 from sdk.python.companies import Company
 from sdk.python.invoices import Invoice
+from sdk.python.shipment_items import ShipmentItem
 from sdk.python.shipment_methods import ShipmentMethod
 
 
@@ -60,6 +61,7 @@ class Shipment(sdk.python.entities.Entity):
     buy_currency = Property(str)
     tax_type = Property(sdk.python.country_taxes.CountryTax)
     tags = Property(DomainTag, backref="shipments")
+    shipment_items = Property(ShipmentItem)
     shipment_method = Property(ShipmentMethod)
 
 
