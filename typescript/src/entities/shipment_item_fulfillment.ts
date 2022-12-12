@@ -8,8 +8,8 @@ export class ShipmentItemFulfillment extends Entity {
   protected static pluralName: string = 'shipmentItemFulfillments';
 
   @ShipmentItemFulfillment.property({type: 'Assignment'})
-  public assignment?: Assignment | null;
+  public assignment?: Assignment;
 
   @ShipmentItemFulfillment.property({type: 'Job'})
-  public job?: Job | null;
+  public job?: Job;
 }
