@@ -11,7 +11,6 @@ from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
 from sdk.python.addresses import Address
-from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
