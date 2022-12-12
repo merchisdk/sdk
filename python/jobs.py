@@ -102,7 +102,8 @@ class Job(sdk.python.entities.Entity):
     variations = Property(Variation)
     quote_set = Property(bool)
     drop_ship = Property(bool)
-    shipment = Property(Shipment, backref="jobs")
+    shipment = Property(
+        'from sdk.python.shipments.Shipment', backref="jobs")
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")
