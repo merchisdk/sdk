@@ -58,6 +58,8 @@ class Invoice(sdk.python.entities.Entity):
     client_company_email = Property(EmailAddress)
     items = Property(Item, backref="invoice")
     shipping = Property(Address)
+    shipments = Property(
+        'sdk.python.shipments.Shipment', backref="invoices")
     domain = Property(Domain)
     pdf = Property(File)
     receipt = Property(File)
