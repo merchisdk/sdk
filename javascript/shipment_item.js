@@ -1,6 +1,6 @@
 import { generateUUID } from './uuid';
 import { addPropertyTo } from './model';
-import { Assignment } from './assignment';
+import { ShipmentItemFulfillment } from './shipment_item_fulfillment';
 import { Job } from './job';
 
 export function ShipmentItem() {
@@ -9,5 +9,5 @@ export function ShipmentItem() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'job', Job);
-    addPropertyTo(this, 'fulfillments', Job || Assignment);
+    addPropertyTo(this, 'fulfillments', ShipmentItemFulfillment);
 }

@@ -1,5 +1,5 @@
 import { Entity } from '../entity';
-import { Assignment } from './assignment';
+import { ShipmentItemFulfillment } from './shipment_item_fulfillment';
 import { Job } from './job';
 
 export class ShipmentItem extends Entity {
@@ -10,6 +10,6 @@ export class ShipmentItem extends Entity {
   @ShipmentItem.property({type: Job})
   public job?: Job | null;
 
-  @ShipmentItem.property({arrayType: 'Job' | 'Assignment'})
-  public fulfillments?: (Job | Assignment)[] | null;
+  @ShipmentItem.property({arrayType: 'ShipmentItemFulfillment'})
+  public fulfillments?: ShipmentItemFulfillment[] | null;
 }

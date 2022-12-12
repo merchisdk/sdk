@@ -1,6 +1,6 @@
 import sdk.python.entities
-from sdk.python.assignments import Assignment
 from sdk.python.jobs import Job
+from sdk.python.shipment_item_fulfillment import ShipmentItemFulfillment
 from sdk.python.entities import Property
 
 
@@ -10,7 +10,7 @@ class ShipmentItem(sdk.python.entities.Entity):
     json_name = 'shipmentItem'
 
     job = Property(Job)
-    fulfillments = Property(Job or Assignment)
+    fulfillments = Property(ShipmentItemFulfillment)
 
 
 class ShipmentItems(sdk.python.entities.Resource):
