@@ -120,7 +120,7 @@ export class Merchi {
   public DraftComment: typeof DraftComment;
   public Shipment: typeof Shipment;
   public ShipmentItem: typeof ShipmentItem;
-  public ShipmentItemFulfillment typeof ShipmentItemFulfillment;
+  public ShipmentItemFulfillment: typeof ShipmentItemFulfillment;
   public ShipmentMethod: typeof ShipmentMethod;
   public ShipmentMethodVariation: typeof ShipmentMethodVariation;
   public Draft: typeof Draft;
