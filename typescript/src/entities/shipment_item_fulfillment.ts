@@ -7,7 +7,7 @@ export class ShipmentItemFulfillment extends Entity {
   protected static singularName: string = 'shipmentItemFulfillment';
   protected static pluralName: string = 'shipmentItemFulfillments';
 
-  @ShipmentItemFulfillment.property({arrayType: 'Assignment'})
+  @ShipmentItemFulfillment.property({type: 'Assignment'})
   public assignment?: Assignment | null;
 
   @ShipmentItemFulfillment.property({type: 'Job'})
