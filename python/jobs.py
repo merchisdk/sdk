@@ -11,7 +11,6 @@ from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
 from sdk.python.addresses import Address
-from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
@@ -102,7 +101,8 @@ class Job(sdk.python.entities.Entity):
     variations = Property(Variation)
     quote_set = Property(bool)
     drop_ship = Property(bool)
-    shipment = Property(Shipment, backref="jobs")
+    shipment = Property(
+        'sdk.python.shipments.Shipment', backref="jobs")
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")

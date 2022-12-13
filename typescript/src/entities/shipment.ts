@@ -8,6 +8,7 @@ import { Invoice } from './invoice';
 import { Quote } from './quote';
 import { Job } from './job';
 import { User } from './user';
+import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
 
 interface CalculateOptions {
@@ -129,6 +130,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];
+
+  @Shipment.property({arrayType: 'ShipmentItem'})
+  public items?: ShipmentItem[];
 
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];

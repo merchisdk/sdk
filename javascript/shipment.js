@@ -10,6 +10,7 @@ import { User } from './user';
 import { Company } from './company';
 import { Invoice } from './invoice';
 import { Job } from './job';
+import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
 
 export function Shipment() {
@@ -47,6 +48,7 @@ export function Shipment() {
     addPropertyTo(this, 'taxType', CountryTax);
     addPropertyTo(this, 'senderResponsible');
     addPropertyTo(this, 'tags', DomainTag);
+    addPropertyTo(this, 'shipmentItems', ShipmentItem)
     addPropertyTo(this, 'shipmentMethod', ShipmentMethod);
 
     this.get = function (success, error, embed) {
