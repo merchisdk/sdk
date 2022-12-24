@@ -92,6 +92,9 @@ export class Domain extends Entity {
   @Domain.property()
   public shopifyIsActive?: boolean;
 
+  @Domain.property({type: String})
+  public qrShopQrCode?: string | null;
+
   @Domain.property()
   public ownedBy?: Company;
 

@@ -35,6 +35,7 @@ export function Domain() {
     addPropertyTo(this, 'emailDomain');
     addPropertyTo(this, 'trackingCodeGoogleConversion');
     addPropertyTo(this, 'trackingCodeGoogleGlobal');
+    addPropertyTo(this, 'qrShopQrCode');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);
