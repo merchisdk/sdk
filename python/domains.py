@@ -65,6 +65,8 @@ class Domain(sdk.python.entities.Entity):
     shopify_is_active = Property(bool)
     public_access_restricted = Property(bool)
 
+    qr_shop_qr_code = Property(str)
+
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")
