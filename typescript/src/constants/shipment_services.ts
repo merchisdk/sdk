@@ -1,0 +1,2 @@
+SHIP_STATION = 1
+SENDLE = 2
