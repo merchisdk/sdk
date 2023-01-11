@@ -296,7 +296,7 @@ export class Job extends Entity {
     const resource = `/jobs/${this.id}/deduct/`;
     const jobForPayload = new this.merchi.Job();
     jobForPayload.matchingInventories = matchingInventories;
-    jobForPayload.id = 1;
+    jobForPayload.id = this.id;
     const data = jobForPayload.toFormData({excludeOld: false});
     const embed = {matchingInventories: {inventory: {}, group: {}}};
     const fetchOptions: RequestOptions = {
