@@ -223,6 +223,9 @@ export class Job extends Entity {
   @Job.property()
   public product?: Product;
 
+  @Job.property()
+  public supplyChainRequestProduct?: Product;
+
   @Job.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
 

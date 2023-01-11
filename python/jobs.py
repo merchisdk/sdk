@@ -41,6 +41,8 @@ class Job(sdk.python.entities.Entity):
     manager = Property('sdk.python.users.User')
     designer = Property('sdk.python.users.User')
     product = Property('sdk.python.products.Product')
+    supply_chain_request_product = Property(
+        'sdk.python.products.Product')
     comments = Property(JobComment)
     pre_draft_comments_count = Property(int)
     draft_comments = Property(DraftComment)

@@ -41,6 +41,7 @@ export function Job() {
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'jobType');
     addPropertyTo(this, 'product', Product);
+    addPropertyTo(this, 'supplyChainRequestProduct', Product);
     addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
     addPropertyTo(this, 'received');
