@@ -95,6 +95,7 @@ class Job(sdk.python.entities.Entity):
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
     needs_inventory = Property(bool)
+    needs_supply_chain_request = Property(bool)
     show_production_files_to_client = Property(bool)
     allow_client_draft_contribution = Property(bool)
     group_buy_status = Property(int)
