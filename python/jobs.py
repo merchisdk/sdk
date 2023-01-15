@@ -70,6 +70,7 @@ class Job(sdk.python.entities.Entity):
     design_status = Property(int)
     payment_status = Property(int)
     shipping_status = Property(int)
+    supply_chain_request_status = Property(int)
     completed = Property(bool)
     job_type = Property(int)
     job_info_approved_by_client = Property(bool)

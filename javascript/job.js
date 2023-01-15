@@ -106,6 +106,7 @@ export function Job() {
     addPropertyTo(this, 'designStatus');
     addPropertyTo(this, 'paymentStatus');
     addPropertyTo(this, 'productionStatus');
+    addPropertyTo(this, 'supplyChainRequestStatus');
     addPropertyTo(this, 'assignments', Assignment);
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'notifications', Notification);

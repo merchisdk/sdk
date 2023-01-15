@@ -64,6 +64,9 @@ export class Job extends Entity {
   @Job.property({type: Number})
   public designStatus?: number | null;
 
+  @Job.property({type: Number})
+  public supplyChainRequestStatus?: number | null;
+
   @Job.property()
   public needsDrafting?: boolean;
 
