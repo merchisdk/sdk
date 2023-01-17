@@ -69,6 +69,7 @@ class Product(sdk.python.entities.Entity):
     public_files = Property(File)
     production_files = Property(File)
     default_job = Property("sdk.python.jobs.Job")
+    supply_chain_request_jobs = Property("sdk.python.jobs.Job")
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
     tags = Property(DomainTag, backref="products")

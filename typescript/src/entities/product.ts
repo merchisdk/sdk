@@ -259,6 +259,9 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Job'})
   public jobs?: Job[];
 
+  @Product.property({arrayType: 'Job'})
+  public supplyChainRequestJobs?: Job[];
+
   @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
   public savedByUsers?: User[];
 

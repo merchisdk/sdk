@@ -64,6 +64,9 @@ export class Job extends Entity {
   @Job.property({type: Number})
   public designStatus?: number | null;
 
+  @Job.property({type: Number})
+  public supplyChainRequestStatus?: number | null;
+
   @Job.property()
   public needsDrafting?: boolean;
 
@@ -81,6 +84,9 @@ export class Job extends Entity {
 
   @Job.property()
   public needsInventory?: boolean;
+
+  @Job.property()
+  public needsSupplyChainRequest?: boolean;
 
   @Job.property()
   public showProductionFilesToClient?: boolean;
@@ -222,6 +228,9 @@ export class Job extends Entity {
 
   @Job.property()
   public product?: Product;
+
+  @Job.property()
+  public supplyChainRequestProduct?: Product;
 
   @Job.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
