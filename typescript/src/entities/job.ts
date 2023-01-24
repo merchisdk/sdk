@@ -304,7 +304,7 @@ export class Job extends Entity {
   public deduct = (matchingInventories: MatchingInventory[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
     const inventoriesNeedToBeDeducted = matchingInventories.map(
-      matchingInventory => matchingInventory.inventory!.id)
+      matchingInventory => matchingInventory.inventory!.id);
     const embed = {matchingInventories: {inventory: {}, group: {}}};
     const fetchOptions: RequestOptions = {
       method: 'POST',
