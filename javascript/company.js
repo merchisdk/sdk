@@ -49,9 +49,6 @@ export function Company() {
     addPropertyTo(this, 'sendleActive');
     addPropertyTo(this, 'sendleApiKey');
     addPropertyTo(this, 'sendleId');
-    addPropertyTo(this, 'shipStationActive');
-    addPropertyTo(this, 'shipStationApiKey');
-    addPropertyTo(this, 'shipStationApiSecret');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
     addPropertyTo(this, 'stripePublishableTestKey');

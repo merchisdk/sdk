@@ -80,15 +80,6 @@ export class Company extends Entity {
   public sendleId?: string;
 
   @Company.property()
-  public shipStationActive?: boolean;
-
-  @Company.property({type: String})
-  public shipStationApiKey?: string;
-
-  @Company.property({type: String})
-  public shipStationApiSecret?: string;
-
-  @Company.property()
   public isNew?: boolean;
 
   @Company.property()
