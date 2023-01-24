@@ -294,13 +294,14 @@ export class Job extends Entity {
 
   public deduct = (matchingInventories: MatchingInventory[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
-    const jobForPayload = new this.merchi.Job();
-    jobForPayload.matchingInventories = matchingInventories;
-    jobForPayload.id = 1;
-    const data = jobForPayload.toFormData({excludeOld: false});
+    const inventoriesNeedToBeDeducted = matchingInventories.map(
+      matchingInventory => matchingInventory.inventory!.id)
     const embed = {matchingInventories: {inventory: {}, group: {}}};
     const fetchOptions: RequestOptions = {
-      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+      method: 'POST',
+      body: JSON.stringify({'inventories': inventoriesNeedToBeDeducted}),
+      query: [['embed', JSON.stringify(embed)]]
+    };
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
