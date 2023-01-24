@@ -97,6 +97,7 @@ export function Product() {
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
     addPropertyTo(this, 'defaultJob', Job);
+    addPropertyTo(this, 'supplyChainRequestJobs', Job);
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
 
