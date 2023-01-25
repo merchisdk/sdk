@@ -41,6 +41,7 @@ export function Job() {
     addPropertyTo(this, 'notes');
     addPropertyTo(this, 'jobType');
     addPropertyTo(this, 'product', Product);
+    addPropertyTo(this, 'supplyChainRequestProduct', Product);
     addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
     addPropertyTo(this, 'received');
@@ -97,6 +98,7 @@ export function Job() {
     addPropertyTo(this, "needsProduction");
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
+    addPropertyTo(this, "needsSupplyChainRequest");
     addPropertyTo(this, 'showProductionFilesToClient');
     addPropertyTo(this, 'allowClientDraftContribution');
     addPropertyTo(this, 'groupBuyStatus');
@@ -105,6 +107,7 @@ export function Job() {
     addPropertyTo(this, 'designStatus');
     addPropertyTo(this, 'paymentStatus');
     addPropertyTo(this, 'productionStatus');
+    addPropertyTo(this, 'supplyChainRequestStatus');
     addPropertyTo(this, 'assignments', Assignment);
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'notifications', Notification);
