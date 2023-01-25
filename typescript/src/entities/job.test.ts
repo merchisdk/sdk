@@ -72,13 +72,13 @@ test('test deduct job inventory', () => {
   matchingInventoryOne.status = InventoryStatus.CAN_DEDUCT;
   matchingInventoryOne.deductionDate = null;
   job.matchingInventories = [matchingInventoryOne];
-  const correct = '{"inventories":[1]}'
+  const correct = [['inventories', '[1]']];
   const fetch = mockFetch(true, {}, 200);
   job.deduct([matchingInventoryOne]);
-  expect(fetch.mock.calls[0][1]['body']).toEqual(correct);
+  expect(Array.from(fetch.mock.calls[0][1]['body'].entries())).toEqual(correct);
 
   job.bulkDeduct();
-  expect(fetch.mock.calls[1][1]['body']).toEqual(correct);
+  expect(Array.from(fetch.mock.calls[1][1]['body'].entries())).toEqual(correct);
 });
 
 test('test bulk deduct job without inventories will cause error', () => {
