@@ -306,9 +306,11 @@ export class Job extends Entity {
     const inventoriesNeedToBeDeducted = matchingInventories.map(
       matchingInventory => matchingInventory.inventory!.id);
     const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const data = new FormData();
+    data.append('inventories', JSON.stringify(inventoriesNeedToBeDeducted));
     const fetchOptions: RequestOptions = {
       method: 'POST',
-      body: JSON.stringify({'inventories': inventoriesNeedToBeDeducted}),
+      body: data,
       query: [['embed', JSON.stringify(embed)]]
     };
 
