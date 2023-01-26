@@ -53,7 +53,8 @@ test('add two files to job', () => {
 
 test('Get quote update job cost', () => {
   const merchi = new Merchi();
-  const job = new merchi.Job().fromJson({'quantity': 10, 'cost': 0});
+  const job = new merchi.Job().fromJson(
+    {'quantity': 10, 'cost': 0, product: {'id': 1}});
   mockFetch(true, {'quantity': 10, 'cost': 100}, 200);
   job.getQuote().then(job => {
     expect(job.quantity).toEqual(10);
