@@ -295,6 +295,11 @@ export class Job extends Entity {
     const fetchOptions: RequestOptions = {method: 'POST', body: data};
     fetchOptions.query = [];
     fetchOptions.query.push(['skip_rights', 'y']);
+    // insert product id to query for debug purposes
+    fetchOptions.query.push([
+      'product_id',
+      this.product!.id ? this.product!.id!.toString() : 'null'
+    ]);
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
