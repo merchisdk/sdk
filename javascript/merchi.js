@@ -601,7 +601,7 @@ export function merchi(backendUri, websocketUri) {
         request.data().merge(data);
         request.query().add('skip_rights', true);
         // add this to helping backend to know what the product id is
-        request.query().add('product_id', job.product().id);
+        request.query().add('product_id', job.product().id());
         function handleResponse(status, body) {
             var result = '';
             if (status === 201) {
