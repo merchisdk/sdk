@@ -53,9 +53,16 @@ test('add two files to job', () => {
 
 test('Get quote update job cost', () => {
   const merchi = new Merchi();
-  const job = new merchi.Job().fromJson({'quantity': 10, 'cost': 0});
+  const jobWithExistingProduct = new merchi.Job().fromJson(
+    {'quantity': 10, 'cost': 0, product: {'id': 1, 'name': 'test'}});
+  const jobWithNewProduct = new merchi.Job().fromJson(
+    {'quantity': 10, 'cost': 0, product: {'name': 'test'}});
   mockFetch(true, {'quantity': 10, 'cost': 100}, 200);
-  job.getQuote().then(job => {
+  jobWithExistingProduct.getQuote().then(job => {
+    expect(job.quantity).toEqual(10);
+    expect(job.cost).toEqual(100);
+  });
+  jobWithNewProduct.getQuote().then(job => {
     expect(job.quantity).toEqual(10);
     expect(job.cost).toEqual(100);
   });
@@ -72,14 +79,7 @@ test('test deduct job inventory', () => {
   matchingInventoryOne.status = InventoryStatus.CAN_DEDUCT;
   matchingInventoryOne.deductionDate = null;
   job.matchingInventories = [matchingInventoryOne];
-  const correct = [
-    ['id', '1'],
-    ['matchingInventories-0-deductionDate', 'null'],
-    ['matchingInventories-0-inventory-0-id', '1'],
-    ['matchingInventories-0-inventory-count', '1'],
-    ['matchingInventories-0-status', String(InventoryStatus.CAN_DEDUCT)],
-    ['matchingInventories-count', '1'],
-  ];
+  const correct = [['inventories', '[1]']];
   const fetch = mockFetch(true, {}, 200);
   job.deduct([matchingInventoryOne]);
   expect(Array.from(fetch.mock.calls[0][1]['body'].entries())).toEqual(correct);

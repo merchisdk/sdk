@@ -295,6 +295,11 @@ export class Job extends Entity {
     const fetchOptions: RequestOptions = {method: 'POST', body: data};
     fetchOptions.query = [];
     fetchOptions.query.push(['skip_rights', 'y']);
+    // insert product id to query for debug purposes
+    fetchOptions.query.push([
+      'product_id',
+      this.product!.id ? this.product!.id!.toString() : 'null'
+    ]);
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
@@ -303,13 +308,16 @@ export class Job extends Entity {
 
   public deduct = (matchingInventories: MatchingInventory[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
-    const jobForPayload = new this.merchi.Job();
-    jobForPayload.matchingInventories = matchingInventories;
-    jobForPayload.id = this.id;
-    const data = jobForPayload.toFormData({excludeOld: false});
+    const inventoriesNeedToBeDeducted = matchingInventories.map(
+      matchingInventory => matchingInventory.inventory!.id);
     const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const data = new FormData();
+    data.append('inventories', JSON.stringify(inventoriesNeedToBeDeducted));
     const fetchOptions: RequestOptions = {
-      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+      method: 'POST',
+      body: data,
+      query: [['embed', JSON.stringify(embed)]]
+    };
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {
