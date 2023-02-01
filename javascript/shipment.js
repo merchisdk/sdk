@@ -19,6 +19,7 @@ export function Shipment() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'name');
     addPropertyTo(this, 'creationDate');
     addPropertyTo(this, 'dispatchDate');
     addPropertyTo(this, 'dispatchedDate');
@@ -180,4 +181,4 @@ export function Shipments() {
         getList(this.resource, handleResponse, error,
                 parameters);
     };
-} 
+}

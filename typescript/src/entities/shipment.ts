@@ -26,6 +26,9 @@ export class Shipment extends Entity {
   @Shipment.property()
   public id?: number;
 
+  @Shipment.property()
+  public name?: string;
+
   @Shipment.property({type: Date})
   public creationDate?: Date | null;
 
