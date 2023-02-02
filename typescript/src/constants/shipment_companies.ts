@@ -13,4 +13,5 @@ export enum ShipmentCompany {
   UBER = 11,
   CIVIC_TRANSPORT_COURIERS = 12,
   NZ_POST = 13,
+  SENDLE = 14,
 }
