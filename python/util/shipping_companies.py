@@ -24,4 +24,3 @@ CIVIC_TRANSPORT_COURIERS = SHIPPING_COMPANIES.index(
     'Civic Transport Couriers')
 NZ_POST = SHIPPING_COMPANIES.index('NZ Post')
 SENDLE = SHIPPING_COMPANIES.index('Sendle')
-
