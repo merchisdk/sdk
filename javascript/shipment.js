@@ -20,6 +20,7 @@ export function Shipment() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'shipmentServiceQuote');
     addPropertyTo(this, 'creationDate');
     addPropertyTo(this, 'dispatchDate');
     addPropertyTo(this, 'dispatchedDate');

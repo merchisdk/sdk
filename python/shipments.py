@@ -20,6 +20,7 @@ class Shipment(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    shipmentServiceQuote = Property(str)
     creation_date = Property(datetime.datetime)
     dispatched_date = Property(datetime.datetime)
     dispatch_date = Property(datetime.datetime)
