@@ -4,6 +4,6 @@ SHIPPING_COMPANIES = ['DHL', 'UPS', 'EMS', 'FedEx',
                       'Custom Track Link', 'Aramex',
                       'realtime express', 'Uber',
                       'Civic Transport Couriers',
-                      'NZ Post', 'Sendle']
+                      'NZ Post', 'Sendle', 'UPS', 'USPS']
 
 SHIPPING_TRANSPORT_COMPANIES = dict(enumerate(SHIPPING_COMPANIES))
