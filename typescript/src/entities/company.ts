@@ -71,6 +71,15 @@ export class Company extends Entity {
   public stripeCustomerId?: string;
 
   @Company.property()
+  public sendleActive?: boolean;
+
+  @Company.property({type: String})
+  public sendleApiKey?: string;
+
+  @Company.property({type: String})
+  public sendleId?: string;
+
+  @Company.property()
   public isNew?: boolean;
 
   @Company.property()

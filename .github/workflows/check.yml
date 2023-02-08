@@ -76,7 +76,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '7.3'
-          tools: phpunit, phpmd, phpcs, squizlabs/php_codesniffer
+          tools: phpunit:9.5.28, phpmd, phpcs, squizlabs/php_codesniffer
       - run: ./php/lint.sh
       - run: ./php/test.sh
       - run: php php/check.php php/clover.xml 10

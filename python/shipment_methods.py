@@ -11,6 +11,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    shipment_service = Property(int)
     origin_address = Property(Address)
     company = Property("sdk.python.companies.Company")
     company_default = Property(bool)

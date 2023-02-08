@@ -13,6 +13,7 @@ export function ShipmentMethod() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'shipmentService');
     addPropertyTo(this, 'originAddress', Address);
     addPropertyTo(this, 'company', Company);
     addPropertyTo(this, 'companyDefault');
