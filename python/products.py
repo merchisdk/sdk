@@ -24,6 +24,8 @@ class Product(sdk.python.entities.Entity):
     updated_by = Property("sdk.python.users.User")
     product_type = Property(str)
     notes = Property(str)
+    country = Property(str)
+    currency = Property(str)
     description = Property(str)
     shopify_product_id = Property(str)
     unit_price = Property(float)
