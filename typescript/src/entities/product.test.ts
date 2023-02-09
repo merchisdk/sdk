@@ -634,18 +634,6 @@ test('primaryImage', () => {
   expect(product.primaryImage()).toBe(null);
 });
 
-test('currency', () => {
-  const merchi = new Merchi();
-  const product = new merchi.Product();
-  expect(product.currency).toThrow();
-  product.domain = new merchi.Domain();
-  expect(product.currency).toThrow();
-  product.domain.company = new merchi.Company();
-  expect(product.currency).toThrow();
-  product.domain.company.defaultCurrency = 'MMK';
-  expect(product.currency()).toEqual('MMK');
-});
-
 test('hasGroupVariationFields', () => {
   const merchi = new Merchi();
   const product = new merchi.Product();

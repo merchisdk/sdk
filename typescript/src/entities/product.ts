@@ -85,6 +85,12 @@ export class Product extends Entity {
   @Product.property()
   public name?: string;
 
+  @Product.property()
+  public country?: string;
+
+  @Product.property()
+  public currency?: string;
+
   @Product.property({type: String})
   public description?: string | null;
 
@@ -300,13 +306,6 @@ export class Product extends Entity {
       return this.images[0];
     }
     return null;
-  }
-
-  public currency = () => {
-    if (this.domain === undefined) {
-      throw new Error('domain is undefined, did you forget to embed it?');
-    }
-    return this.domain.defaultCurrency();
   }
 
   public hasGroupVariationFields = () => {
