@@ -33,6 +33,12 @@ export class Domain extends Entity {
   public domain?: string;
 
   @Domain.property()
+  public country?: string;
+
+  @Domain.property()
+  public currency?: string;
+
+  @Domain.property()
   public callToActions?: string;
 
   @Domain.property()
@@ -166,18 +172,6 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'Theme'})
   public themes?: Theme[];
-
-  public defaultCurrency = () => {
-    if (this.company === undefined) {
-      throw new Error('company is undefined, did you forget to embed it?');
-    }
-    if (this.company.defaultCurrency === undefined) {
-      const err = 'company.defaultCurrency is undefined, did you forget to' +
-        ' embed it?';
-      throw new Error(err);
-    }
-    return this.company.defaultCurrency;
-  }
 
   public defaultTaxType = () => {
     if (this.company === undefined) {

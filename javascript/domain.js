@@ -24,6 +24,8 @@ export function Domain() {
     addPropertyTo(this, 'webflowApiKey');
     addPropertyTo(this, 'shopifyShopUrl');
     addPropertyTo(this, 'shopifyIsActive');
+    addPropertyTo(this, 'country');
+    addPropertyTo(this, 'currency');
     addPropertyTo(this, 'domain');
     addPropertyTo(this, 'domainType');
     addPropertyTo(this, 'activeThemeId');

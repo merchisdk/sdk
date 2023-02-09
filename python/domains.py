@@ -43,6 +43,8 @@ class Domain(sdk.python.entities.Entity):
 
     id = Property(int)
     active_theme_id = Property(int)
+    country = Property(str)
+    currency = Property(str)
     domain = Property(str)
     domain_type = Property(int)
     sub_domain = Property(str)
