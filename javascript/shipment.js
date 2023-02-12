@@ -10,6 +10,7 @@ import { User } from './user';
 import { Company } from './company';
 import { Invoice } from './invoice';
 import { Job } from './job';
+import { MerchiFile } from './merchi_file';
 import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
 
@@ -20,7 +21,9 @@ export function Shipment() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'shipmentServiceBookingInfo');
     addPropertyTo(this, 'shipmentServiceQuote');
+    addPropertyTo(this, 'shipmentLabel', MerchiFile);
     addPropertyTo(this, 'creationDate');
     addPropertyTo(this, 'dispatchDate');
     addPropertyTo(this, 'dispatchedDate');
