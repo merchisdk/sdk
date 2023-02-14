@@ -1,3 +1,3 @@
 export enum ShipmentService {
-    SENDLE = 1
+  SENDLE = 1
 }
