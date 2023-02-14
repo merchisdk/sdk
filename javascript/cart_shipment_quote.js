@@ -12,6 +12,8 @@ export function CartShipmentQuote() {
     addPropertyTo(this, 'taxAmount');
     addPropertyTo(this, 'totalCost');
     addPropertyTo(this, 'shipmentMethod', ShipmentMethod);
+    addPropertyTo(this, 'shipmentServiceQuote')
+    addPropertyTo(this, 'shipmentService')
 
     this.name = function () {
         const shipmentMethod = this.shipmentMethod();

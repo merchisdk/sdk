@@ -1,5 +1,6 @@
 import { ShipmentMethod } from './shipment_method';
 import { Entity } from '../entity';
+import { ShipmentService } from 'src/constants/shipment_services';
 
 export class CartShipmentQuote extends Entity {
   protected static resourceName: string = 'cart_shipment_quotes';
@@ -17,6 +18,12 @@ export class CartShipmentQuote extends Entity {
 
   @CartShipmentQuote.property()
   public totalCost?: number;
+
+  @CartShipmentQuote.property()
+  public shipmentService?: ShipmentService | null;
+
+  @CartShipmentQuote.property()
+  public shipmentServiceQuote?: string;
 
   @CartShipmentQuote.property({type: 'ShipmentMethod'})
   public shipmentMethod?: ShipmentMethod;

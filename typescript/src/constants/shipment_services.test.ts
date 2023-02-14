@@ -1,5 +1,5 @@
-import { SENDLE } from './shipment_services';
+import { ShipmentService } from './shipment_services';
 
 test('dhl exists', () => {
-  expect(SENDLE).toBe(1);
+  expect(ShipmentService.SENDLE).toBe(1);
 });
