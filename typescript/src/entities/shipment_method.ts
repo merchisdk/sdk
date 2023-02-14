@@ -1,4 +1,4 @@
-import { ShipmentService } from 'src/constants/shipment_services';
+import { ShipmentService } from '../constants/shipment_services';
 import { Entity } from '../entity';
 import { Address } from './address';
 import { Company } from './company';
