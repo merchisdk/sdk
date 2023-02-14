@@ -34,6 +34,7 @@ class Company(sdk.python.entities.Entity):
     stripe_account_id = Property(str)
     stripe_customer_id = Property(str)
     is_stripe_account_enabled = Property(bool)
+    is_stripe_we_chat_enabled = Property(bool)
     is_new = Property(bool)
     is_blocked = Property(bool)
     subscription_outstanding = Property(bool)

@@ -26,6 +26,7 @@ export function Company() {
     addPropertyTo(this, 'country');
     addPropertyTo(this, 'stripeAccountId');
     addPropertyTo(this, 'isStripeAccountEnabled');
+    addPropertyTo(this, 'isStripeWeChatEnabled');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'defaultCurrency');
     addPropertyTo(this, 'taxNumber');

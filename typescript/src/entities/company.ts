@@ -65,6 +65,9 @@ export class Company extends Entity {
   public isStripeAccountEnabled?: boolean;
 
   @Company.property()
+  public isStripeWeChatEnabled?: boolean;
+
+  @Company.property()
   public stripeAccountId?: string;
 
   @Company.property({type: String})
