@@ -5,6 +5,7 @@ from sdk.python.addresses import Address
 from sdk.python.domain_tags import DomainTag
 from sdk.python.users import User
 from sdk.python.companies import Company
+from sdk.python.files import File
 from sdk.python.shipment_items import ShipmentItem
 from sdk.python.shipment_methods import ShipmentMethod
 
@@ -20,7 +21,9 @@ class Shipment(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
-    shipmentServiceQuote = Property(str)
+    shipment_service_booking_info = Property(str)
+    shipment_service_quote = Property(str)
+    shipment_label = Property(File)
     creation_date = Property(datetime.datetime)
     dispatched_date = Property(datetime.datetime)
     dispatch_date = Property(datetime.datetime)

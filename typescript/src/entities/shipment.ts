@@ -7,6 +7,7 @@ import { Entity } from '../entity';
 import { Invoice } from './invoice';
 import { Quote } from './quote';
 import { Job } from './job';
+import { MerchiFile } from './file';
 import { User } from './user';
 import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
@@ -30,7 +31,13 @@ export class Shipment extends Entity {
   public name?: string;
 
   @Shipment.property()
+  public shipmentServiceBookingInfo?: string;
+
+  @Shipment.property()
   public shipmentServiceQuote?: string;
+
+  @Shipment.property({type: MerchiFile})
+  public shipmentLabel?: MerchiFile | null;
 
   @Shipment.property({type: Date})
   public creationDate?: Date | null;
