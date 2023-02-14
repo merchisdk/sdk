@@ -17,7 +17,7 @@ export class ShipmentMethod extends Entity {
   @ShipmentMethod.property()
   public name?: string;
 
-  @ShipmentMethod.property()
+  @ShipmentMethod.property({type: ShipmentService})
   public shipmentService?: ShipmentService | null;
 
   @ShipmentMethod.property({type: Address})
