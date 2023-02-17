@@ -19,7 +19,7 @@ export class CartShipmentQuote extends Entity {
   @CartShipmentQuote.property()
   public totalCost?: number;
 
-  @CartShipmentQuote.property()
+  @CartShipmentQuote.property({type: ShipmentService})
   public shipmentService?: ShipmentService | null;
 
   @CartShipmentQuote.property()
