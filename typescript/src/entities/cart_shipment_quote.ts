@@ -11,6 +11,9 @@ export class CartShipmentQuote extends Entity {
   public id?: number;
 
   @CartShipmentQuote.property()
+  public name?: string;
+
+  @CartShipmentQuote.property()
   public subtotalCost?: number;
 
   @CartShipmentQuote.property()

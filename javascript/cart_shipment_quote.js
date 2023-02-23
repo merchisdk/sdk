@@ -8,6 +8,7 @@ export function CartShipmentQuote() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'name');
     addPropertyTo(this, 'subtotalCost');
     addPropertyTo(this, 'taxAmount');
     addPropertyTo(this, 'totalCost');
