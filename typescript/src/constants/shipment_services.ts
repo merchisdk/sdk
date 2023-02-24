@@ -1,1 +1,3 @@
-export const SENDLE = 1;
+export enum ShipmentService {
+  SENDLE = 1
+}

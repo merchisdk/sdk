@@ -99,6 +99,8 @@ export function Job() {
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
     addPropertyTo(this, "needsSupplyChainRequest");
+    addPropertyTo(this, 'hasValidVolumes');
+    addPropertyTo(this, 'hasValidWeights');
     addPropertyTo(this, 'showProductionFilesToClient');
     addPropertyTo(this, 'allowClientDraftContribution');
     addPropertyTo(this, 'groupBuyStatus');

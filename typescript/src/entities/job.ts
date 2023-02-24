@@ -289,6 +289,12 @@ export class Job extends Entity {
   @Job.property()
   public supplyJob?: Job;
 
+  @Job.property()
+  public hasValidVolume?: boolean;
+
+  @Job.property()
+  public hasValidWeight?: boolean;
+
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';
     const data = this.toFormData({excludeOld: false});
