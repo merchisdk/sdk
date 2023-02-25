@@ -963,7 +963,7 @@ export function merchi(backendUri, websocketUri) {
             data = new Dictionary();
         data.add('quantity', quantity);
         data = serialise(address, data, 'address')[0];
-        request.resource(`/shipments-for-product/${productId}/`);
+        request.resource(`/products/${productId}/shipment_options/`);
         request.method('POST');
         request.data().merge(data);
         function handleResponse(status, body) {
