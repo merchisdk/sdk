@@ -109,6 +109,9 @@ export class Company extends Entity {
   @Company.property({type: Date})
   public squareExpiresAt?: Date | null;
 
+  @Company.property()
+  public squareIsValid?: boolean;
+
   @Company.property({type: String})
   public squareMerchantId?: string | null;
 

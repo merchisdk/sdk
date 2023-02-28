@@ -52,6 +52,7 @@ export function Company() {
     addPropertyTo(this, 'squareAccessToken');
     addPropertyTo(this, 'squareRefreshToken');
     addPropertyTo(this, 'squareExpiresAt');
+    addPropertyTo(this, 'squareIsValid');
     addPropertyTo(this, 'squareMerchantId');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
