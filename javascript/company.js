@@ -49,6 +49,10 @@ export function Company() {
     addPropertyTo(this, 'sendleActive');
     addPropertyTo(this, 'sendleApiKey');
     addPropertyTo(this, 'sendleId');
+    addPropertyTo(this, 'squareAccessToken');
+    addPropertyTo(this, 'squareRefreshToken');
+    addPropertyTo(this, 'squareExpiresAt');
+    addPropertyTo(this, 'squareMerchantId');
     addPropertyTo(this, 'stripePublishableKey');
     addPropertyTo(this, 'stripeApiKey');
     addPropertyTo(this, 'stripePublishableTestKey');

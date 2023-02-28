@@ -101,6 +101,21 @@ export class Company extends Entity {
   public isTesting?: boolean;
 
   @Company.property({type: String})
+  public squareAccessToken?: string | null;
+
+  @Company.property({type: String})
+  public squareRefreshToken?: string | null;
+
+  @Company.property({type: Date})
+  public squareExpiresAt?: Date | null;
+
+  @Company.property({type: String})
+  public squareMerchantId?: string | null;
+
+  @Company.property({type: String})
+  public stripeApiKey?: string | null;
+
+  @Company.property({type: String})
   public stripePublishableTestKey?: string | null;
 
   @Company.property({type: String})
