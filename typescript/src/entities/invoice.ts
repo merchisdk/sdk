@@ -78,6 +78,9 @@ export class Invoice extends Entity {
   public currency?: string;
 
   @Invoice.property()
+  public acceptSquare?: boolean;
+
+  @Invoice.property()
   public acceptStripe?: boolean;
 
   @Invoice.property()

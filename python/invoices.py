@@ -31,6 +31,7 @@ class Invoice(sdk.python.entities.Entity):
     unpaid = Property(bool)
     buy_side = Property(bool)
     can_auto_pay = Property(bool)
+    accept_square = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_utrust = Property(bool)
