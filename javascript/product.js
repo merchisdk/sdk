@@ -78,6 +78,7 @@ export function Product() {
     addPropertyTo(this, 'publicFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'showPublic');
+    addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
     addPropertyTo(this, 'acceptUtrust');
