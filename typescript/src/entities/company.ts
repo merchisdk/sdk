@@ -116,6 +116,9 @@ export class Company extends Entity {
   public squareMerchantId?: string | null;
 
   @Company.property({type: String})
+  public squareWebLocationId?: string | null;
+
+  @Company.property({type: String})
   public stripePublishableTestKey?: string | null;
 
   @Company.property({type: String})

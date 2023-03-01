@@ -45,6 +45,7 @@ class Company(sdk.python.entities.Entity):
     square_refresh_token = Property(str)
     square_expires_at = Property(datetime.datetime)
     square_merchant_id = Property(str)
+    square_web_location_id = Property(str)
     stripe_publishable_key = Property(str)
     stripe_api_key = Property(str)
     stripe_publishable_test_key = Property(str)
