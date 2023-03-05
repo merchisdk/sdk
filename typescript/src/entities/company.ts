@@ -140,6 +140,9 @@ export class Company extends Entity {
   public isStripeValid?: boolean;
 
   @Company.property()
+  public acceptSquare?: boolean;
+
+  @Company.property()
   public acceptStripe?: boolean;
 
   @Company.property()

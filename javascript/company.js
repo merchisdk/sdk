@@ -61,6 +61,7 @@ export function Company() {
     addPropertyTo(this, 'stripeApiTestKey');
     addPropertyTo(this, 'stripeConnectDisabled');
     addPropertyTo(this, 'isStripeValid');
+    addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
     addPropertyTo(this, 'acceptBankTransfer');

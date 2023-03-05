@@ -63,6 +63,7 @@ class Company(sdk.python.entities.Entity):
     trial_end_date = Property(datetime.datetime)
     trial_end_date_updated = Property(datetime.datetime)
     trial_end_date_set_by = Property(sdk.python.users.User)
+    accept_square = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
     accept_bank_transfer = Property(bool)
