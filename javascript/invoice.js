@@ -51,6 +51,7 @@ export function Invoice() {
     addPropertyTo(this, 'receipt', MerchiFile);
     addPropertyTo(this, 'payments', Payment);
     addPropertyTo(this, 'currency');
+    addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
     addPropertyTo(this, 'acceptUtrust');
