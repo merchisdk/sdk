@@ -306,6 +306,10 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (parameters.asRole) {
         request.query().add('as_role', JSON.stringify(parameters.asRole));
     }
+    if (parameters.groupBuyOnly) {
+        request.query().add('group_buy_only',
+                            JSON.stringify(parameters.groupBuyOnly));
+    }
     if (parameters.publicOnly) {
         request.query().add('public_only',
                             JSON.stringify(parameters.publicOnly));
@@ -338,9 +342,20 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('merchi_only',
                             JSON.stringify(parameters.merchiOnly));
     }
+    if (parameters.supplierResellOnly) {
+        request.query().add(
+            'supplier_resell_only',
+            JSON.stringify(parameters.supplierResellOnly));
+    }
     if (parameters.inbound) {
-        request.query().add('inbound',
-                            JSON.stringify(parameters.inbound));
+        request.query().add(
+            'inbound',
+            JSON.stringify(parameters.inbound));
+    }
+    if (parameters.isMaster) {
+        request.query().add(
+            'is_master',
+            JSON.stringify(parameters.isMaster));
     }
     if (parameters.domainRoles) {
         request.query().add('domain_roles', parameters.domainRoles);
@@ -348,8 +363,14 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (parameters.domainTypes) {
         request.query().add('domain_types', parameters.domainTypes);
     }
+    if (parameters.entityTypes) {
+        request.query().add('entity_types', parameters.entityTypes);
+    }
     if (parameters.productTypes) {
         request.query().add('product_types', parameters.productTypes);
+    }
+    if (parameters.masterProduct) {
+        request.query().add('master_product', parameters.masterProduct);
     }
     if (parameters.managedDomainsOnly) {
         request.query().add('managed_domains_only',

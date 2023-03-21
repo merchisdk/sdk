@@ -14,6 +14,7 @@ import { Notification } from './notification';
 import { Product } from './product';
 import { Session } from './session';
 import { SupplyDomain } from './supply_domain';
+import { SeoDomainPage } from './seo_domain_page';
 import { Theme } from './theme';
 import { DomainType } from '../constants/domain_types';
 
@@ -30,6 +31,12 @@ export class Domain extends Entity {
 
   @Domain.property()
   public domain?: string;
+
+  @Domain.property()
+  public country?: string;
+
+  @Domain.property()
+  public currency?: string;
 
   @Domain.property()
   public callToActions?: string;
@@ -56,6 +63,9 @@ export class Domain extends Entity {
   public showDomainPublicly?: boolean;
 
   @Domain.property()
+  public publicAccessRestricted?: boolean;
+
+  @Domain.property()
   public showDomainToAccessibleEntitiesOnly?: boolean;
 
   @Domain.property()
@@ -71,13 +81,10 @@ export class Domain extends Entity {
   public enableNotifications?: boolean;
 
   @Domain.property({type: String})
-  public conversionTrackingCode?: string | null;
+  public trackingCodeGoogleConversion?: string | null;
 
   @Domain.property({type: String})
-  public newConversionTrackingCode?: string | null;
-
-  @Domain.property({type: String})
-  public newGlobalTrackingCode?: string | null;
+  public trackingCodeGoogleGlobal?: string | null;
 
   @Domain.property({type: String})
   public apiSecret?: string | null;
@@ -90,6 +97,9 @@ export class Domain extends Entity {
 
   @Domain.property()
   public shopifyIsActive?: boolean;
+
+  @Domain.property({type: String})
+  public qrShopQrCode?: string | null;
 
   @Domain.property()
   public ownedBy?: Company;
@@ -157,20 +167,11 @@ export class Domain extends Entity {
   @Domain.property({arrayType: 'DomainInvitation'})
   public domainInvitations?: DomainInvitation[];
 
+  @Domain.property({arrayType: 'SeoDomainPage'})
+  public seoDomainPages?: SeoDomainPage[];
+
   @Domain.property({arrayType: 'Theme'})
   public themes?: Theme[];
-
-  public defaultCurrency = () => {
-    if (this.company === undefined) {
-      throw new Error('company is undefined, did you forget to embed it?');
-    }
-    if (this.company.defaultCurrency === undefined) {
-      const err = 'company.defaultCurrency is undefined, did you forget to' +
-        ' embed it?';
-      throw new Error(err);
-    }
-    return this.company.defaultCurrency;
-  };
 
   public defaultTaxType = () => {
     if (this.company === undefined) {

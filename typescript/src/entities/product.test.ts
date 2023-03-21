@@ -264,6 +264,7 @@ test('can list products with options set', () => {
     inDomainRoles: [2],
     isPrivate: false,
     asRole: 2,
+    groupBuyOnly: false,
     publicOnly: false,
     managedOnly: false,
     doesNotHaveAdminDomain: false,
@@ -271,8 +272,10 @@ test('can list products with options set', () => {
     teamOnly: false,
     memberOnly: false,
     merchiOnly: false,
+    supplierResellOnly: false,
     shopifyOnly: false,
     inbound: false,
+    isMaster: false,
     domainRoles: [Role.ADMIN],
     managedDomainsOnly: true,
     businessDomainsOnly: true,
@@ -289,7 +292,9 @@ test('can list products with options set', () => {
     relatedDraft: 1,
     clientId: 349,
     managerId: 355,
+    masterProduct: 1,
     domainTypes: [0, 1],
+    entityTypes: [0, 1],
     productTypes: [0, 1],
     excludeDomains: [0, 1],
     clientCompanyId: 124,
@@ -329,6 +334,7 @@ test('can list products with options set', () => {
     ['in_domain_roles', '[2]'],
     ['is_private', 'false'],
     ['as_role', '2'],
+    ['group_buy_only', 'false'],
     ['public_only', 'false'],
     ['managed_only', 'false'],
     ['does_not_have_admin_domain', 'false'],
@@ -336,10 +342,13 @@ test('can list products with options set', () => {
     ['team_only', 'false'],
     ['member_only', 'false'],
     ['merchi_only', 'false'],
+    ['supplier_resell_only', 'false'],
     ['shopify_only', 'false'],
     ['inbound', 'false'],
+    ['is_master', 'false'],
     ['domain_roles', '1'],
     ['domain_types', '0,1'],
+    ['entity_types', '0,1'],
     ['product_types', '0,1'],
     ['managed_domains_only', 'true'],
     ['business_domains_only', 'true'],
@@ -356,6 +365,7 @@ test('can list products with options set', () => {
     ['related_user', '55'],
     ['client_id', '349'],
     ['manager_id', '355'],
+    ['master_product', '1'],
     ['client_company_id', '124'],
     ['saved_by_user', '24'],
     ['receiver_id', '86'],
@@ -571,22 +581,6 @@ test('use from json have options to ignore array type if it is wrong', () => {
   expect(p.categories).toBe(undefined);
 });
 
-test('cannot mix sessions with different token', () => {
-  const m1 = new Merchi('token1');
-  const p = new m1.Product();
-  const m2 = new Merchi('token2');
-  const d = new m2.Domain();
-  expect(() => p.domain = d).toThrow();
-});
-
-test('can mix sessions with same token', () => {
-  const m1 = new Merchi('token');
-  const p = new m1.Product();
-  const m2 = new Merchi('token');
-  const d = new m2.Domain();
-  expect(() => p.domain = d).not.toThrow();
-});
-
 test('primary key always serialised', () => {
   const merchi = new Merchi();
   const testId = 42;
@@ -638,18 +632,6 @@ test('primaryImage', () => {
   expect(product.primaryImage()).toBe(i2);
   product.images = [];
   expect(product.primaryImage()).toBe(null);
-});
-
-test('currency', () => {
-  const merchi = new Merchi();
-  const product = new merchi.Product();
-  expect(product.currency).toThrow();
-  product.domain = new merchi.Domain();
-  expect(product.currency).toThrow();
-  product.domain.company = new merchi.Company();
-  expect(product.currency).toThrow();
-  product.domain.company.defaultCurrency = 'MMK';
-  expect(product.currency()).toEqual('MMK');
 });
 
 test('hasGroupVariationFields', () => {

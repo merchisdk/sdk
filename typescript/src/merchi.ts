@@ -24,6 +24,8 @@ import { InventoryUnitVariation } from './entities/inventory_unit_variation';
 import { VariationFieldsOption } from './entities/variation_fields_option';
 import { Bank } from './entities/bank';
 import { Shipment } from './entities/shipment';
+import { ShipmentItem } from './entities/shipment_item';
+import { ShipmentItemFulfillment } from './entities/shipment_item_fulfillment';
 import { ShipmentMethod } from './entities/shipment_method';
 import { ShipmentMethodVariation } from './entities/shipment_method_variation';
 import { DomainInvitation } from './entities/domain_invitation';
@@ -38,6 +40,7 @@ import { ThemeCssSetting } from './entities/theme_css_setting';
 import { Component } from './entities/component';
 import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
+import { SeoDomainPage } from './entities/seo_domain_page';
 import { ShortUrl } from './entities/short_url';
 import { VariationsGroup } from './entities/variations_group';
 import { Quote } from './entities/quote';
@@ -116,6 +119,8 @@ export class Merchi {
   public ProductionComment: typeof ProductionComment;
   public DraftComment: typeof DraftComment;
   public Shipment: typeof Shipment;
+  public ShipmentItem: typeof ShipmentItem;
+  public ShipmentItemFulfillment: typeof ShipmentItemFulfillment;
   public ShipmentMethod: typeof ShipmentMethod;
   public ShipmentMethodVariation: typeof ShipmentMethodVariation;
   public Draft: typeof Draft;
@@ -143,6 +148,7 @@ export class Merchi {
   public ThemeCssSetting: typeof ThemeCssSetting;
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
+  public SeoDomainPage: typeof SeoDomainPage;
   public Domain: typeof Domain;
   public ExchangeRate: typeof ExchangeRate;
   public Payment: typeof Payment;
@@ -211,6 +217,10 @@ export class Merchi {
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
     this.Notification = this.setupClass(Notification) as typeof Notification;
     this.Shipment = this.setupClass(Shipment) as typeof Shipment;
+    this.ShipmentItem = this.setupClass(ShipmentItem) as typeof ShipmentItem;
+    this.ShipmentItemFulfillment = this.setupClass(
+      ShipmentItemFulfillment
+    ) as typeof ShipmentItemFulfillment;
     this.ShipmentMethod = this.setupClass(
       ShipmentMethod
     ) as typeof ShipmentMethod;
@@ -246,6 +256,7 @@ export class Merchi {
     ) as typeof CompanyInvitation;
     this.Quote = this.setupClass(Quote) as typeof Quote;
     this.EmailAddress = this.setupClass(EmailAddress) as typeof EmailAddress;
+    this.SeoDomainPage = this.setupClass(SeoDomainPage) as typeof SeoDomainPage;
     this.ProductionComment = this.setupClass(
       ProductionComment
     ) as typeof ProductionComment;

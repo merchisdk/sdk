@@ -12,6 +12,7 @@ export function Category() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'showDashboard');
     addPropertyTo(this, 'showPublic');
+    addPropertyTo(this, 'showPublicSupplierResell');
     addPropertyTo(this, 'domain', Domain);
 
     this.create = function (success, error, embed, domainId) {

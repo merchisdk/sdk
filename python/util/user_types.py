@@ -14,6 +14,8 @@ SUPPLIER_RESTRICTED = 10  # A user who has a restricted supply domain
 SUPPLIER_MERCHI = 11  # A user who has a supply domain which has been
 # verified by Merchi
 UNRESTRICTED = 12  # A user who has a domain which is unrestricted
+# A user who makes order from shopify and linked to our system
+SHOPIFY_REFERENCE = 13
 
 ALL_TYPES = [
     (PUBLIC, "PUBLIC"),
@@ -29,6 +31,9 @@ ALL_TYPES = [
     (SUPPLIER_RESTRICTED, "SUPPLIER_RESTRICTED"),
     (SUPPLIER_MERCHI, "SUPPLIER_MERCHI"),
     (UNRESTRICTED, "UNRESTRICTED"),
+    (SHOPIFY_REFERENCE, "SHOPIFY_REFERENCE"),
 ]
 
 TYPE_STRINGS = dict(ALL_TYPES)
+
+EMAIL_NOT_REQUIRED = [SHOPIFY_REFERENCE]

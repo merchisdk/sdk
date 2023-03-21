@@ -85,6 +85,12 @@ export class Product extends Entity {
   @Product.property()
   public name?: string;
 
+  @Product.property()
+  public country?: string;
+
+  @Product.property()
+  public currency?: string;
+
   @Product.property({type: String})
   public description?: string | null;
 
@@ -129,6 +135,9 @@ export class Product extends Entity {
 
   @Product.property({type: Number})
   public groupBuyStatus?: number | null;
+
+  @Product.property()
+  public acceptSquare?: boolean;
 
   @Product.property()
   public acceptStripe?: boolean;
@@ -188,6 +197,9 @@ export class Product extends Entity {
   public originalProduct?: Product | null;
 
   @Product.property({type: Product})
+  public clonedFromProduct?: Product | null;
+
+  @Product.property({type: Product})
   public chainedSupplierProduct?: Product | null;
 
   @Product.property({arrayType: 'Product'})
@@ -244,6 +256,9 @@ export class Product extends Entity {
   @Product.property()
   public inventoriesOpen?: boolean;
 
+  @Product.property()
+  public supplyChainDisabled?: boolean;
+
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
 
@@ -252,6 +267,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  @Product.property({arrayType: 'Job'})
+  public supplyChainRequestJobs?: Job[];
 
   @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
   public savedByUsers?: User[];
@@ -291,13 +309,6 @@ export class Product extends Entity {
       return this.images[0];
     }
     return null;
-  };
-
-  public currency = () => {
-    if (this.domain === undefined) {
-      throw new Error('domain is undefined, did you forget to embed it?');
-    }
-    return this.domain.defaultCurrency();
   };
 
   public hasGroupVariationFields = () => {

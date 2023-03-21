@@ -8,10 +8,13 @@ class CartShipmentQuote(sdk.python.entities.Entity):
     json_name = 'cartShipmentQuote'
 
     id = Property(int)
+    name = Property(str)
     subtotal_cost = Property(float)
     tax_amount = Property(float)
     total_cost = Property(float)
     shipment_method = Property("sdk.python.shipment_methods.ShipmentMethod")
+    shipment_service = Property(int)
+    shipment_service_quote = Property(str)
 
 
 class CartShipmentQuotes(sdk.python.entities.Resource):

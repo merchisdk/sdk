@@ -1,3 +1,4 @@
+import { ShipmentService } from '../constants/shipment_services';
 import { Entity } from '../entity';
 import { Address } from './address';
 import { Company } from './company';
@@ -15,6 +16,9 @@ export class ShipmentMethod extends Entity {
 
   @ShipmentMethod.property()
   public name?: string;
+
+  @ShipmentMethod.property({type: ShipmentService})
+  public shipmentService?: ShipmentService | null;
 
   @ShipmentMethod.property({type: Address})
   public originAddress?: Address | null;
@@ -39,6 +43,9 @@ export class ShipmentMethod extends Entity {
 
   @ShipmentMethod.property({type: Number})
   public transportCompany?: number | null;
+
+  @ShipmentMethod.property()
+  public transportCompanyName?: string;
 
   @ShipmentMethod.property({type: CountryTax})
   public taxType?: CountryTax | null;

@@ -71,6 +71,15 @@ export class Company extends Entity {
   public stripeCustomerId?: string;
 
   @Company.property()
+  public sendleActive?: boolean;
+
+  @Company.property({type: String})
+  public sendleApiKey?: string;
+
+  @Company.property({type: String})
+  public sendleId?: string;
+
+  @Company.property()
   public isNew?: boolean;
 
   @Company.property()
@@ -92,6 +101,24 @@ export class Company extends Entity {
   public isTesting?: boolean;
 
   @Company.property({type: String})
+  public squareAccessToken?: string | null;
+
+  @Company.property({type: String})
+  public squareRefreshToken?: string | null;
+
+  @Company.property({type: Date})
+  public squareExpiresAt?: Date | null;
+
+  @Company.property()
+  public squareIsValid?: boolean;
+
+  @Company.property({type: String})
+  public squareMerchantId?: string | null;
+
+  @Company.property({type: String})
+  public squareWebLocationId?: string | null;
+
+  @Company.property({type: String})
   public stripePublishableTestKey?: string | null;
 
   @Company.property({type: String})
@@ -111,6 +138,9 @@ export class Company extends Entity {
 
   @Company.property()
   public isStripeValid?: boolean;
+
+  @Company.property()
+  public acceptSquare?: boolean;
 
   @Company.property()
   public acceptStripe?: boolean;

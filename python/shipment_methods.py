@@ -11,6 +11,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    shipment_service = Property(int)
     origin_address = Property(Address)
     company = Property("sdk.python.companies.Company")
     company_default = Property(bool)
@@ -20,6 +21,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
     buy_currency = Property(str)
     company_default = Property(bool)
     transport_company = Property(str)
+    transport_company_name = Property(int)
     tax_type = Property('sdk.python.country_taxes.CountryTax')
     variations = Property(ShipmentMethodVariation)
 

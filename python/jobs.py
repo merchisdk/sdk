@@ -11,7 +11,6 @@ from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
 from sdk.python.addresses import Address
-from sdk.python.shipments import Shipment
 from sdk.python.companies import Company
 from sdk.python.phone_numbers import PhoneNumber
 from sdk.python.email_addresses import EmailAddress
@@ -42,6 +41,8 @@ class Job(sdk.python.entities.Entity):
     manager = Property('sdk.python.users.User')
     designer = Property('sdk.python.users.User')
     product = Property('sdk.python.products.Product')
+    supply_chain_request_product = Property(
+        'sdk.python.products.Product')
     comments = Property(JobComment)
     pre_draft_comments_count = Property(int)
     draft_comments = Property(DraftComment)
@@ -58,6 +59,9 @@ class Job(sdk.python.entities.Entity):
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
     notes = Property(str)
+    shopify_shop_url = Property(str)
+    shopify_order_id = Property(str)
+    shopify_order_line_item_id = Property(str)
     purpose = Property(int)
     call_to_actions = Property(str)
     call_to_action_details = Property(list)
@@ -66,7 +70,9 @@ class Job(sdk.python.entities.Entity):
     design_status = Property(int)
     payment_status = Property(int)
     shipping_status = Property(int)
+    supply_chain_request_status = Property(int)
     completed = Property(bool)
+    job_type = Property(int)
     job_info_approved_by_client = Property(bool)
     priority = Property(int)
     production_files = Property(File)
@@ -89,6 +95,10 @@ class Job(sdk.python.entities.Entity):
     needs_drafting = Property(bool)
     needs_shipping = Property(bool)
     needs_inventory = Property(bool)
+    needs_supply_chain_request = Property(bool)
+    has_valid_volumes = Property(bool)
+    has_valid_weights = Property(bool)
+    show_production_files_to_client = Property(bool)
     allow_client_draft_contribution = Property(bool)
     group_buy_status = Property(int)
     group_buy_production_started = Property(datetime.datetime)
@@ -97,7 +107,8 @@ class Job(sdk.python.entities.Entity):
     variations = Property(Variation)
     quote_set = Property(bool)
     drop_ship = Property(bool)
-    shipment = Property(Shipment, backref="jobs")
+    shipment = Property(
+        'sdk.python.shipments.Shipment', backref="jobs")
     tax_type = Property(CountryTax)
     tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")
@@ -243,8 +254,8 @@ class Job(sdk.python.entities.Entity):
         return status_info(self.payment_status, PAYMENT_STATUS, "payment ")
 
     def shipment_display_info(self):
-        """ Return the SHIPPING_STATUS dict from sdk.python.util.status with the values
-            based on the job.shipping_status
+        """ Return the SHIPPING_STATUS dict from sdk.python.util.status with
+            the values based on the job.shipping_status
         """
         return status_info(self.shipping_status, SHIPPING_STATUS, "shipment ")
 
@@ -347,10 +358,10 @@ class Job(sdk.python.entities.Entity):
 
     def production_finished(self):
         """ Return whether the production has been finished """
-        return (self.production_status is not None and
-                self.production_status >=
-                PRODUCTION_STATUS["SHIPPED"]["dbValue"]) or \
-            not self.needs_production
+        status = self.production_status
+        needs = self.needs_production
+        value = PRODUCTION_STATUS["SHIPPED"]["dbValue"]
+        return (status is not None and status >= value) or not needs
 
     def payment_finished(self):
         """ Return whether the payment has been finished """

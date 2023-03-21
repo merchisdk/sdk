@@ -10,6 +10,8 @@ import { User } from './user';
 import { Company } from './company';
 import { Invoice } from './invoice';
 import { Job } from './job';
+import { MerchiFile } from './merchi_file';
+import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
 
 export function Shipment() {
@@ -18,6 +20,10 @@ export function Shipment() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'name');
+    addPropertyTo(this, 'shipmentServiceBookingInfo');
+    addPropertyTo(this, 'shipmentServiceQuote');
+    addPropertyTo(this, 'shipmentLabel', MerchiFile);
     addPropertyTo(this, 'creationDate');
     addPropertyTo(this, 'dispatchDate');
     addPropertyTo(this, 'dispatchedDate');
@@ -27,6 +33,7 @@ export function Shipment() {
     addPropertyTo(this, 'senderCompany', Company);
     addPropertyTo(this, 'senderAddress', Address);
     addPropertyTo(this, 'senderNotes');
+    addPropertyTo(this, 'blindShipTo');
     addPropertyTo(this, 'receiver', User);
     addPropertyTo(this, 'receiverCompany', Company);
     addPropertyTo(this, 'receiverAddress', Address);
@@ -36,6 +43,7 @@ export function Shipment() {
     addPropertyTo(this, 'assignments', Assignment);
     addPropertyTo(this, 'trackingNumber');
     addPropertyTo(this, 'transportCompany');
+    addPropertyTo(this, 'transportCompanyName');
     addPropertyTo(this, 'sendSms');
     addPropertyTo(this, 'sendEmail');
     addPropertyTo(this, 'cost');
@@ -45,6 +53,7 @@ export function Shipment() {
     addPropertyTo(this, 'taxType', CountryTax);
     addPropertyTo(this, 'senderResponsible');
     addPropertyTo(this, 'tags', DomainTag);
+    addPropertyTo(this, 'shipmentItems', ShipmentItem)
     addPropertyTo(this, 'shipmentMethod', ShipmentMethod);
 
     this.get = function (success, error, embed) {
@@ -176,4 +185,4 @@ export function Shipments() {
         getList(this.resource, handleResponse, error,
                 parameters);
     };
-} 
+}

@@ -89,6 +89,7 @@ interface ListOptions {
   inDomainRoles?: number[];
   isPrivate?: boolean;
   asRole?: Role;
+  groupBuyOnly?: boolean;
   publicOnly?: boolean;
   managedOnly?: boolean;
   doesNotHaveAdminDomain?: boolean;
@@ -96,10 +97,13 @@ interface ListOptions {
   teamOnly?: boolean;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  supplierResellOnly?: boolean;
   platformCategoryId?: number;
   inbound?: boolean;
+  isMaster?: boolean;
   domainRoles?: Role[];
   domainTypes?: DomainType[];
+  entityTypes?: number[];
   productTypes?: ProductType[];
   managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
@@ -116,6 +120,7 @@ interface ListOptions {
   relatedUser?: number;
   clientId?: number;
   managerId?: number;
+  masterProduct?: number;
   clientCompanyId?: number;
   savedByUser?: number;
   serialiseMethod?: SerialiseMethod;
@@ -310,7 +315,6 @@ export class Entity {
         return info.currentValue;
       };
       const set = (newValue?: Entity) => {
-        this.checkSameSession(newValue);
         info.currentValue = newValue;
         this.addBackObject(newValue);
         this.markDirty(info.property, newValue);
@@ -335,7 +339,6 @@ export class Entity {
       };
       const set = (newValue?: Entity[]) => {
         info.currentValue = newValue;
-        this.checkSameSessionList(newValue);
         this.addBackObjectList(newValue);
         this.markDirty(info.property, newValue);
       };
@@ -436,6 +439,10 @@ export class Entity {
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
       }
+      if (options.groupBuyOnly !== undefined) {
+        fetchOptions.query.push(
+          ['group_buy_only', options.groupBuyOnly.toString()]);
+      }
       if (options.publicOnly !== undefined) {
         fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
       }
@@ -461,11 +468,19 @@ export class Entity {
       if (options.merchiOnly !== undefined) {
         fetchOptions.query.push(['merchi_only', options.merchiOnly.toString()]);
       }
+      if (options.supplierResellOnly !== undefined) {
+        fetchOptions.query.push(
+          ['supplier_resell_only', options.supplierResellOnly.toString()]
+        );
+      }
       if (options.shopifyOnly !== undefined) {
         fetchOptions.query.push(['shopify_only', options.shopifyOnly.toString()]);
       }
       if (options.inbound !== undefined) {
         fetchOptions.query.push(['inbound', options.inbound.toString()]);
+      }
+      if (options.isMaster !== undefined) {
+        fetchOptions.query.push(['is_master', options.isMaster.toString()]);
       }
       if (options.domainRoles !== undefined) {
         fetchOptions.query.push(['domain_roles',
@@ -474,6 +489,10 @@ export class Entity {
       if (options.domainTypes !== undefined) {
         fetchOptions.query.push(['domain_types',
           options.domainTypes.join(',')]);
+      }
+      if (options.entityTypes !== undefined) {
+        fetchOptions.query.push(['entity_types',
+          options.entityTypes.join(',')]);
       }
       if (options.productTypes !== undefined) {
         fetchOptions.query.push(['product_types',
@@ -534,6 +553,9 @@ export class Entity {
       }
       if (options.managerId !== undefined) {
         fetchOptions.query.push(['manager_id', options.managerId.toString()]);
+      }
+      if (options.masterProduct !== undefined) {
+        fetchOptions.query.push(['master_product', options.masterProduct.toString()]);
       }
       if (options.clientCompanyId !== undefined) {
         fetchOptions.query.push(['client_company_id',
@@ -672,18 +694,6 @@ export class Entity {
       return undefined;
     }
     return (this.merchi as any)[name];
-  };
-
-  protected checkSameSession = (other?: Entity) => {
-    if (other !== undefined && other.merchi.sessionToken !== this.merchi.sessionToken) {
-      throw new Error('cannot mix objects from different sessions');
-    }
-  };
-
-  protected checkSameSessionList = (other?: Entity[]) =>  {
-    if (other !== undefined) {
-      other.map(this.checkSameSession);
-    }
   };
 
   public cleanDirty = () => {

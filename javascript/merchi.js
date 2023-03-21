@@ -3,8 +3,7 @@ import { isNull, isUndefined, isUndefinedOrNull, id,
     notEmptyArray, isArray, removeObjectFromArrayWithIntegerValue,
     sortArrayByObjectKey, getGlobal } from './helpers.js';
 import { addPropertyTo, serialise, fromJsonList, forEachProperty,
-   fromJson, patchOne, Request, getOne, create,
-   enumerateFiles } from './model.js';
+   fromJson, Request, create } from './model.js';
 import { jobStatusProduction, jobPriority } from './job_status';
 import { roles, systemRoles } from './roles';
 import { domainTypes } from './domain_types';
@@ -24,6 +23,8 @@ import {
 import { Backup, Backups } from './backup';
 import { Bank } from './bank.js';
 import { Category, Categories } from './category';
+import { Cart } from './cart';
+import { CartItem } from './cart_item';
 import { CountryTax, CountryTaxes, NoTaxEntity } from './country_tax';
 import { Company, Companies } from './company';
 import { CompanyInvitation, CompanyInvitations } from './company_invitation';
@@ -507,253 +508,6 @@ export function merchi(backendUri, websocketUri) {
         return files;
     }
 
-    function CartShipmentQuote() {
-        this.resource = '/cart_shipment_quotes';
-        this.json = 'cartShipmentQuote';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'subtotalCost');
-        addPropertyTo(this, 'taxAmount');
-        addPropertyTo(this, 'totalCost');
-        addPropertyTo(this, 'shipmentMethod', ShipmentMethod);
-
-        this.name = function () {
-            const shipmentMethod = this.shipmentMethod();
-            return shipmentMethod ? shipmentMethod.name() : null;
-        }
-    }
-
-    function CartShipmentGroup() {
-        this.resource = '/cart_shipment_groups';
-        this.json = 'cartShipmentGroup';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'cartItems', CartItem);
-        addPropertyTo(this, 'quotes', CartShipmentQuote);
-        addPropertyTo(this, 'selectedQuote', CartShipmentQuote);
-
-        this.selectedQuoteName = function () {
-            var selectedQuote = this.selectedQuote();
-            return selectedQuote ? selectedQuote.name() : null;
-        }
-    }
-
-    function CartItem() {
-        this.resource = '/cart_items';
-        this.json = 'cartItem';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'creationDate');
-        addPropertyTo(this, 'cart', Cart);
-        addPropertyTo(this, 'currency');
-        addPropertyTo(this, 'quantity');
-        addPropertyTo(this, 'currency');
-        addPropertyTo(this, 'product', Product);
-        addPropertyTo(this, 'variations', Variation);
-        addPropertyTo(this, 'variationsGroups', VariationsGroup);
-        addPropertyTo(this, 'taxType', CountryTax);
-        addPropertyTo(this, 'subtotalCost');
-        addPropertyTo(this, 'totalCost');
-
-        this.hasVariationsGroups = function () {
-            var groups = this.variationsGroups();
-            return groups && groups.length > 0;
-        };
-
-        this.create = function (success, error, embed, asDomain) {
-            var self = this,
-                data = serialise(self);
-            function handleResponse(result) {
-                success(fromJson(self, result[self.json]));
-            }
-            create({resource: this.resource,
-                    parameters: data[0],
-                    as_domain: asDomain,
-                    files: enumerateFiles(data[1]),
-                    success: handleResponse,
-                    error: error,
-                    embed: embed});
-        };
-
-        this.calculate = function (success, error, embed) {
-            var request = new Request(),
-                data = serialise(this)[0];
-            request.resource('/cart-item-cost-estimate/');
-            request.method('POST');
-            request.query().add('skip_rights', true);
-            request.data().merge(data);
-            function handleResponse(status, body) {
-                var result = '';
-                if (status === 201) {
-                    try {
-                        result = JSON.parse(body);
-                    } catch (e) {
-                        result = {message: 'invalid json from server',
-                                  errorCode: 0};
-                    }
-                    success(fromJson(new CartItem(), result));
-                } else {
-                    try {
-                        result = JSON.parse(body);
-                    } catch (e) {
-                        result = {message: 'could not get quote',
-                                  errorCode: 0};
-                    }
-                    error(result);
-                }
-            }
-            function handleError(status, data) {
-                var responseData = data ? JSON.parse(data) :
-                    {message: 'could not connect to server',
-                       errorCode: 0}
-                error(status, responseData);
-            }
-            request.responseHandler(handleResponse).errorHandler(handleError);
-            request.send();
-        };
-
-        this.requiresShipment = function() {
-            var product = this.product();
-            return product ? product.needsShipping() : false;
-        };
-
-    }
-
-    function Cart() {
-        this.resource = '/carts';
-        this.json = 'cart';
-        this.temporaryId = generateUUID();
-
-        addPropertyTo(this, 'id');
-        addPropertyTo(this, 'token');
-        addPropertyTo(this, 'ip');
-        addPropertyTo(this, 'client', User);
-        addPropertyTo(this, 'clientCompany', Company);
-        addPropertyTo(this, 'creationDate');
-        addPropertyTo(this, 'domain', Domain);
-        addPropertyTo(this, 'subtotalCost');
-        addPropertyTo(this, 'taxAmount');
-        addPropertyTo(this, 'totalCost');
-        addPropertyTo(this, 'cartItems', CartItem);
-        addPropertyTo(this, 'cartItemsSubtotalCost');
-        addPropertyTo(this, 'cartItemsTaxAmount');
-        addPropertyTo(this, 'cartItemsTotalCost');
-        addPropertyTo(this, 'shipmentSubtotalCost');
-        addPropertyTo(this, 'shipmentTaxAmount');
-        addPropertyTo(this, 'shipmentTotalCost');
-        addPropertyTo(this, 'currency');
-        addPropertyTo(this, 'receiverNotes');
-        addPropertyTo(this, 'shipmentGroups', CartShipmentGroup);
-        addPropertyTo(this, 'invoice', Invoice);
-        addPropertyTo(this, 'shipment', Shipment);
-        addPropertyTo(this, 'receiverAddress', Address);
-
-        this.create = function (success, error, embed, asDomain) {
-            var self = this,
-                data = serialise(self);
-            function handleResponse(result) {
-                success(fromJson(self, result[self.json]));
-            }
-            create({resource: this.resource,
-                    parameters: data[0],
-                    as_domain: asDomain,
-                    files: enumerateFiles(data[1]),
-                    success: handleResponse,
-                    error: error,
-                    embed: embed});
-        };
-
-        this.get = function (success, error, embed, includeArchived,
-                             withRights) {
-            var self = this,
-                parameters = {
-                    cartToken: this.token(),
-                    embed: embed,
-                    error: error,
-                    id: this.id(),
-                    includeArchived: includeArchived,
-                    withRights: withRights,
-                    resource: this.resource};
-            function handleResponse(result) {
-                success(fromJson(self, result[self.json],
-                                 {makesDirty: false}));
-            }
-            parameters.success = handleResponse;
-            getOne(parameters);
-        };
-
-        this.patch = function (success, error, embed) {
-            var self = this,
-                data = serialise(this, undefined, undefined, undefined,
-                                 {excludeOld: true})[0];
-            function handleResponse(result) {
-                success(fromJson(self, result[self.json],
-                                 {makesDirty: false}));
-            }
-            patchOne({cartToken: this.token(),
-                      resource: this.resource,
-                      id: this.id(),
-                      success: handleResponse,
-                      error: error,
-                      data: data,
-                      embed: embed});
-        };
-
-        this.getShipmentGroupsAndQuotes = function (success, error) {
-            var self = this,
-                request = new Request(),
-                jsonBody;
-            request.resource(`/generate-cart-shipment-quotes/${self.id()}/`);
-            request.method('GET');
-            request.query().add('cart_token', this.token());
-            function handleResponse(status, body) {
-                var result = '';
-                if (status === 200) {
-                    try {
-                        jsonBody = JSON.parse(body);
-                        success(fromJson(self, jsonBody, {makesDirty: false}));
-                    } catch (e) {
-                        result = {message: 'invalid json from server'};
-                        error(null, result);
-                    }
-                } else {
-                    try {
-                        result = JSON.parse(body);
-                    } catch (e) {
-                        result = {message: 'Unable to duplicate product.'};
-                    }
-                    error(null, result);
-                }
-            }
-            request.responseHandler(handleResponse).errorHandler(error);
-            request.send();
-        };
-
-        this.requiresShipment = function () {
-            var cartItems = this.cartItems() ? this.cartItems() : [],
-                i;
-            for (i = 0; i < cartItems.length; i++) {
-                if (cartItems[i].requiresShipment()) {
-                    return true;
-                }
-            }
-        };
-
-        this.stripePublishableKey = function () {
-            return this.domain().company() ?
-                this.domain().company().stripePublishableKey() : null;
-        };
-
-        this.stripeIsValidAndActive = function () {
-            const company = this.domain().company();
-            return this.stripePublishableKey() && company &&
-                company.acceptStripe();
-        };
-    }
-
     function toUnix(date) {
         return Math.floor(date.getTime() / 1000);
     }
@@ -840,12 +594,16 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function getJobQuote(job, success, error) {
-        var request = new Request(),
-            data = serialise(job)[0];
+        var slimProduct = new Product().id(job.product().id()),
+            slimJob = job.domain(new Domain()).product(slimProduct),
+            request = new Request(),
+            data = serialise(slimJob)[0];
         request.resource('/specialised-order-estimate/');
         request.method('POST');
         request.data().merge(data);
         request.query().add('skip_rights', true);
+        // add this to helping backend to know what the product id is
+        request.query().add('product_id', job.product().id());
         function handleResponse(status, body) {
             var result = '';
             if (status === 201) {
@@ -876,6 +634,17 @@ export function merchi(backendUri, websocketUri) {
         request.send();
     }
 
+    function initSessionByToken(tokenStringForUser, success, error, embed) {
+        if (!window.currentSession) {
+            window.currentSession = new Session();
+        }
+        if (!embed) {
+            embed = {};
+        }
+        window.currentSession.token(tokenStringForUser);
+        window.currentSession.get(success, error, {'user': embed});
+    }
+
     function getCurrentUser(success, error, embed) {
         var tokenStringForUser;
         if (!!getGlobal().loggedInUser && !embed) {
@@ -891,6 +660,7 @@ export function merchi(backendUri, websocketUri) {
         } catch (e) {
             error(e);
         }
+<<<<<<< HEAD
         if (!getGlobal().currentSession) {
             getGlobal().currentSession = new Session();
         }
@@ -901,8 +671,13 @@ export function merchi(backendUri, websocketUri) {
             getGlobal().currentSession.token(tokenStringForUser);
             getGlobal().currentSession.get(haveToken, error,
                                {'user': embed});
+=======
+        if (Boolean(tokenStringForUser)) {
+            initSessionByToken(tokenStringForUser, haveToken, error, embed);
+>>>>>>> master
         }
     }
+
 
     function checkUserInfo(args) {
         var request = new Request(),
@@ -1201,7 +976,7 @@ export function merchi(backendUri, websocketUri) {
             data = new Dictionary();
         data.add('quantity', quantity);
         data = serialise(address, data, 'address')[0];
-        request.resource(`/shipments-for-product/${productId}/`);
+        request.resource(`/products/${productId}/shipment_options/`);
         request.method('POST');
         request.data().merge(data);
         function handleResponse(status, body) {
@@ -1330,6 +1105,7 @@ export function merchi(backendUri, websocketUri) {
             'DiscountGroups': DiscountGroup,
             'SupplyDomain': SupplyDomain,
             'SupplyDomains': new SupplyDomains(),
+            'initSessionByToken': initSessionByToken,
             'getCurrentUser': getCurrentUser,
             'Payment': Payment,
             'Item': Item,

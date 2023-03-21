@@ -35,6 +35,9 @@ export class Job extends Entity {
   public id?: number;
 
   @Job.property()
+  public jobType?: number;
+
+  @Job.property()
   public quantity?: number;
 
   @Job.property()
@@ -46,11 +49,23 @@ export class Job extends Entity {
   @Job.property({type: String})
   public productionNotes?: string | null;
 
+  @Job.property({type: String})
+  public shopifyShopUrl?: string | null;
+
+  @Job.property()
+  public shopifyOrderId?: string;
+
+  @Job.property()
+  public shopifyOrderLineItemId?: string;
+
   @Job.property({type: Number})
   public productionStatus?: number | null;
 
   @Job.property({type: Number})
   public designStatus?: number | null;
+
+  @Job.property({type: Number})
+  public supplyChainRequestStatus?: number | null;
 
   @Job.property()
   public needsDrafting?: boolean;
@@ -69,6 +84,12 @@ export class Job extends Entity {
 
   @Job.property()
   public needsInventory?: boolean;
+
+  @Job.property()
+  public needsSupplyChainRequest?: boolean;
+
+  @Job.property()
+  public showProductionFilesToClient?: boolean;
 
   @Job.property()
   public allowClientDraftContribution?: boolean;
@@ -208,6 +229,9 @@ export class Job extends Entity {
   @Job.property()
   public product?: Product;
 
+  @Job.property()
+  public supplyChainRequestProduct?: Product;
+
   @Job.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
 
@@ -265,12 +289,23 @@ export class Job extends Entity {
   @Job.property()
   public supplyJob?: Job;
 
+  @Job.property()
+  public hasValidVolume?: boolean;
+
+  @Job.property()
+  public hasValidWeight?: boolean;
+
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';
     const data = this.toFormData({excludeOld: false});
     const fetchOptions: RequestOptions = {method: 'POST', body: data};
     fetchOptions.query = [];
     fetchOptions.query.push(['skip_rights', 'y']);
+    // insert product id to query for debug purposes
+    fetchOptions.query.push([
+      'product_id',
+      this.product!.id ? this.product!.id!.toString() : 'null'
+    ]);
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
@@ -279,13 +314,16 @@ export class Job extends Entity {
 
   public deduct = (matchingInventories: MatchingInventory[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
-    const jobForPayload = new this.merchi.Job();
-    jobForPayload.matchingInventories = matchingInventories;
-    jobForPayload.id = 1;
-    const data = jobForPayload.toFormData({excludeOld: false});
+    const inventoriesNeedToBeDeducted = matchingInventories.map(
+      matchingInventory => matchingInventory.inventory!.id);
     const embed = {matchingInventories: {inventory: {}, group: {}}};
+    const data = new FormData();
+    data.append('inventories', JSON.stringify(inventoriesNeedToBeDeducted));
     const fetchOptions: RequestOptions = {
-      method: 'POST', body: data, query: [['embed', JSON.stringify(embed)]]};
+      method: 'POST',
+      body: data,
+      query: [['embed', JSON.stringify(embed)]]
+    };
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => {

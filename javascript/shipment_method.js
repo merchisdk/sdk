@@ -13,6 +13,7 @@ export function ShipmentMethod() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'shipmentService');
     addPropertyTo(this, 'originAddress', Address);
     addPropertyTo(this, 'company', Company);
     addPropertyTo(this, 'companyDefault');
@@ -20,6 +21,7 @@ export function ShipmentMethod() {
     addPropertyTo(this, 'maxCost');
     addPropertyTo(this, 'currency');
     addPropertyTo(this, 'transportCompany');
+    addPropertyTo(this, 'transportCompanyName');
     addPropertyTo(this, 'variations', ShipmentMethodVariation);
     addPropertyTo(this, 'taxType', CountryTax);
 

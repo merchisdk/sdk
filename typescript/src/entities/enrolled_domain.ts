@@ -16,6 +16,9 @@ export class EnrolledDomain extends Entity {
   public id?: number;
 
   @EnrolledDomain.property()
+  public isJobsAssignee?: boolean;
+
+  @EnrolledDomain.property()
   public role?: Role;
 
   @EnrolledDomain.property()

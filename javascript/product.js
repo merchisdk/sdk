@@ -13,6 +13,7 @@ import { DomainTag } from './domain_tag';
 import { DiscountGroup } from './discount_group';
 import { Domain } from './domain';
 import { Inventory } from './inventory';
+import { ShipmentMethod } from './shipment_method';
 import { VariationField } from './variation_field';
 import { VariationsGroup } from './variations_group';
 import { MerchiFile } from './merchi_file';
@@ -29,6 +30,8 @@ export function Product() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'created');
     addPropertyTo(this, 'updated');
+    addPropertyTo(this, 'country');
+    addPropertyTo(this, 'currency');
     addPropertyTo(this, 'createdBy', User);
     addPropertyTo(this, 'updatedBy', User);
     addPropertyTo(this, 'independent');
@@ -60,6 +63,7 @@ export function Product() {
     addPropertyTo(this, 'groupVariationFields', VariationField);
     addPropertyTo(this, 'independentVariationFields', VariationField);
     addPropertyTo(this, 'originalProduct', Product);
+    addPropertyTo(this, 'clonedFromProduct', Product);
     addPropertyTo(this, 'chainedSupplierProduct', Product);
     addPropertyTo(this, 'chainedSellerProducts', Product);
     addPropertyTo(this, 'chainedInventorySupplierProduct', Product);
@@ -74,11 +78,13 @@ export function Product() {
     addPropertyTo(this, 'publicFiles', MerchiFile);
     addPropertyTo(this, 'productionFiles', MerchiFile);
     addPropertyTo(this, 'showPublic');
+    addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
     addPropertyTo(this, 'acceptUtrust');
     addPropertyTo(this, 'acceptBankTransfer');
     addPropertyTo(this, 'acceptPhonePayment');
+    addPropertyTo(this, 'supplyChainDisabled');
     addPropertyTo(this, 'allowGroupBuy');
     addPropertyTo(this, 'allowPaymentUpfront');
     addPropertyTo(this, 'allowQuotation');
@@ -94,7 +100,9 @@ export function Product() {
     addPropertyTo(this, 'categories', Category);
     addPropertyTo(this, 'taxType', CountryTax);
     addPropertyTo(this, 'defaultJob', Job);
+    addPropertyTo(this, 'supplyChainRequestJobs', Job);
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
+    addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),

@@ -33,6 +33,7 @@ export function Invoice() {
     addPropertyTo(this, 'subtotalCost');
     addPropertyTo(this, 'taxAmount');
     addPropertyTo(this, 'invoiceToken');
+    addPropertyTo(this, 'canAutoPay');
     addPropertyTo(this, 'responsibleManager', User);
     addPropertyTo(this, 'creator', User);
     addPropertyTo(this, 'client', User);
@@ -50,6 +51,7 @@ export function Invoice() {
     addPropertyTo(this, 'receipt', MerchiFile);
     addPropertyTo(this, 'payments', Payment);
     addPropertyTo(this, 'currency');
+    addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');
     addPropertyTo(this, 'acceptPaypal');
     addPropertyTo(this, 'acceptUtrust');
@@ -64,6 +66,7 @@ export function Invoice() {
     addPropertyTo(this, 'paidMoney');
     addPropertyTo(this, 'isCompletelyPaid');
     addPropertyTo(this, 'shipments', Shipment);
+    addPropertyTo(this, 'shopifyOrderId');
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),

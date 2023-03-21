@@ -7,7 +7,9 @@ import { Entity } from '../entity';
 import { Invoice } from './invoice';
 import { Quote } from './quote';
 import { Job } from './job';
+import { MerchiFile } from './file';
 import { User } from './user';
+import { ShipmentItem } from './shipment_item';
 import { ShipmentMethod } from './shipment_method';
 
 interface CalculateOptions {
@@ -24,6 +26,18 @@ export class Shipment extends Entity {
 
   @Shipment.property()
   public id?: number;
+
+  @Shipment.property()
+  public name?: string;
+
+  @Shipment.property()
+  public shipmentServiceBookingInfo?: string;
+
+  @Shipment.property()
+  public shipmentServiceQuote?: string;
+
+  @Shipment.property({type: MerchiFile})
+  public shipmentLabel?: MerchiFile | null;
 
   @Shipment.property({type: Date})
   public creationDate?: Date | null;
@@ -51,6 +65,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({type: Number})
   public transportCompany?: number | null;
+
+  @Shipment.property({type: String})
+  public transportCompanyName?: string | null;
 
   @Shipment.property({type: String})
   public trackingNumber?: string | null;
@@ -100,6 +117,9 @@ export class Shipment extends Entity {
   @Shipment.property({type: Address})
   public senderAddress?: Address | null;
 
+  @Shipment.property({type: String})
+  public blindShipTo?: string | null;
+
   @Shipment.property({type: User})
   public receiver?: User | null;
 
@@ -123,6 +143,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];
+
+  @Shipment.property({arrayType: 'ShipmentItem'})
+  public items?: ShipmentItem[];
 
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];

@@ -11,6 +11,7 @@ import { Theme } from './theme';
 import { MerchiFile } from './merchi_file';
 import { Menu } from './menu';
 import { SupplyDomain } from './supply_domain';
+import { SeoDomainPage } from './seo_domain_page';
 import { User, Users } from './user';
 
 export function Domain() {
@@ -23,6 +24,8 @@ export function Domain() {
     addPropertyTo(this, 'webflowApiKey');
     addPropertyTo(this, 'shopifyShopUrl');
     addPropertyTo(this, 'shopifyIsActive');
+    addPropertyTo(this, 'country');
+    addPropertyTo(this, 'currency');
     addPropertyTo(this, 'domain');
     addPropertyTo(this, 'domainType');
     addPropertyTo(this, 'activeThemeId');
@@ -32,9 +35,9 @@ export function Domain() {
     addPropertyTo(this, 'logoUrl');
     addPropertyTo(this, 'smsName');
     addPropertyTo(this, 'emailDomain');
-    addPropertyTo(this, 'conversionTrackingCode');
-    addPropertyTo(this, 'newConversionTrackingCode');
-    addPropertyTo(this, 'newGlobalTrackingCode');
+    addPropertyTo(this, 'trackingCodeGoogleConversion');
+    addPropertyTo(this, 'trackingCodeGoogleGlobal');
+    addPropertyTo(this, 'qrShopQrCode');
     addPropertyTo(this, 'logo', MerchiFile);
     addPropertyTo(this, 'favicon', MerchiFile);
     addPropertyTo(this, 'company', Company);
@@ -43,10 +46,12 @@ export function Domain() {
     addPropertyTo(this, 'accessibleClientCompanies', Company);
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
+    addPropertyTo(this, 'publicAccessRestricted');
     addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
     addPropertyTo(this, 'enableNotifications');
     addPropertyTo(this, 'enableEmailNotifications');
     addPropertyTo(this, 'enableSmsNotifications');
+    addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
     addPropertyTo(this, 'themes', Theme);
     addPropertyTo(this, 'supplyProducts', SupplyDomain);
     addPropertyTo(this, 'domainInvitations', DomainInvitation);

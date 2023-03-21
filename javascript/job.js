@@ -39,7 +39,9 @@ export function Job() {
     addPropertyTo(this, 'currency');
     addPropertyTo(this, 'quantity');
     addPropertyTo(this, 'notes');
+    addPropertyTo(this, 'jobType');
     addPropertyTo(this, 'product', Product);
+    addPropertyTo(this, 'supplyChainRequestProduct', Product);
     addPropertyTo(this, 'createdProducts', Product);
     addPropertyTo(this, 'priority');
     addPropertyTo(this, 'received');
@@ -96,13 +98,18 @@ export function Job() {
     addPropertyTo(this, "needsProduction");
     addPropertyTo(this, "needsShipping");
     addPropertyTo(this, "needsInvoicing");
-    addPropertyTo(this, "allowClientDraftContribution");
+    addPropertyTo(this, "needsSupplyChainRequest");
+    addPropertyTo(this, 'hasValidVolumes');
+    addPropertyTo(this, 'hasValidWeights');
+    addPropertyTo(this, 'showProductionFilesToClient');
+    addPropertyTo(this, 'allowClientDraftContribution');
     addPropertyTo(this, 'groupBuyStatus');
     addPropertyTo(this, 'groupBuyProductionStarted');
     addPropertyTo(this, 'shippingStatus');
     addPropertyTo(this, 'designStatus');
     addPropertyTo(this, 'paymentStatus');
     addPropertyTo(this, 'productionStatus');
+    addPropertyTo(this, 'supplyChainRequestStatus');
     addPropertyTo(this, 'assignments', Assignment);
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'notifications', Notification);
@@ -113,6 +120,9 @@ export function Job() {
     addPropertyTo(this, 'completed');
     addPropertyTo(this, 'jobInfoApprovedByClient');
     addPropertyTo(this, 'quoteSet');
+    addPropertyTo(this, 'shopifyShopUrl');
+    addPropertyTo(this, 'shopifyOrderId');
+    addPropertyTo(this, 'shopifyOrderLineItemId');
 
     this.create = function (
         success, error, embed, asDomain, withRights) {
