@@ -635,14 +635,14 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function initSessionByToken(tokenStringForUser, success, error, embed) {
-        if (!window.currentSession) {
-            window.currentSession = new Session();
+        if (!getGlobal().currentSession) {
+            getGlobal().currentSession = new Session();
         }
         if (!embed) {
             embed = {};
         }
-        window.currentSession.token(tokenStringForUser);
-        window.currentSession.get(success, error, {'user': embed});
+        getGlobal().currentSession.get(success, error, {'user': embed});
+        getGlobal().currentSession.token(tokenStringForUser);
     }
 
     function getCurrentUser(success, error, embed) {
@@ -660,21 +660,8 @@ export function merchi(backendUri, websocketUri) {
         } catch (e) {
             error(e);
         }
-<<<<<<< HEAD
-        if (!getGlobal().currentSession) {
-            getGlobal().currentSession = new Session();
-        }
-        if (!embed) {
-            embed = {};
-        }
-        if (Boolean(tokenStringForUser)) {
-            getGlobal().currentSession.token(tokenStringForUser);
-            getGlobal().currentSession.get(haveToken, error,
-                               {'user': embed});
-=======
         if (Boolean(tokenStringForUser)) {
             initSessionByToken(tokenStringForUser, haveToken, error, embed);
->>>>>>> master
         }
     }
 
