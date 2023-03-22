@@ -1,4 +1,10 @@
+import { isNode, isDeno } from 'browser-or-node'
+
 export function generateUUID(): string {
+  if (isNode || isDeno) {
+    return require('uuid').v4();
+  }
+
   let d = Date.now() + performance.now(),
     uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
   uuid = uuid.replace(/[xy]/g, function (c): string {
