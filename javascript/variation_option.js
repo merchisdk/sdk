@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { MerchiFile } from './merchi_file';
-import { Variation } from './variation';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { MerchiFile } from './merchi_file.js';
+import { Variation } from './variation.js';
 
 export function VariationOption() {
     this.json = 'variation_option';

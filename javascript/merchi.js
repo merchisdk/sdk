@@ -4,77 +4,77 @@ import { isNull, isUndefined, isUndefinedOrNull, id,
     sortArrayByObjectKey, getGlobal } from './helpers.js';
 import { addPropertyTo, serialise, fromJsonList, forEachProperty,
    fromJson, Request, create } from './model.js';
-import { jobStatusProduction, jobPriority } from './job_status';
-import { roles, systemRoles } from './roles';
-import { domainTypes } from './domain_types';
-import { productTypes, productTypesInts } from './product_types';
-import { paymentTypes, paymentTypeIds } from './payment_types'
+import { jobStatusProduction, jobPriority } from './job_status.js';
+import { roles, systemRoles } from './roles.js';
+import { domainTypes } from './domain_types.js';
+import { productTypes, productTypesInts } from './product_types.js';
+import { paymentTypes, paymentTypeIds } from './payment_types.js';
 import { Dictionary } from './dictionary.js';
-import { fieldTypes } from './field_types';
+import { fieldTypes } from './field_types.js';
 import { notificationTypes, notificationSectionCodes, notificationSection,
     notificationSectionKey, notificationSectionClass,
-    notificationSectionIconClass } from './notification_types';
-import { Address, Addresses } from './address';
-import { Assignment, Assignments } from './assignment';
+    notificationSectionIconClass } from './notification_types.js';
+import { Address, Addresses } from './address.js';
+import { Assignment, Assignments } from './assignment.js';
 import {
     AutomaticPaymentRelationship,
     AutomaticPaymentRelationships,
-} from './automatic_payment_relationship';
-import { Backup, Backups } from './backup';
+} from './automatic_payment_relationship.js';
+import { Backup, Backups } from './backup.js';
 import { Bank } from './bank.js';
-import { Category, Categories } from './category';
-import { Cart } from './cart';
-import { CartItem } from './cart_item';
-import { CountryTax, CountryTaxes, NoTaxEntity } from './country_tax';
-import { Company, Companies } from './company';
-import { CompanyInvitation, CompanyInvitations } from './company_invitation';
-import { Component, Components } from './component';
-import { ComponentTag, ComponentTags } from './component_tag';
-import { Discount } from './discount';
-import { DiscountGroup } from './discount_group';
-import { Domain, Domains } from './domain';
-import { DomainTag, DomainTags } from './domain_tag';
-import { DomainInvitation } from './domain_invitation';
-import { Draft, Drafts } from './draft';
-import { DraftTemplate } from './draft_template';
-import { DraftComment } from './draft_comment';
-import { EnrolledDomain, EnrolledDomains } from './enrolled_domain';
+import { Category, Categories } from './category.js';
+import { Cart } from './cart.js';
+import { CartItem } from './cart_item.js';
+import { CountryTax, CountryTaxes, NoTaxEntity } from './country_tax.js';
+import { Company, Companies } from './company.js';
+import { CompanyInvitation, CompanyInvitations } from './company_invitation.js';
+import { Component, Components } from './component.js';
+import { ComponentTag, ComponentTags } from './component_tag.js';
+import { Discount } from './discount.js';
+import { DiscountGroup } from './discount_group.js';
+import { Domain, Domains } from './domain.js';
+import { DomainTag, DomainTags } from './domain_tag.js';
+import { DomainInvitation } from './domain_invitation.js';
+import { Draft, Drafts } from './draft.js';
+import { DraftTemplate } from './draft_template.js';
+import { DraftComment } from './draft_comment.js';
+import { EnrolledDomain, EnrolledDomains } from './enrolled_domain.js';
 import { EmailAddress, EmailAddresses } from './email_address.js';
 import { EmailCounter, EmailCounters } from './email_counter.js';
-import { ExchangeRate, ExchangeRates } from './exchange_rate';
-import { Item } from './item';
-import { Inventory, Inventories } from './inventory';
-import { InventoryUnitVariation } from './inventory_unit_variation';
-import { MatchingInventory } from './matching_inventory';
-import { Notification, Notifications } from './notification';
-import { Invoice, Invoices } from './invoice';
-import { Job, Jobs } from './job';
-import { JobComment } from './job_comment';
-import { MerchiFile, MerchiFiles } from './merchi_file';
-import { Menu } from './menu';
-import { MenuItem } from './menu_item';
-import { Page } from './page';
-import { Payment } from './payment';
-import { Product, Products } from './product';
-import { ProductionComment } from './production_comment';
+import { ExchangeRate, ExchangeRates } from './exchange_rate.js';
+import { Item } from './item.js';
+import { Inventory, Inventories } from './inventory.js';
+import { InventoryUnitVariation } from './inventory_unit_variation.js';
+import { MatchingInventory } from './matching_inventory.js';
+import { Notification, Notifications } from './notification.js';
+import { Invoice, Invoices } from './invoice.js';
+import { Job, Jobs } from './job.js';
+import { JobComment } from './job_comment.js';
+import { MerchiFile, MerchiFiles } from './merchi_file.js';
+import { Menu } from './menu.js';
+import { MenuItem } from './menu_item.js';
+import { Page } from './page.js';
+import { Payment } from './payment.js';
+import { Product, Products } from './product.js';
+import { ProductionComment } from './production_comment.js';
 import { PhoneNumber, PhoneNumbers } from './phone_number.js';
-import { Session, Sessions } from './session';
-import { Shipment, Shipments } from './shipment';
-import { ShipmentMethod, ShipmentMethods } from './shipment_method';
+import { Session, Sessions } from './session.js';
+import { Shipment, Shipments } from './shipment.js';
+import { ShipmentMethod, ShipmentMethods } from './shipment_method.js';
 import { ShipmentMethodVariation, ShipmentMethodVariations } from
-    './shipment_method_variation';
-import { SubscriptionPlan, SubscriptionPlans } from './subscription_plan';
-import { SupplyDomain, SupplyDomains } from './supply_domain';
-import { SystemRole } from './system_role';
-import { Theme, Themes } from './theme';
-import { User, Users } from './user';
-import { UserCompany } from './user_company';
-import { Variation } from './variation';
-import { VariationField } from './variation_field';
-import { VariationFieldsOption } from './variation_fields_option';
-import { VariationsGroup } from './variations_group';
-import { QuoteItem, QuoteItems } from './quote_item';
-import { Quotes, Quote } from './quote';
+    './shipment_method_variation.js';
+import { SubscriptionPlan, SubscriptionPlans } from './subscription_plan.js';
+import { SupplyDomain, SupplyDomains } from './supply_domain.js';
+import { SystemRole } from './system_role.js';
+import { Theme, Themes } from './theme.js';
+import { User, Users } from './user.js';
+import { UserCompany } from './user_company.js';
+import { Variation } from './variation.js';
+import { VariationField } from './variation_field.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
+import { VariationsGroup } from './variations_group.js';
+import { QuoteItem, QuoteItems } from './quote_item.js';
+import { Quotes, Quote } from './quote.js';
 
 export function merchi(backendUri, websocketUri) {
     getGlobal().merchiJsonpHandlers = {};
@@ -1002,6 +1002,7 @@ export function merchi(backendUri, websocketUri) {
             'systemRoles': systemRoles,
             'roleCssClass': roleCssClass,
             'eventTypes': eventTypes,
+            'getGlobal': getGlobal,
             'logout': logout,
             'canEditAttributes': canEditAttributes,
             'editAttributes': editAttributes,

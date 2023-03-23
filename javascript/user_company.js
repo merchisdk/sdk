@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { Company } from './company';
-import { User } from './user';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { Company } from './company.js';
+import { User } from './user.js';
 
 export function UserCompany() {
     this.resource = '/user_companies';

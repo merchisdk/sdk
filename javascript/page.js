@@ -1,7 +1,7 @@
 import { addPropertyTo, serialise, enumerateFiles, fromJson,
-    create } from './model';
-import { isUndefinedOrNull } from './helpers';
-import { Theme } from './theme';
+    create } from './model.js';
+import { isUndefinedOrNull } from './helpers.js';
+import { Theme } from './theme.js';
 
 export function Page() {
     this.resource = '/pages';

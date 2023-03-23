@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model'
-import { CountryTax } from './country_tax';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { CountryTax } from './country_tax.js';
 
 export function Item() {
     this.resource = '/items';

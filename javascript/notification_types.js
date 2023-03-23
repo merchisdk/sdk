@@ -1,5 +1,5 @@
-import { Dictionary } from './dictionary';
-import { any } from './helpers';
+import { Dictionary } from './dictionary.js';
+import { any } from './helpers.js';
 
 
 export const showUserAvatarArray =

@@ -1,10 +1,10 @@
 import { addPropertyTo, serialise, create, enumerateFiles,
-    fromJson } from './model';
-import { Draft } from './draft';
-import { Job } from './job';
-import { User } from './user';
-import { Notification } from './notification';
-import { MerchiFile } from './merchi_file';
+    fromJson } from './model.js';
+import { Draft } from './draft.js';
+import { Job } from './job.js';
+import { User } from './user.js';
+import { Notification } from './notification.js';
+import { MerchiFile } from './merchi_file.js';
 
 export function DraftComment() {
     this.resource = '/draft_comments';

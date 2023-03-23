@@ -1,33 +1,33 @@
-import { generateUUID } from './uuid';
-import { Dictionary } from './dictionary';
+import { generateUUID } from './uuid.js';
+import { Dictionary } from './dictionary.js';
 import { addPropertyTo, getOne, create, serialise, recoverOne, deleteOne,
     fromJson, patchOne, getList, fromJsonList, enumerateFiles,
-    Request } from './model';
+    Request } from './model.js';
 import { isUndefinedOrNull, sortArrayByObjectKeyDescending,
-    sortArrayByObjectKey } from './helpers';
+    sortArrayByObjectKey } from './helpers.js';
 import { jobStatusProduction, jobStatusDrafting, jobStatusPayment,
-    jobStatusShipment } from './job_status';
-import { roles } from './roles';
-import { Address } from './address';
-import { Assignment } from './assignment';
-import { Product } from './product';
-import { CountryTax } from './country_tax';
-import { Company } from './company';
-import { MerchiFile } from './merchi_file';
-import { Draft } from './draft';
-import { DraftComment } from './draft_comment';
-import { Domain } from './domain';
-import { DomainTag } from './domain_tag';
-import { EmailAddress } from './email_address';
-import { Invoice } from './invoice';
-import { Notification } from './notification';
-import { Shipment } from './shipment';
-import { PhoneNumber } from './phone_number';
-import { MatchingInventory } from './matching_inventory';
-import { User } from './user';
-import { Variation } from './variation';
-import { VariationsGroup } from './variations_group';
-import { JobComment } from './job_comment';
+    jobStatusShipment } from './job_status.js';
+import { roles } from './roles.js';
+import { Address } from './address.js';
+import { Assignment } from './assignment.js';
+import { Product } from './product.js';
+import { CountryTax } from './country_tax.js';
+import { Company } from './company.js';
+import { MerchiFile } from './merchi_file.js';
+import { Draft } from './draft.js';
+import { DraftComment } from './draft_comment.js';
+import { Domain } from './domain.js';
+import { DomainTag } from './domain_tag.js';
+import { EmailAddress } from './email_address.js';
+import { Invoice } from './invoice.js';
+import { Notification } from './notification.js';
+import { Shipment } from './shipment.js';
+import { PhoneNumber } from './phone_number.js';
+import { MatchingInventory } from './matching_inventory.js';
+import { User } from './user.js';
+import { Variation } from './variation.js';
+import { VariationsGroup } from './variations_group.js';
+import { JobComment } from './job_comment.js';
 
 
 export function Job() {

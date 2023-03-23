@@ -1,21 +1,21 @@
 import moment from 'moment-timezone';
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, create, serialise, enumerateFiles, getOne, getList,
-    fromJson, deleteOne, fromJsonList, patchOne, Request } from './model';
-import { isUndefinedOrNull } from './helpers';
-import { Address } from './address';
-import { EmailAddress } from './email_address'
-import { Domain } from './domain';
-import { DomainTag } from './domain_tag';
-import { Item } from './item';
-import { Company } from './company';
-import { PhoneNumber } from './phone_number';
-import { User } from './user';
-import { Shipment } from './shipment';
-import { MerchiFile } from './merchi_file';
-import { Quote } from './quote';
-import { Payment } from './payment';
-import { Job } from './job';
+    fromJson, deleteOne, fromJsonList, patchOne, Request } from './model.js';
+import { isUndefinedOrNull } from './helpers.js';
+import { Address } from './address.js';
+import { EmailAddress } from './email_address.js';
+import { Domain } from './domain.js';
+import { DomainTag } from './domain_tag.js';
+import { Item } from './item.js';
+import { Company } from './company.js';
+import { PhoneNumber } from './phone_number.js';
+import { User } from './user.js';
+import { Shipment } from './shipment.js';
+import { MerchiFile } from './merchi_file.js';
+import { Quote } from './quote.js';
+import { Payment } from './payment.js';
+import { Job } from './job.js';
 
 export function Invoice() {
     this.resource = '/invoices';

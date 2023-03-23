@@ -1,9 +1,9 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, getOne, serialise, enumerateFiles, patchOne,
-    fromJsonList, getList, create } from './model';
-import { MerchiFile } from './merchi_file';
-import { ComponentTag } from './component_tag';
-import { User } from './user';
+    fromJsonList, getList, create } from './model.js';
+import { MerchiFile } from './merchi_file.js';
+import { ComponentTag } from './component_tag.js';
+import { User } from './user.js';
 
 export function Component() {
     this.resource = '/components';

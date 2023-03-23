@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { Inventory } from './inventory';
-import { Job } from './job';
-import { VariationsGroup } from './variations_group';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { Inventory } from './inventory.js';
+import { Job } from './job.js';
+import { VariationsGroup } from './variations_group.js';
 
 export function MatchingInventory() {
     this.resource = '/matching_inventories';

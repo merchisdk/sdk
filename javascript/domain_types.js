@@ -1,4 +1,4 @@
-import { Dictionary } from './dictionary';
+import { Dictionary } from './dictionary.js';
 
 export const domainTypes = new Dictionary();
 domainTypes.add(0, 'Unrestricted');

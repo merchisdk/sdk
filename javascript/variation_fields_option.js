@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { DiscountGroup } from './discount_group';
-import { MerchiFile } from './merchi_file';
-import { VariationField } from './variation_field';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { DiscountGroup } from './discount_group.js';
+import { MerchiFile } from './merchi_file.js';
+import { VariationField } from './variation_field.js';
 
 export function VariationFieldsOption() {
     this.resource = '/variationFieldOptions';

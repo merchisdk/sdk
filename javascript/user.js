@@ -1,20 +1,20 @@
-import { generateUUID } from './uuid';
 import moment from 'moment-timezone';
-import { Set } from './set';
-import { md5 } from './md5';
-import {  COMPONENT_BUILDER, roles, systemRoles, allRoles } from './roles';
-import { any, isUndefinedOrNull } from './helpers';
+import { generateUUID } from './uuid.js';
+import { Set } from './set.js';
+import { md5 } from './md5.js';
+import {  COMPONENT_BUILDER, roles, systemRoles, allRoles } from './roles.js';
+import { any, isUndefinedOrNull } from './helpers.js';
 import { addPropertyTo, getList, fromJsonList, serialise, getOne, fromJson,
-    create, enumerateFiles, patchOne, Request } from './model';
-import { Address } from './address';
-import { EmailAddress } from './email_address';
-import { EnrolledDomain } from './enrolled_domain';
-import { PhoneNumber } from './phone_number';
-import { Product } from './product';
-import { Domain } from './domain';
-import { MerchiFile } from './merchi_file';
-import { SystemRole } from './system_role';
-import { UserCompany } from './user_company';
+    create, enumerateFiles, patchOne, Request } from './model.js';
+import { Address } from './address.js';
+import { EmailAddress } from './email_address.js';
+import { EnrolledDomain } from './enrolled_domain.js';
+import { PhoneNumber } from './phone_number.js';
+import { Product } from './product.js';
+import { Domain } from './domain.js';
+import { MerchiFile } from './merchi_file.js';
+import { SystemRole } from './system_role.js';
+import { UserCompany } from './user_company.js';
 
 export function User() {
     this.resource = '/users';

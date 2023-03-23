@@ -1,8 +1,8 @@
-import { Company } from './company';
-import { generateUUID } from './uuid';
+import { Company } from './company.js';
+import { generateUUID } from './uuid.js';
 import {
     addPropertyTo, serialise, fromJson, create, enumerateFiles,
-    deleteOne, getList, fromJsonList, getOne } from './model';
+    deleteOne, getList, fromJsonList, getOne } from './model.js';
 
 export function AutomaticPaymentRelationship() {
     this.resource = '/automatic_payment_relationships';

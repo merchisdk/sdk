@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, serialise, create, enumerateFiles,
-    getOne, deleteOne, fromJsonList, getList } from './model';
-import { Domain } from './domain';
+    getOne, deleteOne, fromJsonList, getList } from './model.js';
+import { Domain } from './domain.js';
 
 export function Category() {
     this.resource = '/categories';

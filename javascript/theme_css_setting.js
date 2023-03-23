@@ -1,6 +1,6 @@
 import { addPropertyTo, serialise, fromJson, create, getList,
-    fromJsonList, getOne } from './model';
-import { User } from './user';
+    fromJsonList, getOne } from './model.js';
+import { User } from './user.js';
 
 export function ThemeCssSetting() {
     this.resource = '/theme_css_settings';

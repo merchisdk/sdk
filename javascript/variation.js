@@ -1,10 +1,10 @@
-import { generateUUID } from './uuid';
-import { fieldTypes } from './field_types';
-import { addPropertyTo } from './model';
-import { isUndefined } from './helpers';
-import { VariationOption } from './variation_option';
-import { VariationField } from './variation_field';
-import { MerchiFile } from './merchi_file';
+import { generateUUID } from './uuid.js';
+import { fieldTypes } from './field_types.js';
+import { addPropertyTo } from './model.js';
+import { isUndefined } from './helpers.js';
+import { VariationOption } from './variation_option.js';
+import { VariationField } from './variation_field.js';
+import { MerchiFile } from './merchi_file.js';
 
 export function Variation() {
     this.resource = '/variation';

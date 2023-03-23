@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { paymentTypes } from './payment_types';
-import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
-import { User } from './user';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { paymentTypes } from './payment_types.js';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship.js';
+import { User } from './user.js';
 
 export function Payment() {
     this.resource = '/payments';

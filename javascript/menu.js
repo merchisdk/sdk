@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo, fromJson, getOne, deleteOne } from './model';
-import { MenuItem } from './menu_item';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo, fromJson, getOne, deleteOne } from './model.js';
+import { MenuItem } from './menu_item.js';
 
 export function Menu() {
     this.resource = '/menus';
