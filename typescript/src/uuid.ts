@@ -1,10 +1,11 @@
 import { isNode, isDeno } from 'browser-or-node';
 
 export function generateUUID(): string {
+  let d: number;
   if (isNode || isDeno) {
-    var d = Date.now()
+    d = Date.now();
   } else {
-    var d = Date.now() + performance.now()
+    d = Date.now() + performance.now();
   }
 
   let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
