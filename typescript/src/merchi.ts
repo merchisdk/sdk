@@ -200,6 +200,7 @@ export class Merchi {
     if (cartToken) {
       this.cartToken = cartToken;
     } else {
+      console.log('debug here cart token', getCookie('cart_token'));
       this.cartToken = getCookie('cart_token');
     }
 

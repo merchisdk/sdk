@@ -1,7 +1,6 @@
-import { isNode, isDeno } from 'browser-or-node';
-
 export function getCookie(name: string) {
-  if (isNode || isDeno) {
+  // code might be executed during SSR
+  if (!document) {
     return undefined;
   }
   const searchPrefix = name + '=',
