@@ -1,12 +1,13 @@
-import { isNode, isDeno } from 'browser-or-node'
+import { isNode, isDeno } from 'browser-or-node';
 
 export function generateUUID(): string {
   if (isNode || isDeno) {
-    return require('uuid').v4();
+    var d = Date.now()
+  } else {
+    var d = Date.now() + performance.now()
   }
 
-  let d = Date.now() + performance.now(),
-    uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+  let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
   uuid = uuid.replace(/[xy]/g, function (c): string {
     const r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
