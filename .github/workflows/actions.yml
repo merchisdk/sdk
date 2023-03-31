@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - run: sudo apt update
       - run: sudo apt install nodejs
       - run: yarn
       - run: yarn add --dev typescript
       - run: yarn add --dev typedoc
       - run: npx typedoc --readme none --exclude "**/*.test.ts" --excludeProtected --excludePrivate --excludeExternals src/ --out ../reference
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: gh-pages
           clean: false
