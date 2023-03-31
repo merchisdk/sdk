@@ -6,9 +6,9 @@ import { Product } from './product';
 import { Shipment } from './shipment';
 
 export class DomainTag extends Entity {
-  protected static resourceName: string = 'domain_tags';
-  protected static singularName: string = 'domainTag';
-  protected static pluralName: string = 'domainTags';
+  protected static resourceName = 'domain_tags';
+  protected static singularName = 'domainTag';
+  protected static pluralName = 'domainTags';
 
   @DomainTag.property()
   public id?: number;

@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { ShipmentItemFulfillment } from './shipment_item_fulfillment';
-import { Job } from './job';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { ShipmentItemFulfillment } from './shipment_item_fulfillment.js';
+import { Job } from './job.js';
 
 export function ShipmentItem() {
     this.resource = '/shipment_items';

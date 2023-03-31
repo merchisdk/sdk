@@ -5,9 +5,9 @@ import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
 import { RequestOptions } from '../request';
 
 export class Payment extends Entity {
-  protected static resourceName: string = 'payments';
-  protected static singularName: string = 'payment';
-  protected static pluralName: string = 'payments';
+  protected static resourceName = 'payments';
+  protected static singularName = 'payment';
+  protected static pluralName = 'payments';
 
   @Payment.property({ type: Date })
   public archived?: Date | null;

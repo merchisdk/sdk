@@ -6,9 +6,9 @@ import { Variation } from './variation';
 import { VariationField } from './variation_field';
 
 export class VariationFieldsOption extends Entity {
-  protected static resourceName: string = 'variation_fields_options';
-  protected static singularName: string = 'variationFieldsOption';
-  protected static pluralName: string = 'variationFieldsOptions';
+  protected static resourceName = 'variation_fields_options';
+  protected static singularName = 'variationFieldsOption';
+  protected static pluralName = 'variationFieldsOptions';
 
   @VariationFieldsOption.property({type: Date})
   public archived?: Date | null;
@@ -72,7 +72,7 @@ export class VariationFieldsOption extends Entity {
       throw new Error('variationUnitCost is unknown');
     }
     return this.variationCost + this.variationUnitCost * quantity;
-  }
+  };
 
   public buildVariationOption = () => {
     const result = new this.merchi.VariationOption(this.merchi);
@@ -91,5 +91,5 @@ export class VariationFieldsOption extends Entity {
     result.onceOffCost = this.variationCost;
     result.totalCost = this.variationCost;
     return result;
-  }
+  };
 }

@@ -1,20 +1,20 @@
 import { addPropertyTo, getList, fromJson, getOne, serialise,
     patchOne, deleteOne, create, fromJsonList, enumerateFiles,
-    Request } from './model';
-import { Dictionary } from './dictionary';
-import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
-import { Address } from './address';
-import { Bank } from './bank';
-import { CountryTax, NoTaxEntity } from './country_tax';
-import { CompanyInvitation } from './company_invitation';
-import { Domain } from './domain';
-import { EmailAddress } from './email_address';
-import { MerchiFile } from './merchi_file';
-import { PhoneNumber } from './phone_number';
-import { Product } from './product';
-import { ShipmentMethod } from './shipment_method';
-import { User } from './user';
-import { UserCompany } from './user_company';
+    Request } from './model.js';
+import { Dictionary } from './dictionary.js';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship.js';
+import { Address } from './address.js';
+import { Bank } from './bank.js';
+import { CountryTax, NoTaxEntity } from './country_tax.js';
+import { CompanyInvitation } from './company_invitation.js';
+import { Domain } from './domain.js';
+import { EmailAddress } from './email_address.js';
+import { MerchiFile } from './merchi_file.js';
+import { PhoneNumber } from './phone_number.js';
+import { Product } from './product.js';
+import { ShipmentMethod } from './shipment_method.js';
+import { User } from './user.js';
+import { UserCompany } from './user_company.js';
 
 export function Company() {
     this.resource = '/companies';

@@ -3,9 +3,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class ShortUrl extends Entity {
-  protected static resourceName: string = 'short_urls';
-  protected static singularName: string = 'shortUrl';
-  protected static pluralName: string = 'shortUrls';
+  protected static resourceName = 'short_urls';
+  protected static singularName = 'shortUrl';
+  protected static pluralName = 'shortUrls';
 
   @ShortUrl.property({type: Date})
   public archived?: Date | null;

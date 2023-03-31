@@ -1,9 +1,9 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, fromJson, create, getOne, deleteOne,
-    patchOne, fromJsonList, getList, enumerateFiles } from './model';
-import { Address } from './address';
-import { InventoryUnitVariation } from './inventory_unit_variation';
-import { Product } from './product';
+    patchOne, fromJsonList, getList, enumerateFiles } from './model.js';
+import { Address } from './address.js';
+import { InventoryUnitVariation } from './inventory_unit_variation.js';
+import { Product } from './product.js';
 
 export function Inventory() {
     this.resource = '/inventories';

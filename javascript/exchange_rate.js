@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, fromJson, create, enumerateFiles, deleteOne,
-    getOne, fromJsonList, getList } from './model';
+    getOne, fromJsonList, getList } from './model.js';
 
 
 export function ExchangeRate() {

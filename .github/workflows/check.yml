@@ -27,14 +27,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '12' ]
+        node: [ '16' ]
     name: Check Javascript ${{ matrix.node }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
       - name: yarn
         working-directory: javascript
         run: yarn
@@ -45,14 +46,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '12' ]
+        node: [ '16' ]
     name: Check Typescript
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
       - name: ts
         working-directory: typescript
         run: yarn global add typescript

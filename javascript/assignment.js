@@ -1,15 +1,15 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, create, serialise, enumerateFiles, getList,
-    patchOne, fromJsonList, getOne } from './model';
+    patchOne, fromJsonList, getOne } from './model.js';
 import { notificationTypes, notificationRecieverIsCurrentUserFilter,
-   notificationsFilter } from './notification_types';
-import { Job } from './job';
-import { User } from './user';
-import { Notification } from './notification';
-import { Quote } from './quote';
-import { Shipment } from './shipment';
-import { SupplyDomain } from './supply_domain';
-import { ProductionComment } from './production_comment';
+   notificationsFilter } from './notification_types.js';
+import { Job } from './job.js';
+import { User } from './user.js';
+import { Notification } from './notification.js';
+import { Quote } from './quote.js';
+import { Shipment } from './shipment.js';
+import { SupplyDomain } from './supply_domain.js';
+import { ProductionComment } from './production_comment.js';
 
 export function Assignment() {
     this.resource = '/assignments';

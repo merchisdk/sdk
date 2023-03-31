@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, getOne, getList, serialise, create,
-    fromJsonList, enumerateFiles } from './model';
-import { Product } from './product';
-import { Domain } from './domain';
+    fromJsonList, enumerateFiles } from './model.js';
+import { Product } from './product.js';
+import { Domain } from './domain.js';
 
 export function SupplyDomain() {
     this.resource = '/supply_domains';

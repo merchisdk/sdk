@@ -1,5 +1,5 @@
 import { addPropertyTo, create, serialise, fromJson, enumerateFiles, getOne,
-    deleteOne, fromJsonList, getList } from './model';
+    deleteOne, fromJsonList, getList } from './model.js';
 
 export function CountryTax() {
     this.resource = '/country_taxes';

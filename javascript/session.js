@@ -1,8 +1,8 @@
-import { Dictionary } from './dictionary';
+import { Dictionary } from './dictionary.js';
 import { addPropertyTo, create, fromJson, getOne, deleteOne, fromJsonList,
-    getList, Request } from './model';
-import { User } from './user';
-import { Domain } from './domain';
+    getList, Request } from './model.js';
+import { User } from './user.js';
+import { Domain } from './domain.js';
 
 export function Session() {
     this.resource = '/sessions';

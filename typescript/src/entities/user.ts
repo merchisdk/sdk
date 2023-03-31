@@ -37,9 +37,9 @@ import { SystemRoles as SR } from '../constants/system_roles';
 import { some } from 'lodash';
 
 export class User extends Entity {
-  protected static resourceName: string = 'users';
-  protected static singularName: string = 'user';
-  protected static pluralName: string = 'users';
+  protected static resourceName = 'users';
+  protected static singularName = 'user';
+  protected static pluralName = 'users';
 
   @User.property({type: Date})
   public archived?: Date | null;

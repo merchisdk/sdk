@@ -4,9 +4,9 @@ import { MerchiFile } from './file';
 import { User } from './user';
 
 export class Component extends Entity {
-  protected static resourceName: string = 'components';
-  protected static singularName: string = 'component';
-  protected static pluralName: string = 'components';
+  protected static resourceName = 'components';
+  protected static singularName = 'component';
+  protected static pluralName = 'components';
 
   @Component.property({type: Date})
   public archived?: Date | null;
@@ -56,6 +56,6 @@ export class Component extends Entity {
     const proxy = new Proxy(context, {});
     const callable = new Function(componentCode);
     return callable.call(proxy);
-  }
+  };
 
 }

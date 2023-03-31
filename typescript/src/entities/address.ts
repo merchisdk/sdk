@@ -8,9 +8,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Address extends Entity {
-  protected static resourceName: string = 'addresses';
-  protected static singularName: string = 'address';
-  protected static pluralName: string = 'addresses';
+  protected static resourceName = 'addresses';
+  protected static singularName = 'address';
+  protected static pluralName = 'addresses';
 
   @Address.property({type: Date})
   public archived?: Date | null;

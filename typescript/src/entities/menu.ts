@@ -3,9 +3,9 @@ import { Theme } from './theme';
 import { MenuItem } from './menu_item';
 
 export class Menu extends Entity {
-  protected static resourceName: string = 'menus';
-  protected static singularName: string = 'menu';
-  protected static pluralName: string = 'menus';
+  protected static resourceName = 'menus';
+  protected static singularName = 'menu';
+  protected static pluralName = 'menus';
 
   @Menu.property({type: Date})
   public archived?: Date | null;

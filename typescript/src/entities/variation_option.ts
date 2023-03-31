@@ -2,8 +2,8 @@ import { Entity } from '../entity';
 import { MerchiFile } from './file';
 
 export class VariationOption extends Entity {
-  protected static singularName: string = 'variationOption';
-  protected static pluralName: string = 'variationOptions';
+  protected static singularName = 'variationOption';
+  protected static pluralName = 'variationOptions';
 
   @VariationOption.property()
   public optionId?: number;

@@ -7,9 +7,9 @@ import { VariationFieldsOption } from './variation_fields_option';
 import { FieldType } from '../constants/field_types';
 
 export class VariationField extends Entity {
-  protected static resourceName: string = 'variation_fields';
-  protected static singularName: string = 'variationField';
-  protected static pluralName: string = 'variationFields';
+  protected static resourceName = 'variation_fields';
+  protected static singularName = 'variationField';
+  protected static pluralName = 'variationFields';
 
   @VariationField.property({type: Date})
   public archived?: Date | null;
@@ -120,7 +120,7 @@ export class VariationField extends Entity {
       FieldType.IMAGE_SELECT,
       FieldType.COLOUR_SELECT]);
     return selectable.has(this.fieldType);
-  }
+  };
 
   public buildEmptyVariation = () => {
     if (this.defaultValue === undefined) {
@@ -165,5 +165,5 @@ export class VariationField extends Entity {
     }
     result.variationField = cloneDeepWith(this, customiser);
     return result;
-  }
+  };
 }

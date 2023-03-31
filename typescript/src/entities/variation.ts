@@ -7,9 +7,9 @@ import { VariationOption } from './variation_option';
 import { VariationsGroup } from './variations_group';
 
 export class Variation extends Entity {
-  protected static resourceName: string = 'variations';
-  protected static singularName: string = 'variation';
-  protected static pluralName: string = 'variations';
+  protected static resourceName = 'variations';
+  protected static singularName = 'variation';
+  protected static pluralName = 'variations';
 
   @Variation.property({type: Date})
   public archived?: Date | null;

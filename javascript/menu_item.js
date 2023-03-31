@@ -1,5 +1,5 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
 
 export function MenuItem() {
     this.resource = '/menu_items';

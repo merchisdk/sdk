@@ -24,9 +24,9 @@ import { InventoryStatus } from '../constants/inventory_statuses';
 
 
 export class Job extends Entity {
-  protected static resourceName: string = 'jobs';
-  protected static singularName: string = 'job';
-  protected static pluralName: string = 'jobs';
+  protected static resourceName = 'jobs';
+  protected static singularName = 'job';
+  protected static pluralName = 'jobs';
 
   @Job.property({type: Date})
   public archived?: Date | null;
@@ -310,7 +310,7 @@ export class Job extends Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions).
       then((data: any) => { this.fromJson(data, {makeDirty: true});
         return this;});
-  }
+  };
 
   public deduct = (matchingInventories: MatchingInventory[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
@@ -329,7 +329,7 @@ export class Job extends Entity {
       then((data: any) => {
         this.fromJson(data);
         return this;});
-  }
+  };
 
   public bulkDeduct = () => {
     if (this.matchingInventories === undefined) {
@@ -338,5 +338,5 @@ export class Job extends Entity {
       throw new Error(err);
     }
     return this.deduct(this.matchingInventories);
-  }
+  };
 }

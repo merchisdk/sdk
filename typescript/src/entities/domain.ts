@@ -19,9 +19,9 @@ import { Theme } from './theme';
 import { DomainType } from '../constants/domain_types';
 
 export class Domain extends Entity {
-  protected static resourceName: string = 'domains';
-  protected static singularName: string = 'domain';
-  protected static pluralName: string = 'domains';
+  protected static resourceName = 'domains';
+  protected static singularName = 'domain';
+  protected static pluralName = 'domains';
 
   @Domain.property({type: Date})
   public archived?: Date | null;
@@ -183,12 +183,12 @@ export class Domain extends Entity {
       throw new Error(err);
     }
     return this.company.defaultTaxType;
-  }
+  };
 
   public getActiveTheme = (): Theme => {
     if (this.activeTheme === undefined) {
       throw new Error('activeTheme is undefined, did you forget to embed it?');
     }
     return this.activeTheme!;
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import { Dictionary } from './dictionary';
+import { Dictionary } from './dictionary.js';
 
 export const productTypes = new Dictionary();
 productTypes.add(0, 'supplier MOD (made on demand)');

@@ -3,9 +3,9 @@ import { CountryTax } from './country_tax';
 import { ShipmentMethod } from './shipment_method';
 
 export class ShipmentMethodVariation extends Entity {
-  protected static resourceName: string = 'shipment_method_variations';
-  protected static singularName: string = 'shipmentMethodVariation';
-  protected static pluralName: string = 'shipmentMethodVariations';
+  protected static resourceName = 'shipment_method_variations';
+  protected static singularName = 'shipmentMethodVariation';
+  protected static pluralName = 'shipmentMethodVariations';
 
   @ShipmentMethodVariation.property()
   public id?: number;

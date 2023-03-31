@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo, fromJsonList, getList } from './model';
-import { CountryTax } from './country_tax';
-import { ShipmentMethod } from './shipment_method';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo, fromJsonList, getList } from './model.js';
+import { CountryTax } from './country_tax.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 export function ShipmentMethodVariation() {
     this.resource = '/shipment_method_variations';

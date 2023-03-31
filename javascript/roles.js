@@ -1,5 +1,5 @@
-import { Dictionary } from './dictionary';
-import { Set } from './set';
+import { Dictionary } from './dictionary.js';
+import { Set } from './set.js';
 
 export const roles = new Dictionary();
 roles.add('public', 0);

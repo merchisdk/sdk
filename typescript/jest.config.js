@@ -1,8 +1,9 @@
-module.exports = {
+export default {
   "roots": ["<rootDir>/src"],
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
+  "testEnvironment": 'jsdom',
   "collectCoverage": true,
   "collectCoverageFrom": ["src/**"],
   "coverageThreshold": {

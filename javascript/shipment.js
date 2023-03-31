@@ -1,18 +1,18 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, getOne, fromJson, enumerateFiles, serialise, patchOne,
-    deleteOne, fromJsonList, getList, create } from './model';
-import { removeObjectFromArrayWithIntegerValue } from './helpers';
-import { Address } from './address';
-import { Assignment } from './assignment';
-import { CountryTax } from './country_tax';
-import { DomainTag } from './domain_tag';
-import { User } from './user';
-import { Company } from './company';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { MerchiFile } from './merchi_file';
-import { ShipmentItem } from './shipment_item';
-import { ShipmentMethod } from './shipment_method';
+    deleteOne, fromJsonList, getList, create } from './model.js';
+import { removeObjectFromArrayWithIntegerValue } from './helpers.js';
+import { Address } from './address.js';
+import { Assignment } from './assignment.js';
+import { CountryTax } from './country_tax.js';
+import { DomainTag } from './domain_tag.js';
+import { User } from './user.js';
+import { Company } from './company.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { MerchiFile } from './merchi_file.js';
+import { ShipmentItem } from './shipment_item.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 export function Shipment() {
     this.resource = '/shipments';

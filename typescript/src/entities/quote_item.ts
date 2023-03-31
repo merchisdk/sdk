@@ -7,9 +7,9 @@ interface CalculateOptions {
 }
 
 export class QuoteItem extends Entity {
-  protected static resourceName: string = 'quote_items';
-  protected static singularName: string = 'quoteItem';
-  protected static pluralName: string = 'quoteItems';
+  protected static resourceName = 'quote_items';
+  protected static singularName = 'quoteItem';
+  protected static pluralName = 'quoteItems';
 
   @QuoteItem.property({type: Date})
   public archived?: Date | null;
@@ -51,7 +51,7 @@ export class QuoteItem extends Entity {
     const quant = this.quantity ? this.quantity : 0;
     const unitPrice = this.unitPrice ? this.unitPrice : 0;
     return (quant * unitPrice).toFixed(3);
-  }
+  };
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
     const taxPercent = this.taxType && this.taxType.taxPercent ?
@@ -59,13 +59,13 @@ export class QuoteItem extends Entity {
     const taxRate = taxPercent ? Number(taxPercent) / 100 : 0;
     return (parseFloat(
       this.calculateSubTotal(options)) * taxRate).toFixed(3);
-  }
+  };
 
   public calculateTotal = (options?: CalculateOptions) => {
     return (
       parseFloat(this.calculateSubTotal(options)) +
       parseFloat(this.calculateTaxAmount(options))
     ).toFixed(3);
-  }
+  };
 
 }

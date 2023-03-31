@@ -1,11 +1,11 @@
-import { generateUUID } from './uuid';
-import { fieldTypes } from './field_types';
-import { addPropertyTo } from './model';
-import { isUndefinedOrNull, clone } from './helpers';
-import { DiscountGroup } from './discount_group';
-import { VariationFieldsOption } from './variation_fields_option';
-import { Variation } from './variation';
-import { VariationOption } from './variation_option';
+import { generateUUID } from './uuid.js';
+import { fieldTypes } from './field_types.js';
+import { addPropertyTo } from './model.js';
+import { isUndefinedOrNull, clone } from './helpers.js';
+import { DiscountGroup } from './discount_group.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
+import { Variation } from './variation.js';
+import { VariationOption } from './variation_option.js';
 
 export function VariationField() {
     this.resource = '/variationFields';

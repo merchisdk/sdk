@@ -2,9 +2,9 @@ import { Entity } from '../entity';
 import { DiscountGroup } from './discount_group';
 
 export class Discount extends Entity {
-  protected static resourceName: string = 'discounts';
-  protected static singularName: string = 'discount';
-  protected static pluralName: string = 'discounts';
+  protected static resourceName = 'discounts';
+  protected static singularName = 'discount';
+  protected static pluralName = 'discounts';
 
   @Discount.property({type: Date})
   public archived?: Date | null;
@@ -30,5 +30,5 @@ export class Discount extends Entity {
     }
     const discount = 100 - this.amount;
     return (unitPrice * discount / 100).toFixed(3);
-  }
+  };
 }

@@ -1,11 +1,11 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, create, fromJson, enumerateFiles, getOne,
-    patchOne, fromJsonList, getList } from './model'
-import { themeStatus } from './theme_status';
-import { MerchiFile } from './merchi_file';
-import { Domain } from './domain';
-import { Page } from './page';
-import { User } from './user';
+    patchOne, fromJsonList, getList } from './model.js';
+import { themeStatus } from './theme_status.js';
+import { MerchiFile } from './merchi_file.js';
+import { Domain } from './domain.js';
+import { Page } from './page.js';
+import { User } from './user.js';
 
 export function Theme() {
     this.resource = '/themes';

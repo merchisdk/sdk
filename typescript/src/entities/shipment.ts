@@ -17,9 +17,9 @@ interface CalculateOptions {
 }
 
 export class Shipment extends Entity {
-  protected static resourceName: string = 'shipments';
-  protected static singularName: string = 'shipment';
-  protected static pluralName: string = 'shipments';
+  protected static resourceName = 'shipments';
+  protected static singularName = 'shipment';
+  protected static pluralName = 'shipments';
 
   @Shipment.property({type: Date})
   public archived?: Date | null;
@@ -159,7 +159,7 @@ export class Shipment extends Entity {
     }
     const cost = this.cost ? this.cost : 0;
     return parseFloat(String(cost)).toFixed(3);
-  }
+  };
 
   public calculateTaxAmount = (options?: CalculateOptions) => {
     const taxPercent = this.taxType && this.taxType.taxPercent ?
@@ -167,12 +167,12 @@ export class Shipment extends Entity {
     const taxRate = taxPercent ? Number(taxPercent) / 100 : 0;
     return (parseFloat(
       this.calculateSubTotal(options)) * taxRate).toFixed(3);
-  }
+  };
 
   public calculateTotal = (options?: CalculateOptions) => {
     return (
       parseFloat(this.calculateSubTotal(options)) +
       parseFloat(this.calculateTaxAmount(options))
     ).toFixed(3);
-  }
+  };
 }

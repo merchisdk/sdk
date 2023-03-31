@@ -1,7 +1,7 @@
 import { addPropertyTo, serialise, fromJson, create, enumerateFiles, getList,
-    fromJsonList, getOne } from './model';
-import { User } from './user';
-import { CountryTax } from './country_tax';
+    fromJsonList, getOne } from './model.js';
+import { User } from './user.js';
+import { CountryTax } from './country_tax.js';
 
 export function SubscriptionPlan() {
     this.resource = '/subscription_plans';

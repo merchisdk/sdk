@@ -1,3 +1,6 @@
+import NodeFormData from 'form-data';
+import { isBrowser, isJsDom } from "browser-or-node";
+
 export function Dictionary() {
 
     var store = {},
@@ -100,7 +103,12 @@ export function Dictionary() {
     };
 
     this.toFormData = function () {
-        var result = new FormData();
+        var result;
+        if (isJsDom || isBrowser) {
+            result = new FormData();
+        } else {
+            result = new NodeFormData();
+        }
         this.each(function (key, value) {
             result.append(key, value);
         });

@@ -1,10 +1,10 @@
 import { addPropertyTo, serialise, fromJsonList, getList, getOne,
-   fromJson, patchOne } from './model';
-import { sortArrayByObjectKeyDescending, isUndefined } from './helpers';
-import { Job } from './job';
-import { User } from './user';
-import { DraftComment } from './draft_comment';
-import { MerchiFile } from './merchi_file';
+   fromJson, patchOne } from './model.js';
+import { sortArrayByObjectKeyDescending, isUndefined } from './helpers.js';
+import { Job } from './job.js';
+import { User } from './user.js';
+import { DraftComment } from './draft_comment.js';
+import { MerchiFile } from './merchi_file.js';
 
 export function Draft() {
     this.resource = '/drafts';

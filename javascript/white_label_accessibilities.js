@@ -1,4 +1,4 @@
-import { Dictionary } from './dictionary';
+import { Dictionary } from './dictionary.js';
 
 export const whiteLabelAccessibilities = new Dictionary();
 whiteLabelAccessibilities.add("NOT_REACHABLE", 0);
