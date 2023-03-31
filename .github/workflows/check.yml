@@ -35,6 +35,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
       - name: yarn
         working-directory: javascript
         run: yarn
@@ -53,6 +54,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
       - name: ts
         working-directory: typescript
         run: yarn global add typescript
