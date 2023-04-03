@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { ShipmentMethod } from './shipment_method';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 export function CartShipmentQuote() {
     this.resource = '/cart_shipment_quotes';

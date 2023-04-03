@@ -2,9 +2,9 @@ import { Domain } from './domain';
 import { Entity } from '../entity';
 
 export class SeoDomainPage extends Entity {
-  protected static resourceName: string = 'seo_domain_pages';
-  protected static singularName: string = 'seoDomainPage';
-  protected static pluralName: string = 'seoDomainPages';
+  protected static resourceName = 'seo_domain_pages';
+  protected static singularName = 'seoDomainPage';
+  protected static pluralName = 'seoDomainPages';
 
   @SeoDomainPage.property({type: Date})
   public archived?: Date | null;

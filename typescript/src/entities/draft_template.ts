@@ -4,9 +4,9 @@ import { Job } from './job';
 import { Product } from './product';
 
 export class DraftTemplate extends Entity {
-  protected static resourceName: string = 'draft_templates';
-  protected static singularName: string = 'draftTemplate';
-  protected static pluralName: string = 'draftTemplates';
+  protected static resourceName = 'draft_templates';
+  protected static singularName = 'draftTemplate';
+  protected static pluralName = 'draftTemplates';
 
   @DraftTemplate.property({type: Date})
   public archived?: Date | null;

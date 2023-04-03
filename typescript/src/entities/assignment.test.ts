@@ -10,26 +10,25 @@ test('can make Assignment', () => {
 });
 
 test('can generate new invoice', () => {
-  mockFetch(true, {'id': 1, 'cost': 100}, 200);
+  mockFetch(true, {'id': 1, 'totalCost': 100}, 200);
 
   const merchi = new Merchi();
   const assignment = new merchi.Assignment();
   assignment.id = 1;
-  assignment.generateInvoice().then(assignment => {
-    expect(assignment.totalCost).toEqual(100);
-    expect(assignment.id).toEqual(1);
+  assignment.generateInvoice().then(invoice => {
+    expect(invoice.totalCost).toEqual(100);
+    expect(invoice.id).toEqual(1);
   });
 });
 
 test('can add to invoice', () => {
-
-  const fetch = mockFetch(true, {'id': 2, 'cost': 100}, 200);
+  const fetch = mockFetch(true, {'id': 2, 'totalCost': 100}, 200);
   const merchi = new Merchi();
   const assignment = new merchi.Assignment();
   assignment.id = 1;
-  assignment.generateInvoice({addToInvoice: 2}).then(assignment => {
-    expect(assignment.totalCost).toEqual(100);
-    expect(assignment.id).toEqual(1);
+  assignment.generateInvoice({addToInvoice: 2}).then(invoice => {
+    expect(invoice.totalCost).toEqual(100);
+    expect(invoice.id).toEqual(2);
   });
 
   const correct = [['add_to_invoice', '2']];

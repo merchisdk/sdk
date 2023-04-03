@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid'; 
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, getOne, serialise, create, enumerateFiles,
-    fromJsonList, getList } from './model';
+    fromJsonList, getList } from './model.js';
 
 export function ComponentTag() {
     this.resource = '/component_tags';

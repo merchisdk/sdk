@@ -38,13 +38,17 @@ test('calculation', () => {
 
   // 800 * 1.1 + 25 * 2 + 100 * 1.1 = 1040
   expect(quote.quoteTotal()).toBe('1040.000');
+  expect(quote.quoteTotal({'strictEmbed': false})).toBe('1040.000');
   expect(quote.calculateTotal()).toBe('1040.000');
+  expect(quote.calculateTotal({'strictEmbed': false})).toBe('1040.000');
 
   // 800 + 25 * 2 + 100
   expect(quote.calculateSubTotal()).toBe('950.000');
+  expect(quote.calculateSubTotal({'strictEmbed': false})).toBe('950.000');
 
   // 800 * 0.1 + 100 * 0.1
   expect(quote.calculateTaxAmount()).toBe('90.000');
+  expect(quote.calculateTaxAmount({'strictEmbed': false})).toBe('90.000');
 });
 
 test('findQuoteItemIndex', () => {

@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, create, fromJson, patchOne, deleteOne,
-    fromJsonList, getList, enumerateFiles, getOne } from './model';
-import { Domain } from './domain';
-import { Product } from './product';
+    fromJsonList, getList, enumerateFiles, getOne } from './model.js';
+import { Domain } from './domain.js';
+import { Product } from './product.js';
 
 export function DomainTag() {
     this.resource = '/domain_tags';

@@ -1,4 +1,4 @@
-import { addPropertyTo } from './model';
+import { addPropertyTo } from './model.js';
 
 export function SystemRole() {
     this.resource = '/system_roles';

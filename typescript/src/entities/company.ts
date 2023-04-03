@@ -18,9 +18,9 @@ import { UserCompany } from './user_company';
 import { SubscriptionPlan } from './subscription_plan';
 
 export class Company extends Entity {
-  protected static resourceName: string = 'companies';
-  protected static singularName: string = 'company';
-  protected static pluralName: string = 'companies';
+  protected static resourceName = 'companies';
+  protected static singularName = 'company';
+  protected static pluralName = 'companies';
 
   @Company.property({type: Date})
   public archived?: Date | null;

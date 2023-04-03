@@ -1,6 +1,6 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
-import { Variation } from './variation';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
+import { Variation } from './variation.js';
 
 export function VariationsGroup() {
     this.resource = '/variationsGroups';

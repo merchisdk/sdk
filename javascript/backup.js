@@ -1,5 +1,5 @@
-import { addPropertyTo, deleteOne, fromJsonList, getList } from './model'
-import { MerchiFile } from './merchi_file';
+import { addPropertyTo, deleteOne, fromJsonList, getList } from './model.js'
+import { MerchiFile } from './merchi_file.js';
 
 export function Backup() {
     this.resource = '/backups';

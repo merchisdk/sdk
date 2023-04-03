@@ -1,25 +1,25 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { notEmptyArray, isUndefinedOrNull,
-    removeObjectFromArrayWithIntegerValue } from './helpers';
+    removeObjectFromArrayWithIntegerValue } from './helpers.js';
 import { addPropertyTo, getList, fromJsonList, deleteOne, patchOne, fromJson,
-    serialise, getOne, create, enumerateFiles, Request } from './model';
-import { productTypesInts } from './product_types';
-import { Category } from './category';
-import { Component } from './component';
-import { Company } from './company';
-import { CountryTax } from './country_tax';
-import { DraftTemplate } from './draft_template';
-import { DomainTag } from './domain_tag';
-import { DiscountGroup } from './discount_group';
-import { Domain } from './domain';
-import { Inventory } from './inventory';
-import { ShipmentMethod } from './shipment_method';
-import { VariationField } from './variation_field';
-import { VariationsGroup } from './variations_group';
-import { MerchiFile } from './merchi_file';
-import { SupplyDomain } from './supply_domain';
-import { User } from './user';
-import { Job } from './job';
+    serialise, getOne, create, enumerateFiles, Request } from './model.js';
+import { productTypesInts } from './product_types.js';
+import { Category } from './category.js';
+import { Component } from './component.js';
+import { Company } from './company.js';
+import { CountryTax } from './country_tax.js';
+import { DraftTemplate } from './draft_template.js';
+import { DomainTag } from './domain_tag.js';
+import { DiscountGroup } from './discount_group.js';
+import { Domain } from './domain.js';
+import { Inventory } from './inventory.js';
+import { ShipmentMethod } from './shipment_method.js';
+import { VariationField } from './variation_field.js';
+import { VariationsGroup } from './variations_group.js';
+import { MerchiFile } from './merchi_file.js';
+import { SupplyDomain } from './supply_domain.js';
+import { User } from './user.js';
+import { Job } from './job.js';
 
 export function Product() {
     this.resource = '/products';

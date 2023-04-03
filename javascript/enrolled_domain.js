@@ -1,8 +1,8 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, fromJson, create, enumerateFiles,
-    getOne, patchOne, deleteOne, getList, fromJsonList } from './model';
-import { Domain } from './domain';
-import { User } from './user';
+    getOne, patchOne, deleteOne, getList, fromJsonList } from './model.js';
+import { Domain } from './domain.js';
+import { User } from './user.js';
 
 export function EnrolledDomain() {
     this.resource = '/enrolled_domains';

@@ -1,9 +1,9 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, fromJson, getOne, fromJsonList,
-    getList } from './model';
-import { QuoteItem } from './quote_item';
-import { Assignment } from './assignment';
-import { Invoice } from './invoice';
+    getList } from './model.js';
+import { QuoteItem } from './quote_item.js';
+import { Assignment } from './assignment.js';
+import { Invoice } from './invoice.js';
 
 export function Quote() {
     this.resource = '/quotes';

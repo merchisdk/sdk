@@ -1,4 +1,4 @@
-import { Dictionary } from './dictionary';
+import { Dictionary } from './dictionary.js';
 
 export const themeStatus = new Dictionary();
 themeStatus.add("NOT_VALID", 1);

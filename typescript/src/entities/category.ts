@@ -4,9 +4,9 @@ import { Product } from './product';
 import { User } from './user';
 
 export class Category extends Entity {
-  protected static resourceName: string = 'categories';
-  protected static singularName: string = 'category';
-  protected static pluralName: string = 'categories';
+  protected static resourceName = 'categories';
+  protected static singularName = 'category';
+  protected static pluralName = 'categories';
 
   @Category.property({type: Date})
   public archived?: Date | null;

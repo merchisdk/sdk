@@ -1,7 +1,7 @@
-import { generateUUID } from './uuid';
-import { Dictionary } from './dictionary';
+import { generateUUID } from './uuid.js';
+import { Dictionary } from './dictionary.js';
 import { addPropertyTo, fromJson, getOne, serialise, create, enumerateFiles,
-    getList, fromJsonList, deleteOne, Request } from './model';
+    getList, fromJsonList, deleteOne, Request } from './model.js';
 
 export function MerchiFile() {
     this.resource = '/files';

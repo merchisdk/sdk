@@ -3,9 +3,9 @@ import { CartShipmentQuote } from './cart_shipment_quote';
 import { Entity } from '../entity';
 
 export class CartShipmentGroup extends Entity {
-  protected static resourceName: string = 'cart_shipment_groups';
-  protected static singularName: string = 'cartShipmentGroup';
-  protected static pluralName: string = 'cartShipmentGroups';
+  protected static resourceName = 'cart_shipment_groups';
+  protected static singularName = 'cartShipmentGroup';
+  protected static pluralName = 'cartShipmentGroups';
 
   @CartShipmentGroup.property()
   public id?: number;

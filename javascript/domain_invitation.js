@@ -1,5 +1,5 @@
-import { generateUUID } from './uuid';
-import { addPropertyTo } from './model';
+import { generateUUID } from './uuid.js';
+import { addPropertyTo } from './model.js';
 
 export function DomainInvitation() {
     this.resource = '/domain_invitations';

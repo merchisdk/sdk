@@ -1,9 +1,9 @@
 import { Entity } from '../entity';
 
 export class ExchangeRate extends Entity {
-  protected static resourceName: string = 'exchange_rates';
-  protected static singularName: string = 'exchangeRate';
-  protected static pluralName: string = 'exchangeRates';
+  protected static resourceName = 'exchange_rates';
+  protected static singularName = 'exchangeRate';
+  protected static pluralName = 'exchangeRates';
 
   @ExchangeRate.property()
   public id?: number;

@@ -8,9 +8,9 @@ import { VariationFieldsOption } from './variation_fields_option';
 import { some } from 'lodash';
 
 export class Inventory extends Entity {
-  protected static resourceName: string = 'inventories';
-  protected static singularName: string = 'inventory';
-  protected static pluralName: string = 'inventories';
+  protected static resourceName = 'inventories';
+  protected static singularName = 'inventory';
+  protected static pluralName = 'inventories';
 
   @Inventory.property({type: Date})
   public archived?: Date | null;
@@ -52,5 +52,5 @@ export class Inventory extends Entity {
     }
     return some(this.inventoryUnitVariations.map(
       (v: InventoryUnitVariation) => v.optionId() === option.id));
-  }
+  };
 }

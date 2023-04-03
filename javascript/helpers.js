@@ -1,3 +1,5 @@
+import { isBrowser, isJsDom } from "browser-or-node";
+
 export function id(x) {
     return x;
 }
@@ -16,6 +18,13 @@ export function isNull(x) {
 
 export function isUndefinedOrNull(x) {
     return isUndefined(x) || isNull(x);
+}
+
+export function getGlobal() {
+    if (isBrowser || isJsDom) {
+        return window;
+    }
+    return global;
 }
 
 export function isArray(x) {

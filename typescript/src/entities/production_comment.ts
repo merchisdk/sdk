@@ -5,9 +5,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class ProductionComment extends Entity {
-  protected static resourceName: string = 'production_comments';
-  protected static singularName: string = 'productionComment';
-  protected static pluralName: string = 'productionComments';
+  protected static resourceName = 'production_comments';
+  protected static singularName = 'productionComment';
+  protected static pluralName = 'productionComments';
 
   @ProductionComment.property({type: Date})
   public archived?: Date | null;

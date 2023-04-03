@@ -1,16 +1,16 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, patchOne, enumerateFiles, getList,
-    fromJson, getOne, create, fromJsonList } from './model';
+    fromJson, getOne, create, fromJsonList } from './model.js';
 import { isAvatarTypeInNotificationAvatar, notificationTypesKeys,
-    notificationSectionIconClass } from './notification_types';
-import { User } from './user';
-import { Domain } from './domain';
-import { Job } from './job';
-import { MerchiFile } from './merchi_file';
-import { DraftComment } from './draft_comment';
-import { JobComment } from './job_comment';
-import { ProductionComment } from './production_comment';
-import { Invoice } from './invoice';
+    notificationSectionIconClass } from './notification_types.js';
+import { User } from './user.js';
+import { Domain } from './domain.js';
+import { Job } from './job.js';
+import { MerchiFile } from './merchi_file.js';
+import { DraftComment } from './draft_comment.js';
+import { JobComment } from './job_comment.js';
+import { ProductionComment } from './production_comment.js';
+import { Invoice } from './invoice.js';
 
 export function Notification() {
     this.resource = '/notifications';

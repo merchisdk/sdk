@@ -16,9 +16,9 @@ import { Shipment } from './shipment';
 import { User } from './user';
 
 export class Invoice extends Entity {
-  protected static resourceName: string = 'invoices';
-  protected static singularName: string = 'invoice';
-  protected static pluralName: string = 'invoices';
+  protected static resourceName = 'invoices';
+  protected static singularName = 'invoice';
+  protected static pluralName = 'invoices';
 
   @Invoice.property({type: Date})
   public archived?: Date | null;

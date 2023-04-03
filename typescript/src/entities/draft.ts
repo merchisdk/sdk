@@ -6,9 +6,9 @@ import { Notification } from './notification';
 import { User } from './user';
 
 export class Draft extends Entity {
-  protected static resourceName: string = 'drafts';
-  protected static singularName: string = 'draft';
-  protected static pluralName: string = 'drafts';
+  protected static resourceName = 'drafts';
+  protected static singularName = 'draft';
+  protected static pluralName = 'drafts';
 
   @Draft.property({type: Date})
   public archived?: Date | null;
@@ -72,7 +72,7 @@ export class Draft extends Entity {
       }
     }
     return false;
-  }
+  };
 
   public commentsYoungestToEldest = () => {
     if (this.comments === undefined) {
@@ -84,5 +84,5 @@ export class Draft extends Entity {
       }
       return a.id - b.id;
     });
-  }
+  };
 }

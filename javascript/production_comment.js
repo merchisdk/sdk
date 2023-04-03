@@ -1,9 +1,9 @@
 import { addPropertyTo, enumerateFiles, create, serialise,
-    fromJson } from './model';
-import { Assignment } from './assignment';
-import { User } from './user';
-import { MerchiFile } from './merchi_file';
-import { Notification } from './notification';
+    fromJson } from './model.js';
+import { Assignment } from './assignment.js';
+import { User } from './user.js';
+import { MerchiFile } from './merchi_file.js';
+import { Notification } from './notification.js';
 
 export function ProductionComment() {
     this.resource = '/production_comments';

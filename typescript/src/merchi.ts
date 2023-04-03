@@ -357,8 +357,6 @@ export class Merchi {
     return apiFetchWithProgress(resource, options, progressCallback);
   };
 
-
-
   public getCurrentUser = (options?: UserRequestOptions) => {
     const { embed = {} } = options || {};
     const defaultEmbed = { user: { enrolledDomains: { domain: {} } } };

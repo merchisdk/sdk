@@ -2,9 +2,9 @@ import { Entity } from '../entity';
 import { User } from './user';
 
 export class ThemeCssSetting extends Entity {
-  protected static resourceName: string = 'theme_css_settings';
-  protected static singularName: string = 'themeCssSetting';
-  protected static pluralName: string = 'themeCssSettings';
+  protected static resourceName = 'theme_css_settings';
+  protected static singularName = 'themeCssSetting';
+  protected static pluralName = 'themeCssSettings';
 
   @ThemeCssSetting.property()
   public id?: number;

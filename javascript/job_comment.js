@@ -1,10 +1,10 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, enumerateFiles, fromJson, create,
-    serialise } from './model';
-import { Job } from './job';
-import { User } from './user';
-import { MerchiFile } from './merchi_file';
-import { Notification } from './notification';
+    serialise } from './model.js';
+import { Job } from './job.js';
+import { User } from './user.js';
+import { MerchiFile } from './merchi_file.js';
+import { Notification } from './notification.js';
 
 export function JobComment() {
     this.resource = '/job_comments';

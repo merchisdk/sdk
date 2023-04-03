@@ -1,11 +1,11 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, fromJson, create,
-     enumerateFiles } from './model';
-import { Cart } from './cart';
-import { CountryTax } from './country_tax';
-import { Product } from './product';
-import { Variation } from './variation';
-import { VariationsGroup } from './variations_group';
+     enumerateFiles } from './model.js';
+import { Cart } from './cart.js';
+import { CountryTax } from './country_tax.js';
+import { Product } from './product.js';
+import { Variation } from './variation.js';
+import { VariationsGroup } from './variations_group.js';
 
 export function CartItem() {
     this.resource = '/cart_items';

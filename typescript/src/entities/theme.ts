@@ -7,9 +7,9 @@ import { Page } from './page';
 import { ThemeStatus } from '../constants/theme_status';
 
 export class Theme extends Entity {
-  protected static resourceName: string = 'themes';
-  protected static singularName: string = 'theme';
-  protected static pluralName: string = 'themes';
+  protected static resourceName = 'themes';
+  protected static singularName = 'theme';
+  protected static pluralName = 'themes';
 
   @Theme.property({type: Date})
   public archived?: Date | null;
@@ -324,7 +324,7 @@ export class Theme extends Entity {
     }
     return this.mainCssStatus >= validStatus &&
       this.emailCssStatus >= validStatus;
-  }
+  };
 
   public isActiveOnDomain = (domainId: number) => {
     const domain = this.domain;
@@ -339,5 +339,5 @@ export class Theme extends Entity {
       throw new Error('activeTheme is unknown');
     }
     return domain.id == domainId && activeTheme.id === this.id;
-  }
+  };
 }

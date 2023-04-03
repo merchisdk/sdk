@@ -1,14 +1,14 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 import { addPropertyTo, serialise, enumerateFiles, getOne, fromJson, patchOne,
-   create } from './model';
-import { Address } from './address';
-import { CartItem } from './cart_item';
-import { CartShipmentGroup } from './cart_shipment_group';
-import { Company } from './company';
-import { Domain } from './domain';
-import { Invoice } from './invoice';
-import { Shipment } from './shipment';
-import { User } from './user';
+   create } from './model.js';
+import { Address } from './address.js';
+import { CartItem } from './cart_item.js';
+import { CartShipmentGroup } from './cart_shipment_group.js';
+import { Company } from './company.js';
+import { Domain } from './domain.js';
+import { Invoice } from './invoice.js';
+import { Shipment } from './shipment.js';
+import { User } from './user.js';
 
 
 export function Cart() {

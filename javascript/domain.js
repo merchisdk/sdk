@@ -1,18 +1,18 @@
-import { generateUUID } from './uuid';
-import { Dictionary } from './dictionary';
+import { generateUUID } from './uuid.js';
+import { Dictionary } from './dictionary.js';
 import { addPropertyTo, serialise, fromJson, getList, fromJsonList, patchOne,
-    getOne, create, enumerateFiles, Request } from './model';
-import { SELLER, SELLER_PLUS, SUPPLIER, RESTRICTED_SUPPLIER } from './roles';
-import { domainTypesInts } from './domain_types';
-import { Company } from './company';
-import { DomainTag } from './domain_tag';
-import { DomainInvitation } from './domain_invitation';
-import { Theme } from './theme';
-import { MerchiFile } from './merchi_file';
-import { Menu } from './menu';
-import { SupplyDomain } from './supply_domain';
-import { SeoDomainPage } from './seo_domain_page';
-import { User, Users } from './user';
+    getOne, create, enumerateFiles, Request } from './model.js';
+import { SELLER, SELLER_PLUS, SUPPLIER, RESTRICTED_SUPPLIER } from './roles.js';
+import { domainTypesInts } from './domain_types.js';
+import { Company } from './company.js';
+import { DomainTag } from './domain_tag.js';
+import { DomainInvitation } from './domain_invitation.js';
+import { Theme } from './theme.js';
+import { MerchiFile } from './merchi_file.js';
+import { Menu } from './menu.js';
+import { SupplyDomain } from './supply_domain.js';
+import { SeoDomainPage } from './seo_domain_page.js';
+import { User, Users } from './user.js';
 
 export function Domain() {
     this.resource = '/domains';
