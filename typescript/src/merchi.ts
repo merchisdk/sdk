@@ -61,6 +61,7 @@ import { Payment } from './entities/payment';
 import { Page } from './entities/page';
 import { CompanyInvitation } from './entities/company_invitation';
 import { SystemRole } from './entities/system_role';
+import { PaymentDevice } from './entities/payment_device';
 import { PhoneNumber } from './entities/phone_number';
 import { Variation } from './entities/variation';
 import { CartItem } from './entities/cart_item';
@@ -152,6 +153,7 @@ export class Merchi {
   public Domain: typeof Domain;
   public ExchangeRate: typeof ExchangeRate;
   public Payment: typeof Payment;
+  public PaymentDevice: typeof PaymentDevice;
   public Page: typeof Page;
   public ShortUrl: typeof ShortUrl;
   public CartItem: typeof CartItem;
@@ -283,6 +285,7 @@ export class Merchi {
     this.Discount = this.setupClass(Discount) as typeof Discount;
     this.DiscountGroup = this.setupClass(DiscountGroup) as typeof DiscountGroup;
     this.Payment = this.setupClass(Payment) as typeof Payment;
+    this.PaymentDevice = this.setupClass(PaymentDevice) as typeof PaymentDevice;
     this.Page = this.setupClass(Page) as typeof Page;
     this.Cart = this.setupClass(Cart) as typeof Cart;
     this.CartShipmentGroup = this.setupClass(

@@ -15,6 +15,7 @@ import { Product } from './product.js';
 import { ShipmentMethod } from './shipment_method.js';
 import { User } from './user.js';
 import { UserCompany } from './user_company.js';
+import { PaymentDevice } from './payment_device.js';
 
 export function Company() {
     this.resource = '/companies';
@@ -87,6 +88,7 @@ export function Company() {
         'accessibleDomainsAsClientCompany',
         Domain,
     );
+    addPropertyTo(this, 'paymentDevices', PaymentDevice);
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),
