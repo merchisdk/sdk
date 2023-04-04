@@ -148,11 +148,33 @@ export function Request() {
                 'Content-Type': self.contentType()
             }
         }
-        axios(params).then(
-            response => self.responseHandler()(response.data)
-        ).catch(
-          response => self.errorHandler()(response.data)
-        )
+        axios(params)
+            .then(response => handleResponse(response))
+            .catch(error => handleError(error));
+
+        function handleResponse(response) {
+            const func = self.responseHandler();
+            const argCount = func.length;
+            const data = JSON.stringify(response.data);
+          
+            if (argCount > 1) {
+                func(response.status, data);
+            } else {
+                func(data);
+            }
+         }
+
+        function handleError(error) {
+            const func = self.errorHandler();
+            const argCount = func.length;
+            const data = JSON.stringify(error.data);
+          
+            if (argCount > 1) {
+              func(error.status, data);
+            } else {
+              func(data);
+            }
+        }
     };
 }
 
