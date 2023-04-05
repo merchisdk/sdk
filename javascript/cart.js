@@ -93,8 +93,7 @@ export function Cart() {
 
     this.getShipmentGroupsAndQuotes = function (success, error) {
         var self = this,
-            request = new Request(),
-            jsonBody;
+            request = new Request();
         request.resource(`/generate-cart-shipment-quotes/${self.id()}/`);
         request.method('GET');
         request.query().add('cart_token', this.token());

@@ -145,7 +145,6 @@ export function Job() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            result = '',
             request = new Request();
         request.data().merge(data[0]);
         request.resource('/public-job-create/');

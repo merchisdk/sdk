@@ -49,14 +49,13 @@ export function MerchiFile() {
     this.publicCreate = function (success, error) {
         var self = this,
             filesObject = serialise(this),
-            request = new Request(),
-            jsonBody;
+            request = new Request();
         request.resource('/public-upload-job-files/');
         request.method('POST');
         request.files(enumerateFiles(filesObject[1]));
         function handleResponse(status, data) {
             if (status === 201) {
-                success(data);
+                success(fromJson(self, data[self.json]));
             } else {
                 error(data);
             }

@@ -107,7 +107,6 @@ export function Invoice() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            result = '',
             request = new Request();
         request.data().merge(data[0]);
         request.resource('/public-invoice-create/');
