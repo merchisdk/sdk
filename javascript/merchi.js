@@ -641,8 +641,9 @@ export function merchi(backendUri, websocketUri) {
         if (!embed) {
             embed = {};
         }
-        getGlobal().currentSession.get(success, error, {'user': embed});
-        getGlobal().currentSession.token(tokenStringForUser);
+
+        getGlobal().currentSession.token(tokenStringForUser).
+            get(success, error, {'user': embed});
     }
 
     function getCurrentUser(success, error, embed) {
