@@ -98,23 +98,11 @@ export function Cart() {
         request.resource(`/generate-cart-shipment-quotes/${self.id()}/`);
         request.method('GET');
         request.query().add('cart_token', this.token());
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    success(fromJson(self, jsonBody, {makesDirty: false}));
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(null, result);
-                }
+                success(fromJson(self, data, {makesDirty: false}));
             } else {
-               try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                   result = {message: 'Unable to duplicate product.'};
-                }
-                error(null, result);
+                error(status, data);
             }
         }
         request.responseHandler(handleResponse).errorHandler(error);

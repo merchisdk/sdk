@@ -54,24 +54,11 @@ export function MerchiFile() {
         request.resource('/public-upload-job-files/');
         request.method('POST');
         request.files(enumerateFiles(filesObject[1]));
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    result = fromJson(self, jsonBody[self.json]);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(result);
-                }
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to upload files.'};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError(status, data) {
@@ -157,29 +144,16 @@ export function MerchiFiles() {
         request.resource('/files/user/');
         request.method('GET');
         request.query().merge(query);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Invalid json from server',
-                              errorCode: 0};
-                }
-                success(fromJsonList(self, result));
+                success(fromJsonList(self, data));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create order',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError(status, data) {
             var statusCode = status ? status : 400,
-                errorObject = data ? JSON.parse(data) :
+                errorObject = data ? data :
                     {message: 'could not connect to server',
                      errorCode: 0};
             error(statusCode, errorObject);

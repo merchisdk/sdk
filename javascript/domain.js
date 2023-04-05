@@ -93,9 +93,9 @@ export function Domain() {
             self = this,
             _id = self.id();
 
-        function handleResponse(status, result) {
+        function handleResponse(status, data) {
             var newInvitation = new DomainInvitation(),
-                invitation = JSON.parse(result),
+                invitation = data,
                 invitations = self.domainInvitations() ?
                   self.domainInvitations() : [];
             newInvitation.id(invitation.id);

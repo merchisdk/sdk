@@ -71,13 +71,12 @@ export function Session() {
         request.resource('/store-session/');
         request.method('POST');
         request.query().merge(query);
-        function handleResponse(status, body) {
-            var result = JSON.parse(body);
-            success(fromJson(self, result[self.json]));
+        function handleResponse(status, data) {
+            success(fromJson(self, data[self.json]));
         }
         function handleError(status, data) {
             var statusCode = status ? status : 400,
-                errorObject = data ? JSON.parse(data) :
+                errorObject = data ? data :
                     {message: 'could not connect to server',
                      errorCode: 0};
             error(statusCode, errorObject);

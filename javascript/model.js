@@ -155,20 +155,19 @@ export function Request() {
         function handleResponse(response) {
             const func = self.responseHandler();
             const argCount = func.length;
-            const data = JSON.stringify(response.data);
-          
+            const data = response.data;
+
             if (argCount > 1) {
                 func(response.status, data);
             } else {
-                func(data);
+                func(response.data);
             }
          }
 
         function handleError(error) {
             const func = self.errorHandler();
             const argCount = func.length;
-            const data = JSON.stringify(error.data);
-          
+            const data = error.data;
             if (argCount > 1) {
               func(error.status, data);
             } else {
