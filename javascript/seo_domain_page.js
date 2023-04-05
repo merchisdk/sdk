@@ -1,6 +1,7 @@
 import { generateUUID } from './uuid.js';
 import { addPropertyTo, getList, fromJsonList } from './model.js';
 import { Domain } from './domain.js';
+import { Product } from './product.js';
 
 export function SeoDomainPage() {
     this.resource = '/seo_domain_pages';
@@ -14,6 +15,7 @@ export function SeoDomainPage() {
     addPropertyTo(this, 'metaTitle');
     addPropertyTo(this, 'pageKey');
     addPropertyTo(this, 'domain', Domain);
+    addPropertyTo(this, 'product', Product);
 }
 
 export function SeoDomainPages() {

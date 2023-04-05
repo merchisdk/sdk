@@ -1,4 +1,5 @@
 import { Domain } from './domain';
+import { Product } from './product';
 import { Entity } from '../entity';
 
 export class SeoDomainPage extends Entity {
@@ -14,6 +15,9 @@ export class SeoDomainPage extends Entity {
 
   @SeoDomainPage.property()
   public domain?: Domain;
+
+  @SeoDomainPage.property()
+  public product?: Product;
 
   @SeoDomainPage.property()
   public metaDescription?: string;

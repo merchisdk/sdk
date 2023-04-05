@@ -20,6 +20,7 @@ import { MerchiFile } from './merchi_file.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { Job } from './job.js';
+import { SeoDomainPage } from './seo_domain_page.js';
 
 export function Product() {
     this.resource = '/products';
@@ -103,6 +104,7 @@ export function Product() {
     addPropertyTo(this, 'supplyChainRequestJobs', Job);
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
+    addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
