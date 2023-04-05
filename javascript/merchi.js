@@ -800,8 +800,7 @@ export function merchi(backendUri, websocketUri) {
 
     function getUserIdByEmail(emailAddress, success, error) {
         var request = new Request(),
-            data = new Dictionary(),
-            errorCodeEmailNotFound = 5;
+            data = new Dictionary();
         request.resource('/user-check-email/');
         request.method('POST');
         data.add('email_address', emailAddress);
@@ -813,10 +812,7 @@ export function merchi(backendUri, websocketUri) {
                 error(status, data);
             }
         }
-        function handleError(status, data) {
-            error(status, data);
-        }
-        request.responseHandler(handleResponse).errorHandler(handleError);
+        request.responseHandler(handleResponse).errorHandler(error);
         request.send();
     }
 
