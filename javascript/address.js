@@ -88,28 +88,15 @@ export function Addresses() {
         request.resource('/related-addresses/');
         request.method('GET');
         request.query().merge(query);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Invalid json from server',
-                              errorCode: 0};
-                }
-                success(fromJsonList(self, result));
+                success(fromJsonList(self, data));
            } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create order',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError(status, data) {
-            var responseData = data ? JSON.parse(data) :
+            var responseData = data ? data :
                 {message: 'could not connect to server',
                    errorCode: 0}
             error(status, responseData);

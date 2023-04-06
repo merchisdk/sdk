@@ -66,39 +66,19 @@ export function User() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            request = new Request(),
-            result = '',
-            jsonBody;
+            request = new Request();
         request.data().merge(data[0]);
         request.resource('/public_user_create/');
         request.method('POST');
-        function handleResponse(status, body) {
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    result = fromJson(self, jsonBody[self.json]);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(status, result);
-                }
+                success(fromJson(self, data[self.json]));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create user.'};
-                }
-                error(status, result);
+                error(status, data);
             }
         }
-        function handleError(status, body) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'Invalid json from server',
-                          errorCode: 0};
-            }
-            error(status, result);
+        function handleError(status, data) {
+            error(status, data);
         }
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
