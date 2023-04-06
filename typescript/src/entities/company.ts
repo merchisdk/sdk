@@ -16,6 +16,7 @@ import { Shipment } from './shipment';
 import { User } from './user';
 import { UserCompany } from './user_company';
 import { SubscriptionPlan } from './subscription_plan';
+import { PaymentDevice } from './payment_device';
 
 export class Company extends Entity {
   protected static resourceName = 'companies';
@@ -183,6 +184,9 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'CountryTax'})
   public taxTypes?: CountryTax[];
+
+  @Company.property({arrayType: 'PaymentDevice'})
+  public paymentDevices?: PaymentDevice[];
 
   @Company.property({type: SubscriptionPlan})
   public subscriptionPlan?: SubscriptionPlan | null;
