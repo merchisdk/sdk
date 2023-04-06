@@ -2,6 +2,7 @@ import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.domains import Domain
+from sdk.python.products import Product
 
 
 class SeoDomainPage(sdk.python.entities.Entity):
@@ -12,6 +13,7 @@ class SeoDomainPage(sdk.python.entities.Entity):
     id = Property(int)
     archived = Property(datetime.datetime)
     domain = Property(Domain)
+    product = Property(Product)
     meta_description = Property(str)
     meta_robots = Property(str)
     meta_title = Property(str)

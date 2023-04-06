@@ -20,6 +20,7 @@ import { MerchiFile } from './merchi_file.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { Job } from './job.js';
+import { SeoDomainPage } from './seo_domain_page.js';
 
 export function Product() {
     this.resource = '/products';
@@ -103,6 +104,7 @@ export function Product() {
     addPropertyTo(this, 'supplyChainRequestJobs', Job);
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
+    addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
@@ -155,28 +157,14 @@ export function Product() {
 
     this.duplicate = function (success, error) {
         var self = this,
-            request = new Request(),
-            jsonBody;
+            request = new Request();
         request.resource('/products/' + self.id() + '/copy/');
         request.method('POST');
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    result = fromJson(self, jsonBody[self.json]);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(null, result);
-                }
+                success(fromJson(self, data[self.json]));
             } else {
-               try {
-                    result = JSON.parse(body);
-               } catch (e) {
-                    result = {message: 'Unable to duplicate product.'};
-                }
-                error(null, result);
+                error(null, data);
             }
         }
         request.responseHandler(handleResponse).errorHandler(error);

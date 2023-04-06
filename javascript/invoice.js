@@ -107,39 +107,19 @@ export function Invoice() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            result = '',
             request = new Request();
         request.data().merge(data[0]);
         request.resource('/public-invoice-create/');
         request.method('POST');
-        function handleResponse(status, body) {
-            var jsonBody;
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    result = fromJson(self, jsonBody[self.json]);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(status, result);
-                }
+                success(fromJson(self, data[self.json]));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create invoice.'};
-                }
-                error(status, result);
+                error(status, data);
             }
         }
-        function handleError(status, body) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'Invalid json from server',
-                          errorCode: 0};
-            }
-            error(status, result);
+        function handleError(status, data) {
+            error(status, data);
         }
         request.responseHandler(handleResponse).errorHandler(handleError);
         request.send();
@@ -189,24 +169,11 @@ export function Invoice() {
         request.query().add("as_domain", self.domain().id());
         request.query().add('skip_rights', true);
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                }
-                success(fromJson(self, result));
+                success(fromJson(self, data));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not get quote',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {

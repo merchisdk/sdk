@@ -15,6 +15,7 @@ import { Job } from './job';
 import { SupplyDomain } from './supply_domain';
 import { User } from './user';
 import { VariationField } from './variation_field';
+import { SeoDomainPage } from './seo_domain_page';
 import { ShipmentMethod } from './shipment_method';
 import {
   AutoAssignProductionOnAction
@@ -231,6 +232,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
+
+  @Product.property({arrayType: 'SeoDomainPage'})
+  public seoDomainPages?: SeoDomainPage[];
 
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;

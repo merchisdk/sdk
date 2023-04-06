@@ -145,42 +145,19 @@ export function Job() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            result = '',
             request = new Request();
         request.data().merge(data[0]);
         request.resource('/public-job-create/');
         request.method('POST');
         request.query().add('skip_rights', true);
-        function handleResponse(status, body) {
-            var jsonBody;
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    jsonBody = JSON.parse(body);
-                    result = fromJson(self, jsonBody[self.json]);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'invalid json from server'};
-                    error(result);
-                }
+                success(fromJson(self, data[self.json]));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create job.'};
-                }
-                error(result);
+                error(data);
             }
         }
-        function handleError(status, body) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'Invalid json from server',
-                          errorCode: 0};
-            }
-            error(status, result);
-        }
-        request.responseHandler(handleResponse).errorHandler(handleError);
+        request.responseHandler(handleResponse).errorHandler(error);
         request.send();
     };
 
@@ -194,8 +171,8 @@ export function Job() {
                 includeArchived: includeArchived,
                 withRights: withRights,
                 resource: this.resource};
-        function handleResponse(result) {
-            success(fromJson(self, result[self.json],
+        function handleResponse(data) {
+            success(fromJson(self, data[self.json],
                              {makesDirty: false}));
         }
         parameters.success = handleResponse;
@@ -225,8 +202,8 @@ export function Job() {
                 id: this.id(),
                  withRights: withRights,
                resource: this.resource};
-        function handleResponse(result) {
-             success(fromJson(self, result[self.json],
+        function handleResponse(data) {
+             success(fromJson(self, data[self.json],
                              {makesDirty: false}));
         }
         settings.success = handleResponse;
@@ -601,26 +578,11 @@ export function Job() {
         request.method('POST');
         request.data().merge(data);
         request.query().merge(query);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                    error(result);
-                    return;
-                }
-                success(fromJson(self, result['job']));
+                success(fromJson(self, data['job']));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not deduct',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {

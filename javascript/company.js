@@ -139,9 +139,9 @@ export function Company() {
             self = this,
             _id = self.id();
 
-        function handleResponse(status, result) {
+        function handleResponse(status, data) {
             var newInvitation = new CompanyInvitation(),
-                invitation = JSON.parse(result),
+                invitation = data,
                 invitations = self.companyInvitations() ?
                   self.companyInvitations() : [];
             newInvitation.id(invitation.id);

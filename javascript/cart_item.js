@@ -52,33 +52,14 @@ export function CartItem() {
         request.method('POST');
         request.query().add('skip_rights', true);
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                }
-                success(fromJson(new CartItem(), result));
+                success(fromJson(new CartItem(), data));
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not get quote',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
-        function handleError(status, data) {
-            var responseData = data ? JSON.parse(data) :
-                {message: 'could not connect to server',
-                  errorCode: 0}
-             error(status, responseData);
-        }
-        request.responseHandler(handleResponse).errorHandler(handleError);
+        request.responseHandler(handleResponse).errorHandler(error);
         request.send();
     };
 

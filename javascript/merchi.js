@@ -563,26 +563,11 @@ export function merchi(backendUri, websocketUri) {
         data.add('quantity', quantity);
         request.query().add('skip_rights', true);
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                    error(result);
-                    return;
-                }
-                success(result);
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not get quote',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {
@@ -604,26 +589,11 @@ export function merchi(backendUri, websocketUri) {
         request.query().add('skip_rights', true);
         // add this to helping backend to know what the product id is
         request.query().add('product_id', job.product().id());
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 201) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                    error(result);
-                    return;
-                }
-                success(result);
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not get quote',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {
@@ -641,8 +611,9 @@ export function merchi(backendUri, websocketUri) {
         if (!embed) {
             embed = {};
         }
-        getGlobal().currentSession.get(success, error, {'user': embed});
-        getGlobal().currentSession.token(tokenStringForUser);
+
+        getGlobal().currentSession.token(tokenStringForUser).
+            get(success, error, {'user': embed});
     }
 
     function getCurrentUser(success, error, embed) {
@@ -670,24 +641,11 @@ export function merchi(backendUri, websocketUri) {
         var request = new Request(),
             data = new Dictionary();
 
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                }
-                args.success(JSON.parse(body));
+                args.success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not recover the entity',
-                              errorCode: 0};
-                }
-                args.error(result);
+                args.error(data);
             }
         }
         function handleError() {
@@ -769,29 +727,11 @@ export function merchi(backendUri, websocketUri) {
                                                     'notificationTypes')));
         request.data().merge(data);
         request.query().add('skip_rights', 'y');
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                    checkDictKeyForFunction(optionsDict,
-                                            'error')(result);
-                    return;
-                }
-                checkDictKeyForFunction(optionsDict,
-                                        'success')(JSON.parse(body));
+                checkDictKeyForFunction(optionsDict, 'success')(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not recover the entity',
-                              errorCode: 0};
-                }
-                checkDictKeyForFunction(optionsDict,
-                                        'error')(result);
+                checkDictKeyForFunction(optionsDict, 'error')(data);
             }
         }
         function handleError() {
@@ -812,24 +752,11 @@ export function merchi(backendUri, websocketUri) {
         data.add('sender_id', senderId);
         request.query().add('skip_rights', 'y');
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'invalid json from server',
-                              errorCode: 0};
-                }
-                success(JSON.parse(body));
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'could not recover the entity',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {
@@ -873,44 +800,19 @@ export function merchi(backendUri, websocketUri) {
 
     function getUserIdByEmail(emailAddress, success, error) {
         var request = new Request(),
-            data = new Dictionary(),
-            result = '',
-            errorCodeEmailNotFound = 5;
+            data = new Dictionary();
         request.resource('/user-check-email/');
         request.method('POST');
         data.add('email_address', emailAddress);
         request.data().merge(data);
-        function handleResponse(status, body) {
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                    success(result);
-                } catch (e) {
-                    result = {message: 'Invalid json from server',
-                              errorCode: 0};
-                    error(status, result);
-                    return;
-                }
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Email not found.',
-                              errorCode: errorCodeEmailNotFound};
-                }
-                error(status, result);
+                error(status, data);
             }
         }
-        function handleError(status, body) {
-            try {
-                result = JSON.parse(body);
-            } catch (e) {
-                result = {message: 'Invalid json from server',
-                          errorCode: 0};
-            }
-            error(status, result);
-        }
-        request.responseHandler(handleResponse).errorHandler(handleError);
+        request.responseHandler(handleResponse).errorHandler(error);
         request.send();
     }
 
@@ -929,24 +831,11 @@ export function merchi(backendUri, websocketUri) {
         request.resource('/public-order/');
         request.method('POST');
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Invalid json from server',
-                              errorCode: 0};
-                }
-                success(JSON.parse(body));
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Unable to create order',
-                              errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {
@@ -966,25 +855,11 @@ export function merchi(backendUri, websocketUri) {
         request.resource(`/products/${productId}/shipment_options/`);
         request.method('POST');
         request.data().merge(data);
-        function handleResponse(status, body) {
-            var result = '';
+        function handleResponse(status, data) {
             if (status === 200) {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {message: 'Invalid json from server',
-                              errorCode: 0};
-                }
-                success(JSON.parse(body));
+                success(data);
             } else {
-                try {
-                    result = JSON.parse(body);
-                } catch (e) {
-                    result = {
-                        message: 'Unable to fetch shipment options',
-                        errorCode: 0};
-                }
-                error(result);
+                error(data);
             }
         }
         function handleError() {
