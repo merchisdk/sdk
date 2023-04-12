@@ -104,6 +104,7 @@ def get_https_expiry(host):
     expires = x509.get_notAfter().decode('UTF-8')
     return datetime.datetime.strptime(expires, "%Y%m%d%H%M%SZ")
 
+
 def hash(string):
     """ Hash a string using scrypt.
 
