@@ -114,4 +114,5 @@ def hash(string):
         Returns:
           str: hashed string
     """
-    return scrypt.hash(string.encode('utf-8'), buflen=DIGEST_LEN, salt=b'merchi')
+    return scrypt.hash(
+        string.encode('utf-8'), buflen=DIGEST_LEN, salt=b'merchi')
