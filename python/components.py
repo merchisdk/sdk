@@ -12,19 +12,23 @@ class Component(sdk.python.entities.Entity):
     json_name = 'component'
 
     id = Property(int)
-    archived = Property(datetime.datetime)
-    created = Property(datetime.datetime)
-    updated = Property(datetime.datetime)
-    is_class_based = Property(bool)
-    name = Property(str)
     body = Property(str)
-    description = Property(str)
+    archived = Property(datetime.datetime)
     compiled = Property(str)
+    component_exports = Property("sdk.python.products.Component")
+    component_imports = Property("sdk.python.products.Component")
+    created = Property(datetime.datetime)
     created_by = Property(User)
-    updated_by = Property(User)
-    tags = Property(ComponentTag)
-    images = Property(File)
+    description = Property(str)
     feature_image = Property(File)
+    images = Property(File)
+    is_class_based = Property(bool)
+    original_component = Property("sdk.python.products.Component")
+    name = Property(str)
+    needs_update = Property(bool)
+    tags = Property(ComponentTag)
+    updated = Property(datetime.datetime)
+    updated_by = Property(User)
 
 
 class Components(sdk.python.entities.Resource):

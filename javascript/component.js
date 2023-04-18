@@ -12,12 +12,16 @@ export function Component() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'archived');
+    addPropertyTo(this, 'componentImports');
+    addPropertyTo(this, 'componentExports');
     addPropertyTo(this, 'created');
     addPropertyTo(this, 'updated');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'needsUpdate');
     addPropertyTo(this, 'body');
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'compiled');
+    addPropertyTo(this, 'originalComponent', Component);
     addPropertyTo(this, 'createdBy', User);
     addPropertyTo(this, 'updatedBy', User);
     addPropertyTo(this, 'featureImage', MerchiFile);
