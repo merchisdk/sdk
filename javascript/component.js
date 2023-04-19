@@ -12,8 +12,8 @@ export function Component() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'archived');
-    addPropertyTo(this, 'componentImports');
-    addPropertyTo(this, 'componentExports');
+    addPropertyTo(this, 'componentImports', Component);
+    addPropertyTo(this, 'componentExports', Component);
     addPropertyTo(this, 'created');
     addPropertyTo(this, 'updated');
     addPropertyTo(this, 'name');
