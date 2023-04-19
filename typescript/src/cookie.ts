@@ -1,7 +1,7 @@
 export function getCookie(name: string) {
   // code might be executed during SSR
   // istanbul ignore next
-  if (document) {
+  if (typeof document !== 'undefined') {
     const searchPrefix = name + '=',
       cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; ++i) {
