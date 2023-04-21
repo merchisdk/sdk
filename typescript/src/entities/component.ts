@@ -27,6 +27,9 @@ export class Component extends Entity {
   public needsUpdate?: boolean;
 
   @Component.property()
+  public hasImports?: boolean;
+
+  @Component.property()
   public name?: string;
 
   @Component.property()
@@ -37,6 +40,9 @@ export class Component extends Entity {
 
   @Component.property()
   public compiled?: string;
+
+  @Component.property({type: 'Component'})
+  public componentExport?: Component;
 
   @Component.property({arrayType: 'Component'})
   public componentExports?: Component[];
