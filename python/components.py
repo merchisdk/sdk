@@ -27,7 +27,7 @@ class Component(sdk.python.entities.Entity):
     original_component = Property("sdk.python.components.Component")
     name = Property(str)
     needs_update = Property(bool)
-    has_imports = Property(bool)
+    has_imports = Property(int)
     tags = Property(ComponentTag)
     updated = Property(datetime.datetime)
     updated_by = Property(User)

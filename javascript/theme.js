@@ -3,6 +3,7 @@ import { addPropertyTo, serialise, create, fromJson, enumerateFiles, getOne,
     patchOne, fromJsonList, getList } from './model.js';
 import { themeStatus } from './theme_status.js';
 import { MerchiFile } from './merchi_file.js';
+import { Component } from './component.js';
 import { Domain } from './domain.js';
 import { Page } from './page.js';
 import { User } from './user.js';
@@ -19,6 +20,7 @@ export function Theme() {
     addPropertyTo(this, 'public');
     addPropertyTo(this, 'lastUpdated');
 
+    addPropertyTo(this, 'components', Component);
     addPropertyTo(this, 'featureImage', MerchiFile);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'cssImageFiles', MerchiFile);

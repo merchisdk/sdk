@@ -27,7 +27,7 @@ export class Component extends Entity {
   public needsUpdate?: boolean;
 
   @Component.property()
-  public hasImports?: boolean;
+  public hasImports?: number;
 
   @Component.property()
   public name?: string;
