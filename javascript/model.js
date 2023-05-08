@@ -167,9 +167,8 @@ export function Request() {
         function handleError(error) {
             const func = self.errorHandler();
             const argCount = func.length;
-            const data = error.data;
             if (argCount > 1) {
-              func(error.status, data);
+              func(error.status, error);
             } else {
               func(data);
             }
