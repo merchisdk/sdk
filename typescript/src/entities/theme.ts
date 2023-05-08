@@ -22,7 +22,7 @@ export class Theme extends Entity {
   public foundation?: number;
 
   @Theme.property({arrayType: 'Component'})
-  public menus?: Component[];
+  public components?: Component[];
 
   @Theme.property()
   public mainCssStatus?: number;
