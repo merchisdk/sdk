@@ -1,4 +1,4 @@
-import { Component } from './Component';
+import { Component } from './component';
 import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
