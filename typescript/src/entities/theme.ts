@@ -1,4 +1,4 @@
-import { Component } from './Component';
+import { Component } from './component';
 import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
@@ -22,7 +22,7 @@ export class Theme extends Entity {
   public foundation?: number;
 
   @Theme.property({arrayType: 'Component'})
-  public menus?: Component[];
+  public components?: Component[];
 
   @Theme.property()
   public mainCssStatus?: number;
