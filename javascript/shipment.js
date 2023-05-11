@@ -21,6 +21,7 @@ export function Shipment() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
+    addPropertyTo(this, 'pickUp');
     addPropertyTo(this, 'shipmentServiceBookingInfo');
     addPropertyTo(this, 'shipmentServiceQuote');
     addPropertyTo(this, 'shipmentLabel', MerchiFile);
