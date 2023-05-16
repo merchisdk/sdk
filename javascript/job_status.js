@@ -41,6 +41,7 @@ jobStatusShipment.add("DISPATCHED", 5);
 jobStatusShipment.add("EXPECTED_RECEIVE_DATE_WARNING", 6);
 jobStatusShipment.add("EXPECTED_RECEIVE_DATE_PAST", 7);
 jobStatusShipment.add("RECEIVED", 8);
+jobStatusShipment.add("PICKED_UP", 9);
 
 export const jobPriority = new Dictionary();
 

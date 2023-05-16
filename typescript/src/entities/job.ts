@@ -148,6 +148,9 @@ export class Job extends Entity {
   @Job.property()
   public dropShip?: boolean;
 
+  @Job.property()
+  public pickUp?: boolean;
+
   @Job.property({type: Number})
   public costPerUnit?: number | null;
 

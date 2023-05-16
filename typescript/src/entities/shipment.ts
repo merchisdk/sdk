@@ -36,6 +36,9 @@ export class Shipment extends Entity {
   @Shipment.property()
   public shipmentServiceQuote?: string;
 
+  @Shipment.property()
+  public pickUp?: boolean;
+
   @Shipment.property({type: MerchiFile})
   public shipmentLabel?: MerchiFile | null;
 
