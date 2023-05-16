@@ -28,6 +28,8 @@ class Component(sdk.python.entities.Entity):
     name = Property(str)
     needs_update = Property(bool)
     has_imports = Property(int)
+    is_cloned = Property(bool)
+    warnings = Property(str)
     tags = Property(ComponentTag)
     updated = Property(datetime.datetime)
     updated_by = Property(User)
