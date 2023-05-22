@@ -30,6 +30,12 @@ export class Component extends Entity {
   public hasImports?: number;
 
   @Component.property()
+  public isClone?: boolean;
+
+  @Component.property()
+  public warnings?: boolean;
+
+  @Component.property()
   public name?: string;
 
   @Component.property()

@@ -20,6 +20,8 @@ export function Component() {
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'needsUpdate');
     addPropertyTo(this, 'hasImports');
+    addPropertyTo(this, 'isClone');
+    addPropertyTo(this, 'warnings');
     addPropertyTo(this, 'body');
     addPropertyTo(this, 'description');
     addPropertyTo(this, 'compiled');
