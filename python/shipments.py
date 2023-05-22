@@ -21,6 +21,7 @@ class Shipment(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    pick_up = Property(bool)
     shipment_service_booking_info = Property(str)
     shipment_service_quote = Property(str)
     shipment_label = Property(File)

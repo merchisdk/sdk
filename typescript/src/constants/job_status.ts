@@ -38,6 +38,7 @@ export enum ShipmentStatus {
   EXPECTED_RECEIVE_DATE_WARNING = 6,
   EXPECTED_RECEIVE_DATE_PAST = 7,
   RECEIVED = 8,
+  PICKED_UP = 9,
 }
 
 export enum SupplyChainRequestStatus {

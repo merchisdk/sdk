@@ -67,6 +67,8 @@ export function Job() {
     addPropertyTo(this, 'manager', User);
     addPropertyTo(this, 'designer', User);
     addPropertyTo(this, 'shipping', Address);
+    addPropertyTo(this, 'dropShip');
+    addPropertyTo(this, 'pickUp');
     addPropertyTo(this, 'productionShippingAddress', Address);
     addPropertyTo(this, 'supplyAssignment', Assignment);
     addPropertyTo(this, 'supplyJob', Job);
