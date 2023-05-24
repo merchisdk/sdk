@@ -23,6 +23,9 @@ export class ShipmentMethod extends Entity {
   @ShipmentMethod.property({type: Address})
   public originAddress?: Address | null;
 
+  @ShipmentMethod.property()
+  public pickUp?: boolean;
+
   @ShipmentMethod.property({type: Company})
   public company?: Company | null;
 

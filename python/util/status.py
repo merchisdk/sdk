@@ -95,7 +95,9 @@ SHIPPING_STATUS = {
                                    "percentage": 70,
                                    "cssClass": "progress-bar-danger"},
     "RECEIVED": {"dbValue": 8, "text": "Received", "percentage": 100,
-                 "cssClass": "progress-bar-success"}
+                 "cssClass": "progress-bar-success"},
+    "PICKED_UP": {"dbValue": 9, "text": "Picked Up", "percentage": 100,
+                  "cssClass": "progress-bar-success"}
 }
 
 
