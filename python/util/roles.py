@@ -99,3 +99,7 @@ ROLE_OPTIONS = [(role, role_string(role)) for role in OPTIONS_ORDER]
 
 MANAGER_ROLE_OPTIONS = [(role, role_string(role)) for role in
                         MANAGER_OPTIONS_ORDER]
+
+ROLE_PRIORITIES = [
+    ADMIN, MANAGER, ACCOUNTANT, DESIGNER, SALES, SUPPLIER, CLIENT, PUBLIC
+]
