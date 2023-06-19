@@ -100,6 +100,8 @@ ROLE_OPTIONS = [(role, role_string(role)) for role in OPTIONS_ORDER]
 MANAGER_ROLE_OPTIONS = [(role, role_string(role)) for role in
                         MANAGER_OPTIONS_ORDER]
 
-ROLE_PRIORITIES = [
+ROLE_PRIORITY_RANK = [
     ADMIN, MANAGER, ACCOUNTANT, DESIGNER, SALES, SUPPLIER, CLIENT, PUBLIC
 ]
+
+ROLE_PRIORITIES = {role: i for i, role in enumerate(ROLE_PRIORITY_RANK)}
