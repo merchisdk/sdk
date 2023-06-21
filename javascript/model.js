@@ -488,9 +488,13 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (notEmpty(parameters.exclude)) {
         request.query().add('exclude', parameters.exclude);
     }
+    if (notEmpty(parameters.excludeComponents)) {
+        request.query().add(
+            'exclude_components', parameters.excludeComponents);
+    }
     if (notEmpty(parameters.excludeDomains)) {
-        request.query().add('excludeDomains',
-                            parameters.excludeDomains);
+        request.query().add(
+            'exclude_domains', parameters.excludeDomains);
     }
     if (notEmpty(parameters.includeOnly)) {
         request.query().add('include_only', parameters.includeOnly);

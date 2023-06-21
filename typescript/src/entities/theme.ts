@@ -1,3 +1,4 @@
+import { Component } from './component';
 import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
@@ -20,6 +21,9 @@ export class Theme extends Entity {
   @Theme.property()
   public foundation?: number;
 
+  @Theme.property({arrayType: 'Component'})
+  public components?: Component[];
+
   @Theme.property()
   public mainCssStatus?: number;
 
@@ -39,6 +43,9 @@ export class Theme extends Entity {
   public description?: string;
 
   @Theme.property()
+  public jsBundle?: string;
+
+  @Theme.property()
   public headerTemplate?: string;
 
   @Theme.property({type: String})
@@ -46,9 +53,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public headerHtml?: string;
-
-  @Theme.property()
-  public headerJs?: string;
 
   @Theme.property()
   public footerTemplate?: string;
@@ -60,9 +64,6 @@ export class Theme extends Entity {
   public footerHtml?: string;
 
   @Theme.property()
-  public footerJs?: string;
-
-  @Theme.property()
   public indexPageTemplate?: string;
 
   @Theme.property({type: String})
@@ -70,21 +71,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public indexHtml?: string;
-
-  @Theme.property()
-  public indexJs?: string;
-
-  @Theme.property()
-  public invoicesPageTemplate?: string;
-
-  @Theme.property({type: String})
-  public invoicesPageError?: string | null;
-
-  @Theme.property()
-  public invoicesHtml?: string;
-
-  @Theme.property()
-  public invoicesJs?: string;
 
   @Theme.property({arrayType: 'Menu'})
   public menus?: Menu[];
@@ -98,9 +84,6 @@ export class Theme extends Entity {
   @Theme.property()
   public productsHtml?: string;
 
-  @Theme.property()
-  public productsJs?: string;
-
   @Theme.property({type: String})
   public domainInvitePageTemplate?: string | null;
 
@@ -109,9 +92,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public domainInviteHtml?: string;
-
-  @Theme.property()
-  public domainInviteJs?: string;
 
   @Theme.property({type: String})
   public resetPasswordPageTemplate?: string | null;
@@ -122,9 +102,6 @@ export class Theme extends Entity {
   @Theme.property()
   public passwordResetHtml?: string;
 
-  @Theme.property()
-  public passwordResetJs?: string;
-
   @Theme.property({type: String})
   public passwordChangePageTemplate?: string | null;
 
@@ -133,21 +110,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public passwordChangeHtml?: string;
-
-  @Theme.property()
-  public passwordChangeJs?: string;
-
-  @Theme.property({type: String})
-  public jobsPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public jobsPageError?: string | null;
-
-  @Theme.property()
-  public jobsHtml?: string;
-
-  @Theme.property()
-  public jobsJs?: string;
 
   @Theme.property({type: String})
   public jobDraftingPageTemplate?: string | null;
@@ -158,9 +120,6 @@ export class Theme extends Entity {
   @Theme.property()
   public jobDraftingHtml?: string;
 
-  @Theme.property()
-  public jobDraftingJs?: string;
-
   @Theme.property({type: String})
   public jobQuoteRequestedPageTemplate?: string | null;
 
@@ -169,21 +128,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public jobQuoteRequestedHtml?: string;
-
-  @Theme.property()
-  public jobQuoteRequestedJs?: string;
-
-  @Theme.property({type: String})
-  public draftPreviewPageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public draftPreviewPageError?: string | null;
-
-  @Theme.property()
-  public draftPreviewHtml?: string;
-
-  @Theme.property()
-  public draftPreviewJs?: string;
 
   @Theme.property({type: String})
   public invoicePageTemplate?: string | null;
@@ -194,9 +138,6 @@ export class Theme extends Entity {
   @Theme.property()
   public invoiceHtml?: string;
 
-  @Theme.property()
-  public invoiceJs?: string;
-
   @Theme.property({type: String})
   public loginPageTemplate?: string | null;
 
@@ -205,9 +146,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public loginPageHtml?: string;
-
-  @Theme.property()
-  public loginPageJs?: string;
 
   @Theme.property({type: String})
   public errorPageTemplate?: string | null;
@@ -218,9 +156,6 @@ export class Theme extends Entity {
   @Theme.property()
   public errorPageHtml?: string;
 
-  @Theme.property()
-  public errorPageJs?: string;
-
   @Theme.property({type: String})
   public userProfilePageTemplate?: string | null;
 
@@ -229,21 +164,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public userProfileHtml?: string;
-
-  @Theme.property()
-  public userProfileJs?: string;
-
-  @Theme.property({type: String})
-  public companyProfilePageTemplate?: string | null;
-
-  @Theme.property({type: String})
-  public companyProfilePageError?: string | null;
-
-  @Theme.property()
-  public companyProfileHtml?: string;
-
-  @Theme.property()
-  public companyProfileJs?: string;
 
   @Theme.property({type: String})
   public productPageTemplate?: string | null;
@@ -254,9 +174,6 @@ export class Theme extends Entity {
   @Theme.property()
   public productHtml?: string;
 
-  @Theme.property()
-  public productJs?: string;
-
   @Theme.property({type: String})
   public invoicePaidPageTemplate?: string | null;
 
@@ -265,9 +182,6 @@ export class Theme extends Entity {
 
   @Theme.property()
   public invoicePaidHtml?: string;
-
-  @Theme.property()
-  public invoicePaidJs?: string;
 
   @Theme.property()
   public lastUpdated?: Date;

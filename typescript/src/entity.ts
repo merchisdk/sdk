@@ -136,6 +136,7 @@ interface ListOptions {
   tags?: number[];
   tagNames?: string[];
   exclude?: number[];
+  excludeComponents?: string[];
   excludeDomains?: number[];
   includeOnly?: number[];
   orClientId?: number;
@@ -602,6 +603,10 @@ export class Entity {
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
+      }
+      if (options.excludeComponents !== undefined) {
+        fetchOptions.query.push(
+          ['exclude_components', options.excludeComponents.join(',')]);
       }
       if (options.excludeDomains !== undefined) {
         fetchOptions.query.push(

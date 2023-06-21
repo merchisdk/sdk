@@ -24,6 +24,18 @@ export class Component extends Entity {
   public isClassBased?: boolean;
 
   @Component.property()
+  public needsUpdate?: boolean;
+
+  @Component.property()
+  public hasImports?: number;
+
+  @Component.property()
+  public isClone?: boolean;
+
+  @Component.property()
+  public warnings?: boolean;
+
+  @Component.property()
   public name?: string;
 
   @Component.property()
@@ -34,6 +46,18 @@ export class Component extends Entity {
 
   @Component.property()
   public compiled?: string;
+
+  @Component.property({type: 'Component'})
+  public componentExport?: Component;
+
+  @Component.property({arrayType: 'Component'})
+  public componentExports?: Component[];
+
+  @Component.property({arrayType: 'Component'})
+  public componentImports?: Component[];
+
+  @Component.property({type: 'Component'})
+  public originalComponent?: Component;
 
   @Component.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
