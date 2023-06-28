@@ -24,6 +24,7 @@ class Component(sdk.python.entities.Entity):
     feature_image = Property(File)
     images = Property(File)
     is_class_based = Property(bool)
+    outdated_with_original = Property(bool)
     original_component = Property("sdk.python.components.Component")
     name = Property(str)
     needs_update = Property(bool)
