@@ -24,6 +24,9 @@ export class Component extends Entity {
   public isClassBased?: boolean;
 
   @Component.property()
+  public outdatedWithOriginal?: boolean;
+
+  @Component.property()
   public needsUpdate?: boolean;
 
   @Component.property()

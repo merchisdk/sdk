@@ -19,6 +19,7 @@ export function Component() {
     addPropertyTo(this, 'updated');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'needsUpdate');
+    addPropertyTo(this, 'outdatedWithOriginal');
     addPropertyTo(this, 'hasImports');
     addPropertyTo(this, 'isClone');
     addPropertyTo(this, 'warnings');

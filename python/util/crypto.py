@@ -39,15 +39,24 @@ SHORTEST_NEW_PASSWORD = 8
 MAX_PASSWORD_LENGTH = 256
 
 
-def random_token(length):
+def random_token(length, upper=True, lower=True, digits=True):
     """ Produce a cryptographically secure pseudorandom token composed of
         a uniformly distributed sequence of ASCII uppercase letters, lowercase
         letters and digits.
 
         Args:
           length (int): number of characters to return
+          upper (bool): include uppercase letters
+          lower (bool): include lowercase letters
+          digits (bool): include digits
     """
-    chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
+    chars = ''
+    if upper:
+        chars += string.ascii_uppercase
+    if lower:
+        chars += string.ascii_lowercase
+    if digits:
+        chars += string.digits
     chooser = random.SystemRandom()
 
     def random_char():
