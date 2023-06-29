@@ -46,6 +46,9 @@ def random_token(length, upper=True, lower=True, digits=True):
 
         Args:
           length (int): number of characters to return
+          upper (bool): include uppercase letters
+          lower (bool): include lowercase letters
+          digits (bool): include digits
     """
     chars = ''
     if upper:
