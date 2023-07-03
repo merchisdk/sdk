@@ -12,9 +12,24 @@ class CountryTax extends Entity
     public function __construct()
     {
         $this->json_property('id', 'integer');
+        $this->json_property('archived', 'integer');
         $this->json_property('country', 'string');
         $this->json_property('tax_name', 'string');
         $this->json_property('tax_percent', 'float');
+        $this->json_property('shipments', 'Shipment', $many = True, $recursive = True);
+        $this->json_property('company', 'Company', $many = False, $recursive = True);
+        $this->json_property('jobs', 'Job', $many = True, $recursive = True);
+        $this->json_property('items', 'Item', $many = True, $recursive = True);
+
+    }
+
+    static function get_no_tax()
+    {
+        $result = new CountryTax();
+        $result->id = 3; // 3 is a reserved id for 'no tax' by the backend
+        $result->tax_name = 'No tax';
+        $result->tax_percent = 0;
+        return $result;
     }
 
     function country_name()
