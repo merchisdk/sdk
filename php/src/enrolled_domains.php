@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 require_once 'entity.php';
 
-class EmailAddress extends Entity
+class EnrolledDomain extends Entity
 {
-    public static $json_name = 'emailAddress';
-    public static $resource = '/email_addresses/';
+    public static $json_name = 'enrolled_domain';
+    public static $resource = '/enrolled_domains/';
 
 
     public function __construct()
