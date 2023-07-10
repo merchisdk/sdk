@@ -147,9 +147,11 @@ export function Job() {
     this.publicCreate = function (success, error) {
         var data = serialise(this),
             self = this,
-            request = new Request();
+            request = new Request(),
+            jobType = this.product() && this.product().productType() === 0 ?
+                'mod' : 'supplier';
         request.data().merge(data[0]);
-        request.resource('/public-job-create/');
+        request.resource(`/public-${jobType}-quote/`);
         request.method('POST');
         request.query().add('skip_rights', true);
         function handleResponse(status, data) {
