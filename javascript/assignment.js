@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, fromJson, create, serialise, enumerateFiles, getList,
     patchOne, fromJsonList, getOne } from './model.js';
 import { notificationTypes, notificationRecieverIsCurrentUserFilter,

@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, fromJson, getOne, fromJsonList,
     getList } from './model.js';
 import { QuoteItem } from './quote_item.js';

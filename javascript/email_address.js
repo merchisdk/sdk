@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, getList, fromJsonList } from './model.js';
 
 export function EmailAddress() {

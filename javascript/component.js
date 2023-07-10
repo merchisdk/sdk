@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, fromJson, getOne, serialise, enumerateFiles, patchOne,
     fromJsonList, getList, create } from './model.js';
 import { MerchiFile } from './merchi_file.js';

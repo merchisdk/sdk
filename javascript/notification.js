@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, serialise, patchOne, enumerateFiles, getList,
     fromJson, getOne, create, fromJsonList } from './model.js';
 import { isAvatarTypeInNotificationAvatar, notificationTypesKeys,

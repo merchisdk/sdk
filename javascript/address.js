@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, fromJson, getOne, fromJsonList,
     Request } from './model.js'
 import { isUndefinedOrNull } from './helpers.js';

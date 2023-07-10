@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { isNull, isUndefined, isUndefinedOrNull, id,
     notEmptyArray, isArray, removeObjectFromArrayWithIntegerValue,
     sortArrayByObjectKey, getGlobal } from './helpers.js';

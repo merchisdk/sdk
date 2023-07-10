@@ -1,5 +1,5 @@
-import moment from 'moment-timezone';
-import { generateUUID } from './uuid.js';
+import moment from 'moment';
+import generateUUID from './uuid.js';
 import { Set } from './set.js';
 import { md5 } from './md5.js';
 import {  COMPONENT_BUILDER, roles, systemRoles, allRoles } from './roles.js';
