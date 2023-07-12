@@ -409,6 +409,9 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (notEmpty(parameters.relatedAssignment)) {
         request.query().add('related_assignment', parameters.relatedAssignment);
     }
+    if (notEmpty(parameters.relatedComponent)) {
+        request.query().add('related_component', parameters.relatedComponent);
+    }
     if (notEmpty(parameters.relatedDraft)) {
         request.query().add('related_draft', parameters.relatedDraft);
     }

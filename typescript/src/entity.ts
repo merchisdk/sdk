@@ -110,6 +110,7 @@ interface ListOptions {
   dateFrom?: Date;
   dateTo?: Date;
   relatedAssignment?: number;
+  relatedComponent?: number;
   relatedDraft?: number;
   relatedJob?: number;
   relatedProduct?: number;
@@ -517,6 +518,10 @@ export class Entity {
       if (options.relatedAssignment !== undefined) {
         fetchOptions.query.push(['related_assignment',
           options.relatedAssignment.toString()]);
+      }
+      if (options.relatedComponent !== undefined) {
+        fetchOptions.query.push(['related_component',
+          options.relatedComponent.toString()]);
       }
       if (options.relatedDraft !== undefined) {
         fetchOptions.query.push(['related_draft',
