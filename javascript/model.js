@@ -506,6 +506,14 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('shopify_only',
                             parameters.shopifyOnly);
     }
+    if (notEmpty(parameters.relatedComponent)) {
+        request.query().add('related_component',
+                            parameters.shopifyOnly);
+    }
+    if (notEmpty(parameters.originalOf)) {
+        request.query().add('original_of',
+                            parameters.shopifyOnly);
+    }
     request.send();
     if (withUpdates) {
         return getGlobal().merchiSusubscriptionManager.subscribe(
