@@ -500,11 +500,19 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('include_only', parameters.includeOnly);
     }
     if (notEmpty(parameters.orClientId)) {
-        request.query().add('include_only', parameters.includeOnly);
+        request.query().add('or_client_id', parameters.orClientId);
     }
     if (notEmpty(parameters.shopifyOnly)) {
         request.query().add('shopify_only',
                             parameters.shopifyOnly);
+    }
+    if (notEmpty(parameters.relatedComponent)) {
+        request.query().add('related_component',
+                            parameters.relatedComponent);
+    }
+    if (notEmpty(parameters.originalOf)) {
+        request.query().add('original_of',
+                            parameters.originalOf);
     }
     request.send();
     if (withUpdates) {
