@@ -500,7 +500,7 @@ export function getList(resource, success, error, parameters, withUpdates) {
         request.query().add('include_only', parameters.includeOnly);
     }
     if (notEmpty(parameters.orClientId)) {
-        request.query().add('include_only', parameters.includeOnly);
+        request.query().add('or_client_id', parameters.orClientId);
     }
     if (notEmpty(parameters.shopifyOnly)) {
         request.query().add('shopify_only',
@@ -508,11 +508,11 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (notEmpty(parameters.relatedComponent)) {
         request.query().add('related_component',
-                            parameters.shopifyOnly);
+                            parameters.relatedComponent);
     }
     if (notEmpty(parameters.originalOf)) {
         request.query().add('original_of',
-                            parameters.shopifyOnly);
+                            parameters.originalOf);
     }
     request.send();
     if (withUpdates) {
