@@ -1,6 +1,8 @@
 import generateUUID from './uuid.js';
-import { addPropertyTo, serialise, fromJson, create,
-     enumerateFiles } from './model.js';
+import {
+    addPropertyTo, serialise, fromJson, create,
+    enumerateFiles, deleteOneV2, getOne,Request, patchOne
+} from './model.js';
 import { Cart } from './cart.js';
 import { CountryTax } from './country_tax.js';
 import { Product } from './product.js';
@@ -36,18 +38,58 @@ export function CartItem() {
         function handleResponse(result) {
             success(fromJson(self, result[self.json]));
         }
-        create({resource: this.resource,
-                parameters: data[0],
-                as_domain: asDomain,
-                files: enumerateFiles(data[1]),
-                success: handleResponse,
+        create({
+            resource: this.resource,
+            parameters: data[0],
+            as_domain: asDomain,
+            files: enumerateFiles(data[1]),
+            success: handleResponse,
+            error: error,
+            embed: embed
+        });
+    };
+
+    this.get = function (success, error, embed, includeArchived,
+        withRights) {
+        var self = this,
+            parameters = {
+                embed: embed,
                 error: error,
-                embed: embed});
+                id: this.id(),
+                includeArchived: includeArchived,
+                withRights: withRights,
+                resource: this.resource,
+                cartToken: this.cart().token()
+            };
+        function handleResponse(result) {
+            success(fromJson(self, result[self.json],
+                { makesDirty: false }));
+        }
+        parameters.success = handleResponse;
+        getOne(parameters);
+    };
+
+
+    this.patch = function (success, error, embed) {
+        var self = this,
+            data = serialise(this, undefined, undefined, undefined,
+                             {excludeOld: true})[0];
+        function handleResponse(result) {
+            success(fromJson(self, result[self.json],
+                             {makesDirty: false}));
+        }
+        patchOne({cartToken: this.cart().token(),
+                  resource: this.resource,
+                  id: this.id(),
+                  success: handleResponse,
+                  error: error,
+                  data: data,
+                  embed: embed});
     };
 
     this.calculate = function (success, error, embed) {
-        var request = new Request(),
-            data = serialise(this)[0];
+        var request = new Request();
+        var data = serialise(this)[0];
         request.resource('/cart-item-cost-estimate/');
         request.method('POST');
         request.query().add('skip_rights', true);
@@ -63,9 +105,18 @@ export function CartItem() {
         request.send();
     };
 
-    this.requiresShipment = function() {
-        var product = this.product();
-        return product ? product.needsShipping() : false;
+    this.destroy = function (success, error) {
+        deleteOneV2({
+            resource: this.resource + "/" + this.id(),
+            success: success,
+            error: error,
+            cartToken: this.cart().token()
+        });
     };
 
+    this.requiresShipment = function () {
+        var product = this.product();
+        //console.log("bhbh")
+        return product ? product.needsShipping() : false;
+    };
 }

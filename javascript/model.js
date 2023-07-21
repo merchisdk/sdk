@@ -120,7 +120,7 @@ export function Request() {
         if (Boolean(getGlobal().currentSession) &&
             Boolean(getGlobal().currentSession.token())) {
             this.query().add('session_token',
-                             getGlobal().currentSession.token());
+                getGlobal().currentSession.token());
         }
         if (this.query().count() > 0) {
             url += '?' + this.query().toUriEncoding();
@@ -148,9 +148,12 @@ export function Request() {
                 'Content-Type': self.contentType()
             }
         }
-        axios(params)
+        return axios(params)
             .then(response => handleResponse(response))
-            .catch(error => handleError(error));
+            .catch(error => {
+                //console.log(`${error.response.status} ${JSON.stringify(error.response.data)}`);
+                handleError(error)
+            });
 
         function handleResponse(response) {
             const func = self.responseHandler();
@@ -162,15 +165,16 @@ export function Request() {
             } else {
                 func(response.data);
             }
-         }
+        }
 
         function handleError(error) {
             const func = self.errorHandler();
             const argCount = func.length;
             if (argCount > 1) {
-              func(error.status, error);
+                console.log(`Error ${JSON.stringify(error.response)}`)
+                func(error.status, error);
             } else {
-              func(data);
+                func(data);
             }
         }
     };
@@ -185,7 +189,7 @@ export function forEachProperty(obj, procedure) {
 }
 
 export function fromJson(model, json, options) {
-    var defaults = {makesDirty: true};
+    var defaults = { makesDirty: true };
     options = Object.assign({}, defaults, options);
     forEachProperty(model, function (propName, Type) {
         try {
@@ -194,7 +198,7 @@ export function fromJson(model, json, options) {
 
             if (!Type || typeof received === 'number') {
                 // Prop is untyped or only id received
-                model[propName](received, {makesDirty: options.makesDirty});
+                model[propName](received, { makesDirty: options.makesDirty });
             } else {
                 // Prop is typed and other thing rather than
                 // single id received
@@ -203,7 +207,7 @@ export function fromJson(model, json, options) {
                         received[0] instanceof Object) {
                         // response has embed obj
                         parsed = fromJsonList(new Type(), received,
-                                              options);
+                            options);
                     } else {
                         // response is id array
                         parsed = received;
@@ -212,7 +216,7 @@ export function fromJson(model, json, options) {
                     // Embed Object received
                     parsed = fromJson(new Type(), received, options);
                 }
-                model[propName](parsed, {makesDirty: options.makesDirty});
+                model[propName](parsed, { makesDirty: options.makesDirty });
             }
         } catch (ignore) {
         }
@@ -227,7 +231,7 @@ export function fromJsonList(obj, json, options) {
         i,
         single;
 
-    var defaults = {makesDirty: true};
+    var defaults = { makesDirty: true };
     options = Object.assign({}, defaults, options);
 
     // When request plural eg /users, it gives typed json list
@@ -321,46 +325,46 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (parameters.inDomainRoles) {
         request.query().add('in_domain_roles',
-                            JSON.stringify(parameters.inDomainRoles));
+            JSON.stringify(parameters.inDomainRoles));
     }
     if (parameters.asRole) {
         request.query().add('as_role', JSON.stringify(parameters.asRole));
     }
     if (parameters.groupBuyOnly) {
         request.query().add('group_buy_only',
-                            JSON.stringify(parameters.groupBuyOnly));
+            JSON.stringify(parameters.groupBuyOnly));
     }
     if (parameters.publicOnly) {
         request.query().add('public_only',
-                            JSON.stringify(parameters.publicOnly));
+            JSON.stringify(parameters.publicOnly));
     }
     if (parameters.isPrivate) {
         request.query().add('is_private',
-                            JSON.stringify(parameters.isPrivate));
+            JSON.stringify(parameters.isPrivate));
     }
     if (parameters.managedOnly) {
         request.query().add('managed_only',
-                            JSON.stringify(parameters.managedOnly));
+            JSON.stringify(parameters.managedOnly));
     }
     if (parameters.doesNotHaveAdminDomain) {
         request.query().add('does_not_have_admin_domain',
-                            JSON.stringify(parameters.doesNotHaveAdminDomain));
+            JSON.stringify(parameters.doesNotHaveAdminDomain));
     }
     if (parameters.teamOnly) {
-       request.query().add('team_only',
-                            JSON.stringify(parameters.teamOnly));
+        request.query().add('team_only',
+            JSON.stringify(parameters.teamOnly));
     }
     if (parameters.clientOnly) {
         request.query().add('client_only',
-                            JSON.stringify(parameters.clientOnly));
+            JSON.stringify(parameters.clientOnly));
     }
     if (parameters.memberOnly) {
         request.query().add('member_only',
-                            JSON.stringify(parameters.memberOnly));
+            JSON.stringify(parameters.memberOnly));
     }
     if (parameters.merchiOnly) {
         request.query().add('merchi_only',
-                            JSON.stringify(parameters.merchiOnly));
+            JSON.stringify(parameters.merchiOnly));
     }
     if (parameters.supplierResellOnly) {
         request.query().add(
@@ -394,11 +398,11 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (parameters.managedDomainsOnly) {
         request.query().add('managed_domains_only',
-                            JSON.stringify(parameters.managedDomainsOnly));
+            JSON.stringify(parameters.managedDomainsOnly));
     }
     if (parameters.businessDomainsOnly) {
         request.query().add('business_domains_only',
-                            JSON.stringify(parameters.businessDomainsOnly));
+            JSON.stringify(parameters.businessDomainsOnly));
     }
     if (notEmpty(parameters.dateFrom)) {
         request.query().add('date_from', parameters.dateFrom);
@@ -442,30 +446,30 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (notEmpty(parameters.clientCompanyId)) {
         request.query().add('client_company_id',
-                            parameters.clientCompanyId);
+            parameters.clientCompanyId);
     }
     if (parameters.savedByUser) {
         request.query().add('saved_by_user',
-                            JSON.stringify(parameters.savedByUser));
+            JSON.stringify(parameters.savedByUser));
     }
     if (parameters.receiverId) {
         request.query().add('receiver_id',
-                            JSON.stringify(parameters.receiverId));
+            JSON.stringify(parameters.receiverId));
     }
     if (notEmpty(parameters.queryString)) {
         request.query().add('query_string',
-                            parameters.queryString);
+            parameters.queryString);
     }
     if (notEmpty(parameters.companyCustomerId)) {
         request.query().add('company_customer_id',
-                            parameters.companyCustomerId);
+            parameters.companyCustomerId);
     }
     if (notEmpty(parameters.companyId)) {
         request.query().add('company_id', parameters.companyId);
     }
     if (notEmpty(parameters.companySupplierId)) {
         request.query().add('company_supplier_id',
-                            parameters.companySupplierId);
+            parameters.companySupplierId);
     }
     if (notEmpty(parameters.componentId)) {
         request.query().add('component_id', parameters.componentId);
@@ -504,13 +508,13 @@ export function getList(resource, success, error, parameters, withUpdates) {
     }
     if (notEmpty(parameters.shopifyOnly)) {
         request.query().add('shopify_only',
-                            parameters.shopifyOnly);
+            parameters.shopifyOnly);
     }
     request.send();
     if (withUpdates) {
         return getGlobal().merchiSusubscriptionManager.subscribe(
             withUpdates, request.path(), "GET",
-            function(statusCode, data) {return success(JSON.parse(data))}
+            function (statusCode, data) { return success(JSON.parse(data)) }
         );
     }
     return null;
@@ -528,14 +532,13 @@ export function serialise(obj, existing, prefix, files, options) {
     if (!files) {
         files = [];
     }
-   function appendData(name, value) {
+    function appendData(name, value) {
         if (!isUndefined(value) && value !== null) {
             if (Boolean(prefix)) {
                 result.add(prefix + '-' + name, value);
             }
-            else
-            {
-               result.add(name, value);
+            else {
+                result.add(name, value);
             }
         }
     }
@@ -558,10 +561,10 @@ export function serialise(obj, existing, prefix, files, options) {
             if (value instanceof Array) {
                 var isDirty = false;
                 for (i = 0; i < value.length; i++) {
-                  if (!!value[i]._isDirty) {
-                    isDirty = true;
-                    break;
-                  }
+                    if (!!value[i]._isDirty) {
+                        isDirty = true;
+                        break;
+                    }
                 }
                 if (excludeOld && !(obj._wantsUpdate[property] ||
                     isDirty)) {
@@ -579,15 +582,15 @@ export function serialise(obj, existing, prefix, files, options) {
                     }
                     var initialCount = result.count();
                     nested = serialise(value[i], result, innerPrefix,
-                                       files, options);
+                        files, options);
                     if (result.count() > initialCount) {
-                      childrenSerialised += 1;
+                        childrenSerialised += 1;
                     }
                     result = nested[0];
                     files = nested[1];
 
                     if (childrenSerialised > 0) {
-                      appendData(property + '-count', childrenSerialised);
+                        appendData(property + '-count', childrenSerialised);
                     }
                 }
             } else if (Boolean(value)) {
@@ -602,13 +605,13 @@ export function serialise(obj, existing, prefix, files, options) {
                 }
                 initialCount = result.count();
                 nested = serialise(value, result, innerPrefix, files,
-                                   options);
+                    options);
                 if (result.count() > initialCount) {
-                  appendData(property + '-count', 1);
+                    appendData(property + '-count', 1);
                 }
                 result = nested[0];
                 files = nested[1];
-           }
+            }
         } else {
             // serialise scalar
             if (excludeOld && !obj._wantsUpdate[property] &&
@@ -622,21 +625,21 @@ export function serialise(obj, existing, prefix, files, options) {
 }
 
 function markDirty(obj) {
- /* mark this object, and recursively all objects that have refered to it,
-     as changed compared to the backend. */
-  var openSet = [];  /* Queue (BFS) */
-  var closedSet = new Set();
-  openSet.push(obj);
-  while (openSet.length > 0) {
-    var current = openSet.shift();
-    if (!closedSet.has(current)) {
-      current._isDirty = true;
-      closedSet.add(current);
-      current._backObjects.each(function (child) {
-        openSet.push(child);
-      });
+    /* mark this object, and recursively all objects that have refered to it,
+        as changed compared to the backend. */
+    var openSet = [];  /* Queue (BFS) */
+    var closedSet = new Set();
+    openSet.push(obj);
+    while (openSet.length > 0) {
+        var current = openSet.shift();
+        if (!closedSet.has(current)) {
+            current._isDirty = true;
+            closedSet.add(current);
+            current._backObjects.each(function (child) {
+                openSet.push(child);
+            });
+        }
     }
-  }
 }
 
 export function addPropertyTo(obj, propertyName, Type) {
@@ -665,32 +668,32 @@ export function addPropertyTo(obj, propertyName, Type) {
     obj._properties.add([propertyName, Type]);
     obj[propertyName] = function (value, options) {
         if (isUndefined(options)) {
-          options = {};
+            options = {};
         }
         if (isUndefined(options.makesDirty)) {
-          options.makesDirty = true;
+            options.makesDirty = true;
         }
         if (isUndefined(options.updatingOrder)) {
-          options.updatingOrder = false;
+            options.updatingOrder = false;
         }
         if (isUndefined(value)) {
             return obj[hiddenProperty];
         }
         obj[hiddenProperty] = value;
         if (options.makesDirty) {
-          obj._wantsUpdate[propertyName] = true;
-          markDirty(obj);
+            obj._wantsUpdate[propertyName] = true;
+            markDirty(obj);
         }
         obj._updatingOrder[propertyName] = options.updatingOrder;
         if (!!value && !!value._isMerchiEntity) {
-          value._backObjects.add(obj);
+            value._backObjects.add(obj);
         } else if (Array.isArray(value)) {
-          for (var i = 0; i < value.length; i++) {
-            var item = value[i];
-            if (!!item._isMerchiEntity) {
-              item._backObjects.add(obj);
+            for (var i = 0; i < value.length; i++) {
+                var item = value[i];
+                if (!!item._isMerchiEntity) {
+                    item._backObjects.add(obj);
+                }
             }
-          }
         }
         return obj;
     };
@@ -698,11 +701,12 @@ export function addPropertyTo(obj, propertyName, Type) {
 
 export function patchOne(options) {
     var request = new Request(),
-    id = options.id;
+        id = options.id;
     options.resource = options.resource || '';
     options.id = options.id || '';
     options.data = options.data || {};
     options.success = options.success || id;
+    //options.data.cart_token = options.cartToken
     options.error = options.error || id;
     options.files = options.files || new Dictionary();
 
@@ -758,6 +762,19 @@ export function deleteOne(resource, success, error) {
     var request = new Request();
     request.resource(resource + '/').method('DELETE');
     request.responseHandler(success).errorHandler(error);
+    request.send();
+}
+
+export function deleteOneV2(options) {
+    var request = new Request();
+    request.resource(options.resource + '/').method('DELETE');
+    if (options.cartToken) {
+        request.data().merge({ 'cart_token': options.cartToken })
+    }
+    if (!options.withRights) {
+        request.data().merge({ 'skip_rights': 'y' })
+    }
+    request.responseHandler(options.success).errorHandler(options.error);
     request.send();
 }
 

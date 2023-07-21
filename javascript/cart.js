@@ -1,6 +1,6 @@
 import generateUUID from './uuid.js';
 import { addPropertyTo, serialise, enumerateFiles, getOne, fromJson, patchOne,
-   create } from './model.js';
+   create, Request } from './model.js';
 import { Address } from './address.js';
 import { CartItem } from './cart_item.js';
 import { CartShipmentGroup } from './cart_shipment_group.js';

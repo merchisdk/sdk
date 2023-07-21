@@ -75,6 +75,7 @@ import { VariationFieldsOption } from './variation_fields_option.js';
 import { VariationsGroup } from './variations_group.js';
 import { QuoteItem, QuoteItems } from './quote_item.js';
 import { Quotes, Quote } from './quote.js';
+import { CartShipmentQuote } from './cart_shipment_quote.js';
 
 export function merchi(backendUri, websocketUri) {
     getGlobal().merchiJsonpHandlers = {};
@@ -944,6 +945,7 @@ export function merchi(backendUri, websocketUri) {
             'JobComment': JobComment,
             'Cart': Cart,
             'CartItem': CartItem,
+            'CartShipmentQuote': CartShipmentQuote,
             'Bank': Bank,
             'QuoteItem': QuoteItem,
             'QuoteItems': new QuoteItems(),
