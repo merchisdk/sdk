@@ -86,6 +86,7 @@ export function Product() {
     addPropertyTo(this, 'acceptBankTransfer');
     addPropertyTo(this, 'acceptPhonePayment');
     addPropertyTo(this, 'supplyChainDisabled');
+    addPropertyTo(this, 'allowAutomaticPaymentSupply');
     addPropertyTo(this, 'allowGroupBuy');
     addPropertyTo(this, 'allowPaymentUpfront');
     addPropertyTo(this, 'allowQuotation');

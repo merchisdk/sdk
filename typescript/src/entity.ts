@@ -113,6 +113,8 @@ interface ListOptions {
   relatedDraft?: number;
   relatedJob?: number;
   relatedProduct?: number;
+  relatedComponent?: number;
+  originalOf?: number;
   jobNotifiable?: number;
   notificationType?: NotificationType;
   notificationRecipient?: number;
@@ -513,6 +515,14 @@ export class Entity {
       }
       if (options.dateTo !== undefined) {
         fetchOptions.query.push(['date_to', toUnixTimestamp(options.dateTo)]);
+      }
+      if (options.originalOf !== undefined) {
+        fetchOptions.query.push(['original_of',
+          options.originalOf.toString()]);
+      }
+      if (options.relatedComponent !== undefined) {
+        fetchOptions.query.push(['related_component',
+          options.relatedComponent.toString()]);
       }
       if (options.relatedAssignment !== undefined) {
         fetchOptions.query.push(['related_assignment',
