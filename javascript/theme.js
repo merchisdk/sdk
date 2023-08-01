@@ -22,6 +22,7 @@ export function Theme() {
     addPropertyTo(this, 'lastUpdated');
 
     addPropertyTo(this, 'components', Component);
+    addPropertyTo(this, 'contextComponents', Component);
     addPropertyTo(this, 'featureImage', MerchiFile);
     addPropertyTo(this, 'images', MerchiFile);
     addPropertyTo(this, 'cssImageFiles', MerchiFile);
