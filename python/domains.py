@@ -65,6 +65,8 @@ class Domain(sdk.python.entities.Entity):
     webflow_api_key = Property(str)
     shopify_shop_url = Property(str)
     shopify_is_active = Property(bool)
+    unltd_ai_api_organization_id = Property(str)
+    unltd_ai_api_secret_key = Property(str)
     public_access_restricted = Property(bool)
 
     qr_shop_qr_code = Property(str)
