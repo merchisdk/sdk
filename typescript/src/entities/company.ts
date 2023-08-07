@@ -80,6 +80,12 @@ export class Company extends Entity {
   @Company.property({type: String})
   public sendleId?: string;
 
+  @Company.property({type: String})
+  public unltdAiApiOrganizationId?: string;
+
+  @Company.property({type: String})
+  public unltdAiApiSecretKey?: string;
+
   @Company.property()
   public isNew?: boolean;
 

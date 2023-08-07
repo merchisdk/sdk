@@ -101,6 +101,12 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public qrShopQrCode?: string | null;
 
+  @Domain.property({type: String})
+  public unltdAiApiOrganizationId?: string;
+
+  @Domain.property({type: String})
+  public unltdAiApiSecretKey?: string;
+
   @Domain.property()
   public ownedBy?: Company;
 

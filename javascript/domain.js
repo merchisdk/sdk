@@ -44,6 +44,8 @@ export function Domain() {
     addPropertyTo(this, 'ownedBy', Company);
     addPropertyTo(this, 'accessibleClients', User);
     addPropertyTo(this, 'accessibleClientCompanies', Company);
+    addPropertyTo(this, 'unltdAiApiOrganizationId');
+    addPropertyTo(this, 'unltdAiApiSecretKey');
     addPropertyTo(this, 'menus', Menu);
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');
