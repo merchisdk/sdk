@@ -61,6 +61,8 @@ export function Company() {
     addPropertyTo(this, 'stripePublishableTestKey');
     addPropertyTo(this, 'stripeApiTestKey');
     addPropertyTo(this, 'stripeConnectDisabled');
+    addPropertyTo(this, 'unltdAiApiOrganizationId');
+    addPropertyTo(this, 'unltdAiApiSecretKey');
     addPropertyTo(this, 'isStripeValid');
     addPropertyTo(this, 'acceptSquare');
     addPropertyTo(this, 'acceptStripe');

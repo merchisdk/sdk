@@ -24,6 +24,9 @@ export class Theme extends Entity {
   @Theme.property({arrayType: 'Component'})
   public components?: Component[];
 
+  @Theme.property({arrayType: 'Component'})
+  public contextComponents?: Component[];
+
   @Theme.property()
   public mainCssStatus?: number;
 

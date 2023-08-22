@@ -15,6 +15,7 @@ class Theme(sdk.python.entities.Entity):
 
     id = Property(int)
     components = Property("sdk.python.components.Component")
+    context_components = Property("sdk.python.components.Component")
     js_bundle = Property(str)
     name = Property(str)
     description = Property(str)
