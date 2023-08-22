@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo } from './model.js';
 import { DiscountGroup } from './discount_group.js';
 import { MerchiFile } from './merchi_file.js';

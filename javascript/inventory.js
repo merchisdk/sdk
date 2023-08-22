@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, serialise, fromJson, create, getOne, deleteOne,
     patchOne, fromJsonList, getList, enumerateFiles } from './model.js';
 import { Address } from './address.js';

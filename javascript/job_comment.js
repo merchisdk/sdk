@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, enumerateFiles, fromJson, create,
     serialise } from './model.js';
 import { Job } from './job.js';

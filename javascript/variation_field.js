@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { fieldTypes } from './field_types.js';
 import { addPropertyTo } from './model.js';
 import { isUndefinedOrNull, clone } from './helpers.js';

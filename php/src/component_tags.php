@@ -12,5 +12,7 @@ class ComponentTag extends Entity
     {
         $this->json_property('id', 'integer');
         $this->json_property('name', 'string');
+        $this->json_property('component', 'Component', $many = False, $recursive = True);
+
     }
 }

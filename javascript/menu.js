@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo, fromJson, getOne, deleteOne } from './model.js';
 import { MenuItem } from './menu_item.js';
 

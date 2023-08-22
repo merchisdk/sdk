@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import { addPropertyTo } from './model.js';
 import { Company } from './company.js';
 import { User } from './user.js';

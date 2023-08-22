@@ -12,6 +12,11 @@ class EmailAddress extends Entity
     public function __construct()
     {
         $this->json_property('id', 'integer');
+        $this->json_property('archived', 'integer');
         $this->json_property('emailAddress', 'string');
+        $this->json_property('users', 'User',
+            $many = True, $recursive = True);
+        $this->json_property('companies', 'Company',
+            $many = True, $recursive = True);
     }
 }

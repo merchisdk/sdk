@@ -1,5 +1,5 @@
 import { Company } from './company.js';
-import { generateUUID } from './uuid.js';
+import generateUUID from './uuid.js';
 import {
     addPropertyTo, serialise, fromJson, create, enumerateFiles,
     deleteOne, getList, fromJsonList, getOne } from './model.js';

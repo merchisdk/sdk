@@ -1,5 +1,5 @@
-import moment from 'moment-timezone';
-import { generateUUID } from './uuid.js';
+import moment from 'moment';
+import generateUUID from './uuid.js';
 import { addPropertyTo, create, serialise, enumerateFiles, getOne, getList,
     fromJson, deleteOne, fromJsonList, patchOne, Request } from './model.js';
 import { isUndefinedOrNull } from './helpers.js';
