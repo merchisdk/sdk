@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+/**
 import { generateUUID } from './uuid.js';
 import { addPropertyTo, create, serialise, enumerateFiles, getOne, getList,
     fromJson, deleteOne, fromJsonList, patchOne, Request } from './model.js';
@@ -68,7 +68,7 @@ export function Invoice() {
     addPropertyTo(this, 'shipments', Shipment);
     addPropertyTo(this, 'shopifyOrderId');
 
-    this.create = function (success, error, embed, asDomain) {
+    /**
         var data = serialise(this),
             self = this,
             domain = self.domain() ? self.domain().id() : null,
@@ -85,7 +85,7 @@ export function Invoice() {
                 embed: embed});
    };
 
-   this.patch = function (success, error, embed, asDomain) {
+   /**
         var self = this,
             data = serialise(this, undefined, undefined, undefined,
                              {excludeOld: true})[0],
@@ -125,7 +125,7 @@ export function Invoice() {
         request.send();
     };
 
-    this.get = function (success, error, embed) {
+    /**
         var self = this;
          function handleResponse(result) {
             success(fromJson(self, result[self.json],
@@ -138,7 +138,7 @@ export function Invoice() {
                 embed: embed});
     };
 
-    this.destroy = function (success, error) {
+    /**
         deleteOne(this.resource + "/" + this.id(), success, error);
     };
 
