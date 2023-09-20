@@ -7,7 +7,7 @@ from sdk.python.country_taxes import CountryTax
 class QuoteItem(sdk.python.entities.Entity):
 
     resource = '/quote_items'
-    json_name = 'quoteItems'
+    json_name = 'quoteItem'
 
     id = Property(int)
     type = Property(int)
