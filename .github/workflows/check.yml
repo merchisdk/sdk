@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9.16']
+        python-version: ['3.9']
     name: Check Python ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v2
