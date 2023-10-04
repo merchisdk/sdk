@@ -30,3 +30,4 @@ pytest==7.1.2
 lxml==4.9.1
 Babel==2.5.1
 envparse==0.2.0
+Werkzeug==2.2.2
