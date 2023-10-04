@@ -1,3 +1,4 @@
+import { isBrowser } from 'browser-or-node';
 import { generateUUID } from './uuid.js';
 import { isNull, isUndefined, isUndefinedOrNull, id,
     notEmptyArray, isArray, removeObjectFromArrayWithIntegerValue,
@@ -785,14 +786,16 @@ export function merchi(backendUri, websocketUri) {
     }
 
     function getQueryStringValue(name) {
-        var query = getGlobal().location.search.substring(1),
-            vars = query.split("&"),
-            pair,
-            i;
-        for (i = 0; i < vars.length; i++) {
-            pair = vars[i].split("=");
-            if (pair[0] === name) {
-                return decodeURIComponent(pair[1]);
+        if (isBrowser) {
+            var query = window.location.search.substring(1),
+                vars = query.split("&"),
+                pair,
+                i;
+            for (i = 0; i < vars.length; i++) {
+                pair = vars[i].split("=");
+                if (pair[0] === name) {
+                    return decodeURIComponent(pair[1]);
+                }
             }
         }
         return undefined;
