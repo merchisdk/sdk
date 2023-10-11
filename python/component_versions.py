@@ -11,4 +11,4 @@ class ComponentVersion(sdk.python.entities.Entity):
     name = Property(str)
     created_at = Property(datetime.datetime)
     body = Property(str)
-    component = Property(sdk.python.components.Component)
+    component = Property('sdk.python.components.Component')
