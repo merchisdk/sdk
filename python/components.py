@@ -18,6 +18,7 @@ class Component(sdk.python.entities.Entity):
     component_export = Property("sdk.python.components.Component")
     component_exports = Property("sdk.python.components.Component")
     component_imports = Property("sdk.python.components.Component")
+    versions = Property("sdk.python.component_versions.ComponentVersion")
     created = Property(datetime.datetime)
     created_by = Property(User)
     description = Property(str)
