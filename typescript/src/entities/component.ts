@@ -78,7 +78,7 @@ export class Component extends Entity {
   @Component.property({type: 'User'})
   public updatedBy?: User | null;
 
-  @Component.property({type: 'ComponentVersion'})
+  @Component.property({arrayType: 'ComponentVersion'})
   public versions?: ComponentVersion[];
 
   public toReact = (context: any) => {
