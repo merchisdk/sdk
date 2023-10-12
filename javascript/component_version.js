@@ -10,8 +10,8 @@ export function ComponentVersion() {
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'component', Component);
     addPropertyTo(this, 'created');
-    addPropertyTo(this, 'isClassBased', Boolean);
-    addPropertyTo(this, 'description', String);
+    addPropertyTo(this, 'isClassBased');
+    addPropertyTo(this, 'description');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'body');
 }

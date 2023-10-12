@@ -10,13 +10,19 @@ export class ComponentVersion extends Entity {
   public archived?: Date | null;
 
   @ComponentVersion.property({type: Date})
-  public createdAt?: Date;
+  public created?: Date | null;
 
   @ComponentVersion.property()
   public id?: number;
 
   @ComponentVersion.property()
   public body?: string;
+
+  @ComponentVersion.property()
+  public description?: string;
+
+  @ComponentVersion.property()
+  public isClassBased?: boolean;
 
   @ComponentVersion.property({type: 'Component'})
   public component?: Component;
