@@ -9,7 +9,7 @@ export function ComponentVersion() {
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'archived');
     addPropertyTo(this, 'component', Component);
-    addPropertyTo(this, 'createdAt');
+    addPropertyTo(this, 'created');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'body');
 }
