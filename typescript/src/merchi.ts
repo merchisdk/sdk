@@ -38,6 +38,7 @@ import { CartShipmentQuote } from './entities/cart_shipment_quote';
 import { Theme } from './entities/theme';
 import { ThemeCssSetting } from './entities/theme_css_setting';
 import { Component } from './entities/component';
+import { ComponentVersion } from './entities/component_version';
 import { MerchiFile } from './entities/file';
 import { EmailAddress } from './entities/email_address';
 import { SeoDomainPage } from './entities/seo_domain_page';
@@ -165,6 +166,7 @@ export class Merchi {
   public CartShipmentQuote: typeof CartShipmentQuote;
   public Quote: typeof Quote;
   public Component: typeof Component;
+  public ComponentVersion : typeof ComponentVersion;
   public QuoteItem: typeof QuoteItem;
   public MatchingInventory: typeof MatchingInventory;
   public SubscriptionPlan: typeof SubscriptionPlan;
@@ -212,6 +214,7 @@ export class Merchi {
     this.Variation = this.setupClass(Variation) as typeof Variation;
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
     this.Component = this.setupClass(Component) as typeof Component;
+    this.ComponentVersion = this.setupClass(ComponentVersion) as typeof ComponentVersion;
     this.Theme = this.setupClass(Theme) as typeof Theme;
     this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;

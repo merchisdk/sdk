@@ -1,4 +1,5 @@
 import { ComponentTag } from './component_tag';
+import { ComponentVersion } from './component_version';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { User } from './user';
@@ -76,6 +77,9 @@ export class Component extends Entity {
 
   @Component.property({type: 'User'})
   public updatedBy?: User | null;
+
+  @Component.property({arrayType: 'ComponentVersion'})
+  public versions?: ComponentVersion[];
 
   public toReact = (context: any) => {
     const componentCode = 'with (this) { ' + this.compiled + ' return ' +
