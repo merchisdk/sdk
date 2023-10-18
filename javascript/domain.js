@@ -52,12 +52,12 @@ export function Domain() {
     addPropertyTo(this, 'socialDiscord');
     addPropertyTo(this, 'socialFacebook');
     addPropertyTo(this, 'socialInstagram');
-    addPropertyTo(this, 'socialLinkedIn');
+    addPropertyTo(this, 'socialLinkedin');
     addPropertyTo(this, 'socialRumble');
     addPropertyTo(this, 'socialTelegram');
-    addPropertyTo(this, 'socialTikTok');
+    addPropertyTo(this, 'socialTiktok');
     addPropertyTo(this, 'socialX');
-    addPropertyTo(this, 'socialYouTube');
+    addPropertyTo(this, 'socialYoutube');
 
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');

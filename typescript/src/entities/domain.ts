@@ -120,7 +120,7 @@ export class Domain extends Entity {
   public socialInstagram?: string | null;
 
   @Domain.property({type: String})
-  public socialLinkedIn?: string | null;
+  public socialLinkedin?: string | null;
 
   @Domain.property({type: String})
   public socialRumble?: string | null;
@@ -129,13 +129,13 @@ export class Domain extends Entity {
   public socialTelegram?: string | null;
 
   @Domain.property({type: String})
-  public socialTikTok?: string | null;
+  public socialTiktok?: string | null;
 
   @Domain.property({type: String})
   public socialX?: string | null;
 
   @Domain.property({type: String})
-  public socialYouTube?: string | null;
+  public socialYoutube?: string | null;
 
   @Domain.property()
   public ownedBy?: Company;
