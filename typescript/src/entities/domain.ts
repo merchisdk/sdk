@@ -107,6 +107,36 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public unltdAiApiSecretKey?: string;
 
+  @Domain.property({type: String})
+  public socialBitchute?: string | null;
+
+  @Domain.property({type: String})
+  public socialDiscord?: string | null;
+
+  @Domain.property({type: String})
+  public socialFacebook?: string | null;
+
+  @Domain.property({type: String})
+  public socialInstagram?: string | null;
+
+  @Domain.property({type: String})
+  public socialLinkedin?: string | null;
+
+  @Domain.property({type: String})
+  public socialRumble?: string | null;
+
+  @Domain.property({type: String})
+  public socialTelegram?: string | null;
+
+  @Domain.property({type: String})
+  public socialTiktok?: string | null;
+
+  @Domain.property({type: String})
+  public socialX?: string | null;
+
+  @Domain.property({type: String})
+  public socialYoutube?: string | null;
+
   @Domain.property()
   public ownedBy?: Company;
 
