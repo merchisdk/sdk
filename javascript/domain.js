@@ -47,6 +47,7 @@ export function Domain() {
     addPropertyTo(this, 'unltdAiApiOrganizationId');
     addPropertyTo(this, 'unltdAiApiSecretKey');
     addPropertyTo(this, 'menus', Menu);
+
     addPropertyTo(this, 'socialBitchute');
     addPropertyTo(this, 'socialDiscord');
     addPropertyTo(this, 'socialFacebook');
@@ -57,6 +58,7 @@ export function Domain() {
     addPropertyTo(this, 'socialTikTok');
     addPropertyTo(this, 'socialX');
     addPropertyTo(this, 'socialYouTube');
+
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');
     addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
