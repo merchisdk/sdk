@@ -47,6 +47,18 @@ export function Domain() {
     addPropertyTo(this, 'unltdAiApiOrganizationId');
     addPropertyTo(this, 'unltdAiApiSecretKey');
     addPropertyTo(this, 'menus', Menu);
+
+    addPropertyTo(this, 'socialBitchute');
+    addPropertyTo(this, 'socialDiscord');
+    addPropertyTo(this, 'socialFacebook');
+    addPropertyTo(this, 'socialInstagram');
+    addPropertyTo(this, 'socialLinkedin');
+    addPropertyTo(this, 'socialRumble');
+    addPropertyTo(this, 'socialTelegram');
+    addPropertyTo(this, 'socialTiktok');
+    addPropertyTo(this, 'socialX');
+    addPropertyTo(this, 'socialYoutube');
+
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');
     addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
