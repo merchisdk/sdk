@@ -51,6 +51,7 @@ export function Domain() {
     addPropertyTo(this, 'socialBitchute');
     addPropertyTo(this, 'socialDiscord');
     addPropertyTo(this, 'socialFacebook');
+    addPropertyTo(this, 'socialGoogle');
     addPropertyTo(this, 'socialInstagram');
     addPropertyTo(this, 'socialLinkedin');
     addPropertyTo(this, 'socialRumble');

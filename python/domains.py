@@ -74,6 +74,7 @@ class Domain(sdk.python.entities.Entity):
     social_bitchute = Property(str)
     social_discord = Property(str)
     social_facebook = Property(str)
+    social_google = Property(str)
     social_instagram = Property(str)
     social_linkedin = Property(str)
     social_rumble = Property(str)

@@ -117,6 +117,9 @@ export class Domain extends Entity {
   public socialFacebook?: string | null;
 
   @Domain.property({type: String})
+  public socialGoogle?: string | null;
+
+  @Domain.property({type: String})
   public socialInstagram?: string | null;
 
   @Domain.property({type: String})
