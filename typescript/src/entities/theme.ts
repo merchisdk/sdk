@@ -192,6 +192,9 @@ export class Theme extends Entity {
   @Theme.property()
   public public?: boolean;
 
+  @Theme.property({type: String})
+  public aiContext?: string;
+
   @Theme.property({embeddedByDefault: false, type: String})
   public mainCss?: string | null;
 

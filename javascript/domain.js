@@ -20,6 +20,7 @@ export function Domain() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'aiContext');
     addPropertyTo(this, 'apiSecret');
     addPropertyTo(this, 'webflowApiKey');
     addPropertyTo(this, 'shopifyShopUrl');
@@ -59,6 +60,9 @@ export function Domain() {
     addPropertyTo(this, 'socialTiktok');
     addPropertyTo(this, 'socialX');
     addPropertyTo(this, 'socialYoutube');
+
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
 
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');

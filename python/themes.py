@@ -14,6 +14,7 @@ class Theme(sdk.python.entities.Entity):
     json_name = 'theme'
 
     id = Property(int)
+    ai_context = Property(str)
     components = Property("sdk.python.components.Component")
     context_components = Property("sdk.python.components.Component")
     js_bundle = Property(str)
