@@ -104,6 +104,15 @@ export class User extends Entity {
   @User.property()
   public name?: string;
 
+  @User.property({type: String})
+  public internalUseNotes?: string;
+
+  @User.property({type: String})
+  public internalUseAiContext?: string;
+
+  @User.property({type: String})
+  public aiContext?: string;
+
   @User.property()
   public callToActions?: string;
 

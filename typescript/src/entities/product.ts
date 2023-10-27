@@ -99,6 +99,15 @@ export class Product extends Entity {
   public notes?: string | null;
 
   @Product.property({type: String})
+  public internalUseNotes?: string;
+
+  @Product.property({type: String})
+  public internalUseAiContext?: string;
+
+  @Product.property({type: String})
+  public aiContext?: string;
+
+  @Product.property({type: String})
   public shopifyProductId?: string | null;
 
   @Product.property()

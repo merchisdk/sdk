@@ -86,6 +86,15 @@ export class Company extends Entity {
   @Company.property({type: String})
   public unltdAiApiSecretKey?: string;
 
+  @Company.property({type: String})
+  public internalUseNotes?: string;
+
+  @Company.property({type: String})
+  public internalUseAiContext?: string;
+
+  @Company.property({type: String})
+  public aiContext?: string;
+
   @Company.property()
   public isNew?: boolean;
 

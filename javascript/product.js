@@ -106,6 +106,9 @@ export function Product() {
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
     addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
+    addPropertyTo(this, 'aiContext');
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),

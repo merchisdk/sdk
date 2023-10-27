@@ -83,6 +83,10 @@ class Domain(sdk.python.entities.Entity):
     social_x = Property(str)
     social_youtube = Property(str)
 
+    ai_context = Property(str)
+    internal_use_notes = Property(str)
+    internal_use_ai_context = Property(str)
+
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")

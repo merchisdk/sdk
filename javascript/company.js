@@ -91,6 +91,9 @@ export function Company() {
         Domain,
     );
     addPropertyTo(this, 'paymentDevices', PaymentDevice);
+    addPropertyTo(this, 'aiContext');
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),

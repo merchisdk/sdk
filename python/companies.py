@@ -71,6 +71,11 @@ class Company(sdk.python.entities.Entity):
     accept_bank_transfer = Property(bool)
     accept_phone_payment = Property(bool)
     ownership_unconfirmed = Property(bool)
+
+    ai_context = Property(str)
+    internal_use_notes = Property(str)
+    internal_use_ai_context = Property(str)
+
     logo = Property(File)
     email_addresses = Property(EmailAddress)
     addresses = Property(Address)
