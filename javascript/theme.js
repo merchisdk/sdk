@@ -14,6 +14,7 @@ export function Theme() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'aiContext');
     addPropertyTo(this, 'jsBundle');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'description');

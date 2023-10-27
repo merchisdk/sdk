@@ -48,6 +48,9 @@ export function User() {
     /* products that a user has saved for future reference */
     addPropertyTo(this, 'savedProducts', Product);
     addPropertyTo(this, 'accessibleDomainsAsClient', Domain);
+    addPropertyTo(this, 'aiContext');
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
 
     this.create = function (success, error, embed, as_domain) {
         var self = this,

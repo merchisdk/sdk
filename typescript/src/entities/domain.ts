@@ -48,6 +48,15 @@ export class Domain extends Entity {
   public isMaster?: boolean;
 
   @Domain.property()
+  public internalUseNotes?: string;
+
+  @Domain.property()
+  public internalUseAiContext?: string;
+
+  @Domain.property()
+  public aiContext?: string;
+
+  @Domain.property()
   public domainType?: DomainType;
 
   @Domain.property()
