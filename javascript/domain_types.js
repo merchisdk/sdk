@@ -10,6 +10,7 @@ domainTypes.add(5, 'Domain supplier');
 domainTypes.add(6, 'Domain client catalogue');
 domainTypes.add(7, 'Domain shopify seller');
 domainTypes.add(8, 'Unrestricted shopify app');
+domainTypes.add(9, 'Reserved');
 
 export const domainTypesInts = new Dictionary();
 domainTypes.each(function (key, value) {
