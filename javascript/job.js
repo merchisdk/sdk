@@ -28,6 +28,7 @@ import { User } from './user.js';
 import { Variation } from './variation.js';
 import { VariationsGroup } from './variations_group.js';
 import { JobComment } from './job_comment.js';
+import { InternalTag } from './internal_tag.js';
 
 
 export function Job() {
@@ -125,6 +126,7 @@ export function Job() {
     addPropertyTo(this, 'shopifyShopUrl');
     addPropertyTo(this, 'shopifyOrderId');
     addPropertyTo(this, 'shopifyOrderLineItemId');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (
         success, error, embed, asDomain, withRights) {

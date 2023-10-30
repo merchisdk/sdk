@@ -76,6 +76,7 @@ import { VariationFieldsOption } from './variation_fields_option.js';
 import { VariationsGroup } from './variations_group.js';
 import { QuoteItem, QuoteItems } from './quote_item.js';
 import { Quotes, Quote } from './quote.js';
+import { InternalTag, InternalTags } from './internal_tag.js';
 
 export function merchi(backendUri, websocketUri) {
     getGlobal().merchiJsonpHandlers = {};
@@ -940,6 +941,8 @@ export function merchi(backendUri, websocketUri) {
             'inventories': new Inventories(),
             'InventoryUnitVariation': InventoryUnitVariation,
             'matchiingInventory': MatchingInventory,
+            'InternalTag': InternalTag,
+            'internalTags': new InternalTags(),
             'Invoice': Invoice,
             'invoices': new Invoices(),
             'Job': Job,

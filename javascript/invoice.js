@@ -16,6 +16,7 @@ import { MerchiFile } from './merchi_file.js';
 import { Quote } from './quote.js';
 import { Payment } from './payment.js';
 import { Job } from './job.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Invoice() {
     this.resource = '/invoices';
@@ -67,6 +68,7 @@ export function Invoice() {
     addPropertyTo(this, 'isCompletelyPaid');
     addPropertyTo(this, 'shipments', Shipment);
     addPropertyTo(this, 'shopifyOrderId');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),
