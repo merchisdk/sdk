@@ -75,10 +75,10 @@ export function InternalTag() {
     };
 }
 
-export function DomainTags() {
+export function InternalTags() {
     this.resource = '/internal_tags';
     this.json = 'internalTags';
-    this.single = DomainTag;
+    this.single = InternalTag;
 
     this.get = function (success, error, parameters) {
         var self = this;
