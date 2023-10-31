@@ -4,6 +4,7 @@ export class InternalTag extends Entity {
   protected static resourceName: string = 'internal_tags';
   protected static singularName: string = 'internalTag';
   protected static pluralName: string = 'internalTags';
+import { Property } from './decorators';
 
   @Property({type: Number})
   public id?: number;
