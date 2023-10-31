@@ -18,7 +18,7 @@ export function InternalTag() {
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'description');
-    addPropertyTo(this, 'colour');
+    addPropertyTo(this, 'colour', String);
     addPropertyTo(this, 'companies', Company);
     addPropertyTo(this, 'domains', Domain);
     addPropertyTo(this, 'invoices', Invoice);
