@@ -17,7 +17,7 @@ UNRESTRICTED = 12  # A user who has a domain which is unrestricted
 # A user who makes order from shopify and linked to our system
 SHOPIFY_REFERENCE = 13
 # A user crawled from Social network
-RESERVERD_FROM_SOCIAL = 14
+RESERVED_FROM_SOCIAL = 14
 
 ALL_TYPES = [
     (PUBLIC, "PUBLIC"),
@@ -34,7 +34,7 @@ ALL_TYPES = [
     (SUPPLIER_MERCHI, "SUPPLIER_MERCHI"),
     (UNRESTRICTED, "UNRESTRICTED"),
     (SHOPIFY_REFERENCE, "SHOPIFY_REFERENCE"),
-    (RESERVERD_FROM_SOCIAL, "RESERVERD_FROM_SOCIAL"),
+    (RESERVED_FROM_SOCIAL, "RESERVED_FROM_SOCIAL"),
 ]
 
 TYPE_STRINGS = dict(ALL_TYPES)
