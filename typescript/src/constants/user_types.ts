@@ -12,4 +12,6 @@ export enum UserType {
   SUPPLIER_RESTRICTED = 10, // A user who has a restricted supply domain
   SUPPLIER_MERCHI = 11, // A user who has a supply domain which has been verified by Merchi
   UNRESTRICTED = 12, // A user who has a domain which is unrestricted
+  SHOPIFY_REFERENCE = 13, // A user who makes order from shopify and linked to our system
+  RESERVERD_FROM_SOCIAL = 14, // A user crawled from Social network
 }
