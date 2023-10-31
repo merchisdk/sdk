@@ -69,6 +69,7 @@ import { SupplyDomain, SupplyDomains } from './supply_domain.js';
 import { SystemRole } from './system_role.js';
 import { Theme, Themes } from './theme.js';
 import { User, Users } from './user.js';
+import { userTypes } from './user_types.js';
 import { UserCompany } from './user_company.js';
 import { Variation } from './variation.js';
 import { VariationField } from './variation_field.js';
@@ -1058,6 +1059,7 @@ export function merchi(backendUri, websocketUri) {
             'copyEntIfNotNullOrUndefined': copyEntIfNotNullOrUndefined,
             'entAsBlank': entAsBlank,
             'cleanEntities': cleanEntities,
+            'userTypes': userTypes,
             'updateEntNonEmbeddableAttrbibutes': updateEntNonEmbeddableAttrbibutes,
             'updateEntAttributes': updateEntAttributes,
             'ignoreAttributesUpdateEnt': ignoreAttributesUpdateEnt,
