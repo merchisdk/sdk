@@ -13,6 +13,7 @@ import { Job } from './job.js';
 import { MerchiFile } from './merchi_file.js';
 import { ShipmentItem } from './shipment_item.js';
 import { ShipmentMethod } from './shipment_method.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Shipment() {
     this.resource = '/shipments';
@@ -56,6 +57,7 @@ export function Shipment() {
     addPropertyTo(this, 'tags', DomainTag);
     addPropertyTo(this, 'shipmentItems', ShipmentItem)
     addPropertyTo(this, 'shipmentMethod', ShipmentMethod);
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.get = function (success, error, embed) {
         var self = this;

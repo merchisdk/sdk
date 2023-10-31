@@ -15,6 +15,7 @@ import { Domain } from './domain.js';
 import { MerchiFile } from './merchi_file.js';
 import { SystemRole } from './system_role.js';
 import { UserCompany } from './user_company.js';
+import { InternalTag } from './internal_tag.js';
 
 export function User() {
     this.resource = '/users';
@@ -51,6 +52,7 @@ export function User() {
     addPropertyTo(this, 'aiContext');
     addPropertyTo(this, 'internalUseNotes');
     addPropertyTo(this, 'internalUseAiContext');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, as_domain) {
         var self = this,

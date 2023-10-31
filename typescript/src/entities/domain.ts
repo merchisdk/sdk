@@ -6,6 +6,7 @@ import { DomainTag } from './domain_tag';
 import { EnrolledDomain } from './enrolled_domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { Menu } from './menu';
@@ -163,6 +164,9 @@ export class Domain extends Entity {
 
   @Domain.property()
   public activeTheme?: Theme;
+
+  @Domain.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Domain.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
