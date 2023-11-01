@@ -291,6 +291,7 @@ test('can list products with options set', () => {
     notificationJob: 27,
     relatedUser: 55,
     relatedAssignment: 1,
+    relatedComponent: 1,
     relatedDraft: 1,
     clientId: 349,
     managerId: 355,
