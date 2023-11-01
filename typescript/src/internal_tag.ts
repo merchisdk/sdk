@@ -1,5 +1,5 @@
 import { Entity } from './entity';
-import { addField } from './model';
+import { addField } from './entity';
 
 class InternalTag extends Entity {
   protected static resourceName: string = 'internal_tags';
@@ -18,5 +18,12 @@ class InternalTag extends Entity {
   @addField('colour', 'String')
   public colour: string;
 }
+  constructor() {
+    super();
+    this.id = 0;
+    this.name = '';
+    this.description = '';
+    this.colour = '';
+  }
 
 export { InternalTag };
