@@ -16,8 +16,8 @@ export class InternalTag extends Entity {
   @InternalTag.property()
   public id?: number;
 
-  @InternalTag.property()
-  public colour?: number;
+  @InternalTag.property({type: String})
+  public colour?: string;
 
   @InternalTag.property()
   public name?: string;
