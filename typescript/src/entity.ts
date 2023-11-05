@@ -136,6 +136,7 @@ interface ListOptions {
   senderRole?: Role;
   isOrder?: boolean;
   tags?: number[];
+  tagsInternal?: number[];
   tagNames?: string[];
   exclude?: number[];
   excludeComponents?: string[];
@@ -607,6 +608,9 @@ export class Entity {
       }
       if (options.tags !== undefined) {
         fetchOptions.query.push(['tags', options.tags.join(',')]);
+      }
+      if (options.tagsInternal !== undefined) {
+        fetchOptions.query.push(['tags_internal', options.tagsInternal.join(',')]);
       }
       if (options.tagNames !== undefined) {
         fetchOptions.query.push(['tags_name', options.tagNames.join(',')]);

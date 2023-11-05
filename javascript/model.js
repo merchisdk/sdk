@@ -482,6 +482,9 @@ export function getList(resource, success, error, parameters, withUpdates) {
     if (notEmpty(parameters.tags)) {
         request.query().add('tags', parameters.tags);
     }
+    if (parameters.tagsInternal) {
+        request.query().add('tags_internal', parameters.tagsInternal);
+    }
     if (parameters.tagNames) {
         request.query().add('tag_names', parameters.tagNames);
     }
