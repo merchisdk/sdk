@@ -314,7 +314,7 @@ test('can list products with options set', () => {
     isOrder: true,
     tags: [2, 3, 5],
     tagsInternal: [2, 3, 5],
-    tagNames: ['a'],
+    tagsNames: ['a'],
     exclude: [8],
     includeOnly: [1]};
   const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
@@ -384,7 +384,7 @@ test('can list products with options set', () => {
     ['senderRole', '6'],
     ['is_order', 'true'],
     ['tags', '2,3,5'],
-    ['tagsInternal', '2,3,5'],
+    ['tags_internal', '2,3,5'],
     ['tags_name', 'a'],
     ['exclude', '8'],
     ['exclude_components', 'DomainInfo,DomainSettings'],
