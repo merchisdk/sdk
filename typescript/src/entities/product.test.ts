@@ -401,7 +401,8 @@ test('can list products with options set', () => {
     fetch.mock.calls[0][1]['query'].sort(
       (a: string[], b: string[]) => a[0].localeCompare(b[0])
     )
-  ).toEqual(correct.sort(
+  ).toEqual(
+    correct.sort(
       (a: string[], b: string[]) => a[0].localeCompare(b[0])
     )
   );
