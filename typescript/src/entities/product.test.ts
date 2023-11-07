@@ -385,7 +385,7 @@ test('can list products with options set', () => {
     ['related_user', '55'],
     ['saved_by_user', '24'],
     ['section', '2'],
-    ['senderRole', '6'],
+    ['sender_role', '6'],
     ['shopify_only', 'false'],
     ['sort', 'name'],
     ['state', 'yes'],
@@ -395,7 +395,7 @@ test('can list products with options set', () => {
     ['tags_name', 'a'],
     ['tab', 'job'],
     ['team_only', 'false'],
-    ['withRights', 'true'],
+    ['with_rights', 'true'],
   ];
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
