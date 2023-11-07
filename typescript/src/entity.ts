@@ -601,7 +601,7 @@ export class Entity {
         fetchOptions.query.push(['section', options.section.toString()]);
       }
       if (options.senderRole !== undefined) {
-        fetchOptions.query.push(['senderRole', options.senderRole.toString()]);
+        fetchOptions.query.push(['sender_role', options.senderRole.toString()]);
       }
       if (options.isOrder) {
         fetchOptions.query.push(['is_order', 'true']);
@@ -613,7 +613,7 @@ export class Entity {
         fetchOptions.query.push(['tags_internal', options.tagsInternal.join(',')]);
       }
       if (options.tagNames !== undefined) {
-        fetchOptions.query.push(['tags_name', options.tagNames.join(',')]);
+        fetchOptions.query.push(['tag_names', options.tagNames.join(',')]);
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);

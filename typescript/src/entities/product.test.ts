@@ -315,9 +315,9 @@ test('can list products with options set', () => {
     tab: 'job',
     tags: [2, 3, 5],
     tagsInternal: [2, 3, 5],
-    tagsNames: ['a'],
+    tagNames: ['a'],
     teamOnly: false,
-    withRights: true,
+    withRights: false,
   };
   const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
     {'product': {'name': 'p2'}}],
@@ -386,18 +386,25 @@ test('can list products with options set', () => {
     ['saved_by_user', '24'],
     ['section', '2'],
     ['sender_role', '6'],
+    ['skip_rights', 'y'],
     ['shopify_only', 'false'],
     ['sort', 'name'],
     ['state', 'yes'],
     ['supplier_resell_only', 'false'],
+    ['tab', 'job'],
     ['tags', '2,3,5'],
     ['tags_internal', '2,3,5'],
-    ['tags_name', 'a'],
-    ['tab', 'job'],
+    ['tag_names', 'a'],
     ['team_only', 'false'],
-    ['with_rights', 'true'],
   ];
-  expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
+  expect(
+    fetch.mock.calls[0][1]['query'].sort(
+      (a: string[], b: string[]) => a[0].localeCompare(b[0])
+    )
+  ).toEqual(correct.sort(
+      (a: string[], b: string[]) => a[0].localeCompare(b[0])
+    )
+  );
   return invocation;
 });
 
