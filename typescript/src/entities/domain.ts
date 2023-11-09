@@ -6,6 +6,7 @@ import { DomainTag } from './domain_tag';
 import { EnrolledDomain } from './enrolled_domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { Menu } from './menu';
@@ -46,6 +47,15 @@ export class Domain extends Entity {
 
   @Domain.property()
   public isMaster?: boolean;
+
+  @Domain.property()
+  public internalUseNotes?: string;
+
+  @Domain.property()
+  public internalUseAiContext?: string;
+
+  @Domain.property()
+  public aiContext?: string;
 
   @Domain.property()
   public domainType?: DomainType;
@@ -107,6 +117,39 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public unltdAiApiSecretKey?: string;
 
+  @Domain.property({type: String})
+  public socialBitchute?: string | null;
+
+  @Domain.property({type: String})
+  public socialDiscord?: string | null;
+
+  @Domain.property({type: String})
+  public socialFacebook?: string | null;
+
+  @Domain.property({type: String})
+  public socialGoogle?: string | null;
+
+  @Domain.property({type: String})
+  public socialInstagram?: string | null;
+
+  @Domain.property({type: String})
+  public socialLinkedin?: string | null;
+
+  @Domain.property({type: String})
+  public socialRumble?: string | null;
+
+  @Domain.property({type: String})
+  public socialTelegram?: string | null;
+
+  @Domain.property({type: String})
+  public socialTiktok?: string | null;
+
+  @Domain.property({type: String})
+  public socialX?: string | null;
+
+  @Domain.property({type: String})
+  public socialYoutube?: string | null;
+
   @Domain.property()
   public ownedBy?: Company;
 
@@ -121,6 +164,9 @@ export class Domain extends Entity {
 
   @Domain.property()
   public activeTheme?: Theme;
+
+  @Domain.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Domain.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];

@@ -13,6 +13,7 @@ import { Menu } from './menu.js';
 import { SupplyDomain } from './supply_domain.js';
 import { SeoDomainPage } from './seo_domain_page.js';
 import { User, Users } from './user.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Domain() {
     this.resource = '/domains';
@@ -20,6 +21,7 @@ export function Domain() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'aiContext');
     addPropertyTo(this, 'apiSecret');
     addPropertyTo(this, 'webflowApiKey');
     addPropertyTo(this, 'shopifyShopUrl');
@@ -47,6 +49,22 @@ export function Domain() {
     addPropertyTo(this, 'unltdAiApiOrganizationId');
     addPropertyTo(this, 'unltdAiApiSecretKey');
     addPropertyTo(this, 'menus', Menu);
+
+    addPropertyTo(this, 'socialBitchute');
+    addPropertyTo(this, 'socialDiscord');
+    addPropertyTo(this, 'socialFacebook');
+    addPropertyTo(this, 'socialGoogle');
+    addPropertyTo(this, 'socialInstagram');
+    addPropertyTo(this, 'socialLinkedin');
+    addPropertyTo(this, 'socialRumble');
+    addPropertyTo(this, 'socialTelegram');
+    addPropertyTo(this, 'socialTiktok');
+    addPropertyTo(this, 'socialX');
+    addPropertyTo(this, 'socialYoutube');
+
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
+
     addPropertyTo(this, 'showDomainPublicly');
     addPropertyTo(this, 'publicAccessRestricted');
     addPropertyTo(this, 'showDomainToAccessibleEntitiesOnly')
@@ -59,6 +77,7 @@ export function Domain() {
     addPropertyTo(this, 'domainInvitations', DomainInvitation);
     addPropertyTo(this, 'jobsAssignees', User);
     addPropertyTo(this, 'tags', DomainTag);
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),

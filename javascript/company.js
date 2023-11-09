@@ -16,6 +16,8 @@ import { ShipmentMethod } from './shipment_method.js';
 import { User } from './user.js';
 import { UserCompany } from './user_company.js';
 import { PaymentDevice } from './payment_device.js';
+import { InternalTag } from './internal_tag.js';
+
 
 export function Company() {
     this.resource = '/companies';
@@ -91,6 +93,10 @@ export function Company() {
         Domain,
     );
     addPropertyTo(this, 'paymentDevices', PaymentDevice);
+    addPropertyTo(this, 'aiContext');
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),

@@ -8,6 +8,7 @@ import { Domain } from './domain';
 import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { Invoice } from './invoice';
 import { Job } from './job';
 import { PhoneNumber } from './phone_number';
@@ -85,6 +86,15 @@ export class Company extends Entity {
 
   @Company.property({type: String})
   public unltdAiApiSecretKey?: string;
+
+  @Company.property({type: String})
+  public internalUseNotes?: string;
+
+  @Company.property({type: String})
+  public internalUseAiContext?: string;
+
+  @Company.property({type: String})
+  public aiContext?: string;
 
   @Company.property()
   public isNew?: boolean;
@@ -178,6 +188,9 @@ export class Company extends Entity {
 
   @Company.property()
   public country?: string;
+
+  @Company.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Company.property({type: MerchiFile})
   public logo?: MerchiFile | null;

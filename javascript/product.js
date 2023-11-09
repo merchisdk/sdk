@@ -21,6 +21,7 @@ import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { Job } from './job.js';
 import { SeoDomainPage } from './seo_domain_page.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Product() {
     this.resource = '/products';
@@ -106,6 +107,10 @@ export function Product() {
     addPropertyTo(this, 'draftTemplates', DraftTemplate);
     addPropertyTo(this, 'shipmentMethods', ShipmentMethod);
     addPropertyTo(this, 'seoDomainPages', SeoDomainPage);
+    addPropertyTo(this, 'aiContext');
+    addPropertyTo(this, 'internalUseNotes');
+    addPropertyTo(this, 'internalUseAiContext');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, asDomain) {
         var data = serialise(this),

@@ -93,6 +93,9 @@ class User(sdk.python.entities.Entity):
     notifications = Property(Notification, backref="recipient")
     sent_notifications = Property(Notification, backref="sender")
     accessible_domains_as_client = Property("sdk.python.domains.Domain")
+    ai_context = Property(str)
+    internal_use_notes = Property(str)
+    internal_use_ai_context = Property(str)
 
     def role_in_domain(self, domain_id):
         """ The role of this user of specific domain id """

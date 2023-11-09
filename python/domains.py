@@ -71,6 +71,22 @@ class Domain(sdk.python.entities.Entity):
 
     qr_shop_qr_code = Property(str)
 
+    social_bitchute = Property(str)
+    social_discord = Property(str)
+    social_facebook = Property(str)
+    social_google = Property(str)
+    social_instagram = Property(str)
+    social_linkedin = Property(str)
+    social_rumble = Property(str)
+    social_telegram = Property(str)
+    social_tiktok = Property(str)
+    social_x = Property(str)
+    social_youtube = Property(str)
+
+    ai_context = Property(str)
+    internal_use_notes = Property(str)
+    internal_use_ai_context = Property(str)
+
     active_theme = Property(Theme, backref="domain")
     domain_invitations = Property(DomainInvitation, backref='domain')
     company = Property("sdk.python.companies.Company")

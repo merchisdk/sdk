@@ -7,6 +7,7 @@ import { Component } from './component.js';
 import { Domain } from './domain.js';
 import { Page } from './page.js';
 import { User } from './user.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Theme() {
     this.resource = '/themes';
@@ -14,6 +15,7 @@ export function Theme() {
     this.temporaryId = generateUUID();
 
     addPropertyTo(this, 'id');
+    addPropertyTo(this, 'aiContext');
     addPropertyTo(this, 'jsBundle');
     addPropertyTo(this, 'name');
     addPropertyTo(this, 'description');
@@ -88,6 +90,7 @@ export function Theme() {
     addPropertyTo(this, 'author', User);
     addPropertyTo(this, 'domain', Domain);
     addPropertyTo(this, 'defaultForDomainType');
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, as_domain) {
         var self = this,

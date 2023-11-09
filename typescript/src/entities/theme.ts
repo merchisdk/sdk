@@ -2,6 +2,7 @@ import { Component } from './component';
 import { Domain } from './domain';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { User } from './user';
 import { Menu } from './menu';
 import { Page } from './page';
@@ -20,6 +21,9 @@ export class Theme extends Entity {
 
   @Theme.property()
   public foundation?: number;
+
+  @Theme.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Theme.property({arrayType: 'Component'})
   public components?: Component[];
@@ -191,6 +195,9 @@ export class Theme extends Entity {
 
   @Theme.property()
   public public?: boolean;
+
+  @Theme.property({type: String})
+  public aiContext?: string;
 
   @Theme.property({embeddedByDefault: false, type: String})
   public mainCss?: string | null;

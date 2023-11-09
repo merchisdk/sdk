@@ -10,6 +10,7 @@ import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
 import { MatchingInventory } from './matching_inventory';
+import { InternalTag } from './internal_tag';
 import { Invoice } from './invoice';
 import { JobComment } from './job_comment';
 import { Notification } from './notification';
@@ -243,6 +244,9 @@ export class Job extends Entity {
 
   @Job.property({type: CountryTax})
   public taxType?: CountryTax | null;
+
+  @Job.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Job.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
