@@ -73,77 +73,78 @@ export enum SerialiseMethod {
 }
 
 interface ListOptions {
-  embed?: EmbedDescriptor;
-  offset?: number;
-  limit?: number;
-  q?: string;
-  sort?: string;
-  order?: string;
-  tab?: string;
   as?: string;
-  withRights?: boolean;
-  state?: string;
-  categoryId?: number;
-  inDomain?: number;
-  inDomainName?: string;
-  inDomainRoles?: number[];
-  isPrivate?: boolean;
   asRole?: Role;
-  groupBuyOnly?: boolean;
-  publicOnly?: boolean;
-  managedOnly?: boolean;
-  doesNotHaveAdminDomain?: boolean;
-  clientOnly?: boolean;
-  teamOnly?: boolean;
-  memberOnly?: boolean;
-  merchiOnly?: boolean;
-  supplierResellOnly?: boolean;
-  platformCategoryId?: number;
-  inbound?: boolean;
-  isMaster?: boolean;
-  domainRoles?: Role[];
-  domainTypes?: DomainType[];
-  entityTypes?: number[];
-  productTypes?: ProductType[];
-  managedDomainsOnly?: boolean;
   businessDomainsOnly?: boolean;
-  dateFrom?: Date;
-  dateTo?: Date;
-  relatedAssignment?: number;
-  relatedDraft?: number;
-  relatedJob?: number;
-  relatedProduct?: number;
-  relatedComponent?: number;
-  originalOf?: number;
-  jobNotifiable?: number;
-  notificationType?: NotificationType;
-  notificationRecipient?: number;
-  notificationJob?: number;
-  relatedUser?: number;
+  categoryId?: number;
   clientId?: number;
-  managerId?: number;
-  masterProduct?: number;
   clientCompanyId?: number;
-  savedByUser?: number;
-  serialiseMethod?: SerialiseMethod;
-  receiverId?: number;
+  clientOnly?: boolean;
   companyCustomerId?: number;
   companyId?: number;
   companySupplierId?: number;
   componentId?: number;
-  groupBuyForJobId?: number;
-  section?: NotificationSection;
-  senderRole?: Role;
-  isOrder?: boolean;
-  tags?: number[];
-  tagNames?: string[];
+  dateFrom?: Date;
+  dateTo?: Date;
+  domainRoles?: Role[];
+  domainTypes?: DomainType[];
+  doesNotHaveAdminDomain?: boolean;
+  embed?: EmbedDescriptor;
+  entityTypes?: number[];
   exclude?: number[];
   excludeComponents?: string[];
   excludeDomains?: number[];
+  groupBuyForJobId?: number;
+  groupBuyOnly?: boolean;
+  inbound?: boolean;
   includeOnly?: number[];
+  inDomain?: number;
+  inDomainName?: string;
+  inDomainRoles?: number[];
+  isMaster?: boolean;
+  isOrder?: boolean;
+  isPrivate?: boolean;
+  jobNotifiable?: number;
+  limit?: number;
+  managedDomainsOnly?: boolean;
+  managedOnly?: boolean;
+  managerId?: number;
+  masterProduct?: number;
+  memberOnly?: boolean;
+  merchiOnly?: boolean;
+  notificationJob?: number;
+  notificationRecipient?: number;
+  notificationType?: NotificationType;
+  offset?: number;
   orClientId?: number;
   orClientCompanyId?: number;
+  order?: string;
+  originalOf?: number;
+  platformCategoryId?: number;
+  productTypes?: ProductType[];
+  publicOnly?: boolean;
+  q?: string;
+  receiverId?: number;
+  relatedAssignment?: number;
+  relatedComponent?: number;
+  relatedDraft?: number;
+  relatedJob?: number;
+  relatedProduct?: number;
+  relatedUser?: number;
+  savedByUser?: number;
+  section?: NotificationSection;
+  senderRole?: Role;
+  serialiseMethod?: SerialiseMethod;
   shopifyOnly?: boolean;
+  sort?: string;
+  state?: string;
+  supplierResellOnly?: boolean;
+  tab?: string;
+  tags?: number[];
+  tagsInternal?: number[];
+  tagNames?: string[];
+  teamOnly?: boolean;
+  withRights?: boolean;
 }
 
 export interface ListMetadata {
@@ -600,7 +601,7 @@ export class Entity {
         fetchOptions.query.push(['section', options.section.toString()]);
       }
       if (options.senderRole !== undefined) {
-        fetchOptions.query.push(['senderRole', options.senderRole.toString()]);
+        fetchOptions.query.push(['sender_role', options.senderRole.toString()]);
       }
       if (options.isOrder) {
         fetchOptions.query.push(['is_order', 'true']);
@@ -608,8 +609,11 @@ export class Entity {
       if (options.tags !== undefined) {
         fetchOptions.query.push(['tags', options.tags.join(',')]);
       }
+      if (options.tagsInternal !== undefined) {
+        fetchOptions.query.push(['tags_internal', options.tagsInternal.join(',')]);
+      }
       if (options.tagNames !== undefined) {
-        fetchOptions.query.push(['tags_name', options.tagNames.join(',')]);
+        fetchOptions.query.push(['tag_names', options.tagNames.join(',')]);
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
