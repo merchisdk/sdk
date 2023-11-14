@@ -13,6 +13,7 @@ import { Menu } from './menu.js';
 import { SupplyDomain } from './supply_domain.js';
 import { SeoDomainPage } from './seo_domain_page.js';
 import { User, Users } from './user.js';
+import { InternalTag } from './internal_tag.js';
 
 export function Domain() {
     this.resource = '/domains';
@@ -76,6 +77,7 @@ export function Domain() {
     addPropertyTo(this, 'domainInvitations', DomainInvitation);
     addPropertyTo(this, 'jobsAssignees', User);
     addPropertyTo(this, 'tags', DomainTag);
+    addPropertyTo(this, 'internalTags', InternalTag);
 
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),

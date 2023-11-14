@@ -15,6 +15,7 @@ import { VariationField } from './entities/variation_field';
 import { VariationOption } from './entities/variation_option';
 import { ProductionComment } from './entities/production_comment';
 import { Product } from './entities/product';
+import { InternalTag } from './entities/internal_tag';
 import { Inventory } from './entities/inventory';
 import { QuoteItem } from './entities/quote_item';
 import { Category } from './entities/category';
@@ -114,6 +115,7 @@ export class Merchi {
   public MenuItem: typeof MenuItem;
   public VariationField: typeof VariationField;
   public Assignment: typeof Assignment;
+  public InternalTag: typeof InternalTag;
   public Inventory: typeof Inventory;
   public JobComment: typeof JobComment;
   public VariationOption: typeof VariationOption;
@@ -219,6 +221,7 @@ export class Merchi {
     this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;
     this.MenuItem = this.setupClass(MenuItem) as typeof MenuItem;
+    this.InternalTag = this.setupClass(InternalTag) as typeof InternalTag;
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
     this.Notification = this.setupClass(Notification) as typeof Notification;
     this.Shipment = this.setupClass(Shipment) as typeof Shipment;

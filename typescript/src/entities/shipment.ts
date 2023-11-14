@@ -4,6 +4,7 @@ import { Company } from './company';
 import { CountryTax } from './country_tax';
 import { DomainTag } from './domain_tag';
 import { Entity } from '../entity';
+import { InternalTag } from './internal_tag';
 import { Invoice } from './invoice';
 import { Quote } from './quote';
 import { Job } from './job';
@@ -38,6 +39,9 @@ export class Shipment extends Entity {
 
   @Shipment.property()
   public pickUp?: boolean;
+
+  @Shipment.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Shipment.property({type: MerchiFile})
   public shipmentLabel?: MerchiFile | null;

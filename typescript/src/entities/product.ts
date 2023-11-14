@@ -10,6 +10,7 @@ import { DomainTag } from './domain_tag';
 import { DraftTemplate } from './draft_template';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { Inventory } from './inventory';
 import { Job } from './job';
 import { SupplyDomain } from './supply_domain';
@@ -244,6 +245,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];
+
+  @Product.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Product.property({arrayType: 'SeoDomainPage'})
   public seoDomainPages?: SeoDomainPage[];

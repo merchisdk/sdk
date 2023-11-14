@@ -6,6 +6,7 @@ import { DomainTag } from './domain_tag';
 import { EmailAddress } from './email_address';
 import { Entity } from '../entity';
 import { MerchiFile } from './file';
+import { InternalTag } from './internal_tag';
 import { Item } from './item';
 import { Job } from './job';
 import { Quote } from './quote';
@@ -151,6 +152,9 @@ export class Invoice extends Entity {
 
   @Invoice.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
+
+  @Invoice.property({arrayType: 'InternalTag'})
+  public internalTags?: InternalTag[];
 
   @Invoice.property({arrayType: 'DomainTag'})
   public tags?: DomainTag[];

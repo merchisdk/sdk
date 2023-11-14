@@ -69,6 +69,7 @@ import { SupplyDomain, SupplyDomains } from './supply_domain.js';
 import { SystemRole } from './system_role.js';
 import { Theme, Themes } from './theme.js';
 import { User, Users } from './user.js';
+import { userTypes } from './user_types.js';
 import { UserCompany } from './user_company.js';
 import { Variation } from './variation.js';
 import { VariationField } from './variation_field.js';
@@ -76,6 +77,7 @@ import { VariationFieldsOption } from './variation_fields_option.js';
 import { VariationsGroup } from './variations_group.js';
 import { QuoteItem, QuoteItems } from './quote_item.js';
 import { Quotes, Quote } from './quote.js';
+import { InternalTag, InternalTags } from './internal_tag.js';
 
 export function merchi(backendUri, websocketUri) {
     getGlobal().merchiJsonpHandlers = {};
@@ -940,6 +942,8 @@ export function merchi(backendUri, websocketUri) {
             'inventories': new Inventories(),
             'InventoryUnitVariation': InventoryUnitVariation,
             'matchiingInventory': MatchingInventory,
+            'InternalTag': InternalTag,
+            'internalTags': new InternalTags(),
             'Invoice': Invoice,
             'invoices': new Invoices(),
             'Job': Job,
@@ -1058,6 +1062,7 @@ export function merchi(backendUri, websocketUri) {
             'copyEntIfNotNullOrUndefined': copyEntIfNotNullOrUndefined,
             'entAsBlank': entAsBlank,
             'cleanEntities': cleanEntities,
+            'userTypes': userTypes,
             'updateEntNonEmbeddableAttrbibutes': updateEntNonEmbeddableAttrbibutes,
             'updateEntAttributes': updateEntAttributes,
             'ignoreAttributesUpdateEnt': ignoreAttributesUpdateEnt,
