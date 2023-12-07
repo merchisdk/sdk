@@ -37,8 +37,8 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public user?: User;
 
-  @DraftComment.property({type: MerchiFile})
-  public file?: MerchiFile | null;
+  @DraftComment.property({arrayType: "MerchiFile"})
+  public files?: MerchiFile[];
 
   @DraftComment.property({arrayType: 'User'})
   public forwards?: User[];

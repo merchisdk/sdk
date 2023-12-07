@@ -14,7 +14,7 @@ export function JobComment() {
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'job', Job);
     addPropertyTo(this, 'user', User);
-    addPropertyTo(this, 'file', MerchiFile);
+    addPropertyTo(this, 'files', MerchiFile);
     addPropertyTo(this, 'notifications', Notification);
     addPropertyTo(this, 'date');
     addPropertyTo(this, 'text');

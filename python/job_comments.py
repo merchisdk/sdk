@@ -10,7 +10,7 @@ class JobComment(sdk.python.entities.Entity):
     json_name = 'job_comment'
 
     id = Property(int)
-    file = Property(File)
+    files = Property(File)
     date = Property(datetime.datetime)
     text = Property(str)
     urgency = Property(int)

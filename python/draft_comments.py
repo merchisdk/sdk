@@ -10,7 +10,7 @@ class DraftComment(sdk.python.entities.Entity):
     json_name = 'draft_comment'
 
     id = Property(int)
-    file = Property(File)
+    files = Property(File)
     urgency = Property(int)
     subject = Property(str)
     date = Property(datetime.datetime)
