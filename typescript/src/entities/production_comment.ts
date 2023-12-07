@@ -33,8 +33,8 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public sendEmail?: boolean;
 
-  @ProductionComment.property({type: MerchiFile})
-  public file?: MerchiFile | null;
+  @ProductionComment.property({arrayType: "MerchiFile"})
+  public files?: MerchiFile[];
 
   @ProductionComment.property()
   public user?: User;

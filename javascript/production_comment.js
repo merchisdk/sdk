@@ -11,7 +11,7 @@ export function ProductionComment() {
 
     addPropertyTo(this, 'id');
     addPropertyTo(this, 'user', User);
-    addPropertyTo(this, 'file', MerchiFile);
+    addPropertyTo(this, 'files', MerchiFile);
     addPropertyTo(this, 'notifications', Notification);
     addPropertyTo(this, 'assignment', Assignment);
     addPropertyTo(this, 'date');

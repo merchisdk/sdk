@@ -33,8 +33,8 @@ export class JobComment extends Entity {
   @JobComment.property()
   public urgency?: number;
 
-  @JobComment.property({type: Date})
-  public file?: MerchiFile | null;
+  @JobComment.property({arrayType: "MerchiFile"})
+  public files?: MerchiFile[];
 
   @JobComment.property({arrayType: 'User'})
   public forwards?: User[];
