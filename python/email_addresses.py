@@ -5,7 +5,7 @@ from sdk.python.entities import Property
 class EmailAddress(sdk.python.entities.Entity):
 
     resource = '/email_addresses/'
-    json_name = 'email_address'
+    json_name = 'emailAddress'
 
     id = Property(int)
     email_address = Property(str)
@@ -14,7 +14,7 @@ class EmailAddress(sdk.python.entities.Entity):
 class EmailAddresses(sdk.python.entities.Resource):
 
     entity_class = EmailAddress
-    json_name = 'email_addresses'
+    json_name = 'emailAddresses'
 
 
 email_addresses = EmailAddresses()
