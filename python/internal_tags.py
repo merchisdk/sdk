@@ -18,7 +18,7 @@ class InternalTag(sdk.python.entities.Entity):
     id = Property(int)
     name = Property(str)
     # colour is in RRGGBB format.
-    colour = Property(int)
+    colour = Property(str)
     description = Property(str)
 
     companies = Property(Company, backref="internal_tags")
