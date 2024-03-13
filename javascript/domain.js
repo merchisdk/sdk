@@ -79,6 +79,11 @@ export function Domain() {
     addPropertyTo(this, 'tags', DomainTag);
     addPropertyTo(this, 'internalTags', InternalTag);
 
+    addPropertyTo(this, 'deploymentInProgress');
+    addPropertyTo(this, 'deploymentSucceeded');
+    addPropertyTo(this, 'deploymentMessage');
+    addPropertyTo(this, 'deploymentKey');
+
     this.create = function (success, error, embed, as_domain) {
         var data = serialise(this),
             self = this;
