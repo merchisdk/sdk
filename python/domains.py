@@ -100,6 +100,11 @@ class Domain(sdk.python.entities.Entity):
     themes = Property(Theme)
     menus = Property(Menu)
 
+    deployment_in_progress = Property(bool)
+    deployment_succeeded = Property(bool)
+    deployment_message = Property(str)
+    deployment_key = Property(str)
+
     def public_categories(self):
         """ Return domain categories which are public """
         return [category for category in self.categories if
