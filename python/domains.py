@@ -100,6 +100,7 @@ class Domain(sdk.python.entities.Entity):
     themes = Property(Theme)
     menus = Property(Menu)
 
+    deployment_online = Property(bool)
     deployment_in_progress = Property(bool)
     deployment_succeeded = Property(bool)
     deployment_message = Property(str)
