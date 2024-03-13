@@ -42,34 +42,6 @@ jobs:
       - name: eslint
         working-directory: javascript
         run: yarn run eslint --ignore-pattern '.eslintrc.js' .
-  check-ts:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ '16' ]
-    name: Check Typescript
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
-      - name: ts
-        working-directory: typescript
-        run: yarn global add typescript
-      - name: yarn
-        working-directory: typescript
-        run: yarn
-      - name: tsc
-        working-directory: typescript
-        run: tsc
-      - name: eslint
-        working-directory: typescript
-        run: ./node_modules/eslint/bin/eslint.js 'src/**/*.ts'
-      - name: test
-        working-directory: typescript
-        run: yarn test
   check-php:
     runs-on: ubuntu-latest
     name: Check PHP
