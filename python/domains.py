@@ -69,6 +69,8 @@ class Domain(sdk.python.entities.Entity):
     unltd_ai_api_secret_key = Property(str)
     public_access_restricted = Property(bool)
 
+    scalable_press_api_key = Property(str)
+
     qr_shop_qr_code = Property(str)
 
     social_bitchute = Property(str)
