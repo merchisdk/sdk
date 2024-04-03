@@ -1,7 +1,7 @@
 import copy
 import sdk.python.entities
 from sdk.python.discount_groups import DiscountGroup
-from sdk.python.draft_templates import DrafTemplate
+from sdk.python.draft_templates import DraftTemplate
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
@@ -31,7 +31,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     linked_file = Property(File)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
-    draft_templates = Property(DrafTemplate)
+    draft_templates = Property(DraftTemplate)
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
