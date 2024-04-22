@@ -105,8 +105,8 @@ class S3Bucket(object):
         params = {
             'ResponseContentDisposition': f'attachment; filename="{file_name}"'
         }
-        params = urlencode(params)
-        return f"{self.fetch_view_url(key)}?{params}"
+        params_endcoded = urlencode(params)
+        return f"{self.fetch_view_url(key)}?{params_endcoded}"
 
     def delete_file(self, key):
         """ Delete file from bucket.
