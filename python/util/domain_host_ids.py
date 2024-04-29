@@ -1,0 +1,2 @@
+VERCEL = 'vercel'
+MERCHI = 'merchi'
