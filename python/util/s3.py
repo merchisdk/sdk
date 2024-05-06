@@ -103,10 +103,19 @@ class S3Bucket(object):
             :return: str, the public URL to access the S3 object
         """
         params = {
-            'ResponseContentDisposition': f'attachment; filename="{file_name}"'
+            'response-content-disposition': f'attachment; filename="{file_name}"',
         }
         params_endcoded = urlencode(params)
-        return f"{self.fetch_view_url(key)}?{params_endcoded}"
+
+        params = {'Bucket': self.bucket_name, 'Key': key}
+        if file_name:
+            value = 'attachment; filename="{0}"'.format(file_name)
+            params['ResponseContentDisposition'] = value
+        url1 = self.client.generate_presigned_url('get_object', Params=params, ExpiresIn=URL_TTL)
+        url2 = f"{self.fetch_view_url(key)}?{params_endcoded}"
+        print(url1, 'debug here 1', flush=True)
+        print(url2, 'debug here 2', flush=True)
+        return url2
 
     def delete_file(self, key):
         """ Delete file from bucket.
