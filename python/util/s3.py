@@ -3,7 +3,6 @@ import io
 import requests
 import boto3
 import s3fs
-from urllib.parse import urlencode
 
 from botocore.config import Config
 
