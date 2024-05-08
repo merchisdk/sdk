@@ -3,11 +3,10 @@ import io
 import requests
 import boto3
 import s3fs
-from urllib.parse import urlencode
 
 from botocore.config import Config
 
-URL_TTL = 14400  # (seconds = 4 hours)
+URL_TTL = 604800  # (seconds = 7 days)
 
 
 class S3Bucket(object):
@@ -102,11 +101,12 @@ class S3Bucket(object):
         """ Generate a public download URL for an object in an S3 bucket.
             :return: str, the public URL to access the S3 object
         """
-        params = {
-            'ResponseContentDisposition': f'attachment; filename="{file_name}"'
-        }
-        params_endcoded = urlencode(params)
-        return f"{self.fetch_view_url(key)}?{params_endcoded}"
+        params = {'Bucket': self.bucket_name, 'Key': key}
+        if file_name:
+            value = 'attachment; filename="{0}"'.format(file_name)
+            params['ResponseContentDisposition'] = value
+        return self.client.generate_presigned_url(
+            'get_object', Params=params, ExpiresIn=URL_TTL)
 
     def delete_file(self, key):
         """ Delete file from bucket.
