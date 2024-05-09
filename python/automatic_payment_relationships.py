@@ -9,6 +9,7 @@ class AutomaticPaymentRelationship(sdk.python.entities.Entity):
     resource = '/automatic_payment_relationships/'
     json_name = 'automaticPaymentRelationship'
 
+    allow_post_payment = Property(bool)
     archived = Property(datetime.datetime)
     id = Property(int)
     creation_date = Property(datetime.datetime)
