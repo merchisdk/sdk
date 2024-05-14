@@ -15,7 +15,7 @@ DAWG==0.8.0
 arrow==0.10.0
 Flask==2.2.2
 pycountry==17.9.23
-requests==2.28.1
+requests==2.31.0
 bidict==0.13.1
 simplejson==3.12.0
 scrypt==0.8.0

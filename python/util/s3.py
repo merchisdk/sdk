@@ -6,7 +6,7 @@ import s3fs
 
 from botocore.config import Config
 
-URL_TTL = 14400  # (seconds = 4 hours)
+URL_TTL = 604800  # (seconds = 7 days)
 
 
 class S3Bucket(object):
@@ -92,42 +92,21 @@ class S3Bucket(object):
         return io.BytesIO(requests.get(url).text.encode())
 
     def fetch_view_url(self, key):
-        """ Produce a URL at which the file named by the given key is served
-            over HTTP. Link is only valid for URL_TTL.
-
-            Args:
-              key (str): designates the file to serve
-
-            Returns: str
-
-            Raises:
-              KeyError: if no such key in bucket
+        """ Generate a public URL for an object in an S3 bucket.
+            :return: str, the public URL to access the S3 object
         """
-        params = {'Bucket': self.bucket_name,
-                  'Key': key}
-        return self.client.generate_presigned_url('get_object',
-                                                  Params=params,
-                                                  ExpiresIn=URL_TTL)
+        return f"https://{self.bucket_name}.s3-accelerate.amazonaws.com/{key}"
 
     def fetch_download_url(self, key, file_name):
-        """ Produce a URL at which the file named by the given key is served
-            over HTTP as an attachment. Link is only valid for URL_TTL.
-
-            Args:
-              key (str): designates the file to serve
-
-            Returns: str
-
-            Raises:
-              KeyError: if no such key in bucket
+        """ Generate a public download URL for an object in an S3 bucket.
+            :return: str, the public URL to access the S3 object
         """
-        params = {'Bucket': self.bucket_name,
-                  'Key': key}
+        params = {'Bucket': self.bucket_name, 'Key': key}
         if file_name:
             value = 'attachment; filename="{0}"'.format(file_name)
             params['ResponseContentDisposition'] = value
-        return self.client.generate_presigned_url('get_object', Params=params,
-                                                  ExpiresIn=URL_TTL)
+        return self.client.generate_presigned_url(
+            'get_object', Params=params, ExpiresIn=URL_TTL)
 
     def delete_file(self, key):
         """ Delete file from bucket.
