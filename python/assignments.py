@@ -29,6 +29,7 @@ class Assignment(sdk.python.entities.Entity):
     supply_domain = Property(SupplyDomain, backref="supply_assignments")
     supplier = Property('sdk.python.users.User')
     quote = Property(Quote, backref="assignments")
+    quote_total_cost = Property(float)
     comments = Property(ProductionComment, backref="assignment")
     shipment = Property(Shipment, backref="assignments")
     notifications = Property(Notification)
