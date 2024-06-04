@@ -86,6 +86,7 @@ class VariationField(sdk.python.entities.Entity):
     allow_file_ai = Property(bool)
     multiple_select = Property(bool)
     name = Property(str)
+    instructions = Property(str)
     default_value = Property(str)
     placeholder = Property(str)
     variation_cost = Property(float)
