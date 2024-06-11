@@ -1,3 +1,4 @@
+import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 
@@ -8,8 +9,13 @@ class DiscountGroup(sdk.python.entities.Entity):
     json_name = 'discountGroup'
 
     id = Property(int)
+    created = Property(datetime.datetime)
+    date_end = Property(datetime.datetime)
+    date_start = Property(datetime.datetime)
     discount_type = Property(int)
+    name = Property(str)
     discounts = Property("Discount")
+    domain = Property("Domain")
     product = Property("Product")
 
 
