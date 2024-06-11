@@ -14,6 +14,7 @@ class DiscountGroup(sdk.python.entities.Entity):
     date_start = Property(datetime.datetime)
     discount_type = Property(int)
     name = Property(str)
+    code = Property(str)
     discounts = Property("Discount")
     domain = Property("Domain")
     product = Property("Product")
