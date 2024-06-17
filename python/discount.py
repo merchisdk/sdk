@@ -11,6 +11,9 @@ class Discount(sdk.python.entities.Entity):
     id = Property(int)
     lower_limit = Property(float)
     amount = Property(float)
+    usage_limit = Property(int)
+    code = Property(str)
+    is_percentage = Property(bool)
     discount_group = Property(DiscountGroup)
 
 
