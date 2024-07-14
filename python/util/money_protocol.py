@@ -155,6 +155,13 @@ def display_price(money):
     return str(quantize(money))
 
 
+def display_percentage(percent):
+    """ Given a percentage as a Decimal, return a unicode string suitable for
+        displaying the percentage.
+    """
+    return str(quantize(percent, '.1')) + '%'
+
+
 def invoice_format_currency(amount, currency) -> str:
     """ Return a string where amount has been printed to 3 decimal places, with
         the symbol for the given ISO currency code prepended.
@@ -176,9 +183,10 @@ def currency_converter_factory(convert_rule):
     return converter
 
 
-def quantize(amount):
+def quantize(amount, decimal_param='.01'):
     """ Round the decimal amount down so there are only 2 decimal places """
-    return amount.quantize(Decimal('.01'), rounding=decimal.ROUND_DOWN)
+    return amount.quantize(
+        Decimal(decimal_param), rounding=decimal.ROUND_DOWN)
 
 
 def total_tax(jobs):
