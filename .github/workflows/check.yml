@@ -14,6 +14,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
+      - name: install legacy pip for package
+        working-directory: python
+        run: pip install pip==21.1.2
       - name: pip
         working-directory: python
         run: pip install -r requirements/dev.txt
