@@ -109,6 +109,7 @@ class Job(sdk.python.entities.Entity):
     quote_set = Property(bool)
     drop_ship = Property(bool)
     pick_up = Property(bool)
+    is_new_client = Property(bool)
     shipment = Property(
         'sdk.python.shipments.Shipment', backref="jobs")
     tax_type = Property(CountryTax)
