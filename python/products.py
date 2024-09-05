@@ -59,6 +59,7 @@ class Product(sdk.python.entities.Entity):
     accept_phone_payment = Property(bool)
     allow_automatic_payment_supply = Property(bool)
     allow_group_buy = Property(bool)
+    allow_add_to_cart = Property(bool)
     allow_payment_upfront = Property(bool)
     allow_quotation = Property(bool)
     allow_chained_inventory_creation = Property(bool)
