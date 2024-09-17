@@ -11,6 +11,7 @@ class InventoryGroup(sdk.python.entities.Entity):
     archived = Property(datetime.datetime)
     id = Property(int)
     name = Property(str)
+    company = Property("sdk.python.companies.Company")
     inventories = Property("sdk.python.invoices.Inventories")
     products = Property("sdk.python.products.Products")
     jobs = Property("sdk.python.jobs.Jobs")
