@@ -3,6 +3,7 @@ import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.variations import Variation, VariationsGroup
 from sdk.python.country_taxes import CountryTax
+from sdk.python.domain_tags import DomainTag
 
 
 class CartItem(sdk.python.entities.Entity):
@@ -18,6 +19,7 @@ class CartItem(sdk.python.entities.Entity):
     tax_amount = Property(float)
     currency = Property(str)
     notes = Property(str)
+    tags = Property(DomainTag)
     tax_type = Property(CountryTax)
     product = Property('sdk.python.products.Product')
     variations_groups = Property(VariationsGroup)
