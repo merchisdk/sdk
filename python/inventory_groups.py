@@ -1,7 +1,5 @@
 import datetime
 import sdk.python.entities
-import sdk.python.users
-from sdk.python.util.business_default import PAYMENT_TYPES
 from sdk.python.entities import Property
 
 
