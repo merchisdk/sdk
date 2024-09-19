@@ -16,6 +16,8 @@ class Inventory(sdk.python.entities.Entity):
     name = Property(str)
     notes = Property(str)
     is_orphan = Property(bool)
+    inventory_groups = Property(
+        "sdk.python.inventory_groups.InventoryGroups")
     products = Property(Product, backref="inventories")
 
 
