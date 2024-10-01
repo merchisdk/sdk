@@ -100,6 +100,7 @@ class Product(sdk.python.entities.Entity):
     supply_chain_disabled = Property(bool)
     draft_templates = Property("sdk.python.draft_templates.DraftTemplate")
     seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
+    inventory_group = Property("sdk.python.inventory_groups.InventoryGroup")
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
