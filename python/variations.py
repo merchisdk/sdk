@@ -90,6 +90,10 @@ class VariationField(sdk.python.entities.Entity):
     placeholder = Property(str)
     variation_cost = Property(float)
     variation_cost_discount_group = Property(DiscountGroup)
+    inventory_group = Property(
+        "sdk.python.inventory_groups.InventoryGroup")
+    linked_inventory_group = Property(
+        "sdk.python.inventory_groups.InventoryGroup")
     variation_unit_cost = Property(float)
     variation_unit_cost_discount_group = Property(DiscountGroup)
     cost = Property(float)
