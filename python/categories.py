@@ -15,6 +15,8 @@ class Category(sdk.python.entities.Entity):
     show_public_supplier_resell = Property(bool)
 
     domain = Property(Domain, backref="categories")
+    sub_categories = Property(Category)
+    parent_categories = Property(Category)
 
 
 class Categories(sdk.python.entities.Resource):
