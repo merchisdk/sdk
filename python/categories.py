@@ -16,7 +16,7 @@ class Category(sdk.python.entities.Entity):
 
     domain = Property(Domain, backref="categories")
     sub_categories = Property(self)
-    parent_categories = Property(self)
+    parent = Property(self)
 
 
 class Categories(sdk.python.entities.Resource):
