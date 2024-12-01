@@ -31,6 +31,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     linked_file = Property(File)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
+    draft_templates = Property('sdk.python.draft_templates.DraftTemplate')
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """

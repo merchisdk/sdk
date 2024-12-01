@@ -4,6 +4,7 @@ from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.jobs import Job
 from sdk.python.products import Product
+from sdk.python.variations import VariationFieldOption
 
 
 class DraftTemplate(sdk.python.entities.Entity):
@@ -14,6 +15,7 @@ class DraftTemplate(sdk.python.entities.Entity):
     id = Property(int)
     file = Property(File)
     product = Property(Product)
+    variation_field_option = Property(VariationFieldOption)
     job = Property(Job)
     description = Property(str)
     name = Property(str)
