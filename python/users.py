@@ -46,6 +46,7 @@ class User(sdk.python.entities.Entity):
     reset_token = Property(str)
     created = Property(datetime.datetime)
     timezone = Property(str)
+    telegram_username = Property(str)
     email_addresses = Property(EmailAddress)
     # not embedded by default, must be requested
     incomplete_jobs_count = Property(int)
