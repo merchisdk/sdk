@@ -84,6 +84,7 @@ class Domain(sdk.python.entities.Entity):
     social_tiktok = Property(str)
     social_x = Property(str)
     social_youtube = Property(str)
+    telegram_chat_id = Property(str)
 
     ai_context = Property(str)
     internal_use_notes = Property(str)
