@@ -46,6 +46,7 @@ class Invoice(sdk.python.entities.Entity):
     is_completely_paid = Property(float)
     tax_amount = Property(float)
     currency = Property(str)
+    payment_url = Property(str)
     invoice_token = Property(str)
     reminder_message = Property(str)
     shopify_order_id = Property(str)
