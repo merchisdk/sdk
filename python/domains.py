@@ -100,6 +100,7 @@ class Domain(sdk.python.entities.Entity):
     logo = Property(File)
     favicon = Property(File)
     seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
+    shipment_methods = Property("sdk.python.shipment_methods.ShipmentMethod")
     themes = Property(Theme)
     menus = Property(Menu)
 
