@@ -13,6 +13,7 @@ class DiscountGroup(sdk.python.entities.Entity):
     date_end = Property(datetime.datetime)
     date_start = Property(datetime.datetime)
     discount_type = Property(int)
+    group_restricted = Property(bool)
     name = Property(str)
     discounts = Property("Discount")
     domain = Property("Domain")
