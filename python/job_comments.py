@@ -7,7 +7,7 @@ from sdk.python.entities import Property
 class JobComment(sdk.python.entities.Entity):
 
     resource = '/job_comments/'
-    json_name = 'job_comment'
+    json_name = 'jobComment'
 
     id = Property(int)
     file = Property(File)
