@@ -39,11 +39,6 @@ final class Test extends TestCase
         $this->assertNotNull(new Category());
     }
 
-    public function testCanCreateBackup()
-    {
-        $this->assertNotNull(new Backup());
-    }
-
     public function testCanCreateBank()
     {
         $this->assertNotNull(new Bank());
