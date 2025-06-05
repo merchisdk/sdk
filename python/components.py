@@ -15,7 +15,6 @@ class Component(sdk.python.entities.Entity):
     body = Property(str)
     archived = Property(datetime.datetime)
     compiled = Property(str)
-    component_export = Property("sdk.python.components.Component")
     component_exports = Property("sdk.python.components.Component")
     component_imports = Property("sdk.python.components.Component")
     versions = Property("sdk.python.component_versions.ComponentVersion")
