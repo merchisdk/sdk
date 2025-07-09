@@ -1,19 +1,7 @@
 [tool.ruff.lint]
-# Pycodestyle and flake8 compatibility
+# Pycodestyle
 # E402: Module level import not at top of file
-# N814: camelCase imported as non-camelCase
-# E127: continuation line over-indented for visual indent
-# E131: continuation line unaligned for hanging indent
-# N803: argument name should be lowercase
-ignore = ["E402", "N814", "E127", "E131", "N803"]
-
-[tool.ruff.lint.pydocstyle]
-# Match tox.ini pydocstyle settings
-ignore = ["D400", "D100", "D101", "D102", "D103", "D104", "D105", "D107", "D203", "D205", "D208", "D210", "D212", "D213", "D214", "D406", "D407", "D413", "D401", "D412", "D415"]
-
-[tool.ruff.lint.mccabe]
-# Match tox.ini flake8 max-complexity
-max-complexity = 42
+ignore = ["E402"]
 
 [tool.ruff]
 # Match tox.ini max-line-length
