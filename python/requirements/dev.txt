@@ -11,7 +11,7 @@ pylint-common==0.2.5
 pylint-flask==0.5
 pylint-plugin-utils==0.2.6
 pytz==2023.3
-DAWG==0.8.0
+DAWG2==0.13.1
 arrow==0.14.2
 Flask==2.2.2
 pycountry==17.9.23
