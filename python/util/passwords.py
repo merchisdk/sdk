@@ -42,7 +42,7 @@
 """
 import os
 import unicodedata
-import dawg2 as dawg
+import dawg
 import sdk.python.util.crypto as crypto
 
 
