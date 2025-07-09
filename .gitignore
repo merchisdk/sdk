@@ -22,7 +22,6 @@ pyenv/*
 .coverage.*
 .coverage
 *.mo
-.mypy_cache/
 php/clover.xml
 .pytest_cache/
 .tox
