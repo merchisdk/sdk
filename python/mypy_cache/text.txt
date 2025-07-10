@@ -1,3 +1,0 @@
-this file need to put something so mypy cache can be runned with CI
-
-related issue list here https://github.com/python/mypy/issues/10600

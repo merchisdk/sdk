@@ -2,9 +2,9 @@ LEGAL_SUFFIX = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx', 'doc']
 
 PIC_SUFFIX = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
 
-TRUE_INPUTS = {'y', 'yes', 'true', '1', 'on', 'True'}
+TRUE_INPUTS = {'y', 'yes', 'true', '1', 'on', 'True', 1, True}
 
-FALSE_INPUTS = {'n', 'no', 'false', '0', 'off', 'False'}
+FALSE_INPUTS = {'n', 'no', 'false', '0', 'off', 'False', 0, False}
 
 
 def is_legal_suffix(filename):

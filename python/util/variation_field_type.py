@@ -21,7 +21,6 @@ variation_fields_dict = {
     RADIO: "Radio",
     FIELD_INSTRUCTIONS: 'Field Instructions',
     IMAGE_SELECT: 'Image Select',
-    FIELD_INSTRUCTIONS: "Field Instructions",
     COLOUR_PICKER: "Colour Picker",
     COLOUR_SELECT: "Colour Select"
 }

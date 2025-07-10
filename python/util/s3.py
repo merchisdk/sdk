@@ -17,14 +17,16 @@ class S3Bucket(object):
         # contrary to the documentation, the smallest chunk size that S3 allows,
         # other than for the last chunk, is 5MiB, not 5MB
         self.chunk_size = 5242880
-        config = Config(s3={"use_accelerate_endpoint": True})
+        config = Config(
+            s3={"use_accelerate_endpoint": True},
+            retries={'max_attempts': 50}
+        )
         self.session = boto3.Session(aws_access_key_id=access_key,
                                      aws_secret_access_key=secret_key)
         self.s3 = self.session.resource('s3', config=config)
         self.bucket = self.s3.Bucket(bucket_name)
         self.bucket_name = bucket_name
         self.client = self.s3.meta.client
-        self.client._client_config.retries = 50
 
     def upload_file(self, key, data, mimetype=None, filename=None,
                     with_retries=1):
