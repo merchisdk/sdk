@@ -71,6 +71,9 @@ class Domain(sdk.python.entities.Entity):
 
     scalable_press_api_key = Property(str)
 
+    google_merchant_api_key = Property(str)
+    google_merchant_id = Property(str)
+
     qr_shop_qr_code = Property(str)
 
     social_bitchute = Property(str)

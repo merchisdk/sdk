@@ -102,6 +102,12 @@ class Product(sdk.python.entities.Entity):
     seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     inventory_groups = Property("sdk.python.inventory_groups.InventoryGroup")
 
+    google_merchant_center_id = Property(str)
+    google_merchant_center_title = Property(str)
+    google_merchant_center_description = Property(str)
+    google_merchant_center_product_url = Property(str)
+    google_merchant_center_price = Property(float)
+
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):
         self.unit_price = float(self.unit_price)  # type: ignore
