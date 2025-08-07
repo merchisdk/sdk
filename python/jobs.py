@@ -119,7 +119,7 @@ class Job(sdk.python.entities.Entity):
     tags = Property(DomainTag, backref="jobs")
     comments = Property(JobComment, backref="job")
     own_drafts = Property(Draft, backref="job")
-    shared_drafts = Property(Draft, backref="shared_with_job")
+    shared_drafts = Property(Draft, backref="shared_with_jobs")
     draft_comments = Property(DraftComment, backref="job")
 
     # not embedded by default, must be requested
