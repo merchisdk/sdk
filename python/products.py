@@ -33,6 +33,7 @@ class Product(sdk.python.entities.Entity):
     unit_price_discount_group = Property(DiscountGroup)
     margin = Property(float)
     minimum = Property(float)
+    minimum_price = Property(float)
     minimum_per_group = Property(bool)
     unit_weight = Property(float)
     unit_height = Property(float)
