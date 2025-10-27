@@ -25,6 +25,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     variation_cost_discount_group = Property(DiscountGroup)
     variation_unit_cost = Property(float)
     variation_unit_cost_discount_group = Property(DiscountGroup)
+    selected_by = Property("sdk.python.variations.VariationFieldOption")
     default = Property(bool)
     include = Property(bool)
     no_inventory = Property(bool)
@@ -91,6 +92,7 @@ class VariationField(sdk.python.entities.Entity):
     placeholder = Property(str)
     variation_cost = Property(float)
     variation_cost_discount_group = Property(DiscountGroup)
+    selected_by = Property(VariationFieldOption)
     inventory_group = Property(
         "sdk.python.inventory_groups.InventoryGroup")
     linked_inventory_group = Property(
@@ -176,6 +178,7 @@ class VariationOption(sdk.python.entities.Entity):
     position = Property(int)
     default = Property(bool)
     include = Property(bool)
+    is_visible = Property(bool)
     linked_file = Property(File)
 
 
@@ -192,6 +195,7 @@ class Variation(sdk.python.entities.Entity):
     once_off_cost = Property(float)
     unit_cost = Property(float)
     unit_cost_total = Property(float)
+    is_visible = Property(bool)
     selected_options = Property(VariationOption)
     selectable_options = Property(VariationOption)
     variation_files = Property(File)
