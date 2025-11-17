@@ -87,6 +87,7 @@ class VariationField(sdk.python.entities.Entity):
     allow_file_png = Property(bool)
     allow_file_ai = Property(bool)
     multiple_select = Property(bool)
+    is_html = Property(bool)
     name = Property(str)
     default_value = Property(str)
     placeholder = Property(str)
