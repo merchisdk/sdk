@@ -19,7 +19,7 @@ class Inventory(sdk.python.entities.Entity):
     inventory_groups = Property(
         "sdk.python.inventory_groups.InventoryGroups")
     inventory_unit_variations = Property(
-        "sdk.python.inventory.InventoryUnitVariation")
+        "sdk.python.inventories.InventoryUnitVariation")
     products = Property(Product, backref="inventories")
 
 
