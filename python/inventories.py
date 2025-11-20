@@ -3,7 +3,7 @@ import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.jobs import Job
 from sdk.python.products import Product
-from sdk.python.variations import VariationsGroup
+from sdk.python.variations import VariationsGroup, VariationFieldOption
 
 
 class Inventory(sdk.python.entities.Entity):
@@ -40,3 +40,20 @@ class MatchingInventory(sdk.python.entities.Entity):
     job = Property(Job, backref="matching_inventories")
     group = Property(VariationsGroup, backref="matching_inventory")
     inventory = Property(Inventory)
+
+
+class InventoryUnitVariation(sdk.python.entities.Entity):
+
+    resource = '/inventory_unit_variations/'
+    json_name = 'inventory_unit_variation'
+
+    archived = Property(datetime.datetime)
+    id = Property(int)
+    inventory = Property(Inventory)
+    variation_fields_option = Property(VariationFieldOption)
+
+    def option_id(self):
+        if self.variation_fields_option is None:
+            raise ValueError(
+                'variation_fields_option is None, did you forget to embed it?')
+        return self.variation_fields_option.id
