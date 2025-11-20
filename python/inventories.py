@@ -18,6 +18,8 @@ class Inventory(sdk.python.entities.Entity):
     is_orphan = Property(bool)
     inventory_groups = Property(
         "sdk.python.inventory_groups.InventoryGroups")
+    inventory_unit_variations = Property(
+        "sdk.python.inventory.InventoryUnitVariation")
     products = Property(Product, backref="inventories")
 
 
