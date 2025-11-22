@@ -64,7 +64,7 @@ class S3Bucket(object):
     def upload_stream(self, file_row):
         fs = s3fs.S3FileSystem(anon=False, key=self.access_key,
                                secret=self.secret_key)
-        object_name = '{}/{}'.format(self.bucket_name, file_row.upload_id)
+        object_name = '{}/{}'.format(self.bucket_name, file_row.id)
         return fs.open(object_name, 'wb')
 
     def fetch_file(self, key):
