@@ -122,6 +122,19 @@ class S3Bucket(object):
         self.client.delete_object(Bucket=self.bucket_name,
                                   Key=key)
 
+    def copy_file(self, old_key, new_key):
+        """ Copy a file within the same bucket.
+
+            Args:
+              old_key (str): original file key
+              new_key (str): destination file key
+        """
+        copy_source = {
+            'Bucket': self.bucket_name,
+            'Key': old_key
+        }
+        self.bucket.copy(copy_source, new_key)
+
     def all_keys(self):
         """ Generator that yields every key in the bucket """
         continuation_token = None

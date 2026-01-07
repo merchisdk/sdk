@@ -11,7 +11,7 @@ class File(sdk.python.entities.Entity):
     json_name = 'file'
     url_fields = ['view_url', 'download_url']
 
-    id = Property(int)
+    id = Property(str)
     name = Property(str)
     size = Property(int)
     mimetype = Property(str)
