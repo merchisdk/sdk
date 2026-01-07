@@ -64,7 +64,7 @@ class S3Bucket(object):
     def upload_stream(self, file_row):
         fs = s3fs.S3FileSystem(anon=False, key=self.access_key,
                                secret=self.secret_key)
-        object_name = '{}/{}'.format(self.bucket_name, file_row.upload_id)
+        object_name = '{}/{}'.format(self.bucket_name, file_row.id)
         return fs.open(object_name, 'wb')
 
     def fetch_file(self, key):
@@ -121,6 +121,19 @@ class S3Bucket(object):
         """
         self.client.delete_object(Bucket=self.bucket_name,
                                   Key=key)
+
+    def copy_file(self, old_key, new_key):
+        """ Copy a file within the same bucket.
+
+            Args:
+              old_key (str): original file key
+              new_key (str): destination file key
+        """
+        copy_source = {
+            'Bucket': self.bucket_name,
+            'Key': old_key
+        }
+        self.bucket.copy(copy_source, new_key)
 
     def all_keys(self):
         """ Generator that yields every key in the bucket """
