@@ -53,6 +53,8 @@ class User(sdk.python.entities.Entity):
     unpaid_jobs_count = Property(int)
     ready_for_shipping_count = Property(int)
     production_quoting_count = Property(int)
+    job_count_as_client = Property(int)
+    total_invoice_value = Property(float)
     comments = Property(str)
     preferred_language = Property(str)
     call_to_actions = Property(str)
