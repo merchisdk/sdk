@@ -6,6 +6,8 @@ def address_country(code):
         name, i.e. 'Australia' as a string
     """
     country_name = pycountry.countries.get(alpha_2=code)
+    if not country_name:
+        return ''
     return country_name.name
 
 
