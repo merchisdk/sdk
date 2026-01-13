@@ -32,6 +32,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     linked_file = Property(File)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
+    delivery_days = Property(int)
 
     def apply_cost_per_unit(self):
         """ Return True if the option cost is applied per unit """
@@ -106,6 +107,8 @@ class VariationField(sdk.python.entities.Entity):
     default_options = Property(VariationFieldOption)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
+    consider_business_hours = Property(bool)
+    shipping_time_included = Property(bool)
 
     def is_select(self):
         return self.field_type == SELECT
