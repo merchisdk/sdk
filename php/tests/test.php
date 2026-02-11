@@ -8,7 +8,6 @@ require_once 'php/src/component_tags.php';
 require_once 'php/src/products.php';
 require_once 'php/src/domain_invitations.php';
 require_once 'php/src/discounts.php';
-require_once 'php/src/backups.php';
 require_once 'php/src/bank.php';
 require_once 'php/src/quote_items.php';
 require_once 'php/src/util/address.php';
@@ -37,11 +36,6 @@ final class Test extends TestCase
     public function testCanCreateCategory()
     {
         $this->assertNotNull(new Category());
-    }
-
-    public function testCanCreateBackup()
-    {
-        $this->assertNotNull(new Backup());
     }
 
     public function testCanCreateBank()

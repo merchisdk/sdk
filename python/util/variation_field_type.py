@@ -9,6 +9,7 @@ FIELD_INSTRUCTIONS = 8
 IMAGE_SELECT = 9
 COLOUR_PICKER = 10
 COLOUR_SELECT = 11
+TURNAROUND_TIME = 12
 
 
 variation_fields_dict = {
@@ -21,9 +22,15 @@ variation_fields_dict = {
     RADIO: "Radio",
     FIELD_INSTRUCTIONS: 'Field Instructions',
     IMAGE_SELECT: 'Image Select',
-    FIELD_INSTRUCTIONS: "Field Instructions",
     COLOUR_PICKER: "Colour Picker",
-    COLOUR_SELECT: "Colour Select"
+    COLOUR_SELECT: "Colour Select",
+    TURNAROUND_TIME: "Turnaround Time"
 }
 
-has_options_array = [SELECT, CHECKBOX, RADIO, IMAGE_SELECT, COLOUR_SELECT]
+has_options_array = [
+    SELECT,
+    CHECKBOX,
+    RADIO,
+    IMAGE_SELECT,
+    COLOUR_SELECT,
+    TURNAROUND_TIME]

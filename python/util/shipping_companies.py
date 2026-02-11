@@ -4,7 +4,8 @@ SHIPPING_COMPANIES = ['DHL', 'UPS', 'EMS', 'FedEx',
                       'Custom Track Link', 'Aramex',
                       'realtime express', 'Uber',
                       'Civic Transport Couriers',
-                      'NZ Post', 'Sendle', 'USPS']
+                      'NZ Post', 'Sendle', 'USPS',
+                      'Fusion Freight']
 
 SHIPPING_TRANSPORT_COMPANIES = dict(enumerate(SHIPPING_COMPANIES))
 
@@ -25,3 +26,4 @@ CIVIC_TRANSPORT_COURIERS = SHIPPING_COMPANIES.index(
 NZ_POST = SHIPPING_COMPANIES.index('NZ Post')
 SENDLE = SHIPPING_COMPANIES.index('Sendle')
 USPS = SHIPPING_COMPANIES.index('USPS')
+FUSION_FREIGHT = SHIPPING_COMPANIES.index('Fusion Freight')

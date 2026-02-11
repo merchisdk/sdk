@@ -17,14 +17,16 @@ class S3Bucket(object):
         # contrary to the documentation, the smallest chunk size that S3 allows,
         # other than for the last chunk, is 5MiB, not 5MB
         self.chunk_size = 5242880
-        config = Config(s3={"use_accelerate_endpoint": True})
+        config = Config(
+            s3={"use_accelerate_endpoint": True},
+            retries={'max_attempts': 50}
+        )
         self.session = boto3.Session(aws_access_key_id=access_key,
                                      aws_secret_access_key=secret_key)
         self.s3 = self.session.resource('s3', config=config)
         self.bucket = self.s3.Bucket(bucket_name)
         self.bucket_name = bucket_name
         self.client = self.s3.meta.client
-        self.client._client_config.retries = 50
 
     def upload_file(self, key, data, mimetype=None, filename=None,
                     with_retries=1):
@@ -62,7 +64,7 @@ class S3Bucket(object):
     def upload_stream(self, file_row):
         fs = s3fs.S3FileSystem(anon=False, key=self.access_key,
                                secret=self.secret_key)
-        object_name = '{}/{}'.format(self.bucket_name, file_row.upload_id)
+        object_name = '{}/{}'.format(self.bucket_name, file_row.id)
         return fs.open(object_name, 'wb')
 
     def fetch_file(self, key):
@@ -119,6 +121,19 @@ class S3Bucket(object):
         """
         self.client.delete_object(Bucket=self.bucket_name,
                                   Key=key)
+
+    def copy_file(self, old_key, new_key):
+        """ Copy a file within the same bucket.
+
+            Args:
+              old_key (str): original file key
+              new_key (str): destination file key
+        """
+        copy_source = {
+            'Bucket': self.bucket_name,
+            'Key': old_key
+        }
+        self.bucket.copy(copy_source, new_key)
 
     def all_keys(self):
         """ Generator that yields every key in the bucket """

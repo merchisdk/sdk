@@ -33,6 +33,8 @@ class Product(sdk.python.entities.Entity):
     unit_price_discount_group = Property(DiscountGroup)
     margin = Property(float)
     minimum = Property(float)
+    default_quantity = Property(int)
+    minimum_price = Property(float)
     minimum_per_group = Property(bool)
     unit_weight = Property(float)
     unit_height = Property(float)
@@ -48,6 +50,7 @@ class Product(sdk.python.entities.Entity):
     needs_shipping = Property(bool)
     needs_invoicing = Property(bool)
     needs_inventory = Property(bool)
+    groups_first = Property(bool)
     feature_deadline = Property(datetime.datetime)
     show_feature_deadline = Property(bool)
     show_public = Property(bool)
@@ -101,6 +104,12 @@ class Product(sdk.python.entities.Entity):
     draft_templates = Property("sdk.python.draft_templates.DraftTemplate")
     seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     inventory_groups = Property("sdk.python.inventory_groups.InventoryGroup")
+
+    google_merchant_center_id = Property(str)
+    google_merchant_center_title = Property(str)
+    google_merchant_center_description = Property(str)
+    google_merchant_center_product_url = Property(str)
+    google_merchant_center_price = Property(float)
 
     def create(self, embed=None, email=None, password=None, query=None,
                api_secret=None, as_domain=None):

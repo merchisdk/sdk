@@ -1,0 +1,8 @@
+[tool.ruff.lint]
+# Pycodestyle
+# E402: Module level import not at top of file
+ignore = ["E402"]
+
+[tool.ruff]
+# Match tox.ini max-line-length
+line-length = 80
