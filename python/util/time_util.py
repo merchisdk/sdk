@@ -67,8 +67,16 @@ def is_date_near(date_attribute, hours_until=DAY_IN_HOURS):
 
 def calculate_deadline(start_date, delivery_days, consider_business_hours=True,
                        timezone='Australia/Melbourne'):
-    """ Calculate deadline based on start_date, delivery_days and
-        business hours
+    """Calculate deadline based on start_date, delivery_days and business hours.
+
+    Args:
+        start_date: The starting date (datetime or Arrow object)
+        delivery_days: Number of days for delivery
+        consider_business_hours: If True, only count business days
+        timezone: Timezone for calculation
+
+    Returns:
+        datetime.datetime: The calculated deadline, or None if start_date is None
     """
     if not start_date:
         return None
@@ -93,5 +101,5 @@ def calculate_deadline(start_date, delivery_days, consider_business_hours=True,
             if current_date.weekday() < 5:
                 delivery_days -= 1
 
-        return current_date.ceil('day')
-    return start_date.shift(days=+delivery_days).ceil('day')
+        return current_date.ceil('day').datetime
+    return start_date.shift(days=+delivery_days).ceil('day').datetime
