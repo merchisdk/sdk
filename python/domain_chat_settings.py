@@ -1,6 +1,5 @@
 """Domain chat settings entity for support chat widget configuration."""
 
-import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.domains import Domain
