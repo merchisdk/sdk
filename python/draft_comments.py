@@ -16,6 +16,8 @@ class DraftComment(sdk.python.entities.Entity):
     date = Property(datetime.datetime)
     text = Property(str)
     change_request = Property(bool)
+    last_edited_by = Property('sdk.python.users.User')
+    last_edited_time = Property(datetime.datetime)
     send_sms = Property(bool)
     send_email = Property(bool)
 
