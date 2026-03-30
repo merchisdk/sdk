@@ -14,7 +14,6 @@ from sdk.python.util.google import \
 from sdk.python.util.brand_util import PLATFORM_MASCOT_ICON
 from sdk.python.entities import Property
 
-
 class Domain(sdk.python.entities.Entity):
     """ merchi python SDK object representing Domains.
 
@@ -103,6 +102,7 @@ class Domain(sdk.python.entities.Entity):
     logo = Property(File)
     favicon = Property(File)
     seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
+    domain_chat_settings = Property("sdk.python.domain_chat_settings.DomainChatSettings")
     shipment_methods = Property("sdk.python.shipment_methods.ShipmentMethod")
     themes = Property(Theme)
     menus = Property(Menu)
