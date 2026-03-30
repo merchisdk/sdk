@@ -1,6 +1,9 @@
 """Domain chat settings entity for support chat widget configuration."""
 
+<<<<<<< HEAD
 import datetime
+=======
+>>>>>>> 5fee622beb7e036344e458f72a4c45f5a49078f5
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.domains import Domain
