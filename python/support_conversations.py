@@ -21,6 +21,8 @@ class SupportConversation(sdk.python.entities.Entity):
     guest_contact_name = Property(str)
     client_fingerprint = Property(str)
     user = Property(User)
+    assigned_user = Property(User)
+    ai_auto_reply = Property(bool)
     creation_date = Property(datetime.datetime)
     last_message_at = Property(datetime.datetime)
     archived_at = Property(datetime.datetime)
