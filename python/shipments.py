@@ -70,6 +70,7 @@ class Shipment(sdk.python.entities.Entity):
     tags = Property(DomainTag, backref="shipments")
     shipment_items = Property(ShipmentItem)
     shipment_method = Property(ShipmentMethod)
+    logs = Property('sdk.python.shipment_logs.ShipmentLog')
 
 
 class Shipments(sdk.python.entities.Resource):

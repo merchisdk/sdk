@@ -27,6 +27,7 @@ class Product(sdk.python.entities.Entity):
     country = Property(str)
     currency = Property(str)
     description = Property(str)
+    ai_context_drafting = Property(str)
     shopify_product_id = Property(str)
     sp_product_id = Property(str)
     unit_price = Property(float)

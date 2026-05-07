@@ -20,6 +20,9 @@ class DraftTemplate(sdk.python.entities.Entity):
     date = Property(datetime.datetime)
     height = Property(int)
     width = Property(int)
+    customisation_map = Property(dict)
+    customisation_map_source = Property(str)
+    customisation_map_file_id = Property(str)
 
 
 class DraftTemplates(sdk.python.entities.Resource):

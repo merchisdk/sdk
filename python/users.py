@@ -18,9 +18,11 @@ from sdk.python.domains import EnrolledDomain
 from sdk.python.themes import Theme
 from sdk.python.domain_invitations import DomainInvitation
 from sdk.python.job_comments import JobComment
+from sdk.python.shipment_logs import ShipmentLog
 from sdk.python.drafts import Draft
 from sdk.python.draft_comments import DraftComment
 from sdk.python.production_comments import ProductionComment
+from sdk.python.domain_tags import DomainTag
 
 
 class SystemRole(sdk.python.entities.Entity):
@@ -72,6 +74,7 @@ class User(sdk.python.entities.Entity):
     addresses = Property(Address)
     phone_numbers = Property(PhoneNumber)
     categories = Property('sdk.python.categories.Category')
+    tags = Property(DomainTag)
     notifications = Property(Notification)
     enrolled_domains = Property(EnrolledDomain, backref="user")
     # products that supplier can produce
@@ -85,6 +88,7 @@ class User(sdk.python.entities.Entity):
     received_domain_invitations = Property(DomainInvitation, backref="user")
     job_comments = Property(JobComment, backref="user")
     forwarded_job_comments = Property(JobComment, backref="forwards")
+    shipment_logs = Property(ShipmentLog, backref="user")
     drafts = Property(Draft, backref="designer")
     draft_comments = Property(DraftComment, backref="user")
     forwarded_draft_comments = Property(DraftComment, backref="forwards")
