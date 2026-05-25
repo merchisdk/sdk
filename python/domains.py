@@ -182,6 +182,163 @@ class Domain(sdk.python.entities.Entity):
             return self.logo.view_url
         return PLATFORM_MASCOT_ICON
 
+    def _storefront_request(self, resource, method='GET', data=None,
+                            query=None, expected_statuses=(200,), **kwargs):
+        if 'skip_rights' not in kwargs:
+            kwargs['skip_rights'] = True
+        request = sdk.python.entities.generate_request(
+            data=data, query=query, **kwargs)
+        request.method = method
+        request.resource = resource
+        response = request.send()
+        if response.status_code not in expected_statuses:
+            sdk.python.entities.check_response(response, expected_statuses[0])
+        return response.json()
+
+    def get_storefront_v2(self, **kwargs):
+        """Fetch storefront v2 config for this domain.
+
+        Responses can include active preview branch attributes:
+        - `activePreviewBranchName`
+        - `activePreviewStartedAt`
+        - `activePreviewLastRequestId`
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def provision_storefront_v2(self, data=None, **kwargs):
+        """Provision storefront v2 resources for this domain.
+
+        `data` may include:
+        - `starterTemplate`: starter repo in `owner/repo` format.
+        - `urlStructure`: desired product route pattern
+          (for example `/products/:product`).
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/provision/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def extract_storefront_v2_site_context(self, data=None, **kwargs):
+        """Run storefront site-context extraction.
+
+        `data` should include:
+        - `url`: target site URL to analyze.
+
+        Responses may include:
+        - `analysisFilePath`: markdown analysis document path
+        - `analysisJsonFilePath`: structured JSON analysis document path
+        - `analysisScreenshotPaths`: saved screenshot artifact paths
+        - `analysisScreenshots`: screenshot metadata/context image payloads
+        - `emulationSpec`: route contract and boilerplate component mapping
+        - `pageAnalysis`: per-page extracted content summaries
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/site_context/extract/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def create_storefront_change_request(self, data=None, **kwargs):
+        """Create a storefront change request.
+
+        `data` may include:
+        - `prompt`: natural language request text.
+        - `contextFilePaths`: list of repository file paths to prioritize.
+        - `contextImages`: list of image context objects containing
+          `name`, optional `mimeType`, and `dataUrl`.
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/requests/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_storefront_change_request(self, request_id, **kwargs):
+        """Fetch a storefront change request.
+
+        The API response may include `pullRequestNumber`, `checksSummary`,
+        `checksUpdatedAt`, and `executionEvents` when run/approve workflows
+        are using GitHub PRs.
+        """
+        return self._storefront_request(
+            '/storefront_change_requests/{0}/'.format(request_id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_storefront_change_request_events(self, request_id, **kwargs):
+        """Fetch execution events for a storefront change request.
+
+        Returns payload with:
+        - `requestId`: change request id
+        - `events`: ordered execution event list
+        """
+        return self._storefront_request(
+            '/storefront_change_requests/{0}/events/'.format(request_id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def run_storefront_change_request(self, request_id, data=None, **kwargs):
+        """Run a storefront change request and return updated metadata.
+
+        Successful responses can include `pullRequestNumber`,
+        `checksSummary`, and `checksUpdatedAt`.
+        """
+        return self._storefront_request(
+            '/storefront_change_requests/{0}/run/'.format(request_id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def approve_storefront_change_request(self, request_id, data=None, **kwargs):
+        return self._storefront_request(
+            '/storefront_change_requests/{0}/approve/'.format(request_id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def reject_storefront_change_request(self, request_id, data=None, **kwargs):
+        return self._storefront_request(
+            '/storefront_change_requests/{0}/reject/'.format(request_id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_storefront_v2_deployments(self, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/deployments/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_storefront_v2_deployment_logs(self, deployment_id, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/deployments/{1}/logs/'.format(
+                self.id, deployment_id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def rollback_storefront_v2(self, data=None, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/rollback/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
 
 class EnrolledDomain(sdk.python.entities.Entity):
 
