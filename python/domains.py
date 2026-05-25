@@ -72,6 +72,8 @@ class Domain(sdk.python.entities.Entity):
 
     google_merchant_api_key = Property(str)
     google_merchant_id = Property(str)
+    google_product_reviews_feed_enabled = Property(bool)
+    google_product_reviews_feed_token = Property(str)
 
     qr_shop_qr_code = Property(str)
 

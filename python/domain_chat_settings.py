@@ -23,6 +23,7 @@ class DomainChatSettings(sdk.python.entities.Entity):
     away_message = Property(str)
     notify_email_new_conversation = Property(bool)
     notify_email_new_message = Property(bool)
+    telegram_chat_id = Property(str)
     assigned_users = Property(list)
     require_guest_contact = Property(bool)
     auto_open_delay = Property(int)
