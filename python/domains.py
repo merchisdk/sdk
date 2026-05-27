@@ -228,7 +228,7 @@ class Domain(sdk.python.entities.Entity):
         """Run storefront site-context extraction.
 
         `data` should include:
-        - `url`: target site URL to analyze.
+        - `url` or `sourceUrl`: target site URL to analyze.
 
         Responses may include:
         - `analysisFilePath`: markdown analysis document path
@@ -245,6 +245,54 @@ class Domain(sdk.python.entities.Entity):
             expected_statuses=(200,),
             **kwargs)
 
+    def resolve_starter_template_url_structure(self, data=None, **kwargs):
+        """Resolve the default URL structure for a starter template repo.
+
+        `data` should include:
+        - `starterTemplate`: starter repo in `owner/repo` format.
+
+        Returns:
+        - `starterTemplate`
+        - `urlStructure`
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/starter_template/url_structure/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def create_storefront_v2_generation_brief(self, data=None, **kwargs):
+        """Build a generation brief and clarification questions before code generation.
+
+        `data` should include:
+        - `siteContext`: extracted site analysis payload.
+        - `urlStructure`: optional selected route pattern.
+        - `starterTemplate`: optional starter repo identifier.
+
+        Returns payload with:
+        - `generationBrief.planSummary`
+        - `generationBrief.boilerplateFit`
+        - `generationBrief.gapTopics`
+        - `generationBrief.questions`
+        - `generationBrief.questionCount`
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/generation_brief/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def reset_storefront_v2(self, data=None, **kwargs):
+        """Delete the current storefront v2 setup for this domain (admin only)."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/reset/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
     def create_storefront_change_request(self, data=None, **kwargs):
         """Create a storefront change request.
 
@@ -253,6 +301,12 @@ class Domain(sdk.python.entities.Entity):
         - `contextFilePaths`: list of repository file paths to prioritize.
         - `contextImages`: list of image context objects containing
           `name`, optional `mimeType`, and `dataUrl`.
+        - `branchName`: reuse an existing preview branch.
+        - `startNewBranch`: create a new AI-named preview branch.
+        - `clarificationAnswers`: user answers keyed by question id.
+        - `generationBriefSummary`: brief summary from generation planning.
+        - `generationBoilerplateFit`: boilerplate fit summary from planning.
+        - `clarificationSkipped`: bool when user skipped clarification step.
         """
         return self._storefront_request(
             '/domains/{0}/storefront_v2/requests/'.format(self.id),
@@ -334,6 +388,71 @@ class Domain(sdk.python.entities.Entity):
     def rollback_storefront_v2(self, data=None, **kwargs):
         return self._storefront_request(
             '/domains/{0}/storefront_v2/rollback/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_storefront_v2_repository_tree(self, query=None, **kwargs):
+        """List repository tree entries for a path/ref."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/repository_tree/'.format(self.id),
+            method='GET',
+            query=query,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_storefront_v2_repository_branches(self, **kwargs):
+        """List repository branches for the storefront repo."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/repository_branches/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_storefront_v2_repository_file(self, query=None, **kwargs):
+        """Fetch repository file contents.
+
+        `query` should include:
+        - `path`: repository file path.
+        - `ref`: optional branch/ref name.
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/repository_file/'.format(self.id),
+            method='GET',
+            query=query,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def update_storefront_v2_repository_file(self, data=None, **kwargs):
+        """Update repository file contents on a branch.
+
+        `data` should include:
+        - `path`: repository file path.
+        - `content`: full file content.
+        - `message`: optional commit message.
+        - `branch`: optional branch name.
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/repository_file/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def publish_storefront_v2_product(self, data=None, **kwargs):
+        """Publish or recache a product URL on the storefront."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/products/publish/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def publish_storefront_v2_category(self, data=None, **kwargs):
+        """Publish or recache a category URL on the storefront."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/categories/publish/'.format(self.id),
             method='POST',
             data=data,
             expected_statuses=(200, 201),
