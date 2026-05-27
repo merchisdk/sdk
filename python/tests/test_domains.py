@@ -290,3 +290,118 @@ def test_domain_storefront_change_request_events_routes_and_skip_rights():
         assert _FakeRequest.last.query.get("skip_rights") is True
     finally:
         _restore_request(old)
+
+
+def test_domain_storefront_create_supports_clarification_payload():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 201
+        _FakeRequest.next_payload = {"storefrontChangeRequest": {"id": 9}}
+        domain = Domain()
+        domain.id = 12
+        payload = {
+            "prompt": "Generate storefront",
+            "startNewBranch": True,
+            "clarificationAnswers": {"nav-style": "simplify-to-starter-header"},
+            "generationBriefSummary": "Refresh homepage hero.",
+            "generationBoilerplateFit": "Starter header maps to source nav.",
+            "clarificationSkipped": False,
+        }
+
+        result = domain.create_storefront_change_request(payload)
+
+        assert result["storefrontChangeRequest"]["id"] == 9
+        assert _FakeRequest.last.data == payload
+    finally:
+        _restore_request(old)
+
+
+def test_domain_storefront_generation_brief_routes_and_payload():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 200
+        _FakeRequest.next_payload = {
+            "generationBrief": {
+                "planSummary": "Build storefront",
+                "boilerplateFit": "Starter maps to source",
+                "gapTopics": [],
+                "questions": [],
+                "questionCount": 0,
+            }
+        }
+        domain = Domain()
+        domain.id = 12
+        payload = {
+            "siteContext": {"sourceUrl": "https://example.com"},
+            "urlStructure": "/:category/:product",
+        }
+
+        result = domain.create_storefront_v2_generation_brief(payload)
+
+        assert result["generationBrief"]["planSummary"] == "Build storefront"
+        assert _FakeRequest.last.resource == "/domains/12/storefront_v2/generation_brief/"
+        assert _FakeRequest.last.method == "POST"
+        assert _FakeRequest.last.data == payload
+    finally:
+        _restore_request(old)
+
+
+def test_domain_storefront_resolve_starter_template_url_structure():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 200
+        _FakeRequest.next_payload = {
+            "starterTemplate": "merchi/storefront-v2-starter",
+            "urlStructure": "/:category/:product",
+        }
+        domain = Domain()
+        domain.id = 12
+
+        result = domain.resolve_starter_template_url_structure(
+            {"starterTemplate": "merchi/storefront-v2-starter"}
+        )
+
+        assert result["urlStructure"] == "/:category/:product"
+        assert (
+            _FakeRequest.last.resource
+            == "/domains/12/storefront_v2/starter_template/url_structure/"
+        )
+    finally:
+        _restore_request(old)
+
+
+def test_domain_storefront_repository_tree_passes_query():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 200
+        _FakeRequest.next_payload = {"repositoryTree": {"path": "src", "ref": "main", "entries": []}}
+        domain = Domain()
+        domain.id = 12
+
+        result = domain.get_storefront_v2_repository_tree(
+            query={"path": "src", "ref": "main"}
+        )
+
+        assert result["repositoryTree"]["path"] == "src"
+        assert _FakeRequest.last.resource == "/domains/12/storefront_v2/repository_tree/"
+        assert _FakeRequest.last.query["path"] == "src"
+        assert _FakeRequest.last.query["ref"] == "main"
+    finally:
+        _restore_request(old)
+
+
+def test_domain_storefront_publish_product_routes_and_payload():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 200
+        _FakeRequest.next_payload = {"productPublish": {"action": "deploy", "status": "queued"}}
+        domain = Domain()
+        domain.id = 12
+
+        result = domain.publish_storefront_v2_product({"productName": "Wristband"})
+
+        assert result["productPublish"]["action"] == "deploy"
+        assert _FakeRequest.last.resource == "/domains/12/storefront_v2/products/publish/"
+        assert _FakeRequest.last.data == {"productName": "Wristband"}
+    finally:
+        _restore_request(old)
