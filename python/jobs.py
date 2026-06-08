@@ -3,6 +3,7 @@ import collections
 import datetime
 import sdk.python.entities
 from sdk.python.job_comments import JobComment
+from sdk.python.job_notes import JobNote
 from sdk.python.draft_comments import DraftComment
 from sdk.python.country_taxes import CountryTax
 from sdk.python.domains import Domain
@@ -61,14 +62,13 @@ class Job(sdk.python.entities.Entity):
     client_company_phone = Property(PhoneNumber)
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
-    notes = Property(str)
+    job_notes = Property(JobNote, backref="job")
     shopify_shop_url = Property(str)
     shopify_order_id = Property(str)
     shopify_order_line_item_id = Property(str)
     purpose = Property(int)
     call_to_actions = Property(str)
     call_to_action_details = Property(list)
-    production_notes = Property(str)
     production_status = Property(int)
     design_status = Property(int)
     payment_status = Property(int)
