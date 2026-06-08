@@ -84,6 +84,8 @@ class Job(sdk.python.entities.Entity):
     received = Property(datetime.datetime)
     deadline = Property(datetime.datetime)
     updated = Property(datetime.datetime)
+    date_last_actioned = Property(datetime.datetime)
+    date_first_actioned = Property(datetime.datetime)
     inventory_status = Property(int)
     cost_per_unit = Property(float)
     automatic_price_enabled = Property(bool)
