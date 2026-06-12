@@ -7,7 +7,7 @@ from sdk.python.job_notes import JobNote
 from sdk.python.draft_comments import DraftComment
 from sdk.python.country_taxes import CountryTax
 from sdk.python.domains import Domain
-from sdk.python.domain_tags import DomainTag
+from sdk.python.company_tags import CompanyTag
 from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
 from sdk.python.files import File
@@ -118,7 +118,7 @@ class Job(sdk.python.entities.Entity):
     shipment = Property(
         'sdk.python.shipments.Shipment', backref="jobs")
     tax_type = Property(CountryTax)
-    tags = Property(DomainTag, backref="jobs")
+    tags = Property(CompanyTag, backref="jobs")
     comments = Property(JobComment, backref="job")
     own_drafts = Property(Draft, backref="job")
     shared_drafts = Property(Draft, backref="shared_with_jobs")

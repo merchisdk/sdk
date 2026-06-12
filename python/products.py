@@ -4,7 +4,7 @@ from sdk.python.entities import Property
 from sdk.python.categories import Category
 from sdk.python.discount_groups import DiscountGroup
 from sdk.python.domains import Domain
-from sdk.python.domain_tags import DomainTag
+from sdk.python.company_tags import CompanyTag
 from sdk.python.files import File
 from sdk.python.shipment_methods import ShipmentMethod
 from sdk.python.variations import VariationField,\
@@ -86,7 +86,7 @@ class Product(sdk.python.entities.Entity):
     supply_chain_request_jobs = Property("sdk.python.jobs.Job")
     independent_variation_fields = Property(VariationField)
     group_variation_fields = Property(VariationField)
-    tags = Property(DomainTag, backref="products")
+    tags = Property(CompanyTag, backref="products")
     tax_type = Property('sdk.python.country_taxes.CountryTax')
     feature_image = Property(File, backref="featured_products")
     created_by_job = Property("sdk.python.jobs.Job", backref="created_products")
