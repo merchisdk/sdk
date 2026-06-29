@@ -150,6 +150,32 @@ class Company(sdk.python.entities.Entity):
 
         return primary_email_address
 
+    def _analytics_request(self, resource, method='GET', data=None,
+                           query=None, expected_statuses=(200,), **kwargs):
+        request = sdk.python.entities.generate_request(
+            data=data, query=query, **kwargs)
+        request.method = method
+        request.resource = resource
+        response = request.send()
+        if response.status_code not in expected_statuses:
+            sdk.python.entities.check_response(response, expected_statuses[0])
+        return response.json()
+
+    def get_analytics(self, **kwargs):
+        return self._analytics_request(
+            '/companies/{0}/analytics/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_agent_token_analytics(self, query=None, **kwargs):
+        return self._analytics_request(
+            '/companies/{0}/agent_token_analytics/'.format(self.id),
+            query=query,
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
 
 class Companies(sdk.python.entities.Resource):
 

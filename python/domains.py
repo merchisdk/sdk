@@ -476,6 +476,21 @@ class Domain(sdk.python.entities.Entity):
             expected_statuses=(200, 201),
             **kwargs)
 
+    def get_analytics(self, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/analytics/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_agent_token_analytics(self, query=None, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/agent_token_analytics/'.format(self.id),
+            query=query,
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
 
 class EnrolledDomain(sdk.python.entities.Entity):
 
