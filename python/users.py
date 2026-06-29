@@ -18,6 +18,7 @@ from sdk.python.domains import EnrolledDomain
 from sdk.python.themes import Theme
 from sdk.python.domain_invitations import DomainInvitation
 from sdk.python.job_comments import JobComment
+from sdk.python.job_operation_logs import JobOperationLog
 from sdk.python.shipment_logs import ShipmentLog
 from sdk.python.drafts import Draft
 from sdk.python.draft_comments import DraftComment
@@ -87,6 +88,7 @@ class User(sdk.python.entities.Entity):
     sent_domain_invitations = Property(DomainInvitation, backref="sender")
     received_domain_invitations = Property(DomainInvitation, backref="user")
     job_comments = Property(JobComment, backref="user")
+    job_operation_logs = Property(JobOperationLog, backref="user")
     forwarded_job_comments = Property(JobComment, backref="forwards")
     shipment_logs = Property(ShipmentLog, backref="user")
     drafts = Property(Draft, backref="designer")
