@@ -10,6 +10,9 @@ class Category(sdk.python.entities.Entity):
 
     id = Property(int)
     name = Property(str)
+    position = Property(int)
+    description = Property(str)
+    description_short = Property(str)
     show_dashboard = Property(bool)
     show_public = Property(bool)
     show_public_supplier_resell = Property(bool)

@@ -15,6 +15,8 @@ class AgentConversation(sdk.python.entities.Entity):
     initial_prompt = Property(str)
     creation_date = Property(datetime.datetime)
     service_provider = Property(int)
+    entity_type = Property(str)
+    entity_id = Property(int)
     user = Property(User)
     domain = Property(Domain)
 
