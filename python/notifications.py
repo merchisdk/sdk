@@ -17,6 +17,7 @@ class Notification(sdk.python.entities.Entity):
 
     id = Property(int)
     date = Property(datetime.datetime)
+    email_opened_at = Property(datetime.datetime)
     domain = Property(sdk.python.domains.Domain)
     related_job_comment = Property(sdk.python.job_comments.JobComment,
                                    backref="notifications")

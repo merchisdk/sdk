@@ -264,6 +264,24 @@ class Domain(sdk.python.entities.Entity):
             expected_statuses=(200,),
             **kwargs)
 
+    def sync_storefront_v2_environment_variables(self, data=None, **kwargs):
+        """Upsert env vars on the linked Vercel project without reprovisioning.
+
+        `data` should include:
+        - `environmentVariables`: dict of key/value pairs from the boilerplate schema.
+
+        Returns:
+        - `variableCount`
+        - `variableKeys`
+        - `vercelProjectId`
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/environment_variables/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
     def create_storefront_v2_generation_brief(self, data=None, **kwargs):
         """Build a generation brief and clarification questions before code generation.
 
@@ -458,6 +476,21 @@ class Domain(sdk.python.entities.Entity):
             method='POST',
             data=data,
             expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_analytics(self, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/analytics/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_agent_token_analytics(self, query=None, **kwargs):
+        return self._storefront_request(
+            '/domains/{0}/agent_token_analytics/'.format(self.id),
+            query=query,
+            method='GET',
+            expected_statuses=(200,),
             **kwargs)
 
 

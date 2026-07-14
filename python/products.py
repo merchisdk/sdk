@@ -77,6 +77,7 @@ class Product(sdk.python.entities.Entity):
     categories = Property(Category)
     platform_categories = Property(Category)
     discountGroups = Property(DiscountGroup, backref="product")
+    attachedDiscountGroups = Property(DiscountGroup, backref="attachedProducts")
     domain = Property(Domain, backref="products")
     images = Property(File)
     shipment_methods = Property(ShipmentMethod, backref="products")

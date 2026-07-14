@@ -10,6 +10,7 @@ from sdk.python.domains import Domain
 from sdk.python.domain_tags import DomainTag
 from sdk.python.drafts import Draft
 from sdk.python.invoices import Invoice
+from sdk.python.job_operation_logs import JobOperationLog
 from sdk.python.files import File
 from sdk.python.addresses import Address
 from sdk.python.companies import Company
@@ -63,6 +64,7 @@ class Job(sdk.python.entities.Entity):
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
     job_notes = Property(JobNote, backref="job")
+    operation_logs = Property(JobOperationLog, backref="job")
     shopify_shop_url = Property(str)
     shopify_order_id = Property(str)
     shopify_order_line_item_id = Property(str)
@@ -84,6 +86,8 @@ class Job(sdk.python.entities.Entity):
     received = Property(datetime.datetime)
     deadline = Property(datetime.datetime)
     updated = Property(datetime.datetime)
+    date_last_actioned = Property(datetime.datetime)
+    date_first_actioned = Property(datetime.datetime)
     inventory_status = Property(int)
     cost_per_unit = Property(float)
     automatic_price_enabled = Property(bool)
