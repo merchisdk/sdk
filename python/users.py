@@ -67,6 +67,7 @@ class User(sdk.python.entities.Entity):
     is_super_user = Property(bool)
     is_admin_of_subscribed_company = Property(bool)
     registered_as_guest = Property(bool)
+    is_merchi_agent = Property(bool)
     registered_under_domains = Property('sdk.python.domains.Domain')
     system_roles = Property(SystemRole)
     user_companies = Property(UserCompany, backref="user")
