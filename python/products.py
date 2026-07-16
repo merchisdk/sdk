@@ -21,6 +21,7 @@ class Product(sdk.python.entities.Entity):
     created = Property(datetime.datetime)
     updated = Property(datetime.datetime)
     created_by = Property("sdk.python.users.User")
+    designer = Property("sdk.python.users.User")
     updated_by = Property("sdk.python.users.User")
     product_type = Property(str)
     notes = Property(str)

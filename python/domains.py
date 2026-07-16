@@ -1,3 +1,5 @@
+import json
+
 import sdk.python.entities
 from sdk.python.files import File
 from sdk.python.themes import Theme
@@ -58,6 +60,8 @@ class Domain(sdk.python.entities.Entity):
     show_domain_to_accessible_entities_only = Property(bool)
     show_domain_publicly = Property(bool)
     enable_notifications = Property(bool)
+    assign_to_agent = Property(bool)
+    merchi_agent_user = Property('sdk.python.users.User')
     enable_email_notifications = Property(bool)
     enable_sms_notifications = Property(bool)
     mailgun_records = Property(list)
@@ -308,6 +312,138 @@ class Domain(sdk.python.entities.Entity):
             '/domains/{0}/storefront_v2/reset/'.format(self.id),
             method='POST',
             data=data,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_storefront_v2_gsc_status(self, **kwargs):
+        """Return whether Google Search Console is connected for this domain."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/gsc/status/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def analyze_storefront_v2_gsc(self, data=None, **kwargs):
+        """Analyze Search Console data and return SEO recommendations.
+
+        Optional `data`:
+        - `days`: 1 | 7 | 28 | 90 lookback window (default 28).
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/gsc/analyze/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def apply_storefront_v2_gsc_recommendations(self, data=None, **kwargs):
+        """Create a storefront change request from selected SEO recommendations.
+
+        `data` should include:
+        - `recommendationIds`: ids from the analyze response.
+        - `recommendations`: optional full recommendation objects (avoids re-fetch).
+        - `narrative`: optional analysis summary.
+        - `days`: lookback used when re-analyzing by ids only.
+        - `startNewBranch`: default true.
+        - `branchName`: optional existing preview branch.
+
+        Nested list/object fields are JSON-encoded so they survive form encoding.
+        """
+        payload = dict(data or {})
+        for key in (
+            'recommendationIds',
+            'recommendation_ids',
+            'recommendations',
+            'selectedRecommendations',
+            'selected_recommendations',
+        ):
+            value = payload.get(key)
+            if isinstance(value, (list, dict)):
+                payload[key] = json.dumps(value)
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/gsc/apply/'.format(self.id),
+            method='POST',
+            data=payload,
+            expected_statuses=(200, 201),
+            **kwargs)
+
+    def get_storefront_v2_google_integrations(self, **kwargs):
+        """Return saved GA4 / Google Ads integration settings for this domain."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/google_integrations/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def save_storefront_v2_google_integrations(self, data=None, **kwargs):
+        """Save GA4 / Google Ads IDs and sync storefront env vars.
+
+        `data` may include `googleIntegrations` object or flat fields:
+        - `ga4MeasurementId`
+        - `ga4PropertyId`
+        - `googleAdsId`
+        - `googleAdsConversionLabel`
+        - `googleAdsQuoteConversionLabel`
+        """
+        payload = dict(data or {})
+        for key in ('googleIntegrations', 'google_integrations'):
+            value = payload.get(key)
+            if isinstance(value, dict):
+                payload[key] = json.dumps(value)
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/google_integrations/'.format(self.id),
+            method='POST',
+            data=payload,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def get_storefront_v2_ga_status(self, **kwargs):
+        """Return whether Google Analytics is connected for this domain."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/ga/status/'.format(self.id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
+    def verify_storefront_v2_ga_installation(self, data=None, **kwargs):
+        """Verify GA4/Ads tags on the live storefront and check GA4 realtime."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/ga/verify/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def analyze_storefront_v2_ga(self, data=None, **kwargs):
+        """Analyze GA4 data and return storefront recommendations.
+
+        Optional `data`:
+        - `days`: 1 | 7 | 28 | 90 lookback window (default 28).
+        """
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/ga/analyze/'.format(self.id),
+            method='POST',
+            data=data,
+            expected_statuses=(200,),
+            **kwargs)
+
+    def apply_storefront_v2_ga_recommendations(self, data=None, **kwargs):
+        """Create a storefront change request from selected analytics recommendations."""
+        payload = dict(data or {})
+        for key in (
+            'recommendationIds',
+            'recommendation_ids',
+            'recommendations',
+            'selectedRecommendations',
+            'selected_recommendations',
+        ):
+            value = payload.get(key)
+            if isinstance(value, (list, dict)):
+                payload[key] = json.dumps(value)
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/ga/apply/'.format(self.id),
+            method='POST',
+            data=payload,
             expected_statuses=(200, 201),
             **kwargs)
 
