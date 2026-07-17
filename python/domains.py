@@ -103,7 +103,6 @@ class Domain(sdk.python.entities.Entity):
     accessible_client_companies = Property("sdk.python.companies.Company")
     logo = Property(File)
     favicon = Property(File)
-    seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     domain_chat_settings = Property("sdk.python.domain_chat_settings.DomainChatSettings")
     shipment_methods = Property("sdk.python.shipment_methods.ShipmentMethod")
     themes = Property(Theme)
