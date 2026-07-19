@@ -4,7 +4,6 @@ declare(strict_types = 1);
 use PHPUnit\Framework\TestCase;
 
 require_once 'php/src/country_taxes.php';
-require_once 'php/src/component_tags.php';
 require_once 'php/src/products.php';
 require_once 'php/src/domain_invitations.php';
 require_once 'php/src/discounts.php';
@@ -41,11 +40,6 @@ final class Test extends TestCase
     public function testCanCreateBank()
     {
         $this->assertNotNull(new Bank());
-    }
-
-    public function testCanCreateComponentTag()
-    {
-        $this->assertNotNull(new ComponentTag());
     }
 
     public function testCanCreateDiscount()

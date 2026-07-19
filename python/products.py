@@ -97,7 +97,6 @@ class Product(sdk.python.entities.Entity):
     chained_seller_products = Property("sdk.python.products.Product")
     chained_inventory_supplier_product = Property("sdk.python.products.Product")
     chained_inventory_seller_product = Property("sdk.python.products.Product")
-    component = Property("sdk.python.components.Component")
     buy_unit_price = Property(float)
     auto_assign_production_on_action = Property(int)
     show_group_buy_status = Property(bool)
@@ -105,7 +104,6 @@ class Product(sdk.python.entities.Entity):
     allow_client_draft_contribution = Property(bool)
     supply_chain_disabled = Property(bool)
     draft_templates = Property("sdk.python.draft_templates.DraftTemplate")
-    seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     inventory_groups = Property("sdk.python.inventory_groups.InventoryGroup")
 
     google_merchant_center_id = Property(str)

@@ -3,9 +3,7 @@ import json
 import sdk.python.entities
 from sdk.python.files import File
 from sdk.python.themes import Theme
-from sdk.python.menus import Menu
 from sdk.python.domain_invitations import DomainInvitation
-import sdk.python.util.menu_util as menu_util
 from sdk.python.util.google import reconstitute_tracking_global_google_script
 from sdk.python.util.google import \
     extract_tracking_global_google_script_parameters
@@ -107,11 +105,9 @@ class Domain(sdk.python.entities.Entity):
     accessible_client_companies = Property("sdk.python.companies.Company")
     logo = Property(File)
     favicon = Property(File)
-    seo_domain_pages = Property("sdk.python.seo_domain_pages.SeoDomainPage")
     domain_chat_settings = Property("sdk.python.domain_chat_settings.DomainChatSettings")
     shipment_methods = Property("sdk.python.shipment_methods.ShipmentMethod")
     themes = Property(Theme)
-    menus = Property(Menu)
 
     deployment_online = Property(bool)
     deployment_in_progress = Property(bool)
@@ -133,14 +129,6 @@ class Domain(sdk.python.entities.Entity):
         """ Return True if the domain has SMS notifications switched on """
         return self.enable_notifications and\
             self.enable_sms_notifications
-
-    def main_menu(self):
-        """ Return the first menu of menu type MAIN else return None """
-        if self.menus:
-            for menu in self.menus:
-                if menu.menu_type == menu_util.MAIN:
-                    return menu
-        return None
 
     def safe_tracking_code_google_conversion(self, invoice=None):
         """ Return javascript conversion code string safe to serve to clients.
