@@ -17,6 +17,7 @@ class Product(sdk.python.entities.Entity):
     json_name = 'product'
 
     id = Property(int)
+    position = Property(int)
     name = Property(str)
     created = Property(datetime.datetime)
     updated = Property(datetime.datetime)
