@@ -38,6 +38,8 @@ class Product(sdk.python.entities.Entity):
     minimum = Property(float)
     default_quantity = Property(int)
     minimum_price = Property(float)
+    setup_price = Property(float)
+    setup_per_group = Property(bool)
     minimum_per_group = Property(bool)
     unit_weight = Property(float)
     unit_height = Property(float)
