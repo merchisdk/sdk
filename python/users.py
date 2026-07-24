@@ -23,7 +23,7 @@ from sdk.python.shipment_logs import ShipmentLog
 from sdk.python.drafts import Draft
 from sdk.python.draft_comments import DraftComment
 from sdk.python.production_comments import ProductionComment
-from sdk.python.domain_tags import DomainTag
+from sdk.python.company_tags import CompanyTag
 
 
 class SystemRole(sdk.python.entities.Entity):
@@ -76,7 +76,7 @@ class User(sdk.python.entities.Entity):
     addresses = Property(Address)
     phone_numbers = Property(PhoneNumber)
     categories = Property('sdk.python.categories.Category')
-    tags = Property(DomainTag)
+    tags = Property(CompanyTag)
     notifications = Property(Notification)
     enrolled_domains = Property(EnrolledDomain, backref="user")
     # products that supplier can produce

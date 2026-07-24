@@ -2,7 +2,7 @@ import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.addresses import Address
-from sdk.python.domain_tags import DomainTag
+from sdk.python.company_tags import CompanyTag
 from sdk.python.users import User
 from sdk.python.companies import Company
 from sdk.python.files import File
@@ -67,7 +67,7 @@ class Shipment(sdk.python.entities.Entity):
     buy_cost = Property(float)
     buy_currency = Property(str)
     tax_type = Property(sdk.python.country_taxes.CountryTax)
-    tags = Property(DomainTag, backref="shipments")
+    tags = Property(CompanyTag, backref="shipments")
     shipment_items = Property(ShipmentItem)
     shipment_method = Property(ShipmentMethod)
     logs = Property('sdk.python.shipment_logs.ShipmentLog')
