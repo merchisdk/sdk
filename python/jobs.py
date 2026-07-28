@@ -57,6 +57,8 @@ class Job(sdk.python.entities.Entity):
     client_browser = Property(str)
     client_device = Property(str)
     client_os = Property(str)
+    client_ip = Property(str)
+    client_origin = Property(str)
     client_phone = Property(PhoneNumber)
     client_email = Property(EmailAddress)
     client_company = Property(Company)
