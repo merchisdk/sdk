@@ -5,7 +5,12 @@ def address_country(code):
     """ Take a 2 char country code like 'AU' and return the associated country
         name, i.e. 'Australia' as a string
     """
-    country_name = pycountry.countries.get(alpha_2=code)
+    if not code:
+        return ''
+    try:
+        country_name = pycountry.countries.get(alpha_2=code)
+    except (KeyError, LookupError):
+        return ''
     if not country_name:
         return ''
     return country_name.name
