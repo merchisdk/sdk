@@ -10,6 +10,7 @@ IMAGE_SELECT = 9
 COLOUR_PICKER = 10
 COLOUR_SELECT = 11
 TURNAROUND_TIME = 12
+COLOUR_EXTRACT = 13
 
 
 variation_fields_dict = {
@@ -24,7 +25,8 @@ variation_fields_dict = {
     IMAGE_SELECT: 'Image Select',
     COLOUR_PICKER: "Colour Picker",
     COLOUR_SELECT: "Colour Select",
-    TURNAROUND_TIME: "Turnaround Time"
+    TURNAROUND_TIME: "Turnaround Time",
+    COLOUR_EXTRACT: "Colour Extract",
 }
 
 has_options_array = [
@@ -33,4 +35,6 @@ has_options_array = [
     RADIO,
     IMAGE_SELECT,
     COLOUR_SELECT,
-    TURNAROUND_TIME]
+    TURNAROUND_TIME,
+    COLOUR_EXTRACT,
+]
