@@ -11,6 +11,7 @@ COLOUR_PICKER = 10
 COLOUR_SELECT = 11
 TURNAROUND_TIME = 12
 COLOUR_EXTRACT = 13
+AREA = 14
 
 
 variation_fields_dict = {
@@ -27,6 +28,7 @@ variation_fields_dict = {
     COLOUR_SELECT: "Colour Select",
     TURNAROUND_TIME: "Turnaround Time",
     COLOUR_EXTRACT: "Colour Extract",
+    AREA: "Area",
 }
 
 has_options_array = [
