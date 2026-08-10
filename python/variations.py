@@ -122,6 +122,7 @@ class VariationField(sdk.python.entities.Entity):
     width_field_max = Property(float)
     area_unit = Property(str)
     area_input_type = Property(str)
+    area_step = Property(float)
     aspect_ratio_lock = Property(bool)
     aspect_ratio = Property(float)
     cost = Property(float)
