@@ -4,7 +4,7 @@ from sdk.python.discount_groups import DiscountGroup
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
-    has_options_array, COLOUR_SELECT, FILE_UPLOAD
+    has_options_array, COLOUR_SELECT, COLOUR_EXTRACT, FILE_UPLOAD, AREA
 
 
 class VariationFieldOption(sdk.python.entities.Entity):
@@ -19,6 +19,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     id = Property(int)
     value = Property(str)
     colour = Property(str)
+    is_extracted = Property(bool)
     currency = Property(str)
     position = Property(int)
     variation_cost = Property(float)
@@ -87,6 +88,8 @@ class VariationField(sdk.python.entities.Entity):
     allow_file_pdf = Property(bool)
     allow_file_png = Property(bool)
     allow_file_ai = Property(bool)
+    max_colours = Property(int)
+    simplify_colours = Property(bool)
     multiple_select = Property(bool)
     is_html = Property(bool)
     name = Property(str)
@@ -94,6 +97,8 @@ class VariationField(sdk.python.entities.Entity):
     placeholder = Property(str)
     variation_cost = Property(float)
     variation_cost_discount_group = Property(DiscountGroup)
+    colour_variation_cost = Property(float)
+    colour_variation_cost_discount_group = Property(DiscountGroup)
     selected_by = Property(VariationFieldOption)
     inventory_group = Property(
         "sdk.python.inventory_groups.InventoryGroup")
@@ -101,6 +106,25 @@ class VariationField(sdk.python.entities.Entity):
         "sdk.python.inventory_groups.InventoryGroup")
     variation_unit_cost = Property(float)
     variation_unit_cost_discount_group = Property(DiscountGroup)
+    colour_variation_unit_cost = Property(float)
+    colour_variation_unit_cost_discount_group = Property(DiscountGroup)
+    height_variation_cost = Property(float)
+    height_variation_cost_discount_group = Property(DiscountGroup)
+    height_variation_unit_cost = Property(float)
+    height_variation_unit_cost_discount_group = Property(DiscountGroup)
+    width_variation_cost = Property(float)
+    width_variation_cost_discount_group = Property(DiscountGroup)
+    width_variation_unit_cost = Property(float)
+    width_variation_unit_cost_discount_group = Property(DiscountGroup)
+    height_field_min = Property(float)
+    height_field_max = Property(float)
+    width_field_min = Property(float)
+    width_field_max = Property(float)
+    area_unit = Property(str)
+    area_input_type = Property(str)
+    area_step = Property(float)
+    aspect_ratio_lock = Property(bool)
+    aspect_ratio = Property(float)
     cost = Property(float)
     margin = Property(float)
     options = Property(VariationFieldOption)
@@ -117,7 +141,7 @@ class VariationField(sdk.python.entities.Entity):
         return self.field_type in {SELECT, RADIO}
 
     def is_file_upload(self):
-        return self.field_type == FILE_UPLOAD
+        return self.field_type in {FILE_UPLOAD, COLOUR_EXTRACT}
 
     def is_default_multi_select(self):
         return self.field_type == CHECKBOX
@@ -131,12 +155,25 @@ class VariationField(sdk.python.entities.Entity):
     def is_colour_select(self):
         return self.field_type == COLOUR_SELECT
 
+    def is_colour_extract(self):
+        return self.field_type == COLOUR_EXTRACT
+
+    def is_area(self):
+        return self.field_type == AREA
+
     def build_empty_variation(self):
         variation_built = Variation()
         variation_built.once_off_cost = 0  # type: ignore
         variation_built.value = ""  # type: ignore
         variation_built.selectable_options = []  # type: ignore
-        if self.field_type == CHECKBOX:
+        if self.field_type == COLOUR_EXTRACT:
+            variation_built.value = self.default_value
+            variation_built.once_off_cost = 0  # type: ignore
+            variation_built.variation_files = []  # type: ignore
+        elif self.field_type == AREA:
+            variation_built.value = self.default_value
+            variation_built.once_off_cost = 0  # type: ignore
+        elif self.field_type == CHECKBOX:
             variation_built.value = []  # type: ignore
             for option in self.options:
                 if option.default:
