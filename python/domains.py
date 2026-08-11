@@ -59,6 +59,7 @@ class Domain(sdk.python.entities.Entity):
     show_domain_publicly = Property(bool)
     enable_notifications = Property(bool)
     assign_to_agent = Property(bool)
+    job_agent_policy = Property(dict)
     merchi_agent_user = Property('sdk.python.users.User')
     enable_email_notifications = Property(bool)
     enable_sms_notifications = Property(bool)
