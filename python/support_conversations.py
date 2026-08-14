@@ -4,7 +4,7 @@ import datetime
 import sdk.python.entities
 from sdk.python.entities import Property
 from sdk.python.domains import Domain
-from sdk.python.domain_tags import DomainTag
+from sdk.python.company_tags import CompanyTag
 from sdk.python.users import User
 
 
@@ -26,7 +26,7 @@ class SupportConversation(sdk.python.entities.Entity):
     creation_date = Property(datetime.datetime)
     last_message_at = Property(datetime.datetime)
     archived_at = Property(datetime.datetime)
-    tags = Property(DomainTag, backref="support_conversations")
+    tags = Property(CompanyTag, backref="support_conversations")
     messages = Property("sdk.python.support_messages.SupportMessage")
 
 
