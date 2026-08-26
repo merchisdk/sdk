@@ -93,6 +93,8 @@ class Company(sdk.python.entities.Entity):
     accessible_domains_as_client_company = Property(
         sdk.python.domains.Domain
     )
+    parent_company = Property("sdk.python.companies.Company")
+    child_companies = Property("sdk.python.companies.Company")
 
     @property
     def default_banks(self):
