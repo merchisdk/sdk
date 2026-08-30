@@ -14,6 +14,7 @@ class Discount(sdk.python.entities.Entity):
     usage_limit = Property(int)
     code = Property(str)
     is_percentage = Property(bool)
+    assigned_users = Property('sdk.python.users.User')
     discount_group = Property(DiscountGroup)
 
 
