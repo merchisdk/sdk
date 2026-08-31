@@ -23,6 +23,8 @@ class DraftTemplate(sdk.python.entities.Entity):
     customisation_map = Property(dict)
     customisation_map_source = Property(str)
     customisation_map_file_id = Property(str)
+    print_area_mask = Property(File)
+    body_colour_mask = Property(File)
 
 
 class DraftTemplates(sdk.python.entities.Resource):
