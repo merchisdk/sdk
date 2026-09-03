@@ -62,6 +62,7 @@ class Job(sdk.python.entities.Entity):
     client_phone = Property(PhoneNumber)
     client_email = Property(EmailAddress)
     client_company = Property(Company)
+    notification_subscribers = Property('sdk.python.users.User')
     client_company_phone = Property(PhoneNumber)
     client_company_email = Property(EmailAddress)
     quantity = Property(int)
