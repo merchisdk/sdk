@@ -405,3 +405,23 @@ def test_domain_storefront_publish_product_routes_and_payload():
         assert _FakeRequest.last.data == {"productName": "Wristband"}
     finally:
         _restore_request(old)
+
+
+def test_domain_storefront_product_status_routes():
+    old = _setup_fake_request()
+    try:
+        _FakeRequest.next_status = 200
+        _FakeRequest.next_payload = {
+            "storefrontProductStatus": {"activated": True, "outOfSync": True}
+        }
+        domain = Domain()
+        domain.id = 12
+
+        result = domain.get_storefront_v2_product_status(88)
+
+        assert result["storefrontProductStatus"]["outOfSync"] is True
+        assert _FakeRequest.last.resource == (
+            "/domains/12/storefront_v2/products/88/status/"
+        )
+    finally:
+        _restore_request(old)

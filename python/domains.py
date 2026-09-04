@@ -583,6 +583,15 @@ class Domain(sdk.python.entities.Entity):
             expected_statuses=(200, 201),
             **kwargs)
 
+    def get_storefront_v2_product_status(self, product_id, **kwargs):
+        """Return whether a catalog product is in sync with the storefront."""
+        return self._storefront_request(
+            '/domains/{0}/storefront_v2/products/{1}/status/'.format(
+                self.id, product_id),
+            method='GET',
+            expected_statuses=(200,),
+            **kwargs)
+
     def publish_storefront_v2_product(self, data=None, **kwargs):
         """Publish or recache a product URL on the storefront."""
         return self._storefront_request(
