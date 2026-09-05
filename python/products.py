@@ -21,6 +21,7 @@ class Product(sdk.python.entities.Entity):
     name = Property(str)
     created = Property(datetime.datetime)
     updated = Property(datetime.datetime)
+    storefront_last_deployed = Property(datetime.datetime)
     created_by = Property("sdk.python.users.User")
     designer = Property("sdk.python.users.User")
     updated_by = Property("sdk.python.users.User")
