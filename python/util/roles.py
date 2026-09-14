@@ -23,6 +23,7 @@ CLIENT = 5
 MANAGER = 6
 ACCOUNTANT = 7
 THEME_EDITOR = 8
+REFERRER = 9
 
 ROLE_STRINGS = {PUBLIC: "public",
                 ADMIN: "admin",
@@ -32,7 +33,8 @@ ROLE_STRINGS = {PUBLIC: "public",
                 CLIENT: "client",
                 MANAGER: "manager",
                 ACCOUNTANT: "accountant",
-                THEME_EDITOR: "theme editor"}
+                THEME_EDITOR: "theme editor",
+                REFERRER: "referrer"}
 
 ROLE_CSS_CLASS = {PUBLIC: "default",
                   ADMIN: "inverse",
@@ -42,7 +44,8 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
                   CLIENT: "danger",
                   MANAGER: "primary",
                   ACCOUNTANT: 'info',
-                  THEME_EDITOR: "success"}
+                  THEME_EDITOR: "success",
+                  REFERRER: "success"}
 
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
@@ -51,7 +54,7 @@ ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
 # users who have works with the domain but are not one of the management team
-DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR}
+DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR, REFERRER}
 
 # users who are involved as business parties
 BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
@@ -91,7 +94,8 @@ def role_string(role_code):
         return "public"
 
 
-OPTIONS_ORDER = [CLIENT, SUPPLIER, SALES, DESIGNER, MANAGER, ADMIN, ACCOUNTANT]
+OPTIONS_ORDER = [CLIENT, SUPPLIER, SALES, REFERRER, DESIGNER, MANAGER, ADMIN,
+                 ACCOUNTANT]
 
 MANAGER_OPTIONS_ORDER = [CLIENT, SUPPLIER, DESIGNER, MANAGER]
 
