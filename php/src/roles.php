@@ -11,4 +11,6 @@ abstract class Roles
     const CLIENT = 5;
     const MANAGER = 6;
     const ACCOUNTANT = 7;
+    const THEME_EDITOR = 8;
+    const REFERRER = 9;
 }
