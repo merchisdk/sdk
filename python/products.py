@@ -59,6 +59,7 @@ class Product(sdk.python.entities.Entity):
     feature_deadline = Property(datetime.datetime)
     show_feature_deadline = Property(bool)
     show_public = Property(bool)
+    is_draft = Property(bool)
     accept_square = Property(bool)
     accept_stripe = Property(bool)
     accept_paypal = Property(bool)
