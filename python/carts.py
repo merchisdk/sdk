@@ -19,6 +19,7 @@ class Cart(sdk.python.entities.Entity):
     id = Property(int)
     ip = Property(str)
     token = Property(str)
+    is_test = Property(bool)
     receiver_notes = Property(str)
     currency = Property(str)
     cost = Property(float)

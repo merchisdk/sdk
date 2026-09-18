@@ -105,6 +105,7 @@ class Job(sdk.python.entities.Entity):
     needs_invoicing = Property(bool)
     needs_drafting = Property(bool)
     assign_to_agent = Property(bool)
+    is_test = Property(bool)
     agent_last_run_at = Property(datetime.datetime)
     agent_next_check_at = Property(datetime.datetime)
     needs_shipping = Property(bool)
