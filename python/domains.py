@@ -51,6 +51,7 @@ class Domain(sdk.python.entities.Entity):
     theme = Property(str)
     sms_name = Property(str)
     api_secret = Property(str)
+    api_allowed_origins = Property(list)
     call_to_actions = Property(str)
     call_to_action_details = Property(list)
     tracking_code_google_conversion = Property(str)
