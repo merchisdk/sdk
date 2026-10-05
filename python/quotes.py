@@ -3,6 +3,7 @@ import sdk.python.entities
 from sdk.python.quote_items import QuoteItem
 from sdk.python.shipments import Shipment
 from sdk.python.invoices import Invoice
+from sdk.python.files import File
 from functools import reduce
 from sdk.python.entities import Property
 
@@ -23,6 +24,7 @@ class Quote(sdk.python.entities.Entity):
     currency = Property(str)
     quote_items = Property(QuoteItem)
     shipments = Property(Shipment)
+    files = Property(File)
     invoice = Property(Invoice, backref="quotes")
 
     def quote_total(self):
