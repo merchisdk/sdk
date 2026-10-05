@@ -24,6 +24,7 @@ MANAGER = 6
 ACCOUNTANT = 7
 THEME_EDITOR = 8
 REFERRER = 9
+FULFILLMENT = 10
 
 ROLE_STRINGS = {PUBLIC: "public",
                 ADMIN: "admin",
@@ -34,7 +35,8 @@ ROLE_STRINGS = {PUBLIC: "public",
                 MANAGER: "manager",
                 ACCOUNTANT: "accountant",
                 THEME_EDITOR: "theme editor",
-                REFERRER: "referrer"}
+                REFERRER: "referrer",
+                FULFILLMENT: "fulfillment"}
 
 ROLE_CSS_CLASS = {PUBLIC: "default",
                   ADMIN: "inverse",
@@ -45,7 +47,8 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
                   MANAGER: "primary",
                   ACCOUNTANT: 'info',
                   THEME_EDITOR: "success",
-                  REFERRER: "success"}
+                  REFERRER: "success",
+                  FULFILLMENT: "success"}
 
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
@@ -54,7 +57,7 @@ ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
 # users who have works with the domain but are not one of the management team
-DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR, REFERRER}
+DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR, REFERRER, FULFILLMENT}
 
 # users who are involved as business parties
 BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
@@ -73,8 +76,8 @@ INFO_SECTION = ACCOUNTS.copy()
 INFO_SECTION.add(PUBLIC)
 
 DESIGN_SECTION = {ADMIN, MANAGER, DESIGNER, CLIENT, PUBLIC}
-PRODUCTION_SECTION = {ADMIN, MANAGER, SUPPLIER}
-SHIPPING_SECTION = {ADMIN, MANAGER, CLIENT}
+PRODUCTION_SECTION = {ADMIN, MANAGER, SUPPLIER, FULFILLMENT}
+SHIPPING_SECTION = {ADMIN, MANAGER, CLIENT, FULFILLMENT}
 
 ALLOWED_SIGN_UP_ROLES = (DESIGNER, CLIENT, SUPPLIER)
 
@@ -94,8 +97,8 @@ def role_string(role_code):
         return "public"
 
 
-OPTIONS_ORDER = [CLIENT, SUPPLIER, SALES, REFERRER, DESIGNER, MANAGER, ADMIN,
-                 ACCOUNTANT]
+OPTIONS_ORDER = [CLIENT, SUPPLIER, FULFILLMENT, SALES, REFERRER, DESIGNER,
+                 MANAGER, ADMIN, ACCOUNTANT]
 
 MANAGER_OPTIONS_ORDER = [CLIENT, SUPPLIER, DESIGNER, MANAGER]
 

@@ -13,4 +13,5 @@ abstract class Roles
     const ACCOUNTANT = 7;
     const THEME_EDITOR = 8;
     const REFERRER = 9;
+    const FULFILLMENT = 10;
 }
