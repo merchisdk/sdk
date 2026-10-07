@@ -68,6 +68,7 @@ class Job(sdk.python.entities.Entity):
     source_click_id = Property(str)
     source_landing = Property(str)
     source_referrer = Property(str)
+    checkout_type = Property(str)
     client_phone = Property(PhoneNumber)
     client_email = Property(EmailAddress)
     client_company = Property(Company)
