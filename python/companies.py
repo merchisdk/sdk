@@ -19,6 +19,7 @@ class Company(sdk.python.entities.Entity):
     json_name = 'company'
 
     id = Property(int)
+    created = Property(datetime.datetime)
     name = Property(str)
     website = Property(str)
     country = Property(str)

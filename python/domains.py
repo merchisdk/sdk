@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import sdk.python.entities
@@ -41,6 +42,7 @@ class Domain(sdk.python.entities.Entity):
     json_name = 'domain'
 
     id = Property(int)
+    created = Property(datetime.datetime)
     active_theme_id = Property(int)
     country = Property(str)
     currency = Property(str)
