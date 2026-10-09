@@ -31,6 +31,7 @@ class VariationFieldOption(sdk.python.entities.Entity):
     include = Property(bool)
     no_inventory = Property(bool)
     linked_file = Property(File)
+    linked_product_image = Property(File)
     buy_unit_cost = Property(float)
     buy_cost = Property(float)
     delivery_days = Property(int)
