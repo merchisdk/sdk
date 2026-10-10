@@ -12,6 +12,7 @@ COLOUR_SELECT = 11
 TURNAROUND_TIME = 12
 COLOUR_EXTRACT = 13
 AREA = 14
+PANTONE_COLOUR_SELECT = 15
 
 
 variation_fields_dict = {
@@ -29,6 +30,7 @@ variation_fields_dict = {
     TURNAROUND_TIME: "Turnaround Time",
     COLOUR_EXTRACT: "Colour Extract",
     AREA: "Area",
+    PANTONE_COLOUR_SELECT: "Pantone Colour Select",
 }
 
 has_options_array = [
