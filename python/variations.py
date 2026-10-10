@@ -4,7 +4,8 @@ from sdk.python.discount_groups import DiscountGroup
 from sdk.python.entities import Property
 from sdk.python.files import File
 from sdk.python.util.variation_field_type import SELECT, CHECKBOX, RADIO, \
-    has_options_array, COLOUR_SELECT, COLOUR_EXTRACT, FILE_UPLOAD, AREA
+    has_options_array, COLOUR_SELECT, COLOUR_EXTRACT, FILE_UPLOAD, AREA, \
+    PANTONE_COLOUR_SELECT
 
 
 class VariationFieldOption(sdk.python.entities.Entity):
@@ -92,6 +93,7 @@ class VariationField(sdk.python.entities.Entity):
     max_colours = Property(int)
     simplify_colours = Property(bool)
     multiple_select = Property(bool)
+    allow_all_pantones = Property(bool)
     is_html = Property(bool)
     name = Property(str)
     default_value = Property(str)
@@ -151,10 +153,15 @@ class VariationField(sdk.python.entities.Entity):
         return self.field_type in {RADIO, CHECKBOX}
 
     def has_options(self):
+        if self.field_type == PANTONE_COLOUR_SELECT:
+            return not self.allow_all_pantones
         return self.field_type in has_options_array
 
     def is_colour_select(self):
         return self.field_type == COLOUR_SELECT
+
+    def is_pantone_select(self):
+        return self.field_type == PANTONE_COLOUR_SELECT
 
     def is_colour_extract(self):
         return self.field_type == COLOUR_EXTRACT
@@ -174,6 +181,9 @@ class VariationField(sdk.python.entities.Entity):
         elif self.field_type == AREA:
             variation_built.value = self.default_value
             variation_built.once_off_cost = 0  # type: ignore
+        elif self.field_type == PANTONE_COLOUR_SELECT and self.allow_all_pantones:
+            variation_built.value = self.default_value
+            variation_built.once_off_cost = self.variation_cost
         elif self.field_type == CHECKBOX:
             variation_built.value = []  # type: ignore
             for option in self.options:
@@ -245,7 +255,10 @@ class Variation(sdk.python.entities.Entity):
 
     def is_selectable(self):
         """ Returns True if the field type is selectable """
-        return self.variation_field.field_type in has_options_array
+        field = self.variation_field
+        if field.field_type == PANTONE_COLOUR_SELECT:
+            return not field.allow_all_pantones
+        return field.field_type in has_options_array
 
     def is_file_upload(self):
         """ Returns True if is a file upload type """
@@ -265,7 +278,7 @@ class Variation(sdk.python.entities.Entity):
         return self.selected_options[0]
 
     def has_options(self):
-        return self.variation_field.field_type in has_options_array
+        return self.variation_field.has_options()
 
     def value_array(self, new_values_array=None):
         """ Return an array of the variation values and if new_values_array
