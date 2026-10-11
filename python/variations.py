@@ -76,6 +76,7 @@ class VariationField(sdk.python.entities.Entity):
     id = Property(int)
     field_type = Property(int)
     position = Property(int)
+    layout_span = Property(int)
     rows = Property(int)
     field_min = Property(int)
     field_max = Property(int)

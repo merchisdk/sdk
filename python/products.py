@@ -56,6 +56,8 @@ class Product(sdk.python.entities.Entity):
     needs_invoicing = Property(bool)
     needs_inventory = Property(bool)
     groups_first = Property(bool)
+    independent_variation_columns = Property(int)
+    group_variation_columns = Property(int)
     feature_deadline = Property(datetime.datetime)
     show_feature_deadline = Property(bool)
     show_public = Property(bool)
