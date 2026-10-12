@@ -243,6 +243,7 @@ class Variation(sdk.python.entities.Entity):
     id = Property(int)
     quantity = Property(int)
     value = Property(str)
+    text_style = Property(dict)
     currency = Property(str)
     cost = Property(float)
     once_off_cost = Property(float)
