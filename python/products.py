@@ -108,6 +108,7 @@ class Product(sdk.python.entities.Entity):
     show_group_buy_status = Property(bool)
     group_buy_status = Property(int)
     allow_client_draft_contribution = Property(bool)
+    allow_additional_design_objects = Property(bool)
     supply_chain_disabled = Property(bool)
     draft_templates = Property("sdk.python.draft_templates.DraftTemplate")
     inventory_groups = Property("sdk.python.inventory_groups.InventoryGroup")
