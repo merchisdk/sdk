@@ -25,6 +25,9 @@ ACCOUNTANT = 7
 THEME_EDITOR = 8
 REFERRER = 9
 FULFILLMENT = 10
+# Read-only domain observer. Sees domain business records and cannot
+# create, update, or delete them through this role.
+ANALYTICS = 11
 
 ROLE_STRINGS = {PUBLIC: "public",
                 ADMIN: "admin",
@@ -36,7 +39,8 @@ ROLE_STRINGS = {PUBLIC: "public",
                 ACCOUNTANT: "accountant",
                 THEME_EDITOR: "theme editor",
                 REFERRER: "referrer",
-                FULFILLMENT: "fulfillment"}
+                FULFILLMENT: "fulfillment",
+                ANALYTICS: "analytics"}
 
 ROLE_CSS_CLASS = {PUBLIC: "default",
                   ADMIN: "inverse",
@@ -48,7 +52,8 @@ ROLE_CSS_CLASS = {PUBLIC: "default",
                   ACCOUNTANT: 'info',
                   THEME_EDITOR: "success",
                   REFERRER: "success",
-                  FULFILLMENT: "success"}
+                  FULFILLMENT: "success",
+                  ANALYTICS: "info"}
 
 
 ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
@@ -57,7 +62,9 @@ ROLE_INTS = {v: k for k, v in ROLE_STRINGS.items()}
 MANAGEMENT_ROLES = {SALES, DESIGNER, MANAGER, ACCOUNTANT, ADMIN}
 
 # users who have works with the domain but are not one of the management team
-DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR, REFERRER, FULFILLMENT}
+# ANALYTICS is a worker so they can read domain catalog data. It is not in
+# MANAGEMENT_ROLES or INVOICE_ROLES, which are used for writes.
+DOMAIN_WORKERS = {SUPPLIER, THEME_EDITOR, REFERRER, FULFILLMENT, ANALYTICS}
 
 # users who are involved as business parties
 BUSINESS_ACCOUNTS = MANAGEMENT_ROLES.copy()
@@ -97,8 +104,8 @@ def role_string(role_code):
         return "public"
 
 
-OPTIONS_ORDER = [CLIENT, SUPPLIER, FULFILLMENT, SALES, REFERRER, DESIGNER,
-                 MANAGER, ADMIN, ACCOUNTANT]
+OPTIONS_ORDER = [CLIENT, ANALYTICS, SUPPLIER, FULFILLMENT, SALES, REFERRER,
+                 DESIGNER, MANAGER, ADMIN, ACCOUNTANT]
 
 MANAGER_OPTIONS_ORDER = [CLIENT, SUPPLIER, DESIGNER, MANAGER]
 
