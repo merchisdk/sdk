@@ -13,6 +13,7 @@ TURNAROUND_TIME = 12
 COLOUR_EXTRACT = 13
 AREA = 14
 PANTONE_COLOUR_SELECT = 15
+EMBROIDERY = 16
 
 
 variation_fields_dict = {
@@ -31,6 +32,7 @@ variation_fields_dict = {
     COLOUR_EXTRACT: "Colour Extract",
     AREA: "Area",
     PANTONE_COLOUR_SELECT: "Pantone Colour Select",
+    EMBROIDERY: "Embroidery",
 }
 
 has_options_array = [
