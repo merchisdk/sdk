@@ -22,6 +22,8 @@ class Category(sdk.python.entities.Entity):
         "sdk.python.categories.Category")
     parent = Property(
         "sdk.python.categories.Category")
+    tags = Property("sdk.python.domain_tags.DomainTag")
+    assigned = Property("sdk.python.users.User")
 
 
 class Categories(sdk.python.entities.Resource):

@@ -76,6 +76,7 @@ class User(sdk.python.entities.Entity):
     addresses = Property(Address)
     phone_numbers = Property(PhoneNumber)
     categories = Property('sdk.python.categories.Category')
+    assigned_categories = Property('sdk.python.categories.Category')
     tags = Property(DomainTag)
     notifications = Property(Notification)
     enrolled_domains = Property(EnrolledDomain, backref="user")
