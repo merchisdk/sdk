@@ -16,6 +16,7 @@ class DomainTag(sdk.python.entities.Entity):
     show_public = Property(bool)
 
     domain = Property(Domain, backref="tags")
+    categories = Property("sdk.python.categories.Category")
 
 
 class DomainTags(sdk.python.entities.Resource):
