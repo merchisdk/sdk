@@ -101,6 +101,19 @@ SHIPPING_STATUS = {
 }
 
 
+QUOTE_ISSUED = "issued"
+QUOTE_DECLINED = "declined"
+
+
+def quote_status(is_quote, declined_date):
+    """Return the quote state a job's invoice is in, or None if it is not
+    a quote. Jobs on a quote keep the INIT payment status.
+    """
+    if not is_quote:
+        return None
+    return QUOTE_DECLINED if declined_date else QUOTE_ISSUED
+
+
 def status_info(status, status_dict, status_string=""):
     """ Return a status dictionary based on the sdk.python.util.status
         key provided to the 'status_dict' argument and the job progress
