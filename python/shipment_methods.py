@@ -17,6 +17,7 @@ class ShipmentMethod(sdk.python.entities.Entity):
     company = Property("sdk.python.companies.Company")
     domains = Property("sdk.python.domains.Domain")
     company_default = Property(bool)
+    position = Property(int)
     default_cost = Property(float)
     currency = Property(str)
     buy_cost = Property(float)
